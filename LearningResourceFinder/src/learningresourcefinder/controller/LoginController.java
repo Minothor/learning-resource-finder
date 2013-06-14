@@ -40,7 +40,7 @@ public class LoginController extends BaseController<User> {
     @Autowired UserDisplayController userDisplayController;
     @Autowired ProviderSignInController providerSignIncontroller;
     @Autowired UsersConnectionRepository usersConnectionRepository;
-   @Autowired UserRepository userRepository;
+    @Autowired UserRepository userRepository;
     
     @RequestMapping(value="/login", method=RequestMethod.GET)
     public ModelAndView signin(HttpServletRequest request) {
