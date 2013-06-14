@@ -5,10 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.context.request.RequestAttributes;
-
-import reformyourcountry.web.ContextUtil;
+import learningresourcefinder.web.ContextUtil;
 
 public class NotificationUtil {
 

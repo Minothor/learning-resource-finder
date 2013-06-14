@@ -2,12 +2,7 @@ package learningresourcefinder.util;
 
 import java.security.MessageDigest;
 
-import learningresourcefinder.model.User;
-
 import org.apache.commons.codec.binary.Hex;
-
-import reformyourcountry.security.Privilege;
-import reformyourcountry.security.SecurityContext;
 
 /**
  * @author Aymeric Levaux

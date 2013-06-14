@@ -1,18 +1,9 @@
 package learningresourcefinder.web;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
-
 import learningresourcefinder.model.User;
+import learningresourcefinder.security.SecurityContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.stereotype.Component;
-
-import reformyourcountry.security.SecurityContext;
 
 /** An instance of Current will be bound to the servletContext, in order to enable JSPs to refer it through EL.
  * For example: ${current.user.firstName}

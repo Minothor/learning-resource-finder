@@ -2,20 +2,17 @@ package learningresourcefinder.social;
 
 
 
-import learningresourcefinder.controller.BaseController;
-import learningresourcefinder.controller.LoginController;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountConnectedType;
+import learningresourcefinder.service.LoginService;
+import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.web.ContextUtil;
+import learningresourcefinder.web.UrlUtil;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.context.request.RequestAttributes;
-import reformyourcountry.service.LoginService;
-import reformyourcountry.util.NotificationUtil;
-import reformyourcountry.web.ContextUtil;
-import reformyourcountry.web.UrlUtil;
 @Component
 public class RycSignInAdapter implements SignInAdapter {
 

@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import learningresourcefinder.util.CurrentEnvironment;
+import learningresourcefinder.util.CurrentEnvironment.Environment;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import reformyourcountry.util.CurrentEnvironment;
-import reformyourcountry.util.CurrentEnvironment.Environment;
 
 public class ContextUtil implements Filter, ServletContextListener {
 

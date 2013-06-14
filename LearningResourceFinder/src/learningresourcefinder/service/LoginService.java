@@ -11,12 +11,21 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import learningresourcefinder.controller.LoginController;
+import learningresourcefinder.exception.InvalidPasswordException;
+import learningresourcefinder.exception.UserLockedException;
+import learningresourcefinder.exception.UserNotFoundException;
+import learningresourcefinder.exception.UserNotValidatedException;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountConnectedType;
 import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.model.User.Role;
-import learningresourcefinder.model.User.SpecialType;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.CurrentEnvironment.Environment;
+import learningresourcefinder.util.SecurityUtils;
+import learningresourcefinder.web.ContextUtil;
+import learningresourcefinder.web.Cookies;
+import learningresourcefinder.web.HttpSessionTracker;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +36,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
-
-import reformyourcountry.exception.InvalidPasswordException;
-import reformyourcountry.exception.UserLockedException;
-import reformyourcountry.exception.UserNotFoundException;
-import reformyourcountry.exception.UserNotValidatedException;
-import reformyourcountry.security.SecurityContext;
-import reformyourcountry.util.CurrentEnvironment.Environment;
-import reformyourcountry.util.SecurityUtils;
-import reformyourcountry.web.ContextUtil;
-import reformyourcountry.web.Cookies;
-import reformyourcountry.web.HttpSessionTracker;
 
 
 @Service
@@ -378,13 +376,13 @@ public class LoginService {
     
     public String getPageAfterLogin(User user){
         
-        if(user.getSpecialType() != SpecialType.PRIVATE && !user.isAskedGroup()
-        		&& (!user.getVoteActions().isEmpty() || !user.getVoteArguments().isEmpty()))  // We only ask to input the groups when the user has already voted (it's less interesting to know for the non voters);
-        {
-            user.setAskedGroup(true);
-            userRepository.merge(user);
-            return "/manageGroup?id="+user.getId();
-        }
+//        if(user.getSpecialType() != SpecialType.PRIVATE && !user.isAskedGroup()
+//        		&& (!user.getVoteActions().isEmpty() || !user.getVoteArguments().isEmpty()))  // We only ask to input the groups when the user has already voted (it's less interesting to know for the non voters);
+//        {
+//            user.setAskedGroup(true);
+//            userRepository.merge(user);
+//            return "/manageGroup?id="+user.getId();
+//        }
         
         return null;
     }

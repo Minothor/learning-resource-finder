@@ -4,20 +4,19 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import learningresourcefinder.mail.MailCategory;
+import learningresourcefinder.mail.MailSender;
+import learningresourcefinder.mail.MailType;
 import learningresourcefinder.model.Mail;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.MailRepository;
+import learningresourcefinder.util.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import reformyourcountry.mail.MailCategory;
-import reformyourcountry.mail.MailSender;
-import reformyourcountry.mail.MailType;
-import reformyourcountry.util.Logger;
 
 
 /**

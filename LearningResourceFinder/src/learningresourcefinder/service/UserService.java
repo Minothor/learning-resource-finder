@@ -10,14 +10,31 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import learningresourcefinder.model.Badge;
-import learningresourcefinder.model.BadgeType;
+import learningresourcefinder.exception.InvalidPasswordException;
+import learningresourcefinder.exception.UserAlreadyExistsException;
+import learningresourcefinder.exception.UserAlreadyExistsException.IdentifierType;
+import learningresourcefinder.exception.UserLockedException;
+import learningresourcefinder.exception.UserNotFoundException;
+import learningresourcefinder.exception.UserNotValidatedException;
+import learningresourcefinder.mail.MailCategory;
+import learningresourcefinder.mail.MailType;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountConnectedType;
 import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.model.User.Role;
-import learningresourcefinder.model.User.SpecialType;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.LoginService.WaitDelayNotReachedException;
+import learningresourcefinder.util.CurrentEnvironment;
+import learningresourcefinder.util.FileUtil;
+import learningresourcefinder.util.HTMLUtil;
+import learningresourcefinder.util.ImageUtil;
+import learningresourcefinder.util.Logger;
+import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.util.SecurityUtils;
+import learningresourcefinder.web.ContextUtil;
+import learningresourcefinder.web.UrlUtil;
+import learningresourcefinder.web.UrlUtil.Mode;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -30,34 +47,11 @@ import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.ImageType;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.twitter.api.ImageSize;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.request.WebRequest;
-
-import reformyourcountry.exception.InvalidPasswordException;
-import reformyourcountry.exception.UserAlreadyExistsException;
-import reformyourcountry.exception.UserAlreadyExistsException.IdentifierType;
-import reformyourcountry.exception.UserLockedException;
-import reformyourcountry.exception.UserNotFoundException;
-import reformyourcountry.exception.UserNotValidatedException;
-import reformyourcountry.mail.MailCategory;
-import reformyourcountry.mail.MailType;
-import reformyourcountry.security.SecurityContext;
-import reformyourcountry.service.LoginService.WaitDelayNotReachedException;
-import reformyourcountry.util.CurrentEnvironment;
-import reformyourcountry.util.DateUtil;
-import reformyourcountry.util.FileUtil;
-import reformyourcountry.util.HTMLUtil;
-import reformyourcountry.util.ImageUtil;
-import reformyourcountry.util.Logger;
-import reformyourcountry.util.NotificationUtil;
-import reformyourcountry.util.SecurityUtils;
-import reformyourcountry.web.ContextUtil;
-import reformyourcountry.web.UrlUtil;
-import reformyourcountry.web.UrlUtil.Mode;
 
 @Transactional
 @Service(value="userService")
@@ -79,7 +73,6 @@ public class UserService {
     @Autowired   private LoginService loginService;
     @Autowired   private UsersConnectionRepository usersConnectionRepository;
     @Autowired   private CurrentEnvironment currentEnvironment;
-    @Autowired  IndexManagerService indexManagerService;
     /**
      * Register a user and sends a validation mail.
      * 
@@ -105,8 +98,6 @@ public class UserService {
         newUser.setUserName(username);
         newUser.setPassword(SecurityUtils.md5Encode(passwordInClear));
         newUser.setMail(mail);
-        newUser.setSpecialType(SpecialType.PRIVATE);
-        newUser.setAskedGroup(false);
         
         //// Validation mail.
         String base = newUser.getMail() + newUser.getPassword() + Math.random();  // Could be pure random.
@@ -128,12 +119,6 @@ public class UserService {
             sendRegistrationValidationMail(newUser);
         }
 
-        ///// update index
-    
-           indexManagerService.add(newUser);
-      
-        
-        
         return newUser;
     }
 
@@ -168,7 +153,7 @@ public class UserService {
                         "Voici votre nouveau mot de passe : "+ newPassword + 
                         "<ol>" +  
                         "<li>le mot de passe respecte la casse des caractères,</li>" +                  
-                        "<li>Il s'agit d'un mot de passe auto-généré, libre à vous de le changer sur votre <a href='"+UrlUtil.getAbsoluteUrl("user/"+user.getUserName(),Mode.DEV)+"'>page de profile</a>.</li>" +
+                        "<li>Il s'agit d'un mot de passe auto-généré, libre à vous de le changer sur votre <a href='"+UrlUtil.getAbsoluteUrl("user/"+user.getUserName(), Mode.DEV)+"'>page de profile</a>.</li>" +
                         "</ol>", 
                         MailType.IMMEDIATE, MailCategory.USER);
 
@@ -176,12 +161,6 @@ public class UserService {
 
     /** Change the name of the user and note it in the log */
     public void changeUserName(User user, String newUserName, String newFirstName, String newLastName) {
-        if (user.getNameChangeLog() == null) {
-            user.addNameChangeLog("Previous name: " + user.getFirstName()
-                    + " - " + user.getLastName() + " - " + user.getUserName());
-        }
-        user.addNameChangeLog("\n"+ DateUtil.formatyyyyMMdd(new Date()) + ": "
-                + newFirstName + " - " + newLastName + " - " + newUserName);
         user.setFirstName(newFirstName);
         user.setLastName(newLastName);
         user.setUserName(newUserName);
@@ -446,7 +425,6 @@ public class UserService {
     public void setUser(User user){
         changeUserName(user, "Anonymous"+user.getId(), "", "");
         user.setTitle("");
-        user.setCertificationDate(null);
         user.setBirthDate(null);
         user.setGender(null);
         user.setAccountStatus(AccountStatus.LOCKED);

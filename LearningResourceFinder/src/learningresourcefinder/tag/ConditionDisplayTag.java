@@ -6,9 +6,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import learningresourcefinder.model.User.Role;
-
-import reformyourcountry.security.Privilege;
-import reformyourcountry.security.SecurityContext;
+import learningresourcefinder.security.Privilege;
+import learningresourcefinder.security.SecurityContext;
 
 /** Prevents a JSP from executing if the user does not have a specific privilege or role */
 public class ConditionDisplayTag extends SimpleTagSupport {

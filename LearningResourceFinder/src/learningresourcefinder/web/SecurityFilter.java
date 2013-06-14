@@ -8,12 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.LoginService;
+
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.filter.GenericFilterBean;
-
-import reformyourcountry.security.SecurityContext;
-import reformyourcountry.service.LoginService;
 
 /**
  * Automates the login of a user that has his userid and password (encoded) in a cookie.

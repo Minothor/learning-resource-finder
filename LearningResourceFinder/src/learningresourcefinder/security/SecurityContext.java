@@ -3,16 +3,13 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
-import learningresourcefinder.model.Argument;
-import learningresourcefinder.model.Comment;
-import learningresourcefinder.model.GoodExample;
+import learningresourcefinder.exception.UnauthorizedAccessException;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.service.LoginService;
+import learningresourcefinder.web.ContextUtil;
 
-import reformyourcountry.exception.UnauthorizedAccessException;
-import reformyourcountry.service.LoginService;
-import reformyourcountry.web.ContextUtil;
 
 
 /**
@@ -205,94 +202,6 @@ public  class SecurityContext {
         }
     }
     
-    public static void assertCurrentUserCanEditArgument(Argument arg){
-        User user = SecurityContext.getUser();
-        if (user != null){
-            if((arg.getCreatedBy()==user)||isUserHasPrivilege(Privilege.MANAGE_ARGUMENT)){
-                return;
-            }
-        }
-        throw new UnauthorizedAccessException(" cannot edit that Argument: "+arg.getTitle());
-    }
-    
-    public static void assertCurrentUserCanEditComment(Comment comment){
-        if(comment.getCreatedBy().equals(getUser()) // If the user is editing himself
-                || isUserHasPrivilege(Privilege.MANAGE_ARGUMENT) 
-                || isUserHasPrivilege(Privilege.MANAGE_GOODEXAMPLE) ){
-            return;
-        }
-        throw new UnauthorizedAccessException(" cannot edit that Comment: "+comment.getId());
-    }
-    
-    public static boolean canCurrentUserEditArgument(Argument arg) {
-       	if(! isUserLoggedIn()) {
-    	    return false;
-    	}
-    	return arg.getCreatedBy().equals(getUser()) // If the user is editing himself
-                || isUserHasPrivilege(Privilege.MANAGE_ARGUMENT);     // or If this user has the privilege to edit other users
-
-    }
-    
-    public static boolean canCurrentUserEditGoodExample(GoodExample goodExample) {
-       	if(! isUserLoggedIn()) {
-    	    return false;
-    	}
-    	return goodExample.getCreatedBy().equals(getUser())
-                || isUserHasPrivilege(Privilege.MANAGE_GOODEXAMPLE);
-    }
-    /**
-     * See method name
-     * @return true if the user is the creator of the GoodExample, only if there is no comments or votes yet, 
-     * 				OR the user can manage GoodExamples (even if there are comments and votes)
-     */
-    public static boolean canCurrentUserDeleteGoodExample(GoodExample goodExample){
-    	if(! isUserLoggedIn()) {
-    	    return false;
-    	}
-    	
-    	if (isUserHasPrivilege(Privilege.MANAGE_GOODEXAMPLE)) {
-    	    return true;
-    	} else 	if(goodExample.getCreatedBy().equals(getUser())) {
-    	    return goodExample.getCommentList().isEmpty() && goodExample.getVoteCount()==0;
-    	} else {
-    	    return false;
-    	}
-    }
-    
-    public static boolean canCurrentUserEditComment(Comment com) { 
-    	////this method is used for argument and goodExample
-    	if(! isUserLoggedIn()) {
-    	    return false;
-    	}
-    	return com.getCreatedBy().equals(getUser()) // If the user is editing himself
-                || isUserHasPrivilege(Privilege.MANAGE_ARGUMENT) 
-                || isUserHasPrivilege(Privilege.MANAGE_GOODEXAMPLE);    
-    }
-    
-    public static boolean canCurrentUserHideComment(Comment comment) { 
-    	User creator =  null;
-    	if( comment.getGoodExample() == null &&  comment.getArgument() == null) {
-    		//exception
-    		throw new IllegalArgumentException("Cannot have comment from both actions and goodexamples");
-    	}
-    	if (comment.getArgument() != null) {
-    		//get from argument
-    		creator= comment.getArgument().getCreatedBy();
-    	}else{
-    		//get from goodexample
-    		creator= comment.getGoodExample().getCreatedBy();
-    	}
-    	
-    	return isUserLoggedIn() && (creator.equals(getUser()) // If the user is the author of the goodExample who's commented
-                || isUserHasPrivilege(Privilege.MANAGE_GOODEXAMPLE));
-    }
-
-    public static void assertCurrentUserCanEditGoodExample(GoodExample goodExample) {
-        if( ! canCurrentUserEditGoodExample(goodExample) ) {
-            throw new UnauthorizedAccessException(" cannot edit that goodExample: "+goodExample.getTitle());
-        }
-        
-    }
 
 
 }

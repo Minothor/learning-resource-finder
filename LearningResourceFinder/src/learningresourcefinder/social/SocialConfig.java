@@ -3,6 +3,10 @@ package learningresourcefinder.social;
 import javax.inject.Inject;
 
 import learningresourcefinder.model.User;
+import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.CurrentEnvironment;
+import learningresourcefinder.web.UrlUtil;
+import learningresourcefinder.web.UrlUtil.Mode;
 
 import org.apache.commons.dbcp.datasources.SharedPoolDataSource;
 import org.springframework.context.annotation.Bean;
@@ -24,17 +28,9 @@ import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
-import org.springframework.social.linkedin.api.LinkedIn;
-import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
-import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
-
-import reformyourcountry.security.SecurityContext;
-import reformyourcountry.util.CurrentEnvironment;
-import reformyourcountry.web.UrlUtil;
-import reformyourcountry.web.UrlUtil.Mode;
 
 @Configuration
 public class SocialConfig {

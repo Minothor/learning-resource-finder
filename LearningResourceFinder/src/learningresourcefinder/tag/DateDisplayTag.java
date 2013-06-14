@@ -7,11 +7,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import learningresourcefinder.model.Article;
-import learningresourcefinder.repository.ArticleRepository;
-
-import reformyourcountry.util.DateUtil;
-import reformyourcountry.web.ContextUtil;
+import learningresourcefinder.util.DateUtil;
 
 public class DateDisplayTag extends SimpleTagSupport{
 	

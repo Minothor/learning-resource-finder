@@ -1,12 +1,11 @@
 package learningresourcefinder.web;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import reformyourcountry.util.CurrentEnvironment;
+import learningresourcefinder.util.CurrentEnvironment;
 
 public class UrlUtil {
 

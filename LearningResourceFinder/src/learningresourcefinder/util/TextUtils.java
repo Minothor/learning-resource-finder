@@ -2,8 +2,6 @@ package learningresourcefinder.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class TextUtils {
@@ -61,21 +59,5 @@ public class TextUtils {
         return ret.toString();
 	}
 	
-    /**
-     * It is the new version of compare texts (It uses blackbelt.diff.DiffGenerator)
-     * 
-     * @param original
-     * @param updated
-     * @return a Map<String, String> The first String (key = "original") contains the difference of the
-     *         original text and the second String (key = "updated" ) that of the update.
-     */
-    public static Map<String, String> getGeneratedDiffs(String original, String updated) {
-        DiffGenerator diffGenerator = new DiffGenerator(original, updated);
-        Map<String, String> diffs = new HashMap<String, String>();
-        diffs.put("original", diffGenerator.getTextOriginalHtmlDiff(true));
-        diffs.put("updated", diffGenerator.getTextModifiedHtmlDiff(true));
-
-        return diffs;
-    }
-
+  
 }
