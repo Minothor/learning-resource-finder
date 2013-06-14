@@ -12,13 +12,12 @@ public abstract class BatchUtil {
 	 *  BatchUtil.startSpringBatch(CreateTestDataBatch.class);
 	 */ 
 //	public static void startSpringBatch(Class<? extends Runnable> batchClass) {
-	public static void startSpringBatch(Class<? extends Runnable> batchClass) {
-		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{
-		"applicationContext.xml" });
+	public static void startSpringBatch(Class<? extends Runnable> batchClass) 
+	{
+		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml" });
 		//sessionFactory = (SessionFactory) applicationContext.getBean("sessionFactory");
 		//session = SessionFactoryUtils.getSession(sessionFactory, true);
-		//TransactionSynchronizationManager.bindResource(sessionFactory,
-		//		new SessionHolder(session));
+		//TransactionSynchronizationManager.bindResource(sessionFactory,new SessionHolder(session));
 		ContextUtil.contextInitialized(applicationContext);
 //		Runnable batchObject = (Runnable)ContextUtil.getSpringBean("batchCreate");
 		Runnable batchObject = ContextUtil.getSpringBean(batchClass);
