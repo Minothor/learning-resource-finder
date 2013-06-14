@@ -22,7 +22,7 @@
 	<bean name="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="formatters">
 			<list>
-				<bean class="reformyourcountry.converter.DateFormatter"/>
+				<bean class="learningresourcefinder.converter.DateFormatter"/>
 			</list>
 		</property>
 	</bean>
