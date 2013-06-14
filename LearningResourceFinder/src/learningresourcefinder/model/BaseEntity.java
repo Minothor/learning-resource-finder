@@ -14,13 +14,11 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 
-import learningresourcefinder.search.Searchable;
+import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.DateUtil;
 
 import org.apache.log4j.Logger;
 import org.hibernate.proxy.HibernateProxyHelper;
-
-import reformyourcountry.security.SecurityContext;
-import reformyourcountry.util.DateUtil;
 
 @MappedSuperclass
 public class BaseEntity  {

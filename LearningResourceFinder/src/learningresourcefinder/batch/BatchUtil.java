@@ -1,10 +1,10 @@
 package learningresourcefinder.batch;
 
+import learningresourcefinder.exception.ExceptionUtil;
+import learningresourcefinder.web.ContextUtil;
+
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import reformyourcountry.exception.ExceptionUtil;
-import reformyourcountry.web.ContextUtil;
 
 public abstract class BatchUtil {
 	

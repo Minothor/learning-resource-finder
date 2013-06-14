@@ -21,6 +21,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import learningresourcefinder.mail.MailingDelayType;
+import learningresourcefinder.security.Privilege;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -29,9 +32,6 @@ import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.twitter.api.Twitter;
-
-import reformyourcountry.mail.MailingDelayType;
-import reformyourcountry.security.Privilege;
 
 @Entity
 @Table(name = "users")
@@ -253,16 +253,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     private Role role = Role.USER;
 
     
-    ///////////////////////////////////////////////////////////////////////////////////////
-    public boolean isHasBadgeType(BadgeType badgeType) {
-    	// Recherche dans la liste.
-    	for(Badge badge : badges){
-    		if(badge.getBadgeType().equals(badgeType))
-    			return true;
-    	}
-    
-    	return  false;
-    }
+
     
    //FIXME i think i understand with only one line ... --maxime 28/11/12
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
@@ -273,20 +264,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     
     
     
-    
-    public Date getCertificationDate() {
-		return certificationDate;
-	}
-
-	public Set<Badge> getBadges() {
-		return badges;
-	}
-	
-    
-    
-	public void setCertificationDate(Date certificationDate) {
-		this.certificationDate = certificationDate;
-	}
 
     
     
@@ -300,22 +277,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     
     public Role getRole() {
         return role;
-    }
-
-	public SpecialType getSpecialType() {
-        return specialType;
-    }
-
-    public void setSpecialType(SpecialType specialType) {
-        this.specialType = specialType;
-    }
-
-    public boolean isAskedGroup() {
-        return askedGroup;
-    }
-
-    public void setAskedGroup(boolean askedGroup) {
-        this.askedGroup = askedGroup;
     }
 
     public AccountConnectedType getAccountConnectedType() {
@@ -513,10 +474,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
         this.spamReporter = spamReporter;
     }
 
-    public List<GroupReg> getGroupRegs() {
-        return groupRegs;
-    }
-
     public int getConsecutiveFailedLogins() {
         return consecutiveFailedLogins;
     }
@@ -533,55 +490,32 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
         this.lastFailedLoginDate = lastFailedLoginDate;
     }
 
-    public String getNameChangeLog() {
-        return nameChangeLog;
-    }
+//    public String getNameChangeLog() {
+//        return nameChangeLog;
+//    }
 
-    public void addNameChangeLog(String nameChange) {
-        if (this.nameChangeLog == null) {
-            this.nameChangeLog = nameChange;
-        } else {
-            this.nameChangeLog += "\n" + nameChange;
-        }
-    }
 
     public void setMailingDelayType(MailingDelayType mailingDelay) {
         this.mailingDelayType = mailingDelay;
     }
-    
-    public List<VoteAction> getVoteActions() {
-        return voteActions;
-    }
-    
-    public void addVoteAction(VoteAction va){
-        voteActions.add(va);
-    }
-    
-    public List<VoteArgument> getVoteArguments() {
-        return voteArguments;
-    }
-    
-    public void addVoteArgument(VoteArgument va){
-        voteArguments.add(va);
-    }
 
-    @Override
-    public Map<String, String> getCriterias() {
-        Map<String, String> fields = new HashMap<String,String>();
-        fields.put("userName",StringUtils.defaultIfEmpty(userName,""));
-        fields.put("lastName",StringUtils.defaultIfEmpty(lastName,""));
-        fields.put("firstName",StringUtils.defaultIfEmpty(firstName,""));
-        fields.put("title",StringUtils.defaultIfEmpty(title,""));
-        fields.put("mail",StringUtils.defaultIfEmpty(mail,""));
-        fields.put("description", "");
-        return fields;
-    }
-
-    @Override
-    public String getBoostedCriteriaName() {
-     
-        return "userName";
-    }
+//    @Override
+//    public Map<String, String> getCriterias() {
+//        Map<String, String> fields = new HashMap<String,String>();
+//        fields.put("userName",StringUtils.defaultIfEmpty(userName,""));
+//        fields.put("lastName",StringUtils.defaultIfEmpty(lastName,""));
+//        fields.put("firstName",StringUtils.defaultIfEmpty(firstName,""));
+//        fields.put("title",StringUtils.defaultIfEmpty(title,""));
+//        fields.put("mail",StringUtils.defaultIfEmpty(mail,""));
+//        fields.put("description", "");
+//        return fields;
+//    }
+//
+//    @Override
+//    public String getBoostedCriteriaName() {
+//     
+//        return "userName";
+//    }
 
   
   

@@ -7,10 +7,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.transaction.annotation.Transactional;
+import learningresourcefinder.model.BaseEntity;
+import learningresourcefinder.util.ClassUtil;
 
-import reformyourcountry.model.BaseEntity;
-import reformyourcountry.util.ClassUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @SuppressWarnings("unchecked")

@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import learningresourcefinder.util.DateUtil;
+
 import org.hibernate.ejb.Ejb3Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
-
-import reformyourcountry.util.DateUtil;
 
 /** Small utility to be run by a developer to identify the difference between
  * its entities and its DB schema. It produces an SQL to be copy/pasted and applied

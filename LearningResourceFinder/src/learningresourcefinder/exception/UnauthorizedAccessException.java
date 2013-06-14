@@ -1,7 +1,7 @@
 package learningresourcefinder.exception;
 
-import reformyourcountry.security.Privilege;
-import reformyourcountry.security.SecurityContext;
+import learningresourcefinder.security.Privilege;
+import learningresourcefinder.security.SecurityContext;
 
 public class UnauthorizedAccessException extends RuntimeException {
 

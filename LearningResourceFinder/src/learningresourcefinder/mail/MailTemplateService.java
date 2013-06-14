@@ -6,13 +6,12 @@ import java.util.List;
 import learningresourcefinder.model.Mail;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.MailRepository;
+import learningresourcefinder.service.UserService;
+import learningresourcefinder.web.UrlUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
-
-import reformyourcountry.service.UserService;
-import reformyourcountry.web.UrlUtil;
 
 /**
  * @author Julien Van Assche
