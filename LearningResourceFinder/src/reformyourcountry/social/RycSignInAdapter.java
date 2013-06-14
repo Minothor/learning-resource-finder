@@ -2,15 +2,16 @@ package reformyourcountry.social;
 
 
 
+import learningresourcefinder.controller.LoginController;
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.AccountConnectedType;
+
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import reformyourcountry.controller.BaseController;
-import reformyourcountry.controller.LoginController;
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.AccountConnectedType;
 import reformyourcountry.service.LoginService;
 import reformyourcountry.util.NotificationUtil;
 import reformyourcountry.web.ContextUtil;

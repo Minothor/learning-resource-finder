@@ -1,5 +1,9 @@
 package reformyourcountry.maintest;
 
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Gender;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import reformyourcountry.exception.InvalidPasswordException;
@@ -7,9 +11,6 @@ import reformyourcountry.exception.UserAlreadyExistsException;
 import reformyourcountry.exception.UserLockedException;
 import reformyourcountry.exception.UserNotFoundException;
 import reformyourcountry.exception.UserNotValidatedException;
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.AccountStatus;
-import reformyourcountry.model.User.Gender;
 import reformyourcountry.security.Privilege;
 import reformyourcountry.security.SecurityContext;
 import reformyourcountry.service.LoginService;

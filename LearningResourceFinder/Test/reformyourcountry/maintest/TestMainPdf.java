@@ -12,7 +12,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import reformyourcountry.pdf.ArticlePdfGenerator;
+import learningresourcefinder.pdf.ArticlePdfGenerator;
+
 
 
 

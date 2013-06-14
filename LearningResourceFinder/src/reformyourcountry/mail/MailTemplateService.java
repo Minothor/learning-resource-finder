@@ -3,13 +3,14 @@ package reformyourcountry.mail;
 import java.util.Arrays;
 import java.util.List;
 
+import learningresourcefinder.model.Mail;
+import learningresourcefinder.model.User;
+import learningresourcefinder.repository.MailRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
-import reformyourcountry.model.Mail;
-import reformyourcountry.model.User;
-import reformyourcountry.repository.MailRepository;
 import reformyourcountry.service.UserService;
 import reformyourcountry.web.UrlUtil;
 

@@ -10,8 +10,9 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import learningresourcefinder.model.User;
+
 import reformyourcountry.model.BaseEntity;
-import reformyourcountry.model.User;
 
 public class TestValidator {
 

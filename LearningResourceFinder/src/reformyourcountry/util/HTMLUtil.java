@@ -1,9 +1,10 @@
 package reformyourcountry.util;
 
+import learningresourcefinder.model.User;
+
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-import reformyourcountry.model.User;
 
 public class HTMLUtil {
 	

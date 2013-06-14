@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import javax.mail.internet.MimeMessage;
 
+import learningresourcefinder.model.Mail;
+import learningresourcefinder.model.User;
+import learningresourcefinder.repository.UserRepository;
+
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -12,9 +16,6 @@ import reformyourcountry.mail.MailCategory;
 import reformyourcountry.mail.MailSender;
 import reformyourcountry.mail.MailTemplateService;
 import reformyourcountry.mail.MailType;
-import reformyourcountry.model.Mail;
-import reformyourcountry.model.User;
-import reformyourcountry.repository.UserRepository;
 import reformyourcountry.util.CurrentEnvironment.Environment;
 
 

@@ -10,6 +10,14 @@ import java.util.Set;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
+import learningresourcefinder.controller.LoginController;
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.AccountConnectedType;
+import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Role;
+import learningresourcefinder.model.User.SpecialType;
+import learningresourcefinder.repository.UserRepository;
+
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
@@ -20,17 +28,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
-import reformyourcountry.controller.LoginController;
 import reformyourcountry.exception.InvalidPasswordException;
 import reformyourcountry.exception.UserLockedException;
 import reformyourcountry.exception.UserNotFoundException;
 import reformyourcountry.exception.UserNotValidatedException;
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.AccountConnectedType;
-import reformyourcountry.model.User.AccountStatus;
-import reformyourcountry.model.User.Role;
-import reformyourcountry.model.User.SpecialType;
-import reformyourcountry.repository.UserRepository;
 import reformyourcountry.security.SecurityContext;
 import reformyourcountry.util.CurrentEnvironment.Environment;
 import reformyourcountry.util.SecurityUtils;

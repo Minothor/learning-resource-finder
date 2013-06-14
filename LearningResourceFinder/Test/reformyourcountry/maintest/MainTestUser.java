@@ -2,16 +2,17 @@ package reformyourcountry.maintest;
 
 import java.util.Scanner;
 
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Gender;
+import learningresourcefinder.repository.UserRepository;
+
 import reformyourcountry.exception.InvalidPasswordException;
 import reformyourcountry.exception.UserAlreadyExistsException;
 import reformyourcountry.exception.UserLockedException;
 import reformyourcountry.exception.UserNotFoundException;
 import reformyourcountry.exception.UserNotValidatedException;
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.AccountStatus;
-import reformyourcountry.model.User.Gender;
 import reformyourcountry.regex.EmailValidator;
-import reformyourcountry.repository.UserRepository;
 import reformyourcountry.service.LoginService;
 import reformyourcountry.service.LoginService.WaitDelayNotReachedException;
 import reformyourcountry.service.UserService;

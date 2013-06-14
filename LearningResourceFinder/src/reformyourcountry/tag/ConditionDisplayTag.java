@@ -5,7 +5,8 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import reformyourcountry.model.User.Role;
+import learningresourcefinder.model.User.Role;
+
 import reformyourcountry.security.Privilege;
 import reformyourcountry.security.SecurityContext;
 

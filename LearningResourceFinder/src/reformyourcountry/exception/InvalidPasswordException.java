@@ -1,6 +1,6 @@
 package reformyourcountry.exception;
 
-import reformyourcountry.model.User;
+import learningresourcefinder.model.User;
 
 public class InvalidPasswordException extends Exception {
 

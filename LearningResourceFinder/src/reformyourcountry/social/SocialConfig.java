@@ -2,6 +2,8 @@ package reformyourcountry.social;
 
 import javax.inject.Inject;
 
+import learningresourcefinder.model.User;
+
 import org.apache.commons.dbcp.datasources.SharedPoolDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +31,6 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
-import reformyourcountry.model.User;
 import reformyourcountry.security.SecurityContext;
 import reformyourcountry.util.CurrentEnvironment;
 import reformyourcountry.web.UrlUtil;

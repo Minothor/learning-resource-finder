@@ -1,7 +1,8 @@
 package reformyourcountry.maintest;
 import java.io.IOException;
 
-import reformyourcountry.converter.BBConverter;
+import learningresourcefinder.converter.BBConverter;
+
 
 public class MainTestParser {
     public static void main(String[] args) throws IOException{

@@ -1,5 +1,9 @@
 package reformyourcountry.maintest;
 
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +14,6 @@ import reformyourcountry.exception.UserAlreadyExistsException;
 import reformyourcountry.exception.UserLockedException;
 import reformyourcountry.exception.UserNotFoundException;
 import reformyourcountry.exception.UserNotValidatedException;
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.AccountStatus;
-import reformyourcountry.repository.UserRepository;
 import reformyourcountry.security.Privilege;
 import reformyourcountry.security.SecurityContext;
 import reformyourcountry.service.LoginService;

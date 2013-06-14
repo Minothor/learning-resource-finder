@@ -10,6 +10,15 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import learningresourcefinder.model.Badge;
+import learningresourcefinder.model.BadgeType;
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.AccountConnectedType;
+import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Role;
+import learningresourcefinder.model.User.SpecialType;
+import learningresourcefinder.repository.UserRepository;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +45,6 @@ import reformyourcountry.exception.UserNotFoundException;
 import reformyourcountry.exception.UserNotValidatedException;
 import reformyourcountry.mail.MailCategory;
 import reformyourcountry.mail.MailType;
-import reformyourcountry.model.Badge;
-import reformyourcountry.model.BadgeType;
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.AccountConnectedType;
-import reformyourcountry.model.User.AccountStatus;
-import reformyourcountry.model.User.Role;
-import reformyourcountry.model.User.SpecialType;
-import reformyourcountry.repository.UserRepository;
 import reformyourcountry.security.SecurityContext;
 import reformyourcountry.service.LoginService.WaitDelayNotReachedException;
 import reformyourcountry.util.CurrentEnvironment;

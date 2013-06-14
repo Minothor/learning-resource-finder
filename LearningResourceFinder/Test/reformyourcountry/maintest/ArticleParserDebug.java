@@ -1,12 +1,13 @@
 package reformyourcountry.maintest;
 
+import learningresourcefinder.converter.BBConverter;
+import learningresourcefinder.repository.ArticleRepository;
+import learningresourcefinder.repository.BookRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import reformyourcountry.batch.BatchUtil;
-import reformyourcountry.converter.BBConverter;
-import reformyourcountry.repository.ArticleRepository;
-import reformyourcountry.repository.BookRepository;
 
 @Service
 public class ArticleParserDebug implements Runnable {

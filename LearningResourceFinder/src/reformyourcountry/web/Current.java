@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import learningresourcefinder.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.stereotype.Component;
 
-import reformyourcountry.model.User;
 import reformyourcountry.security.SecurityContext;
 
 /** An instance of Current will be bound to the servletContext, in order to enable JSPs to refer it through EL.

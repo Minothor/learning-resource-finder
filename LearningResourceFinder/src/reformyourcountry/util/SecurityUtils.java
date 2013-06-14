@@ -2,9 +2,10 @@ package reformyourcountry.util;
 
 import java.security.MessageDigest;
 
+import learningresourcefinder.model.User;
+
 import org.apache.commons.codec.binary.Hex;
 
-import reformyourcountry.model.User;
 import reformyourcountry.security.Privilege;
 import reformyourcountry.security.SecurityContext;
 

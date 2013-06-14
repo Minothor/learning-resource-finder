@@ -3,8 +3,8 @@ package reformyourcountry.security;
 //import be.loop.jbb.bo.corp.CorpUser.CorporateRole;
 
 
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.Role;
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.Role;
 
 public enum Privilege {
 

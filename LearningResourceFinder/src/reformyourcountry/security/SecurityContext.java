@@ -3,13 +3,14 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
+import learningresourcefinder.model.Argument;
+import learningresourcefinder.model.Comment;
+import learningresourcefinder.model.GoodExample;
+import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.Role;
+import learningresourcefinder.repository.UserRepository;
+
 import reformyourcountry.exception.UnauthorizedAccessException;
-import reformyourcountry.model.Argument;
-import reformyourcountry.model.Comment;
-import reformyourcountry.model.GoodExample;
-import reformyourcountry.model.User;
-import reformyourcountry.model.User.Role;
-import reformyourcountry.repository.UserRepository;
 import reformyourcountry.service.LoginService;
 import reformyourcountry.web.ContextUtil;
 

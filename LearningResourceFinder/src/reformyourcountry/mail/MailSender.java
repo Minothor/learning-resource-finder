@@ -9,6 +9,11 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.mail.internet.MimeMessage;
 
+import learningresourcefinder.model.Mail;
+import learningresourcefinder.model.User;
+import learningresourcefinder.repository.MailRepository;
+import learningresourcefinder.repository.UserRepository;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.log4j.BasicConfigurator;
@@ -19,10 +24,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
-import reformyourcountry.model.Mail;
-import reformyourcountry.model.User;
-import reformyourcountry.repository.MailRepository;
-import reformyourcountry.repository.UserRepository;
 import reformyourcountry.util.CurrentEnvironment.Environment;
 import reformyourcountry.util.CurrentEnvironment.MailBehavior;
 import reformyourcountry.util.HtmlToTextUtil;

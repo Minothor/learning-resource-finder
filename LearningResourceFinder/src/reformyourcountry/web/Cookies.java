@@ -2,7 +2,8 @@ package reformyourcountry.web;
 
 import javax.servlet.http.Cookie;
 
-import reformyourcountry.model.User;
+import learningresourcefinder.model.User;
+
 
 
 public class Cookies {
