@@ -1,0 +1,87 @@
+LIST OF LIBRARIES:
+
+
+Hibernate & dependencies :
+			-hibernate-core-40104.Final
+			-hibernate-commons-annotations-4.0.1.Final
+			-hibernate-entitymanager-4.1.1.Final
+			-hibernate-jpa-2.0-api.1.0.1.Final
+			-hibernate-validator-4.3.0.Final
+			-hibernate-validator-annotation-processor-4.3.0.Final
+			-validation-api-1.0.0.GA
+			-antlr-2.7.7
+			-dom4j-1.6.1
+			-javassist-3.15.0-GA
+			-sfl4j-api-1.6.6
+			-sfl4j-ext-1.6.6
+			-sfl4j-log4j12-1.6.6
+			-log4j-1.2.17
+JDBC drivers :
+			-postgresql-9.1-902.jdbc4
+JPA Specs :
+			-javax.persistence_2.0.0
+Spring & dependencies :
+			-org.springframework.*
+			-aopalliance
+			-asm
+			-cglib
+			-commons-logging
+JavaMail :
+			-dsn
+			-imap
+			-mailapi
+			-smtp
+JSLT EL :
+			-standard
+			-jstl
+JUnit :
+			-junit-4.10
+PD4ML :
+			-pd4ml
+			-fonts   for accentuated characters
+			-ss_css2
+			
+Lucene :	
+			-lucene-core-4.0.0
+			-lucene-analyzers-common-4.0.0
+			-lucene-queryparser-4.0.0
+			-lucene-highlighter-4.0.0
+			-lucene-memory-4.0.0
+			
+****************************** Spring Social : ******************************
+ 
+commons-dbcp-1.4.jar // In relation with the data source
+commons-pool-1.6.jar // Dependence bdcp
+commons-logging-1.1.1.jar // Login Facebook
+
+Appache-commons(dependency Spring Social) : 
+
+    commons-codec-1.6.jar
+    fluent-hc-4.2.1.jar
+	httpclient-4.2.1.jar
+	httpclient-cache-4.2.1.jar
+	httpcore-4.2.1.jar
+	httpmime-4.2.1.jar
+	
+jackson-all-1.8.10.jar // parser JSON(string)
+javax.inject-1.jar // annotation de spring(@inject)
+
+spring-security-crypto; version= "[3.1.2.RELEASE]" // Spring Social dependence(refers the text encryptor)
+spring-social-core; version= "[1.0.2.RELEASE]"
+spring-social-facebook; version= "[1.0.2.RELEASE]"
+spring-social-facebook-web; version= "[1.0.2.RELEASE]"
+spring-social-test; version= "[1.0.2.RELEASE]"
+spring-social-web; version= "[1.0.2.RELEASE]"
+
+spring-social-twitter; version= "[1.0.2.RELEASE]" //implemetation twitter for spring social
+spring-social-linkedin; version= "[1.0.0.RC1]" //implemetation linkedin for spring social
+spring-social-google-1.0.0.M1.jar
+log4jdbc4-1.2.jar //test jdbc trace with driver spy
+
+************************** End of Spring Social : ****************************
+***************************Content formatting*********************************
+
+jsoup-1.7.1.jar //collection of APIs for safely allowing users to supply 
+				   //their own HTML and CSS without exposing the site to XSS vulnerabilities.
+				   //https://code.google.com/p/owaspantisamy/
+***************************************************************************** 

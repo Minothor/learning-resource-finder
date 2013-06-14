@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="reformyourcountry">
+        <!-- <context:exclude-filter expression="org.springframework.stereotype.Controller"	type="annotation" /> We do not exclude controllers, see comment in dispatcher-servlet.xml - John
+             Explanation there: http://stackoverflow.com/questions/7833767/why-dispatcherservlet-creates-another-application-context -->
+    </context:component-scan>
+    <aop:config proxy-target-class="true" />
+<!--     <context:property-placeholder ignore-unresolvable="false" location="classpath:/config.properties,classpath:/secret.properties"/> -->
+    
+    <!-- for injecting value in application context.xml -->
+    <bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:/secret.properties</value>
+                <value>classpath:/config.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="entityManagerFactory"
+    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="Connection" />
+        <property name="dataSource" ref="dataSource"/>  
+        
+        <!-- we add this jpaVendorAdapter because it seem this class synchronises JPA and JDBCTemplate used in spring social 
+         without it the method ProviderSignInUtils.handlePostSignUp(user.getId()+"", request) 
+         calling the method JdbcConnectionRepository.addConnection() (containing the SQL insert)
+         will never perform commit after subsequent insert sql.
+         We don't understand why. We see the insert statement on the traced JDBC connection, but no record in the DB.
+         The following thread made his think about the hack. 
+         http://stackoverflow.com/questions/6777419/how-to-configure-spring-to-make-jpa-hibernate-and-jdbc-jdbctemplate-or-mybati -->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+        <property name="jpaProperties">
+        
+            <!-- set extra properties here, e.g. for Hibernate: -->
+            <props>
+<!--                 <prop key="hibernate.connection.url">${DB.url}</prop>
+                <prop key="hibernate.connection.username">${DB.userName}</prop>
+                <prop key="hibernate.connection.password">${DB.password}</prop>-->
+                <prop key="hibernate.showsql">true</prop>
+             </props>
+        </property>
+
+    </bean>
+    
+    
+     <bean id="dataSource"
+        class="org.apache.commons.dbcp.datasources.SharedPoolDataSource"
+        destroy-method="close">
+        <property name="connectionPoolDataSource">
+            <bean
+                class="org.apache.commons.dbcp.cpdsadapter.DriverAdapterCPDS">
+               <!-- <property name="driver" value="net.sf.log4jdbc.DriverSpy" /> use this to trace jdbc BOTH JPA AND JdbcTemplate--> 
+                <property name="driver" value="org.postgresql.Driver" />
+                <property name="url" value="${DB.url}" />
+                <property name="user" value="${DB.userName}" />
+                <property name="password" value="${DB.password}" />
+                <property name="maxActive" value="0" />
+                <property name="maxIdle" value="0" />
+                <property name="poolPreparedStatements" value="true" />
+            </bean>
+        </property>
+        <property name="maxWait" value="60000" />
+        <property name="defaultAutoCommit" value="false" />
+        <property name="defaultReadOnly" value="false" />
+    </bean>
+    
+
+    
+
+    <!-- Transaction manager for a single JPA EntityManagerFactory (alternative
+    to JTA) -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+    p:entityManagerFactory-ref="entityManagerFactory" />
+
+    <!-- Configure the multipart resolver -->
+    <bean id="multipartResolver"
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes (10mb
+        here) -->
+        <property name="maxUploadSize" value="10000000" />
+        <property name="maxInMemorySize" value="10000000" />
+    </bean>
+    
+    
+    
+    
+    
+    <tx:annotation-driven />
+
+</beans>
