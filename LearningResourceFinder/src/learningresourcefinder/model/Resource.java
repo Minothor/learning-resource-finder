@@ -43,5 +43,14 @@ public class Resource extends BaseEntity
 		this.description = description;
 	}
 	
+	/**************************** Methods *************************************/
+	
+	public void addProblem(Problem p) {
+		this.problems.add(p);
+	}
+	
+	public void removeProblem(Problem p) {
+		this.problems.remove(p);
+	}
 	
 }

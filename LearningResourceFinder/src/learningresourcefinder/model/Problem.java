@@ -23,6 +23,10 @@ public class Problem extends BaseEntity
 	public String getDescription() {
 		return description;
 	}
+	
+	public Resource getResource() {
+		return resource;
+	}
 
 	/**************************** Setters *************************************/
 
@@ -32,5 +36,9 @@ public class Problem extends BaseEntity
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public void setResource(Resource resource) {
+		this.resource = resource;
 	}
 }
