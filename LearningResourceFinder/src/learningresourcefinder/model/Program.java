@@ -20,7 +20,7 @@ public class Program extends BaseEntity {
 	private int level;
 	
 	@OneToMany
-	List <Resource> resource  = new ArrayList<>();
+	List <Resource> resour  = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -55,6 +55,14 @@ public class Program extends BaseEntity {
 	}
 
 	
+	public void addResource(Resource res){
+		resour.add(res);
+		
+	}
+	
+	public void removeResource(Resource res){
+		resour.remove(res);
+	}
 	
 	
 }
