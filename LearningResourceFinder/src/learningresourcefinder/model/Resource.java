@@ -18,19 +18,18 @@ public class Resource extends BaseEntity
 	@OneToMany(mappedBy="resource")
 	private Set<Problem> problems;
 	
-	public Resource()
-	{
-		problems = new HashSet<>();
+	public Resource() {
+		this.problems = new HashSet<>();
 	}
 	
 	/**************************** Getters *************************************/
 	
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 	
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 	
 	/**************************** Setters *************************************/

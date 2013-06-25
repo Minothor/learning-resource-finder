@@ -11,25 +11,34 @@ public class Comment extends BaseEntity
 	@Column(columnDefinition="TEXT", nullable=false)
 	private String description;
 	
+	@ManyToOne
+	private Problem problem;
+	
 	/**************************** Getters *************************************/
 
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 	
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public Problem getProblem() {
+		return this.problem;
 	}
 	
 	/**************************** Setters *************************************/
 
-	
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public void setProblem(Problem problem) {
+		this.problem = problem;
 	}
 }
