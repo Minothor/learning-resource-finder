@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Program extends BaseEntity {
@@ -18,7 +19,8 @@ public class Program extends BaseEntity {
 	@Column(columnDefinition = "VARCHAR(50)")
 	private int level;
 	
-	List <Program> subProgram = new ArrayList<>();
+	@ManyToMany
+	List <Resource> resource  = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -52,9 +54,7 @@ public class Program extends BaseEntity {
 		this.level = level;
 	}
 
-	public void setSubProgram(List<Program> subProgram) {
-		this.subProgram = subProgram;
-	}
+	
 	
 	
 }
