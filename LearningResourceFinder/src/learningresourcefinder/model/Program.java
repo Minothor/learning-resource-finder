@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Program extends BaseEntity {
@@ -19,7 +19,7 @@ public class Program extends BaseEntity {
 	@Column(columnDefinition = "VARCHAR(50)")
 	private int level;
 	
-	@ManyToMany
+	@OneToMany
 	List <Resource> resource  = new ArrayList<>();
 
 	public String getName() {
