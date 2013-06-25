@@ -23,6 +23,7 @@ public abstract class BatchUtil {
 		Runnable batchObject = ContextUtil.getSpringBean(batchClass);
 		
 		try{
+			
 			batchObject.run();
 
 		} catch (Exception e) {
