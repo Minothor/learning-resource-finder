@@ -16,6 +16,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
@@ -252,7 +253,8 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
    
     private Role role = Role.USER;
 
-    
+    @ManyToMany
+    private School school;
 
     
    //FIXME i think i understand with only one line ... --maxime 28/11/12
