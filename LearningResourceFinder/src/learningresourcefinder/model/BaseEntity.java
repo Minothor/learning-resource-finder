@@ -30,6 +30,7 @@ public class BaseEntity  {
     
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(nullable=true) //when we are not in a thread web request, no user will be associated to entity creation/update (no logged in user)
     User createdBy;

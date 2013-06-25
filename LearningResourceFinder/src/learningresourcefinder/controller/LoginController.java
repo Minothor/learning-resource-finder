@@ -18,6 +18,7 @@ import learningresourcefinder.web.Cookies;
 import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,11 +44,11 @@ public class LoginController extends BaseController<User> {
     @Autowired UserRepository userRepository;
     
     @RequestMapping(value="/login", method=RequestMethod.GET)
-    public ModelAndView signin(HttpServletRequest request) {
+    public ModelAndView signin(HttpRequest request) {
         ModelAndView mv = new ModelAndView("login");
 
         // Should we pre-check the "autologin" checkbox ?
-        Boolean autologin  = (Boolean) request.getSession().getAttribute(AUTOLOGIN_KEY);
+        Boolean autologin  = (Boolean) ((HttpServletRequest) request).getSession().getAttribute(AUTOLOGIN_KEY);
         autologin = autologin == null ? false : autologin;
         autologin = autologin || Cookies.findCookie(Cookies.LOGINCOOKIE_KEY) != null;
         mv.addObject(AUTOLOGIN_KEY, autologin);
