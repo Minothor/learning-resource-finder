@@ -1,5 +1,8 @@
 package learningresourcefinder.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,18 +17,25 @@ public class Problem extends BaseEntity
 	@ManyToOne
 	private Resource resource;
 	
+	@OneToMany(mappedBy="problem")
+	private Set<Comment> comments;
+	
+	public Problem() {
+		this.comments = new HashSet<>();
+	}
+	
 	/**************************** Getters *************************************/
 
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 	
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 	
 	public Resource getResource() {
-		return resource;
+		return this.resource;
 	}
 
 	/**************************** Setters *************************************/
@@ -40,5 +50,15 @@ public class Problem extends BaseEntity
 	
 	public void setResource(Resource resource) {
 		this.resource = resource;
+	}
+	
+/**************************** Methods *************************************/
+	
+	public void addComment(Comment c) {
+		this.comments.add(c);
+	}
+	
+	public void removeComment(Comment c) {
+		this.comments.remove(c);
 	}
 }
