@@ -22,6 +22,8 @@ public class Program extends BaseEntity {
 	@OneToMany
 	List <Resource> resour  = new ArrayList<>();
 
+	
+	///////////Getters & Setters //////////////
 	public String getName() {
 		return name;
 	}
@@ -55,6 +57,8 @@ public class Program extends BaseEntity {
 	}
 
 	
+	
+	////////// Methods //////////
 	public void addResource(Resource res){
 		resour.add(res);
 		

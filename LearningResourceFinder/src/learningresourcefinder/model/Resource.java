@@ -19,7 +19,7 @@ public class Resource extends BaseEntity
 	private Set<Problem> problems;
 	
 	@OneToMany(mappedBy="resour")
-	private Program prog;
+	private Set <Program> prog = new HashSet<>();
 	
 	public Resource() {
 		this.problems = new HashSet<>();
@@ -55,4 +55,11 @@ public class Resource extends BaseEntity
 		this.problems.remove(p);
 	}
 	
+	public void addProgram( Program progr){
+		prog.add(progr);
+	}
+	
+	public void removeProgram(Program progr){
+		prog.remove(progr);
+	}
 }
