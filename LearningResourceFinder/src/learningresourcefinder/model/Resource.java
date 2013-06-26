@@ -21,6 +21,9 @@ public class Resource extends BaseEntity
 	@OneToMany(mappedBy="resource")
 	private Set<Program> programs = new HashSet<>();
 	
+	@ManyToOne
+	private User user;
+	
 	public Resource() {
 		this.problems = new HashSet<>();
 	}
@@ -35,6 +38,10 @@ public class Resource extends BaseEntity
 		return this.description;
 	}
 	
+	public User getUser() {
+		return this.user;
+	}
+	
 	/**************************** Setters *************************************/
 
 	public void setTitle(String title) {
@@ -43,6 +50,10 @@ public class Resource extends BaseEntity
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	/**************************** Methods *************************************/
