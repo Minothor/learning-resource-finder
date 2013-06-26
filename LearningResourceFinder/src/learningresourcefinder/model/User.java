@@ -255,7 +255,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     private Role role = Role.USER;
 
     @ManyToMany
-    private School school;
+    private Set<School> setSchool = new HashSet<>();
     
     @OneToMany (mappedBy="user")
     Set <Scenario> scenario = new HashSet<>();
