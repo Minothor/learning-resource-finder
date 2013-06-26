@@ -20,8 +20,25 @@ public class Program extends BaseEntity {
 	private int level;
 	
 	@OneToMany
-	List <Resource> resour  = new ArrayList<>();
+	List <Resource> resource  = new ArrayList<>();
 
+	Program parent;
+	
+	List <Program> childs = new ArrayList<>();
+	
+
+	public void addChild(Program child){
+		child.parent=this;
+	//this.getChilds().(child);
+		
+	}
+	
+	public void walkTree (Program program){
+		
+		for( Program child : program.childs){
+			walkTree(child);
+		}
+	}
 	
 	///////////Getters & Setters //////////////
 	public String getName() {
@@ -57,16 +74,6 @@ public class Program extends BaseEntity {
 	}
 
 	
-	
-	////////// Methods //////////
-	public void addResource(Resource res){
-		resour.add(res);
-		
-	}
-	
-	public void removeResource(Resource res){
-		resour.remove(res);
-	}
 	
 	
 }
