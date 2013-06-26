@@ -1,17 +1,17 @@
 package learningresourcefinder.model;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 
 @Entity
 public class School extends BaseEntity {
 	
-	
+	@Column(columnDefinition = "VARCHAR(50)")
 	private String name;
-	
+	@Column(columnDefinition = "VARCHAR(50)")
 	private String address;
-	
+	@Column(columnDefinition = "VARCHAR(50)")
 	private String country;
 	
 	public String getName() {
