@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unchecked")
 public class ProblemRepository extends BaseRepository<Problem>
 {
+	public Problem findProblemByTitle(String title) {
+		return getSingleOrNullResult(em.createQuery("SELECT p FROM Problem p WHERE p.title = :title").setParameter("title", title));
+	}
+	
 	public User findUserByProblem(Problem problem) {
 		return (User) em.createQuery("SELECT u FROM User u WHERE u.id = :user").setParameter("user", problem.getUser().getId());
 	}
@@ -25,3 +29,5 @@ public class ProblemRepository extends BaseRepository<Problem>
 		return (Problem) results;
 	}
 }
+
+

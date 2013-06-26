@@ -72,8 +72,8 @@ public class Problem extends BaseEntity
 	public void setResolved(boolean resolved) {
 		this.resolved = resolved;
 	}
-	
-/**************************** Methods *************************************/
+		
+	/**************************** Methods *************************************/
 	
 	public void addComment(Comment c) {
 		this.comments.add(c);
