@@ -20,6 +20,11 @@ public class Problem extends BaseEntity
 	@OneToMany(mappedBy="problem")
 	private Set<Comment> comments;
 	
+	@ManyToOne
+	private User user;
+	
+	private boolean resolved = false;
+	
 	public Problem() {
 		this.comments = new HashSet<>();
 	}
@@ -37,6 +42,14 @@ public class Problem extends BaseEntity
 	public Resource getResource() {
 		return this.resource;
 	}
+	
+	public User getUser() {
+		return this.user;
+	}
+	
+	public boolean getResolved() {
+		return this.resolved;
+	}
 
 	/**************************** Setters *************************************/
 
@@ -50,6 +63,14 @@ public class Problem extends BaseEntity
 	
 	public void setResource(Resource resource) {
 		this.resource = resource;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public void setResolved(boolean resolved) {
+		this.resolved = resolved;
 	}
 	
 /**************************** Methods *************************************/
