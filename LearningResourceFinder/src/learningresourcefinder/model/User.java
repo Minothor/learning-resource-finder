@@ -18,6 +18,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -255,6 +256,9 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 
     @ManyToMany
     private School school;
+    
+    @OneToMany (mappedBy="user")
+    Set <Scenario> scenario = new HashSet<>();
 
     
    //FIXME i think i understand with only one line ... --maxime 28/11/12
