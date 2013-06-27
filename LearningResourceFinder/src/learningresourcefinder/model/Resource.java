@@ -18,7 +18,7 @@ public class Resource extends BaseEntity
 	@OneToMany(mappedBy="resource")
 	private Set<Problem> problems;
 	
-	@OneToMany(mappedBy="resource")
+	@OneToMany(mappedBy="resources")
 	private Set<Program> programs = new HashSet<>();
 	
 	@ManyToOne

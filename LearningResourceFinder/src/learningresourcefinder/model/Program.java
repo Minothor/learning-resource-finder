@@ -16,11 +16,11 @@ public class Program extends BaseEntity {
 	private String description;
 	@Column(columnDefinition = "INTEGER(5)")
 	private int duration;    // duration of the program in days
-	@Column(columnDefinition = "VARCHAR(50)")
+	@Column(columnDefinition = "INTEGER(5)")
 	private int level;
 	
 	@OneToMany
-	List <Resource> resource  = new ArrayList<>();
+	List <Resource> resources  = new ArrayList<>();
 
 	/*Program parent;
 	
@@ -76,7 +76,7 @@ public class Program extends BaseEntity {
 	
 	
 	public List<Resource> getResource() {
-		return resource;
+		return resources;
 	}
 
 	
@@ -95,12 +95,12 @@ public class Program extends BaseEntity {
 
 	////////// Methods //////////
 	public void addResource(Resource res){
-		resource.add(res);
+		resources.add(res);
 		
 	}
 	
 	public void removeResource(Resource res){
-		resource.remove(res);
+		resources.remove(res);
 	}
 	
 	
