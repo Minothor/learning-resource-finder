@@ -259,6 +259,17 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     
     @OneToMany (mappedBy="user")
     Set <Scenario> scenario = new HashSet<>();
+    
+   
+    @ManyToMany
+    @JoinTable(name="task")
+    Set<Scenario> scenari = new HashSet<>();
+    
+    @ManyToMany
+    @JoinTable(name="task")
+    Set<Resource> resources = new HashSet<>();
+    
+    
 
     
    //FIXME i think i understand with only one line ... --maxime 28/11/12

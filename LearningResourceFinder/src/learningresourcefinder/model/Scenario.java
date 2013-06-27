@@ -1,5 +1,7 @@
 package learningresourcefinder.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -10,6 +12,7 @@ public class Scenario extends BaseEntity {
 	@Column(columnDefinition = "VARCHAR(50)")
 	private String name;
 	
+		
 	@ManyToOne
 	private User user;
 	
