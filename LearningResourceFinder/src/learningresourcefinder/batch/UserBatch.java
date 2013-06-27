@@ -16,22 +16,19 @@ public class UserBatch implements Runnable
 	
 	User u = new User();
 	
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(UserBatch.class);
 	}
 
 	@Override
-	public void run() 
-	{
+	public void run() {
 		insertUser();
 		//User u1 = userRepository.getUserByUserName("tato");
 		//System.out.println(u1.getFirstName());
 		System.out.println(u.getFirstName());
 	}
 	
-	public void insertUser() 
-	{	
+	public void insertUser() {	
 		u.setFirstName("titi");
 		u.setLastName("tutu");
 		u.setBirthDate(new Date());

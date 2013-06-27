@@ -21,7 +21,10 @@ public class Problem extends BaseEntity
 	private Set<Comment> comments;
 	
 	@ManyToOne
-	private User user;
+	private User user_author;
+	
+	@ManyToOne
+	private User user_resolved;
 	
 	private boolean resolved = false;
 	
@@ -43,8 +46,12 @@ public class Problem extends BaseEntity
 		return this.resource;
 	}
 	
-	public User getUser() {
-		return this.user;
+	public User getUserAuthor() {
+		return this.user_author;
+	}
+	
+	public User getUserResolved() {
+		return this.user_resolved;
 	}
 	
 	public boolean getResolved() {
@@ -65,8 +72,12 @@ public class Problem extends BaseEntity
 		this.resource = resource;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserAuthor(User user) {
+		this.user_author = user;
+	}
+	
+	public void setUserResolved(User user) {
+		this.user_resolved = user;
 	}
 	
 	public void setResolved(boolean resolved) {
