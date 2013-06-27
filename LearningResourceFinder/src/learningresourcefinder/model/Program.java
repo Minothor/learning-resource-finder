@@ -22,7 +22,7 @@ public class Program extends BaseEntity {
 	@OneToMany
 	List <Resource> resource  = new ArrayList<>();
 
-	Program parent;
+	/*Program parent;
 	
 	List <Program> childs = new ArrayList<>();
 	
@@ -38,7 +38,7 @@ public class Program extends BaseEntity {
 		for( Program child : program.childs){
 			walkTree(child);
 		}
-	}
+	}*/
 	
 	///////////Getters & Setters //////////////
 	public String getName() {
@@ -81,7 +81,7 @@ public class Program extends BaseEntity {
 
 	
 
-	public Program getParent() {
+	/*public Program getParent() {
 		return parent;
 	}
 
@@ -89,7 +89,7 @@ public class Program extends BaseEntity {
 
 	public List<Program> getChilds() {
 		return childs;
-	}
+	}*/
 
 	
 
