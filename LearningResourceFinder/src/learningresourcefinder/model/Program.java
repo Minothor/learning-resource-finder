@@ -5,21 +5,22 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Program extends BaseEntity {
 	
-	@Column(columnDefinition = "VARCHAR(50)")
+	
 	private String name;
-	@Column(columnDefinition = "VARCHAR(50)")
+	
 	private String description;
-	@Column(columnDefinition = "INTEGER(5)")
+	
 	private int duration;    // duration of the program in days
-	@Column(columnDefinition = "INTEGER(5)")
+	
 	private int level;
 	
-	@OneToMany
+	@ManyToMany
 	List <Resource> resources  = new ArrayList<>();
 
 	/*Program parent;
