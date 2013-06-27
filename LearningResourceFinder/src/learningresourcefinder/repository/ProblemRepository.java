@@ -16,7 +16,7 @@ public class ProblemRepository extends BaseRepository<Problem>
 	}
 	
 	public User findUserByProblem(Problem problem) {
-		return (User) em.createQuery("SELECT u FROM User u WHERE u.id = :user").setParameter("user", problem.getUser().getId());
+		return (User) em.createQuery("SELECT u FROM User u WHERE u.id = :user").setParameter("user", problem.getUserAuthor().getId());
 	}
 	
 	public Problem sortProblemByDateAsc() {
