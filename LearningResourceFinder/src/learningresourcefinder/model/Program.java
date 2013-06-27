@@ -29,7 +29,7 @@ public class Program extends BaseEntity {
 
 	public void addChild(Program child){
 		child.parent=this;
-	//this.getChilds().(child);
+		this.getChilds().add(child);
 		
 	}
 	
@@ -74,6 +74,34 @@ public class Program extends BaseEntity {
 	}
 
 	
+	
+	public List<Resource> getResource() {
+		return resource;
+	}
+
+	
+
+	public Program getParent() {
+		return parent;
+	}
+
+	
+
+	public List<Program> getChilds() {
+		return childs;
+	}
+
+	
+
+	////////// Methods //////////
+	public void addResource(Resource res){
+		resource.add(res);
+		
+	}
+	
+	public void removeResource(Resource res){
+		resource.remove(res);
+	}
 	
 	
 }
