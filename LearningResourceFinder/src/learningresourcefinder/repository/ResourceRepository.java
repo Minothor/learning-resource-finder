@@ -15,24 +15,8 @@ public class ResourceRepository extends BaseRepository<Resource>
                 .setParameter("title", title));
 	}
 	
-	public List<Resource> findResourceByLikeTitle(String title) {
-		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.title LIKE :title")
-				.setParameter("title", "%"+ title +"%").getResultList();
-		return results;
-	}
-	
-	public List<Resource> findResourceByLikeDescription(String description) {
-		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.description LIKE :description")
-				.setParameter("description", "%" + description + "%").getResultList();
-		return results;
-	}
-	
-	public Long findTotalNumberResource() {
-		return (Long)em.createQuery("SELECT COUNT(r.id) FROM Resource r").getSingleResult();
-	}
-	
-	public User findUserOfResource(Resource resource) {
-		return (User) em.createQuery("SELECT u FROM User u JOIN Resource r WHERE r.user = :user")
+	public User findAuthorOfResource(Resource resource) {
+		return (User) em.createQuery("SELECT u FROM Resource r JOIN r.user u WHERE r.user = :user")
 				.setParameter("user", resource.getUser()).getSingleResult();
 	}
 }

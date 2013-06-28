@@ -35,7 +35,9 @@ public class BatchDao implements Runnable
 		System.out.println(u.getMail());
 		
 		Resource r = resourceRepository.getResourceByTitle("Français");
-		System.out.println(resourceRepository.findUserOfResource(r).getFirstName());
+		System.out.println(resourceRepository.findAuthorOfResource(r).getFirstName());
+		
+		
 	}
 
 }
