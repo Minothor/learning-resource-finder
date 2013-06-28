@@ -52,6 +52,4 @@ public class Task extends BaseEntity
 	public void setScenario(Scenario scenario) {
 		this.scenario = scenario;
 	}
-	
-	
 }

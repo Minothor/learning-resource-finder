@@ -2,8 +2,10 @@ package learningresourcefinder.batch;
 
 import java.util.Date;
 
+import learningresourcefinder.model.School;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.repository.SchoolRepository;
 import learningresourcefinder.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ public class UserBatch implements Runnable
 {
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	SchoolRepository schoolRepository;
 
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(UserBatch.class);
@@ -25,6 +30,8 @@ public class UserBatch implements Runnable
 	}
 	
 	public void insertUser() {	
+		School school = schoolRepository.find(1L);
+		
 		User u = new User();
 		u.setFirstName("titi");
 		u.setLastName("tutu");
@@ -38,6 +45,7 @@ public class UserBatch implements Runnable
 		u.setPicture(false);
 		u.setSpammer(false);
 		u.setUserName("tato");
+	
 		userRepository.persist(u);
 	}
 }

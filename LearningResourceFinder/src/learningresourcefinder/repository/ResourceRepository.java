@@ -1,7 +1,5 @@
 package learningresourcefinder.repository;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;

@@ -5,6 +5,7 @@ import learningresourcefinder.model.User;
 import learningresourcefinder.repository.CommentRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.repository.TaskRepository;
 import learningresourcefinder.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class BatchDao implements Runnable
 	
 	@Autowired
 	ResourceRepository resourceRepository;
+	
+	@Autowired
+	TaskRepository taskRepository;
 
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(BatchDao.class);
@@ -36,6 +40,8 @@ public class BatchDao implements Runnable
 		
 		Resource r = resourceRepository.getResourceByTitle("Français");
 		System.out.println(resourceRepository.findAuthorOfResource(r).getFirstName());
+		
+		System.out.println(taskRepository.findTaskOfStudent(u));
 		
 		
 	}
