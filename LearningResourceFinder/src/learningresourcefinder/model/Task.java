@@ -18,6 +18,9 @@ public class Task extends BaseEntity
 	@ManyToMany
 	private Resource resource;
 	
+	@ManyToOne
+	private Scenario scenario;
+	
 	public String getName() {
 		return this.name;
 	}
@@ -28,6 +31,10 @@ public class Task extends BaseEntity
 	
 	public User getUser() {
 		return this.student;
+	}
+	
+	public Scenario getScenario() {
+		return this.scenario;
 	}
 
 	public void setName(String name) {
@@ -40,6 +47,10 @@ public class Task extends BaseEntity
 
 	public void setUser(User student) {
 		this.student = student;
+	}
+	
+	public void setScenario(Scenario scenario) {
+		this.scenario = scenario;
 	}
 	
 	
