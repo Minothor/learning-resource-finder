@@ -1,7 +1,7 @@
 package learningresourcefinder.batch;
 
-import learningresourcefinder.model.Program;
-import learningresourcefinder.repository.ProgramRepository;
+import learningresourcefinder.model.ProgramPoint;
+import learningresourcefinder.repository.ProgramPointRepository;
 import learningresourcefinder.repository.ResourceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProgramBatch implements Runnable {
 	
-	Program p = new Program();
+	ProgramPoint p = new ProgramPoint();
 	
 	@Autowired
-	ProgramRepository programRepository;
+	ProgramPointRepository programPointRepository;
 	
 	@Autowired
 	ResourceRepository resourceRepositiry;
@@ -29,7 +29,7 @@ public class ProgramBatch implements Runnable {
 		p.setLevel(2);
 		p.setName("Première primaire ( 1P )");
 		p.addResource(resourceRepositiry.getResourceByTitle("Français"));
-		programRepository.persist(p);
+		programPointRepository.persist(p);
 	}
 	
 	@Override
