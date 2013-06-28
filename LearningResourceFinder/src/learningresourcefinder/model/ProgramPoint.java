@@ -27,17 +27,6 @@ public class ProgramPoint extends BaseEntity {
 	@ManyToMany
 	List <Resource> resources  = new ArrayList<>();
 
-	/*ProgramPoint parent;
-	
-	List <ProgramPoint> childs = new ArrayList<>();
-	
-
-	public void addChild(ProgramPoint child){
-		child.parent=this;
-		this.getChilds().add(child);
-		
-	}*/
-	
 	/*
 	 * We list all the resources in the given programpoint or any of its childs (or sub-childs...)
 	 *    .... (ProgramPoint startProgramPoint)
@@ -46,13 +35,6 @@ public class ProgramPoint extends BaseEntity {
 	   .addParameterList("programPoints", programPoints)
 	   ...
 	   */
-	
-	/*public void walkTree (Program program){
-		
-		for( Program child : program.childs){
-			walkTree(child);
-		}
-	}*/
 	
 	@ManyToOne
 	ProgramPoint parent;
