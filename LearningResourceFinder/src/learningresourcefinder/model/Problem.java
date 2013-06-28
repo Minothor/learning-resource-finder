@@ -21,7 +21,7 @@ public class Problem extends BaseEntity
 	private Set<Comment> comments;
 	
 	@ManyToOne
-	private User user_author;
+	private User author;
 	
 	@ManyToOne
 	private User user_resolved;
@@ -46,8 +46,8 @@ public class Problem extends BaseEntity
 		return this.resource;
 	}
 	
-	public User getUserAuthor() {
-		return this.user_author;
+	public User getAuthor() {
+		return this.author;
 	}
 	
 	public User getUserResolved() {
@@ -72,8 +72,8 @@ public class Problem extends BaseEntity
 		this.resource = resource;
 	}
 	
-	public void setUserAuthor(User user) {
-		this.user_author = user;
+	public void setAuthor(User user) {
+		this.author = user;
 	}
 	
 	public void setUserResolved(User user) {
