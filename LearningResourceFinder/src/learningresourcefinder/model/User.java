@@ -498,4 +498,12 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public void setMailingDelayType(MailingDelayType mailingDelay) {
         this.mailingDelayType = mailingDelay;
     }  
+    
+    public void addSchool (School school){
+    	schools.add(school);
+    }
+    
+    public void removeSchool(School school){
+    	schools.add(school);
+    }
 }
