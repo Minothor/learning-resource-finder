@@ -15,7 +15,7 @@ public class Task extends BaseEntity
 	@ManyToOne
 	private User student;
 	
-	@ManyToMany
+	@ManyToOne
 	private Resource resource;
 	
 	@ManyToOne
