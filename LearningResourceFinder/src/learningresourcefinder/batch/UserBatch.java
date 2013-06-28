@@ -45,7 +45,7 @@ public class UserBatch implements Runnable
 		u.setPicture(false);
 		u.setSpammer(false);
 		u.setUserName("tato");
-	
+		u.addSchool(school);
 		userRepository.persist(u);
 	}
 }
