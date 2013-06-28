@@ -3,7 +3,6 @@ package learningresourcefinder.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-
 @Entity
 public class School extends BaseEntity {
 	
@@ -32,7 +31,4 @@ public class School extends BaseEntity {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	
-
 }

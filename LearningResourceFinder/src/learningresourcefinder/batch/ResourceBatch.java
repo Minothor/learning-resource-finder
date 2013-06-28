@@ -31,5 +31,6 @@ public class ResourceBatch implements Runnable {
 	@Override
 	public void run() {
 		insertResource();
+		System.out.println("Done");
 	}
 }
