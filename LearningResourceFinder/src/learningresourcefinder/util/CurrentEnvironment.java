@@ -69,7 +69,7 @@ public class CurrentEnvironment {
 	 */
 	public enum Environment {
 
-		DEV(MailBehavior.NOT_STARTED, true),
+		DEV(MailBehavior.SENT, true), // FIXME put NOT_STARTED instead SENT when production start, this allows to really sent mails during development
 		PROD(MailBehavior.SENT, true);
 
 		// Flag that tells wether the mail demon thread must be started
