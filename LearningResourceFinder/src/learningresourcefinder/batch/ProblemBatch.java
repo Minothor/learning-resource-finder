@@ -25,9 +25,7 @@ public class ProblemBatch implements Runnable
 	
 	@Autowired
 	ResourceRepository resourceRepository;
-	
-	 
-	
+
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(ProblemBatch.class);
 	}
@@ -49,6 +47,7 @@ public class ProblemBatch implements Runnable
 		c.setDescription("Commentaire sur le problème numéro 1 :D");
 		c.setTitle("Problème 1");
 		c.setProblem(p);
+		c.setAuthor(u);
 		
 		p.addComment(c);
 		p.setResolved(false);
@@ -57,10 +56,7 @@ public class ProblemBatch implements Runnable
 		p.setDescription("Problème numéro 1");
 		p.setTitle("Mon problème ^^");
 		
-		
 		problemRepository.persist(p);
 		commentRepository.persist(c);
-		
 	}
-
 }

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResourceBatch implements Runnable {
 
-	Resource r = new Resource();
-
 	@Autowired
 	ResourceRepository resourceRepository;
 
@@ -23,11 +21,11 @@ public class ResourceBatch implements Runnable {
 	}
 
 	public void insertResource() {
+		Resource r = new Resource();
 		r.setDescription("cours de français pour débutant");
 		r.setTitle("Français");
 		r.setUser(userRepository.getUserByUserName("tato"));
 		resourceRepository.persist(r);
-
 	}
 
 	@Override

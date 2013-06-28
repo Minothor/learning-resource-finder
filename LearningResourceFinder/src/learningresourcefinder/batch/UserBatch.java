@@ -13,9 +13,7 @@ public class UserBatch implements Runnable
 {
 	@Autowired
 	UserRepository userRepository;
-	
-	User u = new User();
-	
+
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(UserBatch.class);
 	}
@@ -23,16 +21,15 @@ public class UserBatch implements Runnable
 	@Override
 	public void run() {
 		insertUser();
-		//User u1 = userRepository.getUserByUserName("tato");
-		//System.out.println(u1.getFirstName());
-		System.out.println(u.getFirstName());
+		System.out.println("Done");
 	}
 	
 	public void insertUser() {	
+		User u = new User();
 		u.setFirstName("titi");
 		u.setLastName("tutu");
 		u.setBirthDate(new Date());
-		u.setMail("toto2@tata.com");
+		u.setMail("toto@tata.com");
 		u.setValidationCode("2fd5f4d5f4d5f4d5f4");
 		u.setAccountStatus(AccountStatus.ACTIVE);
 		u.setConsecutiveFailedLogins(0);
@@ -43,5 +40,4 @@ public class UserBatch implements Runnable
 		u.setUserName("tato");
 		userRepository.persist(u);
 	}
-
 }

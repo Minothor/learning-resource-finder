@@ -24,7 +24,7 @@ public class Problem extends BaseEntity
 	private User author;
 	
 	@ManyToOne
-	private User user_resolved;
+	private User solver;
 	
 	private boolean resolved = false;
 	
@@ -50,8 +50,8 @@ public class Problem extends BaseEntity
 		return this.author;
 	}
 	
-	public User getUserResolved() {
-		return this.user_resolved;
+	public User getSolver() {
+		return this.solver;
 	}
 	
 	public boolean getResolved() {
@@ -76,8 +76,8 @@ public class Problem extends BaseEntity
 		this.author = user;
 	}
 	
-	public void setUserResolved(User user) {
-		this.user_resolved = user;
+	public void setSolver(User user) {
+		this.solver = user;
 	}
 	
 	public void setResolved(boolean resolved) {
