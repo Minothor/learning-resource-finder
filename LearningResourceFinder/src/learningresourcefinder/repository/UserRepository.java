@@ -2,15 +2,16 @@ package learningresourcefinder.repository;
 
 import java.util.List;
 
+import learningresourcefinder.model.Scenario;
 import learningresourcefinder.model.User;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
 @SuppressWarnings("unchecked")
-public class UserRepository extends BaseRepository<User>{
-
-    public  User getUserByEmail(String identifier)  {
+public class UserRepository extends BaseRepository<User> {
+	
+	public  User getUserByEmail(String identifier)  {
         return getSingleOrNullResult( em.createQuery("select u from User u where lower(u.mail) =:mail")
                 .setParameter("mail", identifier.toLowerCase())
                 );

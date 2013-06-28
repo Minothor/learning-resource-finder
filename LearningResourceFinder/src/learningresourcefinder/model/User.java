@@ -260,16 +260,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     @OneToMany (mappedBy="user")
     Set <Scenario> scenario = new HashSet<>();
     
-   
-    @ManyToMany
-    @JoinTable(name="task")
-    Set<Scenario> scenari = new HashSet<>();
-    
-    @ManyToMany
-    @JoinTable(name="task")
-    Set<Resource> resources = new HashSet<>();
-    
-    
 
     
    //FIXME i think i understand with only one line ... --maxime 28/11/12
@@ -372,8 +362,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public void setPasswordKnownByTheUser(boolean isPasswordKnownByTheUser) {
         this.isPasswordKnownByTheUser = isPasswordKnownByTheUser;
     }
-
-
 
     public Date getLastAccess() {
         return lastAccess;
@@ -507,34 +495,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
         this.lastFailedLoginDate = lastFailedLoginDate;
     }
 
-//    public String getNameChangeLog() {
-//        return nameChangeLog;
-//    }
-
-
     public void setMailingDelayType(MailingDelayType mailingDelay) {
         this.mailingDelayType = mailingDelay;
-    }
-
-//    @Override
-//    public Map<String, String> getCriterias() {
-//        Map<String, String> fields = new HashMap<String,String>();
-//        fields.put("userName",StringUtils.defaultIfEmpty(userName,""));
-//        fields.put("lastName",StringUtils.defaultIfEmpty(lastName,""));
-//        fields.put("firstName",StringUtils.defaultIfEmpty(firstName,""));
-//        fields.put("title",StringUtils.defaultIfEmpty(title,""));
-//        fields.put("mail",StringUtils.defaultIfEmpty(mail,""));
-//        fields.put("description", "");
-//        return fields;
-//    }
-//
-//    @Override
-//    public String getBoostedCriteriaName() {
-//     
-//        return "userName";
-//    }
-
-  
-  
-    
+    }  
 }
