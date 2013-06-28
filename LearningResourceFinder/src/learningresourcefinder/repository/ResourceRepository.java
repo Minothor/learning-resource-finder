@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.User;
 
 @Repository
 @SuppressWarnings("unchecked")
@@ -28,5 +29,10 @@ public class ResourceRepository extends BaseRepository<Resource>
 	
 	public Long findTotalNumberResource() {
 		return (Long)em.createQuery("SELECT COUNT(r.id) FROM Resource r").getSingleResult();
+	}
+	
+	public User findUserOfResource(Resource resource) {
+		return (User) em.createQuery("SELECT u FROM User u JOIN Resource r WHERE r.user = :user")
+				.setParameter("user", resource.getUser()).getSingleResult();
 	}
 }
