@@ -2,9 +2,6 @@ package learningresourcefinder.batch;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import learningresourcefinder.model.Comment;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.ProgramPoint;
@@ -19,9 +16,14 @@ import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.SchoolRepository;
 import learningresourcefinder.repository.UserRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
 @Service
-public class InitializeDBBatch implements Runnable
-{
+public class InitializeDBBatch implements Runnable {
+	
 	@Autowired
 	ProblemRepository problemRepository;
 	
