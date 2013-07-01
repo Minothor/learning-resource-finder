@@ -17,6 +17,8 @@ public class ProblemRepository extends BaseRepository<Problem>
 		return (Problem) results;
 	}
 	
+	
+	
 	public Problem sortProblemByDateDesc() {
 		List<Problem> results = em.createQuery("SELECT p FROM Problem p ORDER BY p.date DESC").getResultList();
 		return (Problem) results;
