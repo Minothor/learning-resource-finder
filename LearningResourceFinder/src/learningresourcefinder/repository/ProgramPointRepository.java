@@ -18,7 +18,7 @@ public class ProgramPointRepository extends BaseRepository<ProgramPoint> {
 		
 		// 2. We query
 		List<Resource> result = em
-				.createQuery("SELECT r FROM Resource r join r.programPoints pp WHERE pp in (:programPoints)")
+				.createQuery("SELECT distinct r FROM Resource r join r.programPoints pp WHERE pp in (:programPoints)")
 				.setParameter("programPoints", programPoints)
 				.getResultList();
 
