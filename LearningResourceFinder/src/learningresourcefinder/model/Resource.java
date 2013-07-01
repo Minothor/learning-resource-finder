@@ -37,9 +37,7 @@ public class Resource extends BaseEntity
 	@Column(nullable=false)
 	private User user;
 	
-	
 	public Resource() {} // No arg constructor for Hibernate
-	
 	
 	public Resource(String aName, String aDescription) {
 		this.name = aName;
@@ -50,9 +48,8 @@ public class Resource extends BaseEntity
 	public String toString() {
 		return name;
 	}
-
-
-	/**************************** Getters & Setters *************************************/
+	
+	/**************************** Getters & Setters ************************************/
 	
 	
 	public String getName() {
