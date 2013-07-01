@@ -14,6 +14,7 @@ public abstract class BatchUtil {
 
 	public static void startSpringBatch(Class<? extends Runnable> batchClass) 
 	{
+		ContextUtil.batchMode = true;
 		ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{"applicationContext.xml" });
 		
 		ContextUtil.contextInitialized(applicationContext);
