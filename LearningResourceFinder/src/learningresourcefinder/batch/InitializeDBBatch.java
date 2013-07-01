@@ -49,7 +49,7 @@ public class InitializeDBBatch implements Runnable
 		insertSchool();
 		insertUser();
 		insertProblem();
-		insertProgramPoint();
+		insertProgramPoints();
 		System.out.println("DataBase Initialized !");
 	}
 	
@@ -103,22 +103,47 @@ public class InitializeDBBatch implements Runnable
 	}
 	
 	public void insertResource() {
-		Resource r = new Resource();
-		r.setDescription("cours de français pour débutant");
-		r.setTitle("Français");
-		r.setUser(userRepository.getUserByUserName("tato"));
-		resourceRepository.persist(r);
+		Resource r1 = new Resource();
+		Resource r2 = new Resource();
+		r1.setDescription("cours de français pour débutant");
+		r1.setTitle("Français");
+		r1.setUser(userRepository.getUserByUserName("tato"));
+		r2.setDescription("cours de mathématiques");
+		r2.setTitle("Maths");
+		r2.setUser(userRepository.getUserByUserName("toto"));
+		resourceRepository.persist(r1);
+		resourceRepository.persist(r2);
 		System.out.println("Resource Done !");
 	}
 	
-	public void insertProgramPoint () {
-		ProgramPoint p = new ProgramPoint();
-		p.setDescription("première primaire");
-		p.setDuration(180);
-		p.setLevel(2);
-		p.setName("Première primaire ( 1P )");
-		p.addResource(resourceRepository.getResourceByTitle("Français"));
-		programPointRepository.persist(p);
-		System.out.println("ProgramPoint Done !");
+	public void insertProgramPoints() {
+		ProgramPoint pFond = new ProgramPoint("Fondamental", "Enseignement fondamental (primaire)");
+		programPointRepository.persist(pFond);
+
+		ProgramPoint p1 = new ProgramPoint("1e primaire", "La première année de l'enseignement fondamental");
+		programPointRepository.persist(p1);
+		
+		ProgramPoint p2 = new ProgramPoint("2e primaire", "La dernière année du 1er degré fondamental");
+		programPointRepository.persist(p2);
+		
+		ProgramPoint p1M = new ProgramPoint("Math", "Mathématiques pour les petits de 6 ans");
+		programPointRepository.persist(p1M);
+
+		ProgramPoint p1M1 = new ProgramPoint("Numération", "Dénombrer, compter");
+		programPointRepository.persist(p1M1);
+
+		ProgramPoint p1M2 = new ProgramPoint("Addition", "Additions simples avec un seul chiffre");
+		programPointRepository.persist(p1M2);
+		
+		ProgramPoint p1F = new ProgramPoint("Français", "Français pour les petits de 6 ans");
+		programPointRepository.persist(p1F);
+
+		pFond.addChild(p1);
+		p1.addChild(p1M);
+		p1M.addChild(p1M1);
+		p1M.addChild(p1M2);
+		p1.addChild(p1F);
 	}
+
+
 }

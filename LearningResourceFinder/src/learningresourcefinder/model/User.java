@@ -189,7 +189,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     private String userName; 
     
     @Column(length = 100)
-    //@NotBlank(message="entrer votre mail")
     @Email(message ="adresse mail pas valide", regexp="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")
     private String mail;
     

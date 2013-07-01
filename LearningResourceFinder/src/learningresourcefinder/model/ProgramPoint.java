@@ -9,55 +9,58 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 
 
 
 @Entity
 public class ProgramPoint extends BaseEntity {
-	
-	
+
+
+	@Column(length = 40)
+	@Size(max=40, message="le nom d'un point de programme ne peut contenir que 50 caractères maximum")
 	private String name;
+
+	@Column(length = 8, unique = true, nullable=false)
+	@Size(max=8, message="le code d'un point de programme ne peut contenir que 50 caractères maximum")
+	private String code;   // Short identifier that users can use to quickly refer a ProgramPoint
 	
+	
+	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
-	
-	private int duration;    // duration of the program in days
-	
-	private int level;
-	
+
 	@ManyToMany
 	List <Resource> resources  = new ArrayList<>();
 
-	/*
-	 * We list all the resources in the given programpoint or any of its childs (or sub-childs...)
-	 *    .... (ProgramPoint startProgramPoint)
-	 *  List<ProgramPoint> programPoints = myLittleRecursiveMethod(startProgramPoint)
-	////////   select r from Resource r where r.programPoint in (:programPoints) 
-	   .addParameterList("programPoints", programPoints)
-	   ...
-	   */
-	
 	@ManyToOne
 	ProgramPoint parent;
 	
 	@OneToMany (mappedBy="parent")
 	List<ProgramPoint> children = new ArrayList <ProgramPoint>();
 	
-	//recursion for article's childen and grandchildren
-		public List<ProgramPoint> getChildrenAndSubChildren() {
-			List <ProgramPoint> result = new ArrayList <ProgramPoint> ();
-			for (ProgramPoint child : this.getChildren()) {
-				child.getChildrenRecursively(result);
-			}
-			return result;
-		}
+	public ProgramPoint(String aName, String aDescr) {
+		this.name = aName;
+		this.description = aDescr;
+	}
 
-		private void getChildrenRecursively(List<ProgramPoint> result) {
-			result.add(this);
-			for (ProgramPoint child : this.getChildren()){
-	   		    child.getChildrenRecursively(result);
-			}
+	//recursion for article's childen and grandchildren
+	public List<ProgramPoint> getChildrenAndSubChildren() {
+		List <ProgramPoint> result = new ArrayList <ProgramPoint> ();
+		for (ProgramPoint child : this.getChildren()) {
+			child.getChildrenRecursively(result);
 		}
-	
+		return result;
+	}
+
+	private void getChildrenRecursively(List<ProgramPoint> result) {
+		result.add(this);
+		for (ProgramPoint child : this.getChildren()){
+			child.getChildrenRecursively(result);
+		}
+	}
+
 	///////////Getters & Setters //////////////
 		
 		
@@ -93,21 +96,6 @@ public class ProgramPoint extends BaseEntity {
 		this.description = description;
 	}
 
-	public int getDuration() {
-		return duration;
-	}
-
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
 
 	
 	
@@ -115,14 +103,10 @@ public class ProgramPoint extends BaseEntity {
 		return resources;
 	}
 
-	////////// Methods //////////
-	public void addResource(Resource res){
-		resources.add(res);
-		
-	}
-	
-	public void removeResource(Resource res){
-		resources.remove(res);
+
+	public void addChild(ProgramPoint child) {
+		this.children.add(child);
+		child.setParent(this);
 	}
 
 
