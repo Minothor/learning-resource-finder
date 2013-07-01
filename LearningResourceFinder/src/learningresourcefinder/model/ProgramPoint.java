@@ -38,7 +38,10 @@ public class ProgramPoint extends BaseEntity {
 	
 	@OneToMany (mappedBy="parent")
 	List<ProgramPoint> children = new ArrayList <ProgramPoint>();
+
 	
+	public ProgramPoint() {} // No arg constructor for Hibernate
+
 	public ProgramPoint(String aCode, String aName) {
 		this.code = aCode;
 		this.name = aName;
@@ -70,6 +73,10 @@ public class ProgramPoint extends BaseEntity {
 		child.setParent(this);
 	}
 
+	@Override
+	public String toString()  {
+		return this.getId() + "-" + this.getName();
+	}
 	
 	
 	

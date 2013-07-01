@@ -8,7 +8,9 @@ import learningresourcefinder.repository.ProgramPointRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class QueryTestBatch implements Runnable {
 
@@ -20,7 +22,7 @@ public class QueryTestBatch implements Runnable {
 	
 	@Override
 	public void run() {
-		ProgramPoint pFond = programPointRepository.findByCode("Fon");
+		ProgramPoint pFond = programPointRepository.findByCode("1PF");
 		List<Resource> resList = programPointRepository.findResourceByProgramPointAndSubs(pFond);
 		System.out.println(resList);
 	}

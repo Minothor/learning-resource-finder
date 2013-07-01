@@ -49,7 +49,7 @@ public class Mail extends BaseEntity {
 	private boolean useTemplate;
 	
 	//Constructors
-	public Mail() {}
+	public Mail() {} // No arg constructor for Hibernate
 	
 	//For sending a mail to a user
 	public Mail(User user,String subject, MailCategory mailSubject, String content, MailType mailType, boolean useTemplate) {

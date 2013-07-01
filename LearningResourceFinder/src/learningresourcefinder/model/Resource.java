@@ -37,6 +37,10 @@ public class Resource extends BaseEntity
 	@Column(nullable=false)
 	private User user;
 	
+	
+	public Resource() {} // No arg constructor for Hibernate
+	
+	
 	public Resource(String aName, String aDescription) {
 		this.name = aName;
 		this.description = aDescription;

@@ -128,19 +128,20 @@ public class InitializeDBBatch implements Runnable {
 		ProgramPoint p2 = new ProgramPoint("2P", "2e primaire");
 		programPointRepository.persist(p2);
 		
-		ProgramPoint p1M = new ProgramPoint("2PM", "Math");
+		ProgramPoint p1M = new ProgramPoint("1PM", "Math");
 		programPointRepository.persist(p1M);
 
-		ProgramPoint p1M1 = new ProgramPoint("2PM.Num", "Numération");
+		ProgramPoint p1M1 = new ProgramPoint("1PM.Num", "Numération");
 		programPointRepository.persist(p1M1);
 
-		ProgramPoint p1M2 = new ProgramPoint("2PM.Add", "Additions");
+		ProgramPoint p1M2 = new ProgramPoint("1PM.Add", "Additions");
 		programPointRepository.persist(p1M2);
 		
-		ProgramPoint p1F = new ProgramPoint("2PF", "Français");
+		ProgramPoint p1F = new ProgramPoint("1PF", "Français");
 		programPointRepository.persist(p1F);
 
 		pFond.addChild(p1);
+		pFond.addChild(p2);
 		p1.addChild(p1M);
 		p1M.addChild(p1M1);
 		p1M.addChild(p1M2);
