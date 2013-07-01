@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Scenario extends BaseEntity {
-	@Column(columnDefinition = "VARCHAR(50)")
+	@Column(length=50)
 	private String name;
 	
 		
@@ -23,7 +23,4 @@ public class Scenario extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-
 }
