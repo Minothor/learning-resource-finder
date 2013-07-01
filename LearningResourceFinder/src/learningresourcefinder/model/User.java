@@ -256,8 +256,8 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     @ManyToMany
     private Set<School> schools = new HashSet<>();
     
-    @OneToMany (mappedBy="user")
-    Set <Scenario> scenario = new HashSet<>();
+    @OneToMany (mappedBy="author")
+    Set <Scenario> scenarios = new HashSet<>();
     
 
     
@@ -496,13 +496,17 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 
     public void setMailingDelayType(MailingDelayType mailingDelay) {
         this.mailingDelayType = mailingDelay;
-    }  
-    
-    public void addSchool (School school){
-    	schools.add(school);
     }
+
+	public Set<School> getSchools() {
+		return schools;
+	}
+
+	public Set<Scenario> getScenarios() {
+		return scenarios;
+	}  
     
-    public void removeSchool(School school){
-    	schools.add(school);
-    }
+    
+    
+    
 }

@@ -4,15 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Problem extends BaseEntity
 {
-	@Column(columnDefinition="VARCHAR(250)", nullable=false)
-	private String title;
+	@Column(length = 50)
+	@Size(max=40, message="le nom d'un problème ne peut contenir que 50 caractères maximum")
+	private String name;
+
 	
-	@Column(columnDefinition="TEXT", nullable=false)
+	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
+
 	
 	@ManyToOne
 	private Resource resource;
@@ -34,8 +40,8 @@ public class Problem extends BaseEntity
 	
 	/**************************** Getters *************************************/
 
-	public String getTitle() {
-		return this.title;
+	public String getName() {
+		return this.name;
 	}
 	
 	public String getDescription() {
@@ -60,8 +66,8 @@ public class Problem extends BaseEntity
 
 	/**************************** Setters *************************************/
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setDescription(String description) {

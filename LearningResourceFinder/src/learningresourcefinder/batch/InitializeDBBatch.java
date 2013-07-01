@@ -83,7 +83,7 @@ public class InitializeDBBatch implements Runnable {
 		u.setPicture(false);
 		u.setSpammer(false);
 		u.setUserName("tato");
-		u.addSchool(school);
+		u.getSchools().add(school);
 		userRepository.persist(u);
 		System.out.println("User Done !");
 	}
@@ -102,7 +102,7 @@ public class InitializeDBBatch implements Runnable {
 		p.setResource(r);
 		p.setAuthor(u);
 		p.setDescription("Problème numéro 1");
-		p.setTitle("Mon problème ^^");
+		p.setName("Mon problème ^^");
 		problemRepository.persist(p);
 		commentRepository.persist(c);
 		System.out.println("Problem & Comment Done !");
@@ -152,4 +152,6 @@ public class InitializeDBBatch implements Runnable {
 		
 		System.out.println("Program points done!");
 	}
+
+
 }

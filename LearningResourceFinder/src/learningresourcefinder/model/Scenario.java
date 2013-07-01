@@ -14,7 +14,7 @@ public class Scenario extends BaseEntity {
 	
 		
 	@ManyToOne
-	private User user;
+	private User author;
 	
 	///////// Getters & Setters //////////
 	public String getName() {

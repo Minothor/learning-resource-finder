@@ -19,7 +19,7 @@ public class ProgramPoint extends BaseEntity {
 
 
 	@Column(length = 40)
-	@Size(max=40, message="le nom d'un point de programme ne peut contenir que 50 caractères maximum")
+	@Size(max=40, message="le nom d'un point de programme ne peut contenir que 40 caractères maximum")
 	private String name;
 
 	@Column(length = 8, unique = true, nullable=false)
@@ -70,7 +70,11 @@ public class ProgramPoint extends BaseEntity {
 		child.setParent(this);
 	}
 
-	////////////////////:///////////Getters & Setters //////////////////////////////////////////	
+	
+	
+	
+	////////////////////:///////////Getters & Setters //////////////////////////////////////////
+		
 		
 	public String getName() {
 		return name;
