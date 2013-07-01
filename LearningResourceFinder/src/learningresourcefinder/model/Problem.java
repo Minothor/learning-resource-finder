@@ -38,6 +38,10 @@ public class Problem extends BaseEntity
 		this.comments = new HashSet<>();
 	}
 	
+	public String toString() {
+		return this.name; 
+	}
+	
 	/**************************** Getters *************************************/
 
 	public String getName() {

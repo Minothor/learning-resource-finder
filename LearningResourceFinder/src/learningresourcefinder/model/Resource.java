@@ -35,7 +35,7 @@ public class Resource extends BaseEntity
 	
 	@ManyToOne
 	@JoinColumn(nullable=false)
-	private User user;
+	private User author;
 	
 	public Resource() {} // No arg constructor for Hibernate
 	
@@ -69,11 +69,11 @@ public class Resource extends BaseEntity
 	}
 
 	public User getUser() {
-		return user;
+		return author;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.author = user;
 	}
 
 	public Set<Problem> getProblems() {

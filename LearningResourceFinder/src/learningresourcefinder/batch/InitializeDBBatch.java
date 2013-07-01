@@ -6,7 +6,9 @@ import learningresourcefinder.model.Comment;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.ProgramPoint;
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.Scenario;
 import learningresourcefinder.model.School;
+import learningresourcefinder.model.Task;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.repository.CommentRepository;
@@ -14,6 +16,7 @@ import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ProgramPointRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.SchoolRepository;
+import learningresourcefinder.repository.TaskRepository;
 import learningresourcefinder.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,9 @@ public class InitializeDBBatch implements Runnable {
 	
 	@Autowired
 	ProgramPointRepository programPointRepository;
+	
+	@Autowired
+	TaskRepository taskRepository;
 
 	
 	Resource frDupont;
@@ -57,19 +63,20 @@ public class InitializeDBBatch implements Runnable {
 		insertResource();
 		insertProblem();
 		insertProgramPoints();
+		insertTask();
 		System.out.println("DataBase Initialized !");
 	}
 	
 	public void insertSchool() {
 		School sc = new School();
 		sc.setAddress("Rue du village 157, 5352 Perwez");
-		sc.setName("Ecole communale de perwez");
+		sc.setName("Ecole1");
 		schoolRepository.persist(sc);
 		System.out.println("School Done !");
 	}
 	
 	public void insertUser() {	
-		School school = schoolRepository.find(1L);		
+		School school = schoolRepository.find(11L);		
 		User u = new User();
 		u.setFirstName("Thomas");
 		u.setLastName("Delizee");
@@ -89,7 +96,7 @@ public class InitializeDBBatch implements Runnable {
 	}
 
 	public void insertProblem() {
-		User u = userRepository.find(1L);
+		User u = userRepository.getUserByUserName("deli");
 		Resource r = resourceRepository.getResourceByName("Français");
 		Problem p = new Problem();
 		Comment c = new Comment();
@@ -153,6 +160,20 @@ public class InitializeDBBatch implements Runnable {
 		
 		System.out.println("Program points done!");
 	}
-
-
+	
+	public void insertTask() {
+		Task t = new Task();
+		User u = userRepository.getUserByUserName("deli");
+		t.setAssigner(u);
+		t.setName("Tâche 1");
+		t.setUser(u);
+		taskRepository.persist(t);
+		System.out.println("Task Done !");
+	}
+	
+	public void insetScenario() {
+		Scenario s = new Scenario();
+		s.setName("Scénario 1");
+		
+	}
 }

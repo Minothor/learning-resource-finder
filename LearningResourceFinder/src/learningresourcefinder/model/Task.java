@@ -21,6 +21,11 @@ public class Task extends BaseEntity
 	@ManyToOne
 	private Scenario scenario;
 	
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	
 	public String getName() {
 		return this.name;
 	}

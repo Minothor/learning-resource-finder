@@ -1,5 +1,7 @@
 package learningresourcefinder.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
@@ -13,8 +15,11 @@ public class ResourceRepository extends BaseRepository<Resource>
                 .setParameter("name", name));
 	}
 	
-	public User findAuthorOfResource(Resource resource) {
-		return (User) em.createQuery("SELECT u FROM Resource r JOIN r.user u WHERE r.user = :user")
-				.setParameter("user", resource.getUser()).getSingleResult();
+	public List<Resource> findAllResourceByUser(User author) {
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.author = :author")
+				.setParameter("author", author)
+				.getResultList();
+		
+		return results;
 	}
 }

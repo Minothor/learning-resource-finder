@@ -17,11 +17,16 @@ public class ProblemRepository extends BaseRepository<Problem>
 		return (Problem) results;
 	}
 	
-	
-	
 	public Problem sortProblemByDateDesc() {
 		List<Problem> results = em.createQuery("SELECT p FROM Problem p ORDER BY p.date DESC").getResultList();
 		return (Problem) results;
+	}
+	
+	public List<Problem> findProblemOfAuthor(User author) {
+		List<Problem> results = em.createQuery("SELECT p FROM Problem p WHERE p.author = :author")
+				.setParameter("author", author)
+				.getResultList();
+		return results;
 	}
 }
 
