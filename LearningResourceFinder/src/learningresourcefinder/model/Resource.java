@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -14,7 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name="resource")
@@ -34,7 +34,7 @@ public class Resource extends BaseEntity
 	List<ProgramPoint> programPoints = new ArrayList<>();
 	
 	@ManyToOne
-	@Column(nullable=false)
+	@JoinColumn(nullable=false)
 	private User user;
 	
 	public Resource() {} // No arg constructor for Hibernate
