@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name="resource")

@@ -71,10 +71,10 @@ public class InitializeDBBatch implements Runnable {
 	public void insertUser() {	
 		School school = schoolRepository.find(1L);		
 		User u = new User();
-		u.setFirstName("titi");
-		u.setLastName("tutu");
+		u.setFirstName("Thomas");
+		u.setLastName("Delizee");
 		u.setBirthDate(new Date());
-		u.setMail("toto@tata.com");
+		u.setMail("thomasdelizee@gmail.com");
 		u.setValidationCode("2fd5f4d5f4d5f4d5f4");
 		u.setAccountStatus(AccountStatus.ACTIVE);
 		u.setConsecutiveFailedLogins(0);
@@ -82,7 +82,7 @@ public class InitializeDBBatch implements Runnable {
 		u.setNlSubscriber(false);	
 		u.setPicture(false);
 		u.setSpammer(false);
-		u.setUserName("tato");
+		u.setUserName("deli");
 		u.getSchools().add(school);
 		userRepository.persist(u);
 		System.out.println("User Done !");
@@ -111,8 +111,8 @@ public class InitializeDBBatch implements Runnable {
 	public void insertResource() {
 		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont");
 		mathGob = new Resource("Goblin-Math", "Jeu de mathématiques avec des goblins.");
-		frDupont.setUser(userRepository.getUserByUserName("tato"));
-		mathGob.setUser(userRepository.getUserByUserName("toto"));
+		frDupont.setUser(userRepository.getUserByUserName("deli"));
+		mathGob.setUser(userRepository.getUserByUserName("deli"));
 		resourceRepository.persist(frDupont);
 		resourceRepository.persist(mathGob);
 		System.out.println("Resource Done !");
