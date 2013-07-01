@@ -64,18 +64,13 @@ public class ProgramPoint extends BaseEntity {
 		this.getResources().add(resource);
 		resource.getProgramPoints().add(this);
 	}
-	
 
 	public void addChild(ProgramPoint child) {
 		this.children.add(child);
 		child.setParent(this);
 	}
 
-	
-	
-	
-	////////////////////:///////////Getters & Setters //////////////////////////////////////////
-		
+	////////////////////:///////////Getters & Setters //////////////////////////////////////////	
 		
 	public String getName() {
 		return name;
@@ -109,16 +104,7 @@ public class ProgramPoint extends BaseEntity {
 		this.description = description;
 	}
 
-
-	
-	
 	public List<Resource> getResources() {
 		return resources;
 	}
-
-
-
-	
-	
-	
 }

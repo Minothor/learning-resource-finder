@@ -152,6 +152,4 @@ public class InitializeDBBatch implements Runnable {
 		
 		System.out.println("Program points done!");
 	}
-
-
 }
