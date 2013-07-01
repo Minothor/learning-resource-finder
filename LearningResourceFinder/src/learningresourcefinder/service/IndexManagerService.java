@@ -13,11 +13,12 @@ import javax.persistence.PersistenceContext;
 
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.search.Searchable;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
-import learningresourcefinder.util.HTMLUtil;
+
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
@@ -49,12 +50,6 @@ import org.apache.lucene.util.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import reformyourcountry.search.Searchable;
-
-
-
-
 @Component 
 @Transactional
 /**

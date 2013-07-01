@@ -45,10 +45,15 @@ public abstract class FileUtil {
     static private Log log = LogFactory.getLog(FileUtil.class);
     public static String getGenFolderPath(CurrentEnvironment currentEnvironment) {
     	if (currentEnvironment.getEnvironment() == Environment.PROD) {
-    		return currentEnvironment.getGenFolderOnProd();  // probably something like "/var/www/html/gen".
+    		return currentEnvironment.getGenFolderOnProd();  // probably something like "/var/www/html/gen".  Works in Batch and web.
     	} else if (currentEnvironment.getEnvironment() == Environment.DEV) {
-    		// In dev mode, returns something like C:\Users\forma308\Documents\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ReformYourCountry\gen 
-    		return ContextUtil.getServletContext().getRealPath("/gen");
+        	if (ContextUtil.batchMode) {  // in batch mode, we have no ServletContext
+        		String tmpFolder = System.getProperty("java.io.tmpdir");  // temp folder;
+        		return tmpFolder.substring(0, tmpFolder.length()-1);  // Remove the last "/" from the end
+        	} else {  // Web mode
+        		// In dev mode, returns something like C:\Users\forma308\Documents\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\LearningResourceFinder\gen 
+        		return ContextUtil.getServletContext().getRealPath("/gen");
+        	}
     	} else {  // Defensive coding.
     		throw new IllegalStateException("Bug: unexpected enum value " + currentEnvironment.getEnvironment());
     	}

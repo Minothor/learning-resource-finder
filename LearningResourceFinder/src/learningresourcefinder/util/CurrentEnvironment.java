@@ -128,10 +128,5 @@ public class CurrentEnvironment {
    public String getGenFolderOnProd() {
 		return genFolderOnProd;
 	}
-   
 
-
-	
-	
-	
 }
