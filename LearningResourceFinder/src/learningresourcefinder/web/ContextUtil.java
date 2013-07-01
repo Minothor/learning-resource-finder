@@ -29,6 +29,7 @@ public class ContextUtil implements Filter, ServletContextListener {
     public static ApplicationContext springContext;
     public static boolean devMode;
     public static Environment environment;
+    public static boolean batchMode = false;  // True if we are run through BatchUtil, outside the context of a web app (=> no request, no servletContext).
     
     // Initialized by filter
     private static ThreadLocal<HttpServletRequest> httpServletRequest = new ThreadLocal<HttpServletRequest>();
