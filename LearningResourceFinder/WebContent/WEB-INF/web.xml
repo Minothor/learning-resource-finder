@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>ReformYourCountry</display-name>
+  <display-name>learningresourcefinder</display-name>
   <welcome-file-list>
     <welcome-file>/home</welcome-file>
   </welcome-file-list>
@@ -85,7 +85,7 @@
   
   <filter>
     <filter-name>FilterSkipFilter</filter-name>
-    <filter-class>reformyourcountry.web.FiltersSkipFilter</filter-class>
+    <filter-class>learningresourcefinder.web.FiltersSkipFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>FilterSkipFilter</filter-name>
@@ -117,7 +117,7 @@
   </filter-mapping>
   <filter>
     <filter-name>ContextUtil</filter-name>
-    <filter-class>reformyourcountry.web.ContextUtil</filter-class>
+    <filter-class>learningresourcefinder.web.ContextUtil</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>ContextUtil</filter-name>
@@ -125,7 +125,7 @@
   </filter-mapping>
   <filter>
     <filter-name>SecurityFilter</filter-name>
-    <filter-class>reformyourcountry.web.SecurityFilter</filter-class>
+    <filter-class>learningresourcefinder.web.SecurityFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>SecurityFilter</filter-name>
@@ -151,16 +151,16 @@
     <param-value>/WEB-INF/classes/applicationContext.xml</param-value>
   </context-param>
   <listener>
-    <listener-class>reformyourcountry.web.ContextUtil</listener-class>
+    <listener-class>learningresourcefinder.web.ContextUtil</listener-class>
   </listener>
   <listener>
-    <listener-class>reformyourcountry.web.PropertyLoaderServletContextListener</listener-class>
+    <listener-class>learningresourcefinder.web.PropertyLoaderServletContextListener</listener-class>
   </listener>
   <listener>
-    <listener-class>reformyourcountry.web.SpringSocialInitFinalizerServletContextListener</listener-class>
+    <listener-class>learningresourcefinder.web.SpringSocialInitFinalizerServletContextListener</listener-class>
   </listener>
   <listener>
-    <listener-class>reformyourcountry.web.LuceneIndexContextListener</listener-class>
+    <listener-class>learningresourcefinder.web.LuceneIndexContextListener</listener-class>
   </listener>
   
 </web-app>
