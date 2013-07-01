@@ -63,7 +63,6 @@ public class InitializeDBBatch implements Runnable {
 	public void insertSchool() {
 		School sc = new School();
 		sc.setAddress("Rue du village 157, 5352 Perwez");
-		sc.setCountry("Belgique");
 		sc.setName("Ecole communale de perwez");
 		schoolRepository.persist(sc);
 		System.out.println("School Done !");

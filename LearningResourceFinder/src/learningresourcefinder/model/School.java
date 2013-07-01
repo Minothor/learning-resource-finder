@@ -6,12 +6,10 @@ import javax.persistence.Entity;
 @Entity
 public class School extends BaseEntity {
 	
-	@Column(columnDefinition = "VARCHAR(50)")
+	@Column(length=50)
 	private String name;
-	@Column(columnDefinition = "VARCHAR(50)")
+	@Column(length=50)
 	private String address;
-	@Column(columnDefinition = "VARCHAR(50)")
-	private String country;
 	
 	public String getName() {
 		return name;
@@ -24,11 +22,5 @@ public class School extends BaseEntity {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
 	}
 }
