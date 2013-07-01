@@ -22,7 +22,7 @@ public class QueryTestBatch implements Runnable {
 	
 	@Override
 	public void run() {
-		ProgramPoint pFond = programPointRepository.findByCode("1PF");
+		ProgramPoint pFond = programPointRepository.findByCode("Fon");
 		List<Resource> resList = programPointRepository.findResourceByProgramPointAndSubs(pFond);
 		System.out.println(resList);
 	}
