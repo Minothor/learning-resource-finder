@@ -35,13 +35,13 @@ public class BatchDao implements Runnable
 
 	@Override
 	public void run() {
-		User u = userRepository.find(1L);
-		System.out.println(u.getMail());
-		
-		Resource r = resourceRepository.getResourceByName("Français");
-		System.out.println(resourceRepository.findAuthorOfResource(r).getFirstName());
-		
-		System.out.println(taskRepository.findTaskOfStudent(u));
+//		User u = userRepository.find(1L);
+//		System.out.println(u.getMail());
+//		
+//		Resource r = resourceRepository.getResourceByName("Français");
+//		System.out.println(resourceRepository.findAuthorOfResource(r).getFirstName());
+//		
+//		System.out.println(taskRepository.findTaskOfStudent(u));
 		
 		
 	}

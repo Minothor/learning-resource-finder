@@ -33,6 +33,7 @@ public class Resource extends BaseEntity
 	List<ProgramPoint> programPoints = new ArrayList<>();
 	
 	@ManyToOne
+	@Column(nullable=false)
 	private User user;
 	
 	public Resource(String aName, String aDescription) {
