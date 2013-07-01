@@ -23,17 +23,21 @@ public class MailRepository  extends BaseRepository<Mail>{
 
     @SuppressWarnings("unchecked")
     public User userHavingImmediateMails(){
-
+        
         List<User> list = em.createQuery("SELECT m.user FROM Mail m WHERE m.mailType=:MailType")
         .setParameter("MailType", MailType.IMMEDIATE)
         .setMaxResults(1)  // Because we don't need all the users, just one.
         .getResultList();
-
+       
         if (list.size() == 0) {
+        	
             return null;    
         } else {
+        
             return list.get(0);  // We just want one user, we'll execute this query again later to get the next user.
         }
+        
+        
     }
     /**
      * returns a user (the next one) having grouped mails that must be sent now.

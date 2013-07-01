@@ -11,69 +11,69 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MailBatch implements Runnable {
-	
-	
+
 	JavaMailSenderImpl myJavaMailSender;
-	
-	String myHost="smtp.gmail.com"; 
-    int myPort=758; 
-	
+
+	String myHost = "smtp.gmail.com";
+	int myPort = 758;
+
 	final private static String toto = "ahmed.idoumhaidi@gmail.com";
-	
-	public static void main(String[] args){
-		
+
+	public static void main(String[] args) {
+
 		BatchUtil.startSpringBatch(MailBatch.class);
-		
+
 	}
-	
 
 	@Override
 	public void run() {
-		
-		
-		
-	    sendMail();
-	    
-	    System.out.println("Send Mail");
-		
+
+		sendMail();
+
+		System.out.println("Send Mail");
+
 	}
-	
-	@PostConstruct  // Search for more details
-	public void PostConstruct(){
-		
+
+	@PostConstruct
+	// Search for more details
+	public void PostConstruct() {
+
 		BasicConfigurator.configure();
-		
+
 		myJavaMailSender = new JavaMailSenderImpl();
 		myJavaMailSender.setProtocol("smtp");
 		myJavaMailSender.setHost(myHost);
 		myJavaMailSender.setPort(myPort);
-		
+		myJavaMailSender.getJavaMailProperties().setProperty(
+				"mail.smtp.starttls.enable", "true");
+		myJavaMailSender.getJavaMailProperties().setProperty("mail.smtp.auth",
+				"true");
+
 	}
-	
-	
-	public void sendMail(){
-		
-		
-		MimeMessagePreparator  myMime  = new MimeMessagePreparator(){
+
+	public void sendMail() {
+
+		MimeMessagePreparator myMime = new MimeMessagePreparator() {
 
 			@Override
 			public void prepare(final MimeMessage argOne) throws Exception {
-				
-				MimeMessageHelper myMimeHelper = new MimeMessageHelper(argOne,true,"UTF-8");
-				
+
+				MimeMessageHelper myMimeHelper = new MimeMessageHelper(argOne,
+						true, "UTF-8");
+
 				myMimeHelper.setTo(toto);
 				myMimeHelper.setBcc("Nothing");
 				myMimeHelper.setCc("Nothing");
 				myMimeHelper.setFrom("thomas.delizee@gmail.com");
 				myMimeHelper.setSubject("TestMail");
 				myMimeHelper.setText("Bonsoir Emile cava ??");
-				
+
 			}
-			
+
 		};
-		
+
 		myJavaMailSender.send(myMime);
-			
+
 	}
-	
+
 }
