@@ -14,12 +14,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailSystem implements Runnable {
 
-	@Autowired
-	public UserRepository dao;
-	@Autowired
-	public MailService mailservice;
-	@Autowired
-	public MailRepository mrep;
+    @Autowired public UserRepository dao;
+	@Autowired public MailService mailservice;
+	@Autowired public MailRepository mrep;
 
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(MailSystem.class);
