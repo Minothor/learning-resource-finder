@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -40,9 +39,9 @@ public class ProgramPoint extends BaseEntity {
 	@OneToMany (mappedBy="parent")
 	List<ProgramPoint> children = new ArrayList <ProgramPoint>();
 	
-	public ProgramPoint(String aName, String aDescr) {
+	public ProgramPoint(String aCode, String aName) {
+		this.code = aCode;
 		this.name = aName;
-		this.description = aDescr;
 	}
 
 	//recursion for article's childen and grandchildren
@@ -61,7 +60,21 @@ public class ProgramPoint extends BaseEntity {
 		}
 	}
 
-	///////////Getters & Setters //////////////
+	public void addResource(Resource resource) {
+		this.getResources().add(resource);
+		resource.getProgramPoints().add(this);
+	}
+	
+
+	public void addChild(ProgramPoint child) {
+		this.children.add(child);
+		child.setParent(this);
+	}
+
+	
+	
+	
+	////////////////////:///////////Getters & Setters //////////////////////////////////////////
 		
 		
 	public String getName() {
@@ -99,15 +112,10 @@ public class ProgramPoint extends BaseEntity {
 
 	
 	
-	public List<Resource> getResource() {
+	public List<Resource> getResources() {
 		return resources;
 	}
 
-
-	public void addChild(ProgramPoint child) {
-		this.children.add(child);
-		child.setParent(this);
-	}
 
 
 	

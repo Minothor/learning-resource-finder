@@ -8,9 +8,9 @@ import learningresourcefinder.model.User;
 @SuppressWarnings("unchecked")
 public class ResourceRepository extends BaseRepository<Resource>
 {
-	public Resource getResourceByTitle(String title) {
-		return getSingleOrNullResult(em.createQuery("SELECT r FROM Resource r WHERE r.title =:title")
-                .setParameter("title", title));
+	public Resource getResourceByName(String name) {
+		return getSingleOrNullResult(em.createQuery("SELECT r FROM Resource r WHERE r.name =:name")
+                .setParameter("name", name));
 	}
 	
 	public User findAuthorOfResource(Resource resource) {

@@ -39,6 +39,10 @@ public class InitializeDBBatch implements Runnable
 	
 	@Autowired
 	ProgramPointRepository programPointRepository;
+
+	
+	Resource frDupont;
+	Resource mathGob;
 	
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
@@ -48,6 +52,7 @@ public class InitializeDBBatch implements Runnable
 	public void run() {
 		insertSchool();
 		insertUser();
+		insertResource();
 		insertProblem();
 		insertProgramPoints();
 		System.out.println("DataBase Initialized !");
@@ -84,7 +89,7 @@ public class InitializeDBBatch implements Runnable
 
 	public void insertProblem() {
 		User u = userRepository.find(1L);
-		Resource r = resourceRepository.getResourceByTitle("Français");
+		Resource r = resourceRepository.getResourceByName("Français");
 		Problem p = new Problem();
 		Comment c = new Comment();
 		c.setDescription("Commentaire sur le problème numéro 1 :D");
@@ -103,39 +108,35 @@ public class InitializeDBBatch implements Runnable
 	}
 	
 	public void insertResource() {
-		Resource r1 = new Resource();
-		Resource r2 = new Resource();
-		r1.setDescription("cours de français pour débutant");
-		r1.setTitle("Français");
-		r1.setUser(userRepository.getUserByUserName("tato"));
-		r2.setDescription("cours de mathématiques");
-		r2.setTitle("Maths");
-		r2.setUser(userRepository.getUserByUserName("toto"));
-		resourceRepository.persist(r1);
-		resourceRepository.persist(r2);
+		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont");
+		mathGob = new Resource("Goblin-Math", "Jeu de mathématiques avec des goblins.");
+		frDupont.setUser(userRepository.getUserByUserName("tato"));
+		mathGob.setUser(userRepository.getUserByUserName("toto"));
+		resourceRepository.persist(frDupont);
+		resourceRepository.persist(mathGob);
 		System.out.println("Resource Done !");
 	}
 	
 	public void insertProgramPoints() {
-		ProgramPoint pFond = new ProgramPoint("Fondamental", "Enseignement fondamental (primaire)");
+		ProgramPoint pFond = new ProgramPoint("Fon", "Fondamental");
 		programPointRepository.persist(pFond);
 
-		ProgramPoint p1 = new ProgramPoint("1e primaire", "La première année de l'enseignement fondamental");
+		ProgramPoint p1 = new ProgramPoint("1P", "1ère primaire");
 		programPointRepository.persist(p1);
 		
-		ProgramPoint p2 = new ProgramPoint("2e primaire", "La dernière année du 1er degré fondamental");
+		ProgramPoint p2 = new ProgramPoint("2P", "2e primaire");
 		programPointRepository.persist(p2);
 		
-		ProgramPoint p1M = new ProgramPoint("Math", "Mathématiques pour les petits de 6 ans");
+		ProgramPoint p1M = new ProgramPoint("2PM", "Math");
 		programPointRepository.persist(p1M);
 
-		ProgramPoint p1M1 = new ProgramPoint("Numération", "Dénombrer, compter");
+		ProgramPoint p1M1 = new ProgramPoint("2PM.Num", "Numération");
 		programPointRepository.persist(p1M1);
 
-		ProgramPoint p1M2 = new ProgramPoint("Addition", "Additions simples avec un seul chiffre");
+		ProgramPoint p1M2 = new ProgramPoint("2PM.Add", "Additions");
 		programPointRepository.persist(p1M2);
 		
-		ProgramPoint p1F = new ProgramPoint("Français", "Français pour les petits de 6 ans");
+		ProgramPoint p1F = new ProgramPoint("2PF", "Français");
 		programPointRepository.persist(p1F);
 
 		pFond.addChild(p1);
@@ -143,6 +144,12 @@ public class InitializeDBBatch implements Runnable
 		p1M.addChild(p1M1);
 		p1M.addChild(p1M2);
 		p1.addChild(p1F);
+		
+		p1F.addResource(frDupont);
+		
+		p1M1.addResource(mathGob);
+		
+		System.out.println("Program points done!");
 	}
 
 

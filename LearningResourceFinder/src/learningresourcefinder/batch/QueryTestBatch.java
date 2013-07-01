@@ -1,6 +1,9 @@
 package learningresourcefinder.batch;
 
+import java.util.List;
+
 import learningresourcefinder.model.ProgramPoint;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ProgramPointRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,8 @@ public class QueryTestBatch implements Runnable {
 	
 	@Override
 	public void run() {
-		ProgramPoint pFond = programPointRepository.find....
-		programPointRepository.find....(pFond);
+		ProgramPoint pFond = programPointRepository.findByCode("Fon");
+		List<Resource> resList = programPointRepository.findResourceByProgramPointAndSubs(pFond);
+		System.out.println(resList);
 	}
 }
