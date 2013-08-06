@@ -15,8 +15,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <!-- <context:exclude-filter expression="org.springframework.stereotype.Controller"	type="annotation" /> We do not exclude controllers, see comment in dispatcher-servlet.xml - John
              Explanation there: http://stackoverflow.com/questions/7833767/why-dispatcherservlet-creates-another-application-context -->
     </context:component-scan>
+    
     <aop:config proxy-target-class="true" />
 <!--     <context:property-placeholder ignore-unresolvable="false" location="classpath:/config.properties,classpath:/secret.properties"/> -->
+    
     
     <!-- for injecting value in application context.xml -->
     <bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -29,8 +31,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
             </list>
         </property>
     </bean>
-    <bean id="entityManagerFactory"
-    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    
+    
+    <bean id="entityManagerFactory"   class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="Connection" />
         <property name="dataSource" ref="dataSource"/>  
         
@@ -82,12 +85,15 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     
 
-    <!-- Transaction manager for a single JPA EntityManagerFactory (alternative
-    to JTA) -->
+    <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-    p:entityManagerFactory-ref="entityManagerFactory" />
+          p:entityManagerFactory-ref="entityManagerFactory" />
 
-    <!-- Configure the multipart resolver -->
+    <tx:annotation-driven />
+
+
+
+    <!-- Configure the multipart resolver (image upload) -->
     <bean id="multipartResolver"
     class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- one of the properties available; the maximum file size in bytes (10mb
@@ -96,10 +102,5 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="maxInMemorySize" value="10000000" />
     </bean>
     
-    
-    
-    
-    
-    <tx:annotation-driven />
 
 </beans>
