@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag"%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 
 <!-- you can set variables starting with "p_" in the file named website_content.properties -->
 <head>
@@ -41,7 +42,7 @@ $(document).ready(function() {
 
 <body>
 
-<ryctag:pageheadertitle title="Connexion"/> 
+<lrftag:pageheadertitle title="Connexion"/> 
 
 Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre utilisateur.
 
