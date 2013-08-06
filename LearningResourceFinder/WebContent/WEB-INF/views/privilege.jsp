@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
-<%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@page import="learningresourcefinder.model.User" %>
 <html>
 
 <body>
 
-<ryctag:breadcrumb>
-	<ryctag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="user/${user.userName}" />
-	<ryctag:breadcrumbelement label="Permission" />
-</ryctag:breadcrumb>
-<ryctag:pageheadertitle title="Privileges de ${user.userName }"/>
+<lrftag:breadcrumb>
+	<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="user/${user.userName}" />
+	<lrftag:breadcrumbelement label="Permission" />
+</lrftag:breadcrumb>
+<lrftag:pageheadertitle title="Privileges de ${user.userName }"/>
 
 <h2>Roles :</h2><br>
 
