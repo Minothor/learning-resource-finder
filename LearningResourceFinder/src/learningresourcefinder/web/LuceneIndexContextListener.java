@@ -22,12 +22,9 @@ public class LuceneIndexContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		IndexManagerService indexManagerService = ContextUtil
-				.getSpringBean(IndexManagerService.class);
-		CurrentEnvironment currentEnvironment = ContextUtil
-				.getSpringBean(CurrentEnvironment.class);
-		File file = new File(
-				FileUtil.getLuceneIndexDirectory(currentEnvironment));
+		IndexManagerService indexManagerService = ContextUtil.getSpringBean(IndexManagerService.class);
+		CurrentEnvironment currentEnvironment = ContextUtil.getSpringBean(CurrentEnvironment.class);
+		File file = new File(FileUtil.getLuceneIndexDirectory(currentEnvironment));
 		if (file.isDirectory()) { // The directory exists
 			if (file.list().length > 0) { // It's full of index files.
 				// Do nothing, the index is there !!!
