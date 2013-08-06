@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>1.1</tlib-version>
+	<short-name>LRF</short-name>
+	<uri></uri>
+	<description>
+		Display a list menu of all articles order by release date
+	</description>
+
+
+
+
+	<tag>
+		<name>conditionDisplay</name>
+		<tag-class>learningresourcefinder.tag.ConditionDisplayTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>privilege</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>role</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>publishDate</name>
+		<tag-class>learningresourcefinder.tag.PublishDateTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>datedisplay</name>
+		<tag-class>learningresourcefinder.tag.DateDisplayTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>date</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>duration</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+</taglib>
