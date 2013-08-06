@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
-<%@ page import ="reformyourcountry.web.ContextUtil" %>
+<%@ page import ="learningresourcefinder.web.ContextUtil" %>
 
 
 <!-- This fragment will be displayed in a jQuery dialog box. -->

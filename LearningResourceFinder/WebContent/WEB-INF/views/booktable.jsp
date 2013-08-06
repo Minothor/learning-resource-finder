@@ -3,7 +3,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag"%>
 <%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
 <%@ page import="java.util.*"%>
-<%@ page import="learningresourcefinder.Book"%>
+<%@ page import="learningresourcefinder.model.Book"%>
 
 
 <h2>${tablename}</h2>

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page import="reformyourcountry.web.UrlUtil"%>
+<%@ page import="learningresourcefinder.web.UrlUtil"%>
 <head>
 <!-- code used for "i like facebook" -->
 <meta property="og:title" content="${action.title}" />

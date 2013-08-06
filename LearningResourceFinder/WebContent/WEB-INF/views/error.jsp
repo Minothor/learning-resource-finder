@@ -1,7 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="reformyourcountry.web.ContextUtil"%>
-<%@ page import="reformyourcountry.exception.*"%>
+<%@ page import="learningresourcefinder.web.ContextUtil"%>
+<%@ page import="learningresourcefinder.exception.*"%>
 <%@ page isErrorPage="true"%>
 <%@ page import="java.io.*"%>
 <html>
