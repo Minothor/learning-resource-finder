@@ -49,13 +49,15 @@ public  class SearchResult {
             
             title =  user.getFullName();
             url = "user/"+user.getUserName();
-        } /*else { 
+        }
+        
+        /*else { 
         	
         	// Ahmed-flag
         	
         	// Article, Action, GoodExample
             //TODO setup condition for visible ????
-          /*  visible = true;
+            visible = true;
             
             title = indexManagerService.getHighlight(keyWord, doc.get("title"));
             if (title==null || title.isEmpty()){
@@ -72,13 +74,13 @@ public  class SearchResult {
                 GoodExample goodExample = em.find(GoodExample.class,id);*/
                 
                 //TODO implement getUrl() in goodexample and set pathVariable in controller , uncomment this :
-                 // url ="/goodexample/"+goodExample.getUrl();
-              //  url = "/home"; 
-        //    }
-     //   }
+              //    url ="/goodexample/"+goodExample.getUrl();
+           //    url = "/home"; 
+          //  }
+      // }
 
         // idem for text. if highligt
-     /*   for (IndexableField field : doc.getFields()) {
+      /*  for (IndexableField field : doc.getFields()) {
             
             if(!"id".equals(field.name()) && !"className".equals(field.name()) && (("mail".equals(field.name())  && SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS)) ||
                ("toClassify".equals(field.name())  && SecurityContext.isUserHasPrivilege(Privilege.VIEW_UNPUBLISHED_ARTICLE)))){
@@ -100,17 +102,11 @@ public  class SearchResult {
     }
         
 
-    
-    
-    
-  
+   
     public String getText() {
        
         return text;
     }
-
-
-
 
     public String getTitle() {
       

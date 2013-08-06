@@ -65,11 +65,11 @@ public class IndexManagerService {
 	@Autowired CurrentEnvironment currentEnvironment;
 
 	
-    @PersistenceContext
-    EntityManager em;
+    @PersistenceContext EntityManager em;
 
     @SuppressWarnings("unchecked")   
     Class<Searchable>[] searchables = new Class[]{User.class};  // Entities that are included in the index.
+   
     String[] searchableCriterias = new String[]{    // Addition of all the fields that should be searchable in the searchable entities.
             "title","summary","content","shortName", "toClassify",
             "userName","firstName","lastName","mail",
@@ -86,6 +86,7 @@ public class IndexManagerService {
 			try(IndexWriter writer = new IndexWriter(sfsd, iwc)){// Make an writer to create the index (with try-with-resources block)
 				// Index all Accommodation entries
 			    
+		
 			    for (Class<Searchable> searchableClass : searchables) {
 			        List<Searchable> searchableList =  em.createQuery("select e from "+searchableClass.getName()+" e").getResultList();
 	                for (Searchable searchable : searchableList) {
