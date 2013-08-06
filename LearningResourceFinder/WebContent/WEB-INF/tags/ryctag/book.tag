@@ -3,7 +3,7 @@
 
 <%@taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
 <%@ attribute name="book" type="reformyourcountry.model.Book"%>
-<%@tag import="reformyourcountry.util.FileUtil" %>
+<%@tag import="learningresourcefinder.util.FileUtil" %>
 
 <div class="book" id="${book.abrev}">
     <div class="bookTitle">${book.title}</div>
