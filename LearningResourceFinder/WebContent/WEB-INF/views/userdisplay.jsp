@@ -3,9 +3,9 @@
 <%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
 <%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
-<%@ page import="reformyourcountry.util.DateUtil" %>
+<%@ page import="learningresourcefinder.util.DateUtil" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="learningresourcefinder.User" %>
+<%@ page import="learningresourcefinder.model.User" %>
 
 <html>
 
