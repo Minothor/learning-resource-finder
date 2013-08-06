@@ -5,7 +5,7 @@
 
 
 <%@ attribute name="user" type="reformyourcountry.model.User"%>
-<%@tag import="reformyourcountry.util.FileUtil" %>
+<%@tag import="learningresourcefinder.util.FileUtil" %>
 
 <div class="user" id="${user.id}">
 
