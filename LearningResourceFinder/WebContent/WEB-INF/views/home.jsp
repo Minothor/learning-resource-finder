@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %> 
-<%@ page import="reformyourcountry.web.Current" %>
-<%@ page import="reformyourcountry.util.NotificationUtil" %>
+<%@ page import="learningresourcefinder.web.Current" %>
+<%@ page import="learningresourcefinder.util.NotificationUtil" %>
 
 <head>
 <!-- you can set variables starting with "p_" in the file named website_content.properties -->
