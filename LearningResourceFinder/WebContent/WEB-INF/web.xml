@@ -91,6 +91,7 @@
     <filter-name>FilterSkipFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <filter>
     <filter-name>encoding-filter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -107,6 +108,7 @@
     <filter-name>encoding-filter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <filter>
     <filter-name>JpaFilter</filter-name>
     <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
@@ -115,6 +117,7 @@
     <filter-name>JpaFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <filter>
     <filter-name>ContextUtil</filter-name>
     <filter-class>learningresourcefinder.web.ContextUtil</filter-class>
@@ -123,6 +126,7 @@
     <filter-name>ContextUtil</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <filter>
     <filter-name>SecurityFilter</filter-name>
     <filter-class>learningresourcefinder.web.SecurityFilter</filter-class>
@@ -131,6 +135,7 @@
     <filter-name>SecurityFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
   <filter>
     <filter-name>sitemesh</filter-name>
     <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -143,6 +148,9 @@
     <filter-name>sitemesh</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  
+  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -150,15 +158,19 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/classes/applicationContext.xml</param-value>
   </context-param>
+  
   <listener>
     <listener-class>learningresourcefinder.web.ContextUtil</listener-class>
   </listener>
+  
   <listener>
     <listener-class>learningresourcefinder.web.PropertyLoaderServletContextListener</listener-class>
   </listener>
+  
   <listener>
     <listener-class>learningresourcefinder.web.SpringSocialInitFinalizerServletContextListener</listener-class>
   </listener>
+  
   <listener>
     <listener-class>learningresourcefinder.web.LuceneIndexContextListener</listener-class>
   </listener>
