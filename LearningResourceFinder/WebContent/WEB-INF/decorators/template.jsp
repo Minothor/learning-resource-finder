@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="reformyourcountry.web.UrlUtil" %>
+<%@ page import="learningresourcefinder.web.UrlUtil" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='ryc'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -65,7 +65,7 @@
 				    <td style="padding:0;">
 						<!-- ***************** - START Left list of articles - ***************** -->
 						<div id="sub_nav" style="margin-top:-34px;">
-						  <ryc:articlesNavBar/>
+						  <%-- <ryc:articlesNavBar/>  --%>
 						</div>
 						<!-- ***************** - END Left list of articles - ***************** -->
 				    </td>

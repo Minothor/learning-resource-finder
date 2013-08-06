@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <ul id="menu-main-nav">
 	<li><a href="user"><span><strong>Utilisateurs</strong></span></a>
 		<ul class="sub-menu">
@@ -27,7 +27,7 @@
 			 <li><a href="/about/contribuer.jsp"><span>Comment contribuer?</span></a></li>
 			 <li><a href="/contact"><span>Contactez-nous</span></a></li>
 			 <li><a href="/about/copyright.jsp"><span>Droit d'auteur</span></a></li>
-			 <ryc:conditionDisplay role="ADMIN"><li><a href="/admin"><span>Page administrateur</span></a></li></ryc:conditionDisplay>
+			 <lrf:conditionDisplay role="ADMIN"><li><a href="/admin"><span>Page administrateur</span></a></li></lrf:conditionDisplay>
 		 </ul>
 	</li>
 	

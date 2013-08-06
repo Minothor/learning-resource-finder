@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="reformyourcountry.web.Current" %>
 
 <!-- ***************** - Top Footer - ***************** --> 
 <div id="footer" style="position:relative;">  <%-- need relative to position inner div "monter" --%>
