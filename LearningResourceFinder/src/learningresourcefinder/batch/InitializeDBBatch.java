@@ -3,10 +3,10 @@ package learningresourcefinder.batch;
 import java.util.Date;
 
 import learningresourcefinder.model.Comment;
+import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.ProgramPoint;
 import learningresourcefinder.model.Resource;
-import learningresourcefinder.model.Scenario;
 import learningresourcefinder.model.School;
 import learningresourcefinder.model.Task;
 import learningresourcefinder.model.User;
@@ -171,9 +171,9 @@ public class InitializeDBBatch implements Runnable {
 		System.out.println("Task Done !");
 	}
 	
-	public void insetScenario() {
-		Scenario s = new Scenario();
-		s.setName("Scénario 1");
+	public void insetPlayList() {
+	    PlayList p = new PlayList();
+		p.setName("PlayList 1");
 		
 	}
 }
