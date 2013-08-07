@@ -3,18 +3,18 @@
 <%@ page import="learningresourcefinder.security.Privilege"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 
 
 <html>
 <body>
 <!-- <h1>Formulaire de changement de password</h1> -->
 
-<ryctag:breadcrumb>
-	<ryctag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
-	<ryctag:breadcrumbelement label="changement de mot de passe" />
-</ryctag:breadcrumb>
-<ryctag:pageheadertitle title="changement de mot de passe"/>
+<lrftag:breadcrumb>
+	<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
+	<lrftag:breadcrumbelement label="changement de mot de passe" />
+</lrftag:breadcrumb>
+<lrftag:pageheadertitle title="changement de mot de passe"/>
 	<form:form modelAttribute="user" action="/user/changepasswordsubmit">
 	<table>
 			<c:if test="${verifyOldPassword}">
