@@ -1,7 +1,7 @@
 <%@ tag body-content="scriptless" isELIgnored="false" %>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-<%@taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
+<%@taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 
 
 <%@ attribute name="user" type="reformyourcountry.model.User"%>
@@ -17,11 +17,7 @@
 	<a href="/user/${user.userName}" class="a-name">
       <div class="lien">
 		<span>${user.getFullName()}</span>
-		<c:if test="${user.certificationDate != null }">
-			<img src="images/green-check.png" />
-		</c:if>
-<!-- 		certification -->
-      </div>
+      </div> 
       <div class="usertitle"> ${user.title}</div>
 	</a>
 </div>
