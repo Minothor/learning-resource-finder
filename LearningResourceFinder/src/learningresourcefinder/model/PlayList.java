@@ -27,6 +27,9 @@ public class PlayList extends BaseEntity {
     @Type(type="org.hibernate.type.StringClobType")
     String description;
 	
+    @ManyToOne
+    private User author;
+    
 	@ManyToMany
 	private List<Resource> resourceList = new ArrayList<Resource>();
 	
