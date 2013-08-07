@@ -86,6 +86,7 @@ public class InitializeDBBatch implements Runnable {
 		u.setAccountStatus(AccountStatus.ACTIVE);
 		u.setConsecutiveFailedLogins(0);
 		u.setPasswordKnownByTheUser(true);
+		u.setPassword("code");
 		u.setNlSubscriber(false);	
 		u.setPicture(false);
 		u.setSpammer(false);
