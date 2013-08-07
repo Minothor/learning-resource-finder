@@ -11,6 +11,7 @@ import learningresourcefinder.model.School;
 import learningresourcefinder.model.Task;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.CommentRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ProgramPointRepository;
@@ -76,17 +77,19 @@ public class InitializeDBBatch implements Runnable {
 		System.out.println("School Done !");
 	}
 	
-	   public void insertUser() {
-	        // Admin user
-	        User u = new User();
-	        u.setFirstName("Admin");
-	        u.setLastName("");
-	        u.setBirthDate(new Date());
-	        u.setMail("info@lrf.be");
-	        u.setAccountStatus(AccountStatus.ACTIVE);
-	        u.setUserName("admin");
-	        u.setRole(Role.ADMIN);
-	        userRepository.persist(u);
+	public void insertUser() {
+		// Admin user
+		User u = new User();
+		u.setFirstName("Admin");
+		u.setLastName("");
+		u.setBirthDate(new Date());
+		u.setMail("info@lrf.be");
+		u.setAccountStatus(AccountStatus.ACTIVE);
+		u.setUserName("admin");
+	    u.setRole(Role.ADMIN);
+	    u.hasAdminPrivileges();
+	    u.setPassword("aaaa");
+		userRepository.persist(u);
 
 	    
 	        
