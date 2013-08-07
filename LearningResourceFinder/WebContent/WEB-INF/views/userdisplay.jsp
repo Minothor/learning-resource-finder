@@ -131,9 +131,9 @@
 					Date d'enregistrement : <lrf:datedisplay date="${user.createdOn}" /><br />
 					Rôle : ${user.role}<br/>
 					
-					<c:if test="${user.specialType!='PRIVATE'}">
+<%-- 					<c:if test="${user.specialType!='PRIVATE'}">
 					  Type : ${user.specialType.name}<br/>
-					</c:if>
+					</c:if> --%>
 					
 					Dernier accès : <lrf:datedisplay date="${user.lastAccess}" duration="true"/> <br/>
 					Depuis l'adresse ${user.lastLoginIp}<br/>
@@ -146,11 +146,12 @@
 					<a href ="/socialaccountmanage?id=${user.id}">Gerer mes comptes associés</a><br/>	
 						
 					Groupes:
-					<c:forEach items="${user.groupRegs }" var="groupReg"  >
+<%-- 					<c:forEach items="${user.groupRegs }" var="groupReg"  >
   						<a href="group?id=${groupReg.group.id}">${groupReg.group.name}</a>
-						<%--   <c:if test="${lastGroupReg !eq groupReg}">,</c:if>    --%><%-- no "," after the last one --%>
- 						<c:if test="${user.groupRegs.lastIndexOf(groupReg) < (user.groupRegs.size()-1)}">,</c:if>    <%-- no "," after the last one --%>
+						<%--   <c:if test="${lastGroupReg !eq groupReg}">,</c:if>    --%><%-- no "," after the last one
+ 						<c:if test="${user.groupRegs.lastIndexOf(groupReg) < (user.groupRegs.size()-1)}">,</c:if>    no "," after the last one
 					</c:forEach>
+					--%>
 					&nbsp;&nbsp;&nbsp;
 					<c:if test="${canEdit}">
 						<a href="manageGroup?id=${user.id}">modifier les groupes</a>
@@ -161,18 +162,7 @@
 		</div>
 		
 		
-		<div id="tabs-2">  			<!--  **************************Badges********************* -->
-			<c:forEach items="${user.badges}" var="badge">
-				<br />
-				<lrftag:badge badgeType="${badge.badgeType}" />
-			</c:forEach>
-			
-			<form action="/user/recomputebadge" method="post">
-			  <input type="hidden" name="userid" value="${user.id}">
-			  <input type="submit" value="Recalculer">
-			</form>
-			<a href="/badge/">Gommettes disponibles</a>
-		</div>
+
 
 		<div id="tabs-3">		<!--  **************************Rédaction********************* -->
 		    <h2>Arguments rédigés</h2>
