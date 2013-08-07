@@ -11,7 +11,6 @@ import learningresourcefinder.model.School;
 import learningresourcefinder.model.Task;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
-import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.CommentRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ProgramPointRepository;
@@ -52,6 +51,7 @@ public class InitializeDBBatch implements Runnable {
 	
 	Resource frDupont;
 	Resource mathGob;
+	School school;  // Various methods need the created school
 	
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
@@ -61,7 +61,7 @@ public class InitializeDBBatch implements Runnable {
 	public void run() {
 		insertSchool();
 		insertUser();
-		insertResource();     //Executer le badge InitializaDBBatch en commentent les inserts ligne par ligne
+		insertResource();
 		insertProblem();
 		insertProgramPoints();
 		insertTask();
@@ -69,46 +69,45 @@ public class InitializeDBBatch implements Runnable {
 	}
 	
 	public void insertSchool() {
-		School sc = new School();
-		sc.setAddress("Rue du village 157, 5352 Perwez");
-		sc.setName("Ecole1");
-		schoolRepository.persist(sc);
+	    school = new School();
+	    school.setAddress("Rue du village 157, 5352 Perwez");
+	    school.setName("Ecole1");
+		schoolRepository.persist(school);
 		System.out.println("School Done !");
 	}
 	
-	public void insertUser() {
-		// Admin user
-		User u = new User();
-		u.setFirstName("Admin");
-		u.setLastName("");
-		u.setBirthDate(new Date());
-		u.setMail("info@lrf.be");
-		u.setAccountStatus(AccountStatus.ACTIVE);
-		u.setUserName("admin");
-	    u.setRole(Role.ADMIN);
-		userRepository.persist(u);
+	   public void insertUser() {
+	        // Admin user
+	        User u = new User();
+	        u.setFirstName("Admin");
+	        u.setLastName("");
+	        u.setBirthDate(new Date());
+	        u.setMail("info@lrf.be");
+	        u.setAccountStatus(AccountStatus.ACTIVE);
+	        u.setUserName("admin");
+	        u.setRole(Role.ADMIN);
+	        userRepository.persist(u);
 
-	
-		
-		// Normal user
-		School school = schoolRepository.find(9L);		
-		User nUser = new User();
-		nUser.setFirstName("Thomas");
-		nUser.setLastName("Delizee");
-		nUser.setBirthDate(new Date());
-		nUser.setMail("thomasdelizee@gmail.com");
-		nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
-		nUser.setAccountStatus(AccountStatus.ACTIVE);
-		nUser.setConsecutiveFailedLogins(0);
-		nUser.setPasswordKnownByTheUser(true);
-		nUser.setNlSubscriber(false);	
-		nUser.setPicture(false);
-		nUser.setSpammer(false);
-		nUser.setUserName("deli");
-		nUser.getSchools().add(school);
-		userRepository.persist(nUser);
-		System.out.println("User Thomas Done !");
-	}
+	    
+	        
+	        // Normal user
+	        User nUser = new User();
+	        nUser.setFirstName("Thomas");
+	        nUser.setLastName("Delizee");
+	        nUser.setBirthDate(new Date());
+	        nUser.setMail("thomasdelizee@gmail.com");
+	        nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
+	        nUser.setAccountStatus(AccountStatus.ACTIVE);
+	        nUser.setConsecutiveFailedLogins(0);
+	        nUser.setPasswordKnownByTheUser(true);
+	        nUser.setNlSubscriber(false);   
+	        nUser.setPicture(false);
+	        nUser.setSpammer(false);
+	        nUser.setUserName("deli");
+	        nUser.getSchools().add(school);
+	        userRepository.persist(nUser);
+	        System.out.println("User Thomas Done !");
+	    }
 
 	public void insertProblem() {
 		User u = userRepository.getUserByUserName("deli");
