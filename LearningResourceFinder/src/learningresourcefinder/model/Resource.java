@@ -68,7 +68,7 @@ public class Resource extends BaseEntity
 		this.description = description;
 	}
 
-	public User getUser() {
+	public User getAuthor() {
 		return author;
 	}
 
