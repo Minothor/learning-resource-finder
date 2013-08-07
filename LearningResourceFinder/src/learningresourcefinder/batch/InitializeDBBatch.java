@@ -91,7 +91,7 @@ public class InitializeDBBatch implements Runnable {
 	
 		
 		// Normal user
-		School school = schoolRepository.find(11L);		
+		School school = schoolRepository.find(9L);		
 		User nUser = new User();
 		nUser.setFirstName("Thomas");
 		nUser.setLastName("Delizee");
