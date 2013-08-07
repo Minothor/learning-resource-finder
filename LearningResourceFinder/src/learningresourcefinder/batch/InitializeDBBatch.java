@@ -11,6 +11,7 @@ import learningresourcefinder.model.School;
 import learningresourcefinder.model.Task;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.CommentRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ProgramPointRepository;
@@ -75,25 +76,38 @@ public class InitializeDBBatch implements Runnable {
 		System.out.println("School Done !");
 	}
 	
-	public void insertUser() {	
-		School school = schoolRepository.find(9L);		
+	public void insertUser() {
+		// Admin user
 		User u = new User();
-		u.setFirstName("Thomas");
-		u.setLastName("Delizee");
+		u.setFirstName("Admin");
+		u.setLastName("");
 		u.setBirthDate(new Date());
-		u.setMail("thomasdelizee@gmail.com");
-		u.setValidationCode("2fd5f4d5f4d5f4d5f4");
+		u.setMail("info@lrf.be");
 		u.setAccountStatus(AccountStatus.ACTIVE);
-		u.setConsecutiveFailedLogins(0);
-		u.setPasswordKnownByTheUser(true);
-		u.setPassword("code");
-		u.setNlSubscriber(false);	
-		u.setPicture(false);
-		u.setSpammer(false);
-		u.setUserName("deli");
-		u.getSchools().add(school);
+		u.setUserName("admin");
+	    u.setRole(Role.ADMIN);
 		userRepository.persist(u);
-		System.out.println("User Done !");
+
+	
+		
+		// Normal user
+		School school = schoolRepository.find(11L);		
+		User nUser = new User();
+		nUser.setFirstName("Thomas");
+		nUser.setLastName("Delizee");
+		nUser.setBirthDate(new Date());
+		nUser.setMail("thomasdelizee@gmail.com");
+		nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
+		nUser.setAccountStatus(AccountStatus.ACTIVE);
+		nUser.setConsecutiveFailedLogins(0);
+		nUser.setPasswordKnownByTheUser(true);
+		nUser.setNlSubscriber(false);	
+		nUser.setPicture(false);
+		nUser.setSpammer(false);
+		nUser.setUserName("deli");
+		nUser.getSchools().add(school);
+		userRepository.persist(nUser);
+		System.out.println("User Thomas Done !");
 	}
 
 	public void insertProblem() {
