@@ -61,7 +61,7 @@ public class InitializeDBBatch implements Runnable {
 	public void run() {
 		insertSchool();
 		insertUser();
-		insertResource();
+		insertResource();     //Executer le badge InitializaDBBatch en commentent les inserts ligne par ligne
 		insertProblem();
 		insertProgramPoints();
 		insertTask();
