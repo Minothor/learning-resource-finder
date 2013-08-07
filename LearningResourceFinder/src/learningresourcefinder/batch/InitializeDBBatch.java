@@ -86,31 +86,31 @@ public class InitializeDBBatch implements Runnable {
 		u.setMail("info@lrf.be");
 		u.setAccountStatus(AccountStatus.ACTIVE);
 		u.setUserName("admin");
-	    u.setRole(Role.ADMIN);
-	    u.hasAdminPrivileges();
-	    u.setPassword("aaaa");
+		u.setRole(Role.ADMIN);
+		u.hasAdminPrivileges();
+		u.setPassword("aaaa");
 		userRepository.persist(u);
 
-	    
-	        
-	        // Normal user
-	        User nUser = new User();
-	        nUser.setFirstName("Thomas");
-	        nUser.setLastName("Delizee");
-	        nUser.setBirthDate(new Date());
-	        nUser.setMail("thomasdelizee@gmail.com");
-	        nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
-	        nUser.setAccountStatus(AccountStatus.ACTIVE);
-	        nUser.setConsecutiveFailedLogins(0);
-	        nUser.setPasswordKnownByTheUser(true);
-	        nUser.setNlSubscriber(false);   
-	        nUser.setPicture(false);
-	        nUser.setSpammer(false);
-	        nUser.setUserName("deli");
-	        nUser.getSchools().add(school);
-	        userRepository.persist(nUser);
-	        System.out.println("User Thomas Done !");
-	    }
+
+
+		// Normal user
+		User nUser = new User();
+		nUser.setFirstName("Thomas");
+		nUser.setLastName("Delizee");
+		nUser.setBirthDate(new Date());
+		nUser.setMail("thomasdelizee@gmail.com");
+		nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
+		nUser.setAccountStatus(AccountStatus.ACTIVE);
+		nUser.setConsecutiveFailedLogins(0);
+		nUser.setPasswordKnownByTheUser(true);
+		nUser.setNlSubscriber(false);   
+		nUser.setPicture(false);
+		nUser.setSpammer(false);
+		nUser.setUserName("deli");
+		nUser.getSchools().add(school);
+		userRepository.persist(nUser);
+		System.out.println("User Thomas Done !");
+	}
 
 	public void insertProblem() {
 		User u = userRepository.getUserByUserName("deli");
