@@ -1,8 +1,7 @@
 <%@ tag body-content="scriptless" isELIgnored="false" %>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-<%@taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%> 
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
-
 
 <%@ attribute name="badgeType" type="reformyourcountry.model.BadgeType"%>
 
