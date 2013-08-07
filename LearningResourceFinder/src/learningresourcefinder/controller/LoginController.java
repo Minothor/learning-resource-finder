@@ -44,11 +44,11 @@ public class LoginController extends BaseController<User> {
     @Autowired UserRepository userRepository;
     
     @RequestMapping(value="/login", method=RequestMethod.GET)
-    public ModelAndView signin(HttpRequest request) {
+    public ModelAndView signin(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("login");
 
         // Should we pre-check the "autologin" checkbox ?
-        Boolean autologin  = (Boolean) ((HttpServletRequest) request).getSession().getAttribute(AUTOLOGIN_KEY);
+        Boolean autologin  = (Boolean) (request).getSession().getAttribute(AUTOLOGIN_KEY);
         autologin = autologin == null ? false : autologin;
         autologin = autologin || Cookies.findCookie(Cookies.LOGINCOOKIE_KEY) != null;
         mv.addObject(AUTOLOGIN_KEY, autologin);
