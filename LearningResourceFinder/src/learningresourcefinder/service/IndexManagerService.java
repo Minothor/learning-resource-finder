@@ -11,14 +11,13 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import learningresourcefinder.model.User;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
-
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
@@ -68,7 +67,7 @@ public class IndexManagerService {
     @PersistenceContext EntityManager em;
 
     @SuppressWarnings("unchecked")   
-    Class<Searchable>[] searchables = new Class[]{User.class};  // Entities that are included in the index.
+    Class<Searchable>[] searchables = new Class[]{Resource.class};  // Entities that are included in the index.
    
     String[] searchableCriterias = new String[]{    // Addition of all the fields that should be searchable in the searchable entities.
             "title","summary","content","shortName", "toClassify",
