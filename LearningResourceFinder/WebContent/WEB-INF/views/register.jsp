@@ -33,8 +33,9 @@
     
     <p>vous pouvez également vous <a href="/signin" >connecter</a> sur ${p_website_name} en utilisant votre compte Facebook,Twitter ou Google.
 
-<!-- FACEBOOK SIGNIN -->
-	<!--  <div style="vertical-align:top; width:100%; text-align:center;">
+<%--
+	  <!-- FACEBOOK SIGNIN -->
+	  <div style="vertical-align:top; width:100%; text-align:center;">
 		<div style="display:inline-block;">
 		<form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
 			<input type="hidden" name="scope" value="email,publish_stream,offline_access" /> 
@@ -43,19 +44,18 @@
 					<input class="image-login" type="image" alt="logo facebook" src="images/social_logo/facebook.jpg" />
 				</div>
 		</form>
-		</div> -->
+		</div>
 		
 
 		<!-- TWITTER SIGNIN -->
-		
-		<!-- <div style="display:inline-block;">
+		<div style="display:inline-block;">
 		<form id="tw_signin" action="<c:url value="/signin/twitter"/>"
 			method="POST">
 			<div class="container">se connecter avec<br> 
 				<input style="padding-top:5px;" type="image" alt="logo twitter" src="images/social_logo/twitter.jpg" />
 			</div>
 		</form>
-		</div> -->
+		</div>
 		
 
 		<!-- GOOGLE SIGNIN -->
@@ -68,6 +68,7 @@
 				src="images/social_logo/google.jpg" />
 			</div>
 		</form>
-		</div> -->
+		</div>
+--%>
 </div>
 </body>
