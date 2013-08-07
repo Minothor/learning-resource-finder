@@ -1,7 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
-<%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
 <%@ page import="learningresourcefinder.util.DateUtil" %>
 <%@ page import="java.util.Date" %>
@@ -26,15 +26,15 @@
 
 <body>
 
-<ryctag:pageheadertitle title="${user.fullName}"/>
+<lrftag:pageheadertitle title="${user.fullName}"/>
 <div class="user-options" style="font-size:12px">
-            <ryc:conditionDisplay privilege="MANAGE_USERS">
+            <lrf:conditionDisplay privilege="MANAGE_USERS">
 				 <a href="user/privilegeedit?id=${user.id}">Privilèges</a>&nbsp-&nbsp
 				 <a href="user/usertypeedit?id=${user.id}">Editer le type d'un user</a>	
 				 <c:if test="${not(current.user  eq user)}">
 				  	&nbsp-&nbsp<a href="user/delete?id=${user.id}">Supprimer le compte</a>
 				 </c:if>
-			</ryc:conditionDisplay>
+			</lrf:conditionDisplay>
 			 <c:if test="${canEdit}">
 				&nbsp-&nbsp<a href="user/edit?id=${user.id}">Editer le Profil</a>
 				&nbsp-&nbsp<a href="user/changepassword?id=${user.id}">Modifier le mot de passe</a>
@@ -128,14 +128,14 @@
 					Né le : <c:choose><c:when test="${user.birthDate ne null}">${user.birthDate}</c:when><c:otherwise>?</c:otherwise></c:choose><br />
 					mail : <c:choose><c:when test="${user.mail ne null}">${user.mail}</c:when><c:otherwise>?</c:otherwise></c:choose><br />
 					
-					Date d'enregistrement : <ryc:datedisplay date="${user.createdOn}" /><br />
+					Date d'enregistrement : <lrf:datedisplay date="${user.createdOn}" /><br />
 					Rôle : ${user.role}<br/>
 					
 					<c:if test="${user.specialType!='PRIVATE'}">
 					  Type : ${user.specialType.name}<br/>
 					</c:if>
 					
-					Dernier accès : <ryc:datedisplay date="${user.lastAccess}" duration="true"/> <br/>
+					Dernier accès : <lrf:datedisplay date="${user.lastAccess}" duration="true"/> <br/>
 					Depuis l'adresse ${user.lastLoginIp}<br/>
 					Status du compte : ${user.accountStatus}<br/>
 					<c:if test="${user.lockReason}!= ACTIVE ">
@@ -164,7 +164,7 @@
 		<div id="tabs-2">  			<!--  **************************Badges********************* -->
 			<c:forEach items="${user.badges}" var="badge">
 				<br />
-				<ryctag:badge badgeType="${badge.badgeType}" />
+				<lrftag:badge badgeType="${badge.badgeType}" />
 			</c:forEach>
 			
 			<form action="/user/recomputebadge" method="post">
@@ -180,7 +180,7 @@
 				<div>
 				  <h4><a href="/action/${argument.action.url}">${argument.title}</a> / ${argument.voteCountAgainst}</h4>
 				  ${argument.content}
-				  <ryc:datedisplay date="${argument.updatedOrCreatedOn}" duration="true" />
+				  <lrf:datedisplay date="${argument.updatedOrCreatedOn}" duration="true" />
 				</div>
 			</c:forEach>
 		</div>
