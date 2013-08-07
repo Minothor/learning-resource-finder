@@ -4,6 +4,10 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
 <body>
-   Hello World
+   <table visible=0>
+   <tr><i>Add a line per feature</i></tr>
+   	<!-- Add a line per feature--> 
+   	<tr><td>PlayList list</td><td><a href="inconstruction">Our list of PlayLists</a></td><td>JU/NOR</td><td>(In construction)</td></tr> 
+   </table>
 </body>
 </html>
