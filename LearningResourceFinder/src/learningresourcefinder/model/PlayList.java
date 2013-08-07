@@ -1,5 +1,9 @@
 package learningresourcefinder.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -8,10 +12,11 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Type;
 
 @Entity
-public class Task extends BaseEntity
-{
+public class PlayList extends BaseEntity {
+
+	@Column(length=50)
 	private String name;
-	
+
     @Lob
     /*Forcing type definition to have text type column in postgresql instead of automatic indirect storage of large object (postgresql store lob in a separate table named pg_largeobject and store his id in the "content" column).
      *Without forcing, JDBC driver use write() method of the BlobOutputStream to store Clob into the database;
@@ -21,61 +26,29 @@ public class Task extends BaseEntity
      */
     @Type(type="org.hibernate.type.StringClobType")
     String description;
-    
-	@ManyToOne
-	private User assigner;
 	
-	@ManyToOne
-	private User student;
+	@ManyToMany
+	private List<Resource> resourceList = new ArrayList<Resource>();
 	
-	@ManyToOne
-	private Resource resource;
-	
-	@ManyToOne
-	private PlayList playlist;
-	
-	@Override
-	public String toString() {
-		return this.name;
-	}
-	
+	///////// Getters & Setters //////////
 	public String getName() {
-		return this.name;
+		return name;
 	}
-	
-	public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public User getAssigner() {
-		return this.assigner;
-	}
-	
-	public User getUser() {
-		return this.student;
-	}
-	
-	public PlayList getPlayList() {
-		return this.playlist;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public void setAssigner(User assigner) {
-		this.assigner = assigner;
-	}
-
-	public void setUser(User student) {
-		this.student = student;
-	}
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public List<Resource> getResourceList() {
+        return resourceList;
+    }
+    public void setResourceList(List<Resource> resourceList) {
+        this.resourceList = resourceList;
+    }
 	
-	public void setPlayList(PlayList playlist) {
-		this.playlist = playlist;
-	}
 }

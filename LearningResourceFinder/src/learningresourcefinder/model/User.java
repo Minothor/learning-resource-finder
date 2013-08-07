@@ -257,7 +257,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     private Set<School> schools = new HashSet<>();
     
     @OneToMany (mappedBy="author")
-    Set <Scenario> scenarios = new HashSet<>();
+    Set <PlayList> playlist = new HashSet<>();
     
 
     
@@ -502,8 +502,8 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 		return schools;
 	}
 
-	public Set<Scenario> getScenarios() {
-		return scenarios;
+	public Set<PlayList> getScenarios() {
+		return playlist;
 	}  
     
     

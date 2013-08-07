@@ -2,7 +2,6 @@ package learningresourcefinder.repository;
 
 import java.util.List;
 
-import learningresourcefinder.model.Scenario;
 import learningresourcefinder.model.User;
 
 import org.springframework.stereotype.Repository;
