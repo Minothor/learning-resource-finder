@@ -9,10 +9,10 @@
 </head>
 <body>
 	<h1>Resource Edit :</h1>
-	<form:form modelAttribute="book" method="post" action='<%=response.encodeUrl("")%>'>
-		<label>Name</label> <form:input path="name" /> <form:errors path="name" /><br />
+	<form:form modelAttribute="resource" method="post" action='<%=response.encodeUrl("resourceeditsubmit")%>'>
+		<label>Name</label>        <form:input path="name" /> <form:errors path="name" /><br />
 		<label>Description</label> <form:input path="description" /> <form:errors path="description" /><br />
-		<label>Author</label> <form:input path="createdBy" disabled="true" />
+		<label>Author</label>      <form:input path="createdBy" disabled="true" />
 		<form:hidden path="id" />
 		<input type="submit" value="Save" />
 	</form:form>
