@@ -39,6 +39,7 @@
 				&nbsp-&nbsp<a href="user/edit?id=${user.id}">Editer le Profil</a>
 				&nbsp-&nbsp<a href="user/changepassword?id=${user.id}">Modifier le mot de passe</a>
 			 </c:if>
+			 &nbsp-&nbsp<a href="playlist/user/${user.userName}">Play-lists</a>
 </div>
 
 <br/>
