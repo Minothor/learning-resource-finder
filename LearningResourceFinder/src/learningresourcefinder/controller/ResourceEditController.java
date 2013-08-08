@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.ModelAndView;
 
 @Controller
-public class ResourceEditController extends BaseController {
+public class ResourceEditController extends BaseController<Resource> {
 
 	@Autowired ResourceRepository resourceRepository; 
 @RequestMapping("/resourcecreate")
