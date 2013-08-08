@@ -80,11 +80,9 @@ public class UserService {
      *            : validate an account directly without send a mail
      */
     public User registerUser(boolean directValidation, String username, String passwordInClear, String mail, boolean isSocial) throws UserAlreadyExistsException {
-        //exception if html is dangerous
-    	//TODO review
-    	if(!HTMLUtil.isHtmlSecure(username)) {
-    		throw new RuntimeException("String used for register a user is dangerous : " + username);
-    	}
+
+    	if(!HTMLUtil.isHtmlSecure(username)) // I add this Condition for Batch/Test || Ahmed-flag
+    	   throw new RuntimeException("Vous avez introduit du code html/javascript");
     	
         if (userRepository.getUserByUserName(username) != null)    {
             throw new UserAlreadyExistsException(IdentifierType.USERNAME, username);
@@ -137,7 +135,10 @@ public class UserService {
         
         log.debug("mail sent: " + htmlMessage);  
     }
-
+    
+    // Ahmed-Flag :
+    
+/*
     public void generateNewPasswordForUserAndSendEmail(User user) {
         // We generate a password
         String newPassword = SecurityUtils.generateRandomPassword(8, 12);
@@ -157,17 +158,17 @@ public class UserService {
                         "</ol>", 
                         MailType.IMMEDIATE, MailCategory.USER);
 
-    }
+    }*/
 
     /** Change the name of the user and note it in the log */
-    public void changeUserName(User user, String newUserName, String newFirstName, String newLastName) {
+   /* public void changeUserName(User user, String newUserName, String newFirstName, String newLastName) {
         user.setFirstName(newFirstName);
         user.setLastName(newLastName);
         user.setUserName(newUserName);
         userRepository.merge(user);
-    }
+    }*/
 
-    public void addOrUpdateUserImage(User user, BufferedImage image){
+  /*  public void addOrUpdateUserImage(User user, BufferedImage image){
         try {
 
 
@@ -185,9 +186,9 @@ public class UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
-
+/*
     public void addOrUpdateUserImageFromSocialProvider(User user ,Connection<?> connection){
         AccountConnectedType type = AccountConnectedType.getProviderType(connection.getKey().getProviderId());      
         byte[] userImage =null;
@@ -234,11 +235,11 @@ public class UserService {
         }
 
     }
-    
+    */
 
        
     
-   public void unsocialiseUser(User user, String newPassword){
+  /* public void unsocialiseUser(User user, String newPassword){
        // We remove all uer's social connections.
        ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(user.getId()+"");
        MultiValueMap<String,Connection<?>> connectionsByProvider = connectionRepository.findAllConnections();
@@ -257,9 +258,9 @@ public class UserService {
        userRepository.merge(user);
             
        loginService.resetLoginData(user, new ArrayList<Connection<?>>());
-   }
+   }*/
    
-   public void removeSocialConnection(User user, Connection<?> connection){
+ /*  public void removeSocialConnection(User user, Connection<?> connection){
 
        ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(user.getId()+"");
        connectionRepository.removeConnection(connection.getKey());  
@@ -272,9 +273,9 @@ public class UserService {
        }
        
        loginService.resetLoginData(user, getAllConnections(user));
-   }
+   }*/
    
-   public  List<Connection<?>> getAllConnections(User user){
+  /* public  List<Connection<?>> getAllConnections(User user){
        ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(user.getId()+"");
        MultiValueMap<String,Connection<?>> connectionsByProvider = connectionRepository.findAllConnections();
 
@@ -284,10 +285,10 @@ public class UserService {
            connections.addAll(collection);
        }
        return connections;
-   }
+   }*/
    
    
-   public User tryToAttachSocialLoginToAnExistingUser(Connection<?> connection) throws UserLockedException{
+ /*  public User tryToAttachSocialLoginToAnExistingUser(Connection<?> connection) throws UserLockedException{
 
        if (SecurityContext.getUser() != null) { 
            User user = SecurityContext.getUser();
@@ -330,10 +331,10 @@ public class UserService {
        }
        return null; // Cannot attach the visitor to an existing RYC user. 
 
-   }
+   }*/
 
    
-   public void completUserFromSocialProviderData(Connection<?> connection,User user){
+ /*  public void completUserFromSocialProviderData(Connection<?> connection,User user){
        
        if(StringUtils.isBlank(user.getLastName())) {
            user.setLastName(connection.fetchUserProfile().getLastName());
@@ -348,9 +349,9 @@ public class UserService {
        }       
        
        userRepository.merge(user);
-   }
+   }*/
    
-   public User registerSocialUser(WebRequest request,String mail,boolean mailIsValid) throws UserAlreadyExistsException {
+/*   public User registerSocialUser(WebRequest request,String mail,boolean mailIsValid) throws UserAlreadyExistsException {
        Connection<?> connection =  ProviderSignInUtils.getConnection(request); 
      
        User user = null;
@@ -398,8 +399,8 @@ public class UserService {
        }
        
        return user;
-   }
-    public List<User> getUserLstWithRoleOrPrivilege(){
+   }*/
+  /*  public List<User> getUserLstWithRoleOrPrivilege(){
     	List<User> list1 = userRepository.getUserWithRoleNotNull();
     	List<User> list2 = userRepository.getUserWithPrivilegeNotEmpty();
     	
@@ -410,33 +411,30 @@ public class UserService {
     		}
     	}
 		return list1;
-    }
+    }*/
     
-	/** Encoding user's nickname and registration date to have a parameter sent to a page.
+/*	/** Encoding user's nickname and registration date to have a parameter sent to a page.
 	 * Used in urls (from mails, for example), to directly authentify a user. */
-    public String getUserSecurityString(User user){
+  /*  public String getUserSecurityString(User user){
 		return SecurityUtils.md5Encode(user.getUserName()+user.getCreatedOn().toString()).substring(0, 6);
-    }
+    }*/
     
-    
-
-    
-
-    public void setUser(User user){
+   
+  /*  public void setUser(User user){
         changeUserName(user, "Anonymous"+user.getId(), "", "");
         user.setTitle("");
         user.setBirthDate(null);
         user.setGender(null);
         user.setAccountStatus(AccountStatus.LOCKED);
         user.setRole(Role.USER);
-    }
+    }*/
     
-    public void userImageDelete(User user){
+   /* public void userImageDelete(User user){
 
         FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER, user.getId()+".*");
         FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER + FileUtil.USER_RESIZED_LARGE_SUB_FOLDER, user.getId()+".*");
         FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER +  FileUtil.USER_RESIZED_SMALL_SUB_FOLDER, user.getId()+".*");
         user.setPicture(false);
-    }
+    }*/
 	
 }

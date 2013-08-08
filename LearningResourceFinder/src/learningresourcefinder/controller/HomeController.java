@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController{
  
-    @RequestMapping("/")
+    @RequestMapping(value={"/", "/home"})
     public String showHomePage(){
         return "home"; // JSP (this controller is not doing anything useful but giving access to the JSP).
     } 

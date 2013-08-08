@@ -61,7 +61,7 @@ public class UserDisplayController extends BaseController<User> {
 
 
 
-    
+  /*  
     @RequestMapping("/updateusersocialimage")   
     public ModelAndView updateusersocialimage(@RequestParam("provider") String provider, @RequestParam("id") long id,WebRequest request,HttpServletResponse response){
         User user = userRepository.find(id); 
@@ -77,7 +77,7 @@ public class UserDisplayController extends BaseController<User> {
          
         return mv;
     }
- 
+ */
 
 
 }

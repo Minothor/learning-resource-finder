@@ -81,9 +81,7 @@ public class MailSender extends Thread {
         	log.info("Mail Server Started !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + environment.getMailBehavior());
         } else {
         	log.info("DevMode on, mail thread not started");
-        }
-
-       
+        }  
     }
 
     @PreDestroy
