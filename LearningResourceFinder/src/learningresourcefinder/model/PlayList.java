@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
 
@@ -26,9 +25,6 @@ public class PlayList extends BaseEntity {
      */
     @Type(type="org.hibernate.type.StringClobType")
     String description;
-	
-    @ManyToOne
-    private User author;
     
 	@ManyToMany
 	private List<Resource> resourceList = new ArrayList<Resource>();
@@ -50,8 +46,8 @@ public class PlayList extends BaseEntity {
     public List<Resource> getResourceList() {
         return resourceList;
     }
-
-
+    public void setResourceList(List<Resource> resourceList) {
+        this.resourceList = resourceList;
+    }
 	
-
 }

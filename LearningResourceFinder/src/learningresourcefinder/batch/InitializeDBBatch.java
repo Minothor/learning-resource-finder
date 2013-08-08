@@ -61,6 +61,8 @@ public class InitializeDBBatch implements Runnable {
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
 	}
+	
+	// UPDATE resource set createdby_id = 8 WHERE name = 'Français - Dupont' AND name = 'Goblin-Math';
 
 	@Override
 	public void run() {
@@ -82,8 +84,8 @@ public class InitializeDBBatch implements Runnable {
 		System.out.println("School Done !");
 	}
 	
-
 	public void insertUser() {
+		// Admin user
 		User u = new User();
 		u.setFirstName("Admin");
 		u.setLastName("");
@@ -94,27 +96,28 @@ public class InitializeDBBatch implements Runnable {
 	    u.setRole(Role.ADMIN);
 	    u.hasAdminPrivileges();
 	    u.setPassword(SecurityUtils.md5Encode("aaaa"));
-	    userRepository.persist(u);
+		userRepository.persist(u);
 
-
-	    // Normal user
-	    User nUser = new User();
-	    nUser.setFirstName("Thomas");
-	    nUser.setLastName("Delizee");
-	    nUser.setBirthDate(new Date());
-	    nUser.setMail("thomasdelizee@gmail.com");
-	    nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
-	    nUser.setAccountStatus(AccountStatus.ACTIVE);
-	    nUser.setConsecutiveFailedLogins(0);
-	    nUser.setPasswordKnownByTheUser(true);
-	    nUser.setNlSubscriber(false);   
-	    nUser.setPicture(false);
-	    nUser.setSpammer(false);
-	    nUser.setUserName("deli");
-	    nUser.getSchools().add(school);
-	    userRepository.persist(nUser);
-	    System.out.println("User Thomas Done !");
-	}
+	    
+	        
+	     // Normal user
+	        User nUser = new User();
+	        nUser.setFirstName("Thomas");
+	        nUser.setLastName("Delizee");
+	        nUser.setBirthDate(new Date());
+	        nUser.setMail("thomasdelizee@gmail.com");
+	        nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
+	        nUser.setAccountStatus(AccountStatus.ACTIVE);
+	        nUser.setConsecutiveFailedLogins(0);
+	        nUser.setPasswordKnownByTheUser(true);
+	        nUser.setNlSubscriber(false);   
+	        nUser.setPicture(false);
+	        nUser.setSpammer(false);
+	        nUser.setUserName("deli");
+	        nUser.getSchools().add(school);
+	        userRepository.persist(nUser);
+	        System.out.println("User Thomas Done !");
+	    }
 
 	public void insertProblem() {
 		User u = userRepository.getUserByUserName("deli");
@@ -124,11 +127,11 @@ public class InitializeDBBatch implements Runnable {
 		c.setDescription("Commentaire sur le problème numéro 1 :D");
 		c.setTitle("Problème 1");
 		c.setProblem(p);
-		c.setAuthor(u);
+		//c.setAuthor(u);
 		p.addComment(c);
 		p.setResolved(false);
 		p.setResource(r);
-		p.setAuthor(u);
+		//p.setAuthor(u);
 		p.setDescription("Problème numéro 1");
 		p.setName("Mon problème ^^");
 		problemRepository.persist(p);
@@ -139,8 +142,8 @@ public class InitializeDBBatch implements Runnable {
 	public void insertResource() {
 		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont");
 		mathGob = new Resource("Goblin-Math", "Jeu de mathématiques avec des goblins.");
-		frDupont.setUser(userRepository.getUserByUserName("deli"));
-		mathGob.setUser(userRepository.getUserByUserName("deli"));
+		//frDupont.setUser(userRepository.getUserByUserName("deli"));
+		//mathGob.setUser(userRepository.getUserByUserName("deli"));
 		resourceRepository.persist(frDupont);
 		resourceRepository.persist(mathGob);
 		System.out.println("Resource Done !");
