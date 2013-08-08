@@ -1,6 +1,7 @@
 package learningresourcefinder.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import javax.validation.constraints.Size;
 
 import learningresourcefinder.search.Searchable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -77,13 +79,16 @@ public class Resource extends BaseEntity implements Searchable
 
     @Override
     public Map<String, String> getCriterias() {
-        // TODO Auto-generated method stub
-        return null;
+        Map<String,String> criterias = new HashMap<String,String>();
+        criterias.put("name",StringUtils.defaultIfEmpty(name,""));
+        criterias.put("description",StringUtils.defaultIfEmpty(description,""));
+        return criterias;
     }
 
     @Override
     public String getBoostedCriteriaName() {
-        // TODO Auto-generated method stub
-        return null;
+        return "title";
     }
+	
+	
 }

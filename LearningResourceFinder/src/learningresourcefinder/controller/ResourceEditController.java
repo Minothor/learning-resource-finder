@@ -38,7 +38,7 @@ private ModelAndView prepareModelAndView(Resource resource) {
 	return mv;
 }
 
-@RequestMapping("/resourcesubmit")
+@RequestMapping("/resourceeditsubmit")
 
 public ModelAndView resourceEditSubmit(@Valid @ModelAttribute Resource resource, BindingResult bindingResult) {
 	
