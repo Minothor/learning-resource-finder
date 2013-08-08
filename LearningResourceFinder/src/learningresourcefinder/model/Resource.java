@@ -87,7 +87,7 @@ public class Resource extends BaseEntity implements Searchable
 
     @Override
     public String getBoostedCriteriaName() {
-        return "title";
+        return "name";
     }
 	
 	
