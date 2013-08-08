@@ -261,7 +261,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     
 
     
-   //FIXME i think i understand with only one line ... --maxime 28/11/12
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
@@ -503,6 +502,10 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 	}
 
 	public Set<PlayList> getScenarios() {
+		return playlist;
+	}
+
+	public Set<PlayList> getPlaylist() {
 		return playlist;
 	}  
     
