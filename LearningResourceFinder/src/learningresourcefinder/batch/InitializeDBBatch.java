@@ -58,7 +58,7 @@ public class InitializeDBBatch implements Runnable {
 	Resource mathGob;
 	School school;  // Various methods need the created school
 	
-1	public static void main(String[] args) {
+	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
 	}
 
