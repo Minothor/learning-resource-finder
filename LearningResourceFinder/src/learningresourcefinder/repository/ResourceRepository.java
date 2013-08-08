@@ -22,4 +22,11 @@ public class ResourceRepository extends BaseRepository<Resource>
 		
 		return results;
 	}
+	
+	public List<Resource> findAllRessourceOrderByTitle () {
+		
+		List<Resource> result = em.createQuery("SELECT r FROM Resource r ORDER BY r.name ASC")
+				.getResultList();
+		return result;
+	}
 }
