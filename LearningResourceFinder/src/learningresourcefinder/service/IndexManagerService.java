@@ -114,7 +114,7 @@ public class IndexManagerService {
         // This give more importance to title during the search
         // The user see the result from the title before the result from the text 
         String boostedName = searchable.getBoostedCriteriaName();
-        Field boostedField=new TextField(boostedName,criteriaMap.get(boostedName),Store.YES);
+        Field boostedField = new TextField(boostedName,criteriaMap.get(boostedName),Store.YES);
         boostedField.setBoost(1.5f);
         doc.add(boostedField);
         
