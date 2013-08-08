@@ -6,15 +6,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style type="text/css" media="screen">
+	label
+	{
+	    display:block;
+	    width:100px; 
+	    float:left;
+	}
+	textarea
+	{
+		width: 400px;
+		height: 25Opx;
+	}
+</style>
 </head>
 <body>
 	<h1>Resource Edit :</h1>
 	<form:form modelAttribute="resource" method="post" action='<%=response.encodeUrl("resourceeditsubmit")%>'>
-		<label>Name</label>        <form:input path="name" /> <form:errors path="name" /><br />
-		<label>Description</label> <form:input path="description" /> <form:errors path="description" /><br />
-		<label>Author</label>      <form:input path="createdBy" disabled="true" />
-		<form:hidden path="id" />
-		<input type="submit" value="Save" />
+		<p>
+			<label>Name :</label>        <form:input path="name" /> <form:errors path="name" />
+		</p>
+		<p>
+			<label>Description :</label> <form:textarea path="description" /> <form:errors path="description" />
+		</p>
+		<p>
+			<label>Author :</label>      <form:input path="createdBy" disabled="true" />
+		</p>
+		<p>
+			<form:hidden path="id" />
+			<input type="submit" value="Save" />
+		</p>
 	</form:form>
+	
+	<br />
+	<a href="resource?id=">home page</a>
 </body>
 </html>

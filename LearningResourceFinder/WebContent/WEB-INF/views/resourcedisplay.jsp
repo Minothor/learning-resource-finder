@@ -11,7 +11,7 @@
 		<img src="http://mrsthiessenswiki.wikispaces.com/file/view/math_clipart.jpg" style="width:500px;height:100px;" />
 		<h2>${resource.name}</h2>
 		<p>${resource.description}</p>
-		<p>${resource.author.firstName} ${resource.createdBy.lastName}</p>
+		<p>${resource.createdBy.firstName} ${resource.createdBy.lastName}</p>
 		<p></p>
 		<a href="<c:url value='resourceedit?id=${resource.id}'/>">Edit resource</a>  <br>
 	</div>
