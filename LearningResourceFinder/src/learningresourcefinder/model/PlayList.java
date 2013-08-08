@@ -50,8 +50,8 @@ public class PlayList extends BaseEntity {
     public List<Resource> getResourceList() {
         return resourceList;
     }
-    public void setResourceList(List<Resource> resourceList) {
-        this.resourceList = resourceList;
-    }
+
+
 	
+
 }

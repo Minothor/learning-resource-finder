@@ -13,6 +13,7 @@ import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.CommentRepository;
+import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ProgramPointRepository;
 import learningresourcefinder.repository.ResourceRepository;
@@ -50,12 +51,14 @@ public class InitializeDBBatch implements Runnable {
 	@Autowired
 	TaskRepository taskRepository;
 
+	@Autowired
+	PlayListRepository playListRepository;
 	
 	Resource frDupont;
 	Resource mathGob;
 	School school;  // Various methods need the created school
 	
-	public static void main(String[] args) {
+1	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
 	}
 
@@ -67,6 +70,7 @@ public class InitializeDBBatch implements Runnable {
 		insertProblem();
 		insertProgramPoints();
 		insertTask();
+		insertPlayList();
 		System.out.println("DataBase Initialized !");
 	}
 	
@@ -78,8 +82,8 @@ public class InitializeDBBatch implements Runnable {
 		System.out.println("School Done !");
 	}
 	
+
 	public void insertUser() {
-		// Admin user
 		User u = new User();
 		u.setFirstName("Admin");
 		u.setLastName("");
@@ -90,28 +94,27 @@ public class InitializeDBBatch implements Runnable {
 	    u.setRole(Role.ADMIN);
 	    u.hasAdminPrivileges();
 	    u.setPassword(SecurityUtils.md5Encode("aaaa"));
-		userRepository.persist(u);
+	    userRepository.persist(u);
 
-	    
-	        
-	        // Normal user
-	        User nUser = new User();
-	        nUser.setFirstName("Thomas");
-	        nUser.setLastName("Delizee");
-	        nUser.setBirthDate(new Date());
-	        nUser.setMail("thomasdelizee@gmail.com");
-	        nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
-	        nUser.setAccountStatus(AccountStatus.ACTIVE);
-	        nUser.setConsecutiveFailedLogins(0);
-	        nUser.setPasswordKnownByTheUser(true);
-	        nUser.setNlSubscriber(false);   
-	        nUser.setPicture(false);
-	        nUser.setSpammer(false);
-	        nUser.setUserName("deli");
-	        nUser.getSchools().add(school);
-	        userRepository.persist(nUser);
-	        System.out.println("User Thomas Done !");
-	    }
+
+	    // Normal user
+	    User nUser = new User();
+	    nUser.setFirstName("Thomas");
+	    nUser.setLastName("Delizee");
+	    nUser.setBirthDate(new Date());
+	    nUser.setMail("thomasdelizee@gmail.com");
+	    nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
+	    nUser.setAccountStatus(AccountStatus.ACTIVE);
+	    nUser.setConsecutiveFailedLogins(0);
+	    nUser.setPasswordKnownByTheUser(true);
+	    nUser.setNlSubscriber(false);   
+	    nUser.setPicture(false);
+	    nUser.setSpammer(false);
+	    nUser.setUserName("deli");
+	    nUser.getSchools().add(school);
+	    userRepository.persist(nUser);
+	    System.out.println("User Thomas Done !");
+	}
 
 	public void insertProblem() {
 		User u = userRepository.getUserByUserName("deli");
@@ -189,9 +192,10 @@ public class InitializeDBBatch implements Runnable {
 		System.out.println("Task Done !");
 	}
 	
-	public void insetPlayList() {
+	public void insertPlayList() {
 	    PlayList p = new PlayList();
 		p.setName("PlayList 1");
-		
+		playListRepository.persist(p);
+		System.out.println("PlayList Done !");
 	}
 }
