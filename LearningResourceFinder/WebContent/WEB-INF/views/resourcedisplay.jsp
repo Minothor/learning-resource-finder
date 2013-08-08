@@ -12,6 +12,7 @@
 		<h2>${resource.name}</h2>
 		<p>${resource.description}</p>
 		<p>${resource.author.firstName} ${resource.author.lastName}</p>
+		<p></p>
 	</div>
 </body>
 </html>
