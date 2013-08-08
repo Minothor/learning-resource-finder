@@ -11,7 +11,7 @@
 		<img src="http://mrsthiessenswiki.wikispaces.com/file/view/math_clipart.jpg" style="width:500px;height:100px;" />
 		<h2>${resource.name}</h2>
 		<p>${resource.description}</p>
-		<p>${resource.author.firstName} ${resource.author.lastName}</p>
+		<p>${resource.author.firstName} ${resource.createdBy.lastName}</p>
 		<p></p>
 	</div>
 </body>

@@ -14,9 +14,6 @@ public class Comment extends BaseEntity
 	@ManyToOne
 	private Problem problem;
 	
-	@ManyToOne
-	private User author;
-	
 	/**************************** Getters *************************************/
 
 	public String getTitle() {
@@ -31,10 +28,6 @@ public class Comment extends BaseEntity
 		return this.problem;
 	}
 	
-	public User getAuthor() {
-		return this.author;
-	}
-	
 	/**************************** Setters *************************************/
 
 	public void setTitle(String title) {
@@ -47,9 +40,5 @@ public class Comment extends BaseEntity
 	
 	public void setProblem(Problem problem) {
 		this.problem = problem;
-	}
-	
-	public void setAuthor(User user) {
-		this.author = user;
 	}
 }

@@ -256,7 +256,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     @ManyToMany
     private Set<School> schools = new HashSet<>();
     
-    @OneToMany (mappedBy="author")
+    @OneToMany (mappedBy="createdBy")
     Set <PlayList> playlist = new HashSet<>();
     
 

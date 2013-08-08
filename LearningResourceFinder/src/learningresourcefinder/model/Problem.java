@@ -27,9 +27,6 @@ public class Problem extends BaseEntity
 	private Set<Comment> comments;
 	
 	@ManyToOne
-	private User author;
-	
-	@ManyToOne
 	private User solver;
 	
 	private boolean resolved = false;
@@ -56,10 +53,6 @@ public class Problem extends BaseEntity
 		return this.resource;
 	}
 	
-	public User getAuthor() {
-		return this.author;
-	}
-	
 	public User getSolver() {
 		return this.solver;
 	}
@@ -80,10 +73,6 @@ public class Problem extends BaseEntity
 	
 	public void setResource(Resource resource) {
 		this.resource = resource;
-	}
-	
-	public void setAuthor(User user) {
-		this.author = user;
 	}
 	
 	public void setSolver(User user) {

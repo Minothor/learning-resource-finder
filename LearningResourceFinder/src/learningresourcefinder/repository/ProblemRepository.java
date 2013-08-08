@@ -22,9 +22,9 @@ public class ProblemRepository extends BaseRepository<Problem>
 		return (Problem) results;
 	}
 	
-	public List<Problem> findProblemOfAuthor(User author) {
-		List<Problem> results = em.createQuery("SELECT p FROM Problem p WHERE p.author = :author")
-				.setParameter("author", author)
+	public List<Problem> findProblemOfAuthor(User createdBy) {
+		List<Problem> results = em.createQuery("SELECT p FROM Problem p WHERE p.createdBy = :createdBy")
+				.setParameter("createdBy", createdBy)
 				.getResultList();
 		return results;
 	}

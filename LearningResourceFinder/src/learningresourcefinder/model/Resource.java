@@ -36,15 +36,11 @@ public class Resource extends BaseEntity implements Searchable
 	@ManyToMany(mappedBy="resources")
 	List<ProgramPoint> programPoints = new ArrayList<>();
 	
-	@ManyToOne
-	@JoinColumn(nullable=false)
-	private User author;
-	
 	public Resource() {} // No arg constructor for Hibernate
 	
-	public Resource(String aName, String aDescription) {
-		this.name = aName;
-		this.description = aDescription;
+	public Resource(String name, String description) {
+		this.name = name;
+		this.description = description;
 	}
 	
 	@Override
@@ -71,14 +67,6 @@ public class Resource extends BaseEntity implements Searchable
 		this.description = description;
 	}
 
-	public User getAuthor() {
-		return author;
-	}
-
-	public void setUser(User user) {
-		this.author = user;
-	}
-
 	public Set<Problem> getProblems() {
 		return problems;
 	}
@@ -98,6 +86,4 @@ public class Resource extends BaseEntity implements Searchable
         // TODO Auto-generated method stub
         return null;
     }
-	
-	
 }
