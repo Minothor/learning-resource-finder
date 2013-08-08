@@ -23,7 +23,7 @@
 						<a href="<c:url value='resource?id=${resource.id}'/>">${resource.name}</a>
 					</td>
 					<td>${resource.description}</td>
-					<td>${resource.author.firstName }</td>				
+					<td>${resource.createdBy.firstName }</td>				
 				</tr>
 			</c:forEach>
 	</table>
