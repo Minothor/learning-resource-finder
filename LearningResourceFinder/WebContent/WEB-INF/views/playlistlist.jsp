@@ -8,15 +8,15 @@
    <h1>PlayListList</h1>
    <table cellspacing="10">
 		<tr>
-		    <td>Name</td>
-			<td>Username</td>
+		    <td>Titre</td>
 			<td>Description</td>
-			<td>Action</td>
+			<td>Autheur</td>
 		</tr>
 		<c:forEach items="${playlistlist}" var="playlist">
 			<tr>
 				<td>${playlist.name}</td>
 				<td>${playlist.description}</td>
+				<td>${playlist.createdBy.fullName}</td>
 		   </tr>
 		</c:forEach>
 		
