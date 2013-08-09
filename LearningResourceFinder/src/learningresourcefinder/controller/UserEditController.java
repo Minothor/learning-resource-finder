@@ -53,13 +53,8 @@ public class UserEditController extends BaseController<User> {
     private ModelAndView prepareModelAndView(Long userId,User user) { 
     	ModelAndView mv=new ModelAndView("useredit");
     	// Sets an initial date in the form
-        Calendar birthCalendar = Calendar.getInstance();
-        if (user.getBirthDate()!=null) {
-            birthCalendar.setTime(user.getBirthDate());
-            mv.addObject("birthDay", birthCalendar.get(Calendar.DAY_OF_MONTH));
-            mv.addObject("birthMonth", birthCalendar.get(Calendar.MONTH));
-            mv.addObject("birthYear", birthCalendar.get(Calendar.YEAR));
-        }
+        
+        bootBirthdayInMv(user, mv);
         
     	mv.addObject("id", userId);  // Do not remove because when we use the dummy model attribute (doNotUseThisUserInstance), it has no id. 
     	mv.addObject("user", user);
@@ -79,6 +74,16 @@ public class UserEditController extends BaseController<User> {
     	
     	return mv;
     }
+
+	private void bootBirthdayInMv(User user, ModelAndView mv) {
+		if (user.getBirthDate()!=null) {
+			Calendar birthCalendar = Calendar.getInstance();
+            birthCalendar.setTime(user.getBirthDate());
+            mv.addObject("birthDay", birthCalendar.get(Calendar.DAY_OF_MONTH));
+            mv.addObject("birthMonth", birthCalendar.get(Calendar.MONTH));
+            mv.addObject("birthYear", birthCalendar.get(Calendar.YEAR));
+        }
+	}
     
     @RequestMapping("/delete")
     public ModelAndView userDelete(@RequestParam(value="id") Long idUser){
@@ -177,15 +182,7 @@ public class UserEditController extends BaseController<User> {
             }
             Calendar birthCalendar = Calendar.getInstance();
           
-            if (user.getBirthDate()!=null) {
-                birthCalendar.setTime(user.getBirthDate());
-                mv.addObject("birthDay", birthCalendar.get(Calendar.DAY_OF_MONTH));
-            
-                mv.addObject("birthMonth", birthCalendar.get(Calendar.MONTH));
-            
-             
-                mv.addObject("birthYear", birthCalendar.get(Calendar.YEAR));
-            }
+            bootBirthdayInMv(user, mv);
             return mv;
         }
         
@@ -215,7 +212,7 @@ public class UserEditController extends BaseController<User> {
         }*/
         user.setAccountStatus(accountStatus);
         user = userRepository.merge(user);
-        //indexManagerService.update(user);
+        // TODO: indexManagerService.update(user);
         //badgeService.grantIfUserIsComplete(user);
         
         return new ModelAndView("redirect:/user/"+user.getUserName());
