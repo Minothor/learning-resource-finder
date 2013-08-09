@@ -1,7 +1,5 @@
 package learningresourcefinder.controller;
 
-import javax.annotation.PostConstruct;
-
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.User;
@@ -19,11 +17,6 @@ public class PlayListListController  extends BaseController<PlayList> {
 
 	@Autowired UserRepository userRepository;
 	
-	@PostConstruct
-	public void test() {
-		System.out.println(userRepository + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
-	}
-	
 	@RequestMapping("/user/{userName}")
 	public ModelAndView displayList(@PathVariable("userName") String userName) {
 		User user = userRepository.getUserByUserName(userName);
@@ -33,6 +26,5 @@ public class PlayListListController  extends BaseController<PlayList> {
         
 		return new ModelAndView("playlistlist", "playlistlist", user.getPlaylist());
 	}
-
 
 }
