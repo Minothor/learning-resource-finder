@@ -16,8 +16,8 @@
 	<br />
 	<div>
 		<h2>Les liens :</h2>
-		<c:forEach items="${resource.getUrlResource}" var="url">
-			<a href="<c:url value='removeurlresource?id=${url.id}'/>">url.name</a>
+		<c:forEach items="${resource.urlResource}" var="url">
+			<a href="<c:url value='removeurlresource?id=${url.id}'/>">${url.name}</a>
 		</c:forEach>		
 	</div>
 </body>

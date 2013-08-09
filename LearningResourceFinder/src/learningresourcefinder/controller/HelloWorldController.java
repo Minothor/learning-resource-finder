@@ -5,6 +5,7 @@ import learningresourcefinder.model.User;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloWorldController extends BaseController<User> {
@@ -15,4 +16,14 @@ public class HelloWorldController extends BaseController<User> {
         return "helloworld";
     }
    
+    @RequestMapping("/helloworldmv")
+    public ModelAndView helloWorldMv() {
+    	return new ModelAndView("helloworld");
+    }
+
+//    @RequestMapping("/helloworldmvr")
+//    public ModelAndView() helloWorldMvr{
+//    	return new ModelAndView("redirect:google.be");
+//    }
+
 }
