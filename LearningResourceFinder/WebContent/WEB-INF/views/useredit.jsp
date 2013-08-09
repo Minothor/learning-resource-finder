@@ -2,23 +2,24 @@
 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>   
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %> 
-<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lfrtag" %>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lfr'%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
 
 <body>
 <script src="/js/int/birthday_picker.js" type = "text/javascript"></script> 
 
-<lrftab:breadcrumb>
+<lrftag:breadcrumb>
 	<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
-	<lfrtag:breadcrumbelement label="Edition" />
-</lrftab:breadcrumb>
+	<lrftag:breadcrumbelement label="Edition" />
+</lrftag:breadcrumb>
 <lrftag:pageheadertitle title="${user.firstName} ${user.lastName}"/>
 
 <div style="float:left; padding-left:30px; width: 810px;">
     <lrftag:form action="user/editsubmit" modelAttribute="user">
     <tr><th></th><th style="width:300px;"></th><th style="width:300px;"></th></tr>
+   
     <c:choose>
     	<c:when test="${canChangeUserName}"><%-- Only an admin can modify name of a certified user --%>
     		<lrftag:input path="firstName" label="Prénom"/>
@@ -75,52 +76,37 @@
             </td><td>${errorBirthDate}</td>
         </tr>       
         
-<%--         <tr><td><form:label path="gender">Genre</form:label></td> --%>
-<%--            <td><form:radiobutton  path="gender" value="MALE"/>MALE --%>
-<%--            <form:radiobutton   path="gender" value="FEMALE"/>FEMALE</td> --%>
-<%--            <form:errors path="gender"  cssClass="error"/> --%>
-<!--         </tr> -->
+        <tr><td><form:label path="gender">Genre</form:label></td>
+           <td><form:radiobutton  path="gender" value="MALE"/>MALE
+           <form:radiobutton   path="gender" value="FEMALE"/>FEMALE</td>
+           <form:errors path="gender"  cssClass="error"/>
+         </tr> 
         
-<!--         <lrftag:input path="mail" label="Mail"/> -->
-<!--         <lrftag:checkbox path="nlSubscriber" label="Newsletters"/> -->
-<!--         <tr title="Le site vous envoie un e-mail de notification, par exemple lorsqu'un utilisateur commente un de vos arguments, ou lorsque vous recevez une gommette. Ces mails peuvent-être groupés en un mail quotidien ou hebdomadaire."> -->
-<%--             <td><form:label path ="mailingDelayType" >Intervalle de reception des email :</form:label></td> --%>
-<!--             <td> -->
-<%--                 <form:radiobutton  path="mailingDelayType" value="IMMEDIATELY"/>Immédiat<br/> --%>
-<%--                 <form:radiobutton  path="mailingDelayType" value="DAILY"/>Quotidien<br/> --%>
-<%--                 <form:radiobutton  path="mailingDelayType" value="WEEKLY"/>Hebdomadaire --%>
-<!--                 </td> -->
-<!--             <td></td> -->
-<!--          </tr> -->
-<%--          <c:choose> --%>
-<%--          <c:when test="${canChangeAccountStatus}"> --%>
-<!-- 	         <tr><td>Statut du compte: -->
-<%-- 	         </td><td><form:select path="accountStatus" > --%>
-<%-- 	         	<form:options items="${statusList}" /> --%>
-<%-- 	         </form:select></td><td></td> --%>
-<!-- 	         </tr> -->
-<%--          </c:when> --%>
-<%--          <c:otherwise><!-- because accountstatus cannot be null due to sql constraint --> --%>
-<%--           <input type="hidden" name="accountStatus" value="${user.accountStatus}"/> --%>
-<%--          </c:otherwise> --%>
-<%--          </c:choose> --%>
+        <lrftag:input path="mail" label="Mail"/>
+        <lrftag:checkbox path="nlSubscriber" label="Newsletters"/>
+        <tr title="Le site vous envoie un e-mail de notification, par exemple lorsqu'un utilisateur commente un de vos arguments, ou lorsque vous recevez une gommette. Ces mails peuvent-être groupés en un mail quotidien ou hebdomadaire.">
+            <td><form:label path ="mailingDelayType" >Intervalle de reception des email :</form:label></td>
+            <td>
+                <form:radiobutton  path="mailingDelayType" value="IMMEDIATELY"/>Immédiat<br/>
+                <form:radiobutton  path="mailingDelayType" value="DAILY"/>Quotidien<br/>
+                <form:radiobutton  path="mailingDelayType" value="WEEKLY"/>Hebdomadaire
+                </td>
+            <td></td>
+         </tr>
+         <c:choose>
+         <c:when test="${canChangeAccountStatus}">
+	         <tr><td>Statut du compte:
+	         </td><td><form:select path="accountStatus" >
+	         	<form:options items="${statusList}" />
+	         </form:select></td><td></td>
+	         </tr>
+         </c:when>
+         <c:otherwise><!-- because accountstatus cannot be null due to sql constraint -->
+          <input type="hidden" name="accountStatus" value="${user.accountStatus}"/>
+         </c:otherwise>
+         </c:choose>
          
-<!--          <lrf:conditionDisplay privilege="MANAGE_USERS"> -->
-<!-- 	         <tr><td> -->
-<%-- 	         ${certificationDate} --%>
-<%-- 	         <c:choose> --%>
-<%-- 	         <c:when test="${user.certificationDate != null}"> --%>
-<!-- 	     	    <input type="checkbox" name="certified" value="true" checked = "checked" />  -->
-<%-- 	     	    </c:when> --%>
-<%-- 	     	    <c:otherwise> --%>
-<!-- 	     	    <input type="checkbox" name="certified" value="true" />  -->
-<%-- 	     	    </c:otherwise> --%>
-<%-- 	     	</c:choose> --%>
-<!-- 	     	Certifié -->
-<!-- 	     	    </td> -->
-<!-- 	     	    <td></td><td></td> -->
-<!-- 	     	</tr> -->
-<!--         </lrf:conditionDisplay> -->
+
          
          
 		<input type="hidden" name="id" value="${id}"/> <%-- We do not use form:hidden because user.id is sometimes null (fake user)--%>
