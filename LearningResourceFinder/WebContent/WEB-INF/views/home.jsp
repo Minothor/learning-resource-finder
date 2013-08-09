@@ -7,7 +7,7 @@
    <table visible=0>
    <tr><i>Add a line per feature</i></tr>
    	<!-- Add a line per feature--> 
-   	<tr><td>PlayList list</td><td><a href="inconstruction">Our list of PlayLists</a></td><td>JU/NOR</td><td>(In construction)</td></tr> 
+   	<tr><td>PlayList list</td><td><a href="/playlist/user/${user.userName}" > My list of PlayLists</a></td><td>JU/NOR/EM</td><td></td></tr> 
    </table>
 </body>
 </html>
