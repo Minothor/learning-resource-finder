@@ -10,7 +10,7 @@
 		<tr>
 		    <td>Titre</td>
 			<td>Description</td>
-			<td>Autheur</td>
+			<td>Auteur</td>
 		</tr>
 		<c:forEach items="${playlistlist}" var="playlist">
 			<tr>
