@@ -2,28 +2,28 @@
 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>   
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %> 
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lfrtag" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lfr'%>
 <html>
 
 <body>
 <script src="/js/int/birthday_picker.js" type = "text/javascript"></script> 
 
-<ryctab:breadcrumb>
-	<ryctag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
-	<ryctag:breadcrumbelement label="Edition" />
-</ryctab:breadcrumb>
-<ryctag:pageheadertitle title="${user.firstName} ${user.lastName}"/>
+<lrftab:breadcrumb>
+	<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
+	<lfrtag:breadcrumbelement label="Edition" />
+</lrftab:breadcrumb>
+<lrftag:pageheadertitle title="${user.firstName} ${user.lastName}"/>
 
 <div style="float:left; padding-left:30px; width: 810px;">
-    <ryctag:form action="user/editsubmit" modelAttribute="user">
+    <lrftag:form action="user/editsubmit" modelAttribute="user">
     <tr><th></th><th style="width:300px;"></th><th style="width:300px;"></th></tr>
     <c:choose>
     	<c:when test="${canChangeUserName}"><%-- Only an admin can modify name of a certified user --%>
-    		<ryctag:input path="firstName" label="Prénom"/>
-    		<ryctag:input path="lastName" label="Nom" />
-	        <ryctag:input path="title" label="Titre" title="Indiquez en peu de mots la nature de votre fonction en rapport avec l'objet de ce site. Votre titre sera affiché sous votre nom. Exemples de titres: 'Directeur d'une PME.', ou 'Ministre de la Bière', ou 'Président du comité des gilles de Binche', ou 'Ouvrier dans l'industrie sidérurgique'."/>
+    		<lrftag:input path="firstName" label="Prénom"/>
+    		<lrftag:input path="lastName" label="Nom" />
+	        <lrftag:input path="title" label="Titre" title="Indiquez en peu de mots la nature de votre fonction en rapport avec l'objet de ce site. Votre titre sera affiché sous votre nom. Exemples de titres: 'Directeur d'une PME.', ou 'Ministre de la Bière', ou 'Président du comité des gilles de Binche', ou 'Ouvrier dans l'industrie sidérurgique'."/>
     	</c:when>
     	<c:otherwise>
 			<tr>
@@ -39,7 +39,7 @@
      	
     	 
 		
-     	  <ryctag:input path="userName" label="Pseudonyme" required="required"/>
+     	  <lrftag:input path="userName" label="Pseudonyme" required="required"/>
         <tr> <%-- We do not use a date picker here, because for old dates, it's not practical --%>
             <td>Date de naissance</td>
             <td>
@@ -75,58 +75,58 @@
             </td><td>${errorBirthDate}</td>
         </tr>       
         
-        <tr><td><form:label path="gender">Genre</form:label></td>
-           <td><form:radiobutton  path="gender" value="MALE"/>MALE
-           <form:radiobutton   path="gender" value="FEMALE"/>FEMALE</td>
-           <form:errors path="gender"  cssClass="error"/>
-        </tr>
+<%--         <tr><td><form:label path="gender">Genre</form:label></td> --%>
+<%--            <td><form:radiobutton  path="gender" value="MALE"/>MALE --%>
+<%--            <form:radiobutton   path="gender" value="FEMALE"/>FEMALE</td> --%>
+<%--            <form:errors path="gender"  cssClass="error"/> --%>
+<!--         </tr> -->
         
-        <ryctag:input path="mail" label="Mail"/>
-        <ryctag:checkbox path="nlSubscriber" label="Newsletters"/>
-        <tr title="Le site vous envoie un e-mail de notification, par exemple lorsqu'un utilisateur commente un de vos arguments, ou lorsque vous recevez une gommette. Ces mails peuvent-être groupés en un mail quotidien ou hebdomadaire.">
-            <td><form:label path ="mailingDelayType" >Intervalle de reception des email :</form:label></td>
-            <td>
-                <form:radiobutton  path="mailingDelayType" value="IMMEDIATELY"/>Immédiat<br/>
-                <form:radiobutton  path="mailingDelayType" value="DAILY"/>Quotidien<br/>
-                <form:radiobutton  path="mailingDelayType" value="WEEKLY"/>Hebdomadaire
-                </td>
-            <td></td>
-         </tr>
-         <c:choose>
-         <c:when test="${canChangeAccountStatus}">
-	         <tr><td>Statut du compte:
-	         </td><td><form:select path="accountStatus" >
-	         	<form:options items="${statusList}" />
-	         </form:select></td><td></td>
-	         </tr>
-         </c:when>
-         <c:otherwise><!-- because accountstatus cannot be null due to sql constraint -->
-          <input type="hidden" name="accountStatus" value="${user.accountStatus}"/>
-         </c:otherwise>
-         </c:choose>
+<!--         <lrftag:input path="mail" label="Mail"/> -->
+<!--         <lrftag:checkbox path="nlSubscriber" label="Newsletters"/> -->
+<!--         <tr title="Le site vous envoie un e-mail de notification, par exemple lorsqu'un utilisateur commente un de vos arguments, ou lorsque vous recevez une gommette. Ces mails peuvent-être groupés en un mail quotidien ou hebdomadaire."> -->
+<%--             <td><form:label path ="mailingDelayType" >Intervalle de reception des email :</form:label></td> --%>
+<!--             <td> -->
+<%--                 <form:radiobutton  path="mailingDelayType" value="IMMEDIATELY"/>Immédiat<br/> --%>
+<%--                 <form:radiobutton  path="mailingDelayType" value="DAILY"/>Quotidien<br/> --%>
+<%--                 <form:radiobutton  path="mailingDelayType" value="WEEKLY"/>Hebdomadaire --%>
+<!--                 </td> -->
+<!--             <td></td> -->
+<!--          </tr> -->
+<%--          <c:choose> --%>
+<%--          <c:when test="${canChangeAccountStatus}"> --%>
+<!-- 	         <tr><td>Statut du compte: -->
+<%-- 	         </td><td><form:select path="accountStatus" > --%>
+<%-- 	         	<form:options items="${statusList}" /> --%>
+<%-- 	         </form:select></td><td></td> --%>
+<!-- 	         </tr> -->
+<%--          </c:when> --%>
+<%--          <c:otherwise><!-- because accountstatus cannot be null due to sql constraint --> --%>
+<%--           <input type="hidden" name="accountStatus" value="${user.accountStatus}"/> --%>
+<%--          </c:otherwise> --%>
+<%--          </c:choose> --%>
          
-         <ryc:conditionDisplay privilege="MANAGE_USERS">
-	         <tr><td>
-	         ${certificationDate}
-	         <c:choose>
-	         <c:when test="${user.certificationDate != null}">
-	     	    <input type="checkbox" name="certified" value="true" checked = "checked" /> 
-	     	    </c:when>
-	     	    <c:otherwise>
-	     	    <input type="checkbox" name="certified" value="true" /> 
-	     	    </c:otherwise>
-	     	</c:choose>
-	     	Certifié
-	     	    </td>
-	     	    <td></td><td></td>
-	     	</tr>
-        </ryc:conditionDisplay>
+<!--          <lrf:conditionDisplay privilege="MANAGE_USERS"> -->
+<!-- 	         <tr><td> -->
+<%-- 	         ${certificationDate} --%>
+<%-- 	         <c:choose> --%>
+<%-- 	         <c:when test="${user.certificationDate != null}"> --%>
+<!-- 	     	    <input type="checkbox" name="certified" value="true" checked = "checked" />  -->
+<%-- 	     	    </c:when> --%>
+<%-- 	     	    <c:otherwise> --%>
+<!-- 	     	    <input type="checkbox" name="certified" value="true" />  -->
+<%-- 	     	    </c:otherwise> --%>
+<%-- 	     	</c:choose> --%>
+<!-- 	     	Certifié -->
+<!-- 	     	    </td> -->
+<!-- 	     	    <td></td><td></td> -->
+<!-- 	     	</tr> -->
+<!--         </lrf:conditionDisplay> -->
          
          
 		<input type="hidden" name="id" value="${id}"/> <%-- We do not use form:hidden because user.id is sometimes null (fake user)--%>
 		
         <tr><td><input type="submit" value="Sauver" /></td><td> <a href="/user/${user.userName}">Annuler</a></td></tr>
-    </ryctag:form> 
+    </lrftag:form> 
   </div>
 
 </body>
