@@ -209,8 +209,10 @@ public class InitializeDBBatch implements Runnable {
 	}
 	
 	public void insertUrlResource() {
-		UrlResource url1 = new UrlResource("Url1", "http://url1.com", frDupont);
-		UrlResource url2 = new UrlResource("Url2", "http://url2.com", mathGob);
+		Resource r1 = resourceRepository.getResourceByName("Français - Dupont");
+		Resource r2 = resourceRepository.getResourceByName("Goblin-Math");
+		UrlResource url1 = new UrlResource("Url1", "http://url1.com", r1);
+		UrlResource url2 = new UrlResource("Url2", "http://url2.com", r2);
 		this.urlResourceRepository.persist(url1);
 		this.urlResourceRepository.persist(url2);
 		System.out.println("Url Done ");

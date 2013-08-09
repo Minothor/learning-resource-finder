@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="url_resource")
+@Table(name="urlresource")
 public class UrlResource extends BaseEntity
 {
 	@Column(length = 50)
