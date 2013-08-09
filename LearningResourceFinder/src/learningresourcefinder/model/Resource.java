@@ -50,6 +50,9 @@ public class Resource extends BaseEntity implements Searchable
 		return name;
 	}
 	
+	@OneToMany(mappedBy="resource")
+	List<UrlResource> urls = new ArrayList<>();
+	
 	/**************************** Getters & Setters ************************************/
 	
 	
@@ -76,6 +79,10 @@ public class Resource extends BaseEntity implements Searchable
 	public List<ProgramPoint> getProgramPoints() {
 		return programPoints;
 	}
+	
+	public List<UrlResource> getUrlResource() {
+		return this.urls;
+	}
 
     @Override
     public Map<String, String> getCriterias() {
@@ -89,6 +96,4 @@ public class Resource extends BaseEntity implements Searchable
     public String getBoostedCriteriaName() {
         return "name";
     }
-	
-	
 }

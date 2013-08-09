@@ -9,6 +9,7 @@ import learningresourcefinder.model.ProgramPoint;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.School;
 import learningresourcefinder.model.Task;
+import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.model.User.Role;
@@ -19,6 +20,7 @@ import learningresourcefinder.repository.ProgramPointRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.SchoolRepository;
 import learningresourcefinder.repository.TaskRepository;
+import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.util.SecurityUtils;
 
@@ -54,6 +56,9 @@ public class InitializeDBBatch implements Runnable {
 	@Autowired
 	PlayListRepository playListRepository;
 	
+	@Autowired
+	UrlResourceRepository urlResourceRepository;
+	
 	Resource frDupont;
 	Resource mathGob;
 	School school;  // Various methods need the created school
@@ -73,6 +78,7 @@ public class InitializeDBBatch implements Runnable {
 		insertProgramPoints();
 		insertTask();
 		insertPlayList();
+		insertUrlResource();
 		System.out.println("DataBase Initialized !");
 	}
 	
@@ -200,5 +206,13 @@ public class InitializeDBBatch implements Runnable {
 		p.setName("PlayList 1");
 		playListRepository.persist(p);
 		System.out.println("PlayList Done !");
+	}
+	
+	public void insertUrlResource() {
+		UrlResource url1 = new UrlResource("Url1", "http://url1.com", frDupont);
+		UrlResource url2 = new UrlResource("Url2", "http://url2.com", mathGob);
+		this.urlResourceRepository.persist(url1);
+		this.urlResourceRepository.persist(url2);
+		System.out.println("Url Done ");
 	}
 }
