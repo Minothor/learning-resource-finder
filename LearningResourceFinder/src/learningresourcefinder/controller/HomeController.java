@@ -18,7 +18,6 @@ public class HomeController extends BaseController<User>{
     @RequestMapping(value={"/", "/home"})
     private ModelAndView prepareModelAndView() {
         User u = SecurityContext.getUser();
-        System.out.println(u.getUserName());
         return new ModelAndView("home", "user", u);
     }
 }
