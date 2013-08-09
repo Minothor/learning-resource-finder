@@ -51,6 +51,4 @@ public class UrlResource extends BaseEntity
 	public void setResource(Resource resource) {
 		this.resource = resource;
 	}
-	
-	
 }

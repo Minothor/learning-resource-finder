@@ -91,7 +91,7 @@ public class Resource extends BaseEntity implements Searchable
         criterias.put("description",StringUtils.defaultIfEmpty(description,""));
         return criterias;
     }
-
+    
     @Override
     public String getBoostedCriteriaName() {
         return "name";
