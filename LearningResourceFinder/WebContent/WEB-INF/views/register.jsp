@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form" %>   
-<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="ryctag" %>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
 </head>
 <body>
-   <ryctag:pageheadertitle title="Inscription"/>
+   <lrftag:pageheadertitle title="Inscription"/>
     
    <p>Créer un nouvel utilisateur vous permettra de faire certaines actions telles que voter ou argumenter.
    Vous devez choisir un pseudonyme et un mot de passe qui vous permettront de vous reconnecter dans le futur.</p>  
    
     <!-- you can set variables starting with "p_" in the file named website_content.properties -->
     
-   <ryctag:form action="/registersubmit" modelAttribute="user">
-    	<ryctag:input path="userName" label="pseudo"/>
-    	<ryctag:password path="password" label="mot de passe"/>
+   <lrftag:form action="/registersubmit" modelAttribute="user">
+    	<lrftag:input path="userName" label="pseudo"/>
+    	<lrftag:password path="password" label="mot de passe"/>
      	<tr> 
  	    	<td><label for="mail">e-mail</label><br/>
  	    	    <span style="font-size:70%">Votre adress e-mail vous permettra de vous faire renvoyer votre mot de passe en case d'oubli.<br/>
@@ -29,7 +29,7 @@
     	    <input type="submit" value="m'inscrire" />
      	  </td> 
      	</tr> 
-    </ryctag:form>
+    </lrftag:form>
     
     
     <!-- 
