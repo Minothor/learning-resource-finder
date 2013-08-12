@@ -150,8 +150,8 @@ public class InitializeDBBatch implements Runnable {
 	
 	public void insertResource() {
 		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont");
-		mathGob = new Resource("Goblin-Math", "Jeu de mathématiques avec des goblins.");
-        frOrtho1 = new Resource("Français - Dupont", "cours d orthographe débutant écrit par Charlotte Dupont");
+		mathGob = new Resource("Goblin-Maths", "Jeu de mathématiques avec des goblins.");
+        frOrtho1 = new Resource("Français - Dupond", "cours d orthographe débutant écrit par Charlotte Dupont");
         mathFraction1 = new Resource("Goblin-Fractionnés", "Jeu de mathématiques avec des découpes de goblins.");
 		//frDupont.setUser(userRepository.getUserByUserName("deli"));
 		//mathGob.setUser(userRepository.getUserByUserName("deli"));
