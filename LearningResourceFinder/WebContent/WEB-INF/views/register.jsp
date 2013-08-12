@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form" %>   
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <head>
 </head>
 <body>
@@ -12,7 +13,7 @@
    
     <!-- you can set variables starting with "p_" in the file named website_content.properties -->
     
-   <lrftag:form action="/registersubmit" modelAttribute="user">
+   <lrftag:form modelAttribute="user" action="/registersubmit" brol="POST">
     	<lrftag:input path="userName" label="pseudo"/>
     	<lrftag:password path="password" label="mot de passe"/>
      	<tr> 
