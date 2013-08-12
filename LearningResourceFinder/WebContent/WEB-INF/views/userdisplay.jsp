@@ -28,7 +28,7 @@
 
 <lrftag:pageheadertitle title="${user.fullName}"/>
 <div class="user-options" style="font-size:12px">
-            <lrf:conditionDisplay privilege="MANAGE_USERS">
+             <lrf:conditionDisplay privilege="MANAGE_USERS">
 				 <a href="user/privilegeedit?id=${user.id}">Privilèges</a>&nbsp-&nbsp
 				 <a href="user/usertypeedit?id=${user.id}">Editer le type d'un user</a>	
 				 <c:if test="${not(current.user  eq user)}">
@@ -111,8 +111,8 @@
 <div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Signalétique</a></li>
-			<li><a href="#tabs-2">Gommettes</a></li>
-			<li><a href="#tabs-3">Rédaction</a></li>
+<!-- 			<li><a href="#tabs-2">Gommettes</a></li> -->
+<!-- 			<li><a href="#tabs-3">Rédaction</a></li> -->
 			
 		</ul>
 		
@@ -144,20 +144,20 @@
 					</c:if>
 					<br/>
 					
-					<a href ="/socialaccountmanage?id=${user.id}">Gerer mes comptes associés</a><br/>	
+<%-- 					<a href ="/socialaccountmanage?id=${user.id}">Gerer mes comptes associés</a><br/>	 --%>
 						
-					Groupes:
+<!-- 					Groupes: -->
 <%-- 					<c:forEach items="${user.groupRegs }" var="groupReg"  >
   						<a href="group?id=${groupReg.group.id}">${groupReg.group.name}</a>
 						<%--   <c:if test="${lastGroupReg !eq groupReg}">,</c:if>    --%><%-- no "," after the last one
  						<c:if test="${user.groupRegs.lastIndexOf(groupReg) < (user.groupRegs.size()-1)}">,</c:if>    no "," after the last one
 					</c:forEach>
 					--%>
-					&nbsp;&nbsp;&nbsp;
-					<c:if test="${canEdit}">
-						<a href="manageGroup?id=${user.id}">modifier les groupes</a>
-					</c:if>
-					<br />		
+<!-- 					&nbsp;&nbsp;&nbsp; -->
+<%-- 					<c:if test="${canEdit}"> --%>
+<%-- 						<a href="manageGroup?id=${user.id}">modifier les groupes</a> --%>
+<%-- 					</c:if> --%>
+<!-- 					<br />		 -->
 				</c:if>
 			</div>
 		</div>
@@ -166,14 +166,14 @@
 
 
 		<div id="tabs-3">		<!--  **************************Rédaction********************* -->
-		    <h2>Arguments rédigés</h2>
-			<c:forEach items="${arguments}" var="argument">
-				<div>
-				  <h4><a href="/action/${argument.action.url}">${argument.title}</a> / ${argument.voteCountAgainst}</h4>
-				  ${argument.content}
-				  <lrf:datedisplay date="${argument.updatedOrCreatedOn}" duration="true" />
-				</div>
-			</c:forEach>
+<!-- 		    <h2>Arguments rédigés</h2> -->
+<%-- 			<c:forEach items="${arguments}" var="argument"> --%>
+<!-- 				<div> -->
+<%-- 				  <h4><a href="/action/${argument.action.url}">${argument.title}</a> / ${argument.voteCountAgainst}</h4> --%>
+<%-- 				  ${argument.content} --%>
+<%-- 				  <lrf:datedisplay date="${argument.updatedOrCreatedOn}" duration="true" /> --%>
+<!-- 				</div> -->
+<%-- 			</c:forEach> --%>
 		</div>
 									
 </div>
