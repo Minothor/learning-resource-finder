@@ -35,7 +35,7 @@ public class UrlResourceController extends BaseController<UrlResource> {
 	public ModelAndView addResource(){
 		
 		UrlResource urlResource = new UrlResource();
-		urlResource.
+		urlResource.getUrl();
 		
 		Resource resource = urlResource.getResource();
 		
