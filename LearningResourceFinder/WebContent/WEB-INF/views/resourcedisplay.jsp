@@ -20,5 +20,17 @@
 			<a href="<c:url value='removeurlresource?id=${url.id}'/>">${url.name}</a>
 		</c:forEach>		
 	</div>
+	<br />
+	<div>
+		<a href="#" data-width="500" data-rel="popup_addURL" class="poplight">Voir la pop-up - Width = 500px</a>
+		<div id="popup_addURL" class="popup_addURL">
+		    <h2>Ajouter une URL</h2>
+		    <form:form modelAttribute="" action="" method="">
+			    <label for="name">Name :</label> <form:input path="name" id="name"> <form:errors path="name" /><br /> 
+			    <label for="url">Url :</label>   <form:input path="url" id="url"> <form:errors path="url" /><br />  
+			    <input type="submit" value="Add" />
+			</form:form>  
+		</div>
+	</div>
 </body>
 </html>
