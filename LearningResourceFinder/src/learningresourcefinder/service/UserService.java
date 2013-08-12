@@ -161,12 +161,12 @@ public class UserService {
     }*/
 
     /** Change the name of the user and note it in the log */
-   /* public void changeUserName(User user, String newUserName, String newFirstName, String newLastName) {
+   public void changeUserName(User user, String newUserName, String newFirstName, String newLastName) {
         user.setFirstName(newFirstName);
         user.setLastName(newLastName);
         user.setUserName(newUserName);
         userRepository.merge(user);
-    }*/
+    }
 
   /*  public void addOrUpdateUserImage(User user, BufferedImage image){
         try {

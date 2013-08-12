@@ -189,7 +189,7 @@ public class UserEditController extends BaseController<User> {
         // We start modifiying user (that may then be automatically saved by hibernate due to dirty checking.
         if ((SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS) || certified == null || certified ==  false ) &&
         	( !ObjectUtils.equals(newFirstName, user.getFirstName()) || !ObjectUtils.equals(newLastName, user.getLastName()) || !ObjectUtils.equals(newUserName, user.getUserName()))){
-           //userService.changeUserName(user, newUserName, newFirstName, newLastName); 
+           userService.changeUserName(user, newUserName, newFirstName, newLastName); 
         }
         
         // MailDelayType
