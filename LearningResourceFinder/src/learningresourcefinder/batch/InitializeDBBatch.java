@@ -61,6 +61,9 @@ public class InitializeDBBatch implements Runnable {
 	
 	Resource frDupont;
 	Resource mathGob;
+    Resource frOrtho1;
+    Resource mathFraction1;	
+
 	School school;  // Various methods need the created school
 	
 	public static void main(String[] args) {
@@ -148,10 +151,14 @@ public class InitializeDBBatch implements Runnable {
 	public void insertResource() {
 		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont");
 		mathGob = new Resource("Goblin-Math", "Jeu de mathématiques avec des goblins.");
+        frOrtho1 = new Resource("Français - Dupont", "cours d orthographe débutant écrit par Charlotte Dupont");
+        mathFraction1 = new Resource("Goblin-Fractionnés", "Jeu de mathématiques avec des découpes de goblins.");
 		//frDupont.setUser(userRepository.getUserByUserName("deli"));
 		//mathGob.setUser(userRepository.getUserByUserName("deli"));
 		resourceRepository.persist(frDupont);
 		resourceRepository.persist(mathGob);
+		resourceRepository.persist(frOrtho1);
+        resourceRepository.persist(mathFraction1);
 		System.out.println("Resource Done !");
 	}
 	
@@ -204,7 +211,11 @@ public class InitializeDBBatch implements Runnable {
 	public void insertPlayList() {
 	    PlayList p = new PlayList();
 		p.setName("PlayList 1");
-		playListRepository.persist(p);
+		p.getResourceList().add(frDupont);
+        p.getResourceList().add(mathGob);
+        p.getResourceList().add(frOrtho1);
+        p.getResourceList().add(mathFraction1);
+        playListRepository.persist(p);
 		System.out.println("PlayList Done !");
 	}
 	
