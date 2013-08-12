@@ -13,7 +13,7 @@
    
     <!-- you can set variables starting with "p_" in the file named website_content.properties -->
     
-   <lrftag:form modelAttribute="user" action="/registersubmit" brol="POST">
+   <lrftag:form modelAttribute="user" action="/registersubmit"  method="POST">
     	<lrftag:input path="userName" label="pseudo"/>
     	<lrftag:password path="password" label="mot de passe"/>
      	<tr> 
