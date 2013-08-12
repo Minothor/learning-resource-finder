@@ -7,9 +7,9 @@ jQuery(function($){
 		var popWidth = $(this).data('width'); //Trouver la largeur
 
 		//Faire apparaitre la pop-up et ajouter le bouton de fermeture
-		$('#' + popID).fadeIn().css({ 'width': popWidth}).prepend('<a href="#" class="close"><img src="close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>');
+		$('#' + popID).fadeIn().css({ 'width': popWidth}).prepend('<a href="#" class="close"><img src="/images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>');
 		
-		//Récupération du margin, qui permettra de centrer la fenêtre - on ajuste de 80px en conformité avec le CSS
+		//Rï¿½cupï¿½ration du margin, qui permettra de centrer la fenï¿½tre - on ajuste de 80px en conformitï¿½ avec le CSS
 		var popMargTop = ($('#' + popID).height() + 80) / 2;
 		var popMargLeft = ($('#' + popID).width() + 80) / 2;
 		

@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,12 +22,12 @@
 	</div>
 	<br />
 	<div>
-		<a href="#" data-width="500" data-rel="popup_addURL" class="poplight">Voir la pop-up - Width = 500px</a>
+		<a href="#" data-width="500" data-rel="popup_addURL" class="poplight">Ajouter une URL</a>
 		<div id="popup_addURL" class="popup_addURL">
-		    <h2>Ajouter une URL</h2>
-		    <form:form modelAttribute="" action="" method="">
-			    <label for="name">Name :</label> <form:input path="name" id="name"> <form:errors path="name" /><br /> 
-			    <label for="url">Url :</label>   <form:input path="url" id="url"> <form:errors path="url" /><br />  
+		    <h2>Ajouter une URL</h2>	
+		    <form:form method="post" action='<%=response.encodeUrl("addurl")%>'>	
+			    <label for="name">Name :</label> <form:input path="name" id="name" /> <br /> 
+			    <label for="url">Url :  </label> <form:input path="url" id="url" />  <br />  
 			    <input type="submit" value="Add" />
 			</form:form>  
 		</div>
