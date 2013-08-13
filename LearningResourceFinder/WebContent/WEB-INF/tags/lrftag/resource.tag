@@ -3,15 +3,10 @@
 <%@ attribute name="resource" type="learningresourcefinder.model.Resource"%>
 
 
-<div style = "position:relative; left:50px; 
+<div style = "left:50px; 
 background-color: #D3D3D3;
-position: relative;
-padding: 10px;
-margin-top: 10px;
 width: 200px;
 height: 200px;
-float: left;
-margin-left: 10px;
  ">
 <a href="/resource?id=${resource.id}">
 	${resource.name}<br />
