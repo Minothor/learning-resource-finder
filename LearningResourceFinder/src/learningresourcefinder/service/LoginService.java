@@ -91,6 +91,7 @@ public class LoginService {
         // Password
         if(md5Password != null && localId == null) {
         	universalPasswordUsed = assertPasswordValid(user, md5Password);
+        	// If we reach this point (no exception), the password is ok.
         }
         
         checkAccountStatus(user, localId != null);
@@ -98,7 +99,7 @@ public class LoginService {
         //////////// Ok, we do the login.
 
         if (ContextUtil.isInBatchNonWebMode()) {
-            throw new IllegalStateException("Trying to login in batch mode?");
+            throw new IllegalStateException("Bug: Trying to login in batch mode?");
         } else { // normal web case
             ContextUtil.getHttpSession().setAttribute(USERID_KEY, user.getId());
             if (accountConnectedType != null) {

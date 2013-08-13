@@ -15,7 +15,7 @@
     
    <lrftag:form modelAttribute="user" action="/registersubmit"  method="POST">
     	<lrftag:input path="userName" label="pseudo"/>
-    	<lrftag:password path="password" label="mot de passe"/>
+    	<lrftag:password path="password" label="mot de passe"/>    	
      	<tr> 
  	    	<td><label for="mail">e-mail</label><br/>
  	    	    <span style="font-size:70%">Votre adress e-mail vous permettra de vous faire renvoyer votre mot de passe en case d'oubli.<br/>

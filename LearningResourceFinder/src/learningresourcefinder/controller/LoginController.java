@@ -73,7 +73,7 @@ public class LoginController extends BaseController<User> {
         User user = null;
         try {
             Boolean autologin = loginService.readAutoLogin(request);          
-            user = loginService.login(userNameOrMail, password, autologin,null,AccountConnectedType.LOCAL);
+            user = loginService.login(userNameOrMail, password, autologin, null, AccountConnectedType.LOCAL);
             NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "+UrlUtil.getWebSiteName());
 
         } catch (UserNotFoundException e) {
