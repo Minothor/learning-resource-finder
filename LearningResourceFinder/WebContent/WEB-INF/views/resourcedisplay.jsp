@@ -4,6 +4,24 @@
 <html>
 <head>
 <title>Insert title here</title>
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+    function crunchifyAjax() {
+        $.ajax({
+            url : 'ajaxtest',
+            success : function(data) {
+                $('#result').html(data);
+            }
+        });
+        alert("ajax");
+    }
+</script>
+ 
+<script type="text/javascript">
+    //var intervalId = 0;
+    //intervalId = setInterval(crunchifyAjax, 3000);
+</script>
 </head>
 <body>
 	<div>
@@ -25,12 +43,17 @@
 		<a href="#" data-width="500" data-rel="popup_addURL" class="poplight">Ajouter une URL</a>
 		<div id="popup_addURL" class="popup_addURL">
 		    <h2>Ajouter une URL</h2>	
-		    <form:form method="post" action='<%=response.encodeUrl("addurl")%>'>	
-			    <label for="name">Name :</label> <form:input path="name" id="name" /> <br /> 
-			    <label for="url">Url :  </label> <form:input path="url" id="url" />  <br />  
-			    <input type="submit" value="Add" />
+		    <form:form method="post" action=#>	
+			    <label for="name">Name :</label> <input type="text" id="name" name="name" /> <br /> 
+			    <label for="url">Url :  </label> <input type="text" name="url" id="url" />  <br />  
+			    <input type="submit" value="Add" onclick="crunchifyAjax()" />
 			</form:form>  
 		</div>
 	</div>
+	<div align="center">
+        <br> <br> ${message} <br> <br>
+        <div id="result"></div>
+        <br>
+    </div>
 </body>
 </html>
