@@ -2,6 +2,7 @@ package learningresourcefinder.controller;
 
 import javax.validation.Valid;
 
+
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.repository.PlayListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	@RequestMapping("/editsubmit")
 	public ModelAndView playListEditSubmit(@Valid @ModelAttribute PlayList playlist, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
-
-			return new ModelAndView("playlistedit","playlist",playlist);
+            System.out.println("eeror : "+playlist);
+	     	return new ModelAndView("playlistedit","playlist",playlist);
 		}
 		if(playlist.getId()==null){
 			playlistRepository.persist(playlist);
