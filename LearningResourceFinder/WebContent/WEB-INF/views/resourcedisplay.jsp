@@ -47,7 +47,7 @@
 		<c:forEach items="${resource.urlResource}" var="url">
 			<tr>
 				<td>${url.name}</td>
-				<td>${url.url}</td>
+				<td><a href="${url.url}">${url.url}</a></td>
 				<td><a href="<c:url value='removeurlresource?id=${url.id}'/>">Supprimer</a></td>
 			</tr>	
 		</c:forEach>
