@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 
@@ -12,7 +11,7 @@
 </head>
 <body>
 	<h1>Edit PlayList</h1>
-	<form:form modelAttribute="playlist" method="post" action='<%=response.encodeUrl("/playlist/editsubmit")%>'>
+	<form:form modelAttribute="playlist" method="post" action='<%=response.encodeURL("/playlist/editsubmit")%>'>
 		<form:hidden path="id" />
 		<label>Description</label> <form:input path="description" />  <form:errors path="description"/><br>
 	    <label>Name</label>        <form:input path="name" />         <form:errors path="name"/><br>

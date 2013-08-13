@@ -1,5 +1,6 @@
-<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
-<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="restag" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="restag"%>
 <html>
 <head>
 <title>PlayList</title>
@@ -10,12 +11,23 @@
 		<li>Nom: ${playlist.name}</li>
 		<li>Description : ${playlist.description}</li>
 		<li>Auteur : ${playlist.createdBy.fullName}</li>
+		<li><a href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a></li>
+		<li><a href=<%=response.encodeURL("/ressourcelist")%>>Vers l'arborescence des ressources</a></li>
+		
 	</ul>
-	
-    <h2>Ressources incluses</h2>
-	
+
+	<h2>Ressources incluses</h2>
+
 	<c:forEach items="${playlist.resourceList}" var="resource">
+		<div
+			style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px; ">
 			<restag:resource resource="${resource}"></restag:resource>
+
+			<div style="padding: 10px; width: 180px; height: 10px; background-color: #F6CEF5 ">
+				<a href=<c:url value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>>Remove</a>
+			</div>
+		</div>
+
 	</c:forEach>
 
 
