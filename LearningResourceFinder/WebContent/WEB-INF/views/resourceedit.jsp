@@ -20,7 +20,7 @@
 </head>
 <body>
 	<h1>Resource Edit :</h1> 
-	<form:form method="post" action='<%=response.encodeUrl("resourceeditsubmit")%>'>
+	<form:form modelAttribute="resource" method="post" action='<%=response.encodeUrl("resourceeditsubmit")%>'>
 		<label for="name">Name :</label>               <form:input path="name" id="name" /> <form:errors path="name" /><br />
 		<label for="description">Description :</label> <form:textarea path="description" id="description" /> <form:errors path="description" /><br />
 		<label for="createdBy">Author :</label>        <form:input path="createdBy" id="createdBy" disabled="true" /><br />
@@ -29,6 +29,6 @@
 	</form:form>
 	
 	<br />
-	<a href="resource?id=">home page</a>
+	<a href="ressourcelist">home page</a>
 </body>
 </html>

@@ -21,5 +21,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<br />
+	<a href="resourcecreate">Créer une ressource</a>
 </body>
 </html>

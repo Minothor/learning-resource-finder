@@ -32,5 +32,7 @@
 			</form:form>  
 		</div>
 	</div>
+	<br />
+	<a href="ressourcelist">home page</a>
 </body>
 </html>

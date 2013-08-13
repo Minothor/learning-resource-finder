@@ -16,14 +16,7 @@ public class RessourceListController extends BaseController<Resource>{
 
 	@RequestMapping("/ressourcelist")
 	public ModelAndView showResourceList () {
-
-		//ModelAndView mv = new ModelAndView("/resourcelist");
-
 		List<Resource> list=resourcerepository.findAllRessourceOrderByTitle();
-		//mv.addObject("resourceList", list);
-		//mv.addObject("toto", "hello");
-
-		//return mv;
 		return new ModelAndView("resourcelist", "resourceList", list);
 	}
 }
