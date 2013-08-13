@@ -5,4 +5,4 @@
 <span class="breadcrumb">
 	<jsp:doBody/>
 </span>
-<ryctag:separator/>
+<lrftag:separator/>
