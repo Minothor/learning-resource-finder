@@ -9,7 +9,6 @@ import learningresourcefinder.model.User;
 public class Cookies {
 
     
-	public static final String SSO_HASH_SALT = "jbbssosec021";
 	public final static String PASSCOOKIE_KEY = "pmark";
 	public final static String LOGINCOOKIE_KEY = "login";
 
