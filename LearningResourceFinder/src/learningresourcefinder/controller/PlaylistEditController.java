@@ -2,8 +2,8 @@ package learningresourcefinder.controller;
 
 import javax.validation.Valid;
 
-
 import learningresourcefinder.model.PlayList;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.PlayListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -40,8 +40,8 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	@RequestMapping("/editsubmit")
 	public ModelAndView playListEditSubmit(@Valid @ModelAttribute PlayList playlist, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
-            System.out.println("eeror : "+playlist);
-	     	return new ModelAndView("playlistedit","playlist",playlist);
+
+			return new ModelAndView("playlistedit","playlist",playlist);
 		}
 		if(playlist.getId()==null){
 			playlistRepository.persist(playlist);
@@ -53,5 +53,41 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		return new ModelAndView("redirect:/playlist?id="+playlist.getId());
 		
 	}
+	
+	@RequestMapping("/remove")
+    public ModelAndView playListRemoveResource(@RequestParam("idplaylist")long idPlayList,@RequestParam("idresource")long idResource) {
+        PlayList playlist = (PlayList) getRequiredEntity(idPlayList,PlayList.class);
+        Resource resource = (Resource) getRequiredEntity(idResource,Resource.class);
+        
+        if (playlist!= null && resource!=null){
+            playlist.getResourceList().remove(resource);
+            playlistRepository.persist(playlist);
+        }
+        return new ModelAndView("redirect:/playlist?id="+playlist.getId());
+    }
+	
+	@RequestMapping("/add")
+    public ModelAndView playListAddResource(@RequestParam("idplaylist")long idPlayList,@RequestParam("idresource")long idResource) {
+        PlayList playlist = (PlayList) getRequiredEntity(idPlayList,PlayList.class);
+        Resource resource = (Resource) getRequiredEntity(idResource,Resource.class);
+        
+        if (playlist!= null && resource!=null){
+            playlist.getResourceList().add(resource);
+            playlistRepository.persist(playlist);
+        }
+        return new ModelAndView("redirect:/playlist?id="+playlist.getId());
+    }
+	
+    @ModelAttribute
+    public PlayList findPlayList(@RequestParam(value="id",required=false)Long id){
+        if(id==null){
+            //create
+            return new PlayList(); 
+        }else {
+
+            return (PlayList)getRequiredDetachedEntity(id);
+
+        }
+    }
 
 }
