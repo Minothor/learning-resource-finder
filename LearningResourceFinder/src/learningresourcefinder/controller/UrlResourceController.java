@@ -8,6 +8,7 @@ import learningresourcefinder.model.UrlResource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,15 +31,20 @@ public class UrlResourceController extends BaseController<UrlResource> {
 		 return new ModelAndView ("redirect:/resource?id="+resource.getId());
 	}
 	
+		
 	@RequestMapping("/addurl")
-	
-	public ModelAndView addResource(){
-		
-		UrlResource urlResource = new UrlResource();
-		//urlResource.getUrl();
-		
-		Resource resource = urlResource.getResource();
-		
+	public ModelAndView urlSubmit (UrlResource urlresource, BindingResult bindingResult) {
+
+		Resource resource= urlresource.getResource(); 
+
+		if (bindingResult.hasErrors() ){
+
+			return new ModelAndView("redirect:/resoure?id"+resource.getId()); 
+		}
+		em.persist(urlresource); 
+
 		return new ModelAndView("redirect:/resource?id="+resource.getId());
+		
 	}
+	
 }
