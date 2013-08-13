@@ -1,23 +1,23 @@
 package learningresourcefinder.controller;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
+import learningresourcefinder.repository.ResourceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UrlResourceController extends BaseController<UrlResource> {
 	
+	@Autowired ResourceRepository resourceRepository;
 	
-	@PersistenceContext 
-	EntityManager em; 
 	@RequestMapping("/removeurlresource")
 	public ModelAndView removeResource(@RequestParam("id") long id) {
 		UrlResource urlResource = getRequiredEntity(id); 
@@ -26,25 +26,27 @@ public class UrlResourceController extends BaseController<UrlResource> {
 		resource.getUrlResource().remove(id);
 		em.remove(urlResource); 
 		
-		
-		
-		 return new ModelAndView ("redirect:/resource?id="+resource.getId());
+		return new ModelAndView ("redirect:/resource?id="+resource.getId());
 	}
 	
+	
+	@RequestMapping(value="/ajax/addurl",method=RequestMethod.POST)
+	public @ResponseBody String urlSubmit(@ModelAttribute UrlResource urlResource, @RequestParam("idresource") long id, @RequestParam("name") String name, @RequestParam("url") String url, BindingResult result) 
+	{
+		String returnText;
 		
-	@RequestMapping("/addurl")
-	public ModelAndView urlSubmit (UrlResource urlresource, BindingResult bindingResult) {
-
-		Resource resource= urlresource.getResource(); 
-
-		if (bindingResult.hasErrors() ){
-
-			return new ModelAndView("redirect:/resoure?id"+resource.getId()); 
+		if(!result.hasErrors()) {
+			Resource resource = resourceRepository.find(id);
+			UrlResource urlresource = new UrlResource();
+			urlresource.setName(name);
+			urlresource.setUrl(url);
+			urlresource.setResource(resource);
+			em.persist(urlresource);
+		    returnText = "La ressource à bien été enregistée !";
 		}
-		em.persist(urlresource); 
-
-		return new ModelAndView("redirect:/resource?id="+resource.getId());
-		
+		else {
+		    returnText = "Désolé mais une erreur est survenue...";
+		}
+		    return returnText;
 	}
-	
 }

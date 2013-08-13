@@ -32,7 +32,7 @@ jQuery(function($){
 		$('#fade , .popup_addURL').fadeOut(function() {
 			$('#fade, a.close').remove();  
 	}); //...ils disparaissent ensemble
-		
+		location.reload();
 		return false;
 	});
 

@@ -44,7 +44,7 @@ img.btn_close {
 *html .popup_block {
 	position: absolute;
 }
-label.formAddUrl {
+.formUrlResource label {
     display: block;
     width: 150px;
     float: left;

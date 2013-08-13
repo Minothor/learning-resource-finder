@@ -10,11 +10,11 @@ import javax.validation.constraints.Size;
 @Table(name="urlresource")
 public class UrlResource extends BaseEntity
 {
-	@Column(length = 50)
+	@Column(length = 50, nullable=false)
 	@Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
 	private String name;
 	
-	@Column
+	@Column(nullable=false)
 	private String url;
 	
 	@ManyToOne
