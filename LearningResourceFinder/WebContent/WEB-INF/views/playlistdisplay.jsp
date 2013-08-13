@@ -12,7 +12,7 @@
 		<li>Description : ${playlist.description}</li>
 		<li>Auteur : ${playlist.createdBy.fullName}</li>
 		<li><a href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a></li>
-		<li><a href=<%=response.encodeURL("/ressourcelist")%>>Vers l'arborescence des ressources</a></li>
+		<li><a href=<c:url value='/ressourcelist'/>>Vers l'arborescence des ressources</a></li>
 		
 	</ul>
 

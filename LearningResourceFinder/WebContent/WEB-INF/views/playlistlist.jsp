@@ -11,7 +11,7 @@
 		    <td>Titre</td>
 			<td>Description</td>
 			<td>Auteur</td>
-			<td><a href=<%=response.encodeURL("/playlist/create")%>>Ajouter PlayList</a></td>
+			<td><a href="<c:url value='/playlist/create'/>">Ajouter PlayList</a></td>
 		</tr>
 		<c:forEach items="${playlistlist}" var="playlist">
 			<tr>
