@@ -3,25 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Insert title here</title>
-<script type="text/javascript"
-    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript">
-    function crunchifyAjax() {
-        $.ajax({
-            url : 'ajaxtest',
-            success : function(data) {
-                $('#result').html(data);
-            }
-        });
-        alert("ajax");
-    }
-</script>
- 
-<script type="text/javascript">
-    //var intervalId = 0;
-    //intervalId = setInterval(crunchifyAjax, 3000);
-</script>
+	<title>Insert title here</title>
 </head>
 <body>
 	<div>
@@ -43,17 +25,12 @@
 		<a href="#" data-width="500" data-rel="popup_addURL" class="poplight">Ajouter une URL</a>
 		<div id="popup_addURL" class="popup_addURL">
 		    <h2>Ajouter une URL</h2>	
-		    <form:form method="post" action=#>	
+		    <form:form method="post" action="addurl">	
 			    <label for="name">Name :</label> <input type="text" id="name" name="name" /> <br /> 
 			    <label for="url">Url :  </label> <input type="text" name="url" id="url" />  <br />  
-			    <input type="submit" value="Add" onclick="crunchifyAjax()" />
+			    <input type="submit" value="Add" />
 			</form:form>  
 		</div>
 	</div>
-	<div align="center">
-        <br> <br> ${message} <br> <br>
-        <div id="result"></div>
-        <br>
-    </div>
 </body>
 </html>
