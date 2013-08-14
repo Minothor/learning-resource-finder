@@ -61,7 +61,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
         
         if (playlist!= null && resource!=null){
             playlist.getResourceList().remove(resource);
-            playlistRepository.persist(playlist);
+            playlistRepository.merge(playlist);
         }
         return new ModelAndView("redirect:/playlist?id="+playlist.getId());
     }
@@ -73,7 +73,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
         
         if (playlist!= null && resource!=null){
             playlist.getResourceList().add(resource);
-            playlistRepository.persist(playlist);
+            playlistRepository.merge(playlist);
         }
         return new ModelAndView("redirect:/playlist?id="+playlist.getId());
     }
