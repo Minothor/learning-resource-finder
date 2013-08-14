@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PlayListDisplayController extends BaseController<PlayList> {
 
 	@RequestMapping("/playlist")
-	private ModelAndView prepareModelAndView(@RequestParam("id") long id) {
+	public ModelAndView prepareModelAndView(@RequestParam("id") long id) {
 		PlayList playlist = getRequiredEntity(id);
 		return new ModelAndView("playlistdisplay", "playlist", playlist);
 	}

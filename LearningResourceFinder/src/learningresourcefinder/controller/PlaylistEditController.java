@@ -5,13 +5,15 @@ import javax.validation.Valid;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.PlayListRepository;
+import learningresourcefinder.security.SecurityContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -22,13 +24,13 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	 private ModelAndView prepareModelAndView(PlayList playlist ) {
 	        ModelAndView mv = new ModelAndView("playlistedit");
 	        mv.addObject("id", playlist.getId());
-	        mv.addObject("playlist",playlist ); 
+	        mv.addObject("playlist", playlist); 
 	        return mv; 
 	    }
 	
 	@RequestMapping("/create")
 	public ModelAndView playListCreate() {
-		 return prepareModelAndView(new PlayList());
+		 return prepareModelAndView(new PlayList());     
 	}
 	
 	@RequestMapping("/edit")
@@ -38,21 +40,36 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		
 	}
 	@RequestMapping("/editsubmit")
-	public ModelAndView playListEditSubmit(@Valid @ModelAttribute PlayList playlist, BindingResult bindingResult){
+	public ModelAndView playListEditSubmit(@Valid @ModelAttribute PlayList playList, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
 
-			return new ModelAndView("playlistedit","playlist",playlist);
+			return new ModelAndView("playlistedit","playlist",playList);
 		}
-		if(playlist.getId()==null){
-			playlistRepository.persist(playlist);
-		}
-		else {playlistRepository.merge(playlist);
-
-
-		}
-		return new ModelAndView("redirect:/playlist?id="+playlist.getId());
 		
+		PlayList playListHavingTheSameName = playlistRepository.findByNameAndAuthor(playList.getName(), SecurityContext.getUser());
+		
+		if(playList.getId()==null) {  // Create
+			if(playListHavingTheSameName != null ) {
+				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
+			} 
+			playlistRepository.persist(playList);
+			
+		} else {  // Edit existing playlist
+			if (playListHavingTheSameName != null && !playList.equals(playListHavingTheSameName)) {
+				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
+			}
+			playlistRepository.merge(playList);
+		}
+		
+		return new ModelAndView("redirect:/playlist?id="+playList.getId());
 	}
+	
+	private ModelAndView otherPlayListError(PlayList playList, PlayList otherPlayList, BindingResult bindingResult) {
+		ModelAndView mv = new ModelAndView ("playlistedit", "playlist", playList);
+		bindingResult.rejectValue("name", "sss", "Une de vos playList a déjà ce titre. Merci d'en choisir un différent.");
+		return mv;
+	}
+
 	
 	@RequestMapping("/remove")
     public ModelAndView playListRemoveResource(@RequestParam("idplaylist")long idPlayList,@RequestParam("idresource")long idResource) {

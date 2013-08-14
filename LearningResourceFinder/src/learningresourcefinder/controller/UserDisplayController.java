@@ -1,31 +1,20 @@
 package learningresourcefinder.controller;
 
 
-import java.util.List;
-import java.util.Random;
-
-import javax.servlet.http.HttpServletResponse;
-
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.User;
-import learningresourcefinder.model.User.AccountConnectedType;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sun.mail.iap.Argument;
 
 
 @Controller

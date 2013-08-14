@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Transactional
 public class BaseController<E extends BaseEntity> {
-    Class<?> entityClass;   // TODO John 2013-06-20 -- no need? remove?
+    Class<?> entityClass;  
     
     @PersistenceContext
     EntityManager em;
