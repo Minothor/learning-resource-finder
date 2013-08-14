@@ -13,8 +13,8 @@ import org.hibernate.annotations.Type;
 @Entity
 public class PlayList extends BaseEntity {
 
-	@Column(length=50)
-	private String name;
+    @Column(length=50,nullable=false )
+    private String name;
 
     @Lob
     /*Forcing type definition to have text type column in postgresql instead of automatic indirect storage of large object (postgresql store lob in a separate table named pg_largeobject and store his id in the "content" column).
@@ -25,29 +25,32 @@ public class PlayList extends BaseEntity {
      */
     @Type(type="org.hibernate.type.StringClobType")
     String description;
-    
-	@ManyToMany
-	private List<Resource> resourceList = new ArrayList<Resource>();
-	
-	///////// Getters & Setters //////////
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
+    @ManyToMany
+    private List<Resource> resourceList = new ArrayList<Resource>();
+
+    ///////// Getters & Setters //////////
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public List<Resource> getResourceList() {
         return resourceList;
     }
-    public void setResourceList(List<Resource> resourceList) {
-        this.resourceList = resourceList;
-    }
-	
+
+
+
+
+
+
+
 }
