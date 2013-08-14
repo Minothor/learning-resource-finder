@@ -5,13 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <h1>PlayListList</h1>
+   <h1>${current.user.fullName} : Mes PlayLists</h1>
+   
+<lrftag:pageheadertitle title="${user.fullName}"/>
+<div class=" " style="font-size:14px">
+   &nbsp&nbsp<a href="<c:url value='/playlist/create'/>"> Créer une PlayList</a>
+</div>
+   
    <table cellspacing="10">
 		<tr>
 		    <td>Titre</td>
 			<td>Description</td>
 			<td>Auteur</td>
-			<td><a href="<c:url value='/playlist/create'/>">Ajouter PlayList</a></td>
+			
 		</tr>
 		<c:forEach items="${playlistlist}" var="playlist">
 			<tr>

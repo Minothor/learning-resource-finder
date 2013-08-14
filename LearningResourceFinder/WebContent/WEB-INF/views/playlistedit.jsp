@@ -13,7 +13,7 @@
 function verifForm(form)
 {
    if(document.form.name.value == ""){
-      alert("Veuillez remplir correctement  le champ nom !");
+      alert("Veuillez remplir le champ nom !");
       document.form.name.focus();
       return false;
    }
@@ -25,14 +25,14 @@ function verifForm(form)
 </head>
 <body>
 	<c:choose>
-	  <c:when test="${playlist.id==null}"><h1>Create PlayList<h1></h1></c:when>
+	  <c:when test="${playlist.id==null}"><h1>Create PlayList</h1></c:when>
 	      <c:otherwise><h1>Edit PlayList</h1></c:otherwise>
 	</c:choose>
 	<form:form modelAttribute="playlist" method="post" name="form" action='<%=response.encodeURL("/playlist/editsubmit")%>'>
 		<form:hidden path="id" />  
 		
-		<label>Name</label>        <form:input path="name"/>         <form:errors path="name"/><br>
-		<label>Description</label> <form:input path="description" />  <form:errors path="description"/><br>
+		<label>Name</label>        <form:input path="name"/>         <form:errors path="name"/><br />
+		<label>Description</label> <form:input path="description" />  <form:errors path="description"/><br />
 	    <input type="submit" value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>"
 	  		onclick="javascript: return verifForm(this);"  />
 	    
