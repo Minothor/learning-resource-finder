@@ -1,5 +1,7 @@
 package learningresourcefinder.controller;
 
+import javax.validation.Valid;
+
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.repository.ResourceRepository;
@@ -31,7 +33,7 @@ public class UrlResourceController extends BaseController<UrlResource> {
 	
 	
 	@RequestMapping(value="/ajax/addurl",method=RequestMethod.POST)
-	public @ResponseBody String urlSubmit(@ModelAttribute UrlResource urlResource, @RequestParam("idresource") long id, @RequestParam("name") String name, @RequestParam("url") String url, BindingResult result) 
+	public @ResponseBody String urlSubmit(@Valid @ModelAttribute UrlResource urlResource, @RequestParam("idresource") long id, @RequestParam("name") String name, @RequestParam("url") String url, BindingResult result) 
 	{
 		String returnText;
 		
