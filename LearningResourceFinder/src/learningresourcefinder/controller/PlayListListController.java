@@ -1,5 +1,9 @@
 package learningresourcefinder.controller;
 
+import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.User;
@@ -24,7 +28,17 @@ public class PlayListListController  extends BaseController<PlayList> {
         	throw new InvalidUrlException("L'utilisateur ayant le pseudonyme (userName) '"+userName+"' est introuvable.");
         }
         
-		return new ModelAndView("playlistlist", "playlistlist", user.getPlaylist());
+        
+        // We want the playlist list sorted by name
+        Comparator<PlayList> comparator = new Comparator<PlayList>() {
+            @Override  public int compare(PlayList pl1, PlayList pl2) {
+                return pl1.getName().compareToIgnoreCase(pl2.getName());
+            }
+        };
+        SortedSet<PlayList> playListSet =  new TreeSet<PlayList>(comparator);
+        playListSet.addAll(user.getPlayListList());
+
+		return new ModelAndView("playlistlist", "playlistlist", playListSet);
 	}
 
 }
