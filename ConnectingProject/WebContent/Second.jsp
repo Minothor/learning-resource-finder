@@ -10,13 +10,6 @@
 
 <h1> Coucou </h1>
 
-<%
-
- String email = (String) request.getAttribute("email");
-
-  out.println("Email : "+ email);
-
-%>
 
 </body>
 </html>

@@ -11,7 +11,7 @@
 
 <h1> Facebook </h1>
 
-<a href="https://www.facebook.com/dialog/oauth?client_id=350985091585275&redirect_uri=http://localhost:8080/ConnectingProject/Profile">Connexion</a>
+<a href="https://www.facebook.com/dialog/oauth?client_id=350985091585275&redirect_uri=http://localhost:8080/ConnectingProject/Profile&scope=email,user_groups">Connexion</a>
 
 </body>
 </html>

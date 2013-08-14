@@ -31,17 +31,13 @@ public class SecondServlet extends HttpServlet {
 		FacebookClient.AccessToken token = getFacebookUserToken(req.getParameter("code"), "http://localhost:8080/ConnectingProject/Profile");
 		
 		String accessToken = token.getAccessToken();
-		
+
 		FacebookClient fclient = new DefaultFacebookClient(accessToken);
-	 
-		User u = fclient.fetchObject(APP_ID,User.class);
 		
-		System.out.println(token);
+		User u = fclient.fetchObject("me",User.class);
 		
-		System.out.println(accessToken);
-		
-		req.setAttribute("email", u.getBirthday());
-	 
+		System.out.println(u.getId() + " --> " + u.getEmail());
+
 		this.getServletContext().getRequestDispatcher("/Second.jsp").forward(req, resp);
 		
 	}
@@ -54,11 +50,10 @@ public class SecondServlet extends HttpServlet {
 	    WebRequestor.Response accessTokenResponse = wr.executeGet(
 	            "https://graph.facebook.com/oauth/access_token?client_id=" + appId + "&redirect_uri=" + redirectUrl
 	            + "&client_secret=" + secretKey + "&code=" + code);
-
+	    
+	    System.out.println(accessTokenResponse.getBody());
+	    
 	    return  DefaultFacebookClient.AccessToken.fromQueryString(accessTokenResponse.getBody()); 
 	}
 	
-	
-
-
 }
