@@ -19,7 +19,7 @@
 	<ul>
 		<li>Nom: ${playlist.name}</li>
 		<li>Description : ${playlist.description}</li>
-		<li>Auteur : ${playlist.createdBy.fullName}</li>
+		<li>Auteur : <a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></li>
 	</ul>
 
 	<h2>Ressources incluses</h2>
