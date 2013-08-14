@@ -13,9 +13,8 @@
 	<h1>Edit PlayList</h1>
 	<form:form modelAttribute="playlist" method="post" action='<%=response.encodeURL("/playlist/editsubmit")%>'>
 		<form:hidden path="id" />
+		<label>Name</label>        <form:input path="name" />         <form:errors path="name"/><br>
 		<label>Description</label> <form:input path="description" />  <form:errors path="description"/><br>
-	    <label>Name</label>        <form:input path="name" />         <form:errors path="name"/><br>
-		
 		<input type="submit" value="Save" />
 	</form:form>
 	
