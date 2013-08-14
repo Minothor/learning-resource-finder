@@ -19,17 +19,13 @@
 	<h2>Ressources incluses</h2>
 
 	<c:forEach items="${playlist.resourceList}" var="resource">
-		<div
-			style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px; ">
+		<div style="float:left;position:relative;padding:10px;margin-top:10px;width:210px;">
 			<restag:resource resource="${resource}"></restag:resource>
 
-			<div style="padding: 10px; width: 180px; height: 10px; background-color: #F6CEF5 ">
+			<div style="padding:10px;width:180px;height:10px;background-color:#F6CEF5 ">
 				<a href=<c:url value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>>Remove</a>
 			</div>
 		</div>
-
 	</c:forEach>
-
-
 </body>
 </html>

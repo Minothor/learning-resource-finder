@@ -19,11 +19,10 @@
 </style>
 </head>
 <body>
-	<h1>Resource Edit :</h1> 
+	<h1>Resource Create / Edit :</h1> 
 	<form:form modelAttribute="resource" method="post" action='<%=response.encodeUrl("resourceeditsubmit")%>'>
 		<label for="name">Name :</label>               <form:input path="name" id="name" /> <form:errors path="name" /><br />
 		<label for="description">Description :</label> <form:textarea path="description" id="description" /> <form:errors path="description" /><br />
-		<label for="createdBy">Author :</label>        <form:input path="createdBy" id="createdBy" disabled="true" /><br />
 		<form:hidden path="id" />
 		<input type="submit" value="Save" />
 	</form:form>
