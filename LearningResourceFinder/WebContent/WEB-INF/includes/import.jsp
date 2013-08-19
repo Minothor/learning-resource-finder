@@ -5,7 +5,7 @@
 <link href="/css/ext/jquery-bubble-popup-v3.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/css/int/template.css" />
 <link rel="stylesheet" type="text/css" href="/css/int/content.css" />
-<link rel="stylesheet" type="text/css" href="/css/int/popup_addurl.css"  /> 
+<link rel="stylesheet" type="text/css" href="/css/int/popupJquery.css"  /> 
 <link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.24.custom.css" /> <%-- Customized for the colors. --%>
 <link rel="stylesheet" type="text/css" href="/css/ext/style.css"  /> 
 <link rel="stylesheet" type="text/css" href="/css/ext/karma-royal-blue.css" />
@@ -45,7 +45,7 @@
 	<script src="/js/int/focusevent.js"></script>
 	<script type="text/javascript" src="/js/ext/jquery-bubble-popup-v3.min.js"></script>
 	<script type="text/javascript" src="/js/int/general.js"></script>
-	<script type="text/javascript" src="/js/int/popup_addURL.js"></script>
+	<script type="text/javascript" src="/js/int/popupJquery.js"></script>
 	<!-- ***************************** End Script from our dev **************************** -->   
 	
 	<!-- ***************************** Design from themeforest/karma template **************************** -->   

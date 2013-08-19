@@ -1,0 +1,88 @@
+#fade {
+/*--Masque opaque noir de fond--*/
+	display: none;
+/*--masqué par défaut--*/
+	background: #000;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: .80;
+	z-index: 9999;
+}
+.popupJquery {
+  padding: 20px;
+	display: none;
+/*--masqué par défaut--*/
+	background: #fff;
+	border: 2px solid #333;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 99999;
+/*--Les différentes définitions de Box Shadow en CSS3--*/
+	-webkit-box-shadow: 0px 0px 20px #000;
+	-moz-box-shadow: 0px 0px 20px #000;
+	box-shadow: 0px 0px 20px #000;
+/*--Coins arrondis en CSS3--*/
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+img.btn_close {
+	float: right;
+	margin: -55px -55px 0 0;
+}
+/*--Gérer la position fixed pour IE6--*/
+*html #fade {
+	position: absolute;
+}
+*html .popup_block {
+	position: absolute;
+}
+span {
+	color: yellow;
+}
+.inputSource {
+	border: 1px solid black;
+	padding: 5px;
+  float: right;
+}
+input[type="button"], input[type="submit"], .button, a.button:link, a.button:visited {
+	background-color: #333333;
+	border: 1px solid #000000 !important;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+	color: #FFFFFF;
+	padding: 0.3em 0.6em;
+	text-decoration: none;
+	cursor: pointer;
+}
+input[type="text"] {
+  width: 250px;
+}
+.popup-close {
+	float: right;
+	margin-top: 10px;
+}
+.popup-close a {
+	background-color: #222222;
+	color: #FFFFFF !important;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 1;
+	padding: 3px 6px 2px;
+	cursor: pointer;
+}
+.formUrlResource label {
+    display: block;
+    width: 150px;
+    float: left;
+}
+.btnSubmit {
+  float: right;
+}

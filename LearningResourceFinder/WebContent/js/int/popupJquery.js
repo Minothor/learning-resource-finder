@@ -1,15 +1,13 @@
-
-jQuery(function($){
-						   		   
+jQuery(function($){			   		   
 	//Lorsque vous cliquez sur un lien de la classe poplight
 	$('a.poplight').on('click', function() {
 		var popID = $(this).data('rel'); //Trouver la pop-up correspondante
 		var popWidth = $(this).data('width'); //Trouver la largeur
-
+    
 		//Faire apparaitre la pop-up et ajouter le bouton de fermeture
-		$('#' + popID).fadeIn().css({ 'width': popWidth}).prepend('<a href="#" class="close"><img src="/images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>');
+		$('#' + popID).fadeIn().css({'width': popWidth});
 		
-		//R�cup�ration du margin, qui permettra de centrer la fen�tre - on ajuste de 80px en conformit� avec le CSS
+		//Recuperation du margin, qui permettra de centrer la fen?tre - on ajuste de 80px en conformite avec le CSS
 		var popMargTop = ($('#' + popID).height() + 80) / 2;
 		var popMargLeft = ($('#' + popID).width() + 80) / 2;
 		
@@ -26,16 +24,13 @@ jQuery(function($){
 		return false;
 	});
 	
-	
 	//Close Popups and Fade Layer
 	$('body').on('click', 'a.close, #fade', function() { //Au clic sur le body...
-		$('#fade , .popup_addURL').fadeOut(function() {
-			$('#fade, a.close').remove();  
+		$('#fade , .popupJquery').fadeOut(function() {
+			$('#fade').remove();   
 	}); //...ils disparaissent ensemble
 		location.reload();
 		return false;
 	});
-
-	
 });
 
