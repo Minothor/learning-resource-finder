@@ -1,0 +1,1 @@
+alter table playlist add column slug varchar(255);
