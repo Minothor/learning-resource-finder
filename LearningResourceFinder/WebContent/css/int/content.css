@@ -486,32 +486,6 @@ color: #444;
 	top:1px;
 }
 
-.article_content {
-	font-family: Georgia, "DejaVu Serif", Norasi, serif;
-	color:#444;
-}
-
-
-.article_content li {
-    margin-top: 8px;
-}
-
-
-
-.article_content p{
-    line-height: 1.4em;
-    margin-top: .5em;
-    margin-bottom: .5em;
-}
-.action-goodexample-title{
-	font-size:10px;
-	color:#CCC;
-	margin-top:-3px;
-	margin-bottom:1px;
-	text-align:right;
-	
-}
-
 .page-menu-links {
 	font-size:12px;
 	margin-top: -10px;  /* to get closer to the breadcrumb */
@@ -722,6 +696,7 @@ color: #444;
 	width:221px;
 	display: inline-block;
 	vertical-align: top;
+	color:#000000;
 	margin-right:20px;
 }
 
@@ -731,7 +706,7 @@ color: #444;
 	background-repeat: no-repeat;
 	background-position: left bottom;
 	text-transform:uppercase;
-	color:#fff;
+	color:#000000;
 	display:block;
 	font-size:13px;
 	letter-spacing: 0.5px;

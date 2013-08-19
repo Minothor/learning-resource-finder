@@ -3,11 +3,11 @@ body {
 }
 
 #wrapper {
-    background:url(/images/template/bg_top.png) 50% 0 no-repeat;
+/*     background:url(/images/template/bg_top.png) 50% 0 no-repeat; */
 }
 
 #wrapper2 {
-    background:url(/images/template/bg_bottom.png) center bottom no-repeat;
+/*     background:url(/images/template/bg_bottom.png) center bottom no-repeat; */
 }
 
   
@@ -38,7 +38,7 @@ body {
 	width:1000px;
 	margin:0px auto 60px auto;
     padding-top: 41px;
-    background-image:url(/images/kidsdrawingbig.png);
+/*     background-image:url(/images/kidsdrawingbig.png); */
 	background-repeat:no-repeat;
 	background-position:40px bottom;"
     

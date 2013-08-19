@@ -24,7 +24,7 @@ $(document).ready(function(){
 		
 
 
-<div id="header">
+<div id="header">HEADER
 	    <div style="height:20px;">  <%-- WHITE LINE ABOVE THE RIBBON --%>
 				<div style="float:right">
 				    <!-- ***************** - REGISTER - ***************** -->
