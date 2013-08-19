@@ -9,9 +9,6 @@
 		Display a list menu of all articles order by release date
 	</description>
 
-
-
-
 	<tag>
 		<name>conditionDisplay</name>
 		<tag-class>learningresourcefinder.tag.ConditionDisplayTag</tag-class>
