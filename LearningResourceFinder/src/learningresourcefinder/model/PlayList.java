@@ -15,8 +15,18 @@ public class PlayList extends BaseEntity {
 
     @Column(length=50,nullable=false )
     private String name;
+    
+    @Column(length=200,nullable=false )
+    private String slug;
+    
+    public String getSlug() {
+		return slug;
+	}
+	public void setSlugs(String slug) {
+		this.slug = slug;
+	}
 
-    @Lob
+	@Lob
     /*Forcing type definition to have text type column in postgresql instead of automatic indirect storage of large object (postgresql store lob in a separate table named pg_largeobject and store his id in the "content" column).
      *Without forcing, JDBC driver use write() method of the BlobOutputStream to store Clob into the database;
      * this method take an int as parameter an convert it into a byte causing lose of 3 byte information so character are render as ASCII instead of UTF-8 expected .
