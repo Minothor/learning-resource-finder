@@ -6,6 +6,7 @@ import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.UrlUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,11 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		}
 		
 		PlayList playListHavingTheSameName = playlistRepository.findByNameAndAuthor(playList.getName(), SecurityContext.getUser());
-		
+
+		// set the slug based on the (maybe changed) title
+		//playlist.setSlug( tu vas appeler une fonction qui prend playList.getTitle() en paramètre );
+		String slug = UrlUtils.toPrettyURL(playList.getName());
+		playList.setSlugs(slug);
 		if(playList.getId()==null) {  // Create
 			if(playListHavingTheSameName != null ) {
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
@@ -61,7 +66,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 			playlistRepository.merge(playList);
 		}
 		
-		return new ModelAndView("redirect:/playlist?id="+playList.getId());
+		return new ModelAndView("redirect:/playlist/"+playList.getId()+"/"+playList.getSlug());
 	}
 	
 	private ModelAndView otherPlayListError(PlayList playList, PlayList otherPlayList, BindingResult bindingResult) {
@@ -92,7 +97,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
             playlist.getResourceList().add(resource);
             playlistRepository.merge(playlist);
         }
-        return new ModelAndView("redirect:/playlist?id="+playlist.getId());
+        return new ModelAndView("redirect:/playlist/"+playlist.getId()+"/"+playlist.getSlug());
     }
 	
     @ModelAttribute
