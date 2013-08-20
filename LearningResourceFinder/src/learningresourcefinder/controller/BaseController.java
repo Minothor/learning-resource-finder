@@ -10,6 +10,7 @@ import learningresourcefinder.exception.AjaxExceptionVO;
 import learningresourcefinder.exception.AjaxValidationException;
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.BaseEntity;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.util.ClassUtil;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -54,27 +55,19 @@ public class BaseController<E extends BaseEntity> {
         return ( E )getRequiredEntity(id, entityClass);
     }
     
-    protected Object getRequiredEntityByUrl(String url, Class<?> clazz){
+    protected Object getRequiredEntityByShortId(String shortId, Class<?> clazz){
     	Object obj;
 		try {
-			obj = em.createQuery("select e from "+clazz.getName()+" e where e.url = :url").setParameter("url",url).getSingleResult();
+			obj = em.createQuery("select e from "+clazz.getName()+" e where lower(e.shortId) = :shortId").setParameter("shortId",shortId.toLowerCase()).getSingleResult();
 		} catch (Exception e) {
-			throw new InvalidUrlException(clazz.getName() + " ayant l'url '"+url+"' est introuvable.", e);
+			throw new InvalidUrlException(clazz.getName() + " ayant l'id (court) '"+shortId+"' est introuvable.", e);
 		}
         return obj;
     }
     
     @SuppressWarnings("unchecked")
-    protected E getRequiredEntityByUrl(String url){
-    	Object obj;
-		try {
-			obj = em.createQuery("select e from "+entityClass.getName()+" e where lower(e.url) = :url")
-					.setParameter("url",url.toLowerCase())
-					.getSingleResult();
-		} catch (Exception e) {
-			throw new InvalidUrlException(entityClass.getName() + " ayant l'url '"+url+"' est introuvable.", e);
-		}
-        return ( E )obj;
+    protected E getRequiredEntityByShortId(String shortId){
+        return (E)getRequiredEntityByShortId(shortId, entityClass);
     }
     /** Useful for SpringMVC @ModelAttribute method.
      * When a form is submitted, our @ModelAttribute method returns a detached entity.
