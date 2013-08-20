@@ -18,12 +18,9 @@ import learningresourcefinder.web.Cookies;
 import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,8 +36,6 @@ public class LoginController extends BaseController<User> {
     
     @Autowired LoginService loginService;
     @Autowired UserDisplayController userDisplayController;
-    @Autowired ProviderSignInController providerSignIncontroller;
-    @Autowired UsersConnectionRepository usersConnectionRepository;
     @Autowired UserRepository userRepository;
     
     @RequestMapping(value="/login", method=RequestMethod.GET)
@@ -85,7 +80,7 @@ public class LoginController extends BaseController<User> {
             try {
                 User retrieveuser = loginService.identifyUserByEMailOrName(userNameOrMail) ;
                 
-                errorMsg = loginService.getRemainderLoginMessage(retrieveuser);
+//                errorMsg = loginService.getRemainderLoginMessage(retrieveuser);
                
             } catch (UserNotFoundException e1) {
                 errorMsg="L'utilisateur '"+userNameOrMail+"' n'existe pas";

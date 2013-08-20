@@ -3,19 +3,10 @@ package learningresourcefinder.controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
-//import learningresourcefinder.service.BadgeService;
 import learningresourcefinder.service.UserService;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
@@ -23,14 +14,19 @@ import learningresourcefinder.util.FileUtil.InvalidImageFileException;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.NotificationUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 @Controller
 @RequestMapping("/user")
 public class UserImageController extends BaseController<User> {
 
 	@Autowired UserRepository userRepository;
-	@Autowired UsersConnectionRepository usersConnectionRepository;
 	@Autowired UserService userService;
-//	@Autowired BadgeService badgeService;
 	@Autowired CurrentEnvironment currentEnvironment;
 	
 	@RequestMapping("/image")
@@ -68,8 +64,6 @@ public class UserImageController extends BaseController<User> {
 			
 			userRepository.merge(user);
 			
-//			badgeService.grantIfUserIsComplete(user);
-			
 		} catch (InvalidImageFileException e) {  //Tell the user that its image is invalid.
 			NotificationUtil.addNotificationMessage(e.getMessageToUser());
 		}
@@ -84,16 +78,10 @@ public class UserImageController extends BaseController<User> {
 	 @RequestMapping("/imagedelete")
 	 public ModelAndView userImageDelete(@RequestParam("id") long userid){
 		 User user = getRequiredEntity(userid);
-//
-//		 FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath() + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER, user.getId()+".*");
-//		 FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath() + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER + FileUtil.USER_RESIZED_LARGE_SUB_FOLDER, user.getId()+".*");
-//		 FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath() + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER +  FileUtil.USER_RESIZED_SMALL_SUB_FOLDER, user.getId()+".*");
-//		 
-//		 user.setPicture(false);
 		 userService.userImageDelete(user);
 		 userRepository.merge(user);
 
-		 return new ModelAndView("redirect:"+user.getUserName());
+		 return new ModelAndView("redirect:/user/" + user.getUserName());
 		 
 	 }
 

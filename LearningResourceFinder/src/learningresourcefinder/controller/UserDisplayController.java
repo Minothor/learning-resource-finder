@@ -9,7 +9,6 @@ import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserDisplayController extends BaseController<User> {
 
     @Autowired UserRepository userRepository;
-    @Autowired UsersConnectionRepository usersConnectionRepository;
     @Autowired UserService userService;
     
     @RequestMapping("/{userName}")

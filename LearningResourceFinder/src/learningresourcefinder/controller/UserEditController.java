@@ -95,7 +95,7 @@ public class UserEditController extends BaseController<User> {
 
     @RequestMapping("/deleteconfirmed")
     public ModelAndView userDeleteConfirmed(@RequestParam(value="id") Long idUser){
-        User user  = userRepository.find(idUser);
+        //User user  = userRepository.find(idUser);
         SecurityContext.assertUserHasPrivilege(Privilege.DELETE);
         //userService.setUser(user);
         NotificationUtil.addNotificationMessage("L'utilisateur est bien supprimé");
