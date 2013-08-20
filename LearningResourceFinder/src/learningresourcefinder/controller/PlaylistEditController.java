@@ -6,7 +6,7 @@ import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
-import learningresourcefinder.util.UrlUtils;
+import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +51,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 
 		// set the slug based on the (maybe changed) title
 		//playlist.setSlug( tu vas appeler une fonction qui prend playList.getTitle() en paramètre );
-		String slug = UrlUtils.toPrettyURL(playList.getName());
+		String slug = Slugify.slugify(playList.getName());
 		playList.setSlugs(slug);
 		if(playList.getId()==null) {  // Create
 			if(playListHavingTheSameName != null ) {
