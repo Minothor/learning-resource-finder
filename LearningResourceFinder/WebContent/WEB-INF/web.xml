@@ -166,10 +166,7 @@
   <listener>
     <listener-class>learningresourcefinder.web.PropertyLoaderServletContextListener</listener-class>
   </listener>
-  
-  <listener>
-    <listener-class>learningresourcefinder.web.SpringSocialInitFinalizerServletContextListener</listener-class>
-  </listener>
+
   
   <listener>
     <listener-class>learningresourcefinder.web.LuceneIndexContextListener</listener-class>

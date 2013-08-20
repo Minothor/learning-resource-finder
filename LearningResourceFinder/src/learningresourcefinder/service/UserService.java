@@ -1,57 +1,24 @@
 package learningresourcefinder.service;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
-
-import learningresourcefinder.exception.InvalidPasswordException;
 import learningresourcefinder.exception.UserAlreadyExistsException;
 import learningresourcefinder.exception.UserAlreadyExistsException.IdentifierType;
-import learningresourcefinder.exception.UserLockedException;
-import learningresourcefinder.exception.UserNotFoundException;
-import learningresourcefinder.exception.UserNotValidatedException;
 import learningresourcefinder.mail.MailCategory;
 import learningresourcefinder.mail.MailType;
 import learningresourcefinder.model.User;
-import learningresourcefinder.model.User.AccountConnectedType;
 import learningresourcefinder.model.User.AccountStatus;
-import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.UserRepository;
-import learningresourcefinder.security.SecurityContext;
-import learningresourcefinder.service.LoginService.WaitDelayNotReachedException;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
 import learningresourcefinder.util.HTMLUtil;
-import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
-import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.SecurityUtils;
-import learningresourcefinder.web.ContextUtil;
 import learningresourcefinder.web.UrlUtil;
-import learningresourcefinder.web.UrlUtil.Mode;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.web.ProviderSignInUtils;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.ImageType;
-import org.springframework.social.google.api.Google;
-import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.context.request.WebRequest;
 
 @Transactional
 @Service(value="userService")
@@ -71,7 +38,6 @@ public class UserService {
     @Autowired   private UserRepository userRepository;
     @Autowired   private MailService mailService;
     @Autowired   private LoginService loginService;
-    @Autowired   private UsersConnectionRepository usersConnectionRepository;
     @Autowired   private CurrentEnvironment currentEnvironment;
     /**
      * Register a user and sends a validation mail.
@@ -430,7 +396,6 @@ public class UserService {
     }*/
     
     public void userImageDelete(User user){
-
         FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER, user.getId()+".*");
         FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER + FileUtil.USER_RESIZED_LARGE_SUB_FOLDER, user.getId()+".*");
         FileUtil.deleteFilesWithPattern(FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER +  FileUtil.USER_RESIZED_SMALL_SUB_FOLDER, user.getId()+".*");

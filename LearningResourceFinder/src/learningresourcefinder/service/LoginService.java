@@ -1,6 +1,5 @@
 package learningresourcefinder.service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -29,9 +28,6 @@ import learningresourcefinder.web.HttpSessionTracker;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestAttributes;
@@ -43,7 +39,6 @@ import org.springframework.web.context.request.WebRequest;
 public class LoginService {
 
     @Autowired  UserRepository userRepository ;
-    @Autowired UsersConnectionRepository usersConnectionRepository;
 
     public static final String USERID_KEY = "UserId";  // Key in the HttpSession for the loggedin user.
     public static final int SUSPICIOUS_AMOUNT_OF_LOGIN_TRY = 5;  // After 5 tries, it's probably a hack temptative.
@@ -318,62 +313,62 @@ public class LoginService {
     }
 
     
-    // Connection data for user changed so much, that we better reset a few values if necessary.
-    public void resetLoginData(User user, List<Connection<?>> socialConnections){
-        if(!SecurityContext.getUser().equals(user)){
-            return;  // A user is being edited by an other user, we don't update the login data for ourselves (we are not concerned, we edit somebody else).
-        }
-
-        ////// 1. Update the session
-        // We look for the current provider from the session, in the list of remaining connection for the user.
-        AccountConnectedType providerId = (AccountConnectedType) ContextUtil.getHttpSession().getAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
-        boolean found = false;
-        for(Connection<?> con : socialConnections){    
-            if(con.getKey().getProviderId().equals(providerId.getProviderId())){
-                found = true;
-                break;
-            }
-        }
-
-        if(!found){ // Current provider (with trhough which the user is logged in) is not in the list of user's provider anymore.
-            ContextUtil.getHttpSession().removeAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
-        }
-          
-
-        /////// 2. Update the cookies
-        Cookie passwordCookie = (Cookie) Cookies.findCookie(Cookies.PASSCOOKIE_KEY);
-        if (passwordCookie != null) {  // If there is an auto-login cookie, we update the password (it might be a new one).
-            ((javax.servlet.http.Cookie) passwordCookie).setValue(user.getPassword());
-        }
-        
-        userRepository.merge(user);
-    }
-
-
-    public String getRemainderLoginMessage(User user){
-        ConnectionRepository connectionRepository =  usersConnectionRepository.createConnectionRepository(user.getId()+"");
-        List<Connection<?>> connectionsRemain = new ArrayList<Connection<?>>();
-        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.FACEBOOK.getProviderId()));
-        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.TWITTER.getProviderId()));
-        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.GOOGLE.getProviderId()));
-        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.LINKEDIN.getProviderId()));
- 
-        String message ="";
-        if(!connectionsRemain.isEmpty()){
-            message = "Par le passé, cet utilisateur s’est loggué via son compte ";
-            for(int i = 0 ; i<connectionsRemain.size() ; i++){
-                Connection<?> connection = connectionsRemain.get(i);
-                if(i > 0){
-                    message += " et son compte ";
-                }
-                message += connection.getKey().getProviderId();
-            }
-            
-            message += ". Peut-être voulez-vous tenter cette méthode en appuiant sur le bouton correspondant ci-dessous?";
-        }
-        
-        return message;
-    }
+//    // Connection data for user changed so much, that we better reset a few values if necessary.
+//    public void resetLoginData(User user, List<Connection<?>> socialConnections){
+//        if(!SecurityContext.getUser().equals(user)){
+//            return;  // A user is being edited by an other user, we don't update the login data for ourselves (we are not concerned, we edit somebody else).
+//        }
+//
+//        ////// 1. Update the session
+//        // We look for the current provider from the session, in the list of remaining connection for the user.
+//        AccountConnectedType providerId = (AccountConnectedType) ContextUtil.getHttpSession().getAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
+//        boolean found = false;
+//        for(Connection<?> con : socialConnections){    
+//            if(con.getKey().getProviderId().equals(providerId.getProviderId())){
+//                found = true;
+//                break;
+//            }
+//        }
+//
+//        if(!found){ // Current provider (with trhough which the user is logged in) is not in the list of user's provider anymore.
+//            ContextUtil.getHttpSession().removeAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
+//        }
+//          
+//
+//        /////// 2. Update the cookies
+//        Cookie passwordCookie = (Cookie) Cookies.findCookie(Cookies.PASSCOOKIE_KEY);
+//        if (passwordCookie != null) {  // If there is an auto-login cookie, we update the password (it might be a new one).
+//            ((javax.servlet.http.Cookie) passwordCookie).setValue(user.getPassword());
+//        }
+//        
+//        userRepository.merge(user);
+//    }
+//
+//
+//    public String getRemainderLoginMessage(User user){
+//        ConnectionRepository connectionRepository =  usersConnectionRepository.createConnectionRepository(user.getId()+"");
+//        List<Connection<?>> connectionsRemain = new ArrayList<Connection<?>>();
+//        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.FACEBOOK.getProviderId()));
+//        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.TWITTER.getProviderId()));
+//        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.GOOGLE.getProviderId()));
+//        connectionsRemain.addAll(connectionRepository.findConnections(AccountConnectedType.LINKEDIN.getProviderId()));
+// 
+//        String message ="";
+//        if(!connectionsRemain.isEmpty()){
+//            message = "Par le passé, cet utilisateur s’est loggué via son compte ";
+//            for(int i = 0 ; i<connectionsRemain.size() ; i++){
+//                Connection<?> connection = connectionsRemain.get(i);
+//                if(i > 0){
+//                    message += " et son compte ";
+//                }
+//                message += connection.getKey().getProviderId();
+//            }
+//            
+//            message += ". Peut-être voulez-vous tenter cette méthode en appuiant sur le bouton correspondant ci-dessous?";
+//        }
+//        
+//        return message;
+//    }
     
     public String getPageAfterLogin(User user){
         

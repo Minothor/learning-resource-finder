@@ -3,10 +3,7 @@ package learningresourcefinder.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -30,10 +27,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.jsoup.helper.StringUtil;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.google.api.Google;
-import org.springframework.social.linkedin.api.LinkedIn;
-import org.springframework.social.twitter.api.Twitter;
 
 @Entity
 @Table(name = "users")
@@ -132,11 +125,11 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
     
     public enum AccountConnectedType{
-        LOCAL("User connected with local account","local", null),
-        FACEBOOK("User connected with his Facebook account","facebook", Facebook.class),
-        TWITTER("User connected with his Twitter account","twitter",Twitter.class),
-        LINKEDIN("User connected with his LinkedIn account","linkedIn",LinkedIn.class),
-        GOOGLE("User connected with his google account","google",Google.class);
+        LOCAL("User connected with local account","local", null);
+//        FACEBOOK("User connected with his Facebook account","facebook", Facebook.class),
+//        TWITTER("User connected with his Twitter account","twitter",Twitter.class),
+//        LINKEDIN("User connected with his LinkedIn account","linkedIn",LinkedIn.class),
+//        GOOGLE("User connected with his google account","google",Google.class);
 
 
         private String detail;
@@ -160,10 +153,10 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
         public static AccountConnectedType getProviderType(String providerId){
             providerId = providerId.toLowerCase();
             switch(providerId){
-            case "facebook" : return AccountConnectedType.FACEBOOK;
-            case "twitter"  : return AccountConnectedType.TWITTER;
-            case "google"   : return AccountConnectedType.GOOGLE;
-            case "linkedin" : return AccountConnectedType.LINKEDIN;
+//            case "facebook" : return AccountConnectedType.FACEBOOK;
+//            case "twitter"  : return AccountConnectedType.TWITTER;
+//            case "google"   : return AccountConnectedType.GOOGLE;
+//            case "linkedin" : return AccountConnectedType.LINKEDIN;
             default : throw new RuntimeException("Provider cannot be identified");
             }
         }

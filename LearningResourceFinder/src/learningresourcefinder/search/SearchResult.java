@@ -4,15 +4,10 @@ import javax.persistence.EntityManager;
 
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
-import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexableField;
-import org.apache.lucene.search.ScoreDoc;
-import org.springframework.social.google.api.plus.activity.Article;
 
 
 public  class SearchResult {
