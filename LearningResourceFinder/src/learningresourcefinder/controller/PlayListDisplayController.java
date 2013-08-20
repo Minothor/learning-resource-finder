@@ -10,9 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PlayListDisplayController extends BaseController<PlayList> {
 
-	@RequestMapping("/playlist/{id}/{slug}")
-	public ModelAndView prepareModelAndView(@PathVariable long id) {
-		PlayList playlist = getRequiredEntity(id);
+	@RequestMapping("/playlist/{shortId}/{slug}")
+	public ModelAndView prepareModelAndView(@PathVariable String shortId) {
+		PlayList playlist = getRequiredEntityByShortId(shortId);
 		return new ModelAndView("playlistdisplay", "playlist", playlist);
 	}
 
