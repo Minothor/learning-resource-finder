@@ -56,7 +56,7 @@ public class PlayList extends BaseEntity {
     public String getSlug() {
   		return slug;
   	}
-  	public void setSlugs(String slug) {
+  	public void setSlug(String slug) {
   		this.slug = slug;
   	}
 

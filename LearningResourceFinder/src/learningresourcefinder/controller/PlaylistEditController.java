@@ -52,7 +52,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		// set the slug based on the (maybe changed) title
 		//playlist.setSlug( tu vas appeler une fonction qui prend playList.getTitle() en paramètre );
 		String slug = Slugify.slugify(playList.getName());
-		playList.setSlugs(slug);
+		playList.setSlug(slug);
 		if(playList.getId()==null) {  // Create
 			if(playListHavingTheSameName != null ) {
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
