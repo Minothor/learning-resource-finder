@@ -23,12 +23,19 @@ public class ResourceEditController extends BaseController<Resource> {
 		return prepareModelAndView(new Resource() );
 	}
 
-	@RequestMapping("/resourceedit")
-	public ModelAndView resourceEdit(@RequestParam("id") long id){
+//	@RequestMapping("/resourceedit")
+//	public ModelAndView resourceEdit(@RequestParam("id") long id){
+//        Resource resource=(Resource)getRequiredEntity(id, Resource.class);
+//		return prepareModelAndView(resource);
+//
+//	}
+	
+    @RequestMapping("/resourceedit")
+    public ModelAndView resourceEdit(@RequestParam("id") long id){
         Resource resource=(Resource)getRequiredEntity(id, Resource.class);
-		return prepareModelAndView(resource);
+        return prepareModelAndView(resource);
 
-	}
+    }
 
 
 	private ModelAndView prepareModelAndView(Resource resource) {
