@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,7 @@ public class ResourceEditController extends BaseController<Resource> {
 
 	@RequestMapping("/resourceedit")
 	public ModelAndView resourceEdit(@RequestParam("id") long id){
-
-		Resource resource=(Resource)getRequiredEntity(id, Resource.class);
+        Resource resource=(Resource)getRequiredEntity(id, Resource.class);
 		return prepareModelAndView(resource);
 
 	}
@@ -42,17 +42,19 @@ public class ResourceEditController extends BaseController<Resource> {
 	public ModelAndView resourceEditSubmit(@Valid @ModelAttribute Resource resource, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()){
-
 			return new ModelAndView("resourceedit","resource",resource);
 		}
+		
+		String slug = Slugify.slugify(resource.getName());
+		resource.setSlug(slug);
+		
 		if(resource.getId()==null){
 			resourceRepository.persist(resource);
+		} else {
+			resourceRepository.merge(resource);
 		}
-		else {resourceRepository.merge(resource);
-
-
-		}
-		return new ModelAndView("redirect:/resource?id="+resource.getId());
+		
+		return new ModelAndView("redirect:/resource/"+resource.getId()+"/"+resource.getSlug());
 	}
 
 	@ModelAttribute

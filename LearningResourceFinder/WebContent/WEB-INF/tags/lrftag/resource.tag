@@ -8,7 +8,7 @@ background-color: #D3D3D3;
 width: 200px;
 height: 200px;
  ">
-<a href="/resource?id=${resource.id}">
+<a href="/resource/${resource.id}/${resource.slug}">
 	${resource.name}<br />
    <p style="font-size: 10px;"><i>${resource.description}</i></p><br />
 </a>

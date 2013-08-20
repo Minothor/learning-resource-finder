@@ -26,7 +26,7 @@
 				<th>Url</th>
 				<th>Action</th>
 			</tr>
-		<c:forEach items="${resource.urlResource}" var="url">
+		<c:forEach items="${resource.urlResources}" var="url">
 			<tr>
 				<td>${url.name}</td>
 				<td><a href="${url.url}">${url.url}</a></td>
