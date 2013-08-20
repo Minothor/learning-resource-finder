@@ -1169,7 +1169,7 @@ p strong {color: #555;}
 /* 08. FORMS
 /* *********************************************************************************** */
 
-input, textarea, select {vertical-align:middle;font-size:100%;}
+input, textarea, select {vertical-align:top;font-size:100%;}
 /*textarea, input {font-size:1em;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;}*/
 .tools input, .tools textarea, .tools select {color:#fff;}
 form, fieldset {margin:0;padding:0;border-style:none;}

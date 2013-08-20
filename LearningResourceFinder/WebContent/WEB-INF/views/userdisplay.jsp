@@ -6,18 +6,39 @@
 <%@ page import="learningresourcefinder.util.DateUtil" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="learningresourcefinder.model.User" %>
-
 <html>
-
 <head>
-
-
-<script>
-    $(function() {
-        $( "#tabs" ).tabs();
-    });
-</script>
-
+<!-- Jquery for change input popup addImageUser -->
+<script typr="text/javascript" src="/js/int/addImageUtil.js"></script>
+<style type="text/css">
+	figure {
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+		margin: 0 20px 0 0;
+	}
+	figure img {
+		display: block;
+	}
+	figcaption {
+		position: absolute;
+		bottom: -6em;
+		left: 0;
+		background-color: #000;
+		color: #FFF;
+		width: 94%;
+		padding: 0.5em 3%;
+		opacity: 0.8;
+		-o-transition: all 300ms linear;
+		-ms-transition: all 300ms linear;
+		-moz-transition: all 300ms linear;
+		-webkit-transition: all 300ms linear;
+		transition: all 300ms linear;
+	}
+	figure:hover figcaption {
+		bottom: 0;
+	}
+</style>
 
 <!-- you can set variables starting with "p_" in the file named website_content.properties -->
 <link rel="canonical" href="${p_website_address}/user/${user.userName}"/>
@@ -47,40 +68,61 @@
 <%-- IMAGE   IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  --%>
 <div style="display:inline-block; vertical-align:top;">
 	<div class="user-options" style="font-size:12px">
-		<c:choose>
-			<c:when test="${user.picture}">
-				<img src="gen/user/resized/large/${user.id}.jpg<c:if test="${random!=null}">?${random}</c:if>"  /><%-- Random, to force the reload of the image in case it changes (but its name does not change) --%>
-			</c:when>
-			<c:otherwise>
+	
+		<div id="divPhoto">
+	    	<a href="#" data-width="500" data-rel="popupJquery" class="poplight">
+	        	<figure>
+	        		<c:choose>
+						<c:when test="${user.picture}">
+							<%-- Random, to force the reload of the image in case it changes (but its name does not change) --%>
+	            			<img src="gen/user/resized/large/${user.id}.jpg<c:if test="${random!=null}">?${random}</c:if>" alt=""  />
+	            		</c:when>
+		            	<c:otherwise>
+		            		<c:choose>
+		            			<c:when test="${user.isFemale()}">
+									<img src="images/Femme_anonyme.jpg" />
+								</c:when>
+								<c:otherwise>
+									<img src="images/Homme_anonyme.jpg" />
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+	                <figcaption lang="la"><span><b>Charger une image</b></span></figcaption>
+	      		</figure>
+	      	</a>
+	    </div>
+		
+		<div id="popupJquery" class="popupJquery">	
+	    	<div class="popup-close">
+	        	<a class="close" title="close this popup">X</a>
+	      	</div>
+	  	  	<form method="post" action="/user/imageadd" class="formUrlResource" enctype="multipart/form-data">	
+	    		<h2>Add Image</h2> 
+	          	<br />
+	          	<input type="radio"  name="rdFrom" value="computer"     class="radioComputer" id="inputComputer" checked="checked" /> From my computer
+	          	<input type="file"   name="file"   value="Parcourir..." class="inputSource"   id="inputFile" /> 
+	          	<input type="hidden" name="strUrl" value="http://..."   class="inputSource"   id="inputUrl"  />             
+	          	<br /> 
+	          	<input type="radio"  name="rdFrom" value="url" class="radioUrl" /> From Url
+	          	<input type="hidden" name="id"     value="${user.id}" />
+	          	<br />
+	          	<br />
+	          	<input class="btnSubmit" type="submit" value="Add Picture" name="btnPicture" /> 
+	      	</form>
+	      	<br />  <%-- Add/edit links --%>
+			<c:if test="${canEdit}">
 				<c:choose>
-					<c:when test="${user.isFemale()}">
-						<img src="images/Femme_anonyme.jpg" />
-					</c:when>
-					<c:otherwise>
-						<img src="images/Homme_anonyme.jpg" />
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-
-		<br/>  <%-- Add/edit links --%>
-		<c:if test="${canEdit}">
-			<c:choose>
-					<c:when test="${user.picture}">
-						<a href= "/user/image?id=${user.id}">changer image</a>&nbsp;-
-					
-						<a href= "/user/imagedelete?id=${user.id}">supprimer image</a><br/>
-					</c:when>
-				
-					<c:otherwise>
-						<a href= "/user/image?id=${user.id}">ajouter image</a><br/>
-					</c:otherwise>
-			</c:choose>			
-			<c:if test="${sessionScope.providersignedin != 'LOCAL'}">	
-			   <a href ="user/updateusersocialimage?provider=${sessionScope.providersignedin}&id=${user.id}">Mettre à jour mon image depuis ${sessionScope.providersignedin} </a><br/>
+						<c:when test="${user.picture}">
+							<a href= "/user/imagedelete?id=${user.id}">supprimer image</a><br/>
+						</c:when>
+				</c:choose>			
+				<c:if test="${sessionScope.providersignedin != 'LOCAL'}">	
+				   <a href ="user/updateusersocialimage?provider=${sessionScope.providersignedin}&id=${user.id}">Mettre à jour mon image depuis ${sessionScope.providersignedin} </a><br/>
+				</c:if>
 			</c:if>
-		</c:if>
-
+		</div>
+<%-- 		<a href= "/user/image?id=${user.id}">ajouter image</a><br/> --%>
 		<br />
 		<br />
 	</div>
@@ -102,28 +144,18 @@
 		</c:if>	
 		<br />
 		<br />
-</div>		
-		
-
+</div>			
 <br/>
-
-
 <div id="tabs">
 		<ul>
-			<li><a href="#tabs-1">Signalétique</a></li>
-<!-- 			<li><a href="#tabs-2">Gommettes</a></li> -->
-<!-- 			<li><a href="#tabs-3">Rédaction</a></li> -->
-			
+			<li><a href="#tabs-1">Signalétique</a></li>			
 		</ul>
-		
-		
 		<div id="tabs-1">		<!--  **************************Signalétique********************* -->
 			<div>
 				Prénom: <c:choose><c:when test="${user.firstName ne null}">${user.firstName}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
 				Nom de famille: <c:choose><c:when test="${user.lastName ne null}">${user.lastName}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
 				Pseudo : ${user.userName}<br/>
 				Titre: <c:choose><c:when test="${user.title ne null}">${user.title}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
-<!-- 				<a href="/action">Mes votes</a><br/> -->
 				Genre : <c:choose><c:when test="${user.gender ne null}">${user.gender}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
 				<c:if test="${canEdit}">
 					Né le : <c:choose><c:when test="${user.birthDate ne null}">${user.birthDate}</c:when><c:otherwise>?</c:otherwise></c:choose><br />
@@ -131,50 +163,16 @@
 					
 					Date d'enregistrement : <lrf:datedisplay date="${user.createdOn}" /><br />
 					Rôle : ${user.role}<br/>
-					
-<%-- 					<c:if test="${user.specialType!='PRIVATE'}">
-					  Type : ${user.specialType.name}<br/>
-					</c:if> --%>
-					
 					Dernier accès : <lrf:datedisplay date="${user.lastAccess}" duration="true"/> <br/>
 					Depuis l'adresse ${user.lastLoginIp}<br/>
 					Status du compte : ${user.accountStatus}<br/>
 					<c:if test="${user.lockReason}!= ACTIVE ">
 						Raison blocage compte : ${user.lockReason}<br /> 
 					</c:if>
-					<br/>
-					
-<%-- 					<a href ="/socialaccountmanage?id=${user.id}">Gerer mes comptes associés</a><br/>	 --%>
-						
-<!-- 					Groupes: -->
-<%-- 					<c:forEach items="${user.groupRegs }" var="groupReg"  >
-  						<a href="group?id=${groupReg.group.id}">${groupReg.group.name}</a>
-						<%--   <c:if test="${lastGroupReg !eq groupReg}">,</c:if>    --%><%-- no "," after the last one
- 						<c:if test="${user.groupRegs.lastIndexOf(groupReg) < (user.groupRegs.size()-1)}">,</c:if>    no "," after the last one
-					</c:forEach>
-					--%>
-<!-- 					&nbsp;&nbsp;&nbsp; -->
-<%-- 					<c:if test="${canEdit}"> --%>
-<%-- 						<a href="manageGroup?id=${user.id}">modifier les groupes</a> --%>
-<%-- 					</c:if> --%>
-<!-- 					<br />		 -->
 				</c:if>
 			</div>
 		</div>
 		
-		
-
-
-		<div id="tabs-3">		<!--  **************************Rédaction********************* -->
-<!-- 		    <h2>Arguments rédigés</h2> -->
-<%-- 			<c:forEach items="${arguments}" var="argument"> --%>
-<!-- 				<div> -->
-<%-- 				  <h4><a href="/action/${argument.action.url}">${argument.title}</a> / ${argument.voteCountAgainst}</h4> --%>
-<%-- 				  ${argument.content} --%>
-<%-- 				  <lrf:datedisplay date="${argument.updatedOrCreatedOn}" duration="true" /> --%>
-<!-- 				</div> -->
-<%-- 			</c:forEach> --%>
-		</div>
 									
 </div>
 	
