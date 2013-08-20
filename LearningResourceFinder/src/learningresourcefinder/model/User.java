@@ -125,20 +125,18 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
     
     public enum AccountConnectedType{
-        LOCAL("User connected with local account","local", null);
-//        FACEBOOK("User connected with his Facebook account","facebook", Facebook.class),
+        LOCAL("User connected with local account","local"),
+        FACEBOOK("User connected with his Facebook account","facebook"),
 //        TWITTER("User connected with his Twitter account","twitter",Twitter.class),
 //        LINKEDIN("User connected with his LinkedIn account","linkedIn",LinkedIn.class),
-//        GOOGLE("User connected with his google account","google",Google.class);
+        GOOGLE("User connected with his google account","google");
 
 
         private String detail;
         private String providerId;  // Used in spring social to identify the provider.
-        private Class<?> providerClass;
-        private AccountConnectedType(String detail,String providerId,Class<?> providerClass){
+        private AccountConnectedType(String detail,String providerId){
             this.detail = detail;
             this.providerId = providerId;
-            this.providerClass = providerClass;
         }
 
         public String getDetail(){
@@ -147,15 +145,12 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
         public String getProviderId(){
             return providerId;
         }
-        public Class<?> getProviderClass(){
-            return providerClass;
-        }
         public static AccountConnectedType getProviderType(String providerId){
             providerId = providerId.toLowerCase();
             switch(providerId){
-//            case "facebook" : return AccountConnectedType.FACEBOOK;
+           case "facebook" : return AccountConnectedType.FACEBOOK;
 //            case "twitter"  : return AccountConnectedType.TWITTER;
-//            case "google"   : return AccountConnectedType.GOOGLE;
+            case "google"   : return AccountConnectedType.GOOGLE;
 //            case "linkedin" : return AccountConnectedType.LINKEDIN;
             default : throw new RuntimeException("Provider cannot be identified");
             }

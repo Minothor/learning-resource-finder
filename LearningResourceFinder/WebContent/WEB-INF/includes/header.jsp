@@ -46,14 +46,8 @@ $(document).ready(function(){
 						          <c:when test="${sessionScope.providersignedin == 'FACEBOOK'}">
 						          <img src="images/features-icons/facebook.png"/>
 						          </c:when>
-						            <c:when test="${sessionScope.providersignedin == 'TWITTER'}">
-						          <img src="images/features-icons/twitter.png" alt="Connecté en tant que ${current.user.userName} avec ${sessionScope.providersignedin}"/>
-						          </c:when>
 						            <c:when test="${sessionScope.providersignedin == 'GOOGLE'}">
 						           <img src="images/features-icons/google.png" alt="Connecté en tant que ${current.user.userName} avec ${sessionScope.providersignedin}"/>
-						          </c:when>
-						            <c:when test="${sessionScope.providersignedin == 'LINKEDIN'}">
-						            <img src="images/features-icons/linkedin.png" alt="Connecté en tant que ${current.user.userName} avec ${sessionScope.providersignedin}"/>
 						          </c:when>
 						          </c:choose>&nbsp;&nbsp;|&nbsp;&nbsp;   
 						          <a id="logout" href="logout">déconnexion</a>
