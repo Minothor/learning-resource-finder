@@ -69,3 +69,5 @@ create table url_resource (
         add column slug varchar(50);
         
         
+        
+        
