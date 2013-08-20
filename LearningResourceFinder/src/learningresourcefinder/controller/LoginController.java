@@ -62,11 +62,14 @@ public class LoginController extends BaseController<User> {
 		}
 			
 		User u = loginService.loginSocial(code);
-		
+      
 		if(u == null){
 			//TODO add notification
 			return new ModelAndView("login");
 		}
+		
+		u = loginService.login(u.getMail(), u.getPassword(), false,u.getId(), AccountConnectedType.FACEBOOK);
+		NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "   + UrlUtil.getWebSiteName());
 	
 		return new ModelAndView("redirect:user/" + u.getUserName());
 
