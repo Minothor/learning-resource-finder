@@ -85,7 +85,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
             playlist.getResourceList().remove(resource);
             playlistRepository.merge(playlist);
         }
-        return new ModelAndView("redirect:/playlist?id="+playlist.getShortId()+"/"+playlist.getSlug());
+        return new ModelAndView("redirect:/playlist/"+playlist.getShortId()+"/"+playlist.getSlug());
     }
 	
 	@RequestMapping("/add")
