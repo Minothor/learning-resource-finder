@@ -21,7 +21,7 @@
 		</tr>
 		<c:forEach items="${playlistlist}" var="playlist">
 			<tr>
-				<td><a href="<c:url value='playlist?id=${playlist.id}'/>">${playlist.name}</a></td>
+				<td><a href="<c:url value='playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a></td>
 				<td>${playlist.description}</td>
 				<td>${playlist.createdBy.fullName}</td>
 		   </tr>

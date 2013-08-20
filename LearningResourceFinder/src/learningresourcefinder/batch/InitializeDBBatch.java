@@ -209,8 +209,7 @@ public class InitializeDBBatch implements Runnable {
 	}
 	
 	public void insertPlayList() {
-	    PlayList p = new PlayList();
-		p.setName("PlayList 1");
+	    PlayList p = new PlayList("PlayList 1", "");
 		p.getResourceList().add(frDupont);
         p.getResourceList().add(mathGob);
         p.getResourceList().add(frOrtho1);

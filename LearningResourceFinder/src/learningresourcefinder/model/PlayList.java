@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 import learningresourcefinder.util.TextUtils;
+import learningresourcefinder.web.Slugify;
 
 import org.hibernate.annotations.Type;
 
@@ -44,11 +45,16 @@ public class PlayList extends BaseEntity {
     @ManyToMany
     private List<Resource> resourceList = new ArrayList<Resource>();
 
-    
     public PlayList() {
     }
     
-    ///////// Getters & Setters //////////
+    public PlayList(String name, String description) {
+		this.name = name;
+		this.description = description;
+		this.slug = Slugify.slugify(name);
+	}
+
+	///////// Getters & Setters //////////
     public String getName() {
         return name;
     }
