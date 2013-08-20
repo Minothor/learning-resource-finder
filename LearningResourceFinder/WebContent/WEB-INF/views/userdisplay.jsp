@@ -74,7 +74,9 @@ $(function() {
 	<div class="user-options" style="font-size:12px">
 	
 		<div id="divPhoto">
-	    	<a href="#" data-width="500" data-rel="popupJquery" class="poplight">
+			<c:if test="${canEdit}">
+	    		<a href="#" data-width="500" data-rel="popupJquery" class="poplight">
+	    	</c:if> 		
 	        	<figure>
 	        		<c:choose>
 						<c:when test="${user.picture}">
@@ -92,9 +94,12 @@ $(function() {
 							</c:choose>
 						</c:otherwise>
 					</c:choose>
-	                <figcaption lang="la"><span class="lib-change-image"><b>Charger une image</b></span></figcaption>
+			<c:if test="${canEdit}">	 
+	                	<figcaption lang="la"><span class="lib-change-image"><b>Charger une image</b></span></figcaption>
 	      		</figure>
+     
 	      	</a>
+	       	</c:if> 		      	
 	    </div>
 		
 		<div id="popupJquery" class="popupJquery">	
