@@ -1,5 +1,6 @@
-function ajaxPostUrlResource() 
-{
+
+// Sends an ajax request for the user who wants to upload an image from an URL (text field).
+function ajaxPostUrlResource() {
 	var name = $('#name').val();
 	var url  = $('#url').val();
 	var idresource = $('#idresource').val();

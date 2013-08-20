@@ -9,7 +9,7 @@
 <html>
 <head>
 <!-- Jquery for change input popup addImageUser -->
-<script typr="text/javascript" src="/js/int/addImageUtil.js"></script>
+<script type="text/javascript" src="/js/int/addImageUtil.js"></script>
 <style type="text/css">
 	figure {
 		position: relative;
@@ -39,7 +39,11 @@
 		bottom: 0;
 	}
 </style>
-
+<script type="text/javascript" >
+$(function() {
+    $( "#tabs" ).tabs();
+});
+</script>
 <!-- you can set variables starting with "p_" in the file named website_content.properties -->
 <link rel="canonical" href="${p_website_address}/user/${user.userName}"/>
 <meta name="description" content="${user.firstName} ${user.lastName}">
@@ -88,7 +92,7 @@
 							</c:choose>
 						</c:otherwise>
 					</c:choose>
-	                <figcaption lang="la"><span><b>Charger une image</b></span></figcaption>
+	                <figcaption lang="la"><span class="lib-change-image"><b>Charger une image</b></span></figcaption>
 	      		</figure>
 	      	</a>
 	    </div>
@@ -98,23 +102,23 @@
 	        	<a class="close" title="close this popup">X</a>
 	      	</div>
 	  	  	<form method="post" action="/user/imageadd" class="formUrlResource" enctype="multipart/form-data">	
-	    		<h2>Add Image</h2> 
+	    		<h2>Ajouter une image</h2> 
 	          	<br />
-	          	<input type="radio"  name="rdFrom" value="computer"     class="radioComputer" id="inputComputer" checked="checked" /> From my computer
+	          	<input type="radio"  name="rdFrom" value="computer"     class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur
 	          	<input type="file"   name="file"   value="Parcourir..." class="inputSource"   id="inputFile" /> 
 	          	<input type="hidden" name="strUrl" value="http://..."   class="inputSource"   id="inputUrl"  />             
 	          	<br /> 
-	          	<input type="radio"  name="rdFrom" value="url" class="radioUrl" /> From Url
+	          	<input type="radio"  name="rdFrom" value="url" class="radioUrl" /> Depuis un lien
 	          	<input type="hidden" name="id"     value="${user.id}" />
 	          	<br />
 	          	<br />
-	          	<input class="btnSubmit" type="submit" value="Add Picture" name="btnPicture" /> 
+	          	<input class="btnSubmit" type="submit" value="Ajouter" name="btnPicture" /> 
 	      	</form>
 	      	<br />  <%-- Add/edit links --%>
 			<c:if test="${canEdit}">
 				<c:choose>
 						<c:when test="${user.picture}">
-							<a href= "/user/imagedelete?id=${user.id}">supprimer image</a><br/>
+							<a href= "/user/imagedelete?id=${user.id}">Supprimer image</a><br/>
 						</c:when>
 				</c:choose>			
 				<c:if test="${sessionScope.providersignedin != 'LOCAL'}">	

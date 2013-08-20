@@ -1,7 +1,7 @@
 #fade {
 /*--Masque opaque noir de fond--*/
 	display: none;
-/*--masqué par défaut--*/
+/*--masquï¿½ par dï¿½faut--*/
 	background: #000;
 	position: fixed;
 	left: 0;
@@ -14,7 +14,7 @@
 .popupJquery {
   padding: 20px;
 	display: none;
-/*--masqué par défaut--*/
+/*--masquï¿½ par dï¿½faut--*/
 	background: #fff;
 	border: 2px solid #333;
 	float: left;
@@ -23,7 +23,7 @@
 	top: 50%;
 	left: 50%;
 	z-index: 99999;
-/*--Les différentes définitions de Box Shadow en CSS3--*/
+/*--Les diffï¿½rentes dï¿½finitions de Box Shadow en CSS3--*/
 	-webkit-box-shadow: 0px 0px 20px #000;
 	-moz-box-shadow: 0px 0px 20px #000;
 	box-shadow: 0px 0px 20px #000;
@@ -36,14 +36,14 @@ img.btn_close {
 	float: right;
 	margin: -55px -55px 0 0;
 }
-/*--Gérer la position fixed pour IE6--*/
+/*--Gï¿½rer la position fixed pour IE6--*/
 *html #fade {
 	position: absolute;
 }
 *html .popup_block {
 	position: absolute;
 }
-span {
+span.lib-change-image {
 	color: yellow;
 }
 .inputSource {

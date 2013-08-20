@@ -1,5 +1,8 @@
 jQuery(function($){			   		   
-	// Click on class poplight
+
+	// Opens the pop-up dialog when clicking on the link having the poplight class.
+	// This function gives the dialog some standard style attributes (margin, fadeIn, etc.)
+	// Reusable for any dialog of this site.
 	$('a.poplight').on('click', function() {
 		var popID = $(this).data('rel'); // Find pop-up
 		var popWidth = $(this).data('width'); // Find width
@@ -28,9 +31,10 @@ jQuery(function($){
 	$('body').on('click', 'a.close, #fade', function() { //Au clic sur le body...
 		$('#fade , .popupJquery').fadeOut(function() {
 			$('#fade').remove();   
-	});
+	    });
+		
 		location.reload();
-		return false;
+	    return false;
 	});
 });
 
