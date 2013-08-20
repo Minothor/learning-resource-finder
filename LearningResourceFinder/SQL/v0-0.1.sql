@@ -73,4 +73,10 @@ create table url_resource (
 	create sequence PLAYLIST_SEQUENCE;
 	create sequence RESOURCE_SEQUENCE;
         
+-- Ibrahim 2013-08-20	
+    alter table playlist 
+        add column shortid varchar(255);
+
+    alter table resource 
+        add column shortid varchar(255);	
         
