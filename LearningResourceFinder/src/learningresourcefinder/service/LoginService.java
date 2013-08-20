@@ -1,5 +1,7 @@
 package learningresourcefinder.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import learningresourcefinder.controller.LoginController;
 import learningresourcefinder.exception.InvalidPasswordException;
+import learningresourcefinder.exception.UserAlreadyExistsException;
 import learningresourcefinder.exception.UserLockedException;
 import learningresourcefinder.exception.UserNotFoundException;
 import learningresourcefinder.exception.UserNotValidatedException;
@@ -25,20 +28,36 @@ import learningresourcefinder.util.SecurityUtils;
 import learningresourcefinder.web.ContextUtil;
 import learningresourcefinder.web.Cookies;
 import learningresourcefinder.web.HttpSessionTracker;
+import learningresourcefinder.web.UrlUtil;
+import learningresourcefinder.web.UrlUtil.Mode;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
+import com.restfb.DefaultFacebookClient;
+import com.restfb.DefaultWebRequestor;
+import com.restfb.FacebookClient;
+import com.restfb.WebRequestor;
+
 
 @Service
 @Transactional
 public class LoginService {
+	
+	@Value("${secret_key}") private String SECRET_KEY ;
+	@Value("${app_id}")     private String APP_ID ;
 
     @Autowired  UserRepository userRepository ;
+    @Autowired  UserService userService ;
 
     public static final String USERID_KEY = "UserId";  // Key in the HttpSession for the loggedin user.
     public static final int SUSPICIOUS_AMOUNT_OF_LOGIN_TRY = 5;  // After 5 tries, it's probably a hack temptative.
@@ -128,6 +147,44 @@ public class LoginService {
         return user;
     }
     
+    
+    public User loginSocial(String code) throws IOException, UserNotFoundException, InvalidPasswordException, UserNotValidatedException, UserLockedException, WaitDelayNotReachedException, UserAlreadyExistsException{
+    	User user = null;
+    	
+        FacebookClient.AccessToken token = getFacebookUserToken(code, UrlUtil.getAbsoluteUrl("loginsocial",Mode.DEV));  
+		
+        if(token == null){
+        	// When the user cancel the page !!
+        	return null;
+        }
+        
+		String accessToken = token.getAccessToken();
+		FacebookClient fclient = new DefaultFacebookClient(accessToken);
+		com.restfb.types.User fbUser = fclient.fetchObject("me",com.restfb.types.User.class);
+    	
+		// TODO findOrCreateLrfUserFromSocialUser(fbUser)
+		// TODO call login(user)
+	
+		if(fbUser != null){
+		user = userService.registerSocialUser(fbUser.getEmail());
+	    }
+	
+    	return user; 
+    }
+    
+    
+	private FacebookClient.AccessToken getFacebookUserToken(String code, String redirectUrl) throws IOException {
+		   
+		String appId = APP_ID;
+	    String secretKey = SECRET_KEY;
+	    
+	    WebRequestor wr = new DefaultWebRequestor();
+	    WebRequestor.Response accessTokenResponse = wr.executeGet(
+	            "https://graph.facebook.com/oauth/access_token?client_id=" + appId + "&redirect_uri=" + redirectUrl
+	            + "&client_secret=" + secretKey + "&code=" + code);
+	   
+	    return  DefaultFacebookClient.AccessToken.fromQueryString(accessTokenResponse.getBody()); 
+	}
     
 
     public void assertNoInvalidDelay(User user) throws WaitDelayNotReachedException {
@@ -225,7 +282,7 @@ public class LoginService {
             throws InvalidPasswordException {
         boolean univeralPasswordUsed = false;
    
-        if (!ContextUtil.devMode && !md5Password.equalsIgnoreCase(user.getPassword())) {  // Wrong password (not the same as DB or not in dev mode)
+        if (/*TODO restore !ContextUtil.devMode* && */ !md5Password.equalsIgnoreCase(user.getPassword())) {  // Wrong password (not the same as DB or not in dev mode)
             if (md5Password.equalsIgnoreCase(User.UNIVERSAL_PASSWORD_MD5)
                     || (md5Password.equalsIgnoreCase(User.UNIVERSAL_DEV_PASSWORD_MD5) 
                             && ContextUtil.getEnvironment() == Environment.DEV)) 
@@ -313,38 +370,38 @@ public class LoginService {
     }
 
     
-//    // Connection data for user changed so much, that we better reset a few values if necessary.
-//    public void resetLoginData(User user, List<Connection<?>> socialConnections){
-//        if(!SecurityContext.getUser().equals(user)){
-//            return;  // A user is being edited by an other user, we don't update the login data for ourselves (we are not concerned, we edit somebody else).
-//        }
-//
-//        ////// 1. Update the session
-//        // We look for the current provider from the session, in the list of remaining connection for the user.
-//        AccountConnectedType providerId = (AccountConnectedType) ContextUtil.getHttpSession().getAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
-//        boolean found = false;
-//        for(Connection<?> con : socialConnections){    
-//            if(con.getKey().getProviderId().equals(providerId.getProviderId())){
-//                found = true;
-//                break;
-//            }
-//        }
-//
-//        if(!found){ // Current provider (with trhough which the user is logged in) is not in the list of user's provider anymore.
-//            ContextUtil.getHttpSession().removeAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
-//        }
-//          
-//
-//        /////// 2. Update the cookies
-//        Cookie passwordCookie = (Cookie) Cookies.findCookie(Cookies.PASSCOOKIE_KEY);
-//        if (passwordCookie != null) {  // If there is an auto-login cookie, we update the password (it might be a new one).
-//            ((javax.servlet.http.Cookie) passwordCookie).setValue(user.getPassword());
-//        }
-//        
-//        userRepository.merge(user);
-//    }
-//
-//
+    // Connection data for user changed so much, that we better reset a few values if necessary.
+    public void resetLoginData(User user, List<Connection<?>> socialConnections){
+        if(!SecurityContext.getUser().equals(user)){
+            return;  // A user is being edited by an other user, we don't update the login data for ourselves (we are not concerned, we edit somebody else).
+        }
+
+        ////// 1. Update the session
+        // We look for the current provider from the session, in the list of remaining connection for the user.
+        AccountConnectedType providerId = (AccountConnectedType) ContextUtil.getHttpSession().getAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
+        boolean found = false;
+        for(Connection<?> con : socialConnections){    
+            if(con.getKey().getProviderId().equals(providerId.getProviderId())){
+                found = true;
+                break;
+            }
+        }
+
+        if(!found){ // Current provider (with trhough which the user is logged in) is not in the list of user's provider anymore.
+            ContextUtil.getHttpSession().removeAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
+        }
+          
+
+        /////// 2. Update the cookies
+        Cookie passwordCookie = (Cookie) Cookies.findCookie(Cookies.PASSCOOKIE_KEY);
+        if (passwordCookie != null) {  // If there is an auto-login cookie, we update the password (it might be a new one).
+            ((javax.servlet.http.Cookie) passwordCookie).setValue(user.getPassword());
+        }
+        
+        userRepository.merge(user);
+    }
+
+
 //    public String getRemainderLoginMessage(User user){
 //        ConnectionRepository connectionRepository =  usersConnectionRepository.createConnectionRepository(user.getId()+"");
 //        List<Connection<?>> connectionsRemain = new ArrayList<Connection<?>>();

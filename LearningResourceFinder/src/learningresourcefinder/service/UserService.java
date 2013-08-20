@@ -1,24 +1,57 @@
 package learningresourcefinder.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
+
+import learningresourcefinder.exception.InvalidPasswordException;
 import learningresourcefinder.exception.UserAlreadyExistsException;
 import learningresourcefinder.exception.UserAlreadyExistsException.IdentifierType;
+import learningresourcefinder.exception.UserLockedException;
+import learningresourcefinder.exception.UserNotFoundException;
+import learningresourcefinder.exception.UserNotValidatedException;
 import learningresourcefinder.mail.MailCategory;
 import learningresourcefinder.mail.MailType;
 import learningresourcefinder.model.User;
+import learningresourcefinder.model.User.AccountConnectedType;
 import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.LoginService.WaitDelayNotReachedException;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
 import learningresourcefinder.util.HTMLUtil;
+import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
+import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.SecurityUtils;
+import learningresourcefinder.web.ContextUtil;
 import learningresourcefinder.web.UrlUtil;
+import learningresourcefinder.web.UrlUtil.Mode;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.ImageType;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.context.request.WebRequest;
 
 @Transactional
 @Service(value="userService")
@@ -42,15 +75,15 @@ public class UserService {
     /**
      * Register a user and sends a validation mail.
      * 
-     * @param directValidation
-     *            : validate an account directly without send a mail
+     * @param directValidation : validate an account directly without send a mail
+     * @param passwordInClear : null if social register.
      */
-    public User registerUser(boolean directValidation, String username, String passwordInClear, String mail, boolean isSocial) throws UserAlreadyExistsException {
+    public User registerUser(boolean directValidation, String username, String passwordInClear, String mail) throws UserAlreadyExistsException {
 
     	if(!HTMLUtil.isHtmlSecure(username)) // I add this Condition for Batch/Test || Ahmed-flag
     	   throw new RuntimeException("Vous avez introduit du code html/javascript");
     	
-        if (userRepository.getUserByUserName(username) != null)    {
+        if (userRepository.getUserByUserName(username) != null){
             throw new UserAlreadyExistsException(IdentifierType.USERNAME, username);
         }
        
@@ -60,21 +93,20 @@ public class UserService {
         
         User newUser = new User();
         newUser.setUserName(username);
-        newUser.setPassword(SecurityUtils.md5Encode(passwordInClear));
+        newUser.setPassword(passwordInClear == null ? null : SecurityUtils.md5Encode(passwordInClear));
         newUser.setMail(mail);
         
         //// Validation mail.
-        String base = newUser.getMail() + newUser.getPassword() + Math.random();  // Could be pure random.
-        newUser.setValidationCode(SecurityUtils.md5Encode(base.toString()));
 
         if (directValidation) {
             newUser.setAccountStatus(AccountStatus.ACTIVE);
         } else {
+            String base = newUser.getMail() + newUser.getPassword() + Math.random();  // Could be pure random.
+            newUser.setValidationCode(SecurityUtils.md5Encode(base.toString()));
+
             newUser.setAccountStatus(AccountStatus.NOTVALIDATED);
         }
                     
-        newUser.setPasswordKnownByTheUser(!isSocial);
-            
         //// Save the user in the db
         userRepository.persist(newUser);
 
@@ -317,55 +349,30 @@ public class UserService {
        userRepository.merge(user);
    }*/
    
-/*   public User registerSocialUser(WebRequest request,String mail,boolean mailIsValid) throws UserAlreadyExistsException {
-       Connection<?> connection =  ProviderSignInUtils.getConnection(request); 
+   public User registerSocialUser(String mail) throws UserAlreadyExistsException {
+      
      
-       User user = null;
-       try {
-           Date date = new Date();
-           
+       User user = userRepository.getUserByEmail(mail);  
+       if(user == null) {  // We need to create a user for a facebook/google first time login.
            // 1. Username based on Time stamp (temporary name until we persist it and have it's id)
+           Date date = new Date();
            String username = date.getTime()+"";
            int begin = username.length()-12;
            username= "tmp"+username.substring(begin);
            Random random = new Random();
-           
-           if (mailIsValid) {  // Ok, we directly register that user. 
-               user = registerUser(true, 
-                   username,  // This name will change at the next line, as soon as we have the id. 
-                   random.nextLong()+"",   // Nobody should never use this password (because the user logs in through it's social network). 
-                   mail,true);         
-              
-           } else { // is there another user having the same mail? 
-               user = userRepository.getUserByEmail(mail);
-               if(user == null){
-                   //we need to verify the mail before registering so we pass false for directValidation
-                   user = registerUser(false, 
-                       username,  
-                       random.nextLong()+"",   
-                       mail,true);     
-               } else { //case where the user is already registered in local and try to register with twitter
-                  throw new UserAlreadyExistsException(IdentifierType.MAIL, user.getUserName());
-               }
-           }
-               
-           // 2. Now we have the ID and can assign a better username.
+
+           // 2. User instantiation and persist
+       	   user = registerUser(true, 
+        			   username,  
+        			   null,   
+        			   mail);     
+
+           // 3. Now we have the ID and can assign a better username.
            user.setUserName("user"+user.getId());
            userRepository.merge(user);
-           
-           //When the user is created in local , add a new Connection to userconnection table
-           ProviderSignInUtils.handlePostSignUp(user.getId()+"", request);   
-          
-       } catch (Exception e) {
-           if(e instanceof UserAlreadyExistsException){
-               throw new UserAlreadyExistsException(IdentifierType.MAIL,user.getUserName());
-           } else {
-               throw new RuntimeException("Problem while registering "+mail+" account through "+ connection.getKey().getProviderId(), e);
-           }
        }
-       
        return user;
-   }*/
+   }
   /*  public List<User> getUserLstWithRoleOrPrivilege(){
     	List<User> list1 = userRepository.getUserWithRoleNotNull();
     	List<User> list2 = userRepository.getUserWithPrivilegeNotEmpty();

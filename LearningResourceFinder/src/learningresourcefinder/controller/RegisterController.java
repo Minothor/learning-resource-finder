@@ -51,8 +51,7 @@ public class RegisterController extends BaseController<User> {
 		//////// Try to register
 		try {
 
-			user = userService.registerUser(false, user.getUserName(),
-					user.getPassword(), user.getMail(), false);
+			user = userService.registerUser(false, user.getUserName(),	user.getPassword(), user.getMail());
 			NotificationUtil
 			.addNotificationMessage("Un message de confirmation de votre inscription vous a été envoyé sur votre email :"
 					+ user.getMail()

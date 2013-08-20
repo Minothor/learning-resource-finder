@@ -99,7 +99,6 @@ public class UserChangePasswordController extends BaseController<User> {
 				return formMv;
 			} else {
 				user.setPassword(SecurityUtils.md5Encode(passwordData.confirmPassword));
-				user.setPasswordKnownByTheUser(true);
 				userRepository.merge(user);
 				NotificationUtil.addNotificationMessage("Votre nouveau mot de passe est bien enregistré");
 				return new ModelAndView("redirect:/user/"+user.getUserName());

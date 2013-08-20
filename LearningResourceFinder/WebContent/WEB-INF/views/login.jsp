@@ -8,35 +8,29 @@
 
 <!-- you can set variables starting with "p_" in the file named website_content.properties -->
 <head>
-<script type="text/javascript">
-$(document).ready(function() {		
-	
-	
-	// ajax request wich will call loginController wich will place a flag autologin in the session
-	// later this value will be used in the spring-social SigninAdapter to determine if we want create a cookie for the user login
-	
-	$('input[name="keepLoggedIn"]').click(function(){
-		console.log("clic");
-		var checkbox = $(this).is(':checked');
-		
-		var request = $.ajax({
-			url: "ajax/autologin",
-			type: "GET", 	
-			data : {autologin:checkbox},
-			dataType: "html"
-		});
-		// if success
-		request.done(function(data) {
-			console.log(data);
-			//location.reload(); Maybe will make the server throw an UnauthorizedException if anonymous users cannot see that page. 
-		});
-								
-	});
-	
-	
-});
 
-</script>
+<style type="text/css">
+.simple-button.provider-signup.facebook {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #185996;
+    background-image: linear-gradient(to bottom, #1A60A2, #154E83);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    color: #FFFFFF !important;
+    text-shadow: none;
+}
+.simple-button.provider-signup {
+    display: block;
+    font-family: "MuseoSans300",sans-serif;
+    height: 40px;
+}
+</style>
 
 </head>
 
@@ -55,13 +49,13 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 		<!-- FACEBOOK SIGNIN -->
 	
 		<div>
-		<form name="fb_signin" id="fb_signin" action="<c:url value="/signin/facebook"/>" method="POST">
-			<input type="hidden" name="scope" value="email,publish_stream,offline_access" /> 
-				<div class="container">
-				se connecter avec<br> 
-					<input class="image-login" type="image" alt="logo facebook" src="images/social_logo/facebook.jpg" />
-				</div>
-		</form>
+
+			<a id="login-facebook" class="simple-button provider-signup facebook" href="https://www.facebook.com/dialog/oauth?client_id=350985091585275&redirect_uri=http://localhost:8080/loginsocial&scope=email">
+				<img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/facebook-24px.png">
+				<span class="provider-separator"></span>
+				<span class="provider-signup-text"> Sign in with Facebook </span>
+			</a>
+		
 		</div>
 		<br/>
 
@@ -94,7 +88,7 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 		<form name="go_signin" id="go_signin"
 			action="<c:url value="/signin/google"/>" method="POST">
 			<input type ="hidden" name ="scope" value="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"/>
-			<div class="container">se connecter avec<br> 
+			<div class="container">se connecter avec<br /> 
 				<input class="image-login" type="image" alt="logo google"
 				src="images/social_logo/google.jpg" />
 			</div>
@@ -111,13 +105,5 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	
 </div>	
 <!-- this checkbox is not in a form tag because we pass its value by an ajax request -->
-<c:choose>
-<c:when test='${autologin}'>    
-<input type="checkbox" name="keepLoggedIn" checked="checked" />
-</c:when>
-<c:otherwise>
-<input type="checkbox" name="keepLoggedIn" />
-</c:otherwise>
-</c:choose>
-<label for="keepLoggedIn"><span title="Si vous cochez cette case, lors de votre prochaine visite vous serez connectés automatiquement">Je souhaite rester connecté</span></label>
+
 </body>

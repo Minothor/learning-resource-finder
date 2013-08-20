@@ -3,7 +3,11 @@ package learningresourcefinder.batch;
 import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
 
+import learningresourcefinder.web.UrlUtil;
+import learningresourcefinder.web.UrlUtil.Mode;
+
 import org.apache.log4j.BasicConfigurator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -12,6 +16,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailBatch implements Runnable {
 
+	@Value("${secret_key}") private String APP_ID;
+	@Value("${app_id}")     private String SECRET_KEY;
+	
 	JavaMailSenderImpl myJavaMailSender;
 
 	String myHost = "smtp.gmail.com";
@@ -28,9 +35,11 @@ public class MailBatch implements Runnable {
 	@Override
 	public void run() {
 
-		sendMail();
+	/*	sendMail();
 
-		System.out.println("Send Mail");
+		System.out.println("Send Mail");*/
+		
+	System.out.println(SECRET_KEY);
 
 	}
 

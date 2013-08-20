@@ -189,11 +189,9 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     private String title;
     
     @Column(length = 100)
-    @Size(min = 4, message = "votre mot de passe doit contenir au moins 4 caractères")
-    private String password;
+    @Size(min = 4, message = "votre mot de passe doit contenir au moins 4 caractères") // TODO: verify if we need to remove this line and check the size manually in the controller (register and change pwd). John 2013-08-20
+    private String password; // MD5 encoded password. May be null if user registered via facebook/google and never logedin directly.
 
-    private boolean isPasswordKnownByTheUser;  // true if account created through social network login, and random password not sent to the user.
-    
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -345,14 +343,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 
     public void setPassword(String password) {
         this.password = password != null ? password.toLowerCase() : password;
-    }
-
-    public boolean isPasswordKnownByTheUser() {
-        return isPasswordKnownByTheUser;
-    }
-
-    public void setPasswordKnownByTheUser(boolean isPasswordKnownByTheUser) {
-        this.isPasswordKnownByTheUser = isPasswordKnownByTheUser;
     }
 
     public Date getLastAccess() {
