@@ -2,6 +2,10 @@ package learningresourcefinder.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.UserRepository;
@@ -38,8 +42,7 @@ public class UserImageController extends BaseController<User> {
 	}
 
 	@RequestMapping("/imageadd")
-	public ModelAndView userImageAdd(@RequestParam("id") long userid,
-			@RequestParam("file") MultipartFile multipartFile) throws Exception{
+	public ModelAndView userImageAdd(@RequestParam("id") long userid, @RequestParam("file") MultipartFile multipartFile) throws Exception{
 		
 		User user = getRequiredEntity(userid);
 
@@ -74,7 +77,54 @@ public class UserImageController extends BaseController<User> {
 
 		return mv;
 	}
+	
+	@RequestMapping("/imageaddUrl" )
+	public ModelAndView userImageAdd(@RequestParam("id") long userid, @RequestParam("strUrl") String url) throws Exception {
+		
+		User user = getRequiredEntity(userid);
+		SecurityContext.assertCurrentUserMayEditThisUser(user);
+		
+		ModelAndView mv = new ModelAndView("redirect:/user/" + user.getUserName());
+		mv.addObject("random", System.currentTimeMillis());
 
+		BufferedImage image = null;
+		
+		try 
+		{
+            image = ImageUtil.readImage(url);
+        } 
+		catch (RuntimeException e) 
+		{
+        	NotificationUtil.addNotificationMessage("veuillez indiquer une URL valide");
+            return mv;//useless to try to save image if we don't have it
+        }
+		
+        try 
+        {
+            ByteArrayOutputStream outStream= new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", outStream);
+            
+            image = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),120 * 200, 200, 200);
+            
+            ImageUtil.saveImageToFileAsJPEG(image, 
+            		FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER +  FileUtil.USER_RESIZED_LARGE_SUB_FOLDER, user.getId() + ".jpg", 0.9f);           
+            
+            BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),40 * 40, 60, 60);
+
+            ImageUtil.saveImageToFileAsJPEG(resizedImage,  
+            		FileUtil.getGenFolderPath(currentEnvironment) + 
+            		FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER + FileUtil.USER_RESIZED_SMALL_SUB_FOLDER, user.getId() + ".jpg", 0.9f);
+
+        } 
+        catch (IOException e) 
+        {
+            throw new RuntimeException(e);
+        }
+
+        return mv;
+	}
+
+	
 	 @RequestMapping("/imagedelete")
 	 public ModelAndView userImageDelete(@RequestParam("id") long userid){
 		 User user = getRequiredEntity(userid);
@@ -88,6 +138,8 @@ public class UserImageController extends BaseController<User> {
 	 private boolean canEdit(User user) {
 		 return user.equals(SecurityContext.getUser()) || SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS);
 	 }
+	 
+
 
 	 
 	

@@ -109,12 +109,12 @@ $(function() {
 	  	  	<form method="post" action="/user/imageadd" class="formUrlResource" enctype="multipart/form-data">	
 	    		<h2>Ajouter une image</h2> 
 	          	<br />
-	          	<input type="radio"  name="rdFrom" value="computer"     class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur
-	          	<input type="file"   name="file"   value="Parcourir..." class="inputSource"   id="inputFile" /> 
-	          	<input type="hidden" name="strUrl" value="http://..."   class="inputSource"   id="inputUrl"  />             
+	          	<label><input type="radio"  name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur</label>
+	          	<input type="file"   name="file"   value="Parcourir..."    class="inputSource"   id="inputFile" /> 
+	          	<input type="hidden" name="strUrl" value="http://..."      class="inputSource"   id="inputUrl"  />             
 	          	<br /> 
-	          	<input type="radio"  name="rdFrom" value="url" class="radioUrl" /> Depuis un lien
-	          	<input type="hidden" name="id"     value="${user.id}" />
+	          	<label><input type="radio"  name="rdFrom" value="url"      class="radioUrl" /> Depuis un lien</label>
+	          	<input type="hidden" name="id" value="${user.id}" />
 	          	<br />
 	          	<br />
 	          	<input class="btnSubmit" type="submit" value="Ajouter" name="btnPicture" /> 

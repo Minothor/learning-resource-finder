@@ -48,8 +48,10 @@ span.lib-change-image {
 }
 .inputSource {
 	border: 1px solid black;
-	padding: 5px;
-  float: right;
+    float: right;
+    overflow: hidden;
+    padding: 5px;
+    width: 250px;
 }
 input[type="button"], input[type="submit"], .button, a.button:link, a.button:visited {
 	background-color: #333333;

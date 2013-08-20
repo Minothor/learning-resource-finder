@@ -4,10 +4,12 @@ jQuery(function($) {
 	  $('input.radioUrl').on('change', function() {
 	    document.getElementById('inputFile').type='hidden';
 	    document.getElementById('inputUrl').type='text';
+	    $('form.formUrlResource').attr('action', '/user/imageaddUrl');
 	  });
 	  $('input.radioComputer').on('change', function() {
 	    document.getElementById('inputUrl').type='hidden';
 	    document.getElementById('inputFile').type='file';
+	    $('form.formUrlResource').attr('action', '/user/imageadd');
 	  });
 	  
 	  // Clean input string URL
