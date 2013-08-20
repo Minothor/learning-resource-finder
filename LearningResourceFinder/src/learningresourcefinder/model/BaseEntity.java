@@ -3,9 +3,6 @@ package learningresourcefinder.model;
 import java.util.Date;
 
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
@@ -16,21 +13,18 @@ import javax.persistence.Transient;
 
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.DateUtil;
-
 import org.apache.log4j.Logger;
 import org.hibernate.proxy.HibernateProxyHelper;
 
 @MappedSuperclass
-public class BaseEntity  {
+public abstract class BaseEntity  {
 
     private static final boolean ENFORCE_CONSISTENT_HASHCODE = false;
-
+    
+    
 	@Transient
     private Logger logger = Logger.getLogger(this.getClass());
-    
-    @Id   @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    
+      
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(nullable=true) //when we are not in a thread web request, no user will be associated to entity creation/update (no logged in user)
     User createdBy;
@@ -58,6 +52,7 @@ public class BaseEntity  {
     public void postPersist(){
     	isBeingPersisted = false;
     }
+    
     @PreUpdate
     public void onUpdate(){
     	updatedBy=SecurityContext.getUser();
@@ -67,13 +62,10 @@ public class BaseEntity  {
 	public void updateOnNotNull() {
 		setUpdateOnWhenCreating = true;
 	}
-
-    
-    public Long getId() {
-    	return id;
-    }
-
-   
+	
+	// Must be abstract to redefine in all inheritance models
+	// to be able to redefine an id annotation per model
+    public abstract Long getId();
     
     @Override
     public int hashCode() {

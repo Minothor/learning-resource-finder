@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 public class Comment extends BaseEntity
 {
+    @Id   @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    
 	@Column(columnDefinition="VARCHAR(250)", nullable=false)
 	private String title;
 	
@@ -41,4 +44,9 @@ public class Comment extends BaseEntity
 	public void setProblem(Problem problem) {
 		this.problem = problem;
 	}
+	
+    @Override
+    public Long getId() {
+        return id;
+    }
 }

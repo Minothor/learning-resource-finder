@@ -5,23 +5,33 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+
+import learningresourcefinder.util.TextUtils;
 
 import org.hibernate.annotations.Type;
 
 @Entity
+@SequenceGenerator(name="PlayListSequence", sequenceName="PLAYLIST_SEQUENCE")
 public class PlayList extends BaseEntity {
-
-    @Column(length=50, nullable=false)
-    private String name;
     
+    @Id  @GeneratedValue(generator="PlayListSequence") 
+    Long id;
+    
+    @Column(nullable=true) // nullable here but fed in baseentity/postpersist from new id
+    String shortId;
+    
+    @Column(length=50,nullable=false )
+    private String name;
+
     @Column(length=50, nullable=false)
     private String slug;
     
-  
-
-	@Lob
+    @Lob
     /*Forcing type definition to have text type column in postgresql instead of automatic indirect storage of large object (postgresql store lob in a separate table named pg_largeobject and store his id in the "content" column).
      *Without forcing, JDBC driver use write() method of the BlobOutputStream to store Clob into the database;
      * this method take an int as parameter an convert it into a byte causing lose of 3 byte information so character are render as ASCII instead of UTF-8 expected .
@@ -34,6 +44,10 @@ public class PlayList extends BaseEntity {
     @ManyToMany
     private List<Resource> resourceList = new ArrayList<Resource>();
 
+    
+    public PlayList() {
+    }
+    
     ///////// Getters & Setters //////////
     public String getName() {
         return name;
@@ -52,12 +66,42 @@ public class PlayList extends BaseEntity {
         return resourceList;
     }
 
-
     public String getSlug() {
-  		return slug;
-  	}
-  	public void setSlug(String slug) {
-  		this.slug = slug;
-  	}
+        return slug;
+    }
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+    
+    public String getShortId() {
+
+        return getOrComputeShortId();
+    }
+    
+    public String getOrComputeShortId() {
+        
+        if (shortId == null) {
+            // update the shortId from the new id
+            // shortId is initialized once here at first call because we need
+            // the new id and so we must wait the nextVal() of persist(resource)
+            // call before calculate the shortId
+            if (this.getId() != null) {
+                this.setShortId(TextUtils.generateShortId(this.getId()));
+            } else {
+                throw new RuntimeException(
+                        "Bug: id can't be null during call to getShortedId. Programmer is not supposed to call this method before em.persist(entity).");
+            }
+        }
+        return shortId;
+    }
+    
+    public void setShortId(String shortId) {
+        this.shortId = shortId;
+    }
 
 }

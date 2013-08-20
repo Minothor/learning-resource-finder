@@ -11,6 +11,9 @@ import org.hibernate.annotations.Type;
 @Entity
 public class Problem extends BaseEntity
 {
+    @Id   @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    
 	@Column(length = 50)
 	@Size(max=40, message="le nom d'un problème ne peut contenir que 50 caractères maximum")
 	private String name;
@@ -92,4 +95,9 @@ public class Problem extends BaseEntity
 	public void removeComment(Comment c) {
 		this.comments.remove(c);
 	}
+	
+    @Override
+    public Long getId() {
+        return id;
+    }
 }

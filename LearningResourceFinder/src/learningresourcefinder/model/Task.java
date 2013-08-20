@@ -1,6 +1,9 @@
 package learningresourcefinder.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -10,6 +13,9 @@ import org.hibernate.annotations.Type;
 @Entity
 public class Task extends BaseEntity
 {
+    @Id   @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    
 	private String name;
 	
     @Lob
@@ -78,4 +84,9 @@ public class Task extends BaseEntity
 	public void setPlayList(PlayList playlist) {
 		this.playlist = playlist;
 	}
+	
+    @Override
+    public Long getId() {
+        return id;
+    }
 }

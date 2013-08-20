@@ -2,6 +2,9 @@ package learningresourcefinder.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -12,6 +15,9 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name="urlresource")
 public class UrlResource extends BaseEntity
 {
+    @Id   @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    
 	@NotBlank
 	@Column(length = 50, nullable=false)
 	@Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
@@ -55,4 +61,9 @@ public class UrlResource extends BaseEntity
 	public void setResource(Resource resource) {
 		this.resource = resource;
 	}
+	
+    @Override
+    public Long getId() {
+        return id;
+    }
 }

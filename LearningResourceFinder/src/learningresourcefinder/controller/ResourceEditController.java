@@ -54,7 +54,7 @@ public class ResourceEditController extends BaseController<Resource> {
 			resourceRepository.merge(resource);
 		}
 		
-		return new ModelAndView("redirect:/resource/"+resource.getId()+"/"+resource.getSlug());
+		return new ModelAndView("redirect:/resource/"+resource.getShortId()+"/"+resource.getSlug());
 	}
 
 	@ModelAttribute

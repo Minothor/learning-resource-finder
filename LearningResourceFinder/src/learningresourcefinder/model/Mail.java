@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -14,7 +17,10 @@ import org.hibernate.annotations.Type;
 
 @Entity
 public class Mail extends BaseEntity {
-		
+
+    @Id   @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    
 	//in case we send an email to a person in the database. Null if emailTarget is not null.
     @ManyToOne
 	@JoinColumn(nullable = true)
@@ -179,6 +185,11 @@ public class Mail extends BaseEntity {
 
     public void setEmailReplyTo(String emailReplyTo) {
         this.emailReplyTo = emailReplyTo;
+    }
+    
+    @Override
+    public Long getId() {
+        return id;
     }
 
 }

@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -34,6 +37,9 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
    
     private static final long serialVersionUID = 4144665927166518905L;
 
+    @Id   @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    
     //this is the MD5 print of the universal password
     public static final String UNIVERSAL_PASSWORD_MD5 = "477bc098b8f2606137c290f9344dcee8";
     public static final String UNIVERSAL_DEV_PASSWORD_MD5 = "e77989ed21758e78331b20e477fc5582";  // "dev" in clear. -> any developer can use "dev" to impersonate anybody when developing. Does not work in production. 
@@ -493,7 +499,10 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 		return playListList;
 	}  
     
-    
+    @Override
+    public Long getId() {
+        return id;
+    }
     
     
 }

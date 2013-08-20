@@ -68,6 +68,9 @@ create table url_resource (
     alter table resource 
         add column slug varchar(50);
         
-        
+-- Julien 2013-08-20
+
+	create sequence PLAYLIST_SEQUENCE;
+	create sequence RESOURCE_SEQUENCE;
         
         
