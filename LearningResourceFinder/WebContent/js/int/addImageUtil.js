@@ -1,5 +1,4 @@
 jQuery(function($) {
-	  // Choix de la provenance de l'image :
 	  $('input.radioUrl').on('change', function() {
 	    document.getElementById('inputFile').type='hidden';
 	    document.getElementById('inputUrl').type='text';
@@ -10,11 +9,12 @@ jQuery(function($) {
 	    document.getElementById('inputFile').type='file';
 	  });
 	  
-	  //Si on clique sur le input URL, on le vide
+	  // Clean input string URL
 	  $('#inputUrl').on('click', function() {
 	    $('#inputUrl').val(''); 
 	  });	  
 	  
+	  // Change radio button if leave by a.close
 	  $('a.close').on('click', function() {
 		 document.getElementById('inputComputer').checked = true; 
 	  });

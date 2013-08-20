@@ -1,34 +1,34 @@
 jQuery(function($){			   		   
-	//Lorsque vous cliquez sur un lien de la classe poplight
+	// Click on class poplight
 	$('a.poplight').on('click', function() {
-		var popID = $(this).data('rel'); //Trouver la pop-up correspondante
-		var popWidth = $(this).data('width'); //Trouver la largeur
+		var popID = $(this).data('rel'); // Find pop-up
+		var popWidth = $(this).data('width'); // Find width
     
-		//Faire apparaitre la pop-up et ajouter le bouton de fermeture
+		// Show popup and add close button
 		$('#' + popID).fadeIn().css({'width': popWidth});
 		
-		//Recuperation du margin, qui permettra de centrer la fen?tre - on ajuste de 80px en conformite avec le CSS
+		// Recover margin for center on window 
 		var popMargTop = ($('#' + popID).height() + 80) / 2;
 		var popMargLeft = ($('#' + popID).width() + 80) / 2;
 		
-		//Apply Margin to Popup
+		//Apply Margin to popup
 		$('#' + popID).css({ 
 			'margin-top' : -popMargTop,
 			'margin-left' : -popMargLeft
 		});
 		
-		//Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues d'anciennes versions de IE
+		// Show background - .css({'filter' : 'alpha(opacity=80)'}) for correct bug with old version of IE
 		$('body').append('<div id="fade"></div>');
 		$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
 		
 		return false;
 	});
 	
-	//Close Popups and Fade Layer
+	// Close popup and Fade Layer
 	$('body').on('click', 'a.close, #fade', function() { //Au clic sur le body...
 		$('#fade , .popupJquery').fadeOut(function() {
 			$('#fade').remove();   
-	}); //...ils disparaissent ensemble
+	});
 		location.reload();
 		return false;
 	});
