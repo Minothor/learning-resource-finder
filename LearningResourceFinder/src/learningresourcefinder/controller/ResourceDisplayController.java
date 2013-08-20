@@ -15,15 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired ResourceRepository resourceRepository;
 
-//    @RequestMapping({"/resource/{id}/{slug}",
-//        "/resource/{id}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.	
-//        "/resource/{id}" // SpringMVC needs us to explicitely specify that the "/" is optional.	
-//    })   
-//    public ModelAndView displayResource(@PathVariable long id) {   
-//        Resource resource = getRequiredEntity(id);
-//        return new ModelAndView("resourcedisplay", "resource", resource); // JSP Name, Attribute Name, Attribute
-//    }
-
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
         "/resource/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
