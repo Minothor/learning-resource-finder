@@ -66,7 +66,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 			playlistRepository.merge(playList);
 		}
 		
-		return new ModelAndView("redirect:/playlist/"+playList.getId()+"/"+playList.getSlug());
+		return new ModelAndView("redirect:/playlist/"+playList.getShortId()+"/"+playList.getSlug());
 	}
 	
 	private ModelAndView otherPlayListError(PlayList playList, PlayList otherPlayList, BindingResult bindingResult) {
@@ -85,7 +85,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
             playlist.getResourceList().remove(resource);
             playlistRepository.merge(playlist);
         }
-        return new ModelAndView("redirect:/playlist?id="+playlist.getId());
+        return new ModelAndView("redirect:/playlist?id="+playlist.getShortId()+"/"+playlist.getSlug());
     }
 	
 	@RequestMapping("/add")
