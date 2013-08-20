@@ -27,7 +27,7 @@ public class Slugify {
 		}
 
 		ret = normalize(ret);
-		ret = toPrettyURL(ret);
+		ret = removeSmallWords(ret);
 		ret = removeDuplicateWhiteSpaces(ret);
 		return ret.replace(" ", "-").toLowerCase();
 	}
@@ -53,17 +53,15 @@ public class Slugify {
 		return ret.replaceAll("\\s+", " ");
 	}
 
-	private static String toPrettyURL(String string) {
+	private static String removeSmallWords(String string) {
 		String[] smallWords = { "les", "la", "de", "le", "un", "une", "des",
 				"ce", "ces", "cette" };
-		String clean = string;
 		for (String smallWord : smallWords) {
-
-			clean = clean.toLowerCase().replaceAll("\\b" + smallWord + "\\b",
+			string = string.toLowerCase().replaceAll("\\b" + smallWord + "\\b",
 					"");
 		}
 
-		return clean;
+		return string;
 	}
 
 }

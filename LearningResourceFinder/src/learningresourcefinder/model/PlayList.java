@@ -13,18 +13,13 @@ import org.hibernate.annotations.Type;
 @Entity
 public class PlayList extends BaseEntity {
 
-    @Column(length=50,nullable=false )
+    @Column(length=50, nullable=false)
     private String name;
     
-    @Column(length=200,nullable=false )
+    @Column(length=50, nullable=false)
     private String slug;
     
-    public String getSlug() {
-		return slug;
-	}
-	public void setSlugs(String slug) {
-		this.slug = slug;
-	}
+  
 
 	@Lob
     /*Forcing type definition to have text type column in postgresql instead of automatic indirect storage of large object (postgresql store lob in a separate table named pg_largeobject and store his id in the "content" column).
@@ -58,9 +53,11 @@ public class PlayList extends BaseEntity {
     }
 
 
-
-
-
-
+    public String getSlug() {
+  		return slug;
+  	}
+  	public void setSlugs(String slug) {
+  		this.slug = slug;
+  	}
 
 }

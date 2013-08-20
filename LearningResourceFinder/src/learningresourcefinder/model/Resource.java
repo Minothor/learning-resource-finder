@@ -17,17 +17,22 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import learningresourcefinder.search.Searchable;
+import learningresourcefinder.web.Slugify;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="resource")
-public class Resource extends BaseEntity implements Searchable
-{
-    @Column(length = 50)
+public class Resource extends BaseEntity implements Searchable {
+
+    @Column(length=50, nullable=false)
     @Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
 	private String name;
+	
+    @Column(length=50, nullable=false)
+    @Size(max=50)
+	private String slug;
 	
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
@@ -43,6 +48,7 @@ public class Resource extends BaseEntity implements Searchable
 	public Resource(String name, String description) {
 		this.name = name;
 		this.description = description;
+		this.slug = Slugify.slugify(name);
 	}
 	
 	@Override
@@ -51,7 +57,7 @@ public class Resource extends BaseEntity implements Searchable
 	}
 	
 	@OneToMany(mappedBy="resource")
-	List<UrlResource> urls = new ArrayList<>();
+	List<UrlResource> urlResources = new ArrayList<>();
 	
 	/**************************** Getters & Setters ************************************/
 	
@@ -80,8 +86,8 @@ public class Resource extends BaseEntity implements Searchable
 		return programPoints;
 	}
 	
-	public List<UrlResource> getUrlResource() {
-		return this.urls;
+	public List<UrlResource> getUrlResources() {
+		return this.urlResources;
 	}
 
     @Override
@@ -96,4 +102,12 @@ public class Resource extends BaseEntity implements Searchable
     public String getBoostedCriteriaName() {
         return "name";
     }
+    
+    public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
 }

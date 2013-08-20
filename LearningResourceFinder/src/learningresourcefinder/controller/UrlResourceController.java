@@ -25,7 +25,7 @@ public class UrlResourceController extends BaseController<UrlResource> {
 		UrlResource urlResource = getRequiredEntity(id); 
 		Resource resource = urlResource.getResource();
 
-		resource.getUrlResource().remove(id);
+		resource.getUrlResources().remove(id);
 		em.remove(urlResource); 
 		
 		return new ModelAndView ("redirect:/resource?id="+resource.getId());
