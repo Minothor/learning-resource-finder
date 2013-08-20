@@ -62,6 +62,7 @@ create table url_resource (
         
 -- Ibrahim 2013-08-20
 
+        
     alter table playlist 
         add column slug varchar(50);
 
