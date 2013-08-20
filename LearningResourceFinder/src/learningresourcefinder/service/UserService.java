@@ -371,6 +371,7 @@ public class UserService {
            user.setUserName("user"+user.getId());
            userRepository.merge(user);
        }
+       
        return user;
    }
   /*  public List<User> getUserLstWithRoleOrPrivilege(){
