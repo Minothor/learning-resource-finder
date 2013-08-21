@@ -2,6 +2,7 @@ package learningresourcefinder.controller;
 
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.security.SecurityContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
     })   
     public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
         Resource resource = getRequiredEntityByShortId(shortId);
-        return new ModelAndView("resourcedisplay", "resource", resource); // JSP Name, Attribute Name, Attribute
+        
+        ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
+    	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
+		return mv;
     }
 }
