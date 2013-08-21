@@ -78,10 +78,12 @@ create table url_resource (
         add column shortid varchar(255);
 
     alter table resource 
-        add column shortid varchar(255);	
-        
+        add column shortid varchar(255);
+        	
 -- Ahmed 2013-08-20
     alter table users drop column isPasswordKnownByTheUser;
-    
-    
+
+-- Lio Chasse les mouches 20-08-2013
+    alter table playlist 
+        add column picture boolean;        
         
