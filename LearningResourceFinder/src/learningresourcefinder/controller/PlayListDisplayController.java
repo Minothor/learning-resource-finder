@@ -81,7 +81,7 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 		return mv;
 	}
     
-    @RequestMapping("/imageaddUrl" )
+    @RequestMapping("/playlist/imageaddUrl" )
 	public ModelAndView userImageAdd(@RequestParam("idPlayList") long playlistid, @RequestParam("strUrl") String url) throws Exception {
 		
 		User user = SecurityContext.getUser();

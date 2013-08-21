@@ -65,7 +65,7 @@
 	    <div class="popup-close">
 	        <a class="close" title="close this popup">X</a>
 	      </div>
-	  	  <form method="post" action="/playlist/imageadd" class="formUrlResource" enctype="multipart/form-data">	
+	  	  <form method="post" action="/playlist/imageadd" class="formUrlPlaylist" enctype="multipart/form-data">	
 	    	<h2>Ajouter une image</h2> 
 	          <br />
 	          <label><input type="radio"  name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur</label>
