@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import learningresourcefinder.exception.UnauthorizedAccessException;
+import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.UserRepository;
@@ -193,7 +194,11 @@ public  class SecurityContext {
     public static boolean canCurrentUserChangeUser(User user2) { 
         return user2.equals(getUser()) // If the user is editing himself
                 || isUserHasPrivilege(Privilege.MANAGE_USERS);     // or If this user has the privilege to edit other users
+    }
 
+    public static boolean canCurrentUserEditPlayList(PlayList playList) { 
+        return playList.getCreatedBy().equals(getUser()) // If the user is editing his own playlist
+                || isUserHasPrivilege(Privilege.MANAGE_PLAYLIST);     // or If this user has the privilege to edit other playlist
     }
 
     public static  void assertCurrentUserMayEditThisUser(User user) {

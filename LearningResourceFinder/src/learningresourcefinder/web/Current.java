@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 public class Current {
 
     public static final String ATTRIBUTE_KEY = "current";  
-
     
+     
     public User getUser(){
         return SecurityContext.getUser();
     }

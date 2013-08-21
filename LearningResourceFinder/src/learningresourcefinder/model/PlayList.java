@@ -32,6 +32,9 @@ public class PlayList extends BaseEntity {
     @Column(length=50, nullable=false)
     private String slug;
     
+    @Column()
+    private Boolean picture;
+    
     @Lob
     /*Forcing type definition to have text type column in postgresql instead of automatic indirect storage of large object (postgresql store lob in a separate table named pg_largeobject and store his id in the "content" column).
      *Without forcing, JDBC driver use write() method of the BlobOutputStream to store Clob into the database;
@@ -109,5 +112,13 @@ public class PlayList extends BaseEntity {
     public void setShortId(String shortId) {
         this.shortId = shortId;
     }
+
+	public Boolean getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Boolean picture) {
+		this.picture = picture;
+	}
 
 }

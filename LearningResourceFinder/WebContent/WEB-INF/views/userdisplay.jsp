@@ -10,35 +10,7 @@
 <head>
 <!-- Jquery for change input popup addImageUser -->
 <script type="text/javascript" src="/js/int/addImageUtil.js"></script>
-<style type="text/css">
-	figure {
-		position: relative;
-		display: inline-block;
-		overflow: hidden;
-		margin: 0 20px 0 0;
-	}
-	figure img {
-		display: block;
-	}
-	figcaption {
-		position: absolute;
-		bottom: -6em;
-		left: 0;
-		background-color: #000;
-		color: #FFF;
-		width: 94%;
-		padding: 0.5em 3%;
-		opacity: 0.8;
-		-o-transition: all 300ms linear;
-		-ms-transition: all 300ms linear;
-		-moz-transition: all 300ms linear;
-		-webkit-transition: all 300ms linear;
-		transition: all 300ms linear;
-	}
-	figure:hover figcaption {
-		bottom: 0;
-	}
-</style>
+
 <script type="text/javascript" >
 $(function() {
     $( "#tabs" ).tabs();
@@ -96,8 +68,9 @@ $(function() {
 					</c:choose>
 			<c:if test="${canEdit}">	 
 	                	<figcaption lang="la"><span class="lib-change-image"><b>Charger une image</b></span></figcaption>
+	        </c:if>         	
 	      		</figure>
-     
+			<c:if test="${canEdit}">     
 	      	</a>
 	       	</c:if> 		      	
 	    </div>

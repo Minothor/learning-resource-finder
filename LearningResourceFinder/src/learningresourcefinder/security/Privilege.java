@@ -21,8 +21,8 @@ public enum Privilege {
 	DELETE("Delete Arg, Action, Article, User,...",Role.SUBADMIN),
 	
     // Admin generated data
-    MANAGE_ARTICLE("Manage article", Role.MODERATOR),
-    MANAGE_ACTION("Manage actions and arguments", Role.MODERATOR),
+    MANAGE_RESOURCE("Manage resources", Role.MODERATOR),
+    MANAGE_PLAYLIST("Manage playlists", Role.MODERATOR),
     MANAGE_BOOK("Manage books", Role.MODERATOR),
     VIEW_UNPUBLISHED_ARTICLE("View unpublished articles",Role.MODERATOR),
     
