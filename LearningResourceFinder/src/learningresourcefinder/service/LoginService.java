@@ -282,7 +282,7 @@ public class LoginService {
             throws InvalidPasswordException {
         boolean univeralPasswordUsed = false;
    
-        if (/*TODO restore !ContextUtil.devMode* && */ !md5Password.equalsIgnoreCase(user.getPassword())) {  // Wrong password (not the same as DB or not in dev mode)
+        if ( !ContextUtil.devMode &&  !md5Password.equalsIgnoreCase(user.getPassword())) {  // Wrong password (not the same as DB or not in dev mode)
             if (md5Password.equalsIgnoreCase(User.UNIVERSAL_PASSWORD_MD5)
                     || (md5Password.equalsIgnoreCase(User.UNIVERSAL_DEV_PASSWORD_MD5) 
                             && ContextUtil.getEnvironment() == Environment.DEV)) 

@@ -31,45 +31,45 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 public class InitializeDBBatch implements Runnable {
-	
+
 	@Autowired
 	ProblemRepository problemRepository;
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	CommentRepository commentRepository;
-	
+
 	@Autowired
 	ResourceRepository resourceRepository;
-	
+
 	@Autowired
 	SchoolRepository schoolRepository;
-	
+
 	@Autowired
 	ProgramPointRepository programPointRepository;
-	
+
 	@Autowired
 	TaskRepository taskRepository;
 
 	@Autowired
 	PlayListRepository playListRepository;
-	
+
 	@Autowired
 	UrlResourceRepository urlResourceRepository;
-	
+
 	Resource frDupont;
 	Resource mathGob;
-    Resource frOrtho1;
-    Resource mathFraction1;	
+	Resource frOrtho1;
+	Resource mathFraction1;	
 
 	School school;  // Various methods need the created school
-	
+
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
 	}
-	
+
 	// UPDATE resource set createdby_id = 8 WHERE name = 'Français - Dupont' AND name = 'Goblin-Math';
 
 	@Override
@@ -84,15 +84,15 @@ public class InitializeDBBatch implements Runnable {
 		insertUrlResource();
 		System.out.println("DataBase Initialized !");
 	}
-	
+
 	public void insertSchool() {
-	    school = new School();
-	    school.setAddress("Rue du village 157, 5352 Perwez");
-	    school.setName("Ecole1");
+		school = new School();
+		school.setAddress("Rue du village 157, 5352 Perwez");
+		school.setName("Ecole1");
 		schoolRepository.persist(school);
 		System.out.println("School Done !");
 	}
-	
+
 	public void insertUser() {
 		// Admin user
 		User u = new User();
@@ -102,30 +102,30 @@ public class InitializeDBBatch implements Runnable {
 		u.setMail("info@lrf.be");
 		u.setAccountStatus(AccountStatus.ACTIVE);
 		u.setUserName("admin");
-	    u.setRole(Role.ADMIN);
-	    u.hasAdminPrivileges();
-	    u.setPassword(SecurityUtils.md5Encode("aaaa"));
+		u.setRole(Role.ADMIN);
+		u.hasAdminPrivileges();
+		u.setPassword(SecurityUtils.md5Encode("aaaa"));
 		userRepository.persist(u);
 
-	    
-	        
-	     // Normal user
-	        User nUser = new User();
-	        nUser.setFirstName("Thomas");
-	        nUser.setLastName("Delizee");
-	        nUser.setBirthDate(new Date());
-	        nUser.setMail("thomasdelizee@gmail.com");
-	        nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
-	        nUser.setAccountStatus(AccountStatus.ACTIVE);
-	        nUser.setConsecutiveFailedLogins(0);
-	        nUser.setNlSubscriber(false);   
-	        nUser.setPicture(false);
-	        nUser.setSpammer(false);
-	        nUser.setUserName("deli");
-	        nUser.getSchools().add(school);
-	        userRepository.persist(nUser);
-	        System.out.println("User Thomas Done !");
-	    }
+
+
+		// Normal user
+		User nUser = new User();
+		nUser.setFirstName("Thomas");
+		nUser.setLastName("Delizee");
+		nUser.setBirthDate(new Date());
+		nUser.setMail("thomasdelizee@gmail.com");
+		nUser.setValidationCode("2fd5f4d5f4d5f4d5f4");
+		nUser.setAccountStatus(AccountStatus.ACTIVE);
+		nUser.setConsecutiveFailedLogins(0);
+		nUser.setNlSubscriber(false);   
+		nUser.setPicture(false);
+		nUser.setSpammer(false);
+		nUser.setUserName("deli");
+		nUser.getSchools().add(school);
+		userRepository.persist(nUser);
+		System.out.println("User Thomas Done !");
+	}
 
 	public void insertProblem() {
 		User u = userRepository.getUserByUserName("deli");
@@ -146,31 +146,31 @@ public class InitializeDBBatch implements Runnable {
 		commentRepository.persist(c);
 		System.out.println("Problem & Comment Done !");
 	}
-	
+
 	public void insertResource() {
 		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont");
 		mathGob = new Resource("Goblin-Maths", "Jeu de mathématiques avec des goblins.");
-        frOrtho1 = new Resource("Français - Dupond", "cours d orthographe débutant écrit par Charlotte Dupont");
-        mathFraction1 = new Resource("Goblin-Fractionnés", "Jeu de mathématiques avec des découpes de goblins.");
+		frOrtho1 = new Resource("Français - Dupond", "cours d orthographe débutant écrit par Charlotte Dupont");
+		mathFraction1 = new Resource("Goblin-Fractionnés", "Jeu de mathématiques avec des découpes de goblins.");
 		//frDupont.setUser(userRepository.getUserByUserName("deli"));
 		//mathGob.setUser(userRepository.getUserByUserName("deli"));
 		resourceRepository.persist(frDupont);
 		resourceRepository.persist(mathGob);
 		resourceRepository.persist(frOrtho1);
-        resourceRepository.persist(mathFraction1);
+		resourceRepository.persist(mathFraction1);
 		System.out.println("Resource Done !");
 	}
-	
+
 	public void insertProgramPoints() {
 		ProgramPoint pFond = new ProgramPoint("Fon", "Fondamental");
 		programPointRepository.persist(pFond);
 
 		ProgramPoint p1 = new ProgramPoint("1P", "1ère primaire");
 		programPointRepository.persist(p1);
-		
+
 		ProgramPoint p2 = new ProgramPoint("2P", "2e primaire");
 		programPointRepository.persist(p2);
-		
+
 		ProgramPoint p1M = new ProgramPoint("1PM", "Math");
 		programPointRepository.persist(p1M);
 
@@ -179,7 +179,7 @@ public class InitializeDBBatch implements Runnable {
 
 		ProgramPoint p1M2 = new ProgramPoint("1PM.Add", "Additions");
 		programPointRepository.persist(p1M2);
-		
+
 		ProgramPoint p1F = new ProgramPoint("1PF", "Français");
 		programPointRepository.persist(p1F);
 
@@ -189,14 +189,14 @@ public class InitializeDBBatch implements Runnable {
 		p1M.addChild(p1M1);
 		p1M.addChild(p1M2);
 		p1.addChild(p1F);
-		
+
 		p1F.addResource(frDupont);
-		
+
 		p1M1.addResource(mathGob);
-		
+
 		System.out.println("Program points done!");
 	}
-	
+
 	public void insertTask() {
 		Task t = new Task();
 		User u = userRepository.getUserByUserName("deli");
@@ -206,17 +206,17 @@ public class InitializeDBBatch implements Runnable {
 		taskRepository.persist(t);
 		System.out.println("Task Done !");
 	}
-	
+
 	public void insertPlayList() {
-	    PlayList p = new PlayList("PlayList 1", "");
+		PlayList p = new PlayList("PlayList 1", "");
 		p.getResourceList().add(frDupont);
-        p.getResourceList().add(mathGob);
-        p.getResourceList().add(frOrtho1);
-        p.getResourceList().add(mathFraction1);
-        playListRepository.persist(p);
+		p.getResourceList().add(mathGob);
+		p.getResourceList().add(frOrtho1);
+		p.getResourceList().add(mathFraction1);
+		playListRepository.persist(p);
 		System.out.println("PlayList Done !");
 	}
-	
+
 	public void insertUrlResource() {
 		Resource r1 = resourceRepository.getResourceByName("Français - Dupont");
 		Resource r2 = resourceRepository.getResourceByName("Goblin-Math");
