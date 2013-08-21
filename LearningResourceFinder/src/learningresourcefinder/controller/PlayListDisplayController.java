@@ -40,7 +40,7 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 		PlayList playlist = getRequiredEntityByShortId(shortId);
 		
 		ModelAndView mv = new ModelAndView("playlistdisplay", "playlist", playlist);
-    	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditPlayList(playlist)) || SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS));
+    	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditPlayList(playlist)));
 		return mv;
 	}
     @RequestMapping("/playlist/imageadd")

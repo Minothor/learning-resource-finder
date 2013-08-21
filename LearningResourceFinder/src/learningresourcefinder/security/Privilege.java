@@ -7,7 +7,7 @@ import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 
 public enum Privilege {
-
+ 
     // Users management
     VIEW_PRIVATE_DATA_OF_USERS("View user's private data", Role.MODERATOR), // Private data includes e-mail and contributions points detail.
     MANAGE_USERS("Manage users (create / edit / delete / rename)", Role.ADMIN), //ok
@@ -25,7 +25,7 @@ public enum Privilege {
     MANAGE_PLAYLIST("Manage playlists", Role.MODERATOR),
     MANAGE_BOOK("Manage books", Role.MODERATOR),
     VIEW_UNPUBLISHED_ARTICLE("View unpublished articles",Role.MODERATOR),
-    
+     
     // User generated data
     MANAGE_GOODEXAMPLE("Manage good examples", Role.CORRECTOR),
     MANAGE_ARGUMENT("Manage arguments", Role.CORRECTOR),

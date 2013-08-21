@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class ResourceEditController extends BaseController<Resource> {
     @RequestMapping("/resourceedit")
     public ModelAndView resourceEdit(@RequestParam("id") long id){
         Resource resource=(Resource)getRequiredEntity(id, Resource.class);
+        SecurityContext.assertCurrentUserMayEditThisPlaylist(resource);
         return prepareModelAndView(resource);
 
     }

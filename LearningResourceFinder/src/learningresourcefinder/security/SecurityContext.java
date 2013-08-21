@@ -5,6 +5,7 @@ import java.util.Set;
 
 import learningresourcefinder.exception.UnauthorizedAccessException;
 import learningresourcefinder.model.PlayList;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.UserRepository;
@@ -200,10 +201,27 @@ public  class SecurityContext {
         return playList.getCreatedBy().equals(getUser()) // If the user is editing his own playlist
                 || isUserHasPrivilege(Privilege.MANAGE_PLAYLIST);     // or If this user has the privilege to edit other playlist
     }
+    
+    public static boolean canCurrentUserEditResource(Resource resource) { 
+        return resource.getCreatedBy().equals(getUser()) // If the user is editing his own resource
+                || isUserHasPrivilege(Privilege.MANAGE_RESOURCE);     // or If this user has the privilege to edit other playlist
+    }
 
     public static  void assertCurrentUserMayEditThisUser(User user) {
         if (! canCurrentUserChangeUser(user)) {
             throw new UnauthorizedAccessException(" cannot edit that user: " + user.getUserName());
+        }
+    }
+    
+    public static  void assertCurrentUserMayEditThisPlaylist(PlayList playList) {
+        if (! canCurrentUserEditPlayList(playList)) {
+            throw new UnauthorizedAccessException(" cannot edit that playlist: " + playList.getName());
+        }
+    }
+    
+    public static  void assertCurrentUserMayEditThisPlaylist(Resource resource) {
+        if (! canCurrentUserEditResource(resource)) {
+            throw new UnauthorizedAccessException(" cannot edit that resource: " + resource.getName());
         }
     }
     

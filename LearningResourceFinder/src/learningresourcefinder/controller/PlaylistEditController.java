@@ -37,6 +37,8 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	@RequestMapping("/edit")
 	public ModelAndView playListEdit (@RequestParam("id")long id) {
 		PlayList playlist =(PlayList) getRequiredEntity(id,PlayList.class);
+		
+		SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
 		return prepareModelAndView(playlist);
 		
 	}

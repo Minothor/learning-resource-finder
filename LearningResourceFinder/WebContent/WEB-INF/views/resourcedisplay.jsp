@@ -14,8 +14,10 @@
 		<img src="http://mrsthiessenswiki.wikispaces.com/file/view/math_clipart.jpg" style="width:500px;height:100px;" />
 		<h1>${resource.name}</h1>
 		<p>${resource.description}</p>
-		<p>${resource.createdBy.firstName} ${resource.createdBy.lastName}</p>		
-		<a href="<c:url value='resourceedit?id=${resource.id}'/>">Edit resource</a> 
+		<p>${resource.createdBy.firstName} ${resource.createdBy.lastName}</p>
+		<c:if test="${canEdit}">		
+			<a href="<c:url value='resourceedit?id=${resource.id}'/>">Edit resource</a> 
+		</c:if>
 	</div>
 	<br />
 	<div>

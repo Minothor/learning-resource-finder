@@ -4,14 +4,19 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
 <head>
+<!-- Jquery for change input popup addImageUser -->
+<script type="text/javascript" src="/js/int/addImageUtil.js"></script>
 <title>PlayList</title>
 </head>
 <body>
 	<h1>PlayList</h1>
 	<lrftag:pageheadertitle title="${user.fullName}" />
 	<div class="" style="font-size: 14px">
+	<c:if test="${canEdit}">
 		&nbsp&nbsp<a href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
-		&nbsp-&nbsp<a href="playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a>
+		&nbsp-&nbsp
+	</c:if>
+		<a href="playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a>
 		&nbsp-&nbsp<a href=<c:url value='/ressourcelist'/>>Vers l'arborescence des ressources</a>
 		</li>
 	</div>
