@@ -69,10 +69,6 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	  </div>
 		<br/>
 	
-		
-		
-
-		
 	<!-- LOCAL SIGNIN - LEFT COLUMN -->
 	<div style="padding-right: 20px;">
 			<h1>Connexion avec votre compte ${p_website_name}</h1>
