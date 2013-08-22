@@ -32,6 +32,8 @@ import learningresourcefinder.web.UrlUtil;
 import learningresourcefinder.web.UrlUtil.Mode;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.brickred.socialauth.AuthProvider;
+import org.brickred.socialauth.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
@@ -52,9 +54,6 @@ import com.restfb.WebRequestor;
 @Service
 @Transactional
 public class LoginService {
-	
-	@Value("${secret_key}") private String SECRET_KEY ;
-	@Value("${app_id}")     private String APP_ID ;
 
     @Autowired  UserRepository userRepository ;
     @Autowired  UserService userService ;
@@ -147,46 +146,29 @@ public class LoginService {
         return user;
     }
     
+    // Ahmed-flag : change all of this methods right now.
     
-    public User loginSocial(String code) throws IOException, UserNotFoundException, InvalidPasswordException, UserNotValidatedException, UserLockedException, WaitDelayNotReachedException, UserAlreadyExistsException{
-    	User user = null;
+    
+    public User loginSocial(AuthProvider provider) throws IOException, UserNotFoundException, InvalidPasswordException, UserNotValidatedException, UserLockedException, WaitDelayNotReachedException, UserAlreadyExistsException{
     	
-        FacebookClient.AccessToken token = getFacebookUserToken(code, UrlUtil.getAbsoluteUrl("loginsocial",Mode.DEV));  
-		
-        if(token == null){
-        	// When the user cancel the page !!
-        	return null;
+        User user = null;
+    	Profile p = null;
+    
+    	try {
+    	    
+            p = provider.getUserProfile();
+            user = userService.registerSocialUser(p.getEmail());
+            
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        
-		String accessToken = token.getAccessToken();
-		FacebookClient fclient = new DefaultFacebookClient(accessToken);
-		com.restfb.types.User fbUser = fclient.fetchObject("me",com.restfb.types.User.class);
-    	
 		// TODO findOrCreateLrfUserFromSocialUser(fbUser)
 		// TODO call login(user)
-	
-		if(fbUser != null){
-		user = userService.registerSocialUser(fbUser.getEmail());
-	    }
-	
+
     	return user; 
     }
-    
-    
-	private FacebookClient.AccessToken getFacebookUserToken(String code, String redirectUrl) throws IOException {
-		   
-		String appId = APP_ID;
-	    String secretKey = SECRET_KEY;
-	    
-	    WebRequestor wr = new DefaultWebRequestor();
-	    WebRequestor.Response accessTokenResponse = wr.executeGet(
-	            "https://graph.facebook.com/oauth/access_token?client_id=" + appId + "&redirect_uri=" + redirectUrl
-	            + "&client_secret=" + secretKey + "&code=" + code);
-	   
-	    return  DefaultFacebookClient.AccessToken.fromQueryString(accessTokenResponse.getBody()); 
-	}
-    
-
+   
     public void assertNoInvalidDelay(User user) throws WaitDelayNotReachedException {
         // Security delay
         if (user.getConsecutiveFailedLogins() > SUSPICIOUS_AMOUNT_OF_LOGIN_TRY) {  // Suspicious, let's introduce the delay
@@ -282,7 +264,7 @@ public class LoginService {
             throws InvalidPasswordException {
         boolean univeralPasswordUsed = false;
    
-        if ( !ContextUtil.devMode &&  !md5Password.equalsIgnoreCase(user.getPassword())) {  // Wrong password (not the same as DB or not in dev mode)
+        if (/*TODO restore !ContextUtil.devMode* && */ !md5Password.equalsIgnoreCase(user.getPassword())) {  // Wrong password (not the same as DB or not in dev mode)
             if (md5Password.equalsIgnoreCase(User.UNIVERSAL_PASSWORD_MD5)
                     || (md5Password.equalsIgnoreCase(User.UNIVERSAL_DEV_PASSWORD_MD5) 
                             && ContextUtil.getEnvironment() == Environment.DEV)) 
