@@ -6,7 +6,10 @@
 	<ul id="list-photos">
 	<c:forEach var="i" begin="1" end="${resource.numberImage}" step="1">
 		<li id="${resource.id}-${i}">
-	      <img src="gen/resource/resized/large/${resource.id}-${i}.jpg" alt="image" />
+	      <img src="gen/resource/resized/large/${resource.id}-${i}.jpg" alt="image" style="width:75px;height:75px" />
+	      <c:if test="${canEdit}">
+	      <p><a href="/resource/delete?id=${resource.id}-${i}">Supprimer</a></p>
+	      </c:if>
 	    </li>
 	</c:forEach>
 	</ul>

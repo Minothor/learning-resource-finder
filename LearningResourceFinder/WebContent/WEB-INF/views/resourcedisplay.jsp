@@ -6,6 +6,8 @@
 	<script type="text/javascript" src="/js/int/ajaxAddUrlResource.js"></script>
 	<script type="text/javascript" src="/js/int/resourceImageGallery.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css"  />
+	<!-- Jquery for change input popup addImageUser -->
+	<script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 	<title>Insert title here</title>
 	<script type="text/javascript">
 		
@@ -58,6 +60,29 @@
 	</div>
 	<br />
 	<%@ include file="resourceimagegallery.jsp" %>
+	<c:if test="${canEdit}">
+	<div>
+		<a href="#" data-width="500" data-rel="popupJqueryaddImageGallery" class="poplight">Ajouter une image à la ressource</a>
+		<div id="popupJqueryaddImageGallery" class="popupJquery">
+			<div class="popup-close">
+		    	<a class="close" title="close this popup">X</a>
+		    </div>
+		    <form method="post" action="/resource/imageadd" class="formUrlGallery" enctype="multipart/form-data">	
+	          	<h2>Ajouter une image à la galerie</h2>
+	          	<label><input type="radio"  name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur</label>
+	          	<input type="file"   name="file"   value="Parcourir..."    class="inputSource"   id="inputFile" /> 
+	          	<input type="hidden" name="strUrl" value="http://..."      class="inputSource"   id="inputUrl"  />             
+	          	<br /> 
+	          	<label><input type="radio"  name="rdFrom" value="url"      class="radioUrl" /> Depuis un lien</label>
+	          	<input type="hidden" name="idResource" value="${resource.id}" />
+	          	<br />
+	          	<br />
+	          	<input class="btnSubmit" type="submit" value="Ajouter" name="btnPicture" /> 
+	      	</form> 
+			<p id="response">${response}</p>
+		</div>
+	</div>
+	</c:if>
 	<br />
 	<a href="ressourcelist">home page</a>
 </body>

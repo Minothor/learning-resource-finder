@@ -5,7 +5,7 @@
 <html>
 <head>
 <!-- Jquery for change input popup addImageUser -->
-<script type="text/javascript" src="/js/int/addImageUtil.js"></script>
+<script type="text/javascript" src="/js/int/addImageUrlPlaylist.js"></script>
 <title>PlayList</title>
 </head>
 <body>

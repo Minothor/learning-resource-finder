@@ -57,12 +57,12 @@ public class ResourceImageController extends BaseController<User> {
 			BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),120 * 200, 200, 200);
 						
 			ImageUtil.saveImageToFileAsJPEG(resizedImage,  
-					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + ".jpg", 0.9f);
+					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
 			
 			BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),40 * 40, 60, 60);
 			
 			ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
-					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + ".jpg", 0.9f);
+					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
 
 			user.setPicture(true);
 			resource.setNumberImage(resource.getNumberImage() + 1);
@@ -73,23 +73,23 @@ public class ResourceImageController extends BaseController<User> {
 			NotificationUtil.addNotificationMessage(e.getMessageToUser());
 		}
 		
-		ModelAndView mv = new ModelAndView("redirect:/resourcedisplay/" + resource.getId() + "/" + resource.getName());
+		ModelAndView mv = new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
 		mv.addObject("random", System.currentTimeMillis());
+		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
 
 		return mv;
 	}
 	
-	 @RequestMapping("/deleteresourceimagedeletegallery")
-	 public ModelAndView resourceImageDelete(@RequestParam("id") long userid, @RequestParam("idresource") long resrouceid){
+	 @RequestMapping("/delete")
+	 public ModelAndView resourceImageDelete(@RequestParam("idresource") long resrouceid){
 		
 		 Resource resource = resourceRepository.find(resrouceid);
-		 User user = getRequiredEntity(userid);
-		 userService.userImageDelete(user);
+		 userService.userImageDelete(resource.getCreatedBy());
 		 resourceService.resourceImageDelete(resource) ;
 
 		 resourceRepository.merge(resource);
 
-		 return new ModelAndView("redirect:/resourcedisplay/" + resource.getId() + "/" + resource.getName());
+		 return new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
 		 
 	 }
 

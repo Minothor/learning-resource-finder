@@ -41,7 +41,7 @@ public abstract class FileUtil {
 	final static public String PLAYLIST_RESIZED_SUB_FOLDER = "/resized";
 	final static public String PLAYLIST_RESIZED_LARGE_SUB_FOLDER = "/large";
 	final static public String PLAYLIST_RESIZED_SMALL_SUB_FOLDER = "/small";
-	final static public String RESOURCE_SUB_FOLDER = "/playlist";
+	final static public String RESOURCE_SUB_FOLDER = "/resource";
 	final static public String RESOURCE_ORIGINAL_SUB_FOLDER = "/original";
 	final static public String RESOURCE_RESIZED_SUB_FOLDER = "/resized";
 	final static public String RESOURCE_RESIZED_LARGE_SUB_FOLDER = "/large";
