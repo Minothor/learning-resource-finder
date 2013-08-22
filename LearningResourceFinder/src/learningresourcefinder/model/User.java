@@ -154,10 +154,8 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
         public static AccountConnectedType getProviderType(String providerId){
             providerId = providerId.toLowerCase();
             switch(providerId){
-           case "facebook" : return AccountConnectedType.FACEBOOK;
-//            case "twitter"  : return AccountConnectedType.TWITTER;
+            case "facebook" : return AccountConnectedType.FACEBOOK;
             case "google"   : return AccountConnectedType.GOOGLE;
-//            case "linkedin" : return AccountConnectedType.LINKEDIN;
             default : throw new RuntimeException("Provider cannot be identified");
             }
         }

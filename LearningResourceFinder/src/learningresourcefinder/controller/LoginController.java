@@ -1,37 +1,36 @@
 package learningresourcefinder.controller;
 
-import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import learningresourcefinder.exception.InvalidPasswordException;
-import learningresourcefinder.exception.UserAlreadyExistsException;
 import learningresourcefinder.exception.UserLockedException;
 import learningresourcefinder.exception.UserNotFoundException;
 import learningresourcefinder.exception.UserNotValidatedException;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountConnectedType;
+import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.LoginService;
 import learningresourcefinder.service.LoginService.WaitDelayNotReachedException;
+import learningresourcefinder.service.UserService;
 import learningresourcefinder.util.DateUtil;
+import learningresourcefinder.util.Logger;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.lang3.StringUtils;
-import org.brickred.socialauth.AuthProvider;
-import org.brickred.socialauth.Profile;
+import org.apache.commons.logging.Log;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
 import org.brickred.socialauth.util.SocialAuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -43,84 +42,97 @@ public class LoginController extends BaseController<User> {
 	@Autowired LoginService loginService;
 	@Autowired UserDisplayController userDisplayController;
 	@Autowired UserRepository userRepository;
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@Autowired SocialAuthConfig socialAuthConfig;
+	@Autowired UserService userService;
+	
+    @Logger Log log;
+    
+	// We will show the login form and social buttons to the user.
+	@RequestMapping(value = "/login")
 	public String signin(HttpServletRequest request) {
 		return "login";
 	}
-	
-	@RequestMapping(value = "/loginsocialPage", method = RequestMethod.GET)
-    public String socialSigninPage(HttpServletRequest request,WebRequest req) {
-	       return getLoginSocialPage(request);
-	   }
-	
-   public String getLoginSocialPage(HttpServletRequest request){
-	        
-	      String urlSocial = "";
-	      HttpSession mySession = request.getSession();
-	      String providerId = (String) request.getParameter("providerid");
-	      
-	      SocialAuthConfig config = SocialAuthConfig.getDefault();
-	      SocialAuthManager SocialManager = new SocialAuthManager();
-	
-	      try {
-	          
-            config.load();
-            SocialManager.setSocialAuthConfig(config);
-            urlSocial = SocialManager.getAuthenticationUrl(providerId,"http://localhost:8080/loginsocial"); //  We can use this method to add permissions later : getAuthenticationUrl(id, successUrl, permission) 
-     
-            
-        } catch (Exception e) {
-           throw new RuntimeException(e);
-        }
-	      
-	     mySession.setAttribute("socialmanager", SocialManager); 
-	     
-	     return "redirect:"+urlSocial;
-    }
-  
-	@RequestMapping(value = "/loginsocial", method = RequestMethod.GET)
-	public ModelAndView socialSignin(HttpServletRequest request,WebRequest req) throws IOException, UserNotFoundException, InvalidPasswordException, UserNotValidatedException, UserLockedException, WaitDelayNotReachedException, UserAlreadyExistsException {
 
-        AuthProvider provider = null;
-        User u = null;
-     
-        SocialAuthManager socialManager = (SocialAuthManager) request.getSession()
-                .getAttribute("socialmanager");
-        Map<String, String> paramsMap = SocialAuthUtil
-                .getRequestParametersMap(request);
-        
-         try {
-             
-            provider= socialManager.connect(paramsMap);
-            u = loginService.loginSocial(provider);
-            
+	// User clicked the facebook or google login button on our web site.
+	@RequestMapping(value = "/loginsocial")
+	public String loginSocial(@RequestParam("provider") String providerId, HttpSession session) throws Exception {
+	    String urlToFacebookOrGoogle = "";
+
+	    SocialAuthManager socialManager = new SocialAuthManager();
+	    socialManager.setSocialAuthConfig(socialAuthConfig);
+
+	    try {
+	        urlToFacebookOrGoogle = socialManager.getAuthenticationUrl(providerId, UrlUtil.getAbsoluteUrl("loginsocialcallback")); //  We can use this method to add permissions later : getAuthenticationUrl(id, successUrl, permission) 
+	    } catch (Exception e) {
+            log.error("Exception during social login (while getting the URL to " + providerId + "for user " + SecurityContext.getUser(), e);
+	        NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+". Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
+	        return "redirect:login";
+	    }
+	    
+	    session.setAttribute("socialmanager", socialManager); 
+
+	    return "redirect:"+urlToFacebookOrGoogle;
+	}
+
+  
+	// In loginSocial, we redirect to facebook or google. Then FB or google tells the browser to redirect here.
+	@RequestMapping(value = "/loginsocialcallback")
+	public String loginSocialCallback(HttpSession session, HttpServletRequest request) {
+
+        SocialAuthManager socialAuthManager = (SocialAuthManager) session.getAttribute("socialmanager");
+        String providerId = socialAuthManager.getCurrentAuthProvider().getProviderId();  // "facebook" or "google"
+
+        // Contacting Facebook or Google to get the user's e-mail 
+        String email = null;
+        Map<String, String> paramsMap = SocialAuthUtil.getRequestParametersMap(request);
+        try {
+            email = socialAuthManager.connect(paramsMap).getUserProfile().getEmail();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
- 
+            log.error("Exception during social login callback (while contacting "+providerId+" to get the e-mail address)", e);
+            NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+" pour obtenir votre adress e-mail afin de vous connecter sur notre site. Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
+            return "redirect:login";
         }
-       
-         if(u!= null){
-             u = loginService.login(u.getMail(), u.getPassword(), false,u.getId(), AccountConnectedType.FACEBOOK);
-             NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "   + UrlUtil.getWebSiteName());             
-             return new ModelAndView("redirect:user/" + u.getUserName());
-         }
-           // Maybe add notification
-         return new ModelAndView("redirect:login");
+        
+        User user = userRepository.getUserByEmail(email);
+        if (user == null) {  // First time login with facebook/google => no user in our DB yet.
+            user = userService.registerSocialUser(email);
+        }
+        
+        if (user.getAccountStatus() == AccountStatus.NOTVALIDATED) {  // it could happen if the user tried to register  manually (without finishing), then tries through facebook/google.
+            user.setAccountStatus(AccountStatus.ACTIVE);
+        }
+        
+        String errorMsg = null;
+        try {
+            loginService.login(user.getMail(), user.getPassword(), false, user.getId(), AccountConnectedType.getProviderType(providerId));
+        } catch (UserLockedException e) {
+            errorMsg = "L'utilisateur avec l'id '" + user.getId() +"' et le mail '" + user.getMail() + "' "
+                    + " est verrouillé. Contacter un administrateur pour le déverrouiller.";
+
+        } catch (WaitDelayNotReachedException e) {
+            errorMsg = "Suite à de multiples tentatives de login échouées, votre utilisateur s'est vu imposé un délai d'attente avant de pouvoir se relogguer, ceci pour des raisons de sécurité."
+                    + " Actuellement, il reste "
+                    + DateUtil.formatIntervalFromToNow(e.getNextPossibleTry())
+                    + " à attendre.";
+        } catch (Exception e) {  // All other exceptions should not happen here (or are bugs).
+            throw new RuntimeException(e);
+        }
+
+        if (errorMsg != null) {
+            NotificationUtil.addNotificationMessage(errorMsg);
+
+            return "redirect:/login";
+
+        } else {
+            NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur " + UrlUtil.getWebSiteName());             
+            return "redirect:/user/" + user.getUserName();
+        }
 	}
 	
 	
-	
-	
 	/**
-	 * 
-	 * @param password
-	 *            required=false because we don't use pswd in DEV
-	 * @param keepLoggedIn
-	 *            required=false because when user don't check the checkbox we
-	 *            get a 400 error
-	 * @return
+	 * @param password required=false because we don't use pswd in DEV
+	 * @param keepLoggedIn required=false else when user doesn't check the checkbox we get a 400 error
 	 */
 	@RequestMapping("/loginsubmit")
 	public ModelAndView loginSubmit(
@@ -174,22 +186,17 @@ public class LoginController extends BaseController<User> {
 		}
 
 		if (errorMsg != null) {
-			
-			ModelAndView mv = new ModelAndView("login");
-			mv.addObject("autoLogin",  autologin);
-			mv.addObject("userNameOrMail", userNameOrMail);
 
-			NotificationUtil.addNotificationMessage(errorMsg);
+		    ModelAndView mv = new ModelAndView("login");
+		    mv.addObject("autoLogin",  autologin);
+		    mv.addObject("userNameOrMail", userNameOrMail);
 
-			return mv;
-			
+		    NotificationUtil.addNotificationMessage(errorMsg);
+
+		    return mv;
+
 		} else {
-			String nextPage = loginService.getPageAfterLogin(user);
-			if (nextPage != null) {
-				return new ModelAndView("redirect:" + nextPage);
-			} else {
-				return new ModelAndView("redirect:user/" + user.getUserName());
-			}
+		    return new ModelAndView("redirect:user/" + user.getUserName());
 		}
 	}
 

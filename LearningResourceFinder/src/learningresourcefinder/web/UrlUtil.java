@@ -39,7 +39,6 @@ public class UrlUtil {
 
     // Usually for images.
     public static String getAbsoluteUrl(String path){
-      
         return getAbsoluteUrl(path, null);
     }
 
