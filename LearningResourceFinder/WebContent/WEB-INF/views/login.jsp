@@ -50,14 +50,16 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	
 		<div>
 
-			<a id="login-facebook" class="simple-button provider-signup facebook" href="https://www.facebook.com/dialog/oauth?client_id=350985091585275&redirect_uri=http://localhost:8080/loginsocial&scope=email">
+			<a id="login-facebook" class="simple-button provider-signup facebook" href="/loginsocialPage?providerid=facebook">
 				<img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/facebook-24px.png">
 				<span class="provider-separator"></span>
 				<span class="provider-signup-text"> Sign in with Facebook </span>
 			</a>
-		
 		</div>
 		<br/>
+		
+		
+		
 
 		<!-- TWITTER SIGNIN -->
 		
