@@ -16,9 +16,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailBatch implements Runnable {
 
-	@Value("${secret_key}") private String APP_ID;
-	@Value("${app_id}")     private String SECRET_KEY;
-	
 	JavaMailSenderImpl myJavaMailSender;
 
 	String myHost = "smtp.gmail.com";
@@ -38,8 +35,6 @@ public class MailBatch implements Runnable {
 	/*	sendMail();
 
 		System.out.println("Send Mail");*/
-		
-	System.out.println(SECRET_KEY);
 
 	}
 
