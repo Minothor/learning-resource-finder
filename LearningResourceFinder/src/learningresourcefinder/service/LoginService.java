@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.Cookie;
@@ -24,6 +25,7 @@ import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.CurrentEnvironment.Environment;
+import learningresourcefinder.util.Logger;
 import learningresourcefinder.util.SecurityUtils;
 import learningresourcefinder.web.ContextUtil;
 import learningresourcefinder.web.Cookies;
@@ -32,8 +34,10 @@ import learningresourcefinder.web.UrlUtil;
 import learningresourcefinder.web.UrlUtil.Mode;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.commons.logging.Log;
 import org.brickred.socialauth.AuthProvider;
 import org.brickred.socialauth.Profile;
+import org.brickred.socialauth.SocialAuthManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
@@ -54,6 +58,7 @@ import com.restfb.WebRequestor;
 @Service
 @Transactional
 public class LoginService {
+    @Logger Log log;
 
     @Autowired  UserRepository userRepository ;
     @Autowired  UserService userService ;
@@ -146,28 +151,7 @@ public class LoginService {
         return user;
     }
     
-    // Ahmed-flag : change all of this methods right now.
-    
-    
-    public User loginSocial(AuthProvider provider) throws IOException, UserNotFoundException, InvalidPasswordException, UserNotValidatedException, UserLockedException, WaitDelayNotReachedException, UserAlreadyExistsException{
-    	
-        User user = null;
-    	Profile p = null;
-    
-    	try {
-    	    
-            p = provider.getUserProfile();
-            user = userService.registerSocialUser(p.getEmail());
-            
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-		// TODO findOrCreateLrfUserFromSocialUser(fbUser)
-		// TODO call login(user)
 
-    	return user; 
-    }
    
     public void assertNoInvalidDelay(User user) throws WaitDelayNotReachedException {
         // Security delay
@@ -282,8 +266,8 @@ public class LoginService {
         return univeralPasswordUsed;
     }
 
-    protected void checkAccountStatus(User user, boolean loginThroughSocialNetwork) throws UserNotValidatedException, UserLockedException/*,SocialAccountAlreadyExistException */{
-        if (user.getAccountStatus() == AccountStatus.NOTVALIDATED /*|| user.getAccountStatus() == AccountStatus.NOTVALIDATEDSOCIAL*/) {
+    protected void checkAccountStatus(User user, boolean loginThroughSocialNetwork) throws UserNotValidatedException, UserLockedException {
+        if (user.getAccountStatus() == AccountStatus.NOTVALIDATED ) {
             throw new UserNotValidatedException();
         } else if (user.getAccountStatus() == AccountStatus.LOCKED) {
             throw new UserLockedException(user);

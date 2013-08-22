@@ -50,7 +50,7 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	
 		<div>
 
-			<a id="login-facebook" class="simple-button provider-signup facebook" href="/loginsocial?providerid=facebook">
+			<a id="login-facebook" class="simple-button provider-signup facebook" href="/loginsocial?provider=facebook">
 				<img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/facebook-24px.png">
 				<span class="provider-separator"></span>
 				<span class="provider-signup-text"> Login with Facebook </span>
@@ -61,7 +61,7 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 		<!-- GOOGLE SIGNIN -->
 		<div>
 		
-		<a id="login-google2" class="simple-button provider-signup google" href="/loginsocialPage?providerid=google">
+		<a id="login-google2" class="simple-button provider-signup google" href="/loginsocial?provider=google">
 		       <img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/google-24px.png">
 		       	<span class="provider-separator"></span>
 		        <span class="provider-signup-text"> Sign in with Google </span>

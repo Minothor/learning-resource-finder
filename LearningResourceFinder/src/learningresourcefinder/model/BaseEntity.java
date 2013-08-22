@@ -160,5 +160,9 @@ public abstract class BaseEntity  {
             return "pas de date communiquée";
     }
   
+    @Override
+    public String toString() {
+        return "id="+this.getId();
+    }
    
 }

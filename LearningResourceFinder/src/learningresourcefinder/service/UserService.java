@@ -349,31 +349,32 @@ public class UserService {
        userRepository.merge(user);
    }*/
    
-   public User registerSocialUser(String mail) throws UserAlreadyExistsException {
-      
-     
-       User user = userRepository.getUserByEmail(mail);  
-       if(user == null) {  // We need to create a user for a facebook/google first time login.
-           // 1. Username based on Time stamp (temporary name until we persist it and have it's id)
-           Date date = new Date();
-           String username = date.getTime()+"";
-           int begin = username.length()-12;
-           username= "tmp"+username.substring(begin);
-           Random random = new Random();
+   public User registerSocialUser(String mail) {
+       // 1. Username based on Time stamp (temporary name until we persist it and have it's id)
+       Date date = new Date();
+       String tempUserName = date.getTime()+"";
+       int begin = tempUserName.length()-12;
+       tempUserName= "tmp"+tempUserName.substring(begin);
+       Random random = new Random();
 
-           // 2. User instantiation and persist
-       	   user = registerUser(true, 
-        			   username,  
-        			   null,   
-        			   mail);     
+       // 2. User instantiation and persist
+       
+       User user;
+       try {
+            user = registerUser(true, tempUserName, null, mail);
+       } catch (UserAlreadyExistsException e) {  // This exception should never happen here (since we checked the e-mail uniqueness already).
+            throw new RuntimeException(e);
+       }     
+       
 
-           // 3. Now we have the ID and can assign a better username.
-           user.setUserName("user"+user.getId());
-           userRepository.merge(user);
-       }
+       // 3. Now we have the ID and can assign a better username.
+       user.setUserName("user"+user.getId());
+       user = userRepository.merge(user);
        
        return user;
    }
+   
+   
   /*  public List<User> getUserLstWithRoleOrPrivilege(){
     	List<User> list1 = userRepository.getUserWithRoleNotNull();
     	List<User> list2 = userRepository.getUserWithPrivilegeNotEmpty();
