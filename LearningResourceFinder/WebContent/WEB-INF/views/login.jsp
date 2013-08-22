@@ -58,22 +58,21 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 		</div>
 		<br/>
 		
+		<!-- GOOGLE SIGNIN -->
+		<div>
+		
+		<a id="login-google2" class="simple-button provider-signup google" href="/loginsocialPage?providerid=google">
+		       <img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/google-24px.png">
+		       	<span class="provider-separator"></span>
+		        <span class="provider-signup-text"> Sign in with Google </span>
+		 </a>
+	  </div>
+		<br/>
+	
 		
 		
 
-		<!-- GOOGLE SIGNIN -->
-		<div>
-		<form name="go_signin" id="go_signin"
-			action="<c:url value="/signin/google"/>" method="POST">
-			<input type ="hidden" name ="scope" value="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"/>
-			<div class="container">se connecter avec<br /> 
-				<input class="image-login" type="image" alt="logo google"
-				src="images/social_logo/google.jpg" />
-			</div>
-		</form>
-		</div>
-	</div>
-	
+		
 	<!-- LOCAL SIGNIN - LEFT COLUMN -->
 	<div style="padding-right: 20px;">
 			<h1>Connexion avec votre compte ${p_website_name}</h1>
@@ -81,7 +80,7 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 		<%@ include file="loginfragment.jsp"%>
 	</div>
 	
-</div>	
+</div>
 <!-- this checkbox is not in a form tag because we pass its value by an ajax request -->
 
 </body>
