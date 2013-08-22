@@ -4,6 +4,8 @@
 <html>
 <head>	
 	<script type="text/javascript" src="/js/int/ajaxAddUrlResource.js"></script>
+	<script type="text/javascript" src="/js/int/resourceImageGallery.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css"  />
 	<title>Insert title here</title>
 	<script type="text/javascript">
 		
@@ -54,6 +56,8 @@
 			<p id="response">${response}</p>
 		</div>
 	</div>
+	<br />
+	<%@ include file="resourceimagegallery.jsp" %>
 	<br />
 	<a href="ressourcelist">home page</a>
 </body>
