@@ -28,12 +28,12 @@ import org.hibernate.annotations.Type;
 @Table(name="resource")
 @SequenceGenerator(name="ResourceSequence", sequenceName="RESOURCE_SEQUENCE")
 public class Resource extends BaseEntity implements Searchable {
-    @Id   @GeneratedValue(generator="ResourceSequence") // We wand Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
+    
+	@Id   @GeneratedValue(generator="ResourceSequence") // We wand Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
     Long id;
     
     @Column(nullable=true) // nullable here but fed in first call of getShortId from new id
     String shortId;
-    
     
     @Column(length = 50, nullable=false)
     @Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
@@ -42,6 +42,9 @@ public class Resource extends BaseEntity implements Searchable {
     @Column(length=50, nullable=false)
     @Size(max=50)
     private String slug;
+    
+	@Column()
+	private int numberImage;
     
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
@@ -67,6 +70,15 @@ public class Resource extends BaseEntity implements Searchable {
 	
 	@OneToMany(mappedBy="resource")
 	List<UrlResource> urlResources = new ArrayList<>();
+	
+	
+//	------------------ zone of test ------------
+	
+	
+	public int addImageOnDB(){
+		return numberImage;
+	}
+	
 	
 	/**************************** Getters & Setters ************************************/
 	
@@ -150,5 +162,13 @@ public class Resource extends BaseEntity implements Searchable {
     public void setSlug(String slug) {
         this.slug = slug;
     }
+
+	public int getNumberImage() {
+		return numberImage;
+	}
+
+	public void setNumberImage(int resourceid) {
+		this.numberImage = resourceid;
+	}
 
 }

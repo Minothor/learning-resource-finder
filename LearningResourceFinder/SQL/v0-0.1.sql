@@ -85,5 +85,10 @@ create table url_resource (
 
 -- Lio Chasse les mouches 20-08-2013
     alter table playlist 
-        add column picture boolean;        
+        add column picture boolean;    
+        
+-- Cengiz 2013-08-21
+    alter table numberImage 
+        add column numberImage int;
+      
         
