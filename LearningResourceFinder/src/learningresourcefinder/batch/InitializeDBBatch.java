@@ -65,6 +65,8 @@ public class InitializeDBBatch implements Runnable {
 	Resource mathFraction1;	
 
 	School school;  // Various methods need the created school
+	
+	User admin;
 
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
@@ -95,17 +97,18 @@ public class InitializeDBBatch implements Runnable {
 
 	public void insertUser() {
 		// Admin user
-		User u = new User();
-		u.setFirstName("Admin");
-		u.setLastName("");
-		u.setBirthDate(new Date());
-		u.setMail("info@lrf.be");
-		u.setAccountStatus(AccountStatus.ACTIVE);
-		u.setUserName("admin");
-		u.setRole(Role.ADMIN);
-		u.hasAdminPrivileges();
-		u.setPassword(SecurityUtils.md5Encode("aaaa"));
-		userRepository.persist(u);
+		admin = new User();
+		admin.setFirstName("Admin");
+		admin.setLastName("");
+		admin.setBirthDate(new Date());
+		admin.setMail("info@lrf.be");
+		admin.setAccountStatus(AccountStatus.ACTIVE);
+		admin.setUserName("admin");
+		admin.setRole(Role.ADMIN);
+		admin.hasAdminPrivileges();
+		admin.setPassword(SecurityUtils.md5Encode("aaaa"));
+		userRepository.persist(admin);
+		
 
 
 
@@ -128,7 +131,7 @@ public class InitializeDBBatch implements Runnable {
 	}
 
 	public void insertProblem() {
-		User u = userRepository.getUserByUserName("deli");
+//		User u = userRepository.getUserByUserName("deli");
 		Resource r = resourceRepository.getResourceByName("Français");
 		Problem p = new Problem();
 		Comment c = new Comment();
@@ -148,10 +151,10 @@ public class InitializeDBBatch implements Runnable {
 	}
 
 	public void insertResource() {
-		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont");
-		mathGob = new Resource("Goblin-Maths", "Jeu de mathématiques avec des goblins.");
-		frOrtho1 = new Resource("Français - Dupond", "cours d orthographe débutant écrit par Charlotte Dupont");
-		mathFraction1 = new Resource("Goblin-Fractionnés", "Jeu de mathématiques avec des découpes de goblins.");
+		frDupont = new Resource("Français - Dupont", "cours de français pour débutant écrit par Charlotte Dupont", admin);
+		mathGob = new Resource("Goblin-Maths", "Jeu de mathématiques avec des goblins.", admin);
+		frOrtho1 = new Resource("Français - Dupond", "cours d orthographe débutant écrit par Charlotte Dupont", admin);
+		mathFraction1 = new Resource("Goblin-Fractionnés", "Jeu de mathématiques avec des découpes de goblins.", admin);
 		//frDupont.setUser(userRepository.getUserByUserName("deli"));
 		//mathGob.setUser(userRepository.getUserByUserName("deli"));
 		resourceRepository.persist(frDupont);

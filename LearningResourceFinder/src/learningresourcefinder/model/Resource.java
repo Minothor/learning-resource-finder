@@ -43,8 +43,9 @@ public class Resource extends BaseEntity implements Searchable {
     @Size(max=50)
     private String slug;
     
-	@Column()
+	@Column(columnDefinition = "int default 0")
 	private int numberImage;
+	
     
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
@@ -57,10 +58,11 @@ public class Resource extends BaseEntity implements Searchable {
 	
 	public Resource() {} // No arg constructor for Hibernate
 	
-	public Resource(String name, String description) {
+	public Resource(String name, String description, User author) {
 		this.name = name;
 		this.description = description;
 		this.slug = Slugify.slugify(name);
+		this.createdBy = author;  // We are probably executing this constructor with params in a test batch code (=> no logged in user to be the author).
 	}
 	
 	@Override
@@ -70,10 +72,6 @@ public class Resource extends BaseEntity implements Searchable {
 	
 	@OneToMany(mappedBy="resource")
 	List<UrlResource> urlResources = new ArrayList<>();
-	
-	
-//	------------------ zone of test ------------
-	
 	
 	public int addImageOnDB(){
 		return numberImage;

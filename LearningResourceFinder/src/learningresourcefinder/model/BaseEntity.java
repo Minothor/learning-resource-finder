@@ -40,7 +40,9 @@ public abstract class BaseEntity  {
     
     @PrePersist
     public void prePersist(){
-    	createdBy = SecurityContext.getUser();
+    	if (createdBy == null) {  // It could be null in the rare case the constructor of the entity assigns a creator (in batch jobs, typically).
+    		createdBy = SecurityContext.getUser();  // Would be null in batch mode (or in case no user is logged in).
+    	}
     	createdOn = new Date();
     	if (setUpdateOnWhenCreating) {
     		updatedOn = createdOn;

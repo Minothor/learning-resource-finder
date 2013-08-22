@@ -10,7 +10,6 @@ import learningresourcefinder.exception.AjaxExceptionVO;
 import learningresourcefinder.exception.AjaxValidationException;
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.BaseEntity;
-import learningresourcefinder.model.Resource;
 import learningresourcefinder.util.ClassUtil;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;

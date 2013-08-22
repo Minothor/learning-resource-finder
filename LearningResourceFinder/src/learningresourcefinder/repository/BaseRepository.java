@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import learningresourcefinder.model.BaseEntity;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.util.ClassUtil;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -48,10 +49,11 @@ public abstract class BaseRepository<E extends BaseEntity> {
          em.refresh(entity);
      
      }
+     
     public E merge(E entity) {
         return em.merge( entity );
     }
-
+    
     public void remove(E entity) {
         entity = find(entity.getId());  // In case of entity is detached. We can only pass managed entities to remove. If the entity already managed, it's in the 1st level cache => no DB access.
         if (entity == null) {

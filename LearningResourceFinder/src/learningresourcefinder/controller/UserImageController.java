@@ -52,7 +52,7 @@ public class UserImageController extends BaseController<User> {
 		try {
 			FileUtil.uploadFile(multipartFile, FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER, 
 					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, Long.toString(user.getId())));
-
+			
 			BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),120 * 200, 200, 200);
 						
 			ImageUtil.saveImageToFileAsJPEG(resizedImage,  
@@ -70,11 +70,11 @@ public class UserImageController extends BaseController<User> {
 		} catch (InvalidImageFileException e) {  //Tell the user that its image is invalid.
 			NotificationUtil.addNotificationMessage(e.getMessageToUser());
 		}
-
-
+		
+		
 		ModelAndView mv = new ModelAndView("redirect:/user/" + user.getUserName());
 		mv.addObject("random", System.currentTimeMillis());
-
+		
 		return mv;
 	}
 	

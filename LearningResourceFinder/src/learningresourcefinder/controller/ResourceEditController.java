@@ -77,7 +77,12 @@ public class ResourceEditController extends BaseController<Resource> {
 
 		}
 	}
-
+	
+	public int addImageOnDB(){
+		
+		return 0;
+	}
+	
 
 }
 
