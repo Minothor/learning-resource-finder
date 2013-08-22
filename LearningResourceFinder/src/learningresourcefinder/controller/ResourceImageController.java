@@ -2,6 +2,10 @@ package learningresourcefinder.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
@@ -64,9 +68,7 @@ public class ResourceImageController extends BaseController<User> {
 			ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
 					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
 
-			user.setPicture(true);
 			resource.setNumberImage(resource.getNumberImage() + 1);
-			
 			resourceRepository.merge(resource);
 			
 		} catch (InvalidImageFileException e) {  
@@ -78,6 +80,56 @@ public class ResourceImageController extends BaseController<User> {
 		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
 
 		return mv;
+	}
+	
+	@RequestMapping("/imageaddUrl" )
+	public ModelAndView resourceImageAddUrl(@RequestParam("idResource") long resourceid, @RequestParam("strUrl") String url) throws Exception {
+		
+		Resource resource = resourceRepository.find(resourceid);
+		User user = resource.getCreatedBy();
+		SecurityContext.assertCurrentUserMayEditThisUser(user);
+		
+		ModelAndView mv = new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
+		mv.addObject("random", System.currentTimeMillis());
+		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
+
+		BufferedImage image = null;
+		
+		try 
+		{
+            image = ImageUtil.readImage(url);
+        } 
+		catch (RuntimeException e) 
+		{
+        	NotificationUtil.addNotificationMessage("veuillez indiquer une URL valide");
+            return mv;//useless to try to save image if we don't have it
+        }
+		
+        try 
+        {
+            ByteArrayOutputStream outStream= new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", outStream);
+            
+            image = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),120 * 200, 200, 200);
+            
+            ImageUtil.saveImageToFileAsJPEG(image, 
+            		FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);           
+            
+            BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),40 * 40, 60, 60);
+
+            ImageUtil.saveImageToFileAsJPEG(resizedImage,  
+            		FileUtil.getGenFolderPath(currentEnvironment) + 
+            		FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
+            
+            resource.setNumberImage(resource.getNumberImage() + 1);
+			resourceRepository.merge(resource);
+        } 
+        catch (IOException e) 
+        {
+            throw new RuntimeException(e);
+        }
+
+        return mv;
 	}
 	
 	 @RequestMapping("/delete")
