@@ -50,40 +50,16 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	
 		<div>
 
-			<a id="login-facebook" class="simple-button provider-signup facebook" href="/loginsocialPage?providerid=facebook">
+			<a id="login-facebook" class="simple-button provider-signup facebook" href="/loginsocial?providerid=facebook">
 				<img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/facebook-24px.png">
 				<span class="provider-separator"></span>
-				<span class="provider-signup-text"> Sign in with Facebook </span>
+				<span class="provider-signup-text"> Login with Facebook </span>
 			</a>
 		</div>
 		<br/>
 		
 		
 		
-
-		<!-- TWITTER SIGNIN -->
-		
-		<div>
-		<form id="tw_signin" action="<c:url value="/signin/twitter"/>"
-			method="POST">
-			<div class="container">se connecter avec<br> 
-				<input style="padding-top:5px;" type="image" alt="logo twitter" src="images/social_logo/twitter.jpg" />
-			</div>
-		</form>
-		</div>
-		<br/>
-		
-		<!-- LINKEDIN SIGNIN
-		<div>
-		<form name="li_signin" id="li_signin"
-			action="<c:url value="/signin/linkedin"/>" method="POST">
-			<input type ="hidden" name ="scope" value="r_basicprofile+r_emailaddress"/>
-				<div class="container">se connecter avec<br>
-			     	<input style="padding-top:5px;" type="image" alt="logo linkedin" src="images/social_logo/linkedin.jpg" />
-				</div>
-		</form>
-		</div>
-		<br/> -->
 
 		<!-- GOOGLE SIGNIN -->
 		<div>
