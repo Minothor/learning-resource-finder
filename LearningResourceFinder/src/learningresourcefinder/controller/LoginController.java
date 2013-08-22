@@ -1,8 +1,10 @@
 package learningresourcefinder.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import learningresourcefinder.exception.InvalidPasswordException;
 import learningresourcefinder.exception.UserAlreadyExistsException;
@@ -17,24 +19,20 @@ import learningresourcefinder.service.LoginService.WaitDelayNotReachedException;
 import learningresourcefinder.util.DateUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.web.UrlUtil;
-import learningresourcefinder.web.UrlUtil.Mode;
 
 import org.apache.commons.lang3.StringUtils;
+import org.brickred.socialauth.AuthProvider;
+import org.brickred.socialauth.Profile;
+import org.brickred.socialauth.SocialAuthConfig;
+import org.brickred.socialauth.SocialAuthManager;
+import org.brickred.socialauth.util.SocialAuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.restfb.DefaultFacebookClient;
-import com.restfb.DefaultWebRequestor;
-import com.restfb.FacebookClient;
-import com.restfb.WebRequestor;
 
 @Controller
 public class LoginController extends BaseController<User> {
@@ -50,30 +48,71 @@ public class LoginController extends BaseController<User> {
 	public String signin(HttpServletRequest request) {
 		return "login";
 	}
-	 // loginSocial
+	
+	@RequestMapping(value = "/loginsocialPage", method = RequestMethod.GET)
+    public String socialSigninPage(HttpServletRequest request,WebRequest req) {
+	       return getLoginSocialPage(request);
+	   }
+	
+   public String getLoginSocialPage(HttpServletRequest request){
+	        
+	      String urlSocial = "";
+	      HttpSession mySession = request.getSession();
+	      String providerId = (String) request.getParameter("providerid");
+	      
+	      SocialAuthConfig config = SocialAuthConfig.getDefault();
+	      SocialAuthManager SocialManager = new SocialAuthManager();
+	
+	      try {
+	          
+            config.load();
+            SocialManager.setSocialAuthConfig(config);
+            urlSocial = SocialManager.getAuthenticationUrl(providerId,"http://localhost:8080/loginsocial"); //  We can use this method to add permissions later : getAuthenticationUrl(id, successUrl, permission) 
+     
+            
+        } catch (Exception e) {
+           throw new RuntimeException(e);
+        }
+	      
+	     mySession.setAttribute("socialmanager", SocialManager); 
+	     
+	     return "redirect:"+urlSocial;
+    }
+  
 	@RequestMapping(value = "/loginsocial", method = RequestMethod.GET)
 	public ModelAndView socialSignin(HttpServletRequest request,WebRequest req) throws IOException, UserNotFoundException, InvalidPasswordException, UserNotValidatedException, UserLockedException, WaitDelayNotReachedException, UserAlreadyExistsException {
-		
-        String code = request.getParameter("code");
-        
-		if(code == null) { // Problem with facebook/google (who did not send the token back, i.e. user press cancel)
-			 // TODO: notify the user.   NotificationUtil...
-			return new ModelAndView("login");
-		}
-			
-		User u = loginService.loginSocial(code);
-      
-		if(u == null){
-			//TODO add notification
-			return new ModelAndView("login");
-		}
-		
-		u = loginService.login(u.getMail(), u.getPassword(), false,u.getId(), AccountConnectedType.FACEBOOK);
-		NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "   + UrlUtil.getWebSiteName());
-	
-		return new ModelAndView("redirect:user/" + u.getUserName());
 
+        AuthProvider provider = null;
+        User u = null;
+     
+        SocialAuthManager socialManager = (SocialAuthManager) request.getSession()
+                .getAttribute("socialmanager");
+        Map<String, String> paramsMap = SocialAuthUtil
+                .getRequestParametersMap(request);
+        
+         try {
+             
+            provider= socialManager.connect(paramsMap);
+            u = loginService.loginSocial(provider);
+            
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+ 
+        }
+       
+         if(u!= null){
+             u = loginService.login(u.getMail(), u.getPassword(), false,u.getId(), AccountConnectedType.FACEBOOK);
+             NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "   + UrlUtil.getWebSiteName());             
+             return new ModelAndView("redirect:user/" + u.getUserName());
+         }
+           // Maybe add notification
+         return new ModelAndView("redirect:login");
 	}
+	
+	
+	
+	
 	/**
 	 * 
 	 * @param password
