@@ -11,20 +11,16 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
-import learningresourcefinder.util.TextUtils;
 import learningresourcefinder.web.Slugify;
 
 import org.hibernate.annotations.Type;
 
 @Entity
 @SequenceGenerator(name="PlayListSequence", sequenceName="PLAYLIST_SEQUENCE")
-public class PlayList extends BaseEntity {
+public class PlayList extends BaseEntityWithShortId {
     
     @Id  @GeneratedValue(generator="PlayListSequence") 
     Long id;
-    
-    @Column(nullable=true) // nullable here but fed in baseentity/postpersist from new id
-    String shortId;
     
     @Column(length=50,nullable=false )
     private String name;
@@ -48,8 +44,7 @@ public class PlayList extends BaseEntity {
     @ManyToMany
     private List<Resource> resourceList = new ArrayList<Resource>();
 
-    public PlayList() {
-    }
+    public PlayList() {} // No arg constructor for Hibernate
     
     public PlayList(String name, String description) {
 		this.name = name;
@@ -87,32 +82,6 @@ public class PlayList extends BaseEntity {
         return id;
     }
     
-    public String getShortId() {
-
-        return getOrComputeShortId();
-    }
-    
-    public String getOrComputeShortId() {
-        
-        if (shortId == null) {
-            // update the shortId from the new id
-            // shortId is initialized once here at first call because we need
-            // the new id and so we must wait the nextVal() of persist(resource)
-            // call before calculate the shortId
-            if (this.getId() != null) {
-                this.setShortId(TextUtils.generateShortId(this.getId()));
-            } else {
-                throw new RuntimeException(
-                        "Bug: id can't be null during call to getShortedId. Programmer is not supposed to call this method before em.persist(entity).");
-            }
-        }
-        return shortId;
-    }
-    
-    public void setShortId(String shortId) {
-        this.shortId = shortId;
-    }
-
 	public Boolean getPicture() {
 		return picture;
 	}
@@ -120,5 +89,5 @@ public class PlayList extends BaseEntity {
 	public void setPicture(Boolean picture) {
 		this.picture = picture;
 	}
-
+	
 }
