@@ -30,7 +30,7 @@ function buildWar(){
   ant -Dant.project.name=$1 -Dtype=$2 war
 }
 function checkout_build(){
-  #first we checkout or update the RYC framework sourcecode
+  #first we checkout or update the LRF framework sourcecode
   echo "update "$FRAMEWORK_NAME"..."
   if [ -d "./$FRAMEWORK_DIR_NAME" ] ; then
     update $FRAMEWORK_DIR_NAME

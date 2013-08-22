@@ -1,4 +1,4 @@
-BASE_FOLDER=/opt/RYC_Maintenance
+BASE_FOLDER=/opt/maintenance
 BUILD_FOLDER=$BASE_FOLDER/build
 BIN_FOLDER=$BASE_FOLDER/bin
 BACKUP_FOLDER=$BASE_FOLDER/backup
@@ -6,7 +6,7 @@ BACKUP_FOLDER=$BASE_FOLDER/backup
 #%F_%T is to have the date format wity yyyy-MM-dd....
 NOW=$(date '+%F_%T')
 
-FRAMEWORK_NAME=ReformYourCountry
+FRAMEWORK_NAME=LearningResourceFinder
 
 APP_ENV=PROD
 APP_NAME=enseignement2.be
@@ -24,8 +24,8 @@ GEN_DIR=$WWW_FOLDER/gen
 TOMCAT_LOG_FILE=/var/log/tomcat7/catalina.out
 TIME_TOMCAT_TO_START=45s
 
-DB_NAME=RYC
-DB_USER=RYC
+DB_NAME=LRF
+DB_USER=LRF
 
-FRAMEWORK_SVN_ADRESS=https://reform-your-country.googlecode.com/svn/
+FRAMEWORK_SVN_ADRESS=https://learning-resource-finder.googlecode.com/svn/
 APP_SVN_ADRESS=https://enseignement2.googlecode.com/svn/

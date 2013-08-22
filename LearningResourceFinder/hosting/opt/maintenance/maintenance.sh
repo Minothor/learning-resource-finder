@@ -8,7 +8,7 @@ if [ "$(id -u)" != "0" ]; then
         exit 1
 fi
 
-BASE_FOLDER=/opt/RYC_Maintenance
+BASE_FOLDER=/opt/maintenance
 #in case of executing the script in a différent folder, we are we access ressource as relative path
 cd $BASE_FOLDER
 
