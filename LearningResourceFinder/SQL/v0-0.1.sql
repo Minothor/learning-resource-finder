@@ -88,7 +88,7 @@ create table url_resource (
         add column picture boolean;    
         
 -- Cengiz 2013-08-21
-    alter table numberImage 
+    alter table resource 
         add column numberImage int;
       
         
