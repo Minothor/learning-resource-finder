@@ -15,19 +15,17 @@ BACKUPS_TO_KEEP=5
 OLD_WAR_COPY_NAME=ROOT_$NOW.war
 
 APACHE_HOME=/etc/httpd
-WWW_FOLDER=/var/www/hagakure/data/www
+WWW_FOLDER=/var/www/html
 
 # There is alreay a sys variable TOMCAT_HOME, but we repeat it in case of... (have had problems in special eapps cron tasks of sys variables not there).
 TOMCAT_HOME=/opt/tomcat7
 WEBAPPS_FOLDER=$TOMCAT_HOME/webapps
-GEN_DIR=$WEBAPPS_FOLDER/ROOT/gen
+GEN_DIR=$WWW_FOLDER/gen
 TOMCAT_LOG_FILE=/var/log/tomcat7/catalina.out
 TIME_TOMCAT_TO_START=45s
 
 DB_NAME=RYC
 DB_USER=RYC
-
-PROD_IP=68.169.61.167
 
 FRAMEWORK_SVN_ADRESS=https://reform-your-country.googlecode.com/svn/
 APP_SVN_ADRESS=https://enseignement2.googlecode.com/svn/

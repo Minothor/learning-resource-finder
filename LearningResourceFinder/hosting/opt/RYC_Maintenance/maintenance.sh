@@ -1,3 +1,4 @@
+
 #/bin/bash
 #tips : exit error code are free between 2 and 64 ( so can use 3 to 63)
 
@@ -78,12 +79,9 @@ case $1 in
                         exit 5
                 else
                         echo "restoring last gen backup..."
-                        assertFolderExists $BACKUP_FOLDER/gen
-                        assertFolderExists $WEBAPPS_FOLDER/ROOT
-                        ensureFolderExists $WEBAPPS_FOLDER/ROOT/gen
-                        chown tomcat:tomcat $WEBAPPS_FOLDER/ROOT/gen
-                        
-                        tar -Jxvf $BACKUP_FOLDER/gen/last.tar.xz -C $WEBAPPS_FOLDER/ROOT/gen
+                        echo $GEN_DIR
+                        rm -r $GEN_DIR
+                        tar -Jxvf $BACKUP_FOLDER/gen/last-gen.tar.xz -C $WWW_FOLDER
                 fi
                 ;;
         "restoreDB")
@@ -106,6 +104,11 @@ case $1 in
                         xz -e9 last
                 fi
                 ;; 
+        "switch_httpd")
+                . $BIN_FOLDER/switch_httpd
+                 switch_httpd $2
+                
+                ;;
         "deploy")
                 echo "deploying application ..."
                 ensureFolderExists $BACKUP_FOLDER
@@ -124,8 +127,6 @@ case $1 in
                                 
                                 #the precedent script change his working and we do not want to hardcode the emplacement of the config file
                                 cd $BASE_FOLDER
-                                #backup gen folder in case of...
-                                ./maintenance.sh backupGen
                                 
                                 . $BIN_FOLDER/do_deployment
                                 do_deployment
@@ -135,8 +136,6 @@ case $1 in
                                 
                                 . $BIN_FOLDER/switch_httpd
                                 switch_httpd prod
-
-                                ./maintenance.sh restoreGen
                         ;;
                 esac
                 ;;
