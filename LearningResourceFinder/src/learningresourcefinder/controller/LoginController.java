@@ -24,6 +24,7 @@ import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
+import org.brickred.socialauth.Profile;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
 import org.brickred.socialauth.util.SocialAuthUtil;
@@ -88,9 +89,14 @@ public class LoginController extends BaseController<User> {
         String providerId = (String) session.getAttribute("providerId");
         // Contacting Facebook or Google to get the user's e-mail 
         String email = null;
+        String UrlPicture = null;
         Map<String, String> paramsMap = SocialAuthUtil.getRequestParametersMap(request);
         try {
-            email = socialAuthManager.connect(paramsMap).getUserProfile().getEmail();
+            Profile profile = socialAuthManager.connect(paramsMap).getUserProfile();
+            email = profile.getEmail();
+            if (providerId.equals("facebook")) {
+            UrlPicture = profile.getProfileImageURL() + "?type=large";
+            }
         } catch (Exception e) {
             log.error("Exception during social login callback (while contacting "+providerId+" to get the e-mail address)", e);
             NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+" pour obtenir votre adress e-mail afin de vous connecter sur notre site. Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
