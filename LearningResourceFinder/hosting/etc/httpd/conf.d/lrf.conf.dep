@@ -1,6 +1,6 @@
 # Configuration file used when the server is doing a deployement (we don't forward request to tomcat, but we show a nice deployment.html page).
 
-<VirtualHost 68.169.61.167:80>
+<VirtualHost 68.169.63.215:80>
         ServerName enseignement2.be
         ServerAlias *.enseignement2.be www.enseignement2.be
 
