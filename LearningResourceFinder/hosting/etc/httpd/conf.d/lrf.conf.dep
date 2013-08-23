@@ -1,6 +1,6 @@
 # Configuration file used when the server is doing a deployement (we don't forward request to tomcat, but we show a nice deployment.html page).
 
-<VirtualHost 68.169.63.215:80>
+<VirtualHost *:80>
         ServerName toujoursplus.be
         ServerAlias *.toujoursplus.be www.toujoursplus.be
 
