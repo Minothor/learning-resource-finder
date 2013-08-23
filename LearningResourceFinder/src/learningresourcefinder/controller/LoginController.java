@@ -94,8 +94,9 @@ public class LoginController extends BaseController<User> {
         try {
             Profile profile = socialAuthManager.connect(paramsMap).getUserProfile();
             email = profile.getEmail();
+            // Picture provided by default is too small. We've added the paramater type to get it large.
             if (providerId.equals("facebook")) {
-            UrlPicture = profile.getProfileImageURL() + "?type=large";
+            UrlPicture = profile.getProfileImageURL() + "?type=large"; 
             }
         } catch (Exception e) {
             log.error("Exception during social login callback (while contacting "+providerId+" to get the e-mail address)", e);
