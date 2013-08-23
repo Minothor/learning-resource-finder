@@ -7,6 +7,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 public abstract class FileUtil {
-	
+
 	final static public String BOOK_SUB_FOLDER = "/book";
 	final static public String BOOK_ORIGINAL_SUB_FOLDER = "/original";
 	final static public String BOOK_RESIZED_SUB_FOLDER = "/resized";
@@ -52,229 +53,229 @@ public abstract class FileUtil {
 	final static public String LUCENE_INDEX_FOLDER = "/indexLucene";
 	final static public String PDF_FOLDER ="/pdf";
 
-    static private Log log = LogFactory.getLog(FileUtil.class);
-    public static String getGenFolderPath(CurrentEnvironment currentEnvironment) {
-    	if (currentEnvironment.getEnvironment() == Environment.PROD) {
-    		return currentEnvironment.getGenFolderOnProd();  // probably something like "/var/www/html/gen".  Works in Batch and web.
-    	} else if (currentEnvironment.getEnvironment() == Environment.DEV) {
-        	if (ContextUtil.batchMode) {  // in batch mode, we have no ServletContext
-        		String tmpFolder = System.getProperty("java.io.tmpdir");  // temp folder;
-        		return tmpFolder.substring(0, tmpFolder.length()-1);  // Remove the last "/" from the end
-        	} else {  // Web mode
-        		// In dev mode, returns something like C:\Users\forma308\Documents\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\LearningResourceFinder\gen 
-        		return ContextUtil.getServletContext().getRealPath("/gen");
-        	}
-    	} else {  // Defensive coding.
-    		throw new IllegalStateException("Bug: unexpected enum value " + currentEnvironment.getEnvironment());
-    	}
-    }
+	static private Log log = LogFactory.getLog(FileUtil.class);
+	public static String getGenFolderPath(CurrentEnvironment currentEnvironment) {
+		if (currentEnvironment.getEnvironment() == Environment.PROD) {
+			return currentEnvironment.getGenFolderOnProd();  // probably something like "/var/www/html/gen".  Works in Batch and web.
+		} else if (currentEnvironment.getEnvironment() == Environment.DEV) {
+			if (ContextUtil.batchMode) {  // in batch mode, we have no ServletContext
+				String tmpFolder = System.getProperty("java.io.tmpdir");  // temp folder;
+				return tmpFolder.substring(0, tmpFolder.length()-1);  // Remove the last "/" from the end
+			} else {  // Web mode
+				// In dev mode, returns something like C:\Users\forma308\Documents\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\LearningResourceFinder\gen 
+				return ContextUtil.getServletContext().getRealPath("/gen");
+			}
+		} else {  // Defensive coding.
+			throw new IllegalStateException("Bug: unexpected enum value " + currentEnvironment.getEnvironment());
+		}
+	}
 
-    
-    /** If an uploaded MultipartFile has the name "toto.jpeg", and we give "123" as newNamePrefixFileName, this method will return "123.jpg".
-     * @throws InvalidImageFileException 
-     */
-    public static String assembleImageFileNameWithCorrectExtention(MultipartFile multipartFile, String newPrefixFileName) throws InvalidImageFileException {
-        String type = multipartFile.getContentType();
-        
-        if (!type.contains("image")) {
-            if(log.isDebugEnabled()){
-                log.debug("someone try to upload this fille but this isn't an image : "+multipartFile.getOriginalFilename());}
-            throw new InvalidImageFileException("File is not an image.  Detected type = '"+type+"'");
-        }
-        
-        ////// Get the right extension
-        String extension;
-        switch (type) {
-        case "image/gif":
-            extension = "gif";
-            break;
-        case "image/jpeg" :
-        case "image/pjpeg" ://internet explorer IFuckDevWhenTheyWantToMakeItSimple special MimeType for jpeg
-            extension = "jpg";
-            break;
-        case "image/png" : 
-        case "image/x-png"://internet explorer IFuckDevWhenTheyWantToMakeItSimple special MimeType for png
-            extension = "png";
-            break;
-        case "image/svg+xml" :
-            extension = "svg";
-            break;
-        default:
-            throw new InvalidImageFileException("bad image type : png , svg , jpeg and gif are only accepted. Detected type = '"+type+"'");
-        }
-        
-        // Compute the new file name
-        return newPrefixFileName + "." + extension;
-    }
-    
-    
-    /**
-     * write the picture in the right folder    
-     * @param path
-     * @param multipartFile
-     * @return
-     * @throws InvalidImageFileException 
-     * @throws IOException 
-     * @throws Exception 
-     */
-    public static File uploadFile(MultipartFile multipartFile, String path, String fileName) throws InvalidImageFileException, IOException {
-        if (multipartFile.getSize()>1500000)  {
-            throw new InvalidImageFileException("file is too large 1.5Mo maximum");
-        }
-        if (path == null) {
-            throw new IllegalArgumentException("File path(image) can't be null");
-        }
-        
-        if (fileName == null) {
-            throw new IllegalArgumentException("File name(image) can't be null");
-        }
-        File folder = FileUtil.ensureFolderExists(path);
-        if(log.isDebugEnabled()){
-            log.debug("genFolder : "+folder.getAbsolutePath());
-            log.debug("file type is :"+multipartFile.getContentType());
-            log.debug("file original name is "+multipartFile.getOriginalFilename());
-        }
-        
-        
-        if (multipartFile.isEmpty()){
-            if(log.isDebugEnabled()){
-                log.debug("someone try to submit an empty file : "+multipartFile.getOriginalFilename());}
-            throw new InvalidImageFileException("No file to transfer. File is empty.");
 
-        }
+	/** If an uploaded MultipartFile has the name "toto.jpeg", and we give "123" as newNamePrefixFileName, this method will return "123.jpg".
+	 * @throws InvalidImageFileException 
+	 */
+	public static String assembleImageFileNameWithCorrectExtention(MultipartFile multipartFile, String newPrefixFileName) throws InvalidImageFileException {
+		String type = multipartFile.getContentType();
 
-        File file = new File(folder, fileName);
-         
+		if (!type.contains("image")) {
+			if(log.isDebugEnabled()){
+				log.debug("someone try to upload this fille but this isn't an image : "+multipartFile.getOriginalFilename());}
+			throw new InvalidImageFileException("File is not an image.  Detected type = '"+type+"'");
+		}
 
-        FileOutputStream fos = null;
-        fos = new FileOutputStream(file);
-        fos.write(multipartFile.getBytes());
-        fos.close();
+		////// Get the right extension
+		String extension;
+		switch (type) {
+		case "image/gif":
+			extension = "gif";
+			break;
+		case "image/jpeg" :
+		case "image/pjpeg" ://internet explorer IFuckDevWhenTheyWantToMakeItSimple special MimeType for jpeg
+			extension = "jpg";
+			break;
+		case "image/png" : 
+		case "image/x-png"://internet explorer IFuckDevWhenTheyWantToMakeItSimple special MimeType for png
+			extension = "png";
+			break;
+		case "image/svg+xml" :
+			extension = "svg";
+			break;
+		default:
+			throw new InvalidImageFileException("bad image type : png , svg , jpeg and gif are only accepted. Detected type = '"+type+"'");
+		}
 
-        log.debug("file succesfull uploaded : "+file.getCanonicalPath());
-        return file;
-    }
+		// Compute the new file name
+		return newPrefixFileName + "." + extension;
+	}
 
-    /**
-     * Return a list of file names contained in a given folder.
-     * @param folderPath The path to the folder from wich we retrieve the file names
-     * @param extentions The extentions we filter on. No filtering if null.
-     * @return the list of file names.
-     */
-    public static List<String> getFilesNamesFromFolder(String folderPath){
-        
-        List<String> files = new ArrayList<String>();
-        File folder = new File(folderPath);
-        if(!folder.exists()){
-            return files;
-        }
-        if(!folder.isDirectory()){
-            folder = folder.getParentFile();
-        }
-        files = Arrays.asList(folder.list());
-      
-        
-        return files;
-        
-    }
 
-    /**
-     * Return a list of files contained in a given folder.
-     * @param folderPath The path to the folder from wich we retrieve the files
-     * @param extentions The extentions we filter on. No filtering if null.
-     * @return the list of files.
-     */
-    public static List<File> getFilesFromFolder(String folderPath){
-        
-        List<File> files = new ArrayList<File>();
-        File folder = new File(folderPath);
-        if(!folder.exists()){
-            return files;
-        }
-        if(!folder.isDirectory()){
-            folder = folder.getParentFile();
-        }
-        files = Arrays.asList(folder.listFiles());
-      
-        
-        return files;
-        
-    }
-    
-    /**
-     * Return a list of files contained in a given folder.
-     * @param folderPath The path to the folder from wich we retrieve the files
-     * @param extentions The extentions we filter on. No filtering if null.
-     * @return the list of files.
-     */
-    public static List<File> getFilesFromFolder(String folderPath, final String ... extensions){
-        
-        List<File> files = new ArrayList<File>();
-        File folder = new File(folderPath);
-        if(!folder.exists()){
-            return files;
-        }
-        if(!folder.isDirectory()){
-            folder = folder.getParentFile();
-        }
-        
-        FilenameFilter filter = new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                for (String extension : extensions) {
-                    if(name.toLowerCase().endsWith(extension.toLowerCase())){
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
+	/**
+	 * write the picture in the right folder    
+	 * @param path
+	 * @param multipartFile
+	 * @return
+	 * @throws InvalidImageFileException 
+	 * @throws IOException 
+	 * @throws Exception 
+	 */
+	public static File uploadFile(MultipartFile multipartFile, String path, String fileName) throws InvalidImageFileException, IOException {
+		if (multipartFile.getSize()>1500000)  {
+			throw new InvalidImageFileException("file is too large 1.5Mo maximum");
+		}
+		if (path == null) {
+			throw new IllegalArgumentException("File path(image) can't be null");
+		}
 
-        files = Arrays.asList(folder.listFiles(filter));
-      
-        
-        return files;
-        
-    }
-    
-    public static int getFolderLength(String folderPath){
-        
-        File folder = new File(folderPath);
-        if(!folder.exists()){
-            return 0;
-        }
-        if(!folder.isDirectory()){
-            folder = folder.getParentFile();
-        }
-        int length = 0;
-        List<File> files = Arrays.asList(folder.listFiles());
-        for(File file : files){
-            if(file.isDirectory()){
-                continue;
-            }
-            length+=file.length();
-        }
-        return length;
-        
-    }
-    
-    public static void writeStringToFile(String dataString, File file) throws IOException {
-        
-        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-        out.print(dataString);
-        out.flush();
-        out.close();
-        
-    }
-    
-    public static File ensureFolderExists(String completeFolderName) {
-        File mainFolder = new File(completeFolderName);
-        if(!mainFolder.exists()){
-            mainFolder.mkdirs();
-        }
-        return mainFolder;
-    }
-    
-    public void saveDataToFile(byte[] data, String fileName, String absoluteFolderPath) throws IOException {
+		if (fileName == null) {
+			throw new IllegalArgumentException("File name(image) can't be null");
+		}
+		File folder = FileUtil.ensureFolderExists(path);
+		if(log.isDebugEnabled()){
+			log.debug("genFolder : "+folder.getAbsolutePath());
+			log.debug("file type is :"+multipartFile.getContentType());
+			log.debug("file original name is "+multipartFile.getOriginalFilename());
+		}
+
+
+		if (multipartFile.isEmpty()){
+			if(log.isDebugEnabled()){
+				log.debug("someone try to submit an empty file : "+multipartFile.getOriginalFilename());}
+			throw new InvalidImageFileException("No file to transfer. File is empty.");
+
+		}
+
+		File file = new File(folder, fileName);
+
+
+		FileOutputStream fos = null;
+		fos = new FileOutputStream(file);
+		fos.write(multipartFile.getBytes());
+		fos.close();
+
+		log.debug("file succesfull uploaded : "+file.getCanonicalPath());
+		return file;
+	}
+
+	/**
+	 * Return a list of file names contained in a given folder.
+	 * @param folderPath The path to the folder from wich we retrieve the file names
+	 * @param extentions The extentions we filter on. No filtering if null.
+	 * @return the list of file names.
+	 */
+	public static List<String> getFilesNamesFromFolder(String folderPath){
+
+		List<String> files = new ArrayList<String>();
+		File folder = new File(folderPath);
+		if(!folder.exists()){
+			return files;
+		}
+		if(!folder.isDirectory()){
+			folder = folder.getParentFile();
+		}
+		files = Arrays.asList(folder.list());
+
+
+		return files;
+
+	}
+
+	/**
+	 * Return a list of files contained in a given folder.
+	 * @param folderPath The path to the folder from wich we retrieve the files
+	 * @param extentions The extentions we filter on. No filtering if null.
+	 * @return the list of files.
+	 */
+	public static List<File> getFilesFromFolder(String folderPath){
+
+		List<File> files = new ArrayList<File>();
+		File folder = new File(folderPath);
+		if(!folder.exists()){
+			return files;
+		}
+		if(!folder.isDirectory()){
+			folder = folder.getParentFile();
+		}
+		files = Arrays.asList(folder.listFiles());
+
+
+		return files;
+
+	}
+
+	/**
+	 * Return a list of files contained in a given folder.
+	 * @param folderPath The path to the folder from wich we retrieve the files
+	 * @param extentions The extentions we filter on. No filtering if null.
+	 * @return the list of files.
+	 */
+	public static List<File> getFilesFromFolder(String folderPath, final String ... extensions){
+
+		List<File> files = new ArrayList<File>();
+		File folder = new File(folderPath);
+		if(!folder.exists()){
+			return files;
+		}
+		if(!folder.isDirectory()){
+			folder = folder.getParentFile();
+		}
+
+		FilenameFilter filter = new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				for (String extension : extensions) {
+					if(name.toLowerCase().endsWith(extension.toLowerCase())){
+						return true;
+					}
+				}
+				return false;
+			}
+		};
+
+		files = Arrays.asList(folder.listFiles(filter));
+
+
+		return files;
+
+	}
+
+	public static int getFolderLength(String folderPath){
+
+		File folder = new File(folderPath);
+		if(!folder.exists()){
+			return 0;
+		}
+		if(!folder.isDirectory()){
+			folder = folder.getParentFile();
+		}
+		int length = 0;
+		List<File> files = Arrays.asList(folder.listFiles());
+		for(File file : files){
+			if(file.isDirectory()){
+				continue;
+			}
+			length+=file.length();
+		}
+		return length;
+
+	}
+
+	public static void writeStringToFile(String dataString, File file) throws IOException {
+
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+		out.print(dataString);
+		out.flush();
+		out.close();
+
+	}
+
+	public static File ensureFolderExists(String completeFolderName) {
+		File mainFolder = new File(completeFolderName);
+		if(!mainFolder.exists()){
+			mainFolder.mkdirs();
+		}
+		return mainFolder;
+	}
+
+	public void saveDataToFile(byte[] data, String fileName, String absoluteFolderPath) throws IOException {
 		if (StringUtils.isEmpty(absoluteFolderPath)) {
 			throw new IllegalArgumentException("foldernames cannot be empty");
 		}
@@ -303,29 +304,29 @@ public abstract class FileUtil {
 		if(lastModified.before(DateUtils.addDays(new Date(), -numberOfDays))){
 			deleted = file.delete();
 			if(!deleted){
-			log.warn("Cannot delete file : " + file.getAbsolutePath());
+				log.warn("Cannot delete file : " + file.getAbsolutePath());
 			}
 		}
 		return deleted;
 	}
-	
+
 	/**
 	 * 
 	 * @param path  example: "c:/mydirectory"
 	 * @param filePattern example: "12345.*"
 	 */
 	public static void deleteFilesWithPattern(String pathStr, String filePattern) {  
-	    
-	    try {
-	        Path dir = Paths.get(pathStr);
-	        DirectoryStream<Path> dirStream;
-	        dirStream = Files.newDirectoryStream(dir, filePattern);
-	        for (Path filePath: dirStream) {
-	            Files.delete(filePath);
-	        }
-	    } catch (IOException e) {
-	        new RuntimeException("Problem while deleting files "+filePattern+" in path "+pathStr, e);
-	    } 
+
+		try {
+			Path dir = Paths.get(pathStr);
+			DirectoryStream<Path> dirStream;
+			dirStream = Files.newDirectoryStream(dir, filePattern);
+			for (Path filePath: dirStream) {
+				Files.delete(filePath);
+			}
+		} catch (IOException e) {
+			new RuntimeException("Problem while deleting files "+filePattern+" in path "+pathStr, e);
+		} 
 	}
 
 
@@ -354,31 +355,59 @@ public abstract class FileUtil {
 		}
 	}
 
-    @SuppressWarnings("serial")
-    public static class InvalidImageFileException extends Exception {
-        private String messageToUser;
-        InvalidImageFileException(String userMsg) {
-            this.messageToUser = userMsg;
-        }
-        public String getMessageToUser() {
-            return messageToUser;
-        }
-    }
-    
-    @SuppressWarnings("serial")
-    public static class deleteFileException extends Exception {
-        private String messageToUser;
-        deleteFileException(String userMsg) {
-            this.messageToUser = userMsg;
-        }
-        public String getMessageToUser() {
-            return messageToUser;
-        }
-    }
+	@SuppressWarnings("serial")
+	public static class InvalidImageFileException extends Exception {
+		private String messageToUser;
+		InvalidImageFileException(String userMsg) {
+			this.messageToUser = userMsg;
+		}
+		public String getMessageToUser() {
+			return messageToUser;
+		}
+	}
+
+	@SuppressWarnings("serial")
+	public static class deleteFileException extends Exception {
+		private String messageToUser;
+		deleteFileException(String userMsg) {
+			this.messageToUser = userMsg;
+		}
+		public String getMessageToUser() {
+			return messageToUser;
+		}
+	}
 
 	public static String getLuceneIndexDirectory(CurrentEnvironment currentEnvironment) {
 		return getGenFolderPath(currentEnvironment)+LUCENE_INDEX_FOLDER+"/";
 	}
-    
-    
+
+	// TODO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> MOVE THIS METHOD TO FILEUTILS
+	// Rename all the files of the pattern (for example "4892*.jpg") to add a suffix to the name.
+	// It renames, for example, 4892-1.jpg into 4892-1.jpg-tmp (if "-tmp" is the suffix)
+	public static void renameFileSetWithSuffix(String directory, String pattern, String suffix) {
+		Path p = FileSystems.getDefault().getPath(directory);
+
+		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(p, pattern)) {
+			for (Path path: directoryStream){
+				renameFile(directory, path.getFileName().toString(), path.getFileName().toString() + suffix);
+
+				File file = path.toFile();
+				File fileWithNewName = new File (file+suffix);
+				file.renameTo(fileWithNewName);
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	// pathStr is for example "c:/img/" with a slash at the end.
+	public static void renameFile(String pathStr, String oldFileName, String newFileName) {
+		Path pathToFile = FileSystems.getDefault().getPath(pathStr + oldFileName);	
+		File fileToRename = pathToFile.toFile();		
+		pathToFile = FileSystems.getDefault().getPath(pathStr + newFileName);
+		File fileWithNewName = pathToFile.toFile();	
+		fileToRename.renameTo(fileWithNewName);	
+	}
+
+
 }
