@@ -53,6 +53,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.request.WebRequest;
 
+
 @Transactional
 @Service(value="userService")
 @Scope("singleton")
@@ -72,6 +73,8 @@ public class UserService {
     @Autowired   private MailService mailService;
     @Autowired   private LoginService loginService;
     @Autowired   private CurrentEnvironment currentEnvironment;
+    //@Autowired   BadgeService badgeService;
+    
     /**
      * Register a user and sends a validation mail.
      * 
@@ -166,20 +169,27 @@ public class UserService {
         userRepository.merge(user);
     }
 
-    public void addOrUpdateUserImage(User user, BufferedImage image){
+    public void addOrUpdateUserImage(User user, BufferedImage image, boolean saveOriginalImage){
         try {
+            if (saveOriginalImage) {
+                ImageUtil.saveImageToFileAsJPEG(image,  
+                        FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER, user.getId() + ".jpg", 0.9f);
+            }
 
-
-            ImageUtil.saveImageToFileAsJPEG(image,  
-                    FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER, user.getId() + ".jpg", 0.9f);
-
+            // Large
             BufferedImage resizedImage = ImageUtil.scale(ImageUtil.convertIntoByteArrayInputStream(image),120 * 200, 200, 200);
-
             ImageUtil.saveImageToFileAsJPEG(resizedImage,  
                     FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER +FileUtil.USER_RESIZED_SUB_FOLDER+ FileUtil.USER_RESIZED_LARGE_SUB_FOLDER, user.getId() + ".jpg", 0.9f);
 
-
+            // Small
+            BufferedImage resizedSmallImage = ImageUtil.scale(ImageUtil.convertIntoByteArrayInputStream(image),40 * 40, 60, 60);
+            ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
+                    FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER +FileUtil.USER_RESIZED_SUB_FOLDER+ FileUtil.USER_RESIZED_SMALL_SUB_FOLDER, user.getId() + ".jpg", 0.9f);            
+            
             user.setPicture(true);
+            userRepository.merge(user);
+            
+          //  badgeService.grantIfUserIsComplete(user);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
