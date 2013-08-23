@@ -3,6 +3,7 @@ package learningresourcefinder.controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -50,22 +51,15 @@ public class UserImageController extends BaseController<User> {
 		
 		///// Save original image, scale it and save the resized image.
 		try {
-			FileUtil.uploadFile(multipartFile, FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER, 
-					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, Long.toString(user.getId())));
+		    String originalImageFolderPath = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_ORIGINAL_SUB_FOLDER;
+		    String originalImageFileName = FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, Long.toString(user.getId()));
+			FileUtil.uploadFile(multipartFile, originalImageFolderPath, originalImageFileName);
+		
+			// TODO: Tomas, refactor here to ;-)
+			BufferedImage originalImage = ImageIO.read(new File(originalImageFolderPath + "/" + originalImageFileName));
+			        	
+	        userService.addOrUpdateUserImage(user, originalImage, false);
 			
-			BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),120 * 200, 200, 200);
-						
-			ImageUtil.saveImageToFileAsJPEG(resizedImage,  
-					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER +  FileUtil.USER_RESIZED_LARGE_SUB_FOLDER, user.getId() + ".jpg", 0.9f);
-			
-			BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),40 * 40, 60, 60);
-			
-			ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
-					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER + FileUtil.USER_RESIZED_SMALL_SUB_FOLDER, user.getId() + ".jpg", 0.9f);
-
-			user.setPicture(true);
-			
-			userRepository.merge(user);
 			
 		} catch (InvalidImageFileException e) {  //Tell the user that its image is invalid.
 			NotificationUtil.addNotificationMessage(e.getMessageToUser());
@@ -89,37 +83,14 @@ public class UserImageController extends BaseController<User> {
 
 		BufferedImage image = null;
 		
-		try 
-		{
+		try {
             image = ImageUtil.readImage(url);
-        } 
-		catch (RuntimeException e) 
-		{
+        } catch (RuntimeException e) {
         	NotificationUtil.addNotificationMessage("veuillez indiquer une URL valide");
             return mv;//useless to try to save image if we don't have it
         }
 		
-        try 
-        {
-            ByteArrayOutputStream outStream= new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", outStream);
-            
-            image = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),120 * 200, 200, 200);
-            
-            ImageUtil.saveImageToFileAsJPEG(image, 
-            		FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER +  FileUtil.USER_RESIZED_LARGE_SUB_FOLDER, user.getId() + ".jpg", 0.9f);           
-            
-            BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),40 * 40, 60, 60);
-
-            ImageUtil.saveImageToFileAsJPEG(resizedImage,  
-            		FileUtil.getGenFolderPath(currentEnvironment) + 
-            		FileUtil.USER_SUB_FOLDER + FileUtil.USER_RESIZED_SUB_FOLDER + FileUtil.USER_RESIZED_SMALL_SUB_FOLDER, user.getId() + ".jpg", 0.9f);
-
-        } 
-        catch (IOException e) 
-        {
-            throw new RuntimeException(e);
-        }
+        userService.addOrUpdateUserImage(user, image, true);
 
         return mv;
 	}
