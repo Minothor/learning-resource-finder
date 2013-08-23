@@ -1,12 +1,12 @@
 # !!!!!!!!!!!!!!!! EDIT THE .conf.prod FILE, NOT THE COPY (.conf)
 
 <VirtualHost 68.169.63.215:80>
-        ServerName enseignement2.be
+        ServerName toujoursplus.be
         DocumentRoot /var/www/html/
 #        SuexecUserGroup hagakure hagakure 
-        CustomLog /var/www/httpd-logs/enseignement2.be.access.log combined
-        ErrorLog /var/www/httpd-logs/enseignement2.be.error.log
-        ServerAlias *.enseignement2.be www.enseignement2.be
+        CustomLog /var/www/httpd-logs/toujoursplus.be.access.log combined
+        ErrorLog /var/www/httpd-logs/toujoursplus.be.error.log
+        ServerAlias *.toujoursplus.be www.toujoursplus.be
         AddDefaultCharset UTF-8
 
 # enable expirations
@@ -22,11 +22,11 @@
 
         RewriteEngine on
         
-        RewriteCond %{HTTP_HOST} ^(.+)\.enseignement(2|deux)\.be [NC] # only if there is something (at lease 1 char) before the first dot. example: toto.enseignement2.be
-        RewriteRule     ^(.*)?$ http://enseignement2.be$1 [redirect=301,nocase]
+        RewriteCond %{HTTP_HOST} ^(.+)\.toujoursplus\.be [NC] # only if there is something (at lease 1 char) before the first dot. example: toto.enseignement2.be
+        RewriteRule     ^(.*)?$ http://toujoursplus.be$1 [redirect=301,nocase]
 
-        RewriteCond %{HTTP_HOST} ^enseignementdeux\.be [NC] # only if this is enseignementdeux.be
-        RewriteRule     ^(.*)?$ http://enseignement2.be$1 [redirect=301,nocase]
+        RewriteCond %{HTTP_HOST} ^toujourplus\.be [NC] # only if this is enseignementdeux.be
+        RewriteRule     ^(.*)?$ http://toujoursplus.be$1 [redirect=301,nocase]
 
         RewriteRule     ^/deployment\.html$ / [L,NC,QSA,R=301] #redirect deployment.html to home page .We don't to leave the user in deployment.html because he would not be noticed when the site is back again. see http://stackoverflow.com/questions/12710596
 
