@@ -1,16 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
-<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Under Construction</title>
+</head>
 <body>
-   <table visible=0>
-   <tr><i>Add a line per feature</i></tr>
-   	<!-- Add a line per feature--> 
-   	<tr><td>PlayList list</td><td><a href="/playlist/user/${user.userName}" > My list of PlayLists</a></td><td>JU/NOR/EM</td><td></td></tr> 
-   	<tr><td>Resources list</td><td><a href="/ressourcelist" >List of Resources</a></td><td>THD/SEB</td><td></td></tr>
-   </table>
+<center>
+<font face="Arial">
+<img src="WebContent\images\home.jpg"/>
+Under COnstruction
+</font></center>
 </body>
-</html>
-
-ressourcelist

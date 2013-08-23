@@ -20,4 +20,10 @@ public class HomeController extends BaseController<User>{
         User u = SecurityContext.getUser();
         return new ModelAndView("home", "user", u);
     }
+    
+    @RequestMapping(value={"/test"})
+    private ModelAndView prepareModelAndViewtest() {
+        User u = SecurityContext.getUser();
+        return new ModelAndView("test", "user", u);
+    }
 }
