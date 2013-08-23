@@ -68,7 +68,7 @@ public class LoginController extends BaseController<User> {
 	        NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+". Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
 	        return "redirect:login";
 	    }
-	    
+	    session.setAttribute("providerId", providerId);
 	    session.setAttribute("socialmanager", socialManager); 
 
 	    return "redirect:"+urlToFacebookOrGoogle;
@@ -80,8 +80,12 @@ public class LoginController extends BaseController<User> {
 	public String loginSocialCallback(HttpSession session, HttpServletRequest request) {
 
         SocialAuthManager socialAuthManager = (SocialAuthManager) session.getAttribute("socialmanager");
-        String providerId = socialAuthManager.getCurrentAuthProvider().getProviderId();  // "facebook" or "google"
+        
+        // The following line does not work. We'd need to access SocialAuthManager.providerId which is private. 
+        // String providerId = socialAuthManager.getCurrentAuthProvider().getProviderId();  // "facebook" or "google"
+        // ==> We have been forced to store the providerId separately in the session.
 
+        String providerId = (String) session.getAttribute("providerId");
         // Contacting Facebook or Google to get the user's e-mail 
         String email = null;
         Map<String, String> paramsMap = SocialAuthUtil.getRequestParametersMap(request);
