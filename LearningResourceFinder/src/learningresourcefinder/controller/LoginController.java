@@ -92,30 +92,43 @@ public class LoginController extends BaseController<User> {
 
         String providerId = (String) session.getAttribute("providerId");
         // Contacting Facebook or Google to get the user's e-mail 
-        String email = null;
-        String urlPicture = null;
         Map<String, String> paramsMap = SocialAuthUtil.getRequestParametersMap(request);
+        Profile profile = null;
         try {
-            Profile profile = socialAuthManager.connect(paramsMap).getUserProfile();
-            email = profile.getEmail();
-            // Picture provided by default is too small. We've added the paramater type to get it large.
-            if (providerId.equals("facebook")) {
-            urlPicture = profile.getProfileImageURL() + "?type=large"; 
-            }
+            profile = socialAuthManager.connect(paramsMap).getUserProfile();
         } catch (Exception e) {
             log.error("Exception during social login callback (while contacting "+providerId+" to get the e-mail address)", e);
             NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+" pour obtenir votre adress e-mail afin de vous connecter sur notre site. Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
             return "redirect:login";
         }
-        
+
+        ///// Get the e-mail & user from e-mail
+        String email = profile.getEmail();
         User user = userRepository.getUserByEmail(email);
-        BufferedImage image = ImageUtil.readImage(urlPicture);
-        userService.addOrUpdateUserImage(user, image);
-        
         if (user == null) {  // First time login with facebook/google => no user in our DB yet.
             user = userService.registerSocialUser(email);
         }
         
+        
+        ///// Get the user picture
+        String urlPicture = null;
+        if (providerId.equals("facebook")) { // Picture provided by default is too small. We've added the paramater type to get it large.
+            urlPicture = profile.getProfileImageURL() + "?type=large"; 
+        } else {
+            urlPicture = profile.getProfileImageURL();
+        }
+
+        try {
+            BufferedImage image = ImageUtil.readImage(urlPicture);
+            userService.addOrUpdateUserImage(user, image, true);
+        } catch (RuntimeException e) {
+            NotificationUtil.addNotificationMessage("Erreur lors de la récupération de votre photo chez "+providerId);
+            log.error(e);
+            // We just continue, this is a non-blocking error.
+        }
+        
+
+        ////// Login
         if (user.getAccountStatus() == AccountStatus.NOTVALIDATED) {  // it could happen if the user tried to register  manually (without finishing), then tries through facebook/google.
             user.setAccountStatus(AccountStatus.ACTIVE);
         }
