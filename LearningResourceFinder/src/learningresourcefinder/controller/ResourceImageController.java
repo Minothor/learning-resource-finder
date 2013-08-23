@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -56,7 +59,7 @@ public class ResourceImageController extends BaseController<User> {
 		try {
 			
 			FileUtil.uploadFile(multipartFile, FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER, 
-					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, Long.toString(user.getId())));
+					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, resource.getId() + "-" + (resource.getNumberImage() + 1)));
 			
 			BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),120 * 200, 200, 200);
 						
@@ -132,15 +135,22 @@ public class ResourceImageController extends BaseController<User> {
         return mv;
 	}
 	
-	 @RequestMapping("/delete")
-	 public ModelAndView resourceImageDelete(@RequestParam("idresource") long resrouceid){
+	@RequestMapping("/change")
+	public ModelAndView resourceImageChange(@RequestParam("order") String order){	
+		ArrayList<String> arrayList = (ArrayList<String>) Arrays.asList(order);
+		System.out.println("----------------------------");
+		Resource resource = resourceRepository.find(1L);
+		//Resource resource = resourceRepository.find(Long.parseLong(order[0].split("-")[0]));
 		
+		resourceService.changeGalleryOrder(arrayList, resource);
+		
+		return new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
+	 }
+	
+	 @RequestMapping("/delete")
+	 public ModelAndView resourceImageDelete(@RequestParam("id") long resrouceid, @RequestParam("img") long imgid){	
 		 Resource resource = resourceRepository.find(resrouceid);
-		 userService.userImageDelete(resource.getCreatedBy());
-		 resourceService.resourceImageDelete(resource) ;
-
-		 resourceRepository.merge(resource);
-
+		 resourceService.resourceImageDelete(resource, imgid);
 		 return new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
 		 
 	 }
