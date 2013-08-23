@@ -166,7 +166,7 @@ public class UserService {
         userRepository.merge(user);
     }
 
-  /*  public void addOrUpdateUserImage(User user, BufferedImage image){
+    public void addOrUpdateUserImage(User user, BufferedImage image){
         try {
 
 
@@ -184,7 +184,7 @@ public class UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
 /*
     public void addOrUpdateUserImageFromSocialProvider(User user ,Connection<?> connection){

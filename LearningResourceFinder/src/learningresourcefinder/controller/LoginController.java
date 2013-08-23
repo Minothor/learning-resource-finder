@@ -1,5 +1,6 @@
 package learningresourcefinder.controller;
 
+import java.awt.image.BufferedImage;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import learningresourcefinder.service.UserService;
 import learningresourcefinder.util.DateUtil;
 import learningresourcefinder.util.Logger;
 import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +35,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 @Controller
 public class LoginController extends BaseController<User> {
@@ -89,14 +93,14 @@ public class LoginController extends BaseController<User> {
         String providerId = (String) session.getAttribute("providerId");
         // Contacting Facebook or Google to get the user's e-mail 
         String email = null;
-        String UrlPicture = null;
+        String urlPicture = null;
         Map<String, String> paramsMap = SocialAuthUtil.getRequestParametersMap(request);
         try {
             Profile profile = socialAuthManager.connect(paramsMap).getUserProfile();
             email = profile.getEmail();
             // Picture provided by default is too small. We've added the paramater type to get it large.
             if (providerId.equals("facebook")) {
-            UrlPicture = profile.getProfileImageURL() + "?type=large"; 
+            urlPicture = profile.getProfileImageURL() + "?type=large"; 
             }
         } catch (Exception e) {
             log.error("Exception during social login callback (while contacting "+providerId+" to get the e-mail address)", e);
@@ -105,6 +109,9 @@ public class LoginController extends BaseController<User> {
         }
         
         User user = userRepository.getUserByEmail(email);
+        BufferedImage image = ImageUtil.readImage(urlPicture);
+        userService.addOrUpdateUserImage(user, image);
+        
         if (user == null) {  // First time login with facebook/google => no user in our DB yet.
             user = userService.registerSocialUser(email);
         }
