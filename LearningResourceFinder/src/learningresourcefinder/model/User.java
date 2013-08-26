@@ -164,7 +164,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
  
    
     @Enumerated(EnumType.STRING)
-    private AccountConnectedType accountConnectedType;
+    private AccountConnectedType accountConnectedType;  // Last login with facebook, google or direct ?
     
     @Column(length = 50)
     @Size(max=50, message="votre prénom ne peut contenir que 50 caractères maximum")
