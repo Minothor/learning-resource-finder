@@ -13,15 +13,16 @@ import learningresourcefinder.exception.UserNotValidatedException;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountConnectedType;
 import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.Gender;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.LoginService;
 import learningresourcefinder.service.LoginService.WaitDelayNotReachedException;
 import learningresourcefinder.service.UserService;
 import learningresourcefinder.util.DateUtil;
+import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
 import learningresourcefinder.util.NotificationUtil;
-import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +67,7 @@ public class LoginController extends BaseController<User> {
 	    SocialAuthManager socialManager = new SocialAuthManager();
 	    socialManager.setSocialAuthConfig(socialAuthConfig);
 	    String url = null;
-	    if (providerId.equals("google")){
+	    if (providerId.equals("google")){  // TODO fixme
 	        url = "http://opensource.brickred.com:8080/GoogleConnect/Profile";
 	    }
 	    else {
@@ -117,23 +118,7 @@ public class LoginController extends BaseController<User> {
         }
         
         
-        ///// Get the user picture
-        String urlPicture = null;
-        if (providerId.equals("facebook")) { // Picture provided by default is too small. We've added the paramater type to get it large.
-            urlPicture = profile.getProfileImageURL() + "?type=large"; 
-        } else {
-            urlPicture = profile.getProfileImageURL();
-        }
-
-        try {
-            BufferedImage image = ImageUtil.readImage(urlPicture);
-            userService.addOrUpdateUserImage(user, image, true);
-        } catch (RuntimeException e) {
-            NotificationUtil.addNotificationMessage("Erreur lors de la récupération de votre photo chez "+providerId);
-            log.error(e);
-            // We just continue, this is a non-blocking error.
-        }
-        
+        completeUserFromSocialProfile(providerId, profile, user);        
 
         ////// Login
         if (user.getAccountStatus() == AccountStatus.NOTVALIDATED) {  // it could happen if the user tried to register  manually (without finishing), then tries through facebook/google.
@@ -166,6 +151,39 @@ public class LoginController extends BaseController<User> {
             return "redirect:/user/" + user.getUserName();
         }
 	}
+
+    private void completeUserFromSocialProfile(String providerId,  Profile profile, User user) {
+        ///// Get general info
+        if (user.getFirstName() != null) {
+            user.setFirstName(profile.getFirstName());
+        }
+        if (user.getLastName() != null) {
+            user.setLastName(profile.getLastName());
+        }
+        if (user.getGender() != null && profile.getGender() != null) {
+            user.setGender(profile.getGender().toLowerCase().startsWith("m") ? Gender.MALE : Gender.FEMALE);
+        }        
+        
+        ///// Get the user picture
+        if (! user.isPicture()) {
+            String urlPicture = null;
+            if (providerId.equals("facebook")) { // Picture provided by default is too small. We've added the paramater type to get it large.
+                urlPicture = profile.getProfileImageURL() + "?type=large"; 
+            } else {
+                urlPicture = profile.getProfileImageURL();
+            }
+    
+           
+            try {
+                BufferedImage image = ImageUtil.readImage(urlPicture);
+                userService.addOrUpdateUserImage(user, image, true);
+            } catch (RuntimeException e) {
+                NotificationUtil.addNotificationMessage("Erreur lors de la récupération de votre photo chez "+providerId);
+                log.error(e);
+                // We just continue, this is a non-blocking error.
+            }
+        }
+    }
 	
 	
 	/**
