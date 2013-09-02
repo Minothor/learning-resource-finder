@@ -39,8 +39,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="socialAuthConfig" class="org.brickred.socialauth.SocialAuthConfig">
         <property name="applicationProperties">
 			<util:properties>
-				<prop key="www.google.com.consumer_key">${google_app_id}</prop>
-				<prop key="www.google.com.consumer_secret">$google_secret_key}</prop>
+				<prop key="www.google.com.consumer_key">opensource.brickred.com</prop>
+				<prop key="www.google.com.consumer_secret">YC06FqhmCLWvtBg/O4W/aJfj</prop>
 				
 				<prop key="graph.facebook.com.consumer_key">350985091585275</prop>
 				<prop key="graph.facebook.com.consumer_secret">3de40a5fe635e975a7d0d8e10719daa4</prop>
