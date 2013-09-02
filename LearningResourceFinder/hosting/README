@@ -1,5 +1,31 @@
 this folder contains ressources and files to host LRF on your server
 
+eApps account creation
+======================
+Make a VM with the following parameters:
+512Mb for test (quickly more for more intensive production usage).
+CentOS 64bits with Tomcat 7
+
+Domain name : [Ibrahima]
+
+eApps VM setup
+==============
+Applications Install
+From the application page: ISP Manager > Other settings > Application,
+install the folowing application. For each application, select it and click the install button.
+Select Java SE 7 and click install icon on the top right corner.
+Java SE 7
+Tomcat 7
+PostgreSQL database server
+PostgreSQL jdbc driver
+Subversion
+SMTP mail Server
+Postgresql management tool /phppgadmin (php scripting langage needed!)
+Firewall
+Apache server
+Pop/IMAP mail server 
+
+
 
 Architecture
 ============
@@ -9,6 +35,8 @@ It enables:
  - the user generated (uploaded) content (such as user profile images) to be located outside of
    the tomcat webapp ROOT directory (which is deleted during every deployment).
    That content is kept in /var/www/html/gen and directly served by httpd.
+
+Tuning Tomcat:min/max memory heap : https://support.eapps.com/index.php?/Knowledgebase/Article/View/203/65/user-guide---tomcat-installation-and-tuning
 
 SCRIPTS
 =======
@@ -25,7 +53,7 @@ HTTPD
 
 The main configuration file is in /etc/httpd/conf/httpd.conf.
 It refers all the *.conf file in /etc/httpd/conf.d/ directory.
-The most important file is /etc/httpd/conf.d/lrf.conf
+The most important file is /etc/httpd/conf.d/LearningResourceFinder.conf
 It has two versions:
  - LearningResourceFinder.conf.prod which redirect most requests (except /gen) to tomcat.
  - LearningResourceFinder.conf.dep which redirects all requests to the deployment.html page.
@@ -77,7 +105,8 @@ It contains the DB password and other sensible data that should not be in the op
 Ant build
 =========
 
-
+Installed in /usr/share/ant in eApps VM
+Commandline "ant" used in do_deployement script
 
 ................................
 
