@@ -27,10 +27,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 public abstract class FileUtil {
-
-	final static public String BOOK_SUB_FOLDER = "/book";
-	final static public String BOOK_ORIGINAL_SUB_FOLDER = "/original";
-	final static public String BOOK_RESIZED_SUB_FOLDER = "/resized";
 	final static public String ARTICLE_SUB_FOLDER = "/article";
 	final static public String USER_SUB_FOLDER = "/user";
 	final static public String USER_ORIGINAL_SUB_FOLDER = "/original";
@@ -47,9 +43,6 @@ public abstract class FileUtil {
 	final static public String RESOURCE_RESIZED_SUB_FOLDER = "/resized";
 	final static public String RESOURCE_RESIZED_LARGE_SUB_FOLDER = "/large";
 	final static public String RESOURCE_RESIZED_SMALL_SUB_FOLDER = "/small";
-	final static public String GROUP_SUB_FOLDER = "/group";
-	final static public String GROUP_ORIGINAL_SUB_FOLDER = "/original";
-	final static public String GROUP_RESIZED_SUB_FOLDER = "/resized";
 	final static public String LUCENE_INDEX_FOLDER = "/indexLucene";
 	final static public String PDF_FOLDER ="/pdf";
 
