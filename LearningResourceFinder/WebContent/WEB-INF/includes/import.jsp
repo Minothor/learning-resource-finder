@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
     
-<!-- ***************************** CSS **************************** -->     
+<!-- ***************************** CSS **************************** -->  
+<!-- Style Files [Vena] -->
+<link rel="stylesheet" href="css/int/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/int/colors/1.css" id="color" />
+	
+<link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.24.custom.css" /> <%-- Customized for the colors. --%> 
+<link rel="stylesheet" type="text/css" href="/css/int/popupJquery.css"  />   
 
 <link href="/css/ext/jquery-bubble-popup-v3.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/css/int/template.css" />
 <link rel="stylesheet" type="text/css" href="/css/int/content.css" />
-<link rel="stylesheet" type="text/css" href="/css/int/popupJquery.css"  /> 
-<link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.24.custom.css" /> <%-- Customized for the colors. --%>
+
+
 <link rel="stylesheet" type="text/css" href="/css/ext/style.css"  /> 
 <link rel="stylesheet" type="text/css" href="/css/ext/karma-royal-blue.css" />
+
 <link href="/css/social.css" rel="stylesheet" type="text/css">
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="/css/ext/lt8.css" media="screen"/><![endif]-->
 <!-- ******for notification bar -->
