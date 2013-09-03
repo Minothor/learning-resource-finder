@@ -42,8 +42,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				<prop key="www.google.com.consumer_key">opensource.brickred.com</prop>
 				<prop key="www.google.com.consumer_secret">YC06FqhmCLWvtBg/O4W/aJfj</prop>
 				
-				<prop key="graph.facebook.com.consumer_key">350985091585275</prop>
-				<prop key="graph.facebook.com.consumer_secret">3de40a5fe635e975a7d0d8e10719daa4</prop>
+				<prop key="graph.facebook.com.consumer_key">1414750432070920</prop>
+				<prop key="graph.facebook.com.consumer_secret">970a54bac4b3e661a587905fdcb51f55</prop>
 			</util:properties>
         </property>
     </bean>
