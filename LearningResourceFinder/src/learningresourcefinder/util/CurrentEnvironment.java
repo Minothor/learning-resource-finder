@@ -14,18 +14,6 @@ public class CurrentEnvironment {
 
 	@Value("${app.environment}") // comes from the secret.properties file. Value is modified by ant at build time
 	private Environment environment;
-	@Value("${facebook.clientId}") //comes from secret.properties files.used to identify the app on facebook 
-	private String facebookClientId;
-	@Value("${facebook.clientSecret}") // needed by facebook when user token requested
-	private String facebookClientSecret;
-	@Value("${tweeter.clientId}")
-	private String tweeterClientId;
-	@Value("${tweeter.clientSecret}")
-	private String tweeterClientSecret;
-	@Value("${google.clientId}")
-	private String googleClientId;
-	@Value("${google.clientSecret}")
-	private String googleClientSecret;
     @Value("${site.name}")
     private String siteName;
     @Value("${site.address}")
@@ -36,21 +24,6 @@ public class CurrentEnvironment {
 	private String genFolderOnProd;
 	
 	
-	public String getGoogleClientId() {
-        return googleClientId;
-    }
-
-    public String getGoogleClientSecret() {
-        return googleClientSecret;
-    }
-
-    public String getTweeterClientId() {
-        return tweeterClientId;
-    }
-
-    public String getTweeterClientSecret() {
-        return tweeterClientSecret;
-    }
 
     public Environment getEnvironment() {
 		return environment;
@@ -105,13 +78,7 @@ public class CurrentEnvironment {
 
 	}
 
-    public String getFacebookClientId() {
-        return facebookClientId;
-    }
 
-    public String getFacebookClientSecret() {
-        return facebookClientSecret;
-    }
 
     public String getSiteName() {
         return siteName;
