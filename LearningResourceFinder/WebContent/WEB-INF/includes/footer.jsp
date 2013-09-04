@@ -54,7 +54,7 @@
 	<section class="footer-bar">
 		<div class="container">
 			<div class="eight columns">
-				<div class="footer-logo"><img src="images/logo.png" alt="" title=""><span>2013 © Copyright Vena.</span></div>
+				<div class="footer-logo"><img src="images/logo.png" alt="" title=""><span>2013 © Copyright ToujoursPlus</span></div>
 			</div>
 			
 			<div class="eight columns">
