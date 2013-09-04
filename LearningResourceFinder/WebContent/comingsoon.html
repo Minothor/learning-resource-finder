@@ -6,6 +6,15 @@
 <script src="/js/ext/jquery-1.8.2.min.js"></script>
 <script src="/js/ext/jquery.flexslider.js"></script>
 
+<!-- start countdown script -->
+<link rel="stylesheet" type="text/css" href="css/ext/countdownstyle.css">
+			
+<script type="text/javascript" src="js/ext/jq.countdown.js"></script>
+<script type="text/javascript" src="js/ext/jq.placeholder.js"></script>
+<script type="text/javascript" src="js/ext/custom.js"></script>
+
+<!-- end countdown script -->
+
 <script type="text/javascript" charset="utf-8">
   $(window).load(function() {
     $('.flexslider').flexslider();
@@ -14,6 +23,83 @@
 <title>Under Construction</title>
 </head>
 <body>
+
+<!-- BEGIN HEADER -->
+			<header>
+				<a href="#">
+				<div id="logo">toujoursPlus</div></a>
+			</header>
+			<!-- END HEADER -->
+			
+			<!-- BEGIN TIMER -->
+			<section id="countdown">
+				<div id="count-wrap">
+					<div class="number_wrapper">
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						
+						<div class="clear"></div>
+						<div class="lable">Jours</div>
+					</div>
+					
+					<div class="number_wrapper">
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						
+						<div class="clear"></div>
+						<div class="lable">Heurs</div>
+					</div>
+					
+					<div class="number_wrapper">
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						
+						<div class="clear"></div>
+						<div class="lable">Minutes</div>
+					</div>
+					
+					<div class="number_wrapper nmr">
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						<div class="num">
+							<div>-</div>
+							<div>0</div>
+						</div>
+						
+						<div class="clear"></div>
+						<div class="lable">Secondes</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+				<div id="ct" style="display:none"></div>
+			</section>
+			<!-- END TIMER -->
+			
 <div class="flexslider">
   <ul class="slides">
     <li>
@@ -31,6 +117,13 @@
     
   </ul>
 </div>
+
+<!-- BEGIN VIDEO -->						
+				<div id="videoyoutube">
+					<iframe marginwidth="40" width="210" height="158" src="http://www.youtube.com/embed/xXy_ywNIZv8?rel=0" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="210" height="158" src="http://www.youtube.com/embed/gaIfbsmmuMs?rel=0" frameborder="0" allowfullscreen> </iframe>
+				</div>
+<!-- END VIDEO -->
 
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
