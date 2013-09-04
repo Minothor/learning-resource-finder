@@ -75,7 +75,7 @@ public class UrlUtil {
             // In dev, it should be "http://ryc.be/"  (because images are not loaded on developers machines).
         	
             result = "http://" + getProdAbsoluteDomainName()        + "/"; // The "/" is crucial at the end of the project name. Without it, you loose the session.
-            // i.e.:  http://  + ryc.be                 +  /
+            // i.e.:  http://  + toujoursPlus.be                    +  /
             
         } else {  // We are in dev and we don't force prod urls.
             result = "http://"
