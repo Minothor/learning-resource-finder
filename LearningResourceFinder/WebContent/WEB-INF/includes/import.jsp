@@ -5,24 +5,24 @@
 <link rel="stylesheet" href="css/int/style.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="css/int/colors/1.css" id="color" />
 	
-<link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.24.custom.css" /> <%-- Customized for the colors. --%> 
+<%-- <link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.24.custom.css" /> Customized for the colors.  --%>
 <link rel="stylesheet" type="text/css" href="/css/int/popupJquery.css"  />   
 
-<link href="/css/ext/jquery-bubble-popup-v3.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/css/int/template.css" />
-<link rel="stylesheet" type="text/css" href="/css/int/content.css" />
+<!-- <link href="/css/ext/jquery-bubble-popup-v3.css" rel="stylesheet" type="text/css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/int/template.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/int/content.css" /> -->
 
 
-<link rel="stylesheet" type="text/css" href="/css/ext/style.css"  /> 
-<link rel="stylesheet" type="text/css" href="/css/ext/karma-royal-blue.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/css/ext/style.css"  />  -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/ext/karma-royal-blue.css" /> -->
 
-<link href="/css/social.css" rel="stylesheet" type="text/css">
+<!-- <link href="/css/social.css" rel="stylesheet" type="text/css"> -->
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="/css/ext/lt8.css" media="screen"/><![endif]-->
 <!-- ******for notification bar -->
-<link rel="stylesheet" type="text/css" href="/css/ext/jquery.pnotify.default.css"  /> 
-<link rel="stylesheet" type="text/css" href="/css/ext/jquery.pnotify.default.icons.css"  /> 
+<!-- <link rel="stylesheet" type="text/css" href="/css/ext/jquery.pnotify.default.css"  />  -->
+<!-- <link rel="stylesheet" type="text/css" href="/css/ext/jquery.pnotify.default.icons.css"  />  -->
 <!-- *****for printing***** -->
-<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+<!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" /> -->
 <!-- ***************************** END CSS **************************** -->    
 
 <!-- ***************************** ICON **************************** -->    
@@ -41,32 +41,32 @@
     <script src="/js/ext/jquery-ui-1.8.24.custom.min.js"></script> <%-- Jquery plugin who add libraries for UI but need JQuery dore --%>
 	
 	<!-- *****************************Script for notification Bar *******************************************************-->
-	<script src="/js/ext/jquery.pnotify.js" type="text/javascript"></script>
-	<script src="/js/ext/jquery.pnotify.min.js" type="text/javascript"></script>
+<!-- 	<script src="/js/ext/jquery.pnotify.js" type="text/javascript"></script> -->
+<!-- 	<script src="/js/ext/jquery.pnotify.min.js" type="text/javascript"></script> -->
 	<!-- ***************************** Script from our dev (that should be on every pages) **************************** -->   
 	<script type="text/javascript">
    		var idUser = "${current.user.id}";
 	</script>
-	<script src="/js/int/datepicker.js" type="text/javascript"></script>
-	<script src="/js/int/redirect.js"></script>
-	<script src="/js/int/focusevent.js"></script>
-	<script type="text/javascript" src="/js/ext/jquery-bubble-popup-v3.min.js"></script>
-	<script type="text/javascript" src="/js/int/general.js"></script>
+<!-- 	<script src="/js/int/datepicker.js" type="text/javascript"></script> -->
+<!-- 	<script src="/js/int/redirect.js"></script> -->
+<!-- 	<script src="/js/int/focusevent.js"></script> -->
+<!-- 	<script type="text/javascript" src="/js/ext/jquery-bubble-popup-v3.min.js"></script> -->
+<!-- 	<script type="text/javascript" src="/js/int/general.js"></script> -->
 	<script type="text/javascript" src="/js/int/popupJquery.js"></script>
 	<!-- ***************************** End Script from our dev **************************** -->   
 	
 	<!-- ***************************** Design from themeforest/karma template **************************** -->   
-		<script type="text/javascript" src="/js/ext/karma.js"></script>
+<!-- 		<script type="text/javascript" src="/js/ext/karma.js"></script> -->
 	<!-- ***************************** End Design **************************** -->   
 	
 	<!-- ***************************** CU3ER 3D **************************** -->   
-		<script type="text/javascript" src="/js/ext/jquery.cycle.all.min.js"></script>
-		<script type="text/javascript" src="/js/ext/jquery-1-slider.js"></script>
-		<script type="text/javascript" src="/js/ext/testimonial-slider.js"></script>
+<!-- 		<script type="text/javascript" src="/js/ext/jquery.cycle.all.min.js"></script> -->
+<!-- 		<script type="text/javascript" src="/js/ext/jquery-1-slider.js"></script> -->
+<!-- 		<script type="text/javascript" src="/js/ext/testimonial-slider.js"></script> -->
 	<!--[if lte IE 8]><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /><![endif]-->
 	<!-- ***************************** End CU3ER 3D **************************** -->   	
 	
 	
-    <script type="text/javascript" src="js/int/generatepdf.js"></script>
+<!--     <script type="text/javascript" src="js/int/generatepdf.js"></script> -->
 
 <!-- ***************************** END JAVASCRIPT **************************** -->   

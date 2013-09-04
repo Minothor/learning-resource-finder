@@ -12,7 +12,7 @@
 	width: 170px;
 	margin-top:11px;
 }
-.form-recherche input {
+.form-recherche input[type="text"] {
 	width: 120px;
 	height: 20px;
 	padding: 10px 5px;
@@ -24,7 +24,7 @@
 	-webkit-border-radius: 3px 0 0 3px;
 	border-radius: 3px 0 0 3px;
 }
-.form-recherche input:focus {
+.form-recherche input[type="text"]:focus {
 	outline: 0;
 	background: #fff;
 	-moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
