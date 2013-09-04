@@ -1,61 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- ***************** - Top Footer - ***************** --> 
-<div id="footer" style="position:relative;">  <%-- need relative to position inner div "monter" --%>
-<div class="footer-area">
-<div class="footer-wrapper">
-<div class="footer-holder">
+<footer>
+	<section id="footer-main">
+		<div class="container">
+		
+			<div class="one-fourth column">
+				<h4>About Us</h4>
+				<hr class="smalline">
+				<p>Per modo inermis disputando cu, facilis scaevola vix ei. Sit ad omnium volutpat prodesset, 
+				eidicta expetenda sensibus definitiones his, vide omittantur vixen velum meliore moderatius te.</p>
+				<div class="clear"></div>
+				<a style="padding-top: 15px; display: block;" href="about.html"><i class="icon-info-sign"></i> Read More </a>
+			</div>
+			
+			<div class="one-fourth column">
+				<h4>Recent News</h4>
+				<hr class="smalline">
+				<ul class="footer-recent-news">
+					<li><a href="" alt="" title=""><i class="icon-circle-arrow-right"></i> Ex tantas urbanitas repudiandae</a></li>
+					<li><a href="" alt="" title=""><i class="icon-circle-arrow-right"></i> Tantas urbanitas repudiandae</a></li>
+					<li><a href="" alt="" title=""><i class="icon-circle-arrow-right"></i> Facer partiendo scriptorem exiv</a></li>
+					<li><a href="" alt="" title=""><i class="icon-circle-arrow-right"></i> Soluta sensibus usuet adan</a></li>
+					<li><a href="" alt="" title=""><i class="icon-circle-arrow-right"></i> Scripta abhorreant consectetuer</a></li>
+				</ul>
+			</div>				
+			
+			<div class="one-fourth column">
+				<h4>Latest Tweets</h4>
+				<hr class="smalline">
+				<ul id="twitter-feed"></ul>
+				<script type="text/javascript">
+					jQuery(document).ready(function($){
+					$.getJSON('get-tweets.php?url='+encodeURIComponent(), function(tweets){
+						$("#twitter-feed").html(tz_format_twitter(tweets));
+					}); });
+				</script>
+			</div>	
+			
+			<div class="one-fourth column">
+				<h4>Contact</h4>
+				<hr class="smalline">
+				<ul class="getintouch">
+					<li><i class="icon-map-marker"></i><strong>Adress: </strong>85 Green Street, TheCity</li>
+					<li><i class="icon-phone"></i><strong>Phone: </strong>(+48) 799 456 158</li>
+					<li><i class="icon-envelope"></i><strong>Mail: </strong>contact@domain.com</li>
+					<li><a href="contact.html"><i class="icon-pencil"></i>Go to contact form</a></li>
+				</ul>
+			</div>				
 
-
-<!-- ***************** - Footer Content Starts Here - *****************  -->
-<div class="footer-column">FOOTER
-
- </div><!-- end fourth one_fourth_column -->
-
-
-<div class="footer-column">
-	<div class="footer-title">FTitle1</div>
-
-</div><!-- end first one_fourth_column -->
-
-<div class="footer-column">
-	<div class="footer-title">FTitle2</div>
-
- </div><!-- end second one_fourth_column -->
-
-<div class="footer-column">
-	<div class="footer-title">FTitle3</div>
-
-</div><!-- end third one_fourth_column -->
-
-
-
-<%-- Link to go up (image is included in the background)--%>
-<!--   <div style="width:90px; height:70px; cursor:pointer; position:absolute; right:-56px; top:0px;" -->
-<%--        onclick="$('html, body').animate({scrollTop:0}, 'slow');"></div>  Empty div to have a clickable area on top of the bg image --%>
-
-
-<!-- ***************** - END Footer Content - *****************  -->
-</div><!-- footer-holder -->
-</div><!-- end footer-wrapper -->
-</div><!-- end footer-area -->
-
-
-<%-- <!-- /***************** - Bottom Footer - *****************  -->
-<div id="footer_bottom">
- <div class="info" >
- 
- 	2012 <a rel="license" href="/about/copyright.jsp" title="Le contenu de ce site est mis à disposition selon les termes de la Licence Creative Commons Attribution 2.0 Belgique.">
- 		<img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/be/80x15.png" />
- 	</a> - ${p_version} 
- 	
-    ${p_website_name} - ${p_version} 
- </div><!-- end info -->
-</div><!-- end footer_bottom -->
- --%>
-
-<!-- /***************** - END Bottom Footer - *****************  -->
-</div><!-- end footer -->
-
-
-<!-- /***************** - END Top Footer Area - *****************  -->
+		</div>
+	</section>
+	
+	<section class="footer-bar">
+		<div class="container">
+			<div class="eight columns">
+				<div class="footer-logo"><img src="images/logo.png" alt="" title=""><span>2013 © Copyright Vena.</span></div>
+			</div>
+			
+			<div class="eight columns">
+				<ul class="footer-links">
+					<li><a href="#"><i class="icon-twitter"></i></a></li>
+					<li><a href="#"><i class="icon-facebook"></i></a></li>
+					<li><a href="#"><i class="icon-linkedin"></i></a></li>
+					<li><a href="#"><i class="icon-pinterest"></i></a></li>
+					<li><a href="#"><i class="icon-google-plus"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</footer>

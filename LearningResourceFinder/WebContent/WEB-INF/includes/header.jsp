@@ -21,89 +21,106 @@ $(document).ready(function(){
    	            <% session.removeAttribute("notifications"); %>
 		   </div>
 </c:if>
+
+<!-- Main Menu / Start
+================================================== -->
+<header class="menu">
+	
+	<div class="container">
+	
+		<!-- Mobile Only Menu Button  -->
+		<a href="#menu" class="menu-trigger"><i class="icon-reorder"></i></a>
 		
+		<!-- Logo  -->	
+		<a class="logo" href="index.html"><img src="http://iodos.eu/ftp/logo.png" alt="LOGO ICI" title="Logo"></a>
+<!-- 		<div class="logodiv" > -->
+<%-- 			${p_website_logo_tag} --%>
+<!-- 		</div> -->
 
-
-<div id="header">HEADER
-	    <div style="height:20px;">  <%-- WHITE LINE ABOVE THE RIBBON --%>
-				<div style="float:right">
-				    <!-- ***************** - REGISTER - ***************** -->
-					<div style="width:100%; font-size:15px;">
-						<c:choose>
-							<c:when test="${current.user!=null}">
-							<div class="login-link" title ="Connecté en tant que ${current.user.userName} avec ${sessionScope.providersignedin}">
-							</c:when>
-							<c:otherwise>
-							<div class="login-link">
-							</c:otherwise>
-						</c:choose>
-					  	
-   				        <c:choose>
-						        <c:when test="${current.user!=null}">
-						        
-						          <a href="/user/${current.user.userName}">${current.user.userName}</a> 
-						          <c:choose>
-						          <c:when test="${sessionScope.providersignedin == 'FACEBOOK'}">
-						          <img src="images/features-icons/facebook.png"/>
-						          </c:when>
-						            <c:when test="${sessionScope.providersignedin == 'GOOGLE'}">
-						           <img src="images/features-icons/google.png" alt="Connecté en tant que ${current.user.userName} avec ${sessionScope.providersignedin}"/>
-						          </c:when>
-						          </c:choose>&nbsp;&nbsp;|&nbsp;&nbsp;   
-						          <a id="logout" href="logout">déconnexion</a>
-						        </c:when>
-						        <c:otherwise>
-						           <!-- <a class="login"  style="cursor:pointer;">connexion</a>&nbsp;-&nbsp;-->
-						            <a href="login">connexion</a>&nbsp;&nbsp;|&nbsp;&nbsp; 
-						            <a href="register">créer un compte</a>
-						         </c:otherwise>
-						</c:choose>
-						</div>
-					</div>
-				</div>	
-			    <!-- ***************** - END REGISTER - ***************** -->
-	    </div><%-- end WHITE LINE ABOVE THE RIBBON --%>
-	    	
-		<div>
+		<!-- Connection Zone -->
+		<div style="float:right">
+			<nav>
+				<ul class="navigation">	
+			<c:choose>
+				<c:when test="${current.user!=null}">
+					<li><a href="/user/${current.user.userName}">${current.user.userName}</a></li>
+					<li><a href="logout">Déconnexion</a></li>	
+				</c:when>
+				
+				<c:otherwise>
+					<li><a href="login">LOG IN</a></li>
+					<li><a href="register">SIGN UP </a></li>
+				</c:otherwise>
 			
-				<!-- ***************** - LOGO - ***************** -->
-				<div class="logodiv" >
-					${p_website_logo_tag}
-				</div>
-				<!-- ***************** - END LOGO - ***************** -->
-				
-				<%--	
-				<!-- ******************* BETA ************************ -->	
-				<div class="beta">
-						<img src= "images/beta.png" style="margin-left:13px;"
-						  alt="Plate-forme en construction, pas encore destinée au grand public. Sortie prévue: 1er trimestre 2013"
-						title="Plate-forme en construction, pas encore destinée au grand public. Sortie prévue: 1er trimestre 2013"  />
-				</div>
-				--%>
-					
-				<div style="float:right; text-align:right;">
-						
-						<!-- Search -->
-						<div style="display:inline-block; padding-top: 30px;">
-						  <form method="get" id="searchform" action="search" class="search-form">
-							 <fieldset>
-								   <input type="submit" class="submit" value="search" id="searchsubmit" />
-								   <input type="text" name="searchtext" id="s" value="Rechercher" onfocus="this.value=(this.value=='Rechercher') ? '' : this.value;" onblur="this.value=(this.value=='') ? 'Rechercher' : this.value;" />
-							 </fieldset>
-						  </form>
-						</div><br/>
-
-						<div style="display:inline-block; margin-right:-30px;">
-							<%@ include file="/WEB-INF/includes/headermenu.jsp"%>
-						</div>
-				
-
-     				    <!-- Hidden div that JavaScript will move in a dialog box when we press the login link (Note JOHN 2013-02: there is no login dialog anymore...)-->
-					    <div id ="logindialog" style = "display:none;"></div>
-				</div>
+			</c:choose>
+				</ul>
+			</nav>
 		</div>
 		
-		<div id="pdfdialog" style="display:hidden"></div>
+		<!-- Search -->
+		<div style="float:right">
+			<form class="form-recherche cf" action="search" method="get">      
+	        	<input type="text" placeholder="Rechercher" required>         
+	          	<button type="submit"></button>    
+	        </form>
+        </div>
+
+		<!-- Navigation -->		
+		<nav>
+			<ul class="navigation">
+				<li class="search"><input class="searchform" type="search" value="" placeholder="Search"></li>
+				<li class="current"><a href="index.html">Home</a></li>
+				<li><a href="#" class="arrow">Point 1</a>
+					<!-- Drop-Down / Start -->
+					<ul>
+						<li><a href="pricing-tables.html">Pricing Tables</a></li>
+						<li><a href="elements.html">Elements</a></li>
+						<li><a href="typography.html">Typography</a></li>
+						<li><a href="columns.html">Columns</a></li>
+						<li><a href="icons.html">Icons</a></li>
+					</ul>
+					<!-- Drop-Down / End -->
+				</li>
+
+				<li><a href="#" class="arrow">Point 2</a>
+					<!-- Drop-Down / Start -->
+					<ul>
+						<li><a href="about.html">About</a></li>
+						<li><a href="faq.html">FAQ</a></li>
+						<li><a href="404.html">404 Error</a></li>
+					</ul>
+					<!-- Drop-Down / End -->
+				</li>
+				
+				<li><a href="#" class="arrow">Point 3</a>
+					<!-- Drop-Down / Start -->
+					<ul>
+						<li><a href="portfolio-three-columns.html">3 columns</a></li>
+						<li><a href="portfolio-four-columns.html">4 columns</a></li>
+						<li><a href="#" class="arrow">Single Portfolio Item</a>
+							<ul>
+								<li><a href="project-vena-style-1.html">Style 1</a></li>
+								<li><a href="project-vena-style-2.html">Style 2</a></li>
+							</ul>
+						</li>
+					</ul>
+					<!-- Drop-Down / End -->
+				</li>		
+				
+			</ul>
+
+		</nav>
+		
+	</div><!-- End of container -->
 	
-</div><!-- end header -->
+</header>
+
+
+
+	
+			
+		
+					
+
+
  
