@@ -3,7 +3,9 @@ package learningresourcefinder.controller;
 import javax.validation.Valid;
 
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.web.Slugify;
 
@@ -12,13 +14,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ResourceEditController extends BaseController<Resource> {
 
 	@Autowired ResourceRepository resourceRepository; 
+	@Autowired UrlResourceRepository urlResourceRepository;
 	@RequestMapping("/resourcecreate")
 	public ModelAndView resourceCreate() {
 		return prepareModelAndView(new Resource() );
@@ -77,12 +82,21 @@ public class ResourceEditController extends BaseController<Resource> {
 
 		}
 	}
-	
 	public int addImageOnDB(){
-		
 		return 0;
 	}
 	
+
+	@RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
+	public @ResponseBody boolean urlSubmit(@RequestParam("url") String url) {
+		 Boolean checkUrlOk = false;
+		 if(urlResourceRepository.getResourceByUrl(url) != null)
+			checkUrlOk =true;
+		else
+	    	checkUrlOk =false;
+		
+		return checkUrlOk;
+	}
 
 }
 
