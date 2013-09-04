@@ -48,7 +48,7 @@
 			<div class="popup-close">
 		    	<a class="close" title="close this popup">X</a>
 		    </div>
-		    <h2>Ajouter une URL</h2>	
+		    <h2>Ajouter une URL Emile</h2>	
 		    <form:form method="post" action="#" class="formUrlResource">	
 			    <label for="name">Name :</label> <input type="text" id="name" name="name" /> <br /> 
 			    <label for="url">Url :  </label> <input type="text" name="url" id="url" />   <br />  
