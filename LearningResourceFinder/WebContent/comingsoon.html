@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,6 +21,30 @@
     $('.flexslider').flexslider();
   });
 </script>
+
+<!-- start mail -->
+<script type="text/javascript">
+	function ajaxPostUrlResource() {
+		var mail = $('#mail').val();
+		if (mail !== null) {
+			$.ajax({
+				type : "POST",
+			    url : 'ajax/addMailOnTable',
+			    data: "mail=" + mail,
+			    success : function(data) {
+			    	alert("Thank you");
+			    },
+			    error : function(data) {
+			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
+			    			"votre e-mail.Cela montre bien que nous ne sommes pas prêts ;-) Toutes nos excuses.");
+			    },
+			}); 
+		}else {
+			alert("Vous n'avez pas entrer de mail.");
+		} 
+	}
+	</script>
+	<!-- end mail -->
 <title>Under Construction</title>
 </head>
 <body>
@@ -125,6 +150,7 @@
 				</div>
 <!-- END VIDEO -->
 
+
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -133,4 +159,12 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-follow" data-href="https://www.facebook.com/toujoursplus.be" data-width="450" data-layout="button_count" data-show-faces="true"></div>
+
+<!-- BEGIN mail -->
+		<form method="post" action="#">
+			<input type="text" name="addresemail" id="mail" /> 
+			<input type="submit" value="Envoyer" onclick="ajaxPostUrlResource()" />
+		</form>
+<!-- END mail -->
 </body>
+</html>
