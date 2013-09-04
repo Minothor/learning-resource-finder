@@ -1,0 +1,91 @@
+.cf:before, .cf:after {
+	content: "";
+	display: table;
+}
+.cf:after {
+	clear: both;
+}
+.cf {
+	zoom: 1;
+}
+.form-recherche {
+	width: 170px;
+	margin-top:11px;
+}
+.form-recherche input {
+	width: 120px;
+	height: 20px;
+	padding: 10px 5px;
+	float: left;
+	font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border: 0;
+	background: #eee;
+	-moz-border-radius: 3px 0 0 3px;
+	-webkit-border-radius: 3px 0 0 3px;
+	border-radius: 3px 0 0 3px;
+}
+.form-recherche input:focus {
+	outline: 0;
+	background: #fff;
+	-moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+	box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+}
+.form-recherche input::-webkit-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+.form-recherche input:-moz-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+.form-recherche input:-ms-input-placeholder {
+	color: #999;
+	font-weight: normal;
+	font-style: italic;
+}
+.form-recherche button {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 40px;
+	width: 40px;
+	font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #fff;
+	text-transform: uppercase;
+	-moz-border-radius: 0 3px 3px 0;
+	-webkit-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+	text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+	background: #FC6264 url(/images/_global/bt-search.png) no-repeat center;
+}
+.form-recherche button:hover {
+	background: #e54040 url(/images/_global/bt-search.png) no-repeat center;
+}
+.form-recherche button:active,     .form-recherche button:focus {
+	background: #e54040 url(/images/_global/bt-search.png) no-repeat center;
+}
+.form-recherche button:before {
+	content: '';
+	position: absolute;
+	border-width: 8px 8px 8px 0;
+	border-style: solid solid solid none;
+	border-color: transparent #FC6264 transparent;
+	top: 12px;
+	left: -6px;
+}
+.form-recherche button:hover:before {
+	border-right-color: #e54040;
+}
+.form-recherche button:focus:before {
+	border-right-color: #e54040;
+}
+.form-recherche button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}

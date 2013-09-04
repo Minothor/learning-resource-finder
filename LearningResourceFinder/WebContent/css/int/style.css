@@ -4,6 +4,7 @@
 @import url("slider.css");
 @import url("tooltips.css");
 @import url("switcher.css");
+@import url("header-search.css");
 
 a.logo {
 	display: block;
