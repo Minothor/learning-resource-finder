@@ -30,7 +30,7 @@ a {
 img { display: block }
 
 body { 
-	background: #50555c no-repeat center top fixed;
+	background: #39a8d4 no-repeat center top fixed;
 	background-image: url(../img/bg4_1440.jpg);
 }
 
@@ -58,7 +58,9 @@ header {
 
 /* === Timer Section === */
 #countdown {
+	
 	margin-top: 40px;
+	margin-bottom: 40px;
 	text-align: center;
 }
 
@@ -70,13 +72,8 @@ header {
 	opacity: .6;
 }
 
-#videoyoutube {
-	margin: 50px auto;
-	width: 738px;
-	height: 30px;
-}
 
-#videoyoutube > .wrap { position: absolute; width: 738px; height: 30px; }
+
 
 
 
@@ -87,11 +84,11 @@ header {
 
 #email,
 #social {
-	width: 384px;
+	width: 500px;
 }
 
 #email {
-	float: left;
+
 }
 
 
@@ -226,6 +223,35 @@ header {
 #icons > li a:hover { opacity: 1; }
 
 #icons .fb 			{ background-image: url(fb.png)}
+
+
+#videoyoutube {
+	-moz-box-shadow: 0 0 5px 5px #555;
+	-webkit-box-shadow: 0 0 5px 5px #555;
+	box-shadow: 0 0 5px 5px #555;
+	
+	margin: 50px auto;
+	width: auto;
+	height: auto;
+	background:#59d0ff;
+	clear:both;
+}
+
+
+#vid1{float:left; width:210px;display:inline-block;margin-left:30%;margin-bottom:20px}
+#vid2{float:right;width:210px;display:inline-block;margin-right:30%;margin-bottom:20px}
+
+
+#vid1 > ul {font-size: 10pt; }
+#vid2 > ul {font-size: 10pt; }
+
+#vid1 > p {text-align: center}
+#vid2 > p {text-align: center}
+
+#spacediv3 {width:auto; clear:both;}
+
+
+#fb-follow {display:inline-block; float:right}
 
 
 /* === Mobile Devices Section === */
