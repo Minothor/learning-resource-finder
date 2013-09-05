@@ -36,7 +36,7 @@
 			    },
 			    error : function(data) {
 			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
-			    			"votre e-mail.Cela montre bien que nous ne sommes pas pr�ts ;-) Toutes nos excuses.");
+			    			"votre e-mail.Cela montre bien que nous ne sommes pas prêts ;-) Toutes nos excuses.");
 			    },
 			}); 
 		}else {
@@ -49,6 +49,8 @@
 </head>
 <body>
 
+
+<div id="wrapper">
 <!-- BEGIN HEADER -->
 			<header>
 				<a href="#">
@@ -63,6 +65,7 @@
 						<div class="num">
 							<div>-</div>
 							<div>0</div>
+							
 						</div>
 						<div class="num">
 							<div>-</div>
@@ -141,14 +144,12 @@
     </li>
     
   </ul>
+  
+  
+
 </div>
 
-<!-- BEGIN VIDEO -->						
-				<div id="videoyoutube">
-					<iframe marginwidth="40" width="210" height="158" src="http://www.youtube.com/embed/xXy_ywNIZv8?rel=0" frameborder="0" allowfullscreen></iframe>
-                    <iframe width="210" height="158" src="http://www.youtube.com/embed/gaIfbsmmuMs?rel=0" frameborder="0" allowfullscreen> </iframe>
-				</div>
-<!-- END VIDEO -->
+
 
 
 <script>(function(d, s, id) {
@@ -158,13 +159,58 @@
   js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=1414750432070920";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-follow" data-href="https://www.facebook.com/toujoursplus.be" data-width="450" data-layout="button_count" data-show-faces="true"></div>
+
 
 <!-- BEGIN mail -->
+		<div id="email">
 		<form method="post" action="#">
-			<input type="text" name="addresemail" id="mail" /> 
-			<input type="submit" value="Envoyer" onclick="ajaxPostUrlResource()" />
+			<input type="text" name="addresemail" id="mail" placeholder="Entrer votre adresse mail" /> 
+			<button type="submit"  onclick="ajaxPostUrlResource()">Envoyer</button>
 		</form>
+		
+		<div class="fb-follow" data-href="https://www.facebook.com/toujoursplus.be" data-width="450" data-layout="button_count" data-show-faces="true"></div>
+		
+		</div>
+		
 <!-- END mail -->
+
+
+</div>
+
+<!-- BEGIN VIDEO -->						
+			<div id="videoyoutube">
+				<div id="vid1">
+					<p>Qu’est-ce que profs et élèves feront sur toujoursPlus.be?</p>
+					<br>
+					<iframe marginwidth="40" width="210" height="158" src="http://www.youtube.com/embed/xXy_ywNIZv8?rel=0" frameborder="0" allowfullscreen></iframe>
+	                <br>
+	                <br>
+	                <ul>
+	                <li>Trouver facilement des vidéos, documents, jeux éducatifs et exercices de qualité sur internet, sans chercher des heures.
+	                </li>
+	                <li>Mesurer leur progression académique</li>
+	                <li>Partager..</li>
+	                </ul>
+                </div>
+                
+                <div id="vid2">
+	                <p>Quels bénéfices dans les écoles?</p>
+	                <br>
+	                <iframe width="210" height="158" src="http://www.youtube.com/embed/gaIfbsmmuMs?rel=0" frameborder="0" allowfullscreen> </iframe>
+					<br>
+					<br>
+					<ul>
+					<li>Un renversement pédagogique</li>
+					<li>La différentation</li>
+					<li>La motivation</li>
+					<li>L’autonomie</li>
+					<li>L’immersion linguistique</li>
+					<li>L’excellence</li>
+					</ul>
+				</div>
+				
+				<div id="spacediv3"></div>
+			</div>
+<!-- END VIDEO -->
 </body>
 </html>
