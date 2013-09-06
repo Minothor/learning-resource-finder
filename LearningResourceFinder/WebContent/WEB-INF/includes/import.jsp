@@ -4,6 +4,12 @@
 <!-- Style Files [Vena] -->
 <link rel="stylesheet" href="css/int/style.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="css/int/colors/1.css" id="color" />
+
+<!-- Style Files [BootStrap] -->
+<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/ext/bootstrap.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/ext/bootstrap-responsive.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/ext/bootstrap-responsive.min.css" type="text/css" media="screen" />
 	
 <%-- <link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.24.custom.css" /> Customized for the colors.  --%>
 <link rel="stylesheet" type="text/css" href="/css/int/popupJquery.css"  />   
