@@ -56,6 +56,7 @@ public class LoginController extends BaseController<User> {
 	// We will show the login form and social buttons to the user.
 	@RequestMapping(value = "/login")
 	public String signin(HttpServletRequest request) {
+	    
 		return "login";
 	}
 
@@ -135,15 +136,15 @@ public class LoginController extends BaseController<User> {
             throw new RuntimeException(e);
         }
 
-        if (errorMsg != null) {
-            NotificationUtil.addNotificationMessage(errorMsg);
-
-            return "redirect:/login";
-
-        } else {
-            NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur " + UrlUtil.getWebSiteName());             
-            return "redirect:/user/" + user.getUserName();
-        }
+//        if (errorMsg != null) {
+//            NotificationUtil.addNotificationMessage(errorMsg);
+//
+//            return "loginsocialcallback";
+//        } else {
+//            NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur " + UrlUtil.getWebSiteName());             
+//            //return "redirect:/user/" + user.getUserName();
+//        }
+        return "loginsocialcallback";
 	}
 
     private void completeUserFromSocialProfile(String providerId,  Profile profile, User user) {
