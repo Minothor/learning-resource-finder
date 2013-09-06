@@ -1,6 +1,8 @@
 package learningresourcefinder.controller;
 
 import java.awt.image.BufferedImage;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +58,6 @@ public class LoginController extends BaseController<User> {
 	// We will show the login form and social buttons to the user.
 	@RequestMapping(value = "/login")
 	public String signin(HttpServletRequest request) {
-	    
 		return "login";
 	}
 
@@ -154,6 +155,10 @@ public class LoginController extends BaseController<User> {
         }
         if (user.getLastName() != null) {
             user.setLastName(profile.getLastName());
+        }
+        if (user.getBirthDate() != null && profile.getDob() != null) {
+            Calendar cal = new GregorianCalendar(profile.getDob().getYear(), profile.getDob().getMonth()+1, profile.getDob().getDay());
+            user.setBirthDate(cal.getTime());
         }
         if (user.getGender() != null && profile.getGender() != null) {
             user.setGender(profile.getGender().toLowerCase().startsWith("m") ? Gender.MALE : Gender.FEMALE);
