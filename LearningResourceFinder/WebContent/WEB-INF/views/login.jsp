@@ -35,27 +35,34 @@
 
 <script type="text/javascript">
 
+function mPopupLogin(provid){
+	
+	var w = 780;
+	var h = 410;
+	var left = (screen.width/2)-(w/2);
+    var   top = (screen.height/2)-(h/2);
+    var urlLogin = "<%= UrlUtil.getAbsoluteUrl("/loginsocial?provider=") %>" + provid;
+    var signin= window.open(urlLogin, "Login", "nom_popup,menubar=no, status=no, scrollbars=no, menubar=no, width="+w+", height="+h+",left=" + left + ",top=" + top);
 
-$(function() {
-	$("#login-facebook").click(function(){
+	return false; 
+	
+};
+
+
+$(document).ready(function(){
 		
+		$("#login-facebook").click(function(){
+			mPopupLogin("facebook");
+		});
 		
-		var w = 780;
-		var h = 410;
-		
-		var left = (screen.width/2)-(w/2);
-        var   top = (screen.height/2)-(h/2);
-	    var signin= window.open("<%= UrlUtil.getAbsoluteUrl("/loginsocial?provider=facebook") %>", "Login", "nom_popup,menubar=no, status=no, scrollbars=no, menubar=no, width="+w+", height="+h+",left=" + left + ",top=" + top);
-	  // open the popup
-		//signin.focus(); // and focus on the window
-	 
-		
-		return false; 
-	});
+		$("#login-googleplus").click(function(){
+			mPopupLogin("googleplus");
+		});
 });
 
-
 </script>
+
+
 </head>
 
 <body>
@@ -85,7 +92,7 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 		<!-- GOOGLE SIGNIN -->
 		<div>
 		
-		<a id="login-google2" class="simple-button provider-signup google" href="/loginsocial?provider=googleplus">
+		<a id="login-googleplus" class="simple-button provider-signup google" href="/loginsocial?provider=googleplus">
 		       <img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/google-24px.png">
 		       	<span class="provider-separator"></span>
 		        <span class="provider-signup-text"> Sign in with Google </span>
@@ -101,6 +108,5 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	</div>
 	
 </div>
-
 
 </body>

@@ -70,7 +70,7 @@ public class LoginController extends BaseController<User> {
 	    String successUrl = UrlUtil.getAbsoluteUrl("loginsocialcallback");  // !!! for local tests, google does not work (it requires an url that is not "localhost" ...).
 	    
 	    try {
-	        urlToFacebookOrGoogle = socialManager.getAuthenticationUrl(providerId, successUrl); //  We can use this method to add permissions later : getAuthenticationUrl(id, successUrl, permission) 
+	        urlToFacebookOrGoogle = socialManager.getAuthenticationUrl(providerId, successUrl)+"&display=popup"; //  We can use this method to add permissions later : getAuthenticationUrl(id, successUrl, permission) 
 	    } catch (Exception e) {
             log.error("Exception during social login (while getting the URL to " + providerId + "for user " + SecurityContext.getUser(), e);
 	        NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+". Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
