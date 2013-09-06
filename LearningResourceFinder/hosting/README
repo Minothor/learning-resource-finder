@@ -26,8 +26,6 @@ Firewall
 Apache server
 Pop/IMAP mail server 
 
-
-
 Architecture
 ============
 toujours.be is hosted with an httpd (Apache) instance in front of the Tomcat 7 server.
@@ -82,6 +80,19 @@ It is backuped and restored with the command: maintenance.sh backupDB/restoreDB
 The backup files are kept in /opt/maintenance/backup.
 backup, restore script on PC,... 
 
+pg_hba.conf is here :  /var/lib/pgsql/data/
+This file controls: which hosts are allowed to connect, how clients
+are authenticated, which PostgreSQL user names they can use, which
+databases they can access.  Records take one of these forms:
+# local      DATABASE  USER  METHOD  [OPTIONS]
+# host       DATABASE  USER  CIDR-ADDRESS  METHOD  [OPTIONS]
+
+Really in file for LearningResourceFinder project, we have this :
+local all postgres password
+local   LRF     lrfuser trust
+
+Here, for example, we see that lrfuser could only modify the LRF DB and can only be connected in local, no password will be requested because trust option is set.
+
 Restore backups on developer's PC
 ========
 To restore prod DB on Dev windows desktop with pgadmin & psql.exe:
@@ -116,7 +127,6 @@ Installed in /usr/share/ant in eApps VM
 Commandline "ant" used in do_deployement script
 The setup file : build.xml is here when application is deployed : /opt/tomcat7/webapps/ROOT/images/build.xml
 
-................................
 
 Folder deployment page
 ======================
@@ -161,4 +171,11 @@ free -m
 
 #Edit a file
 nano filename.ext
+
+#See permission of files & folders
+ls -al
+
+#Search in command historical
+Ctrl+R 
+
 
