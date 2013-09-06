@@ -82,7 +82,7 @@ It is backuped and restored with the command: maintenance.sh backupDB/restoreDB
 The backup files are kept in /opt/maintenance/backup.
 backup, restore script on PC,... 
 
-DB(DEV)
+Restore backups on developer's PC
 ========
 To restore prod DB on Dev windows desktop with pgadmin & psql.exe:
 
@@ -102,12 +102,6 @@ Through the eApps ISP manager, add 2 cron tasks (Management Tools > Scheduler > 
   - Command2: sh /opt/maintenance/maintenance.sh backupGen
 It will make backups run everyday. Our scripts (see maintenance.sh) activate some rolling mechanism to keep a few copies of the backups. Each backup is stored in a compressed .xz file.
 xz files should preferably be open with 7z tool (http://www.7-zip.org/)
-
-
-Restore backups on developer's PC
-=================================
-....
-
 
 Properties
 ==========
