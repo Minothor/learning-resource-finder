@@ -32,7 +32,9 @@
 	            		<img src="gen/playlist/resized/large/${playlist.id}.jpg<c:if test="${random!=null}">?${random}</c:if>" alt=""  />
 	            	</c:when>
 		            <c:otherwise>
-							<img src="images/playlist_default.jpg" />
+							<div class="playlist-no-image">
+					P L A Y<br>L I S T
+				</div>
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${canEdit}">	 
