@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,17 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Playlist editing</title>
 <script type="text/javascript">
-
-function verifForm(form)
-{
-   if(document.form.name.value == ""){
-      alert("Veuillez remplir le champ nom !");
-      document.form.name.focus();
-      return false;
-   }
-}
-
-
+	function verifForm(form) {
+		if (document.form.name.value == "") {
+			alert("Veuillez remplir le champ nom !");
+			document.form.name.focus();
+			return false;
+		}
+	}
 </script>
 
 </head>
@@ -36,31 +32,11 @@ function verifForm(form)
 		</c:otherwise>
 	</c:choose>
 
-	<div id="divPhoto">
-		<c:if test="${canEdit}">
-			<a href="#" data-width="500" data-rel="popupJquery" class="poplight">
-		</c:if>
-		<figure> <c:choose>
-			<c:when test="${playlistlist.picture}">
-				<%-- Random, to force the reload of the image in case it changes (but its name does not change) --%>
-				<img
-					src="gen/playlist/resized/large/${playlistlist.id}.jpg<c:if test="${random!=null}">?${random}</c:if>"
-					alt="" />
-			</c:when>
-			<c:otherwise>
-				<div class="playlist-no-image">
-					P L A Y<br>L I S T
-				</div>
-			</c:otherwise>
-		</c:choose> <c:if test="${canEdit}">
-			<figcaption lang="la">
-			<span class="lib-change-image"><b>Charger une image</b></span></figcaption>
-		</c:if> </figure>
-		<c:if test="${canEdit}">
-			</a>
-		</c:if>
 
-	</div>
+	<lrftag:playlistimage canEdit="${canEdit}" playlist="${playlist}"
+		random="${random}" />
+
+
 	<div id="popupJquery" class="popupJquery">
 		<div class="popup-close">
 			<a class="close" title="close this popup">X</a>

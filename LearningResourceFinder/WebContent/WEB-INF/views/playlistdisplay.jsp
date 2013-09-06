@@ -12,43 +12,24 @@
 	<h1>PlayList</h1>
 	<lrftag:pageheadertitle title="${user.fullName}" />
 	<div class="" style="font-size: 14px">
-	<c:if test="${canEdit}">
+		<c:if test="${canEdit}">
 		&nbsp&nbsp<a href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
 		&nbsp-&nbsp
 	</c:if>
-		<a href="playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a>
-		&nbsp-&nbsp<a href=<c:url value='/ressourcelist'/>>Vers l'arborescence des ressources</a>
+		<a href="playlist/user/${playlist.createdBy.userName}">Mes
+			PlayLists</a> &nbsp-&nbsp<a href=<c:url value='/ressourcelist'/>>Vers
+			l'arborescence des ressources</a>
 		</li>
 	</div>
-	
-	<div id="divPhoto">	
-			<c:if test="${canEdit}">
-	    		<a href="#" data-width="500" data-rel="popupJquery" class="poplight">
-	    	</c:if> 	
-	        <figure>
-	        	<c:choose>
-					<c:when test="${playlist.picture}">
-						<%-- Random, to force the reload of the image in case it changes (but its name does not change) --%>
-	            		<img src="gen/playlist/resized/large/${playlist.id}.jpg<c:if test="${random!=null}">?${random}</c:if>" alt=""  />
-	            	</c:when>
-		            <c:otherwise>
-							<div class="playlist-no-image">
-					P L A Y<br>L I S T
-				</div>
-					</c:otherwise>
-				</c:choose>
-				<c:if test="${canEdit}">	 
-	                	<figcaption lang="la"><span class="lib-change-image"><b>Charger une image</b></span></figcaption>
-	            </c:if>    	
-	      		</figure>	
-			<c:if test="${canEdit}">     
-	      	</a>
-	       	</c:if> 	      						   		      	
-	</div>
-		
-	
+
+
+	<lrftag:playlistimage canEdit="${canEdit}" playlist="${playlist}"
+		random="${random}" />
+
+
+
 	<br />
-	<br />	
+	<br />
 	<ul>
 		<li>Nom: ${playlist.name}</li>
 		<li>Description : ${playlist.description}</li>
@@ -64,28 +45,30 @@
 
 			<div
 				style="padding: 10px; width: 180px; height: 10px; background-color: #F6CEF5">
-				<a href=<c:url value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>>Remove</a>
+				<a
+					href=<c:url value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>>Remove</a>
 			</div>
 		</div>
 	</c:forEach>
-<div id="popupJquery" class="popupJquery">	
-	    <div class="popup-close">
-	        <a class="close" title="close this popup">X</a>
-	      </div>
-	  	  <form method="post" action="/playlist/imageadd" class="formUrlPlaylist" enctype="multipart/form-data">	
-	    	<h2>Ajouter une image</h2> 
-	          <br />
-	          <label><input type="radio"  name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur</label>
-	          <input type="file"   name="file"   value="Parcourir..."    class="inputSource"   id="inputFile" /> 
-	          <input type="hidden" name="strUrl" value="http://..."      class="inputSource"   id="inputUrl"  />             
-	          <br /> 
-	          <label><input type="radio"  name="rdFrom" value="url"      class="radioUrl" /> Depuis un lien</label>
-	          <input type="hidden" name="idPlayList" value="${playlist.id}" />
-	          <br />
-	          <br />
-	          <input class="btnSubmit" type="submit" value="Ajouter" name="btnPicture" /> 
-	      </form>
-	      <br />
-	</div>	
+	<div id="popupJquery" class="popupJquery">
+		<div class="popup-close">
+			<a class="close" title="close this popup">X</a>
+		</div>
+		<form method="post" action="/playlist/imageadd"
+			class="formUrlPlaylist" enctype="multipart/form-data">
+			<h2>Ajouter une image</h2>
+			<br /> <label><input type="radio" name="rdFrom"
+				value="computer" class="radioComputer" id="inputComputer"
+				checked="checked" /> Depuis l'ordinateur</label> <input type="file"
+				name="file" value="Parcourir..." class="inputSource" id="inputFile" />
+			<input type="hidden" name="strUrl" value="http://..."
+				class="inputSource" id="inputUrl" /> <br /> <label><input
+				type="radio" name="rdFrom" value="url" class="radioUrl" /> Depuis
+				un lien</label> <input type="hidden" name="idPlayList"
+				value="${playlist.id}" /> <br /> <br /> <input class="btnSubmit"
+				type="submit" value="Ajouter" name="btnPicture" />
+		</form>
+		<br />
+	</div>
 </body>
 </html>
