@@ -74,13 +74,25 @@ The httpd (apache) server redirects the request for http://toujoursplus.be/gen t
 On the developer machines, there is no httpd server => the gen folder is in ROOT/gen inside the working tomcat directory (somewhere deep in the workspace/.medatada/... with Eclipse).
 It is erased each time you clean the tomcat server.
 
-DB
-==
+DB(PROD)
+========
 
 The PostgreSQL DB is managed by phpPgAdmin : https://toujoursplus.be/pgadmin/
 It is backuped and restored with the command: maintenance.sh backupDB/restoreDB
 The backup files are kept in /opt/maintenance/backup.
 backup, restore script on PC,... 
+
+DB(DEV)
+========
+To restore prod DB on Dev windows desktop with pgadmin & psql.exe:
+
+1)create lrfuser role in pgadmin 
+2)create LRF DB in pgadmin 
+3)under Dos terminal, change console codepage to windows codepage like this : chcp 1252 
+4)in Start menu, launch SQL Shell(psql)
+5)use lrfuser, database LRF and keep port/server by default
+6)launch command, for example for a file sql (not archieved/compressed) like test.sql : \i C:/test.sql
+
 
 Cron backup
 ===========
