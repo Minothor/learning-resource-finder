@@ -133,9 +133,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public enum AccountConnectedType{
         LOCAL("User connected with local account","local"),
         FACEBOOK("User connected with his Facebook account","facebook"),
-//        TWITTER("User connected with his Twitter account","twitter",Twitter.class),
-//        LINKEDIN("User connected with his LinkedIn account","linkedIn",LinkedIn.class),
-        GOOGLE("User connected with his google account","google");
+        GOOGLE("User connected with his google account","googleplus");
 
 
         private String detail;
@@ -155,7 +153,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
             providerId = providerId.toLowerCase();
             switch(providerId){
             case "facebook" : return AccountConnectedType.FACEBOOK;
-            case "google"   : return AccountConnectedType.GOOGLE;
+            case "googleplus"   : return AccountConnectedType.GOOGLE;
             default : throw new RuntimeException("Provider cannot be identified");
             }
         }
