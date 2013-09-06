@@ -6,7 +6,11 @@ Make a VM with the following parameters:
 512Mb for test (quickly more for more intensive production usage).
 CentOS 64bits with Tomcat 7
 
-Domain name : [Ibrahima]
+Domain name
+===========
+Domain name purchased on ovh.com. 
+On ovh.com, via the manager, we changed dns servers through home > domain name > Domain & DNS > Dns servers
+We put eapps DNS servers by "DNS Manager > Add Domain" and then we waited for 24 hours in order to get DNS propagation.
 
 eApps VM setup
 ==============
@@ -21,7 +25,7 @@ PostgreSQL database server
 PostgreSQL jdbc driver
 Subversion
 SMTP mail Server
-Postgresql management tool /phppgadmin (php scripting langage needed!)
+Postgresql management tool /phppgadmin (php scripting langage package needed!)
 Firewall
 Apache server
 Pop/IMAP mail server 
