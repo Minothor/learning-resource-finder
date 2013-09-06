@@ -5,6 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
+<%@ page import ="learningresourcefinder.web.UrlUtil" %>
 
 <!-- you can set variables starting with "p_" in the file named website_content.properties -->
 <head>
@@ -32,6 +33,29 @@
 }
 </style>
 
+<script type="text/javascript">
+
+
+$(function() {
+	$("#login-facebook").click(function(){
+		
+		
+		var w = 780;
+		var h = 410;
+		
+		var left = (screen.width/2)-(w/2);
+        var   top = (screen.height/2)-(h/2);
+	    var signin= window.open("<%= UrlUtil.getAbsoluteUrl("/loginsocial?provider=facebook") %>", "Login", "nom_popup,menubar=no, status=no, scrollbars=no, menubar=no, width="+w+", height="+h+",left=" + left + ",top=" + top);
+	  // open the popup
+		//signin.focus(); // and focus on the window
+	 
+		
+		return false; 
+	});
+});
+
+
+</script>
 </head>
 
 <body>
@@ -50,7 +74,7 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	
 		<div>
 
-			<a id="login-facebook" class="simple-button provider-signup facebook" href="/loginsocial?provider=facebook">
+			<a id="login-facebook" class="simple-button provider-signup facebook">
 				<img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/facebook-24px.png">
 				<span class="provider-separator"></span>
 				<span class="provider-signup-text"> Login with Facebook </span>
@@ -77,6 +101,6 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 	</div>
 	
 </div>
-<!-- this checkbox is not in a form tag because we pass its value by an ajax request -->
+
 
 </body>
