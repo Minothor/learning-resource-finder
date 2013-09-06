@@ -61,7 +61,7 @@ Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre 
 		<!-- GOOGLE SIGNIN -->
 		<div>
 		
-		<a id="login-google2" class="simple-button provider-signup google" href="/loginsocial?provider=google plus">
+		<a id="login-google2" class="simple-button provider-signup google" href="/loginsocial?provider=googleplus">
 		       <img class="provider-signup-img" width="24" height="24" src="https://khan-academy.appspot.com/images/google-24px.png">
 		       	<span class="provider-separator"></span>
 		        <span class="provider-signup-text"> Sign in with Google </span>
