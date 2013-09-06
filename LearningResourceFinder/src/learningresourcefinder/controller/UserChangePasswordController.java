@@ -45,8 +45,8 @@ public class UserChangePasswordController extends BaseController<User> {
 			this.confirmPassword = confirmPassword;
 		}
 	}
-	
-	
+
+
 	@Autowired UserRepository userRepository;
 
 	@RequestMapping("/changepassword")
@@ -56,12 +56,14 @@ public class UserChangePasswordController extends BaseController<User> {
 
 		ModelAndView formMv = new ModelAndView("userchangepassword");
 		formMv.addObject("user",user);
-		formMv.addObject("verifyOldPassword", needToVerifyOldPassword(user));
+		if(user.getPassword() != null){
+			formMv.addObject("verifyOldPassword", needToVerifyOldPassword(user));
+		}
 		formMv.addObject("passwordData", new PasswordData());
 		return formMv;
 	}
 
-	
+
 	@RequestMapping("/changepasswordsubmit")
 	public ModelAndView userChangePasswordSubmit(@Valid @ModelAttribute PasswordData passwordData, BindingResult bindingResult, @RequestParam("id") long id) {
 		User user = getRequiredEntity(id);
@@ -69,12 +71,12 @@ public class UserChangePasswordController extends BaseController<User> {
 
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("redirect:user","id",user.getId());
-			
+
 		} else {
 
-			if(needToVerifyOldPassword(user)){
+			if(needToVerifyOldPassword(user) && user.getPassword()!= null){
 				if (!(SecurityUtils.md5Encode(passwordData.oldPassword)).equals(user.getPassword())) {
-				    bindingResult.rejectValue("oldPassword", "", "Le mot de passe que vous avez introduit ne correspond pas au mot de passe que nous connaissons.");
+					bindingResult.rejectValue("oldPassword", "", "Le mot de passe que vous avez introduit ne correspond pas au mot de passe que nous connaissons.");
 				}
 			}
 
@@ -94,7 +96,9 @@ public class UserChangePasswordController extends BaseController<User> {
 			if (bindingResult.hasErrors()) {
 				ModelAndView formMv = new ModelAndView("userchangepassword");
 				formMv.addObject("user", user);
-				formMv.addObject("verifyOldPassword", needToVerifyOldPassword(user));
+				if(user.getPassword() != null){
+					formMv.addObject("verifyOldPassword", needToVerifyOldPassword(user));
+				}
 				formMv.addObject("passwordData", passwordData);
 				return formMv;
 			} else {
@@ -108,7 +112,7 @@ public class UserChangePasswordController extends BaseController<User> {
 
 	}
 
-	
+
 	private boolean needToVerifyOldPassword(User user) {
 		// If admin and edits somebody else => we don't ask for the old password.
 		if(SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS) && !user.equals(SecurityContext.getUser())){
@@ -117,12 +121,12 @@ public class UserChangePasswordController extends BaseController<User> {
 			return true;
 		}
 	}
-	
 
-//	@ModelAttribute
-//	public User findUser(@RequestParam("id") Long id){
-//		return  userRepository.find(id);
-//	}
+
+	//	@ModelAttribute
+	//	public User findUser(@RequestParam("id") Long id){
+	//		return  userRepository.find(id);
+	//	}
 
 
 }
