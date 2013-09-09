@@ -23,13 +23,7 @@ public enum Privilege {
     // Admin generated data
     MANAGE_RESOURCE("Manage resources", Role.MODERATOR),
     MANAGE_PLAYLIST("Manage playlists", Role.MODERATOR),
-    MANAGE_BOOK("Manage books", Role.MODERATOR),
-    VIEW_UNPUBLISHED_ARTICLE("View unpublished articles",Role.MODERATOR),
-     
-    // User generated data
-    MANAGE_GOODEXAMPLE("Manage good examples", Role.CORRECTOR),
-    MANAGE_ARGUMENT("Manage arguments", Role.CORRECTOR),
-    MANAGE_GROUP("Manage group", Role.SUBADMIN);
+    MANAGE_COMPETENCE("Manage competences", Role.SUBADMIN);
     
 	String name;
 	Role associatedRole;

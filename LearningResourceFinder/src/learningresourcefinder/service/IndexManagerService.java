@@ -178,9 +178,7 @@ public class IndexManagerService {
             //   2. It seems that Lucene has no way to say "search all the fields except the field 'toClassify'".
             
             List<String> fieldList = new ArrayList<String>(Arrays.asList(searchableCriterias));
-			if (!SecurityContext.isUserHasPrivilege(Privilege.VIEW_UNPUBLISHED_ARTICLE)) {
-			    fieldList.remove("toClassify");
-			}
+
             if (!SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS)) {
                 fieldList.remove("mail");
             }

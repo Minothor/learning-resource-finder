@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import learningresourcefinder.exception.UnauthorizedAccessException;
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
@@ -223,6 +224,10 @@ public  class SecurityContext {
         if (! canCurrentUserEditResource(resource)) {
             throw new UnauthorizedAccessException(" cannot edit that resource: " + resource.getName());
         }
+    }
+    
+    public static boolean canCurrentUserEditCompetence() { 
+        return isUserHasPrivilege(Privilege.MANAGE_COMPETENCE);     // If this user has the privilege to edit other competence
     }
     
 

@@ -24,11 +24,11 @@ public class Competence extends BaseEntity {
     Long id;
     
 	@Column(length = 40)
-	@Size(max=40, message="le nom d'un point de programme ne peut contenir que 40 caractères maximum")
+	@Size(max=40, message="le nom d'une compétence ne peut contenir que 40 caractères maximum")
 	private String name;
 
 	@Column(length = 8, unique = true, nullable=false)
-	@Size(max=8, message="le code d'un point de programme ne peut contenir que 50 caractères maximum")
+	@Size(max=8, message="le code d'une compétence ne peut contenir que 50 caractères maximum")
 	private String code;   // Short identifier that users can use to quickly refer a Competence
 	
 	
