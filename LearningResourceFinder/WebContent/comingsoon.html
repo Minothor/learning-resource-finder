@@ -3,13 +3,34 @@
 <html>
 <head>
 <meta charset="UTF-8" />
+<script src="/js/ext/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="/js/ext/jquery.innerfade.js"></script>
+
 <link rel="stylesheet" href="css/ext/flexslider.css" type="text/css">
-<script src="/js/ext/jquery-1.8.2.min.js"></script>
 <script src="/js/ext/jquery.flexslider.js"></script>
+
+<!-- Background -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#background-slide').innerfade({
+			speed : 'slow',
+			timeout : 4000,
+			type : 'sequence',
+			containerheight : '220px'
+		});
+		$('.fade').innerfade({
+			speed : 'slow',
+			timeout : 1000,
+			type : 'sequence',
+			containerheight : '1.5em'
+		});
+	});
+</script>
 
 <!-- start countdown script -->
 <link rel="stylesheet" type="text/css" href="css/ext/countdownstyle.css">
-			
+
 <script type="text/javascript" src="js/ext/jq.countdown.js"></script>
 <script type="text/javascript" src="js/ext/jq.placeholder.js"></script>
 <script type="text/javascript" src="js/ext/custom.js"></script>
@@ -32,12 +53,12 @@
 			    url : 'ajax/addMailOnTable',
 			    data: "mail=" + mail,
 			    success : function(data) {
-			    	alert("Merci pour votre intérêt, nous vous tiendrons informé des prochaines grandes étapes.");
+			    	alert("Merci pour votre intÃ©rÃªt, nous vous tiendrons informÃ© des prochaines grandes Ã©tapes.");
 			    	return false;
 			    },
 			    error : function(data) {
 			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
-	    			"votre e-mail.Cela montre bien que nous ne sommes pas prêts ;-) Toutes nos excuses.");
+	    			"votre e-mail.Cela montre bien que nous ne sommes pas prÃªts ;-) Toutes nos excuses.");
 	        return false;
 			    },
 			}); 
@@ -46,28 +67,68 @@
 		} 
 	}
 	</script>
-	<!-- end mail -->
-	
-	<!-- Donation -->
-	 <link rel="stylesheet" href="css/ext/jquery-ui.css" />
+<!-- end mail -->
 
-<script src="/js/ext/jquery-1.9.0.min.js"></script>
-<script src="/js/ext/jquery-ui.js"></script>
+<!-- Donation -->
+<link rel="stylesheet" href="css/ext/jquery-ui.css" />
+
+
+<script src="/js/ext/jquery-ui.js"></script> 
 
 <style>
-body { font-size: 62.5%; }
-label, input { display:block; }
-input.text { margin-bottom:12px; width:95%; padding: .4em; }
-fieldset { padding:0; border:0; margin-top:25px; }
-h1 { font-size: 1.2em; margin: .6em 0; }
-div#users-contain { width: 350px; margin: 20px 0; }
-div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-.ui-dialog .ui-state-error { padding: .3em; }
-.validateTips { border: 1px solid transparent; padding: 0.3em; }
+body {
+	font-size: 62.5%;
+}
+
+label,input {
+	display: block;
+}
+
+input.text {
+	margin-bottom: 12px;
+	width: 95%;
+	padding: .4em;
+}
+
+fieldset {
+	padding: 0;
+	border: 0;
+	margin-top: 25px;
+}
+
+h1 {
+	font-size: 1.2em;
+	margin: .6em 0;
+}
+
+div#users-contain {
+	width: 350px;
+	margin: 20px 0;
+}
+
+div#users-contain table {
+	margin: 1em 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+div#users-contain table td,div#users-contain table th {
+	border: 1px solid #eee;
+	padding: .6em 10px;
+	text-align: left;
+}
+
+.ui-dialog .ui-state-error {
+	padding: .3em;
+}
+
+.validateTips {
+	border: 1px solid transparent;
+	padding: 0.3em;
+}
 </style>
-	
-	<script>
+
+<script>
 $(function() {
 var name = $( "#name" ),
 email = $( "#email" ),
@@ -148,116 +209,130 @@ $( "#dialog-form" ).dialog( "open" );
 </script>
 
 <!-- /Donation -->
-	
-	
+
+
 <title>Under Construction</title>
 </head>
 <body>
-
-
-<div id="wrapper">
-<!-- BEGIN HEADER -->
-			<header>
-				<a href="#">
-				<div id="logo">toujoursPlus</div></a>
-			</header>
-			<!-- END HEADER -->
-			
-			<!-- BEGIN TIMER -->
-			<section id="countdown">
-				<div id="count-wrap">
-					<div class="number_wrapper">
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-							
-						</div>
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						
-						<div class="clear"></div>
-						<div class="lable">Jours</div>
-					</div>
-					
-					<div class="number_wrapper">
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						
-						<div class="clear"></div>
-						<div class="lable">Heurs</div>
-					</div>
-					
-					<div class="number_wrapper">
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						
-						<div class="clear"></div>
-						<div class="lable">Minutes</div>
-					</div>
-					
-					<div class="number_wrapper nmr">
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						<div class="num">
-							<div>-</div>
-							<div>0</div>
-						</div>
-						
-						<div class="clear"></div>
-						<div class="lable">Secondes</div>
-					</div>
-					<div class="clear"></div>
+		<!-- Background image -->
+		<ul id="background-slide">
+			<li>
+				<div>
+					<img
+						src="http://foto.hrsstatic.com/fotos/0/3/256/256/80/FFFFFF/http%3A%2F%2Ffoto-origin.hrsstatic.com%2Ffoto%2F0%2F2%2F9%2F3%2F029387%2F029387_r_77838.jpg/1tMUI0NcmtRVS69DYJvrow%3D%3D/128,96/6/BEST_WESTERN_Les_3_Cles-Gembloux-Restaurant_Frhstcksraum-29387.jpg">
 				</div>
-				
-				<div id="ct" style="display:none"></div>
-			</section>
-			<!-- END TIMER -->
-			
-<div class="flexslider">
-  <ul class="slides">
-    <li>
-      <img src="http://i.istockimg.com/file_thumbview_approve/11396791/2/stock-photo-11396791-happy-teenage-girl-using-a-laptop.jpg"  style="width: 100%; height: 100%" />
-      <p class="flex-caption">Blablabla ...</p>
-    </li>
-    <li>
-      <img src="http://i.istockimg.com/file_thumbview_approve/8478886/2/stock-photo-8478886-beautiful-brunette-with-laptop.jpg"  style="width: 100%; height: 100%" />
-      <p class="flex-caption">Captions and cupcakes. Winning combination.</p>
-    </li>
-        <li>
-      <img src="http://i.istockimg.com/file_thumbview_approve/8909916/2/stock-photo-8909916-good-result.jpg"  style="width: 100%; height: 100%" />
-      <p class="flex-caption">sdfqsdfp sdmfjq mdfj</p>
-    </li>
-    
-  </ul>
-  
-  
+			</li>
+			<li>
+				<div>
+					<img src="http://images.math.cnrs.fr/IMG/png/section8-image.png">
+				</div>
+			</li>
+		</ul>
+		<!-- END background -->
 
-</div>
+	<div id="wrapper">
+		<!-- BEGIN HEADER -->
+		<header> <a href="#">
+			<div id="logo">toujoursPlus</div>
+		</a> </header>
+		<!-- END HEADER -->
+
+		<!-- BEGIN TIMER -->
+		<section id="countdown">
+		<div id="count-wrap">
+			<div class="number_wrapper">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">Jours</div>
+			</div>
+
+			<div class="number_wrapper">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">Heurs</div>
+			</div>
+
+			<div class="number_wrapper">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">Minutes</div>
+			</div>
+
+			<div class="number_wrapper nmr">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">Secondes</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div id="ct" style="display: none"></div>
+		</section>
+		<!-- END TIMER -->
+
+		<div class="flexslider">
+			<ul class="slides">
+				<li><img
+					src="http://i.istockimg.com/file_thumbview_approve/11396791/2/stock-photo-11396791-happy-teenage-girl-using-a-laptop.jpg"
+					style="width: 100%; height: 100%" />
+					<p class="flex-caption">Blablabla ...</p></li>
+				<li><img
+					src="http://i.istockimg.com/file_thumbview_approve/8478886/2/stock-photo-8478886-beautiful-brunette-with-laptop.jpg"
+					style="width: 100%; height: 100%" />
+					<p class="flex-caption">Captions and cupcakes. Winning
+						combination.</p></li>
+				<li><img
+					src="http://i.istockimg.com/file_thumbview_approve/8909916/2/stock-photo-8909916-good-result.jpg"
+					style="width: 100%; height: 100%" />
+					<p class="flex-caption">sdfqsdfp sdmfjq mdfj</p></li>
+
+			</ul>
+
+
+
+		</div>
 
 
 
 
-<script>(function(d, s, id) {
+		<script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
@@ -266,66 +341,110 @@ $( "#dialog-form" ).dialog( "open" );
 }(document, 'script', 'facebook-jssdk'));</script>
 
 
-<!-- BEGIN mail -->
-		<div id="email">
-			<input type="email" name="addresemail" id="mail" placeholder="Entrer votre adresse mail" /> 
-			<button type="submit"  onclick="ajaxPostUrlResource()">Envoyer</button>
-		
-		<div class="fb-follow" data-href="https://www.facebook.com/toujoursplus.be" data-width="450" data-layout="button_count" data-show-faces="true"></div>
-		
+		<!-- BEGIN mail -->
+		<div id="email2">
+			<input type="text" name="addresemail" id="mail"
+				placeholder="Entrer votre adresse mail" />
+			<button type="submit" onclick="ajaxPostUrlResource()">Envoyer</button>
+
+			<div class="fb-follow"
+				data-href="https://www.facebook.com/toujoursplus.be"
+				data-width="450" data-layout="button_count" data-show-faces="true"></div>
+
 		</div>
-		
-<!-- END mail -->
+
+		<!-- END mail -->
 
 
-</div>
-<!-- Donation -->
-<div id="dialog-form" title="Make a donation">
-<p class="validateTips">All form fields are required.</p>
-<form>
-<fieldset>
-<label for="email">Email</label>
-<input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
-<label for="subject">Subject</label>
-<input type="text" name="subject" id="subject" class="text ui-widget-content ui-corner-all" />
-<label for="body">Body</label>
-<input type="text" name="body" id="body" value="" class="text ui-widget-content ui-corner-all" />
-</fieldset>
-</form>
+	</div>
+	<!-- Donation -->
+	<div id="dialog-form" title="Make a donation">
+		<p class="validateTips">All form fields are required.</p>
+		<form>
+			<fieldset>
+				<label for="email">Email</label> <input type="text" name="email"
+					id="email" value="" class="text ui-widget-content ui-corner-all" />
+				<label for="subject">Subject</label> <input type="text"
+					name="subject" id="subject"
+					class="text ui-widget-content ui-corner-all" /> <label for="body">Body</label>
+				<input type="text" name="body" id="body" value=""
+					class="text ui-widget-content ui-corner-all" />
+			</fieldset>
+		</form>
 
 
+	</div>
+	<button id="create-user">Make a donation</button>
+	<!-- END Donation -->
+	<!-- BEGIN VIDEO -->
+	<div id="videoyoutube">
+		<div id="vid1">
+			<p>Quâest-ce que profs et Ã©lÃ¨ves feront sur toujoursPlus.be?</p>
+			<br>
+			<iframe marginwidth="40" width="210" height="158"
+				src="http://www.youtube.com/embed/xXy_ywNIZv8?rel=0" frameborder="0"
+				allowfullscreen></iframe>
+			<br> <br>
+			<ul>
+				<li>Trouver facilement des vidÃ©os, documents, jeux Ã©ducatifs
+					et exercices de qualitÃ© sur internet, sans chercher des heures.</li>
+				<li>Mesurer leur progression acadÃ©mique</li>
+				<li>Partager..</li>
+			</ul>
+		</div>
+
+		<div id="vid2">
+			<p>Quels bÃ©nÃ©fices dans les Ã©coles?</p>
+			<br>
+			<iframe width="210" height="158"
+				src="http://www.youtube.com/embed/gaIfbsmmuMs?rel=0" frameborder="0"
+				allowfullscreen> </iframe>
+			<br> <br>
+			<ul>
+				<li>Un renversement pÃ©dagogique</li>
+				<li>La diffÃ©rentation</li>
+				<li>La motivation</li>
+				<li>Lâautonomie</li>
+				<li>Lâimmersion linguistique</li>
+				<li>Lâexcellence</li>
+			</ul>
+		</div>
+
+		<div id="spacediv3"></div>
+	</div>
+	<!-- END VIDEO -->
 </div>
 <button id="create-user">Make a donation</button>
 <!-- END Donation -->
 <!-- BEGIN VIDEO -->						
 			<div id="videoyoutube">
 				<div id="vid1">
-					<p>Quâest-ce que profs et Ã©lÃ¨ves feront sur toujoursPlus.be?</p>
+					<p>QuÃ¢ÂÂest-ce que profs et ÃÂ©lÃÂ¨ves feront sur toujoursPlus.be?</p>
 					<br>
 					<iframe marginwidth="40" width="210" height="158" src="http://www.youtube.com/embed/xXy_ywNIZv8?rel=0" frameborder="0" allowfullscreen></iframe>
 	                <br>
 	                <br>
 	                <ul>
-	                <li>Trouver facilement des vidÃ©os, documents, jeux Ã©ducatifs et exercices de qualitÃ© sur internet, sans chercher des heures.
+	                <li>Trouver facilement des vidÃÂ©os, documents, jeux ÃÂ©ducatifs et exercices de qualitÃÂ© sur internet, sans chercher des heures.
 	                </li>
-	                <li>Mesurer leur progression acadÃ©mique</li>
+	                <li>Mesurer leur progression acadÃÂ©mique</li>
 	                <li>Partager..</li>
 	                </ul>
                 </div>
                 
                 <div id="vid2">
-	                <p>Quels bÃ©nÃ©fices dans les Ã©coles?</p>
+	                <p>Quels bÃÂ©nÃÂ©fices dans les ÃÂ©coles?</p>
 	                <br>
 	                <iframe width="210" height="158" src="http://www.youtube.com/embed/gaIfbsmmuMs?rel=0" frameborder="0" allowfullscreen> </iframe>
 					<br>
 					<br>
 					<ul>
-					<li>Un renversement pÃ©dagogique</li>
-					<li>La diffÃ©rentation</li>
+					<li>Un renversement pÃÂ©dagogique</li>
+					<li>La diffÃÂ©rentation</li>
 					<li>La motivation</li>
-					<li>Lâautonomie</li>
-					<li>Lâimmersion linguistique</li>
-					<li>Lâexcellence</li>
+					<li>LÃ¢ÂÂautonomie</li>
+					<li>LÃ¢ÂÂimmersion linguistique</li>
+					<li>LÃ¢ÂÂexcellence</li>
 					</ul>
 				</div>
 				
