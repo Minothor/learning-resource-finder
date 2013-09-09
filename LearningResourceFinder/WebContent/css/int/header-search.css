@@ -10,7 +10,7 @@
 }
 .form-recherche {
 	width: 170px;
-	margin-top:11px;
+	margin:11px 10px 0 0;
 }
 .form-recherche input[type="text"] {
 	width: 120px;
