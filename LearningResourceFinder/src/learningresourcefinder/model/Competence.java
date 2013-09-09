@@ -18,7 +18,7 @@ import org.hibernate.annotations.Type;
 
 
 @Entity
-public class ProgramPoint extends BaseEntity {
+public class Competence extends BaseEntity {
 
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -29,7 +29,7 @@ public class ProgramPoint extends BaseEntity {
 
 	@Column(length = 8, unique = true, nullable=false)
 	@Size(max=8, message="le code d'un point de programme ne peut contenir que 50 caractères maximum")
-	private String code;   // Short identifier that users can use to quickly refer a ProgramPoint
+	private String code;   // Short identifier that users can use to quickly refer a Competence
 	
 	
 	@Type(type = "org.hibernate.type.StringClobType")
@@ -39,31 +39,31 @@ public class ProgramPoint extends BaseEntity {
 	List <Resource> resources  = new ArrayList<>();
 
 	@ManyToOne
-	ProgramPoint parent;
+	Competence parent;
 	
 	@OneToMany (mappedBy="parent")
-	List<ProgramPoint> children = new ArrayList <ProgramPoint>();
+	List<Competence> children = new ArrayList <Competence>();
 
 	
-	public ProgramPoint() {} // No arg constructor for Hibernate
+	public Competence() {} // No arg constructor for Hibernate
 
-	public ProgramPoint(String aCode, String aName) {
+	public Competence(String aCode, String aName) {
 		this.code = aCode;
 		this.name = aName;
 	}
 
-	//recursion for article's childen and grandchildren
-	public List<ProgramPoint> getChildrenAndSubChildren() {
-		List <ProgramPoint> result = new ArrayList <ProgramPoint> ();
-		for (ProgramPoint child : this.getChildren()) {
+	//recursion for competence's childen and grandchildren
+	public List<Competence> getChildrenAndSubChildren() {
+		List <Competence> result = new ArrayList <Competence> ();
+		for (Competence child : this.getChildren()) {
 			child.getChildrenRecursively(result);
 		}
 		return result;
 	}
 
-	private void getChildrenRecursively(List<ProgramPoint> result) {
+	private void getChildrenRecursively(List<Competence> result) {
 		result.add(this);
-		for (ProgramPoint child : this.getChildren()){
+		for (Competence child : this.getChildren()){
 			child.getChildrenRecursively(result);
 		}
 	}
@@ -73,7 +73,7 @@ public class ProgramPoint extends BaseEntity {
 		resource.getProgramPoints().add(this);
 	}
 
-	public void addChild(ProgramPoint child) {
+	public void addChild(Competence child) {
 		this.children.add(child);
 		child.setParent(this);
 	}
@@ -92,20 +92,16 @@ public class ProgramPoint extends BaseEntity {
 		return name;
 	}
 
-	public ProgramPoint getParent() {
+	public Competence getParent() {
 		return parent;
 	}
 
-	public void setParent(ProgramPoint parent) {
+	public void setParent(Competence parent) {
 		this.parent = parent;
 	}
 
-	public List<ProgramPoint> getChildren() {
+	public List<Competence> getChildren() {
 		return children;
-	}
-
-	public void setChildren(List<ProgramPoint> children) {
-		this.children = children;
 	}
 
 	public void setName(String name) {

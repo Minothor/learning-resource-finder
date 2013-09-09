@@ -14,3 +14,22 @@ CREATE TABLE comingsoonmail
       REFERENCES users (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+-- Julien 2013-09-09 11h
+
+ALTER TABLE programpoint_resource
+  	  RENAME TO competence_resource;
+ALTER TABLE programpoint
+	  RENAME TO competence;
+
+    create table cycle (
+        id int8 not null,
+        createdon timestamp,
+        updatedon timestamp,
+        name varchar(40),
+        createdby_id int8,
+        updatedby_id int8,
+        primary key (id)
+    );
+
+  

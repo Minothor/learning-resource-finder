@@ -50,7 +50,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	private Set<Problem> problems = new HashSet<>();
 
 	@ManyToMany(mappedBy="resources")
-	List<ProgramPoint> programPoints = new ArrayList<>();
+	List<Competence> competences = new ArrayList<>();
 	
 	public Resource() {} // No arg constructor for Hibernate
 	
@@ -97,8 +97,8 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		return problems;
 	}
 
-	public List<ProgramPoint> getProgramPoints() {
-		return programPoints;
+	public List<Competence> getProgramPoints() {
+		return competences;
 	}
 	
 	public List<UrlResource> getUrlResources() {

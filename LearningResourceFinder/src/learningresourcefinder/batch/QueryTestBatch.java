@@ -5,9 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import learningresourcefinder.model.ProgramPoint;
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Resource;
-import learningresourcefinder.repository.ProgramPointRepository;
+import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.ResourceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class QueryTestBatch implements Runnable {
 
-	@Autowired ProgramPointRepository programPointRepository;
+	@Autowired CompetenceRepository competenceRepository;
 	@Autowired ResourceRepository resourceRepository;
 	@PersistenceContext EntityManager em;
 	
@@ -28,8 +28,8 @@ public class QueryTestBatch implements Runnable {
 	
 	@Override
 	public void run() {
-		ProgramPoint pFond = programPointRepository.findByCode("Fon");
-		List<Resource> resList = programPointRepository.findResourceByProgramPointAndSubs(pFond);
+		Competence pFond = competenceRepository.findByCode("Fon");
+		List<Resource> resList = competenceRepository.findResourceByProgramPointAndSubs(pFond);
 		System.out.println(resList);		
 		
 		//User u = userRepository.getUserByUserName("deli");

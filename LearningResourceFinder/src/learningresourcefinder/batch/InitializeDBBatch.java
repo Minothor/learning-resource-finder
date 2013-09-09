@@ -5,7 +5,7 @@ import java.util.Date;
 import learningresourcefinder.model.Comment;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Problem;
-import learningresourcefinder.model.ProgramPoint;
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.School;
 import learningresourcefinder.model.Task;
@@ -16,7 +16,7 @@ import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.CommentRepository;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.ProblemRepository;
-import learningresourcefinder.repository.ProgramPointRepository;
+import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.SchoolRepository;
 import learningresourcefinder.repository.TaskRepository;
@@ -48,7 +48,7 @@ public class InitializeDBBatch implements Runnable {
 	SchoolRepository schoolRepository;
 
 	@Autowired
-	ProgramPointRepository programPointRepository;
+	CompetenceRepository competenceRepository;
 
 	@Autowired
 	TaskRepository taskRepository;
@@ -80,7 +80,7 @@ public class InitializeDBBatch implements Runnable {
 		insertUser();
 		insertResource();
 		insertProblem();
-		insertProgramPoints();
+		insertCompetences();
 		insertTask();
 		insertPlayList();
 		insertUrlResource();
@@ -164,27 +164,27 @@ public class InitializeDBBatch implements Runnable {
 		System.out.println("Resource Done !");
 	}
 
-	public void insertProgramPoints() {
-		ProgramPoint pFond = new ProgramPoint("Fon", "Fondamental");
-		programPointRepository.persist(pFond);
+	public void insertCompetences() {
+		Competence pFond = new Competence("Fon", "Fondamental");
+		competenceRepository.persist(pFond);
 
-		ProgramPoint p1 = new ProgramPoint("1P", "1ère primaire");
-		programPointRepository.persist(p1);
+		Competence p1 = new Competence("1P", "1ère primaire");
+		competenceRepository.persist(p1);
 
-		ProgramPoint p2 = new ProgramPoint("2P", "2e primaire");
-		programPointRepository.persist(p2);
+		Competence p2 = new Competence("2P", "2e primaire");
+		competenceRepository.persist(p2);
 
-		ProgramPoint p1M = new ProgramPoint("1PM", "Math");
-		programPointRepository.persist(p1M);
+		Competence p1M = new Competence("1PM", "Math");
+		competenceRepository.persist(p1M);
 
-		ProgramPoint p1M1 = new ProgramPoint("1PM.Num", "Numération");
-		programPointRepository.persist(p1M1);
+		Competence p1M1 = new Competence("1PM.Num", "Numération");
+		competenceRepository.persist(p1M1);
 
-		ProgramPoint p1M2 = new ProgramPoint("1PM.Add", "Additions");
-		programPointRepository.persist(p1M2);
+		Competence p1M2 = new Competence("1PM.Add", "Additions");
+		competenceRepository.persist(p1M2);
 
-		ProgramPoint p1F = new ProgramPoint("1PF", "Français");
-		programPointRepository.persist(p1F);
+		Competence p1F = new Competence("1PF", "Français");
+		competenceRepository.persist(p1F);
 
 		pFond.addChild(p1);
 		pFond.addChild(p2);
@@ -197,7 +197,7 @@ public class InitializeDBBatch implements Runnable {
 
 		p1M1.addResource(mathGob);
 
-		System.out.println("Program points done!");
+		System.out.println("Competences done!");
 	}
 
 	public void insertTask() {
