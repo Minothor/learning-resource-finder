@@ -8,7 +8,7 @@
 <!-- </span> -->
 
 
-<span class="breadcrumb">
+<span> <!-- breadcrumb -->
 	<div class="page-title">
 		<div class="container">
 			<div class="twelve columns">
