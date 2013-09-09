@@ -7,6 +7,8 @@ import learningresourcefinder.model.Resource;
 
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository
 @SuppressWarnings("unchecked")
 public class CompetenceRepository extends BaseRepository<Competence> {
@@ -31,6 +33,9 @@ public class CompetenceRepository extends BaseRepository<Competence> {
         		em.createQuery("select pp from ProgramPoint pp where lower(pp.code) = :code")
         		.setParameter("code",code.toLowerCase())
         );
+    }
+    public List<Competence> findAllWithoutParent(){
+        return    em.createQuery("select a from Competence a where a.parent is null ").getResultList();
     }
     
 }
