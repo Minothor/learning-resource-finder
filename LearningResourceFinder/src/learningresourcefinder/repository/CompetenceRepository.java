@@ -20,7 +20,7 @@ public class CompetenceRepository extends BaseRepository<Competence> {
 		
 		// 2. We query
 		List<Resource> result = em
-				.createQuery("SELECT distinct r FROM Resource r join r.programPoints pp WHERE pp in (:programPoints)")
+				.createQuery("SELECT distinct r FROM Resource r join r.competence c WHERE c in (:programPoints)")
 				.setParameter("programPoints", programPoints)
 				.getResultList();
 
@@ -30,12 +30,12 @@ public class CompetenceRepository extends BaseRepository<Competence> {
 	
     public Competence findByCode(String code){
         return getSingleOrNullResult(
-        		em.createQuery("select pp from ProgramPoint pp where lower(pp.code) = :code")
+        		em.createQuery("select c from Competence c where lower(c.code) = :code")
         		.setParameter("code",code.toLowerCase())
         );
     }
     public List<Competence> findAllWithoutParent(){
-        return    em.createQuery("select a from Competence a where a.parent is null ").getResultList();
+        return    em.createQuery("select c from Competence c where c.parent is null ").getResultList();
     }
     
 }
