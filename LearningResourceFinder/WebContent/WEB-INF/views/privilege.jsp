@@ -20,7 +20,7 @@
 		<c:forEach var="role" items="<%=User.Role.values()%>">
 			<input type="radio" name="role" value="${role}" <c:if test="${user.role == role}">checked="checked"</c:if>>${role.name}<br>
 		</c:forEach>
-		<input type="submit" value="Changer rôle"><br>
+		<input type="submit" value="Changer rôle"><br />
 	</form>
 	<br/>
 	<br/>
