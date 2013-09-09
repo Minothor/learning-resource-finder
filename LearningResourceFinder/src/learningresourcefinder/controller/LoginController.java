@@ -153,7 +153,7 @@ public class LoginController extends BaseController<User> {
         if (user.getLastName() != null) {
             user.setLastName(profile.getLastName());
         }
-        if (user.getBirthDate() != null && profile.getDob() != null) {
+        if (user.getBirthDate() != null && profile.getDob() != null) {  // I've not seen this worked (as if FB & Google don't send the birthdate) - JOHN 2013-09-06
             Calendar cal = new GregorianCalendar(profile.getDob().getYear(), profile.getDob().getMonth()+1, profile.getDob().getDay());
             user.setBirthDate(cal.getTime());
         }
