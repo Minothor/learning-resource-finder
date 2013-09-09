@@ -4,6 +4,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import learningresourcefinder.model.Competence;
+import learningresourcefinder.repository.CompetenceRepository;
+import learningresourcefinder.util.CompetencesTreeRadioVisitor;
+import learningresourcefinder.util.CompetencesTreeWalker;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /*
@@ -14,8 +20,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BatchPGM implements Runnable {
 
-    
-   
+    @Autowired
+    CompetenceRepository mCompetenceRepository;
+
+    private CompetencesTreeRadioVisitor competenceTreeVisitor;
+    private CompetencesTreeWalker competenceTreeWalker;
+
     public static void main(String[] args) {
 
         BatchUtil.startSpringBatch(BatchPGM.class);
@@ -24,15 +34,24 @@ public class BatchPGM implements Runnable {
 
     @Override
     public void run() {
-        // get the root competency (through repository)   (parent = null)
+
+        Competence cOne = mCompetenceRepository.find(1L);
         
-        // new visitor
-        // new Walker
-        // run walker
+        if(cOne != null){
+            
+        competenceTreeVisitor = new CompetencesTreeRadioVisitor(cOne);
+        competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,
+                competenceTreeVisitor, cOne);
+
+        competenceTreeWalker.walk();
+
+        System.out.println(competenceTreeVisitor.getHtmlResult());
+        
+        }else{
+            
+            System.out.println("wait for updating repository competence .. .. ");
+        }
+
     }
-    
-    
 
-
-    
 }
