@@ -32,11 +32,13 @@
 			    url : 'ajax/addMailOnTable',
 			    data: "mail=" + mail,
 			    success : function(data) {
-			    	alert("Thank you");
+			    	alert("Merci pour votre intérêt, nous vous tiendrons informé des prochaines grandes étapes.");
+			    	return false;
 			    },
 			    error : function(data) {
 			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
-			    			"votre e-mail.Cela montre bien que nous ne sommes pas prÃªts ;-) Toutes nos excuses.");
+	    			"votre e-mail.Cela montre bien que nous ne sommes pas prêts ;-) Toutes nos excuses.");
+	        return false;
 			    },
 			}); 
 		}else {
@@ -163,10 +165,8 @@
 
 <!-- BEGIN mail -->
 		<div id="email">
-		<form method="post" action="#">
 			<input type="text" name="addresemail" id="mail" placeholder="Entrer votre adresse mail" /> 
 			<button type="submit"  onclick="ajaxPostUrlResource()">Envoyer</button>
-		</form>
 		
 		<div class="fb-follow" data-href="https://www.facebook.com/toujoursplus.be" data-width="450" data-layout="button_count" data-show-faces="true"></div>
 		
