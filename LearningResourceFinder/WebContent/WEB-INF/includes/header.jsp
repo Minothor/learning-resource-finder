@@ -69,7 +69,7 @@ $(document).ready(function(){
 		<nav>
 			<ul class="navigation">
 				<li class="search"><input class="searchform" type="search" value="" placeholder="Search"></li>
-				<li class="current"><a href="index.html">Home</a></li>
+				<li class="current"><a href="/">Home</a></li>
 				<li><a href="#" class="arrow">Point 1</a>
 					<!-- Drop-Down / Start -->
 					<ul>
