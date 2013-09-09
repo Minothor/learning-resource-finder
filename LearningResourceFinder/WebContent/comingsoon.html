@@ -3,21 +3,30 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<!--  bootstrap start -->
-<script src="/js/ext/bootstrap.js"></script>
 <script src="/js/ext/jquery-1.9.0.min.js"></script>
-<!--  bootstrap end -->
+
+<script src="/js/ext/bootstrap.js"></script>
+<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="css/ext/bootstrap-theme.css" type="text/css" media="screen" /> 
 
 <script type="text/javascript" src="/js/ext/jquery.innerfade.js"></script>
 
-<!-- Donation -->
-<link rel="stylesheet" href="css/ext/jquery-ui.css" />
-<script src="/js/ext/jquery-ui.js"></script> 
 
 <link rel="stylesheet" href="css/ext/flexslider.css" type="text/css">
 <script src="/js/ext/jquery.flexslider.js"></script>
 
 <!-- Background -->
+
+<!-- start popover -->
+
+<script type="text/javascript">
+$(function (){
+	   $(".pop").popover({placement:'right'});
+	});
+</script>
+
+<!-- start popover -->
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -130,6 +139,16 @@ div#users-contain table td,div#users-contain table th {
 	border: 1px solid transparent;
 	padding: 0.3em;
 }
+
+.pop:hover {
+    cursor:pointer;
+    color:#AAA;
+}
+
+.popover-content {   /* We redefine Bootstrap popover text color because our page text color is white */
+     color: #555;
+ }
+
 </style>
 
 <script>
@@ -405,7 +424,8 @@ $( "#dialog-form" ).dialog( "open" );
 				allowfullscreen> </iframe>
 			<br> <br>
 			<ul>
-				<li>Un renversement pÃ©dagogique</li>
+				<li><span class="pop" rel="popover"
+				data-content="l’élève devrait plus prendre et moins recevoir">Un renversement pédagogique</span></li>
 				<li>La diffÃ©rentation</li>
 				<li>La motivation</li>
 				<li>Lâautonomie</li>
