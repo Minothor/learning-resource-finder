@@ -32,4 +32,5 @@ ALTER TABLE programpoint
         primary key (id)
     );
 
+    ALTER TABLE competence_resource RENAME programpoints_id  TO competences_id;
   
