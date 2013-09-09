@@ -11,12 +11,14 @@ import learningresourcefinder.util.CompetencesTreeWalker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /*
  *  BatchPGM Class For PGM/Matiere Test. 
  *  Author Ahmed Idoumhaidi.
  *  Group : Seb - Julien.
  */
+@Transactional
 @Service
 public class BatchPGM implements Runnable {
 
@@ -35,22 +37,19 @@ public class BatchPGM implements Runnable {
     @Override
     public void run() {
 
-        Competence cOne = mCompetenceRepository.find(1L);
-        
-        if(cOne != null){
+
             
-        competenceTreeVisitor = new CompetencesTreeRadioVisitor(cOne);
+        competenceTreeVisitor = new CompetencesTreeRadioVisitor(null);
         competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,
-                competenceTreeVisitor, cOne);
+                competenceTreeVisitor);
 
         competenceTreeWalker.walk();
 
         System.out.println(competenceTreeVisitor.getHtmlResult());
         
-        }else{
+  
             
-            System.out.println("wait for updating repository competence .. .. ");
-        }
+    
 
     }
 
