@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unchecked")
 public class CompetenceRepository extends BaseRepository<Competence> {
 
-	public List<Resource> findResourceByCompetencePointAndSubs(Competence startCompetence) {
+	public List<Resource> findResourceByCompetenceAndSubs(Competence startCompetence) {
 		// 1. We recursively collect all the sub-program points
 		List<Competence> competences = startCompetence.getChildrenAndSubChildren();
 		competences.add(startCompetence);

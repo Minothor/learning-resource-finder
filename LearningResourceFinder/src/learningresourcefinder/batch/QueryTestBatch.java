@@ -29,7 +29,7 @@ public class QueryTestBatch implements Runnable {
 	@Override
 	public void run() {
 		Competence pFond = competenceRepository.findByCode("Fon");
-		List<Resource> resList = competenceRepository.findResourceByProgramPointAndSubs(pFond);
+		List<Resource> resList = competenceRepository.findResourceByCompetenceAndSubs(pFond);
 		System.out.println(resList);		
 		
 		//User u = userRepository.getUserByUserName("deli");
