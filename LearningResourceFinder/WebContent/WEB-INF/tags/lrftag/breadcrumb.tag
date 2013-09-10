@@ -3,7 +3,10 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ attribute name="linkactive" type="java.lang.String"%>
 
-<ol class="breadcrumb">
-  <jsp:doBody/>
-  <li class="active">${linkactive}</li>
-</ol>
+<div class="container">
+	<ol class="breadcrumb" style="text-align:right;">
+  		<jsp:doBody/>
+ 		 <li class="active">${linkactive}</li>
+	</ol>
+</div>
+
