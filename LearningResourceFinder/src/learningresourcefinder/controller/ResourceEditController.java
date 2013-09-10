@@ -51,16 +51,11 @@ public class ResourceEditController extends BaseController<Resource> {
         return "/resource/" + resource.getShortId() + "/" + resource.getSlug();
     }
 
-    @RequestMapping(value = "ajax/checkUrl", method = RequestMethod.POST)
-    public @ResponseBody
-    boolean urlSubmit(@RequestParam("url") String url) {
-        Boolean checkUrlOk = false;
-        if (urlResourceRepository.getResourceByUrl(url) != null)
-            checkUrlOk = true;
-        else
-            checkUrlOk = false;
-
-        return checkUrlOk;
-    }
+    @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
+	public @ResponseBody String urlSubmit(@RequestParam("url") String url) {
+		 String checkUrlOk = "";
+         Resource resource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
+         return resource == null ? "" : resource.getId() + "";
+	}
 
 }
