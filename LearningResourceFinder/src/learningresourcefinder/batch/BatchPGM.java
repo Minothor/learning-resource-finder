@@ -37,24 +37,14 @@ public class BatchPGM implements Runnable {
     @Override
     public void run() {
 
+        competenceTreeVisitor = new CompetencesTreeRadioVisitor(null);
+        competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,
+                competenceTreeVisitor);
 
-            
-//        competenceTreeVisitor = new CompetencesTreeRadioVisitor(null);
-//        competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,
-//                competenceTreeVisitor);
-//
-//        competenceTreeWalker.walk();
-//
-//        System.out.println(competenceTreeVisitor.getHtmlResult());
-        
-        Competence c = mCompetenceRepository.findByCode("1P");
-               
-         if(c != null)
-             System.out.println("tu es coooool : " + c.getId());
-  
-            
-         System.out.println(mCompetenceRepository.findResourceByCompetencePointAndSubs(c));
+        competenceTreeWalker.walk();
 
+        System.out.println(competenceTreeVisitor.getHtmlResult());
+    
     }
 
 }
