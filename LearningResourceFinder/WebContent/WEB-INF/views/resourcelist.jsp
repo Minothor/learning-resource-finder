@@ -26,7 +26,7 @@
 						<div class="form-group id="titleDiv" style="display: none;">
 						    <label for="name">Titre</label> <input type="text" class="form-control" id="title"placeholder="Taper le titre">
 						</div>
-						<button type="submit" class="btn btn-default">Sauver</button>
+						<button type="submit"  class="pull-right">Sauver</button>
 					</form>
 
 				</div>
