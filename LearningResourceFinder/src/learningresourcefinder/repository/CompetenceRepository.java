@@ -7,21 +7,19 @@ import learningresourcefinder.model.Resource;
 
 import org.springframework.stereotype.Repository;
 
-
-
 @Repository
 @SuppressWarnings("unchecked")
 public class CompetenceRepository extends BaseRepository<Competence> {
 
-	public List<Resource> findResourceByProgramPointAndSubs(Competence startProgramPoint) {
+	public List<Resource> findResourceByCompetencePointAndSubs(Competence startCompetence) {
 		// 1. We recursively collect all the sub-program points
-		List<Competence> programPoints = startProgramPoint.getChildrenAndSubChildren();
-		programPoints.add(startProgramPoint);
+		List<Competence> competences = startCompetence.getChildrenAndSubChildren();
+		competences.add(startCompetence);
 		
 		// 2. We query
 		List<Resource> result = em
-				.createQuery("SELECT distinct r FROM Resource r join r.competence c WHERE c in (:programPoints)")
-				.setParameter("programPoints", programPoints)
+				.createQuery("SELECT distinct r FROM Resource r join r.competences c WHERE c in (:competences)")
+				.setParameter("competences", competences)
 				.getResultList();
 
 		return result;
