@@ -114,7 +114,7 @@ function sendDonation(){
 
 <style>
 body {
-	font-size: 62.5%;
+	
 }
 
 label,input {
@@ -335,18 +335,17 @@ div#users-contain table td,div#users-contain table th {
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">Make a donation</h4>
         </div>
-        <div class="modal-body">
-        <div class="form-group">
-          <label for="email">Email</label> <input type="text" name="email"
-					id="email" value="" class="form-control" />
-				<label for="subject">Subject</label> <input type="text"
-					name="subject" id="subject"
-					class="form-control" /> <label for="body">Body</label>
-				<input type="text" name="body" id="body" value=""
-					class="form-control" />
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="email">Email</label> <input type="text" name="email"
+							id="email" value="" class="form-control" /> <label for="subject">Subject</label>
+						<input type="text" name="subject" id="subject"
+							class="form-control" /> <label for="body">Body</label>
+						<TEXTAREA rows="3" name="body" id="body" value=""
+							class="form-control" /></TEXTAREA>
 					</div>
-        </div>
-        <div class="modal-footer">
+				</div>
+				<div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" onclick="sendDonation()">Save changes</button>
         </div>
