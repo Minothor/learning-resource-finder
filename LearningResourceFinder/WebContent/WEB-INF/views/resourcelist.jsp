@@ -9,8 +9,7 @@
 <title>Catalog</title>
 </head>
 <body>
-	<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer
-		une ressource</a>
+	<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -24,12 +23,12 @@
 				<div class="modal-body">
 					<form role="form">
 						<div class="form-group">
-							<label for="addURL">Url</label> <input
+							<label for="url">Url</label> <input
 								type="text" class="form-control" id="url"
 								placeholder="Taper l'URL">
 						</div>
 						<div class="form-group">
-							<label for="addTitle">Titre</label> <input
+							<label for="name">Titre</label> <input
 								type="text" class="form-control" id="title"
 								placeholder="Taper le titre">
 						</div>
