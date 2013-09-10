@@ -23,7 +23,7 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired
     UrlResourceRepository urlResourceRepository;
 
-    @RequestMapping("/ajax/resourceeditsubmit")
+    @RequestMapping("/ajax/resourceaddsubmit")
     public @ResponseBody
     String resourceAddSubmit(@RequestParam("url") String url,
             @RequestParam("title") String title,
@@ -34,20 +34,19 @@ public class ResourceEditController extends BaseController<Resource> {
         Resource resource = new Resource();
         resource.setDescription(description);
         resource.setName(title);
+        String slug = Slugify.slugify(resource.getName());
+        resource.setSlug(slug);
 
         UrlResource urlResource = new UrlResource();
         urlResource.setName(title);
         urlResource.setUrl(url);
         urlResource.setResource(resource);
-
         resource.getUrlResources().add(urlResource);
 
-        String slug = Slugify.slugify(resource.getName());
-        resource.setSlug(slug);
 
         urlResourceRepository.persist(urlResource);
         resourceRepository.persist(resource);
-        
+
         // Url to eventually view the resource
         return "/resource/" + resource.getShortId() + "/" + resource.getSlug();
     }
