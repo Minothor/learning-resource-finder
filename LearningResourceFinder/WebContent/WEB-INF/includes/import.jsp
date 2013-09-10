@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
     
-<!-- ***************************** CSS **************************** -->  
+<!-- ***************************** CSS **************************** --> <!-- Style Files [BootStrap] -->
+<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="css/ext/bootstrap-theme.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="css/ext/sticky-footer-navbar.css">
+
+ 
 <!-- Style Files [Vena] -->
 <link rel="stylesheet" href="css/int/style.css" type="text/css" media="screen" />
 <!-- <link rel="stylesheet" href="css/int/colors/1.css" id="color" /> -->
 
-<!-- Style Files [BootStrap] -->
-<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css" media="screen" /> 
-<link rel="stylesheet" href="css/ext/bootstrap-theme.css" type="text/css" media="screen" /> 
+
 
 
 
@@ -24,7 +27,8 @@
     <![endif]-->
     
     <script src="/js/ext/jquery-1.9.0.min.js"></script>
-    <script src="js/ext/bootstrap.js"></script>   
+    <script src="js/ext/bootstrap.js"></script> 
+    <script src="js/int/ajaxLogin.js"></script>   
 
 	<!-- FIXME -- to be removed when all modal dialog boxes are in bootstrap -->
 <!-- 	<link rel="stylesheet" type="text/css" href="/css/int/popupJquery.css"  />    -->
