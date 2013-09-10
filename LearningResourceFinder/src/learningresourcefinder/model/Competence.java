@@ -51,6 +51,12 @@ public class Competence extends BaseEntity {
 		this.code = aCode;
 		this.name = aName;
 	}
+	
+	public Competence(String aCode, String aName,Competence parent) {
+		this.code = aCode;
+		this.name = aName;
+		this.parent = parent;
+	}
 
 	//recursion for competence's childen and grandchildren
 	public List<Competence> getChildrenAndSubChildren() {

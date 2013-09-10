@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>Hello, world!</h1>
-
+	<a href="javascript:ajaxCompetenceRemoveSubmit(21)">Supprimer id 21</a>
   <!-- Button trigger modal -->
   <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Launch demo modal</a>
 
@@ -36,13 +36,16 @@
 		
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
-          <button type="button" class="btn btn-primary" onclick="ajaxCompetenceAddSubmit()">Ajouter Compétence</button>
+          <button type="button" class="btn btn-primary" onclick="ajaxCompetenceAddSubmit(23)">Ajouter Compétence</button>
         </div>
+        
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+  
+  
 
-
+	
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://code.jquery.com/jquery.js"></script>
@@ -50,14 +53,14 @@
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
-	function ajaxCompetenceAddSubmit() {
+	function ajaxCompetenceAddSubmit(idparent) {
 		var name = $('#name').val();
 		var code = $('#code').val();
-		if (name != '' && code != '' ) {
+		if (name != '' && code != '' && idparent != '' ) {
 			$.ajax({
 				type : "POST",
 			    url : 'ajax/competenceAddSubmit',
-			    data: "name=" + name + "&code=" +code,
+			    data: "name=" + name + "&code=" +code + "&idparent=" +idparent,
 			    success : function(data) {
 			    	alert("Merci pour votre intérêt, nous vous tiendrons informé des prochaines grandes étapes.");
 			    	return false;
@@ -70,6 +73,27 @@
 			}); 
 		}else {
 			alert("Vous n'avez pas entré de nom ou/et de code");
+		} 
+	}
+	function ajaxCompetenceRemoveSubmit(id) {
+		
+		if (id != '') {
+			$.ajax({
+				type : "POST",
+			    url : 'ajax/competenceRemoveSubmit',
+			    data: "id=" + id,
+			    success : function(data) {
+			    	alert("Merci pour votre intérêt, nous vous tiendrons informé des prochaines grandes étapes.");
+			    	return false;
+			    },
+			    error : function(data) {
+			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez essayé \n " +
+	    			"de supprimer une compétence.Cela montre bien que nous ne sommes pas prêts ;-) Toutes nos excuses." + id);
+	        return false;
+			    },
+			}); 
+		}else {
+			alert("Pas d'id reçu pour suppression !");
 		} 
 	}
 	</script>
