@@ -220,7 +220,7 @@ public  class SecurityContext {
         }
     }
     
-    public static  void assertCurrentUserMayEditThisPlaylist(Resource resource) {
+    public static  void assertCurrentUserMayEditThisResource(Resource resource) {
         if (! canCurrentUserEditResource(resource)) {
             throw new UnauthorizedAccessException(" cannot edit that resource: " + resource.getName());
         }
