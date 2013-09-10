@@ -1,15 +1,29 @@
-<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="restag"%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrf" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script type="text/javascript" src="/js/int/addResource.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css" />
-<title>Catalog</title>
+	<script type="text/javascript" src="/js/int/addResource.js"></script>
+	<title>Catalog</title>
 </head>
 <body>
-	<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a>
-	<!-- Modal -->
+	<lrf:breadcrumb linkactive="Liste des ressources">
+		<lrf:breadcrumbelement label="Home" link="home" />
+	</lrf:breadcrumb>
+	<section id="resourcelist">
+		<div class="container">
+			<div class="sixteen columns">
+				<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a>
+				<br />
+				<c:forEach items="${resourceList}" var="resource">
+					<div style="float:left;position:relative;margin-top:10px;width:210px;">
+						<restag:resource resource="${resource}"></restag:resource>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+			<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -42,34 +56,6 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-	<!-- 	<a href="#" data-width="500" data-rel="popupJquery" class="poplight">Créer une ressource</a> -->
-	<!-- 	<div id="popupJquery" class="popupJquery"> -->
-	<!-- 		<div class="popup-close"> -->
-	<!-- 			<a class="close" title="close this popup">X</a> -->
-	<!-- 		</div> -->
-	<!-- 		<h2>Créer une ressource</h2> -->
-	<!-- 		<form:form method="post" action="#" class="formUrlResource"> -->
-
-	<!-- 			<label for="url">Url : </label> -->
-	<!-- 			<input type="text" name="url" id="url" /> -->
-	<!-- 			<br /> -->
-	<!-- 			<div id="titleDiv" style="display: none;"> -->
-	<!-- 				<label for="name">Titre :</label> <input type="text" id="name" name="name" />  -->
-	<!-- 				<br /> -->
-	<!-- 			</div> -->
-
-	<%-- 			<input type="hidden" name="idresource" id="idresource" value="${resource.id}" /> --%>
-	<!-- 			<input type="button" class="btnSubmit" value="Ajouter "onclick="showTilte()" /> -->
-	<!-- 		</form:form> -->
-	<%-- 		<p id="response">${response}</p> --%>
-	<!-- 	</div> -->
-	<br />
-
-	<c:forEach items="${resourceList}" var="resource">
-		<div
-			style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
-			<restag:resource resource="${resource}"></restag:resource>
-		</div>
-	</c:forEach>
+	</section>
 </body>
 </html>
