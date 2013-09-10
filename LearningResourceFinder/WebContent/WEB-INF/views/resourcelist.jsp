@@ -41,9 +41,10 @@
 						    <label for="name">Titre</label> <input type="text" class="form-control" id="title"placeholder="Taper le titre">
 						</div>
 						<div class="pull-right">
-						<button type="submit"  class="btn btn-default">Sauver</button>
+						<button type="submit"  class="btn btn-default">Vérifier</button>
 						</div>
 					</form>
+					<br>
 
 				</div>
 				<div class="modal-footer">
