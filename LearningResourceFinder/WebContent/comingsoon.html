@@ -57,7 +57,11 @@ $(function (){
 
 <script type="text/javascript" charset="utf-8">
   $(window).load(function() {
-    $('.flexslider').flexslider();
+    $('.flexslider').flexslider({
+    	animation: "slide",
+    	direction: "vertical",
+    	reverse: "top"
+    });
   });
 </script>
 
