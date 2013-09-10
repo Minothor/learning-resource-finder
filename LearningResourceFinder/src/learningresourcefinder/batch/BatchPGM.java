@@ -1,12 +1,7 @@
 package learningresourcefinder.batch;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import learningresourcefinder.model.Competence;
 import learningresourcefinder.repository.CompetenceRepository;
-import learningresourcefinder.util.CompetencesTreeRadioVisitor;
+import learningresourcefinder.util.CompetencesTreeVisitorImpl;
 import learningresourcefinder.util.CompetencesTreeWalker;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +20,7 @@ public class BatchPGM implements Runnable {
     @Autowired
     CompetenceRepository mCompetenceRepository;
 
-    private CompetencesTreeRadioVisitor competenceTreeVisitor;
+    private CompetencesTreeVisitorImpl competenceTreeVisitor;
     private CompetencesTreeWalker competenceTreeWalker;
 
     public static void main(String[] args) {
@@ -37,7 +32,7 @@ public class BatchPGM implements Runnable {
     @Override
     public void run() {
 
-        competenceTreeVisitor = new CompetencesTreeRadioVisitor(null);
+        competenceTreeVisitor = new CompetencesTreeVisitorImpl();
         competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,
                 competenceTreeVisitor);
 
