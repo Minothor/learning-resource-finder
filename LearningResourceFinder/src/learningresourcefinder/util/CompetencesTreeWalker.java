@@ -29,7 +29,6 @@ public class CompetencesTreeWalker {
         
         if(competenceFromRequest == null){
             
-            // competenceFromRequest = mCompetenceRepository. // Find all competences without parent.
             listOfCompetences = mCompetenceRepository.findAllWithoutParent();
             
         }else{
@@ -48,7 +47,6 @@ public class CompetencesTreeWalker {
             mCompetenceTreeVisitor.afterChildren();
         }
         
-
     }
 
     public void processCompetences(Competence competence) {
