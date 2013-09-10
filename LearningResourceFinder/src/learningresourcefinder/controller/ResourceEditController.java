@@ -45,8 +45,9 @@ public class ResourceEditController extends BaseController<Resource> {
         String slug = Slugify.slugify(resource.getName());
         resource.setSlug(slug);
 
+        urlResourceRepository.persist(urlResource);
         resourceRepository.persist(resource);
-
+        
         // Url to eventually view the resource
         return "/resource/" + resource.getShortId() + "/" + resource.getSlug();
     }
