@@ -17,12 +17,14 @@
 	<title><decorator:title /></title>
 </head>
 <body>
+<!-- 	<div id="wrap"> -->
+	
+		<%@ include file="/WEB-INF/includes/header.jsp"%>
+	
+		<decorator:body />
+	
+		<%@ include file="/WEB-INF/includes/footer.jsp"%>
 
-	<%@ include file="/WEB-INF/includes/header.jsp"%>
-
-	<decorator:body />
-
-	<%@ include file="/WEB-INF/includes/footer.jsp"%>
-  
+  	<!--  </div>-->
 </body>
 </html>

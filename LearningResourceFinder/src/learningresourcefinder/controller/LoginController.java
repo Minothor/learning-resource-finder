@@ -37,7 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -187,8 +187,8 @@ public class LoginController extends BaseController<User> {
 	 * @param password required=false because we don't use pswd in DEV
 	 * @param keepLoggedIn required=false else when user doesn't check the checkbox we get a 400 error
 	 */
-	@RequestMapping("/loginsubmit")
-	public ModelAndView loginSubmit(
+	@RequestMapping("/ajax/loginsubmit")
+	public @ResponseBody String loginSubmit(
 			@RequestParam(value= "userNameOrMail", required = false) String userNameOrMail,
 			@RequestParam(value= "password", required = false) String password,
 			@RequestParam(value= "autoLogin", required = false) boolean autologin) {
@@ -239,17 +239,10 @@ public class LoginController extends BaseController<User> {
 		}
 
 		if (errorMsg != null) {
-
-		    ModelAndView mv = new ModelAndView("login");
-		    mv.addObject("autoLogin",  autologin);
-		    mv.addObject("userNameOrMail", userNameOrMail);
-
-		    NotificationUtil.addNotificationMessage(errorMsg);
-
-		    return mv;
+		    return errorMsg;
 
 		} else {
-		    return new ModelAndView("redirect:user/" + user.getUserName());
+		    return "success";
 		}
 	}
 
