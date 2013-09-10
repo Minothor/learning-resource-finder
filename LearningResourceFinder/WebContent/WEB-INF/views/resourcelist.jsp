@@ -4,8 +4,7 @@
 <html>
 <head>
 <script type="text/javascript" src="/js/int/addResource.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/css/int/resource-image-gallery.css" />
+<link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css" />
 <title>Catalog</title>
 </head>
 <body>
@@ -16,21 +15,16 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Ajouter une ressource</h4>
 				</div>
 				<div class="modal-body">
 					<form role="form">
 						<div class="form-group">
-							<label for="url">Url</label> <input
-								type="text" class="form-control" id="url"
-								placeholder="Taper l'URL">
+							<label for="url">Url</label> <input type="text" class="form-control" id="url"placeholder="Taper l'URL">
 						</div>
-						<div class="form-group">
-							<label for="name">Titre</label> <input
-								type="text" class="form-control" id="title"
-								placeholder="Taper le titre">
+						<div class="form-group id="titleDiv" style="display: none;">
+						    <label for="name">Titre</label> <input type="text" class="form-control" id="title"placeholder="Taper le titre">
 						</div>
 						<button type="submit" class="btn btn-default">Sauver</button>
 					</form>
