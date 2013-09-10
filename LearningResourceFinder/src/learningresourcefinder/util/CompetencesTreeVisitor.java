@@ -4,9 +4,9 @@ import learningresourcefinder.model.Competence;
 
 public interface CompetencesTreeVisitor {
 
-    void startArticle(Competence competence);
+    void startCompetence(Competence competence);
 
-    void endArticle(Competence competence);
+    void endCompetence(Competence competence);
 
     void beforeChildren(int recurtionLevel);
 

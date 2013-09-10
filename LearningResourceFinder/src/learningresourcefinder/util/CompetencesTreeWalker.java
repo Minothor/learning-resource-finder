@@ -6,29 +6,28 @@ import java.util.List;
 import learningresourcefinder.model.Competence;
 import learningresourcefinder.repository.CompetenceRepository;
 
+/** Performs a recursive walk of a tree (depth first), calling methods of a given CompetenceTreeVisitor object at each node */
 public class CompetencesTreeWalker {
     
-    private CompetencesTreeRadioVisitor mCompetenceTreeVisitor;
+    private CompetencesTreeVisitorImpl  mCompetenceTreeVisitor;
     private CompetenceRepository mCompetenceRepository;
     private Competence competenceFromRequest;
     private int currentLevel; 
 
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeRadioVisitor competenceTreeVisitor) {
+    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor) {
         this(competenceRepository,competenceTreeVisitor,null);
     }
    
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeRadioVisitor competenceTreeVisitor,Competence competenceParent){
+    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor,Competence competenceParent){
         this.mCompetenceRepository = competenceRepository;     
         this.mCompetenceTreeVisitor = competenceTreeVisitor;
         this.competenceFromRequest = competenceParent;
     }
     
     public void walk() {
-        
         List<Competence> listOfCompetences = null;
         
         if(competenceFromRequest == null){
-            
             listOfCompetences = mCompetenceRepository.findAllWithoutParent();
             
         }else{
@@ -36,7 +35,6 @@ public class CompetencesTreeWalker {
         }
         currentLevel = 0;
         processCompetencesList(listOfCompetences);
-        
     }
 
     public void processCompetencesList(Collection<Competence> listOfCompetences) {
@@ -46,18 +44,14 @@ public class CompetencesTreeWalker {
                 processCompetences(competence);
             mCompetenceTreeVisitor.afterChildren();
         }
-        
     }
 
     public void processCompetences(Competence competence) {
-
-        mCompetenceTreeVisitor.startArticle(competence);
+        mCompetenceTreeVisitor.startCompetence(competence);
         currentLevel++;
         processCompetencesList(competence.getChildren());
         currentLevel--;
-        mCompetenceTreeVisitor.endArticle(competence);
-        
-        
+        mCompetenceTreeVisitor.endCompetence(competence);
     }
 
 }
