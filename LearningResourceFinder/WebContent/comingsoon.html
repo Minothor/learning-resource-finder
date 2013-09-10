@@ -309,10 +309,10 @@ div#users-contain table td,div#users-contain table th {
 
 
 		<!-- BEGIN mail -->
-		<div id="email2">
-			<input type="text" name="addresemail" id="mail"
+		<div id="email2" class="form-group">
+			<input type="text" class="form-control" name="addresemail" id="mail"
 				placeholder="Entrer votre adresse mail" />
-			<button type="submit" onclick="ajaxPostUrlResource()">Envoyer</button>
+			<button type="submit" class="btn btn-primary" onclick="ajaxPostUrlResource()">Envoyer</button>
 
 			<div class="fb-follow"
 				data-href="https://www.facebook.com/toujoursplus.be"
@@ -336,13 +336,15 @@ div#users-contain table td,div#users-contain table th {
           <h4 class="modal-title">Make a donation</h4>
         </div>
         <div class="modal-body">
+        <div class="form-group">
           <label for="email">Email</label> <input type="text" name="email"
-					id="email" value="" class="text ui-widget-content ui-corner-all" />
+					id="email" value="" class="form-control" />
 				<label for="subject">Subject</label> <input type="text"
 					name="subject" id="subject"
-					class="text ui-widget-content ui-corner-all" /> <label for="body">Body</label>
+					class="form-control" /> <label for="body">Body</label>
 				<input type="text" name="body" id="body" value=""
-					class="text ui-widget-content ui-corner-all" />
+					class="form-control" />
+					</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
