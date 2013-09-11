@@ -5,7 +5,9 @@ import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.web.Slugify;
+import learningresourcefinder.web.UrlUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,8 +26,8 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired
     UrlResourceRepository urlResourceRepository;
     
-    @RequestMapping("/resourceaddsubmit")
-	public ModelAndView resourceAddSubmit(@RequestParam("url") String url, @RequestParam("title") String title, @RequestParam("description") String description) {
+    @RequestMapping("/ajax/resourceaddsubmit")
+	public String resourceAddSubmit(@RequestParam("url") String url, @RequestParam("title") String title, @RequestParam("description") String description) {
         SecurityContext.assertUserIsLoggedIn();
 
         Resource resource = new Resource();
@@ -42,9 +45,8 @@ public class ResourceEditController extends BaseController<Resource> {
 
         urlResourceRepository.persist(urlResource);
         resourceRepository.persist(resource);
-
-        // Url to eventually view the resource
-        return new ModelAndView ("redirect:/resource/" + resource.getShortId() + "/" + resource.getSlug());
+        
+        return "La ressource a été ajoutée avec succès. <a href='"+UrlUtil.getRelativeUrlToResourceDisplay(resource)+"'>Afficher</a>";
     }
 
     @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
@@ -53,5 +55,4 @@ public class ResourceEditController extends BaseController<Resource> {
          Resource resource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
          return resource == null ? "" : resource.getId() + "";
 	}
-
 }
