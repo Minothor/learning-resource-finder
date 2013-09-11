@@ -2,15 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/ext/flexslider.css" type="text/css">
+<script src="/js/ext/jquery-1.8.3.min.js"></script>
+<script src="/js/ext/jquery.flexslider.js"></script>
+
+
 <meta charset="UTF-8" />
 <!-- Do not update to jquery 1.9, the countdown needs 1.8 version -->
-<script src="/js/ext/jquery-1.8.3.min.js"></script>
+<script src="/js/ext/jquery-1.8.3.min.js"></script><!-- do not update to the new version of jquery confusion with countdown -->
+
 <!-- start countdown script -->
 <link rel="stylesheet" type="text/css" href="css/ext/countdownstyle.css">
 
 <script type="text/javascript" src="js/ext/jq.countdown.js"></script>
 <script type="text/javascript" src="js/ext/jq.placeholder.js"></script>
-<script type="text/javascript" src="js/ext/custom2.js"></script>
+<script type="text/javascript" src="js/ext/customcountdown.js"></script>
 
 <!-- end countdown script -->
 <script src="/js/ext/bootstrap.js"></script>
@@ -60,8 +68,7 @@ $(function (){
   $(window).load(function() {
     $('.flexslider').flexslider({
     	animation: "slide",
-    	direction: "vertical",
-    	reverse: "top"
+    	slideshowSpeed: 5000
     });
   });
 </script>
@@ -197,27 +204,13 @@ div#users-contain table td,div#users-contain table th {
 }(document, 'script', 'facebook-jssdk'));</script>
 <!-- /Script facebook -->
 
-		<!-- Background image -->
-		<ul id="background-slide">
-			<li>
-				<div>
-					<img
-						src="http://foto.hrsstatic.com/fotos/0/3/256/256/80/FFFFFF/http%3A%2F%2Ffoto-origin.hrsstatic.com%2Ffoto%2F0%2F2%2F9%2F3%2F029387%2F029387_r_77838.jpg/1tMUI0NcmtRVS69DYJvrow%3D%3D/128,96/6/BEST_WESTERN_Les_3_Cles-Gembloux-Restaurant_Frhstcksraum-29387.jpg">
-				</div>
-			</li>
-			<li>
-				<div>
-					<img src="http://images.math.cnrs.fr/IMG/png/section8-image.png">
-				</div>
-			</li>
-		</ul>
-		<!-- END background -->
+		
 
 	<div id="wrapper">
 		<!-- BEGIN HEADER -->
-		<header> <a href="#">
+		<header>
 			<div id="logo">toujoursPlus</div>
-		</a> </header>
+		 </header>
 		<!-- END HEADER -->
 
 		<!-- BEGIN TIMER -->
@@ -239,7 +232,7 @@ div#users-contain table td,div#users-contain table th {
 				</div>
 
 				<div class="clear"></div>
-				<div class="lable">Jours</div>
+				<div class="lable">jours</div>
 			</div>
 
 			<div class="number_wrapper">
@@ -253,7 +246,7 @@ div#users-contain table td,div#users-contain table th {
 				</div>
 
 				<div class="clear"></div>
-				<div class="lable">Heurs</div>
+				<div class="lable">heures</div>
 			</div>
 
 			<div class="number_wrapper">
@@ -267,7 +260,7 @@ div#users-contain table td,div#users-contain table th {
 				</div>
 
 				<div class="clear"></div>
-				<div class="lable">Minutes</div>
+				<div class="lable">minutes</div>
 			</div>
 
 			<div class="number_wrapper nmr">
@@ -281,7 +274,7 @@ div#users-contain table td,div#users-contain table th {
 				</div>
 
 				<div class="clear"></div>
-				<div class="lable">Secondes</div>
+				<div class="lable">secondes</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -289,82 +282,163 @@ div#users-contain table td,div#users-contain table th {
 		<div id="ct" style="display: none"></div>
 		</section>
 		<!-- END TIMER -->
-
-		<div class="flexslider">
-			<ul class="slides">
-				<li><img
-					src="http://i.istockimg.com/file_thumbview_approve/11396791/2/stock-photo-11396791-happy-teenage-girl-using-a-laptop.jpg"
-					style="width: 100%; height: 100%" />
-					<p class="flex-caption">Blablabla ...</p></li>
-				<li><img
-					src="http://i.istockimg.com/file_thumbview_approve/8478886/2/stock-photo-8478886-beautiful-brunette-with-laptop.jpg"
-					style="width: 100%; height: 100%" />
-					<p class="flex-caption">Captions and cupcakes. Winning
-						combination.</p></li>
-				<li><img
-					src="http://i.istockimg.com/file_thumbview_approve/8909916/2/stock-photo-8909916-good-result.jpg"
-					style="width: 100%; height: 100%" />
-					<p class="flex-caption">sdfqsdfp sdmfjq mdfj</p></li>
-
-			</ul>
-
-
-
+		
+		
+		<div >
+		   
+		    <img src="css/ext/images/Background_1.jpg" style="display:block; margin:auto;" />
 		</div>
-
-		<!-- BEGIN mail -->
-		<div id="email2" class="form-group">
-			<input type="text" class="form-control" name="addresemail" id="mail"
-				placeholder="Entrer votre adresse mail" />
-			<button type="submit" class="btn btn-primary" onclick="ajaxPostUrlResource()">Envoyer</button>
-
-			<div class="fb-follow"
-				data-href="https://www.facebook.com/toujoursplus.be"
-				data-width="450" data-layout="button_count" data-show-faces="true"></div>
-
-		</div>
-
-		<!-- END mail -->
-
-
-	</div>
-	<!-- Donation -->
-  <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Make a donation</a>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Make a donation</h4>
-        </div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="email">Email</label> <input type="text" name="email"
-							id="email" value="" class="form-control" /> <label for="subject">Subject</label>
-						<input type="text" name="subject" id="subject"
-							class="form-control" /> <label for="body">Body</label>
-						<TEXTAREA rows="3" name="body" id="body" value=""
-							class="form-control" /></TEXTAREA>
-					</div>
+		
+		<div id="divbackgroud">
+			
+			<!-- Background image -->
+			
+			<div id="backgroudimage" >
+				<ul id="background-slide" style="text-align:center;">
+					<li>
+						<div>
+							<img src="css/ext/images/Background_1.jpg">
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="css/ext/images/Background_2.jpg">
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="css/ext/images/Background_3.jpg">
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="css/ext/images/Background_4.jpg">
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="css/ext/images/Background_5.jpg">
+						</div>
+					</li>
+					<li>
+						<div>
+							<img src="css/ext/images/Background_6.jpg">
+						</div>
+					</li>
+										<li>
+						<div>
+							<img src="css/ext/images/Background_7.jpg">
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+			<!-- END background -->
+			
+			<div id="textbackground">
+				
+				<p style="font-size:14px;">Pour nos enfants (6-18) et nos enseignants.</p>
+				<p style="font-size:9px;">gratuit, sans pub, sans but lucratif.</p>
+			
+			</div>
+      </div>
+			
+		
+		
+	  <div style="width:auto;clear:both;"></div>
+		
+			<!-- BEGIN mail -->
+			<div  class="form-group">
+				<div id="email">
+						<input type="text" class="form-control" name="addresemail" id="mail"
+							placeholder="Entrer votre adresse mail" />
+						<button type="submit" class="btn btn-primary" onclick="ajaxPostUrlResource()">Envoyer</button>
 				</div>
-				<div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="sendDonation()">Save changes</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+				<div class="fb-follow"
+					data-href="https://www.facebook.com/toujoursplus.be"
+					data-width="450" data-layout="button_count" data-show-faces="true">
+				</div>
+	
+			</div>
+	
+			<!-- END mail -->
+ 	</div>
+
+<!--***************************************************************************************************************  -->
+	
+	<div id="donation_slide">
+	
+	
+			<!-- Donation -->
+				  <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Faire une donation</a>
+				
+				  <!-- Modal -->
+				  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    <div class="modal-dialog">
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				          <h4 class="modal-title">Make a donation</h4>
+				        </div>
+								<div class="modal-body">
+									<div class="form-group">
+										<p></p>
+										<label for="email">Email</label> <input type="text" name="email"
+											id="email" value="" class="form-control" /> <label for="subject">Sujet</label>
+										<input type="text" name="subject" id="subject"
+											class="form-control" /> <label for="body">Message</label>
+										<TEXTAREA rows="3" name="body" id="body" value=""
+											class="form-control" /></TEXTAREA>
+									</div>
+								</div>
+								<div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				          <button type="button" class="btn btn-primary" onclick="sendDonation()">Save changes</button>
+				        </div>
+				      </div><!-- /.modal-content -->
+				    </div><!-- /.modal-dialog -->
+				  </div><!-- /.modal -->
 	
 	
 	
-	<!-- END Donation -->
+			<!-- END Donation -->
+	
+
+				
+				<!-- slide flex -->
+				
+				<div class="flexslider">
+							<ul class="slides">
+								<li><img
+									src="css/ext/images/portrait_1.jpg"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption">Blablabla ...</p></li>
+								<li><img
+									src="css/ext/images/portrait_2.jpg"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption">Captions and cupcakes. Winning
+										combination.</p></li>
+								<li><img
+									src="css/ext/images/portrait_3.jpg"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption">sdfqsdfp sdmfjq mdfj</p></li>
+				
+							</ul>
+				</div>
+						
+						
+					<div style="clear:both;"></div>
+	
+	</div>
+	
+<!--***************************************************************************************************************  -->
+
+
+	
 	<!-- BEGIN VIDEO -->
 	<div id="videoyoutube">
 		<div id="vid1">
-			<p>Qu’est-ce que profs et élèves feront sur toujoursPlus.be?
-</p>
+			<p>Qu’est-ce que profs et élèves feront sur toujoursPlus.be?</p>
 			<br>
 			<iframe marginwidth="40" width="210" height="158"
 				src="http://www.youtube.com/embed/xXy_ywNIZv8?rel=0" frameborder="0"
@@ -387,7 +461,7 @@ div#users-contain table td,div#users-contain table th {
 			<br> <br>
 			<ul>
 				<li><span class="pop" rel="popover" 
-				data-content="L’élève devrait plus prendre et moins recevoir">Un renversement pédagogique</span></li>
+				data-content="L’élève devrait plus prendre et moins recevoir.">Un renversement pédagogique</span></li>
 				<li><span class="pop" rel="popover"
 				data-content="Comment utilement occuper une classe de première secondaire composée d’élèves de niveaux très différents, sans épuiser l’enseignant?">La différentation</span></li>
 				<li><span class="pop" rel="popover"
