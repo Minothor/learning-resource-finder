@@ -9,11 +9,11 @@ import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ResourceEditController extends BaseController<Resource> {
@@ -22,13 +22,9 @@ public class ResourceEditController extends BaseController<Resource> {
     ResourceRepository resourceRepository;
     @Autowired
     UrlResourceRepository urlResourceRepository;
-
-    @RequestMapping("/ajax/resourceaddsubmit")
-    public @ResponseBody
-    String resourceAddSubmit(@RequestParam("url") String url,
-            @RequestParam("title") String title,
-            @RequestParam("description") String description) {
-
+    
+    @RequestMapping("/resourceaddsubmit")
+	public ModelAndView resourceAddSubmit(@RequestParam("url") String url, @RequestParam("title") String title, @RequestParam("description") String description) {
         SecurityContext.assertUserIsLoggedIn();
 
         Resource resource = new Resource();
@@ -48,7 +44,7 @@ public class ResourceEditController extends BaseController<Resource> {
         resourceRepository.persist(resource);
 
         // Url to eventually view the resource
-        return "/resource/" + resource.getShortId() + "/" + resource.getSlug();
+        return new ModelAndView ("redirect:/resource/" + resource.getShortId() + "/" + resource.getSlug());
     }
 
     @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
