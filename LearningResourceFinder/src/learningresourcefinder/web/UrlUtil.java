@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.util.CurrentEnvironment;
 
 public class UrlUtil {
@@ -133,4 +134,7 @@ public class UrlUtil {
     	nameParam = nameParam.replaceAll("___", "_"); //Sometimes, there is a '&' in the title. The name is compute like : Java___OO_etc. Whith this method, the name will be Java_OO_etc.
         return nameParam;
     }
+	public static String getRelativeUrlToResourceDisplay(Resource resource) {
+		return "/resource/" + resource.getShortId() + "/" + resource.getSlug();
+	}
 }
