@@ -23,38 +23,43 @@
 		</div>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
+		<form role="form" method="post" action="resourceaddsubmit">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Ajouter une ressource</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form">
-						<div class="form-horizontal">
-                           <label for="url">Url</label> 
-                               <input type="text" id="url"placeholder="Lien vers la ressource" size="67 px">
-                            <div class="pull-right"> 
-                              <button type="button" class="btn btn-mini btn-primary" id="button-hide" onclick="ajaxPostAddResource()">Vérifier</button>
+					<div class="form-horizontal">
+						<div class="form-group">
+	                        <label for="url">site</label> 
+	                        <input type="text" class="form-control" id="url" name="url" placeholder="http://...">
+	                        <div class="pull-right"> 
+	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxPostAddResource()">Vérifier</button>
 							</div>
-						</div>
-						<div class="form-group " style="display:none; " id="titleShow" >
-							<label for="name">Titre</label>
-							   <input type="text" class="form-control" id="title" placeholder="Taper le titre" size="67px">
+							<span class="help-block">URL vers le site que vous désirez ajouter.</span>
 						</div>
 
-					</form>
-					<br>
-				</div>
-				<div class="modal-footer" style="display: none;" id="bottomButtons">
-					<button type="button" class="btn btn-primary">Ajouter</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-				</div>
+						<div id="formPart2" style="display:none;">  <%-- will not be displayed until the url is valid --%>
+							<div class="form-group">
+							   <input type="text" class="form-control" name="title" id="title" placeholder="titre...">
+							</div>
+							<div class="form-group">
+							   <textarea class="form-control" rows="3" id="description" name="description" placeholder="déscription..."></textarea>
+							</div>
+						</div>
+					</div>
+                  </div>
+				  <div class="modal-footer" style="display: none;" id="bottomButtons">
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				  </div>
 			</div>
 			<!-- /.modal-content -->
-		</div>
+		</form>
+	    </div>
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal --> </section>
