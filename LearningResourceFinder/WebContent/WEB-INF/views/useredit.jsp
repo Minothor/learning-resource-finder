@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>   
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>  
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %> 
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+
+
+
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <html>
 <head>
 	<script src="/js/int/birthday_picker.js" type = "text/javascript"></script>	
@@ -13,6 +20,13 @@
 		<lrftag:breadcrumbelement label="Home" link="/home" />
 		<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
 	</lrftag:breadcrumb>
+	
+	<form:form method="post" class="form-horizontal" modelAttribute="person">
+	   <fieldset>
+	      <t:input path="firstNames" label="First Name(s)"/>
+	      <t:input path="surname" required="true"/>
+	     </fieldset>
+	</form:form>
 	
 	<div class="container">
 		<lrftag:pageheadertitle title="${user.firstName} ${user.lastName}"/>
