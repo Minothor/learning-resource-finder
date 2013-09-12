@@ -18,9 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SearchSummaryController extends BaseController<Resource> {
 
-	@Autowired SearchService searchService;
-	@Autowired IndexManagerService indexService;
-	@Autowired ResourceRepository resourceRepository;
+	@Autowired private SearchService searchService;
+	@Autowired private IndexManagerService indexService;
+	@Autowired private ResourceRepository resourceRepository;
 
 	@RequestMapping("/searchallresource")
 	public ModelAndView getAllResource(@RequestParam("search") String searchResource){
