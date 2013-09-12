@@ -70,9 +70,7 @@ public class IndexManagerService {
     Class<Searchable>[] searchables = new Class[]{Resource.class};  // Entities that are included in the index.
    
     String[] searchableCriterias = new String[]{    // Addition of all the fields that should be searchable in the searchable entities.
-            "title","summary","content","shortName", "toClassify",
-            "userName","firstName","lastName","mail",
-            "shortDescription"};  
+            "name", "description"};  
 
     
 	@SuppressWarnings("unchecked")
