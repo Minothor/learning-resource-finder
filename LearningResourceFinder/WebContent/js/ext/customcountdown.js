@@ -125,8 +125,8 @@ function updateTime(time) {
 				// Firefox bugfix
 				obj.eq(1)
 					.text(nar[k])
-					.css({marginTop: -190})
-					.animate({opacity: 1}, function(){ $(this).removeAttr('style') });
+					.css({marginTop: -120})
+					.animate({opacity: 1}, function(){ $(this).removeAttr('style'); });
 				
 				obj.eq(0).animate({opacity:0}, function(){ 
 					var parent = $(this).parent();
@@ -139,7 +139,7 @@ function updateTime(time) {
 				obj.eq(1)
 					.text(nar[k])
 					.animate({opacity:1});
-				obj.eq(0).animate({'margin-top': -190, opacity:0}, 600, function(){ 
+				obj.eq(0).animate({'margin-top': -120, opacity:0}, 600, function(){ 
 					var parent = $(this).parent();
 					$(this).remove();
 					$('<div/>').css({opacity:0}).appendTo(parent);

@@ -27,7 +27,7 @@ a {
 	text-decoration: none;
 }
 
-img { display: block }
+img { display: block ;}
 
 body { 
 	background: #39a8d4 no-repeat center top fixed;
@@ -54,7 +54,7 @@ header {
 #logo {
 	font: bold 3.5em 'Oswald';
 	text-align: center;
-	text-shadow: 1px 1px 2px #111;
+	text-shadow: 1px 1px 2px #9C9C9C;
 }
 
 /* === Timer Section === */
@@ -66,8 +66,8 @@ header {
 
 .lable {
 	font-size: 1.0em;
-	color: #EEE;
-	text-shadow: 1px 1px 1px #111;
+	color: #DADADA;
+	text-shadow: 1px 1px 1px #9C9C9C;
 	text-align: center;
 	opacity: .6;
 }
@@ -232,9 +232,15 @@ header {
 	width: auto;
 	height: auto;
 	clear:both;
-	display:
+	padding-left:30%;
+	padding-right:30%;
+	padding-top:20px;
+	padding-bottom:20px;
+	
 	
 }
+
+#btn_soutien{}
 
 #videoyoutube {
 	/* -moz-box-shadow: 0 0 5px 5px #555;
@@ -246,30 +252,58 @@ header {
 	height: auto;
 	background:#16a085;
 	clear:both;
+	padding-top:20px;
+	padding-bottom:20px;
 }
 
 
 
 
-#vid1{float:left; width:210px;display:inline-block;margin-left:30%;margin-bottom:20px}
-#vid2{float:right;width:210px;display:inline-block;margin-right:30%;margin-bottom:20px}
+#vid1{float:left; width:280px;display:inline-block;margin-left:30%;margin-bottom:20px}
+#vid2{float:right;width:280px;display:inline-block;margin-right:30%;margin-bottom:20px}
 
 
-#vid1 > ul {font-size: 10pt; }
-#vid2 > ul {font-size: 10pt; }
+#vid1 > ul {
+	font-size: 10pt;
+	margin:5px 10px 0 25px ;
+	color:#E4E4E4
+	
+ }
+#vid2 > ul {
+	font-size: 10pt; 
+	margin:5px 10px 0 30px ;
+	color:#E4E4E4
+	  }
 
-#vid1 > p {text-align: center}
-#vid2 > p {text-align: center}
+
+ul.vid_li li{
+	
+	padding-bottom:10px;
+	
+}
+
+#vid1 > div > p, #vid2 > div > p  {text-align: center;font-size:14pt;color:white;}
+
 
 #spacediv3 {width:auto; clear:both;}
 
 
-#divbackgroud{}
-#textbackground{text-align:center;width:20%;margin-right:10%;margin-top:10%}
-#backgroudimage {height:500px;}
+
+
+#backgroudimage {height:430px;}
 #backgroudimage ul li img {display:block; margin:auto;}
 
+#divbackgroud{display:inline-block;text-align:center;width:768px;}
 
+#background-slide{list-style-type:none;text-align:center;}
+
+#textbackground{
+text-align: center;
+width: 100%;
+margin-bottom:20px;
+}
+
+#back{text-align:center;width:768px;}
 
 #fb-follow {display:inline-block; float:right}
 
@@ -325,7 +359,8 @@ screen and (max-device-width: 480px) {
 	
 	#count-wrap .num {
 		font: bold 4em Oswald;
-		text-shadow: 1px 1px 2px #111;
+		color:#DADADA;
+		text-shadow: 1px 1px 2px #9C9C9C;
 		display: inline-block;
 	}
 	
@@ -359,10 +394,12 @@ screen and (max-device-width: 480px) {
 @media screen and (min-width: 481px) {	
 	#count-wrap .num {
 		width: 70px;
-		font: 5em Oswald;
+		height: 150px;
+		font: 6em Oswald;
 		text-align: center;
 		
-		text-shadow: 1px 1px 2px #111;
+		color:#DADADA;
+		text-shadow: 1px 1px 2px #9C9C9C;
 		
 		float: left;
 		overflow: hidden;
