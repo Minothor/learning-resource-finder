@@ -1,12 +1,14 @@
 package learningresourcefinder.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchResult;
 
@@ -36,17 +38,36 @@ public class SearchService {
 		return searchResultList;
 	}
 	
-	public List<Resource> getFirstResources(List<SearchResult> searchResults, int maxResult) {
-		List<Long> resourceIds = new ArrayList<>();
+	public List<BaseEntity> getFirstEntities(List<SearchResult> searchResults, int maxResult, Class<? extends BaseEntity> clazz) {
+		final List<Long> entityIds = new ArrayList<>();
 		
-		for(SearchResult searchResult : searchResults){
-			if (resourceIds.size() == maxResult) {
-				break;
+		for(SearchResult searchResult : searchResults) {
+			if (searchResult.isForClass(clazz)) {
+				entityIds.add(searchResult.getId());
 			}
-			resourceIds.add(searchResult.getId());
+			if (entityIds.size() >= maxResult) {
+				break;
+			}	
 		}
+
+		List<BaseEntity> entities = findEntitiesByIdList(entityIds, clazz);
 		
-		return resourceRepository.findResourcesByIdList(resourceIds);
+		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
+		Collections.sort(entities, new Comparator<BaseEntity>() {
+			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
+				return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
+			}
+		});
+		
+		return entities;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<BaseEntity> findEntitiesByIdList(List<Long> idList, Class clazz){
+		List<BaseEntity> result = em.createQuery("SELECT e FROM "+clazz.getSimpleName()+" e WHERE e.id in(:idList)")
+				.setParameter("idList", idList)
+				.getResultList();
+		return result;
 	}
 	
 }
