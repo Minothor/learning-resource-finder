@@ -175,7 +175,6 @@
 	
 	function ajaxCompetenceRemoveSubmit(id) {
 		if (id != '') {
-			alert("1");
 			$.ajax({
 				type : "POST",
 			    url : 'ajax/competenceRemoveSubmit',
@@ -185,7 +184,7 @@
 			    		alert("Compétence supprimée");
 			    		window.location.reload();
 			    	} else {
-			    		alert("souci lors de la soumission : " + data);
+			    		alert("Souci lors de la soumission : " + data);
 			    	}
 			    	return false;
 			    },
@@ -226,7 +225,7 @@
 			    		alert("Compétence editée");
 			    		window.location.reload();
 			    	} else {
-			    		alert("souci lors de la soumission du formulaire : " + data);
+			    		alert("Souci lors de la soumission du formulaire : " + data);
 			    	}
 			    	return false;
 			    },
