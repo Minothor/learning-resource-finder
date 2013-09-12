@@ -13,10 +13,11 @@
 		<lrftag:breadcrumbelement label="${current.user.firstName}" link="/user/${current.user.userName}" />
 	</lrftag:breadcrumb>
 	
+<%-- 	${current.user.fullName} --%>
 	<div class="container">
-		<lrftag:pageheadertitle title="${current.user.firstName} ${user.lastName} : Mes PlayLists"/>
+		<lrftag:pageheadertitle title="${user.fullName} : Mes PlayLists"/>
 		<div class=" " style="font-size:14px">
-		   &nbsp&nbsp<a href="<c:url value='/playlist/create'/>"> Créer une PlayList</a>
+		   &nbsp&nbsp<a class="btn btn-primary pull-right" href="<c:url value='/playlist/create'/>"> Créer une PlayList</a>
 		</div>
 		<br />
 		<div class="table-responsive">

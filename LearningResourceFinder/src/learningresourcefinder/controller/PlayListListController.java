@@ -11,6 +11,7 @@ import learningresourcefinder.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,7 @@ public class PlayListListController  extends BaseController<PlayList> {
 	@Autowired UserRepository userRepository;
 	
 	@RequestMapping("/user/{userName}")
-	public ModelAndView displayList(@PathVariable("userName") String userName) {
+	public String displayList(@PathVariable("userName") String userName, Model model) {
 		User user = userRepository.getUserByUserName(userName);
         if (user == null) {
         	throw new InvalidUrlException("L'utilisateur ayant le pseudonyme (userName) '"+userName+"' est introuvable.");
@@ -38,7 +39,10 @@ public class PlayListListController  extends BaseController<PlayList> {
         SortedSet<PlayList> playListSet =  new TreeSet<PlayList>(comparator);
         playListSet.addAll(user.getPlayListList());
 
-		return new ModelAndView("playlistlist", "playlistlist", playListSet);
+		//return "playlistlist", 
+		model.addAttribute("playlistlist", playListSet);
+		model.addAttribute("user", user);
+		return "playlistlist";
 	}
 
 }

@@ -27,20 +27,22 @@ $(function() {
 	</lrftag:breadcrumb>
 	<div class="container">
 		<lrftag:pageheadertitle title="${user.fullName}"/>
-			<div class="user-options" style="font-size:12px">
-             <lrf:conditionDisplay privilege="MANAGE_USERS">
-				 <a href="user/privilegeedit?id=${user.id}">Privilèges</a>&nbsp-&nbsp
-				 <a href="user/usertypeedit?id=${user.id}">Editer le type d'un user</a>	
-				 <c:if test="${not(current.user  eq user)}">
-				  	&nbsp-&nbsp<a href="user/delete?id=${user.id}">Supprimer le compte</a>
-				 </c:if>
+		<div class="btn-group">
+			<lrf:conditionDisplay privilege="MANAGE_USERS">
+				<a class="btn btn-default" href="user/privilegeedit?id=${user.id}">Privilèges</a>	
+				<a class="btn btn-default" href="user/usertypeedit?id=${user.id}">Editer le type d'un user</a>	
+				<c:if test="${not(current.user  eq user)}">
+				<a class="btn btn-default" href="user/delete?id=${user.id}">Supprimer le compte</a>
+				</c:if>
 			</lrf:conditionDisplay>
-			 <c:if test="${canEdit}">
-				&nbsp-&nbsp<a href="user/edit?id=${user.id}">Editer le Profil</a>
-				&nbsp-&nbsp<a href="user/changepassword?id=${user.id}">Modifier le mot de passe</a>
-			 </c:if>
-			 	&nbsp-&nbsp<a href="playlist/user/${user.userName}">Play-lists</a>
-			</div>
+			<c:if test="${canEdit}">
+				<a class="btn btn-default" href="user/edit?id=${user.id}">Editer le Profil</a>
+				<a class="btn btn-default" href="user/changepassword?id=${user.id}">Modifier le mot de passe</a>
+			</c:if>
+			<a class="btn btn-default" href="playlist/user/${user.userName}">Play-lists</a>
+		</div>
+		
+
 			<br/>
 
 			<%-- IMAGE   IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  --%>

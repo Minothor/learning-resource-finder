@@ -14,16 +14,24 @@
 		<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
 	</lrftag:breadcrumb>
 	<div class="container">
-		<lrf:pageheadertitle title="changement de mot de passe"/>
-		<lrf:form modelAttribute="passwordData" action="/user/changepasswordsubmit">
+		<lrf:pageheadertitle title="Changement de mot de passe"/>
+		<br />
+		<form:form modelAttribute="passwordData" action="/user/changepasswordsubmit" class="form-horizontal">
 			<c:if test="${verifyOldPassword}">
-				<lrf:input label="Mot de passe actuel" path="oldPassword" type="password" />
+				<lrftag:input label="Mot de passe actuel" path="oldPassword" type="password" />
 			</c:if>
-			<lrf:input label="Nouveau mot de passe" path="newPassword" type="password" />
-			<lrf:input label="Confirmer le nouveau  mot de passe" path="confirmPassword" type="password" />
+			<lrftag:input label="Nouveau mot de passe" path="newPassword" type="password" />
+			<lrftag:input label="Confirmer le nouveau  mot de passe" path="confirmPassword" type="password" />
 			<input type="hidden" name="id" value="${user.id}" />
-			<tr><td><input type="submit" value="changer" class="btn btn-primary"/></td><td><a href="/user/${user.userName}">Annuler</a></td></tr>
-		</lrf:form>
+			
+			<div class="form-group">
+		   		<label class="col-lg-2"></label>
+		   		<ul class="col-lg-2" >
+		    		<li style="display:inline;"><input type="submit" value="changer" class="btn btn-primary"/></li>
+		    		<li style="display:inline;"><button onclick="location.href='/user/${user.userName}';" class="btn" type="reset">Annuler</button></li>
+		    	</ul>
+		    </div>
+		</form:form>
 	</div>
 </body>
 </html>

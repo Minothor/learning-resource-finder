@@ -17,14 +17,12 @@
 	
 	<div class="container">
 		<lrftag:pageheadertitle title="${playlist.name}"/>
-		<div class="" style="font-size: 14px">
+		<div class="btn-group">
 			<c:if test="${canEdit}">
-			&nbsp&nbsp<a href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
-			&nbsp-&nbsp
+			<a class="btn btn-default" href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
 			</c:if>
-			<a href="playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a> 
-			&nbsp-&nbsp
-			<a href=<c:url value='/ressourcelist'/>>Vers l'arborescence des ressources</a>
+			<a class="btn btn-default"  href="playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a> 
+			<a class="btn btn-default" href=<c:url value='/ressourcelist'/>>Vers l'arborescence des ressources</a>
 		</div>
 		<lrftag:playlistimage canEdit="${canEdit}" playlist="${playlist}" random="${random}" />
 		<br />
