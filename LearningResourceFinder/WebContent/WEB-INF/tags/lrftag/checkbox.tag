@@ -9,13 +9,10 @@
 see http://stackoverflow.com/questions/439861/spring-mvc-tag-interaction-with-custom-tag
  --%>
 
- <c:choose>
- 	<c:when test="${title!=null}">
- <tr title="${title}">
- 	</c:when>
- 	<c:otherwise>
- <tr>
- 	</c:otherwise>
- </c:choose>
-	<td><form:checkbox path="${path}" label="${label}" required="${required}"/></td>
-</tr>
+<div class="checkbox">
+	<label>
+<!-- 		<input type="checkbox"> Check me out -->
+		<form:checkbox path="${path}" label=" ${label}" required="${required}"/>
+    </label>
+</div>
+
