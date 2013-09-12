@@ -226,6 +226,12 @@ public  class SecurityContext {
         }
     }
     
+    public static  void assertCurrentUserMayEditThisCompetence(Competence competence) {
+        if (! canCurrentUserEditCompetence()) {
+            throw new UnauthorizedAccessException(" cannot edit that competence: " + competence.getName());
+        }
+    }
+    
     public static boolean canCurrentUserEditCompetence() { 
         return isUserHasPrivilege(Privilege.MANAGE_COMPETENCE);     // If this user has the privilege to edit other competence
     }
