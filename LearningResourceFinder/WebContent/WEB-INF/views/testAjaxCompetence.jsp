@@ -18,7 +18,7 @@
   <li><a href="#" id="A-12"> Add in 12 </a></li> 
   <li><a href="#" id="E-12"> Edit </a></li> 
   <li><a href="#" id="E-13"> Edit2 </a></li> 
-  <li><a href="#" id="R-7"> Remove 7</a></li>
+  <li><a href="#" id="R-11"> Remove 11</a></li>
   </ul>
   
  
