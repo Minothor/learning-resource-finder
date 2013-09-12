@@ -2,8 +2,11 @@ package learningresourcefinder.controller;
 
 import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.NotificationUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CompetenceController extends BaseController<Competence> {
+    @Autowired
+    CompetenceRepository competencerepository; 
 
 	@RequestMapping ("/tree")
 	public ModelAndView DisplayCompTree(){
@@ -57,6 +62,25 @@ public class CompetenceController extends BaseController<Competence> {
 
 		
 	}
+    @RequestMapping(value="/competencemovesubmit")
+    public ModelAndView CompetenceMoveSubmit(@RequestParam ("hiddenFieldMoveCompetency") Long idCompetence, @RequestParam("codeField") String codeNewParent ){
+        ModelAndView mv= new ModelAndView("competencetree"); 
+        
+        Competence competence=getRequiredEntity(idCompetence);
+        Competence newParent =   competencerepository.findByCode(codeNewParent);
+        if (newParent==null){
+            NotificationUtil.addNotificationMessage("Code parent inexistant"); 
+            return mv;
+        }
+        
+        if (competence.getParent() != null) {
+            competence.getParent().getChildren().remove(competence);
+        }
+        newParent.getChildren().add(competence);
+        competence.setParent(newParent); 
+        competencerepository.merge(competence);
 
+        return mv; 
+}
 
 }
