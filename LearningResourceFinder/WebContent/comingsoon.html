@@ -5,11 +5,10 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/ext/flexslider.css" type="text/css">
-<script src="/js/ext/jquery-1.8.3.min.js"></script>
+
 <script src="/js/ext/jquery.flexslider.js"></script>
 
 
-<meta charset="UTF-8" />
 <!-- Do not update to jquery 1.9, the countdown needs 1.8 version -->
 <script src="/js/ext/jquery-1.8.3.min.js"></script><!-- do not update to the new version of jquery confusion with countdown -->
 
@@ -185,6 +184,7 @@ div#users-contain table td,div#users-contain table th {
      color: #555;
  }
 
+
 </style>
 
 
@@ -209,7 +209,7 @@ div#users-contain table td,div#users-contain table th {
 	<div id="wrapper">
 		<!-- BEGIN HEADER -->
 		<header>
-			<div id="logo">toujoursPlus</div>
+			<div id="logo" style="color:#BEBEBE">toujoursPlus.be</div>
 		 </header>
 		<!-- END HEADER -->
 
@@ -284,49 +284,45 @@ div#users-contain table td,div#users-contain table th {
 		<!-- END TIMER -->
 		
 		
-		<div >
-		   
-		    <img src="css/ext/images/Background_1.jpg" style="display:block; margin:auto;" />
-		</div>
 		
 		<div id="divbackgroud">
 			
 			<!-- Background image -->
 			
 			<div id="backgroudimage" >
-				<ul id="background-slide" style="text-align:center;">
+				<ul id="background-slide">
 					<li>
-						<div>
+						<div id="back">
 							<img src="css/ext/images/Background_1.jpg">
 						</div>
 					</li>
 					<li>
-						<div>
+						<div id="back">
 							<img src="css/ext/images/Background_2.jpg">
 						</div>
 					</li>
 					<li>
-						<div>
+						<div id="back">
 							<img src="css/ext/images/Background_3.jpg">
 						</div>
 					</li>
 					<li>
-						<div>
+						<div id="back">
 							<img src="css/ext/images/Background_4.jpg">
 						</div>
 					</li>
 					<li>
-						<div>
+						<div id="back">
 							<img src="css/ext/images/Background_5.jpg">
 						</div>
 					</li>
 					<li>
-						<div>
+						<div id="back">
 							<img src="css/ext/images/Background_6.jpg">
 						</div>
 					</li>
 										<li>
-						<div>
+						<div id="back">
 							<img src="css/ext/images/Background_7.jpg">
 						</div>
 					</li>
@@ -348,19 +344,35 @@ div#users-contain table td,div#users-contain table th {
 	  <div style="width:auto;clear:both;"></div>
 		
 			<!-- BEGIN mail -->
-			<div  class="form-group">
-				<div id="email">
-						<input type="text" class="form-control" name="addresemail" id="mail"
-							placeholder="Entrer votre adresse mail" />
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-5">
+						<input type="text" class="form-control" name="addresemail" id="mail" placeholder="Entrez votre adresse e-mail" />
+					</div>
+                    <div class="col-sm-1">
 						<button type="submit" class="btn btn-primary" onclick="ajaxPostUrlResource()">Envoyer</button>
+						
+					</div>
+					
+                    <div class="col-sm-3"></div>
 				</div>
-				<div class="fb-follow"
-					data-href="https://www.facebook.com/toujoursplus.be"
-					data-width="450" data-layout="button_count" data-show-faces="true">
+
+                <div class="row" style="margin-top:40px;">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+						<p style="font-size:11px;">Suivez-nous sur facebook pour être informé du lancement et/ou discuter du développement en cours.</p>
+						<div class="fb-follow"
+							data-href="https://www.facebook.com/toujoursplus.be"
+							data-width="450" data-layout="button_count" data-show-faces="true">
+						</div>
+					</div>
+                    <div class="col-sm-3"></div>
 				</div>
 	
 			</div>
 	
+			<br/>
+			<br/>
 			<!-- END mail -->
  	</div>
 
@@ -370,7 +382,7 @@ div#users-contain table td,div#users-contain table th {
 	
 	
 			<!-- Donation -->
-				  <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Faire une donation</a>
+				  <a data-toggle="modal" href="#myModal" id="btn_soutien" class="btn btn-default btn-sm" style="margin-top:100px;">Comment pouvez-vous nous soutenir? - contact</a>
 				
 				  <!-- Modal -->
 				  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -378,12 +390,14 @@ div#users-contain table td,div#users-contain table th {
 				      <div class="modal-content">
 				        <div class="modal-header">
 				          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				          <h4 class="modal-title">Make a donation</h4>
+				          <h4 class="modal-title">Comment pouvez-vous nous soutenir? </h4>
 				        </div>
 								<div class="modal-body">
 									<div class="form-group">
-										<p></p>
-										<label for="email">Email</label> <input type="text" name="email"
+										<p>Nous avons besoin de vous pour témoigner, diffuser le concept dans votre école/association, tester le site en version beta, 
+										participer à des réunions d’analyse et de feedback, donner des millions de dollars.</p>
+										<p>Contactez-nous!</p>
+										<label for="email">Votre e-mail</label> <input type="text" name="email"
 											id="email" value="" class="form-control" /> <label for="subject">Sujet</label>
 										<input type="text" name="subject" id="subject"
 											class="form-control" /> <label for="body">Message</label>
@@ -392,8 +406,8 @@ div#users-contain table td,div#users-contain table th {
 									</div>
 								</div>
 								<div class="modal-footer">
-				          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				          <button type="button" class="btn btn-primary" onclick="sendDonation()">Save changes</button>
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+				          <button type="button" class="btn btn-primary" onclick="sendDonation()">Enregistrer</button>
 				        </div>
 				      </div><!-- /.modal-content -->
 				    </div><!-- /.modal-dialog -->
@@ -409,7 +423,7 @@ div#users-contain table td,div#users-contain table th {
 				
 				<div class="flexslider">
 							<ul class="slides">
-								<li><img
+								<!-- <li><img
 									src="css/ext/images/portrait_1.jpg"
 									style="width: 100%; height: 100%" />
 									<p class="flex-caption">Blablabla ...</p></li>
@@ -421,7 +435,7 @@ div#users-contain table td,div#users-contain table th {
 								<li><img
 									src="css/ext/images/portrait_3.jpg"
 									style="width: 100%; height: 100%" />
-									<p class="flex-caption">sdfqsdfp sdmfjq mdfj</p></li>
+									<p class="flex-caption">sdfqsdfp sdmfjq mdfj</p></li> -->
 				
 							</ul>
 				</div>
@@ -438,40 +452,43 @@ div#users-contain table td,div#users-contain table th {
 	<!-- BEGIN VIDEO -->
 	<div id="videoyoutube">
 		<div id="vid1">
-			<p>Qu’est-ce que profs et élèves feront sur toujoursPlus.be?</p>
-			<br>
-			<iframe marginwidth="40" width="210" height="158"
+		    <div style="height:70px;">  <!--  to have the same height in both columns -->
+				<p>Qu’est-ce que profs et élèves feront sur toujoursPlus.be?</p>
+			</div>
+			<iframe marginwidth="40" width="280" height="210"
 				src="http://www.youtube.com/embed/xXy_ywNIZv8?rel=0" frameborder="0"
 				allowfullscreen></iframe>
-			<br> <br>
-			<ul>
-				<li>Trouver facilement des vidéos, documents, jeux éducatifs et exercices de qualité sur internet, sans chercher des heures.</li>
+			<br/> <br/>
+			<ul class="vid_li">
+				<li>trouver facilement des vidéos, documents, jeux éducatifs et exercices de qualité sur internet, sans chercher des heures,</li>
 				<li><span class="pup" rel="popover"
-				data-content="Qu’avons-nous couvert du programme et y arriverons-nous pour la fin de l’année?">Mesurer leur progression académique</span></li>
-				<li>Partager..</li>
+				data-content="Qu’avons-nous couvert du programme et y arriverons-nous pour la fin de l’année?">mesurer leur  <abbr title="attribute">progression académique</abbr>.</span></li>
+				<li>partager...</li>
 			</ul>
 		</div>
 
 		<div id="vid2">
-			<p>Quels bénéfices dans les écoles?</p>
-			<br>
-			<iframe width="210" height="158"
+		    <div style="height:70px;">  <!--  to have the same height in both columns -->
+			   <p>Quels bénéfices dans les écoles?</p>
+			</div>
+			
+			<iframe width="280" height="210" style="margin-bottom:10px;"
 				src="http://www.youtube.com/embed/gaIfbsmmuMs?rel=0" frameborder="0"
 				allowfullscreen> </iframe>
-			<br> <br>
-			<ul>
+			
+			<ul class="vid_li">
 				<li><span class="pop" rel="popover" 
-				data-content="L’élève devrait plus prendre et moins recevoir.">Un renversement pédagogique</span></li>
+				data-content="L’élève devrait plus prendre et moins recevoir.">un <abbr title="attribute">renversement pédagogique</abbr>,</span></li>
+				<li ><span class="pop" rel="popover"
+				data-content="Comment utilement occuper une classe de première secondaire composée d’élèves de niveaux très différents, sans épuiser l’enseignant?">la <abbr title="attribute">différentation</abbr>,</span></li>
 				<li><span class="pop" rel="popover"
-				data-content="Comment utilement occuper une classe de première secondaire composée d’élèves de niveaux très différents, sans épuiser l’enseignant?">La différentation</span></li>
-				<li><span class="pop" rel="popover"
-				data-content="Par le non-ennui des HPs et des élèves largués.">La motivation</span></li>
+				data-content="Par le non-ennui des HPs et des élèves largués.">la  <abbr title="attribute">motivation</abbr></span></li>
 				<li><span class="pop" rel="popover"
 				data-content="Je suis moins spectateur et redeviens acteur de ma formation. Je dois décider comment apprendre parmis beaucoup d’alternatives: vidéos, jeux, exercices, etc.">L’autonomie</span></li>
 				<li><span class="pop" rel="popover"
-				data-content="Choix de vidéos et textes dans différantes langues pour apprendre les maths, l’histoire, la biologie, etc.">L’immersion linguistique</span></li>
+				data-content="Choix de vidéos et textes dans différantes langues pour apprendre les maths, l’histoire, la biologie, etc.">l’ <abbr title="attribute">immersion linguistique</abbr>,</span></li>
 				<li><span class="pop" rel="popover"
-				data-content="Mon diagnostique vérité pour voir le plus tôt possible, si le système éducatif me nivelle par le bas.">L’excellence</span></li>
+				data-content="Mon diagnostique vérité pour voir le plus tôt possible, si le système éducatif me nivelle par le bas.">l’ <abbr title="attribute">excellence</abbr></span></li>
 			</ul>
 		</div>
 
