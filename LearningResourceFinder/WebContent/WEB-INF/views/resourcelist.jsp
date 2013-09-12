@@ -25,7 +25,7 @@
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-		<form role="form" method="post" action="resourceaddsubmit">
+		<form id="addResourceForm" role="form" method="post" action="resourceaddsubmit">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
@@ -37,7 +37,7 @@
 	                        <label for="url">site</label> 
 	                        <input type="text" class="form-control" id="url" name="url" placeholder="http://...">
 	                        <div class="pull-right"> 
-	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxPostAddResource()">Vérifier</button>
+	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
 							</div>
 							<span class="help-block">URL vers le site que vous désirez ajouter.</span>
 						</div>
@@ -53,7 +53,7 @@
 					</div>
                   </div>
 				  <div class="modal-footer" style="display: none;" id="bottomButtons">
-					<button type="submit" class="btn btn-primary">Ajouter</button>
+					<button type="button" class="btn btn-primary" onclick="ajaxResourceAddSubmit()" >Ajouter</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 				  </div>
 			</div>
