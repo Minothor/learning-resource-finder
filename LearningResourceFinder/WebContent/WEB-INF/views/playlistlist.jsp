@@ -8,30 +8,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<lrf:breadcrumb linkactive="Mes PlayLists">
+	<lrftag:breadcrumb linkactive="Mes PlayLists">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
-		<lrf:breadcrumbelement label="${current.user.firstName}" link="/user/${current.user.userName}" />
-	</lrf:breadcrumb>
+		<lrftag:breadcrumbelement label="${current.user.firstName}" link="/user/${current.user.userName}" />
+	</lrftag:breadcrumb>
 	
 	<div class="container">
 		<lrftag:pageheadertitle title="${current.user.firstName} ${user.lastName} : Mes PlayLists"/>
 		<div class=" " style="font-size:14px">
 		   &nbsp&nbsp<a href="<c:url value='/playlist/create'/>"> Créer une PlayList</a>
 		</div>
-	   	<table cellspacing="10">
-			<tr>
-			    <td>Titre</td>
-				<td>Description</td>
-				<td>Auteur</td>
-			</tr>
-			<c:forEach items="${playlistlist}" var="playlist">
+		<br />
+		<div class="table-responsive">
+		  	<table class="table table-bordered">
 				<tr>
-					<td><a href="<c:url value='playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a></td>
-					<td>${playlist.description}</td>
-					<td>${playlist.createdBy.fullName}</td>
-			   </tr>
-			</c:forEach>		
-		</table>
+				    <td><strong>Titre</strong></td>
+					<td><strong>Description</strong></td>
+					<td><strong>Auteur</strong></td>
+				</tr>
+				<c:forEach items="${playlistlist}" var="playlist">
+					<tr>
+						<td><a href="<c:url value='playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a></td>
+						<td>${playlist.description}</td>
+						<td>${playlist.createdBy.fullName}</td>
+				   </tr>
+				</c:forEach>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
