@@ -14,7 +14,7 @@
 	<section id="resourcelist">
 	<div class="container">
 		<div class="sixteen columns">
-			<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer	une ressource</a> <br />
+			<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a> <br />
 			<c:forEach items="${resourceList}" var="resource">
 				<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
 					<restag:resource resource="${resource}"></restag:resource>

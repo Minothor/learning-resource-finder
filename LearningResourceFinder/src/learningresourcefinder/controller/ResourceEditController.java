@@ -27,7 +27,7 @@ public class ResourceEditController extends BaseController<Resource> {
     UrlResourceRepository urlResourceRepository;
     
     @RequestMapping("/ajax/resourceaddsubmit")
-	public String resourceAddSubmit(@RequestParam("url") String url, @RequestParam("title") String title, @RequestParam("description") String description) {
+	public @ResponseBody String resourceAddSubmit(@RequestParam("url") String url, @RequestParam("title") String title, @RequestParam("description") String description) {
         SecurityContext.assertUserIsLoggedIn();
 
         Resource resource = new Resource();
@@ -46,7 +46,7 @@ public class ResourceEditController extends BaseController<Resource> {
         urlResourceRepository.persist(urlResource);
         resourceRepository.persist(resource);
         
-        return "La ressource a été ajoutée avec succès. <a href='"+UrlUtil.getRelativeUrlToResourceDisplay(resource)+"'>Afficher</a>";
+       return "La ressource a été ajoutée avec succès."+"<a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>";
     }
 
     @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
