@@ -30,10 +30,5 @@ public class ResourceRepository extends BaseRepository<Resource>
 		return result;
 	}
 	
-	public List<Resource> findResourcesByIdList(List<Long> idList){
-		List<Resource> result = em.createQuery("SELECT r FROM Resource r WHERE r.id in(:idList)")
-				.setParameter("idList", idList)
-				.getResultList();
-		return result;
-	}
+
 }
