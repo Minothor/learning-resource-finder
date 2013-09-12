@@ -128,7 +128,7 @@
 				
 				<form class="navbar-form navbar-right" role="search" method="get" method="search">
 					<div class="form-group">
-						<input id="search" style="min-width:200px" type="text" class="form-control" placeholder="Recherche" required>
+						<input id="search" style="min-width:100px;width:100px" type="text" class="form-control" placeholder="Recherche" required>
 					</div>
 					<button type="submit" class="btn btn-default">Rechercher</button>
 				</form>
