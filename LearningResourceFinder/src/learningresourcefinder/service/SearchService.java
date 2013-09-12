@@ -18,9 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchService {
 
-	@Autowired
-	private IndexManagerService indexManagerService;
-	@Autowired ResourceRepository resourceRepository;
+	@Autowired private IndexManagerService indexManagerService;
+	@Autowired private ResourceRepository resourceRepository;
 	
 	@PersistenceContext
 	EntityManager em;
