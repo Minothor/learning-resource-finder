@@ -22,24 +22,22 @@ public class SearchSummaryController extends BaseController<Resource> {
 	@Autowired private IndexManagerService indexService;
 	@Autowired private ResourceRepository resourceRepository;
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/searchallresource")
-	public ModelAndView getAllResource(@RequestParam("search") String searchResource){
+	public ModelAndView searchAllResource(@RequestParam("search") String searchResource){
 		List<SearchResult> resultList = searchService.search(searchResource);
-		List<Long> resultid = new ArrayList<Long>();
+		List<Resource> resources = (List) searchService.getFirstEntities(resultList, 300, Resource.class);
 		
-		for(SearchResult result : resultList){
-			resultid.add(result.getId()); 
-		}
-		
-		ModelAndView mv = new ModelAndView("search", "resourceList", resourceRepository.findResourcesByIdList(resultid));
+		ModelAndView mv = new ModelAndView("search", "resourceList", resources);
 		
 		return mv;
 	}
+
 	
 	@RequestMapping("/search")
 	public ModelAndView getFirstFiveResource(@RequestParam("search") String searchResource){
 		
-		ModelAndView mv = new ModelAndView("search", "resourceList", searchService.getFirstResources(searchService.search(searchResource), 5));
+		ModelAndView mv = new ModelAndView("search", "resourceList", searchService.getFirstEntities(searchService.search(searchResource), 5, Resource.class));
 		
 		return mv;
 	}
