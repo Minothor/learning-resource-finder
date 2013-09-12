@@ -97,7 +97,10 @@ public  class SearchResult {
     }
         
 
-   
+    public boolean isForClass(Class clazz) {
+    	return this.getEntityClassName().equals(clazz.getSimpleName());
+    }
+    
     public String getText() {
        
         return text;
