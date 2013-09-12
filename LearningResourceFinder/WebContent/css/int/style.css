@@ -87,6 +87,16 @@ you can use the generic selector below, but it's slower:
 .icon-key-3:before {
 	content: "\e00f";
 }
+/*#### FROMS #############################################################################*/
+ul li {
+	list-style-type: none; 
+}
+.font-ligther {
+	font-weight: lighter;
+}
+a.btn {
+	height: 31px;
+}
 /*#### HEADER #############################################################################*/
 .btn-google {
     background-color: #D64635;
@@ -107,6 +117,7 @@ you can use the generic selector below, but it's slower:
 .btn:hover {
  color: #FFF;
 }
+/*#### FOOTER #############################################################################*/
 #footer-main {
 	background-color: #E9F0F4;
 	color: #1D1D1D;
