@@ -51,6 +51,7 @@ function ajaxResourceAddSubmit() {
 		    success : function(msg) {
 	    		alert(msg);
 	    		$('#myModal').modal('hide');
+	    		// Vider champs du formulaire...
 		    },
 		    error : function(data) {
 		    	alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "+ data);
