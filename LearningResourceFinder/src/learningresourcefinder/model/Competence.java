@@ -58,6 +58,15 @@ public class Competence extends BaseEntity {
 		this.parent = parent;
 	}
 
+	public Competence(String codeCompetence, String nameCompetence,
+			Competence parent, String descriptionCompetence) {
+			this.code = codeCompetence;
+			this.name = nameCompetence;
+			this.parent = parent;
+			this.description = descriptionCompetence;
+			
+	}
+
 	//recursion for competence's childen and grandchildren
 	public List<Competence> getChildrenAndSubChildren() {
 		List <Competence> result = new ArrayList <Competence> ();
@@ -126,7 +135,15 @@ public class Competence extends BaseEntity {
 		return resources;
 	}
 	
-    @Override
+    public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	@Override
     public Long getId() {
         return id;
     }
