@@ -14,7 +14,7 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
         long id = competence.getId();
         htmlResult += "<li>" + competence.getName()
         +"<a href=\"javascript:ajaxCompetenceRemoveSubmit([ici l'id à supprimer])\" " + "id='S-" + id + "'>" + "supprimer" + "</a>" 
-        +"<a href=\"\" " + "id='D-" + id + "'>déplacer</a>"
+        +"<a data-toggle =\"modal\" href=\"#myModal\" " + "id='D-" + id + "'>déplacer</a>"
         +"<a href=\"...\" " + "id=" + "\"" +  "E-" +id + "\"" + ">"+ "éditer" +"</a>" 
         +"<a href=\"javascript:ajaxCompetenceAddSubmit([ici l'id du parent])\" " + "id=" + "\"" + "A-" + id + "\"" + ">" + "ajouter" + "</a>"; 
      
@@ -22,6 +22,7 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
 
     @Override
     public void endCompetence(Competence competence) {
+        htmlResult +="</a>";
         htmlResult += "</li>";
 
     }
