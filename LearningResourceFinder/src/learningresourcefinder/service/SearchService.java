@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import learningresourcefinder.model.Resource;
+import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchResult;
 
 import org.apache.lucene.search.ScoreDoc;
@@ -18,7 +20,8 @@ public class SearchService {
 
 	@Autowired
 	private IndexManagerService indexManagerService;
-
+	@Autowired ResourceRepository resourceRepository;
+	
 	@PersistenceContext
 	EntityManager em;
 
@@ -33,5 +36,18 @@ public class SearchService {
 		}
 		return searchResultList;
 	}
-
+	
+	public List<Resource> getFirstResources(List<SearchResult> searchResults, int maxResult) {
+		List<Long> resourceIds = new ArrayList<>();
+		
+		for(SearchResult searchResult : searchResults){
+			if (resourceIds.size() == maxResult) {
+				break;
+			}
+			resourceIds.add(searchResult.getId());
+		}
+		
+		return resourceRepository.findResourcesByIdList(resourceIds);
+	}
+	
 }
