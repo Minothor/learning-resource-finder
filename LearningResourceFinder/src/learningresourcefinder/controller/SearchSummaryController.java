@@ -23,8 +23,8 @@ public class SearchSummaryController extends BaseController<Resource> {
 	@Autowired ResourceRepository resourceRepository;
 
 	@RequestMapping("/searchallresource")
-	public ModelAndView getAllResource(/*@RequestParam("search") String searchResource*/){
-		List<SearchResult> resultList = searchService.search("mathématique" /*searchResource*/);
+	public ModelAndView getAllResource(@RequestParam("search") String searchResource){
+		List<SearchResult> resultList = searchService.search(searchResource);
 		List<Long> resultid = new ArrayList<Long>();
 		
 		for(SearchResult result : resultList){
