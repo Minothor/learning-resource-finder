@@ -232,10 +232,8 @@ header {
 	width: auto;
 	height: auto;
 	clear:both;
-	padding-left:30%;
-	padding-right:30%;
-	padding-top:20px;
-	padding-bottom:20px;
+	padding: 20px calc(50% - 345px);
+	
 	
 	
 }
@@ -259,8 +257,8 @@ header {
 
 
 
-#vid1{float:left; width:280px;display:inline-block;margin-left:30%;margin-bottom:20px}
-#vid2{float:right;width:280px;display:inline-block;margin-right:30%;margin-bottom:20px}
+#vid1{float:left; width:280px;display:inline-block;margin-left:calc(50% - 350px);margin-bottom:20px}
+#vid2{float:right;width:280px;display:inline-block;margin-right:calc(50% - 350px);margin-bottom:20px}
 
 
 #vid1 > ul {
