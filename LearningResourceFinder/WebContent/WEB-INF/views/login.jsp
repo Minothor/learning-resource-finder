@@ -69,6 +69,7 @@ $(document).ready(function(event){
 
 <lrftag:pageheadertitle title="Connexion"/> 
 
+
 Pour participer (voter, argumenter, etc.), vous devez vous connecter avec votre utilisateur.
 
 <div style="padding-top:20px;">    
