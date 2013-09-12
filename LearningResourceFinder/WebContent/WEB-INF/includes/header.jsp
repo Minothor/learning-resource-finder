@@ -125,10 +125,10 @@
 					</c:otherwise>
 
 				</c:choose>
-
+				
 				<form class="navbar-form navbar-right" role="search" method="get" method="search">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Recherche" required>
+						<input id="search" style="min-width:200px" type="text" class="form-control" placeholder="Recherche" required>
 					</div>
 					<button type="submit" class="btn btn-default">Rechercher</button>
 				</form>
