@@ -98,6 +98,7 @@ public class CompetenceController extends BaseController<Competence> {
         ModelAndView mv= new ModelAndView("competencetree"); 
         
         Competence competence=getRequiredEntity(idCompetence);
+        SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
         Competence newParent =   competenceRepository.findByCode(codeNewParent);
         if (newParent==null){
             NotificationUtil.addNotificationMessage("Code parent inexistant"); 
