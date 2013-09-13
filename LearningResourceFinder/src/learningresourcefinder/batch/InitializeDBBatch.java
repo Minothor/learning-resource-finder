@@ -165,6 +165,12 @@ public class InitializeDBBatch implements Runnable {
 	}
 
 	public void insertCompetences() {
+		
+		//Main tree node with null parent
+		Competence cMainNode = new Competence("Les", "Compétences");
+		competenceRepository.persist(cMainNode);
+		//===============================
+		
 		Competence pFond = new Competence("Fon", "Fondamental");
 		competenceRepository.persist(pFond);
 
@@ -186,6 +192,7 @@ public class InitializeDBBatch implements Runnable {
 		Competence p1F = new Competence("1PF", "Français");
 		competenceRepository.persist(p1F);
 
+		cMainNode.addChild(pFond); 
 		pFond.addChild(p1);
 		pFond.addChild(p2);
 		p1.addChild(p1M);
