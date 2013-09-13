@@ -67,6 +67,9 @@ public class CompetenceController extends BaseController<Competence> {
 		Competence competence = getRequiredEntity(idCompetence);
 		SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
 		//checking
+        if (competence.getParent()==null){
+            return "Noeud principal, ne peut être déplacé!";
+        }
 		if (competence.getChildrenAndSubChildren().size() == 0){
 			em.remove(competence);
 			return "success";
@@ -82,6 +85,9 @@ public class CompetenceController extends BaseController<Competence> {
 		if (competenceRepository.getIfCompetenceCodeExistOrIsCurrentlyBeingEdited(idCompetence,codeCompetence)) {
 			Competence competence = getRequiredDetachedEntity(idCompetence);
 			SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
+	        if (competence.getParent()==null){
+	            return "Noeud principal, ne peut être déplacé!";
+	        }
 			competence.setName(nameCompetence);
 			competence.setCode(codeCompetence);
 			competence.setDescription(descriptionCompetence);
@@ -100,6 +106,10 @@ public class CompetenceController extends BaseController<Competence> {
         Competence competence=getRequiredEntity(idCompetence);
         SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
         Competence newParent =   competenceRepository.findByCode(codeNewParent);
+        if (competence.getParent()==null){
+            NotificationUtil.addNotificationMessage("Noeud principal, ne peut être déplacé!"); 
+            return mv;
+        }
         if (newParent==null){
             NotificationUtil.addNotificationMessage("Code parent inexistant"); 
             return mv;
