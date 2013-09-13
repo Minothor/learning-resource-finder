@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.search.Searchable;
@@ -67,7 +69,7 @@ public class IndexManagerService {
     @PersistenceContext EntityManager em;
 
     @SuppressWarnings("unchecked")   
-    Class<Searchable>[] searchables = new Class[]{Resource.class};  // Entities that are included in the index.
+    Class<Searchable>[] searchables = new Class[]{Resource.class, PlayList.class, Competence.class};  // Entities that are included in the index.
    
     String[] searchableCriterias = new String[]{    // Addition of all the fields that should be searchable in the searchable entities.
             "name", "description"};  
