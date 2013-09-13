@@ -1,5 +1,7 @@
 package learningresourcefinder.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,16 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 
 
 @Entity
-public class Cycle extends BaseEntity {
-
+public class Cycle extends BaseEntity implements Serializable {
+private static final long serialVersionUID = 1L;
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     
-	@Column(length = 40)
-	@Size(max=40, message="le nom d'un point de programme ne peut contenir que 40 caractères maximum")
+    @NotBlank(message="Entrez le nom du cycle")
+	@Column(length = 15)
+	@Size(max=15, message="le nom d'un cycle ne peut contenir que 15 caractères maximum")
 	private String name;
 
 	public Cycle() {} // No arg constructor for Hibernate
