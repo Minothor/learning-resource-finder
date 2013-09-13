@@ -9,7 +9,7 @@
 
 <div id="divPhoto">
 	<c:if test="${canEdit}">
-		<a href="#" data-width="500" data-rel="popupJquery" class="poplight">
+		<a data-toggle="modal" href="#modalPlaylist">
 	</c:if>
 
 	<figure>
