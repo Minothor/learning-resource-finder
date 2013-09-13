@@ -103,6 +103,14 @@ public class CompetenceController extends BaseController<Competence> {
             NotificationUtil.addNotificationMessage("Code parent inexistant"); 
             return mv;
         }
+        if (competence.getChildrenAndSubChildren().contains(newParent)){
+        	NotificationUtil.addNotificationMessage("La compétence ne peut être déplacée dans ses propres sous compétences");
+        	return mv;
+        }
+        if (competence.getId() == newParent.getId()){
+        	NotificationUtil.addNotificationMessage("La compétence ne peut être déplacée sur elle même");
+        	return mv;
+        }
         
         if (competence.getParent() != null) {
             competence.getParent().getChildren().remove(competence);
