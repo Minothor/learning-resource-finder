@@ -3,8 +3,7 @@ function ajaxVerifyUrl() {
 	var url = $('#url').val();
 	if (url != '') {
 
-		$
-				.ajax({
+		$.ajax({
 					type : "POST",
 					url : 'ajax/checkUrl',
 					data : "url=" + url,
@@ -13,9 +12,7 @@ function ajaxVerifyUrl() {
 							if (isValidURL(url) == false) {
 								alert("url non valide ");
 							} else {
-								$("#bottomButtons").show();
-								$("#formPart2").show();
-								$("#urlCheckButton").hide();
+                                toggleForm();
 							}
 						} else {
 							alert("une resource avec une url similaire existe déjà sur le site");
@@ -49,16 +46,23 @@ function clearForm() {
 	 .removeAttr('selected');
 }
 
+
+function toggleForm() {
+$("#bottomButtons").toggle();
+$("#formPart2").toggle();
+$("#urlCheckButton").toggle();
+}
+
 function ajaxResourceAddSubmit() {
-	$
-			.ajax({
+	$.ajax({
 				type : "POST",
 				url : 'ajax/resourceaddsubmit',
 				data : $("#addResourceForm").serialize(),
 				success : function(msg) {
-					alert(msg);
+					alert(msg);   /// TODO put this message in a nicer place (div on top of the page?) than an alert.
 					$('#myModal').modal('hide');
 					clearForm();
+					toggleForm();
 				},
 				error : function(data) {
 					alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
