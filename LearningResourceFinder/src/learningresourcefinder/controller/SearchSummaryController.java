@@ -1,8 +1,9 @@
 package learningresourcefinder.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchResult;
@@ -33,12 +34,15 @@ public class SearchSummaryController extends BaseController<Resource> {
 		return mv;
 	}
 
-	
 	@RequestMapping("/search")
 	public ModelAndView getFirstFiveResource(@RequestParam("search") String searchResource){
+		List<SearchResult> listOfResult = searchService.search(searchResource);
 		
-		ModelAndView mv = new ModelAndView("search", "resourceList", searchService.getFirstEntities(searchService.search(searchResource), 5, Resource.class));
-		
+		ModelAndView mv = new ModelAndView("search");
+		mv.addObject("resourceList", searchService.getFirstEntities(listOfResult, 5, Resource.class));
+		mv.addObject("playlistList", searchService.getFirstEntities(listOfResult, 5, PlayList.class));
+		mv.addObject("competenceList", searchService.getFirstEntities(listOfResult, 5, Competence.class));
+	
 		return mv;
 	}
 	
