@@ -1,7 +1,9 @@
 package learningresourcefinder.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +16,15 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 import javax.persistence.OrderBy;
 
+import learningresourcefinder.search.Searchable;
+
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
 
 
 @Entity
-public class Competence extends BaseEntity {
+public class Competence extends BaseEntity implements Searchable{
 
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -149,4 +154,17 @@ public class Competence extends BaseEntity {
     public Long getId() {
         return id;
     }
+
+	@Override
+	public Map<String, String> getCriterias() {
+        Map<String,String> criterias = new HashMap<String,String>();
+        criterias.put("name",StringUtils.defaultIfEmpty(name,""));
+        criterias.put("description",StringUtils.defaultIfEmpty(description,""));
+        return criterias;
+	}
+
+	@Override
+	public String getBoostedCriteriaName() {
+		return "name";
+	}
 }
