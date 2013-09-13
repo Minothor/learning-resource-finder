@@ -10,6 +10,7 @@
 <%@ attribute name="help" type="java.lang.String" %>   <%-- Additional text to write below the input such as "we'll keep your e-mail private" --%>
 <%@ attribute name="cssClass" required="false" type="java.lang.String"%>
 <%@ attribute name="type"  type="java.lang.String" %>
+<%@ attribute name="value"  type="java.lang.String" %>
 <%-- This is in a .tag file and not in a Java file because in JSP 2.0, only .tag file can be used to make custom tags producing custom tags
 see http://stackoverflow.com/questions/439861/spring-mvc-tag-interaction-with-custom-tag
  --%>

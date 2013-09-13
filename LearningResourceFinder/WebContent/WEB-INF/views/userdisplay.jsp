@@ -42,16 +42,16 @@ $(function() {
 			<a class="btn btn-default" href="playlist/user/${user.userName}">Play-lists</a>
 		</div>
 		
+		<br />
+		<br />
 
-			<br/>
-
-			<%-- IMAGE   IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  --%>
-			<div style="display:inline-block; vertical-align:top;">
-				<div class="user-options" style="font-size:12px">
-				
-					<div id="divPhoto">
+		<%-- IMAGE   IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  IMAGE  --%>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="col-md-3">
+					<div>
 						<c:if test="${canEdit}">
-				    		<a href="#" data-width="500" data-rel="popupJquery" class="poplight">
+				    	<a data-toggle="modal" href="#modalAvatar">
 				    	</c:if> 		
 				        	<figure>
 				        		<c:choose>
@@ -62,103 +62,124 @@ $(function() {
 					            	<c:otherwise>
 					            		<c:choose>
 					            			<c:when test="${user.isFemale()}">
-												<img src="images/Femme_anonyme.jpg" />
+												<img src="images/Femme_anonyme.jpg" class="avatar" />
 											</c:when>
 											<c:otherwise>
-												<img src="images/Homme_anonyme.jpg" />
+												<img src="images/Homme_anonyme.jpg"  class="avatar" />
 											</c:otherwise>
 										</c:choose>
 									</c:otherwise>
 								</c:choose>
 						<c:if test="${canEdit}">	 
-				                	<figcaption lang="la"><span class="lib-change-image"><b>Charger une image</b></span></figcaption>
+				                	<figcaption lang="la"><span><strong>Charger une image</strong></span></figcaption>
 				        </c:if>         	
 				      		</figure>
 						<c:if test="${canEdit}">     
 				      	</a>
 				       	</c:if> 		      	
 				    </div>
-					
-					<div id="popupJquery" class="popupJquery">	
-				    	<div class="popup-close">
-				        	<a class="close" title="close this popup">X</a>
-				      	</div>
-				  	  	<form method="post" action="/user/imageadd" class="formUrlResource" enctype="multipart/form-data">	
-				    		<h2>Ajouter une image</h2> 
-				          	<br />
-				          	<label><input type="radio"  name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur</label>
-				          	<input type="file"   name="file"   value="Parcourir..."    class="inputSource"   id="inputFile" /> 
-				          	<input type="hidden" name="strUrl" value="http://..."      class="inputSource"   id="inputUrl"  />             
-				          	<br /> 
-				          	<label><input type="radio"  name="rdFrom" value="url"      class="radioUrl" /> Depuis un lien</label>
-				          	<input type="hidden" name="id" value="${user.id}" />
-				          	<br />
-				          	<br />
-				          	<input class="btnSubmit" type="submit" value="Ajouter" name="btnPicture" /> 
-				      	</form>
-				      	<br />  <%-- Add/edit links --%>
-						<c:if test="${canEdit}">
-							<c:choose>
-									<c:when test="${user.picture}">
-										<a href= "/user/imagedelete?id=${user.id}">Supprimer image</a><br/>
-									</c:when>
-							</c:choose>			
-							<c:if test="${sessionScope.providersignedin != 'LOCAL'}">	
-							   <a href ="user/updateusersocialimage?provider=${sessionScope.providersignedin}&id=${user.id}">Mettre à jour mon image depuis ${sessionScope.providersignedin} </a><br/>
-							</c:if>
-						</c:if>
-					</div>
-			<%-- 		<a href= "/user/image?id=${user.id}">ajouter image</a><br/> --%>
-					<br />
-					<br />
 				</div>
 			</div>
-
-			<div style="display:inline-block; vertical-align:top;">
-				<c:choose><c:when test="${user.firstName ne null}">${user.firstName}</c:when><c:otherwise>?</c:otherwise></c:choose>
-				<c:choose><c:when test="${user.lastName ne null}">${user.lastName}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
-				<c:choose><c:when test="${user.title ne null}">${user.title}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
-									
-				<% 
-					 if (((User) pageContext.getRequest().getAttribute("user")).getBirthDate() != null){
-					 DateUtil.SlicedTimeInterval sti = DateUtil.sliceDuration(((User) pageContext.getRequest().getAttribute("user")).getBirthDate(), new Date());
-		  			 out.println(sti.years + " ans");
-					}
-		 		%>	
-				<c:if test="${user.role != USER}">
-					 ${user.role.name}<br/><br/>
-				</c:if>	
-				<br />
-				<br />
-			</div>			
-			<br/>
-			<div id="tabs">
+		</div>
+<%-- 		<c:if test="${canEdit}"> --%>
+		<div class="panel panel-default">
+		  	<div class="panel-body">
 				<ul>
-					<li><a href="#tabs-1">Signalétique</a></li>			
-				</ul>
-				<div id="tabs-1">		<!--  **************************Signalétique********************* -->
-					<div>
-						Prénom: <c:choose><c:when test="${user.firstName ne null}">${user.firstName}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
-						Nom de famille: <c:choose><c:when test="${user.lastName ne null}">${user.lastName}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
-						Pseudo : ${user.userName}<br/>
-						Titre: <c:choose><c:when test="${user.title ne null}">${user.title}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
-						Genre : <c:choose><c:when test="${user.gender ne null}">${user.gender}</c:when><c:otherwise>?</c:otherwise></c:choose> <br/>
-						<c:if test="${canEdit}">
-							Né le : <c:choose><c:when test="${user.birthDate ne null}">${user.birthDate}</c:when><c:otherwise>?</c:otherwise></c:choose><br />
-							mail : <c:choose><c:when test="${user.mail ne null}">${user.mail}</c:when><c:otherwise>?</c:otherwise></c:choose><br />
-							
-							Date d'enregistrement : <lrf:datedisplay date="${user.createdOn}" /><br />
-							Rôle : ${user.role}<br/>
-							Dernier accès : <lrf:datedisplay date="${user.lastAccess}" duration="true"/> <br/>
-							Depuis l'adresse ${user.lastLoginIp}<br/>
-							Status du compte : ${user.accountStatus}<br/>
-							<c:if test="${user.lockReason}!= ACTIVE ">
-								Raison blocage compte : ${user.lockReason}<br /> 
-							</c:if>
+					<li><label>Prénom :</label> <c:choose><c:when test="${user.firstName ne null}">${user.firstName}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
+					<li><label>Nom :</label> <c:choose><c:when test="${user.lastName ne null}">${user.lastName}</c:when><c:otherwise>?</c:otherwise></c:choose></li>						
+					<li>
+						<label>Âge :</label>
+						<% 
+							if (((User) pageContext.getRequest().getAttribute("user")).getBirthDate() != null){
+								DateUtil.SlicedTimeInterval sti = DateUtil.sliceDuration(((User) pageContext.getRequest().getAttribute("user")).getBirthDate(), new Date());
+					  			out.println(sti.years + " ans");
+							}
+					 	%>
+					</li>
+					<li><label>Genre :</label> <c:choose><c:when test="${user.gender ne null}">${user.gender}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
+					<li><label>Né le :</label> <c:choose><c:when test="${user.birthDate ne null}">${user.birthDate}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
+					<li><label>Pseudo :</label> ${user.userName}</li>
+					<li><label>Email :</label> <c:choose><c:when test="${user.mail ne null}">${user.mail}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
+					<li><label>Titre :</label> <c:choose><c:when test="${user.title ne null}">${user.title}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
+					<li>
+						<label>Rôle :</label>
+						<c:if test="${user.role != USER}">
+							${user.role.name}
 						</c:if>
-					</div>
-				</div>								
-			</div>
+					</li>
+					<li><label>Date d'enregistrement :</label> <lrf:datedisplay date="${user.createdOn}" /></li>
+					<li><label>Dernier accès :</label> <lrf:datedisplay date="${user.lastAccess}" duration="true"/></li>
+					<li><label>Depuis l'adresse :</label> ${user.lastLoginIp}</li>
+					<li>
+						<label>Status du compte :</label> ${user.accountStatus}
+						<c:if test="${user.lockReason}!= ACTIVE ">
+							Raison blocage compte : ${user.lockReason}<br /> 
+						</c:if>
+					</li>
+				</ul>
+		  	</div>
+		</div>
+<%-- 		</c:if> --%>
+
+		  <!-- Modal -->
+		<div class="modal fade" id="modalAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		      	<div class="modal-content">
+		        	<div class="modal-header">
+		          		<button type="button" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
+		          		<h4 class="modal-title">Ajouter un avatar</h4>
+		        	</div>		        	
+		     		<form method="post" action="/user/imageadd" enctype="multipart/form-data" class="form-horizontal formUrlResource">	
+		     			<div class="modal-body">
+		     			
+		     				<div class="form-group">
+							    <label class="col-lg-4 control-label" style="text-align:left;">
+							    	<input type="radio" name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> 
+							    	Depuis l'ordinateur
+							    </label>
+							    <div class="col-lg-8">
+							      	<input type="file" name="file" value="Parcourir..." class="inputSource"  id="inputFile" style="width:345px;" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+							    <label class="col-lg-4 control-label" style="text-align:left;">
+							    	<input type="radio"  name="rdFrom" value="url" class="radioUrl" /> 
+							    	Depuis un lien
+							    </label>
+							    <div class="col-lg-8">
+							      	<input type="hidden" name="strUrl" value="http://..." class="form-control inputSource" id="inputUrl" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+							    <label class="col-lg-4 control-label" style="text-align:left;">
+							    	<input type="radio"  name="rdFrom" value="defaut" class="radioDefaut" /> 
+							    	Image par défaut
+							    </label>
+							    <div class="col-lg-8">
+							    	<c:choose>
+							    		<c:when test="${user.isFemale()}">
+												<img class="avatarDefault" style="visibility:hidden;margin:-95px 211px;position:absolute;" src="images/Femme_anonyme.jpg" alt="Femme" />
+										</c:when>
+										<c:otherwise>
+												<img class="avatarDefault" style="visibility:hidden;margin:-95px 211px;position:absolute;" src="images/Homme_anonyme.jpg" alt="Homme" />
+										</c:otherwise>
+									</c:choose>
+							    </div>
+							</div>
+
+				    	</div>
+				    	
+				    	<div class="modal-footer">
+				    		<input type="hidden" name="id" value="${user.id}" />
+			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
+			          		<button type="submit" class="btn btn-primary closeModal">Sauver l'avatar</button>
+			        	</div>
+				    </form>
+		      	</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	</div>
 </body>
 </html>

@@ -1,8 +1,5 @@
 package learningresourcefinder.controller;
 
-
-
-
 import learningresourcefinder.model.User;
 import learningresourcefinder.service.LoginService;
 import learningresourcefinder.util.NotificationUtil;
@@ -15,12 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
-
-
-
-
 @Controller
-public class LogoutController extends BaseController<User>{
+public class LogoutController extends BaseController<User> {
     
     @Autowired LoginService loginService;
 
@@ -29,16 +22,11 @@ public class LogoutController extends BaseController<User>{
   
          loginService.logout();
          NotificationUtil.addNotificationMessage("Vous ête à present deconnecté de "+UrlUtil.getWebSiteName());
-         
         return "redirect:/";
     }
     @RequestMapping("/ajax/logout")
     public ResponseEntity<String> logoutAjax() {
-   
          loginService.logout();
-         
-         
         return new ResponseEntity<String>("loged out", HttpStatus.OK);
-    }
-   
+    } 
 }
