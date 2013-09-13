@@ -1,7 +1,9 @@
 package learningresourcefinder.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,13 +13,15 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
+import learningresourcefinder.search.Searchable;
 import learningresourcefinder.web.Slugify;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
 @Entity
 @SequenceGenerator(name="PlayListSequence", sequenceName="PLAYLIST_SEQUENCE")
-public class PlayList extends BaseEntityWithShortId {
+public class PlayList extends BaseEntityWithShortId implements Searchable {
     
     @Id  @GeneratedValue(generator="PlayListSequence") 
     Long id;
@@ -89,5 +93,18 @@ public class PlayList extends BaseEntityWithShortId {
 	public void setPicture(Boolean picture) {
 		this.picture = picture;
 	}
+	
+    @Override
+    public Map<String, String> getCriterias() {
+        Map<String,String> criterias = new HashMap<String,String>();
+        criterias.put("name",StringUtils.defaultIfEmpty(name,""));
+        criterias.put("description",StringUtils.defaultIfEmpty(description,""));
+        return criterias;
+    }
+    
+    @Override
+    public String getBoostedCriteriaName() {
+        return "name";
+    }
 	
 }
