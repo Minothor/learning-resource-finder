@@ -62,9 +62,13 @@ public class SearchService {
 		return entities;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<BaseEntity> findEntitiesByIdList(List<Long> idList, Class clazz){
-		List<BaseEntity> result = em.createQuery("SELECT e FROM "+clazz.getSimpleName()+" e WHERE e.id in(:idList)")
+		if(idList.size() == 0){  // If we give an empty list, postGreSQL does not like the query... (Exception).
+			return new ArrayList<BaseEntity>();
+		}
+		String jpql = "SELECT e FROM "+clazz.getSimpleName()+" e WHERE e.id in (:idList)";
+		List<BaseEntity> result = em.createQuery(jpql)
 				.setParameter("idList", idList)
 				.getResultList();
 		return result;
