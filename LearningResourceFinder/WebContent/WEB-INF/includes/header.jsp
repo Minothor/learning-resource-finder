@@ -126,10 +126,10 @@
 											name="username"> <input class="form-control"
 											style="margin-bottom: 15px;" type="password"
 											placeholder="Password" id="password2" name="password">
-										<input style="float: left; margin-right: 10px;"
-											type="checkbox" name="remember-me" id="remember-me2"
-											value="1"> <label class="string optional"
-											for="remember_me2"> Se souvenir de moi</label> <input
+											<input class="form-control"
+											style="margin-bottom: 15px;" type="email"
+											placeholder="Email" id="email" name="email">
+										<input
 											class="btn btn-bleu btn-block" type="submit" id="sign-in"
 											value="Inscription">
 									</form>

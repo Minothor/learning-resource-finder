@@ -32,13 +32,14 @@
 					<lrftag:playlistimage canEdit="${canEdit}" playlist="${playlist}" random="${random}" />
 				</div>
 				<div class="col-md-4">
-					<ul>
-						<li><strong>Nom :</strong> ${playlist.name}</li>
-						<li><strong>Description :</strong> ${playlist.description}</li>
-						<li><strong>Auteur :</strong> <a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></li>
-						<li></li>
-						<li></li>
-					</ul>
+					<dl class="dl-horizontal">
+						<dt>Nom :</dt>
+					  	<dd>${playlist.name}</dd>
+					  	<dt>Description :</dt>
+					  	<dd>${playlist.description}</dd>
+					  	<dt>Auteur :</dt>
+					  	<dd><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
+					</dl>
 				</div>			
 			</div>
 		</div>

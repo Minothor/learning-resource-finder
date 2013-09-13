@@ -29,7 +29,8 @@
 	</lrftag:breadcrumb>
 	
 	<div class="container">
-	
+		<lrftag:pageheadertitle title="Edition : ${playlist.name}"/>
+		
 		<c:choose>
 			<c:when test="${playlist.id==null}">
 				<h1>Create PlayList</h1>
@@ -40,48 +41,18 @@
 		</c:choose>
 	
 		<lrftag:playlistimage canEdit="${canEdit}" playlist="${playlist}" random="${random}" />
-
-		<div id="popupJquery" class="popupJquery">
-			<div class="popup-close">
-				<a class="close" title="close this popup">X</a>
-			</div>
-			<form method="post" action="/playlist/imageadd" class="formUrlResource" enctype="multipart/form-data">
-				<h2>Ajouter une image</h2>
-				<br /> 
-				<label>
-					<input type="radio" name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> 
-					Depuis l'ordinateur
-				</label> 
-				<input type="file" name="file" value="Parcourir..." class="inputSource" id="inputFile" />
-				<input type="hidden" name="strUrl" value="http://..." class="inputSource" id="inputUrl" /> 
-				<br /> 
-				<label>
-					<input type="radio" name="rdFrom" value="url" class="radioUrl" /> 
-					Depuis un lien
-				</label> 
-				<input type="hidden" name="id" value="${user.id}" /> 
-				<input type="hidden" name="idPlayList" value="${playlist.id}" /> <br /> <br />
-				<input class="btnSubmit" type="submit" value="Ajouter" name="btnPicture" />
-			</form>
-			<br />
-		</div>
-
-<%-- 		<form modelAttribute="playlist" method="post" name="form" action='<%=response.encodeURL("/playlist/editsubmit")%>'> --%>
-<%-- 			<form:hidden path="id" /> --%>
-	
-<!-- 			<label>Titre</label> -->
-<%-- 			<form:input path="name" /> --%>
-<%-- 			<form:errors path="name" /> --%>
 		
-<!-- 			<label>Description</label> -->
-<%-- 			<form:input path="description" /> --%>
-<%-- 			<form:errors path="description" /> --%>
-			
-<!-- 			<input type="submit" -->
-<%-- 				value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>" --%>
-<!-- 				onclick="javascript: return verifForm(this);" /> -->
-	
-<%-- 		</form> --%>
+		<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playlist" class="form-horizontal" role="form" method="post">
+			<form:hidden path="id" />
+			<lrftag:input path="name" label="Titre" />
+			<lrftag:input path="description" label="Description" />
+
+			<input type="submit"
+				value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>"
+				onclick="javascript: return verifForm(this);" />
+		</form:form>
+
+
 	
 	</div>
 </body>
