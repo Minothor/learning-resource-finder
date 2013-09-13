@@ -51,7 +51,10 @@
 		<appender-ref ref="console"/>
 	</logger>
 	
-	
+ 	<logger name="org.hibernate" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console"/>
+	</logger> 
 	
 	
 	<!-- SQL and JDBC loggers -->
