@@ -12,12 +12,14 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
     
     public void startCompetence(Competence competence) {
         long id = competence.getId();
-        htmlResult += "<li>" + " " + competence.getCode() + " " + competence.getName() + "<font size=\"1\">"
-        +"<a href=\"#\" " + "id='D-" + id + "'> Déplacer</a>"
-        +"<a href=\"#\" " + "id=" + "\"" + "A-" + id + "\"" + ">" + " Ajouter" + "</a>"
-        +"<a href=\"#\" " + "id=" + "\"" +  "E-" +id + "\"" + ">"+ " Éditer" +"</a>"
+        htmlResult += "<li>" + " " + competence.getCode() + " " + competence.getName() + "<font size=\"1\">";
+        // Main node hasn't parent, it must just be take like parent and only "Add" option is permit
+        if (competence.getParent() != null){ htmlResult += "<a href=\"#\" " + "id='D-" + id + "'> Déplacer</a>";}
+        htmlResult += "<a href=\"#\" " + "id=" + "\"" + "A-" + id + "\"" + ">" + " Ajouter" + "</a>";
+        if (competence.getParent() != null){ htmlResult +="<a href=\"#\" " + "id=" + "\"" +  "E-" +id + "\"" + ">"+ " Éditer" +"</a>"
         +"<a href=\"#\" " + "id='R-" + id + "'>" + " Supprimer" + "</a>" 
-        +"</font>"; 
+        ;} 
+        htmlResult += "</font>";
      
     }
 
