@@ -42,6 +42,20 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@Column()
 	private int numberImage;
 	
+	@Column()
+	private String language;
+	
+	@Column()
+	private String format;
+	
+	@Column()
+	private String platform;
+	
+	@Column()
+	private Boolean advertising;
+	
+	@Column()
+	private Integer duration;
     
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
