@@ -29,28 +29,43 @@
 	</lrftag:breadcrumb>
 	
 	<div class="container">
-		<lrftag:pageheadertitle title="Edition : ${playlist.name}"/>
+		
 		
 		<c:choose>
 			<c:when test="${playlist.id==null}">
-				<h1>Create PlayList</h1>
+				<lrftag:pageheadertitle title="Création d'une PlayList"/>
 			</c:when>
 			<c:otherwise>
-				<h1>Edit PlayList</h1>
+				<lrftag:pageheadertitle title="Edition : ${playlist.name}"/>
 			</c:otherwise>
 		</c:choose>
 	
-		<lrftag:playlistimage canEdit="${canEdit}" playlist="${playlist}" random="${random}" />
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<br />
+				<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playlist" class="form-horizontal" role="form" method="post">
+					<div class="col-md-12">
+						<form:hidden path="id" />
+						<lrftag:input path="name" label="Titre" />
+						<lrftag:input path="description" label="Description" />
+				
+							
+					</div>
+					
+					<div class="form-group">
+				   		<label class="col-lg-2"></label>
+				   		<ul class="col-lg-2" >
+				    		<li style="display:inline;">
+				    			<input type="submit" class="btn btn-primary" value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>" onclick="javascript: return verifForm(this);" />
+				    		</li>
+				    		<li style="display:inline;"><button onclick="location.href='/user/';" class="btn" type="reset">Cancel</button></li>
+				    	</ul>
+				    </div>
+				</form:form>
+			</div>
+		</div>
 		
-		<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playlist" class="form-horizontal" role="form" method="post">
-			<form:hidden path="id" />
-			<lrftag:input path="name" label="Titre" />
-			<lrftag:input path="description" label="Description" />
-
-			<input type="submit"
-				value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>"
-				onclick="javascript: return verifForm(this);" />
-		</form:form>
+		
 
 
 	

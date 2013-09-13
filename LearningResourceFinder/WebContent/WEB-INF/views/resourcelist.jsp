@@ -12,16 +12,21 @@
 		<lrf:breadcrumbelement label="Home" link="home" />
 	</lrf:breadcrumb>
 	<section id="resourcelist">
-	<div class="container">
-		<div class="sixteen columns">
-			<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a> <br />
-			<c:forEach items="${resourceList}" var="resource">
-				<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
-					<restag:resource resource="${resource}"></restag:resource>
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="sixteen columns">
+						<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a> <br />
+						<c:forEach items="${resourceList}" var="resource">
+							<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
+								<restag:resource resource="${resource}"></restag:resource>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-			</c:forEach>
+			</div>
 		</div>
-	</div>
+	</section>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -62,6 +67,6 @@
 	    </div>
 		<!-- /.modal-dialog -->
 	</div>
-	<!-- /.modal --> </section>
+	<!-- /.modal --> 
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
-<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrf" %>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>	
@@ -15,81 +15,150 @@
 	</script>
 </head>
 <body>
-	<lrf:breadcrumb linkactive="${resource.name}">
-		<lrf:breadcrumbelement label="Home" link="home" />
-		<lrf:breadcrumbelement label="Ressource" link="ressourcelist" />
-	</lrf:breadcrumb>
+	<lrftag:breadcrumb linkactive="${resource.name}">
+		<lrftag:breadcrumbelement label="Home" link="home" />
+		<lrftag:breadcrumbelement label="Ressource" link="ressourcelist" />
+	</lrftag:breadcrumb>
 	<div class="container">
-		<div>
-			<h1>${resource.name}</h1>
-			<p>${resource.description}</p>
-			<p>${resource.createdBy.firstName} ${resource.createdBy.lastName}</p>
-			<c:if test="${canEdit}">		
-				<a href="<c:url value='resourceedit?id=${resource.id}'/>">Edit resource</a> 
-			</c:if>
-		</div>
-		<br />
-		<div>
-			<h2>Les liens :</h2>
-			<table>
-				<tr>
-					<th>Nom</th>
-					<th>Url</th>
-					<th>Action</th>
-				</tr>
-			<c:forEach items="${resource.urlResources}" var="url">
-				<tr>
-					<td>${url.name}</td>
-					<td><a href="${url.url}">${url.url}</a></td>
-					<td><a href="<c:url value='removeurlresource?id=${url.id}'/>">Supprimer</a></td>
-				</tr>	
-			</c:forEach>
-			</table>		
-		</div>
-		<br />
-		<div>
-			<a href="#" data-width="500" data-rel="popupJquery" class="poplight">Ajouter une URL</a>
-			<div id="popupJquery" class="popupJquery">
-				<div class="popup-close">
-			    	<a class="close" title="close this popup">X</a>
-			    </div>
-			    <h2>Ajouter une URL</h2>	
-			    <form:form method="post" action="#" class="formUrlResource">	
-				    <label for="name">Name :</label> <input type="text" id="name" name="name" /> <br /> 
-				    <label for="url">Url :  </label> <input type="text" name="url" id="url" />   <br />  
-				    <input type="hidden" name="idresource" id="idresource" value="${resource.id}" />
-				    <input type="button" class="btnSubmit" value="Add" onclick="ajaxPostUrlResource()" />
-				</form:form>  
-				<p id="response">${response}</p>
+		<lrftag:pageheadertitle title="${resource.name}"/>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="col-md-12">
+				<h4>Informations :</h4>
+					<dl class="dl-horizontal">
+						<dt>Nom :</dt>
+					  	<dd>${resource.name}</dd>
+					  	<dt>Description :</dt>
+					  	<dd>${resource.description}</dd>
+					  	<dt>Auteur :</dt>
+					  	<dd><a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a></dd>
+					</dl>
+					<br />
+					<c:if test="${canEdit}">
+					<h4>Options :</h4>	
+					<a class="btn btn-primary" href="<c:url value='resourceedit?id=${resource.id}'/>">Edit resource</a>
+					</c:if>
+					<br />
+					<br />
+					<h4>Les liens</h4>
+					<a data-toggle="modal" href="#modalUrlResource" class="btn btn-primary">Ajouter une URL</a>
+					<br />
+					<br />
+					<div class="table-responsive">
+						<table class="table table-bordered ">
+							<tr>
+								<th>Nom</th>
+								<th>Url</th>
+								<th>Action</th>
+							</tr>
+						<c:forEach items="${resource.urlResources}" var="url">
+							<tr>
+								<td>${url.name}</td>
+								<td><a href="${url.url}">${url.url}</a></td>
+								<td><a href="<c:url value='removeurlresource?id=${url.id}'/>">Supprimer</a></td>
+							</tr>	
+						</c:forEach>
+						</table>
+					</div>
+					<br />
+					<h4>Galerie</h4>
+					<c:if test="${canEdit}">
+					<a data-toggle="modal" href="#modalImageGalerieResource" class="btn btn-primary">Ajouter une Image</a>
+					</c:if>
+					<br />
+					<br />
+					<%@ include file="resourceimagegallery.jsp" %>
+				</div>
 			</div>
 		</div>
-		<br />
-		<%@ include file="resourceimagegallery.jsp" %>
-		<c:if test="${canEdit}">
-		<div>
-			<a href="#" data-width="500" data-rel="popupJqueryaddImageGallery" class="poplight">Ajouter une image à la ressource</a>
-			<div id="popupJqueryaddImageGallery" class="popupJquery">
-				<div class="popup-close">
-			    	<a class="close" title="close this popup">X</a>
-			    </div>
-			    <form method="post" action="/resource/imageadd" class="formUrlGallery" enctype="multipart/form-data">	
-		          	<h2>Ajouter une image à la galerie</h2>
-		          	<label><input type="radio"  name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> Depuis l'ordinateur</label>
-		          	<input type="file"   name="file"   value="Parcourir..."    class="inputSource"   id="inputFile" /> 
-		          	<input type="hidden" name="strUrl" value="http://..."      class="inputSource"   id="inputUrl"  />             
-		          	<br /> 
-		          	<label><input type="radio"  name="rdFrom" value="url"      class="radioUrl" /> Depuis un lien</label>
-		          	<input type="hidden" name="idResource" value="${resource.id}" />
-		          	<br />
-		          	<br />
-		          	<input class="btnSubmit" type="submit" value="Ajouter" name="btnPicture" /> 
-		      	</form> 
-				<p id="response">${response}</p>
-			</div>
-		</div>
-		</c:if>
-		<br />
-		<a href="ressourcelist">home page</a>
+
+		<!-- Modal : AJOUTER UNE URL -->
+		<div class="modal fade" id="modalUrlResource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		      	<div class="modal-content">
+		        	<div class="modal-header">
+		          		<button type="button" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
+		          		<h4 class="modal-title">Ajouter une URL</h4>
+		        	</div>		        	
+		     		<form method="post" action="#" enctype="multipart/form-data" class="form-horizontal formUrlResource">	
+		     			<div class="modal-body">
+		     			
+		     				<div class="form-group">
+							    <label class="col-lg-2 control-label" style="text-align:left;">
+							    	Nom :
+							    </label>
+							    <div class="col-lg-10">
+							      	<input type="text" class="form-control" id="name" name="name" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+							    <label class="col-lg-2 control-label" style="text-align:left;">
+							    	Url :
+							    </label>
+							    <div class="col-lg-10">
+							      	<input type="text" class="form-control" id="url" name="url" />
+								</div>
+							</div>
+							
+							<p id="response">${response}</p>
+							
+				    	</div>
+				    	
+				    	<div class="modal-footer">
+				    		<input type="hidden" name="idresource" id="idresource" value="${resource.id}" />
+			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
+			          		<button type="button" class="btn btn-primary closeModal btnSubmit" onclick="ajaxPostUrlResource()">Sauver le lien</button>
+			        	</div>
+				    </form>
+		      	</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		<!-- Modal : AJOUTER UNE IMAGE -->
+		<div class="modal fade" id="modalImageGalerieResource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		      	<div class="modal-content">
+		        	<div class="modal-header">
+		          		<button type="button" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
+		          		<h4 class="modal-title">Ajouter une image à la galerie</h4>
+		        	</div>		        	
+		     		<form method="post" action="/resource/imageadd" enctype="multipart/form-data" class="form-horizontal formUrlGallery">	
+		     			<div class="modal-body">
+		     			
+		     				<div class="form-group">
+							    <label class="col-lg-4 control-label" style="text-align:left;">
+							    	<input type="radio"  name="rdFrom" value="computer" class="radioComputer" id="inputComputer" checked="checked" /> 
+					          		Depuis l'ordinateur
+					          	</label>
+							    <div class="col-lg-8">
+							      	<input type="file"name="file" value="Parcourir..." class="inputSource" id="inputFile" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+							    <label class="col-lg-4 control-label" style="text-align:left;">
+							    	<input type="radio"  name="rdFrom" value="url" class="radioUrl" /> 
+					          		Depuis un lien
+					          	</label>
+							    <div class="col-lg-8">
+							    	<input type="hidden" name="strUrl" value="http://..." class="inputSource form-control" id="inputUrl" /> 
+								</div>
+							</div>
+							
+							<p id="response">${response}</p>
+							
+				    	</div>
+				    	
+				    	<div class="modal-footer">
+				    		<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
+			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
+			          		<button type="button" name="btnPicture" class="btn btn-primary closeModal btnSubmit" onclick="ajaxPostUrlResource()">Sauver l'image</button>
+			        	</div>
+				    </form>
+		      	</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	</div>
 </body>
 </html>
