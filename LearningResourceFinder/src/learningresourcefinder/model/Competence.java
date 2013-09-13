@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.Type;
 
@@ -42,6 +43,7 @@ public class Competence extends BaseEntity {
 	Competence parent;
 	
 	@OneToMany (mappedBy="parent")
+	@OrderBy("code")
 	List<Competence> children = new ArrayList <Competence>();
 
 	

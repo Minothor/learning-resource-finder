@@ -12,11 +12,12 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
     
     public void startCompetence(Competence competence) {
         long id = competence.getId();
-        htmlResult += "<li>" + competence.getName()
-        +"<a href=\"javascript:ajaxCompetenceRemoveSubmit([ici l'id à supprimer])\" " + "id='S-" + id + "'>" + "supprimer" + "</a>" 
-        +"<a data-toggle =\"modal\" href=\"#myModal\" " + "id='D-" + id + "'>déplacer</a>"
-        +"<a href=\"...\" " + "id=" + "\"" +  "E-" +id + "\"" + ">"+ "éditer" +"</a>" 
-        +"<a href=\"javascript:ajaxCompetenceAddSubmit([ici l'id du parent])\" " + "id=" + "\"" + "A-" + id + "\"" + ">" + "ajouter" + "</a>"; 
+        htmlResult += "<li>" + " " + competence.getCode() + " " + competence.getName() + "<font size=\"1\">"
+        +"<a href=\"#\" " + "id='D-" + id + "'> Déplacer</a>"
+        +"<a href=\"#\" " + "id=" + "\"" + "A-" + id + "\"" + ">" + " Ajouter" + "</a>"
+        +"<a href=\"#\" " + "id=" + "\"" +  "E-" +id + "\"" + ">"+ " Éditer" +"</a>"
+        +"<a href=\"#\" " + "id='R-" + id + "'>" + " Supprimer" + "</a>" 
+        +"</font>"; 
      
     }
 
