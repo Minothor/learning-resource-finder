@@ -57,65 +57,25 @@ label {
 
 </style>
 <script>
-function addLang(){
-	var a=0;
-	
-	var i=0;
-	$("input[name=languages]").each( 
-		    function() {
-		    	i++;
-		       // Insérer son code ici
-		       alert("lang" + i);
-		       if ($(this).is('checked')){
-		       document.getElementById('lang' + i).style.display = 'inline';
-		       }
-		    } 
-		);
-	
-	if ($('#languages6').is(':checked')){
-	document.getElementById('lang-fr').style.display = 'inline';
-	}
-	else {
-		document.getElementById('lang-fr').style.display = 'none';
-		a++;
-	}
-	if ($('#languages7').is(':checked')){
-		document.getElementById('lang-nl').style.display = 'inline';
-		}
-	else {
-		document.getElementById('lang-nl').style.display = 'none';
-		a++;
-	}
-	if ($('#languages3').is(':checked')){
-		document.getElementById('lang-de').style.display = 'inline';
-		}
-	else {
-		a++;
-		document.getElementById('lang-de').style.display = 'none';
-	}
-	if ($('#languages4').is(':checked')){
-		document.getElementById('lang-en').style.display = 'inline';
-		}
-	else {
-		document.getElementById('lang-en').style.display = 'none';
-		a++;
-	}
-	if ($('#languages5').is(':checked')){
-		document.getElementById('lang-ru').style.display = 'inline';
-		}
-	else {
-		document.getElementById('lang-ru').style.display = 'none';
-		a++;
-	}
-	if (a==5){
-		alert('Vous devez sélectionner au moins une langue');
-	}
-	else {
-		$('#monMenu').hide(); 
-	}
-	  
-}
 
+	function addLang() {
+		if ($("#monMenu input:checkbox:checked").length > 0) {
+			var i = 0;
+			$("input[name=language]")
+					.each(
+							function() {
+								i++;
+								if (this.checked) {
+									document.getElementById('lang' + i).style.display = 'inline';
+								} else {
+									document.getElementById('lang' + i).style.display = 'none';
+								}
+								$('#monMenu').hide();
+							});
+		} else {
+			alert('Vous devez sélectionner au moins une langue');
+		}
+	}
 </script>
 <title>Insert title here</title>
 </head>
@@ -126,7 +86,7 @@ function addLang(){
 			<fieldset>
 				<legend>Format</legend>
 				<c:forEach var="formats" items="${formatEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="formats"
+					<label class="checkbox"> <form:checkbox path="format"
 							value="${formats}" />${formats.description}
 					</label>
 				</c:forEach>
@@ -138,7 +98,7 @@ function addLang(){
 			<fieldset>
 				<legend>Plateforme</legend>
 				<c:forEach var="platform" items="${platformsEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="platforms"
+					<label class="checkbox"> <form:checkbox path="platform"
 							value="${platform}" />${platform.description}
 					</label>
 				</c:forEach>
@@ -174,7 +134,7 @@ function addLang(){
 						<c:forEach var="language" items="${languagesEnumAllValues}">
 				
 							<label class="checkbox" style="margin-left: 1em"> <form:checkbox
-									path="languages" value="${language}" />${language.description}
+									path="language" value="${language}" />${language.description}
 							</label>
 						</c:forEach>
 
@@ -189,12 +149,12 @@ function addLang(){
 			<fieldset>
 				<legend>Publicité</legend>
 				<div class="radio">
-					<label> <input type="radio" name="pub" id="optionsRadio1"
+					<label> <input type="radio" name="advertising" id="optionsRadio1"
 						value="1" checked> Oui
 					</label>
 				</div>
 				<div class="radio">
-					<label> <input type="radio" name="pub" id="optionsRadio2"
+					<label> <input type="radio" name="advertising" id="optionsRadio2"
 						value="0"> Non
 					</label>
 				</div>
