@@ -1,9 +1,5 @@
-﻿
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<script type="text/javascript" src="/js/int/resourceEdit.js"></script>
-
 
 <script>
 	$(document).ready(function() {
@@ -25,16 +21,21 @@
 	
 	$(document).ready(function() {
 	 	$("#registerLink").click(function(e) {
-// 	 	    	
 	 	    e.preventDefault();// prevent the default anchor functionality
 	 	    // Hide dropdown connect
 	 	    $('#loginDropDown').dropdown('toggle');
 	 	    $('#registerDropDown').dropdown('toggle');
 	 	    $('#email').focus();
 		});
+	 	
+	 	$("#addResourceLink").click(function(e) {
+	 	    e.preventDefault();// prevent the default anchor functionality
+	 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
+	 	                     no='$("#loginDropDown").dropdown("toggle"); '/>
+	 	
+		});
 	});
 </script>
-
 
 <%-- ********** NOTIFICATIONS ************** --%>
 <%-- <c:if test="${!empty sessionScope.notifications}"> --%>
@@ -82,9 +83,9 @@
 					<li class="active">
 					<!-- <a href="#">Lien 1</a></li> -->
 					<li class="dropdown">
-					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
+					   <a id="contributeDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a data-toggle="modal" href="#addResourceModal">Créer une ressource</a></li>
+							<li><a id="addResourceLink">Créer une ressource</a></li>
 					   </ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Cycles <b class="caret"></b></a>
