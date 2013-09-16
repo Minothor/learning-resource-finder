@@ -16,7 +16,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="sixteen columns">
-						<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a> <br />
+						<a data-toggle="modal" href="#addResourceModal" class="btn btn-primary btn-lg">Créer une ressource</a> <br />
 						<c:forEach items="${resourceList}" var="resource">
 							<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
 								<restag:resource resource="${resource}"></restag:resource>
@@ -28,7 +28,7 @@
 		</div>
 	</section>
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addResourceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		<form id="addResourceForm" role="form" method="post" action="resourceaddsubmit">
 			<div class="modal-content">
