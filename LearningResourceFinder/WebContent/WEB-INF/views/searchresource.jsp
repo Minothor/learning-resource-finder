@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="restag"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -57,15 +59,27 @@ label {
 <script>
 function addLang(){
 	var a=0;
-  
-	if ($('#languages1').is(':checked')){
+	
+	var i=0;
+	$("input[name=languages]").each( 
+		    function() {
+		    	i++;
+		       // Insérer son code ici
+		       alert("lang" + i);
+		       if ($(this).is('checked')){
+		       document.getElementById('lang' + i).style.display = 'inline';
+		       }
+		    } 
+		);
+	
+	if ($('#languages6').is(':checked')){
 	document.getElementById('lang-fr').style.display = 'inline';
 	}
 	else {
 		document.getElementById('lang-fr').style.display = 'none';
 		a++;
 	}
-	if ($('#languages2').is(':checked')){
+	if ($('#languages7').is(':checked')){
 		document.getElementById('lang-nl').style.display = 'inline';
 		}
 	else {
@@ -107,7 +121,7 @@ function addLang(){
 </head>
 <body>
 
-	<form:form modelAttribute="searchoptions" action="searchresourcesubmit">
+	<form:form modelAttribute="searchOptions" action="searchresourcesubmit">
 		<div class="filterSubBlock">
 			<fieldset>
 				<legend>Format</legend>
@@ -124,7 +138,7 @@ function addLang(){
 			<fieldset>
 				<legend>Plateforme</legend>
 				<c:forEach var="platform" items="${platformsEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="languages"
+					<label class="checkbox"> <form:checkbox path="platforms"
 							value="${platform}" />${platform.description}
 					</label>
 				</c:forEach>
@@ -145,18 +159,20 @@ function addLang(){
 		<div class="filterSubBlock" style="max-width: 200px;">
 			<fieldset>
 				<legend>Langues</legend>
-				<br> <span id="lang-fr" class="label label-primary"
-					style="display: inline">Français</span> <span id="lang-nl"
-					class="label label-primary" style="display: none">Néerlandais</span>
-				<span id="lang-de" class="label label-primary" style="display: none">Allemand</span>
-				<span id="lang-en" class="label label-primary" style="display: none">Anglais</span>
-				<span id="lang-ru" class="label label-primary" style="display: none">Russe</span>
+				<br> 
+				<span id="lang1" class="label label-primary" style="display: inline">Français</span> 
+				<span id="lang2" class="label label-primary" style="display: none">Néerlandais</span>
+				<span id="lang3" class="label label-primary" style="display: none">Allemand</span>
+				<span id="lang4" class="label label-primary" style="display: none">Anglais</span>
+				<span id="lang5" class="label label-primary" style="display: none">Russe</span>
 				<div class="dropdown">
 					<br> <a data-toggle="dropdown" href="#"
 						onclick="$('#monMenu').show();">Changer</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
 						id="monMenu">
+					
 						<c:forEach var="language" items="${languagesEnumAllValues}">
+				
 							<label class="checkbox" style="margin-left: 1em"> <form:checkbox
 									path="languages" value="${language}" />${language.description}
 							</label>
@@ -194,8 +210,7 @@ function addLang(){
 		<input type="hidden" name="search" value="${search}">
 		<button type="submit" class="btn btn-default">Filtrer</button>
 	</form:form>
-	
-		<c:forEach items="${resourceList}" var="resource">
+		<c:forEach items="${resourcelist}" var="resource">
 		<div style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
 			<restag:resource resource="${resource}"></restag:resource>
 		</div>
