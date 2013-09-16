@@ -4,6 +4,7 @@ import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
+import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.web.Slugify;
@@ -11,6 +12,7 @@ import learningresourcefinder.web.UrlUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,5 +55,14 @@ public class ResourceEditController extends BaseController<Resource> {
 		 String checkUrlOk = "";
          Resource resource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
          return resource == null ? "" : resource.getId() + "";
+	}
+    
+    
+    // Called by JS to get the optional/expanding part of the form to add a resource in the modal dialog box. 
+    @RequestMapping("/ajax/addresourceform")
+	public String searchresource(Model model){
+		model.addAttribute("formatEnumAllValues", SearchOptions.Format.values());
+		model.addAttribute("languagesEnumAllValues", SearchOptions.Language.values());
+		return "addresourceform";
 	}
 }
