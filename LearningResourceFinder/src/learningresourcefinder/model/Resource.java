@@ -50,6 +50,9 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	@Column()
 	private String platform;
+
+	@Column()
+	private String nature;
 	
 	@Column()
 	private Boolean advertising;
