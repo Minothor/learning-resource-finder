@@ -26,10 +26,10 @@ public class SearchService {
 	@PersistenceContext
 	EntityManager em;
 
-	private List<SearchResult> searchResultList;
+	
 
 	public List<SearchResult> search(String keyWord) {
-		searchResultList = new ArrayList<SearchResult>();
+		List<SearchResult> searchResultList = new ArrayList<SearchResult>();
 		ScoreDoc[] scoreDocs = indexManagerService.search(keyWord);
 		for (ScoreDoc sd : scoreDocs) {
 			searchResultList.add(new SearchResult(keyWord, indexManagerService
@@ -62,6 +62,8 @@ public class SearchService {
 		return entities;
 	}
 	
+
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<BaseEntity> findEntitiesByIdList(List<Long> idList, Class clazz){
 		if(idList.size() == 0){  // If we give an empty list, postGreSQL does not like the query... (Exception).
@@ -73,5 +75,4 @@ public class SearchService {
 				.getResultList();
 		return result;
 	}
-	
 }
