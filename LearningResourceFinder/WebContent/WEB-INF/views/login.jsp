@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 
-function mPopupLogin(provid){
+function mPopupLogin(provid) {
 	
 	var w = 780;
 	var h = 410;

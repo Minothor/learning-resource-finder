@@ -15,6 +15,28 @@
 	<decorator:head />
 	<link rel="shortcut icon" href="#"/>
 	<title><decorator:title /></title>
+	<!-- Script Connection With Facebook -->
+	<script type="text/javascript">
+		function mPopupLogin(provid) {			
+			var w = 780;
+			var h = 410;
+			var left = (screen.width/2)-(w/2);
+		    var   top = (screen.height/2)-(h/2);
+		    var urlLogin = "<%= UrlUtil.getAbsoluteUrl("/loginsocial?provider=") %>" + provid;
+		    var signin= window.open(urlLogin, "Login", "nom_popup,menubar=no, status=no, scrollbars=no, menubar=no, width="+w+", height="+h+",left=" + left + ",top=" + top);
+			return false; 			
+		};
+				
+		$(document).ready(function(event) {				
+			$("#login-facebook").click(function() {
+				mPopupLogin("facebook");
+			});
+				
+			$("#login-googleplus").click(function() {
+				mPopupLogin("googleplus");
+			});
+		});
+	</script>
 </head>
 <body>
 	<div id="wrap">
