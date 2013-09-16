@@ -1,12 +1,23 @@
-﻿
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
 	$(document).ready(function() {
-		$("#notificationArea").slideDown(); // Was hidden at the beginning.
+		<c:if test="${!empty sessionScope.notifications}">
+		   showNotificationArea();
+		</c:if>
+		
 	});
+	
+ 	function showNotificationArea() {	
+		$("#notificationArea").slideDown(); // Was hidden at the beginning.
+	}
+	
+	function showNotificationText(message) {
+		$("#notificationText").html(message);
+		showNotificationArea();
+	}
+	
 	
 	$(document).ready(function() {
 	 	$("#registerLink").click(function(e) {
@@ -20,8 +31,13 @@
 	});
 </script>
 
+<<<<<<< .mine
+ 
+ 
+=======
+>>>>>>> .r652
 <%-- ********** NOTIFICATIONS ************** --%>
-<c:if test="${!empty sessionScope.notifications}">
+<%-- <c:if test="${!empty sessionScope.notifications}"> --%>
 	<div id="notificationArea"
 		style="padding:3px; <%-- padding in style to override header-area class padding  --%> 
                      display:none;  <%-- display none because will be shown through animation by the docuiment ready javascript --%>
@@ -29,14 +45,16 @@
 		<a id="notificationCloser"
 			style="float: right; padding: 0px 0px 0px 10px; cursor: pointer;"
 			onclick="$('#notificationArea').slideUp();">×</a>
-		<c:forEach items="${sessionScope.notifications}" var="notif">
-		           ${notif.text}<br />
-		</c:forEach>
+		<span id="notificationText">
+			<c:forEach items="${sessionScope.notifications}" var="notif">
+			           ${notif.text}<br />
+			</c:forEach>
+		</span>
 		<%
 		    session.removeAttribute("notifications");
 		%>
 	</div>
-</c:if>
+<%-- </c:if> --%>
 
 <!-- Main Menu / Start
 ================================================== -->
@@ -61,17 +79,25 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Lien 1</a></li>
-					<li><a href="#">Lien 2</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+					<li class="active">
+					<!-- <a href="#">Lien 1</a></li> -->
+					<li class="dropdown">
+					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
+					   <ul class="dropdown-menu">
+							<li><a data-toggle="modal" href="#addResourceModal">Créer une ressource</a></li>
+					   </ul>
+					</li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Cycles <b class="caret"></b></a>
+					
+					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">Action</a></li>
 							<li><a href="#">Another action</a></li>
 							<li><a href="#">Something else here</a></li>
 							<li><a href="#">Separated link</a></li>
 							<li><a href="#">One more separated link</a></li>
-						</ul></li>
+						</ul>
+				    </li>
 				</ul>
 
 				<c:choose>
