@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Cycle;
 @Repository
 @SuppressWarnings("unchecked")
@@ -23,6 +24,12 @@ public class CycleRepository extends BaseRepository<Cycle> {
                 em.createQuery("SELECT c FROM Cycle c WHERE lower(c.name) = :name")
                 .setParameter("name",name)
                 );
+    }
+    public List<Competence> FindCompetencesbyCycles (String name) {
+        
+        List<Competence> result = em.createQuery("SELECT c FROM Competence c WHERE c.cycle.name = :name").setParameter("name", name).getResultList();
+        return result; 
+        
     }
         
 }
