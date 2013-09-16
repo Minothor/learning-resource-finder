@@ -7,8 +7,18 @@
 	$(document).ready(function() {
 		$("#notificationArea").slideDown(); // Was hidden at the beginning.
 	});
+	
+	$(document).ready(function() {
+	 	$("#registerLink").click(function(e) {
+// 	 	    	
+	 	    e.preventDefault();// prevent the default anchor functionality
+	 	    // Hide dropdown connect
+	 	    $('#loginDropDown').dropdown('toggle');
+	 	    $('#registerDropDown').dropdown('toggle');
+	 	    $('#email').focus();
+		});
+	});
 </script>
-
 
 <%-- ********** NOTIFICATIONS ************** --%>
 <c:if test="${!empty sessionScope.notifications}">
@@ -81,7 +91,7 @@
 
 					<c:otherwise>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
+							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle"
 								data-toggle="dropdown">Connexion <b class="caret"></b></a>
 								<div class="dropdown-menu"
 									style="padding: 15px; padding-bottom: 0px;">
@@ -105,10 +115,14 @@
 											souvenir de moi
 										</label> <input class="btn btn-bleu btn-block" type="button"
 											id="sign-in" value="Connexion" onclick="ajaxlogin()">
+											<div>
+										<label > Pas de compte ?</label>	
+										<a href="#" id="registerLink">S'inscrire</a>
+										</div>
 									</form>
 									<br />
 								</div></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
+							<li class="dropdown"><a id="registerDropDown" href="#" class="dropdown-toggle"
 								data-toggle="dropdown">Inscription <b class="caret"></b></a>
 								<div class="dropdown-menu"
 									style="padding: 15px; padding-bottom: 0px;">
@@ -121,14 +135,14 @@
 											class="btn btn-facebook btn-block" id="sign-in-facebook">
 											Inscription avec Facebook</button>
 										<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
+										<input class="form-control"
+											style="margin-bottom: 15px;" type="email"
+											placeholder="Email" id="email" name="email">
 										<input class="form-control" style="margin-bottom: 15px;"
-											type="text" placeholder="Username" id="username2"
+											type="text" placeholder="Username" id="usernameRegister"
 											name="username"> <input class="form-control"
 											style="margin-bottom: 15px;" type="password"
 											placeholder="Password" id="password2" name="password">
-											<input class="form-control"
-											style="margin-bottom: 15px;" type="email"
-											placeholder="Email" id="email" name="email">
 										<input
 											class="btn btn-bleu btn-block" type="submit" id="sign-in"
 											value="Inscription">
