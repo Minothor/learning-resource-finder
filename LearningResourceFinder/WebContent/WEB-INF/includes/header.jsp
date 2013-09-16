@@ -1,6 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script type="text/javascript" src="/js/int/resourceEdit.js"></script>
+
+
 <script>
 	$(document).ready(function() {
 		<c:if test="${!empty sessionScope.notifications}">
@@ -30,6 +33,7 @@
 		});
 	});
 </script>
+
 
 <%-- ********** NOTIFICATIONS ************** --%>
 <%-- <c:if test="${!empty sessionScope.notifications}"> --%>
@@ -79,11 +83,16 @@
 					<li class="dropdown">
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a data-toggle="modal" href="<lrftag:loggedin yes="#addResourceModal" no=""/>">Créer une ressource</a></li>
+							<li><a data-toggle="modal" href="#addResourceModal">Créer une ressource</a></li>
 					   </ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Cycles <b class="caret"></b></a>
-					
+					   <ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul>
+					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">Action</a></li>
@@ -193,6 +202,44 @@
 
 
 
+<!-- Modal for adding a resource (invisible until button clicked) -->
+<div class="modal fade" id="addResourceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<form id="addResourceForm" role="form" method="post" action="resourceaddsubmit">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Ajouter une ressource</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-horizontal">
+						<div class="form-group">
+	                        <label for="url">site</label> 
+	                        <input type="text" class="form-control" id="url" name="url" placeholder="http://...">
+	                        <div class="pull-right"> 
+	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
+							</div>
+							<span class="help-block">URL vers le site que vous désirez ajouter.</span>
+							
+						</div>
+
+						<div id="addResourceFormPart2" style="display:none;">  <%-- will not be displayed until the url is valid --%>
+							
+						</div>
+					</div>
+                  </div>
+				  <div class="modal-footer" style="display: none;" id="bottomButtons">
+					
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+					<button type="button" class="btn btn-primary" onclick="ajaxResourceAddSubmit()" >Ajouter</button>
+				  </div>
+			</div>
+			<!-- /.modal-content -->
+		</form>
+	    </div>
+		<!-- /.modal-dialog -->
+</div>
+<!-- /.modal --> 
 
 
 
