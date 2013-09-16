@@ -9,19 +9,32 @@
     <label for="title">Titre</label> 
 	<input type="text" class="form-control" name="title" id="title" placeholder="titre...">
 	  <span class="help-block"> 
-	       utilisé dans les listes, le titre doit donner un un coup d'oeil, une idée claire du contenu de cette ressource.
+	       utilisÃ© dans les listes, le titre doit donner un un coup d'oeil, une idÃ©e claire du contenu de cette ressource.
       </span>
  </div>
+ 
  <div class="form-group">
-   <label for="title">Déscription</label> 
-   <textarea class="form-control" rows="3" id="description" name="description" placeholder="déscription..."></textarea>
+   <label for="language">Langue</label> 
+   <input type="checkbox" class="form-control" name="language" id="language" placeholder="langue...">
+</div>
+ 
+ <div class="form-group">  
+            <label  for="format">Format</label>  
+            <div class="controls">  
+              <label class="checkbox">  
+                <input type="checkbox" id="optionsCheckbox" value="option1">  
+                Option one is this and thatâ€”be sure to include why it's great  
+              </label>  
+            </div>  
+          </div>  
+ 
+ 
+ <div class="form-group">
+   <label for="title">DÃ©scription</label> 
+   <textarea class="form-control" rows="3" id="description" name="description" placeholder="dÃ©scription..."></textarea>
 	 <span class="help-block"> 
-	       la déscription doit donner assez d'information au visiteur pour qu'il puisse décider, sans qu'il aille voir
-           la ressource, si elle correspond à ce qu'il recherche.
+	       la dÃ©scription doit donner assez d'information au visiteur pour qu'il puisse dÃ©cider, sans qu'il aille voir
+           la ressource, si elle correspond Ã  ce qu'il recherche.
      </span>
  </div>
-							    
 
-
-
-langue...
