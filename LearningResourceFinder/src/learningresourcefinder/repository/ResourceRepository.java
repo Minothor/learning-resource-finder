@@ -77,34 +77,34 @@ public class ResourceRepository extends BaseRepository<Resource>
 		// Language
 		boolean first = true;
 		String whereCondition = "";
-		for (Language language : searchOptions.getLanguages()) {
+		for (Language language : searchOptions.getLanguage()) {
 			if (!whereCondition.equals("")) {
 				whereCondition += " OR ";
 			}
 			whereCondition = whereCondition + " r.language='" + language.name() + "' ";
 		}
-		whereConditions.add(whereCondition);
+		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
 
 		// Format
 		whereCondition = "";
-		for (Format format : searchOptions.getFormats()) {
+		for (Format format : searchOptions.getFormat()) {
 			if (!whereCondition.equals("")) {
 				whereCondition += " OR ";
 			}
 			whereCondition = whereCondition + " r.format='" + format.name() + "' ";
 		}
-		whereConditions.add(whereCondition);
+		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
 		
 		
 		// Platform
 		whereCondition = "";
-		for (Platform platform : searchOptions.getPlatforms()) {
+		for (Platform platform : searchOptions.getPlatform()) {
 			if (!whereCondition.equals("")) {
 				whereCondition += " OR ";
 			}
 			whereCondition = whereCondition + " r.platform='" + platform.name() + "' ";
 		}
-		whereConditions.add(whereCondition);		
+		if (!whereCondition.equals("")) whereConditions.add(whereCondition);		
 
 		// Nature
 		whereCondition = "";
@@ -114,7 +114,19 @@ public class ResourceRepository extends BaseRepository<Resource>
 			}
 			whereCondition = whereCondition + " r.nature='" + nature.name() + "' ";
 		}
-		whereConditions.add(whereCondition);				
+		if (!whereCondition.equals("")) whereConditions.add(whereCondition);				
+	
+		// Advertising
+		whereCondition = "";
+		whereCondition += " r.advertising='" + searchOptions.isAdvertising() + "' ";
+		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
+		
+		
+		// Max Duration
+		whereCondition = "";
+		if (!(searchOptions.getMaxDuration() == null)) whereCondition += " r.duration<='" + searchOptions.getMaxDuration().intValue() + "' ";
+		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
+		
 		
 		
 		//// Render the JP-QL statement

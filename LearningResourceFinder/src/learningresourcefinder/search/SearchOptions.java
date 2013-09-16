@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class SearchOptions {
 
-	List<Language> languages = new ArrayList();
-	List<Format> formats = new ArrayList();
-	List<Platform> platforms = new ArrayList();
-	List<Nature> nature = new ArrayList();
+	List<Language> language = new ArrayList<>();
+	List<Format> format = new ArrayList<>();
+	List<Platform> platform = new ArrayList<>();
+	List<Nature> nature = new ArrayList<>();
 	boolean advertising;
+	Integer maxDuration;
 	
 	public enum Language{
 		FR("Français"), 
@@ -59,26 +60,30 @@ public class SearchOptions {
 
 	}
 	
-	public List<Language> getLanguages() {
-		return languages;
+	public List<Language> getLanguage() {
+		// Spring nullifies the lists if they are empty (which is not nice from Spring...)
+		return language == null ? language = new ArrayList<>() : language;
 	}
-	public void setLanguages(List<Language> languages) {
-		this.languages = languages;
+	public void setLanguage(List<Language> language) {
+		this.language = language;
 	}
-	public List<Format> getFormats() {
-		return formats;
+	public List<Format> getFormat() {
+		// Spring nullifies the lists if they are empty (which is not nice from Spring...)
+		return format == null ? format = new ArrayList<>() : format;
 	}
-	public void setFormats(List<Format> formats) {
-		this.formats = formats;
+	public void setFormat(List<Format> format) {
+		this.format = format;
 	}
-	public List<Platform> getPlatforms() {
-		return platforms;
+	public List<Platform> getPlatform() {
+		// Spring nullifies the lists if they are empty (which is not nice from Spring...)
+		return platform == null ? platform = new ArrayList<>() : platform;
 	}
-	public void setPlatforms(List<Platform> platforms) {
-		this.platforms = platforms;
+	public void setPlatform(List<Platform> platform) {
+		this.platform = platform;
 	}
 	public List<Nature> getNature() {
-		return nature;
+		// Spring nullifies the lists if they are empty (which is not nice from Spring...)
+		return nature == null ? nature = new ArrayList<>() : nature;
 	}
 	public void setNature(List<Nature> nature) {
 		this.nature = nature;
@@ -95,7 +100,7 @@ public class SearchOptions {
 	public void setMaxDuration(Integer maxDuration) {
 		this.maxDuration = maxDuration;
 	}
-	Integer maxDuration;
+
 	
 	
 }

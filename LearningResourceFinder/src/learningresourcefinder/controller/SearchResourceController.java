@@ -36,8 +36,8 @@ public class SearchResourceController {
 	
 	@RequestMapping("/searchresourcesubmit")
 	public String searchresourcesubmit(@ModelAttribute SearchOptions searchOptions, Model model, @RequestParam("search") String searchResource){
-		List<BaseEntity> ent = resourceRepository.getFilteredEntities(searchService.search(searchResource), 5, Resource.class, searchOptions);
-		model.addAttribute("resourcelist", ent);
+		List<BaseEntity> entities = resourceRepository.getFilteredEntities(searchService.search(searchResource), 5, Resource.class, searchOptions);
+		model.addAttribute("resourcelist", entities);
 		model.addAttribute("searchOptions", searchOptions);
 		return "searchresource";
 	}
