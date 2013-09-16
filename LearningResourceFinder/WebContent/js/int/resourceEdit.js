@@ -59,7 +59,7 @@ function ajaxResourceAddSubmit() {
 				url : 'ajax/resourceaddsubmit',
 				data : $("#addResourceForm").serialize(),
 				success : function(msg) {
-					alert(msg);   /// TODO put this message in a nicer place (div on top of the page?) than an alert.
+					showNotificationText(msg);  // function defined in header.jsp
 					$('#myModal').modal('hide');
 					clearForm();
 					toggleForm();
