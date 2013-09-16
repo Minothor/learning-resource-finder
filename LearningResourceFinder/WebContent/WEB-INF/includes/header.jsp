@@ -31,11 +31,6 @@
 	});
 </script>
 
-<<<<<<< .mine
- 
- 
-=======
->>>>>>> .r652
 <%-- ********** NOTIFICATIONS ************** --%>
 <%-- <c:if test="${!empty sessionScope.notifications}"> --%>
 	<div id="notificationArea"
@@ -84,7 +79,7 @@
 					<li class="dropdown">
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a data-toggle="modal" href="#addResourceModal">Créer une ressource</a></li>
+							<li><a data-toggle="modal" href="<lrftag:loggedin yes="#addResourceModal" no=""/>">Créer une ressource</a></li>
 					   </ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Cycles <b class="caret"></b></a>
