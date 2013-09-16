@@ -4,11 +4,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>	
+	<!-- Script for Add a URL in a Resource-->
 	<script type="text/javascript" src="/js/int/ajaxAddUrlResource.js"></script>
-	<script type="text/javascript" src="/js/int/resourceImageGallery.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css"  />
-	<!-- Jquery for change input popup addImageUser -->
 	<script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
+<!-- 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+<!-- 	<link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.5.custom.css" /> -->
+<!-- 	<script type="text/javascript" src="/js/ext/jquery-ui-1.8.5.custom.min.js"></script> -->
+<!-- 	<script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script> -->
+
+	
 	<title>Insert title here</title>
 	<script type="text/javascript">
 		
@@ -116,7 +121,7 @@
 		</div><!-- /.modal -->
 		
 		<!-- Modal : AJOUTER UNE IMAGE -->
-		<div class="modal fade" id="modalImageGalerieResource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalImageGalerieResource" tabindex="-1" role="dialog" aria-labelledby="Ajouter une image" aria-hidden="true">
 			<div class="modal-dialog">
 		      	<div class="modal-content">
 		        	<div class="modal-header">
@@ -153,7 +158,7 @@
 				    	<div class="modal-footer">
 				    		<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
 			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
-			          		<button type="button" name="btnPicture" class="btn btn-primary closeModal btnSubmit" onclick="ajaxPostUrlResource()">Sauver l'image</button>
+			          		<button type="submit" name="btnPicture" class="btn btn-primary closeModal btnSubmit">Sauver l'image</button>
 			        	</div>
 				    </form>
 		      	</div><!-- /.modal-content -->
