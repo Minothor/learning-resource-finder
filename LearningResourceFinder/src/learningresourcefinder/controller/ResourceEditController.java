@@ -21,12 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ResourceEditController extends BaseController<Resource> {
 
-    @Autowired
-    ResourceRepository resourceRepository;
-    @Autowired
-    UrlResourceRepository urlResourceRepository;
+    @Autowired   ResourceRepository resourceRepository;
+    @Autowired   UrlResourceRepository urlResourceRepository;
     
     @RequestMapping("/ajax/resourceaddsubmit")
+//	public @ResponseBody String resourceAddSubmit() {
 	public @ResponseBody String resourceAddSubmit(@RequestParam("url") String url, @RequestParam("title") String title, @RequestParam("description") String description) {
         SecurityContext.assertUserIsLoggedIn();
 
