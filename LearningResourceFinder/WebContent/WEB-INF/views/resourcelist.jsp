@@ -1,6 +1,7 @@
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="restag"%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrf"%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,21 +13,17 @@
 		<lrf:breadcrumbelement label="Home" link="home" />
 	</lrf:breadcrumb>
 	<section id="resourcelist">
-		<div class="container">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="sixteen columns">
-						<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Créer une ressource</a> <br />
-						<c:forEach items="${resourceList}" var="resource">
-							<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
-								<restag:resource resource="${resource}"></restag:resource>
-							</div>
-						</c:forEach>
-					</div>
+	<div class="container">
+		<div class="sixteen columns">   
+<%-- 			<button onclick='<lrftag:loggedin yes="showAddResourceModal();" no="showLogin();"/>'>Click Here</button> --%>
+			<a data-toggle="modal" href='<lrftag:loggedin yes="#myModal" no="#loginModal"/>' class="btn btn-primary btn-lg">Créer une ressource</a> <br />
+			<c:forEach items="${resourceList}" var="resource">
+				<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
+					<restag:resource resource="${resource}"></restag:resource>
 				</div>
-			</div>
+			</c:forEach>
 		</div>
-	</section>
+	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -67,6 +64,6 @@
 	    </div>
 		<!-- /.modal-dialog -->
 	</div>
-	<!-- /.modal --> 
+	<!-- /.modal --> </section>
 </body>
 </html>
