@@ -10,40 +10,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class SearchOptions {
 
-	List<String> languages = new ArrayList();
-	List<String> formats = new ArrayList();
-	List<String> platforms = new ArrayList();
-	List<String> nature = new ArrayList();
+	List<Language> languages = new ArrayList();
+	List<Format> formats = new ArrayList();
+	List<Platform> platforms = new ArrayList();
+	List<Nature> nature = new ArrayList();
 	boolean advertising;
 	
-	public enum Languages{
+	public enum Language{
 		FR("Français"), 
 		NL("Néerlandais"), 
 		DE("Allemand"), 
 		EN("Anglais"), 
 		RU("Russe");
-		private Languages(String description){this.description = description;}
+		private Language(String description){this.description = description;}
 		private final String description;
 		public String getDescription(){return description;}
 	}
 	
-	public enum Formats{
+	public enum Format{
 		VIDEOS("Vidéo"),
 		DOC("Document"), 
 		INTERACTIVE("Interactif"), 
 		AUDIO("Audio");
-		private Formats(String description){this.description = description;}
+		private Format(String description){this.description = description;}
 		private final String description;
 		public String getDescription(){return description;}
 	}
 
-	public enum Platforms{
+	public enum Platform{
 		IPAD("iPad"), 
 		ANDROID("Android"), 
 		PC("PC"), 
 		MAC("Mac"), 
 		BROWSER("Navigateur");
-		private Platforms(String description){this.description = description;}
+		private Platform(String description){this.description = description;}
 		private final String description;
 		public String getDescription(){return description;}
 	}
@@ -59,28 +59,28 @@ public class SearchOptions {
 
 	}
 	
-	public List<String> getLanguages() {
+	public List<Language> getLanguages() {
 		return languages;
 	}
-	public void setLanguages(List<String> languages) {
+	public void setLanguages(List<Language> languages) {
 		this.languages = languages;
 	}
-	public List<String> getFormats() {
+	public List<Format> getFormats() {
 		return formats;
 	}
-	public void setFormats(List<String> formats) {
+	public void setFormats(List<Format> formats) {
 		this.formats = formats;
 	}
-	public List<String> getPlatforms() {
+	public List<Platform> getPlatforms() {
 		return platforms;
 	}
-	public void setPlatforms(List<String> platforms) {
+	public void setPlatforms(List<Platform> platforms) {
 		this.platforms = platforms;
 	}
-	public List<String> getNature() {
+	public List<Nature> getNature() {
 		return nature;
 	}
-	public void setNature(List<String> nature) {
+	public void setNature(List<Nature> nature) {
 		this.nature = nature;
 	}
 	public boolean isAdvertising() {
