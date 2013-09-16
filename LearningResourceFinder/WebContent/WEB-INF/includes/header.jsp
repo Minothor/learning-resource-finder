@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+﻿
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script type="text/javascript" src="/js/int/resourceEdit.js"></script>
@@ -121,64 +122,48 @@
 
 					<c:otherwise>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Connexion <b class="caret"></b></a>
-								<div class="dropdown-menu"
-									style="padding: 15px; padding-bottom: 0px;">
-									<form action="/loginsubmit" method="post" action="login"
-										accept-charset="UTF-8" style="width: 200px;">
-										<button data-icon="&#xe005;" type="submit"
-											class="btn btn-google btn-block" id="login-googleplus">
-											Connexion avec Google</button>
-										<button data-icon="&#xe000;" type="submit"
-											class="btn btn-facebook btn-block" id="login-facebook">
-											Connexion avec Facebook</button>
-										<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
-										<input class="form-control" style="margin-bottom: 15px;"
-											type="text" placeholder="Username" id="userNameOrMail"
-											name="userNameOrMail"> <input class="form-control"
-											style="margin-bottom: 15px;" type="password"
-											placeholder="Password" id="password" name="password">
-										<label class="string optional" for="remember_me"> <input
-											style="float: left; margin-right: 10px;" type="checkbox"
-											name="remember-me" id="remember-me" value="1"> Se
-											souvenir de moi
-										</label> <input class="btn btn-bleu btn-block" type="button"
-											id="sign-in" value="Connexion" onclick="ajaxlogin()">
-											<div>
-										<label > Pas de compte ?</label>	
-										<a href="#" id="registerLink">S'inscrire</a>
+							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Connexion <b class="caret"></b></a>
+								<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+									<button data-icon="&#xe005;" type="button" class="btn btn-google btn-block connectionGoogle">
+										Connexion avec Google
+									</button>
+									<button data-icon="&#xe000;" type="button" class="btn btn-facebook btn-block connectionFacebook">
+										Connexion avec Facebook
+									</button>
+									<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>	
+									<form action="/loginsubmit" method="post" action="login" accept-charset="UTF-8" style="width: 200px;">	
+										<input class="form-control" style="margin-bottom: 15px;" type="text" placeholder="Username" id="userNameOrMail" name="userNameOrMail"> 
+										<input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
+										<label class="string optional" for="remember_me"> 
+											<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1"> 
+											Se souvenir de moi
+										</label> 
+										<input class="btn btn-bleu btn-block" type="button" id="sign-in" value="Connexion" onclick="ajaxlogin()">
+										<div>
+											<label > Pas de compte ?</label>	
+											<a href="#" id="registerLink">S'inscrire</a>
 										</div>
 									</form>
 									<br />
 								</div></li>
-							<li class="dropdown"><a id="registerDropDown" href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Inscription <b class="caret"></b></a>
-								<div class="dropdown-menu"
-									style="padding: 15px; padding-bottom: 0px;">
-									<form method="post" action="login" accept-charset="UTF-8"
-										style="width: 200px;">
-										<button data-icon="&#xe005;" type="submit"
-											class="btn btn-google btn-block" id="sign-in-google">
-											Inscription avec Google</button>
-										<button data-icon="&#xe000;" type="submit"
-											class="btn btn-facebook btn-block" id="sign-in-facebook">
-											Inscription avec Facebook</button>
-										<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
-										<input class="form-control"
-											style="margin-bottom: 15px;" type="email"
-											placeholder="Email" id="email" name="email">
-										<input class="form-control" style="margin-bottom: 15px;"
-											type="text" placeholder="Username" id="usernameRegister"
-											name="username"> <input class="form-control"
-											style="margin-bottom: 15px;" type="password"
-											placeholder="Password" id="password2" name="password">
-										<input
-											class="btn btn-bleu btn-block" type="submit" id="sign-in"
-											value="Inscription">
+							<li class="dropdown"><a id="registerDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Inscription <b class="caret"></b></a>
+								<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+									<button data-icon="&#xe005;" type="button" class="btn btn-google btn-block connectionGoogle">
+										Inscription avec Google
+									</button>
+									<button data-icon="&#xe000;" type="button" class="btn btn-facebook btn-block connectionFacebook">
+										Inscription avec Facebook
+									</button>
+									<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>		
+									<form method="post" action="#" accept-charset="UTF-8" style="width: 200px;">		
+										<input class="form-control" style="margin-bottom: 15px;" type="email" placeholder="Email" id="emailRegister" name="emailRegister">
+										<input class="form-control" style="margin-bottom: 15px;" type="text" placeholder="Username" id="usernameRegister" name="usernameRegister"> 
+										<input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="Password" id="passwordRegister" name="passwordRegister">
+										<input class="btn btn-bleu btn-block" type="button" id="sign-in" value="Inscription" onclick="ajaxRegister()">
 									</form>
 									<br />
-								</div></li>
+								</div>
+							</li>
 						</ul>
 					</c:otherwise>
 
