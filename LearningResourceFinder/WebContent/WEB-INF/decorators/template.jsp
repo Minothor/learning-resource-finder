@@ -27,14 +27,13 @@
 			return false; 			
 		};
 				
-		$(document).ready(function(event) {				
-			$("#login-facebook").click(function() {
-				mPopupLogin("facebook");
-			});
-				
-			$("#login-googleplus").click(function() {
+		$(document).ready(function(event) {		
+			$(".connectionGoogle").click(function() {
 				mPopupLogin("googleplus");
 			});
+			$(".connectionFacebook").click(function() {
+				mPopupLogin("facebook");
+			});	
 		});
 	</script>
 </head>

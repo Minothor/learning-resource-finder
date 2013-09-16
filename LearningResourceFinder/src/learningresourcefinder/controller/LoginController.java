@@ -188,7 +188,7 @@ public class LoginController extends BaseController<User> {
 	 * @param keepLoggedIn required=false else when user doesn't check the checkbox we get a 400 error
 	 */
 	@RequestMapping("/ajax/loginsubmit")
-	public @ResponseBody String loginSubmit(
+	public @ResponseBody void loginSubmit(
 			@RequestParam(value= "userNameOrMail", required = false) String userNameOrMail,
 			@RequestParam(value= "password", required = false) String password,
 			@RequestParam(value= "autoLogin", required = false) boolean autologin) {
@@ -212,37 +212,30 @@ public class LoginController extends BaseController<User> {
 				// errorMsg = loginService.getRemainderLoginMessage(retrieveuser);
 
 			} catch (UserNotFoundException e1) {
-				errorMsg = "L'utilisateur '" + userNameOrMail
-						+ "' n'existe pas";
+				NotificationUtil.addNotificationMessage("L'utilisateur '" + userNameOrMail
+						+ "' n'existe pas");
 			}
 
 			if (StringUtils.isBlank(errorMsg)) {
-				errorMsg = "Ce mot de passe n'est pas valide pour l'utilisateur '"
-						+ userNameOrMail + "'";
+				NotificationUtil.addNotificationMessage("Ce mot de passe n'est pas valide pour l'utilisateur '"
+						+ userNameOrMail + "'");
 			}
 
 		} catch (UserNotValidatedException e) {
-			errorMsg = "L'utilisateur '"
+			NotificationUtil.addNotificationMessage("L'utilisateur '"
 					+ userNameOrMail
-					+ "' n'a pas été valide. Vérifiez vos mails reçus et cliquez sur le lien du mail qui vous a été envoyé à l'enregistrement.";
+					+ "' n'a pas été valide. Vérifiez vos mails reçus et cliquez sur le lien du mail qui vous a été envoyé à l'enregistrement.");
 
 		} catch (UserLockedException e) {
-			errorMsg = "L'utilisateur  '"
+			NotificationUtil.addNotificationMessage("L'utilisateur  '"
 					+ userNameOrMail
-					+ "' est verrouillé. Contacter un administrateur pour le déverrouiller.";
+					+ "' est verrouillé. Contacter un administrateur pour le déverrouiller.");
 
 		} catch (WaitDelayNotReachedException e) {
-			errorMsg = "Suite à de multiples tentatives de login échouées, votre utilisateur s'est vu imposé un délai d'attente avant de pouvoir se relogguer, ceci pour des raisons de sécurité."
+			NotificationUtil.addNotificationMessage("Suite à de multiples tentatives de login échouées, votre utilisateur s'est vu imposé un délai d'attente avant de pouvoir se relogguer, ceci pour des raisons de sécurité."
 					+ " Actuellement, il reste "
 					+ DateUtil.formatIntervalFromToNow(e.getNextPossibleTry())
-					+ " à attendre.";
-		}
-
-		if (errorMsg != null) {
-		    return errorMsg;
-
-		} else {
-		    return "success";
+					+ " à attendre.");
 		}
 	}
 
