@@ -51,6 +51,8 @@ public class Competence extends BaseEntity implements Searchable{
 	@OrderBy("code")
 	List<Competence> children = new ArrayList <Competence>();
 
+	@ManyToOne
+	Cycle cycle;   // Could be null (typical of non leaf cycles)
 	
 	public Competence() {} // No arg constructor for Hibernate
 

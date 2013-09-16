@@ -1,5 +1,7 @@
 package learningresourcefinder.model;
 
+import java.util.List;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -7,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -24,12 +28,20 @@ private static final long serialVersionUID = 1L;
 	@Size(max=15, message="le nom d'un cycle ne peut contenir que 15 caractères maximum")
 	private String name;
 
+	@OneToMany (mappedBy="cycle")
+	@OrderBy("code")
+	private List<Competence> competences;
+	
+	
+	
 	public Cycle() {} // No arg constructor for Hibernate
 
 	public Cycle(String aName) {
 		this.name = aName;
 	}
 
+	
+	
 	
 	@Override
 	public String toString()  {
