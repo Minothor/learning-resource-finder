@@ -98,10 +98,10 @@
 									<form action="/loginsubmit" method="post" action="login"
 										accept-charset="UTF-8" style="width: 200px;">
 										<button data-icon="&#xe005;" type="submit"
-											class="btn btn-google btn-block" id="sign-in-google">
+											class="btn btn-google btn-block" id="login-googleplus">
 											Connexion avec Google</button>
 										<button data-icon="&#xe000;" type="submit"
-											class="btn btn-facebook btn-block" id="sign-in-facebook">
+											class="btn btn-facebook btn-block" id="login-facebook">
 											Connexion avec Facebook</button>
 										<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
 										<input class="form-control" style="margin-bottom: 15px;"
