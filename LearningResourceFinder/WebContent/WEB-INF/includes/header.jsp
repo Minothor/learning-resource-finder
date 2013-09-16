@@ -19,22 +19,21 @@
 	}
 	
 	
-	$(document).ready(function() {
-	 	$("#registerLink").click(function(e) {
-	 	    e.preventDefault();// prevent the default anchor functionality
-	 	    // Hide dropdown connect
-	 	    $('#loginDropDown').dropdown('toggle');
-	 	    $('#registerDropDown').dropdown('toggle');
-	 	    $('#email').focus();
+		$(document).ready(function() {
+		 	$("#registerLink").click(function(e) {
+		 	    e.preventDefault();// prevent the default anchor functionality
+		 	    $('#loginDropDown').dropdown('toggle');  // Hide dropdown connect
+		 	    $('#registerDropDown').dropdown('toggle');  // Show dropdown register
+		 	    $('#email').focus();
+			});
+		 	
+		 	$("#addResourceLink").click(function(e) {
+		 	    e.preventDefault();// prevent the default anchor functionality
+		 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
+		 	                     no='$("#loginDropDown").dropdown("toggle"); '/>
+		 	
+			});
 		});
-	 	
-	 	$("#addResourceLink").click(function(e) {
-	 	    e.preventDefault();// prevent the default anchor functionality
-	 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
-	 	                     no='$("#loginDropDown").dropdown("toggle"); '/>
-	 	
-		});
-	});
 </script>
 
 <%-- ********** NOTIFICATIONS ************** --%>
@@ -80,8 +79,6 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active">
-					<!-- <a href="#">Lien 1</a></li> -->
 					<li class="dropdown">
 					   <a id="contributeDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
