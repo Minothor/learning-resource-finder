@@ -1,5 +1,9 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+﻿
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script type="text/javascript" src="/js/int/resourceAdd.js"></script>
+
 
 <script>
 	$(document).ready(function() {
@@ -19,22 +23,18 @@
 	}
 	
 	
-		$(document).ready(function() {
-		 	$("#registerLink").click(function(e) {
-		 	    e.preventDefault();// prevent the default anchor functionality
-		 	    $('#loginDropDown').dropdown('toggle');  // Hide dropdown connect
-		 	    $('#registerDropDown').dropdown('toggle');  // Show dropdown register
-		 	    $('#email').focus();
-			});
-		 	
-		 	$("#addResourceLink").click(function(e) {
-		 	    e.preventDefault();// prevent the default anchor functionality
-		 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
-		 	                     no='$("#loginDropDown").dropdown("toggle"); '/>
-		 	
-			});
+	$(document).ready(function() {
+	 	$("#registerLink").click(function(e) {
+// 	 	    	
+	 	    e.preventDefault();// prevent the default anchor functionality
+	 	    // Hide dropdown connect
+	 	    $('#loginDropDown').dropdown('toggle');
+	 	    $('#registerDropDown').dropdown('toggle');
+	 	    $('#email').focus();
 		});
+	});
 </script>
+
 
 <%-- ********** NOTIFICATIONS ************** --%>
 <%-- <c:if test="${!empty sessionScope.notifications}"> --%>
@@ -79,10 +79,12 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
+					<li class="active">
+					<!-- <a href="#">Lien 1</a></li> -->
 					<li class="dropdown">
-					   <a id="contributeDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Contribuer <b class="caret"></b></a>
+					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a id="addResourceLink">Créer une ressource</a></li>
+							<li><a data-toggle="modal" href="#addResourceModal">Créer une ressource</a></li>
 					   </ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Cycles <b class="caret"></b></a>
