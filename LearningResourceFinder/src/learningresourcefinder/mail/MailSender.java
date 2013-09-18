@@ -70,8 +70,8 @@ public class MailSender extends Thread {
         javaMailSender.setPort(smtpPort);
 
         if(environment == Environment.DEV){ // u need to set port 587 and smtp.gmail.com in config.properties file too .
-            javaMailSender.setUsername("reformyourcountrytest@gmail.com");
-            javaMailSender.setPassword("technofutur");
+            javaMailSender.setUsername("info@toujoursPlus.be");
+            javaMailSender.setPassword("somePassword");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.starttls.enable", "true");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.auth", "true");
         }
@@ -304,7 +304,7 @@ public class MailSender extends Thread {
             strLog.append("\n");
             strLog.append("============== END MAIL ==============");
 
-            log.info(strLog.toString());
+            log.debug(strLog.toString());
 
             if (environment.getMailBehavior() == MailBehavior.SENT) { // Really send the mail to SMTP server now.
                 MimeMessagePreparator mimeMessagePreparator = new MimeMessagePreparator() {
@@ -334,16 +334,13 @@ public class MailSender extends Thread {
                         }
                     }
                 };
-              
                      
                 javaMailSender.send(mimeMessagePreparator);
-                System.out.println("Mail send");
            }
         } catch(Exception e){//if we can't send the mail, continue
             // if we can't send for any reason, we don't stop the thread, we will just remove this mail from the database and we will continue to send mails.
             // Typical exception: the mail address is invalid.
             log.error("Exception while sending mail", e);
-        	
         }
 
     }

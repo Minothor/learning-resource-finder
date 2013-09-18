@@ -10,12 +10,8 @@
 		<c:if test="${!empty sessionScope.notifications}">
 		   showNotificationArea();
 		</c:if>
-		
 	});
 	
-	
-	
-
 	
  	function showNotificationArea() {	
 		$("#notificationArea").slideDown(); // Was hidden at the beginning.
@@ -29,7 +25,6 @@
 	
 	$(document).ready(function() {
 	 	$("#registerLink").click(function(e) {
-// 	 	    	
 	 	    e.preventDefault();// prevent the default anchor functionality
 	 	    $('#loginDropDown').dropdown('toggle');
 	 	    $('#registerDropDown').dropdown('toggle');
@@ -49,13 +44,15 @@
 
 <%-- ********** NOTIFICATIONS ************** --%>
 <%-- <c:if test="${!empty sessionScope.notifications}"> --%>
-	<div id="notificationArea"
-		style="padding:3px; <%-- padding in style to override header-area class padding  --%> 
+	<div id="notificationArea" 
+	     class="alert alert-warning" <%-- from Bootstrap --%>
+		style="  text-align:center;
                      display:none;  <%-- display none because will be shown through animation by the docuiment ready javascript --%>
                      ">
-		<a id="notificationCloser"
+<!-- 		<a id="notificationCloser"
 			style="float: right; padding: 0px 0px 0px 10px; cursor: pointer;"
-			onclick="$('#notificationArea').slideUp();">×</a>
+			>×</a> -->
+			<button id="notificationCloser" type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="$('#notificationArea').slideUp();">&times;</button>
 		<span id="notificationText">
 			<c:forEach items="${sessionScope.notifications}" var="notif">
 			           ${notif.text}<br />

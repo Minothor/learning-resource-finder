@@ -42,7 +42,7 @@ public class CurrentEnvironment {
 	 */
 	public enum Environment {
 
-		DEV(MailBehavior.SENT, true), // FIXME put NOT_STARTED instead SENT when production start, this allows to really sent mails during development
+		DEV(MailBehavior.NOT_STARTED, true), 
 		PROD(MailBehavior.SENT, true);
 
 		// Flag that tells wether the mail demon thread must be started
@@ -55,7 +55,6 @@ public class CurrentEnvironment {
 				boolean socialNetworkToBeConnected) {
 			this.mailBehavior = mailBehavior;
 			this.socialNetworkToBeConnected = socialNetworkToBeConnected;
-
 		}
 
 		public String getDomainName() {  // Cannot pre-load the value because it's not ready at class loading time.

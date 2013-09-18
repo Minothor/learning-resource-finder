@@ -10,6 +10,8 @@
    	<tr><td>PlayList list</td><td><a href="/playlist/user/${user.userName}" > My list of PlayLists</a></td><td>JU/NOR/EM</td><td></td></tr> 
    	<tr><td>Resources list</td><td><a href="/ressourcelist" >List of Resources</a></td><td>THD/SEB</td><td></td></tr>
    </table>
+   
+   <a href="/test/addMsg">Générer un message</a><br/>
 </body>
 </html>
 
