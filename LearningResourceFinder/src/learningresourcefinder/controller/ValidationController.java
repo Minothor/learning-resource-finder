@@ -32,9 +32,7 @@ public class ValidationController extends BaseController<User> {
 		Result result = null;
 
 		if (validationCode == null) {
-
 			result = Result.INVALID_CODE;
-
 		} else {
 
 			User user = userRepository.getUserByValidationCode(validationCode);
@@ -42,13 +40,11 @@ public class ValidationController extends BaseController<User> {
 			if (user != null) {
 
 				if (user.getAccountStatus().equals(User.AccountStatus.ACTIVE)) {
-
 					result = Result.ALREADY_VALIDATED;
 
 				} else {
 
-					if (user.getAccountStatus().equals(
-							User.AccountStatus.NOTVALIDATED)) {
+					if (user.getAccountStatus().equals(User.AccountStatus.NOTVALIDATED)) {
 
 						user.setAccountStatus(User.AccountStatus.ACTIVE);
 						em.merge(user);
@@ -56,8 +52,7 @@ public class ValidationController extends BaseController<User> {
 
 					} else {
 
-						NotificationUtil
-								.addNotificationMessage("Impossible de valider votre compte. Son état actuel est: "
+						NotificationUtil.addNotificationMessage("Impossible de valider votre compte. Son état actuel est: "
 										+ user.getAccountStatus().getName());
 
 					}
@@ -70,11 +65,9 @@ public class ValidationController extends BaseController<User> {
 					} catch (Exception e) {
 						result = Result.VALID_BUT_NOT_LOGGED;
 					}
-
 				}
 
 			} else {
-
 				result = Result.INVALID_CODE;
 			}
 

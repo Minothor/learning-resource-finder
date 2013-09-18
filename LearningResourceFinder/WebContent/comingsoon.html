@@ -81,17 +81,17 @@ $(function (){
 			    url : 'ajax/addMailOnTable',
 			    data: "mail=" + mail,
 			    success : function(data) {
-			    	alert("Merci pour votre intÃ©rÃªt, nous vous tiendrons informÃ© des prochaines grandes Ã©tapes.");
+			    	alert("Merci pour votre intérêt, nous vous tiendrons informés des prochaines grandes étapes.");
 			    	return false;
 			    },
 			    error : function(data) {
 			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
-	    			"votre e-mail.Cela montre bien que nous ne sommes pas prÃªts ;-) Toutes nos excuses.");
+	    			"votre e-mail. Cela montre bien que nous ne sommes pas encore prêts :-( Toutes nos excuses.");
 	        return false;
 			    },
 			}); 
 		}else {
-			alert("Vous n'avez pas entrer de mail.");
+			alert("Vous n'avez pas entreé de mail.");
 		} 
 	}
 	</script>
@@ -109,10 +109,11 @@ function sendDonation(){
 	    data: "sender="+sender+"&subject="+subject+"&content="+content,
 	    dataType: 'text',
 	    success : function(data) {
-	    	alert('Email successfully sent !');
+	    	alert('Merci. Votre message a été envoyé avec succès. Nous vous répondons par e-mail dès que possible.');
+	    	$("#myModal").modal('hide');
 	    },
 	    error : function(data) {
-	    	alert('Something went wrong. Check that none of the fields are empty.');
+	    	alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
 	    }
 	}); 
 }
@@ -406,7 +407,7 @@ div#users-contain table td,div#users-contain table th {
 								</div>
 								<div class="modal-footer">
 				          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-				          <button type="button" class="btn btn-primary" onclick="sendDonation()">Enregistrer</button>
+				          <button type="button" class="btn btn-primary" onclick="sendDonation()">Envoyer</button>
 				        </div>
 				      </div><!-- /.modal-content -->
 				    </div><!-- /.modal-dialog -->
