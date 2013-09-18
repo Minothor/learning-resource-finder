@@ -51,9 +51,9 @@ public class RegisterController extends BaseController<User> {
 		try {
 
 			user = userService.registerUser(false, username, password, email);
-			NotificationUtil.addNotificationMessage("Un message de confirmation de votre inscription vous a été envoyé sur votre email :"
+			NotificationUtil.addNotificationMessage("Un message de confirmation de votre inscription vous a été envoyé sur votre email: "
 					+ email
-					+ ". Merci d'activer votre compte (en cliquant sur le lien de confirmation)afin de pouvoir l'utiliser.");
+					+ ". Merci d'activer votre compte (en cliquant sur le lien de confirmation contenu dans l'e-mail) afin de pouvoir l'utiliser.");
 
 		} catch (UserAlreadyExistsException uaee) {
 
