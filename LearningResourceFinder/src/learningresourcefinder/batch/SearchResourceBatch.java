@@ -1,8 +1,11 @@
 package learningresourcefinder.batch;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import learningresourcefinder.model.BaseEntity;
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
@@ -46,12 +49,19 @@ public class SearchResourceBatch implements Runnable{
 
 	@Override
 	public void run() {	
-		indexService.createIndexes();
-		List<BaseEntity> liste = searchService.getFirstEntities(searchService.search("Matématique"), 5, PlayList.class);
+//		indexService.createIndexes();
+		
+		List<BaseEntity> liste = searchService.getFirstEntities(searchService.search("math"), 30, Competence.class);
+		List<Competence> list = new ArrayList<>();
+		list.add((Competence) liste.get(0));
 		for(BaseEntity result : liste){
-			if(result instanceof PlayList){
-				System.out.println(result);
+			if(result instanceof Competence){
+				list.add( ((Competence) result).getParent() );
 			}
+		}
+		Collections.reverse(list);
+		for(Competence result : list){
+			System.out.print(result.getName() + "/ ");
 		}
 	}
 
