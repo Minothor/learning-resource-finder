@@ -13,6 +13,10 @@
 		
 	});
 	
+	
+	
+
+	
  	function showNotificationArea() {	
 		$("#notificationArea").slideDown(); // Was hidden at the beginning.
 	}
@@ -27,11 +31,18 @@
 	 	$("#registerLink").click(function(e) {
 // 	 	    	
 	 	    e.preventDefault();// prevent the default anchor functionality
-	 	    // Hide dropdown connect
 	 	    $('#loginDropDown').dropdown('toggle');
 	 	    $('#registerDropDown').dropdown('toggle');
 	 	    $('#email').focus();
 		});
+	 	
+	 	$("#addResourceLink").click(function(e) {
+	 	    e.preventDefault();// prevent the default anchor functionality
+	 	    e.stopPropagation();
+	 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
+	 	                     no='$("#loginDropDown").dropdown("toggle");'/>
+		});
+	 	
 	});
 </script>
 
@@ -84,7 +95,7 @@
 					<li class="dropdown">
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a data-toggle="modal" href="#addResourceModal">Créer une ressource</a></li>
+							<li><a id="addResourceLink">Créer une ressource</a></li>
 					   </ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Cycles <b class="caret"></b></a>
@@ -122,8 +133,18 @@
 
 					<c:otherwise>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Connexion <b class="caret"></b></a>
+							<li class="dropdown">
+							
+							    <a id="loginDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Connexion <b class="caret"></b></a>
 								<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+								<div>
+								<p>
+								<small>
+								Ce site est gratuit et ouvert à tous, mais pour contribuer ou accéder à certaines fonctions, il faut se connecter.
+								</small>
+								</p>
+								<br>
+								</div>
 									<button data-icon="&#xe005;" type="button" class="btn btn-google btn-block connectionGoogle">
 										Connexion avec Google
 									</button>
