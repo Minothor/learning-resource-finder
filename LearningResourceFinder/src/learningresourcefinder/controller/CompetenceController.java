@@ -1,6 +1,9 @@
 package learningresourcefinder.controller;
 
+import java.util.List;
+
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.NotificationUtil;
@@ -142,6 +145,26 @@ public class CompetenceController extends BaseController<Competence> {
 		competenceDH.setDescription(competence.getDescription());
 		competenceDH.setName(competence.getName());
 		return competenceDH; 
+	} 
+	
+	@RequestMapping(value="/ajax/setCycle")
+	public @ResponseBody String setCycle(@RequestParam("idcomp") Long idCompetence, @RequestParam("idcycle") Long idCycle){ 
+		Competence competence = getRequiredEntity(idCompetence);
+		//Verify if children, sub children or parents have a different cycle
+		List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
+		for(Competence cptChild : childrenAndSubChildren){
+			Long cycleId = cptChild.getCycle().getId();
+			Long cptCycleId = competence.getCycle().getId(); 
+			if(cptChild.getCycle()!=null && cptCycleId != cycleId){
+				return "Un enfant possède un cycle différent!";
+			}
+		}
+		//FIXME DECOMMENT IN PROD : SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
+		Cycle c = em.find(Cycle.class, idCycle);
+		Competence competenceToUpdate = getRequiredDetachedEntity(idCompetence);
+		competenceToUpdate.setCycle(c);
+		em.merge(competenceToUpdate);
+		return "success";
 	} 
 
 	//we use CompetenceDataHolder because spring cannot perform entities to jSON 	
