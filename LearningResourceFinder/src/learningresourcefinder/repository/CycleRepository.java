@@ -30,6 +30,5 @@ public class CycleRepository extends BaseRepository<Cycle> {
         List<Competence> result = em.createQuery("SELECT c FROM Competence c WHERE c.cycle.name = :name").setParameter("name", name).getResultList();
         return result; 
         
-    }
-        
+    }   
 }
