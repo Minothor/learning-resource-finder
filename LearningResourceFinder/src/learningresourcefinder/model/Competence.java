@@ -54,6 +54,14 @@ public class Competence extends BaseEntity implements Searchable{
 	@ManyToOne
 	Cycle cycle;   // Could be null (typical of non leaf cycles)
 	
+	public Cycle getCycle() {
+		return cycle;
+	}
+
+	public void setCycle(Cycle cycle) {
+		this.cycle = cycle;
+	}
+
 	public Competence() {} // No arg constructor for Hibernate
 
 	public Competence(String aCode, String aName) {
@@ -91,7 +99,7 @@ public class Competence extends BaseEntity implements Searchable{
 			child.getChildrenRecursively(result);
 		}
 	}
-
+	
 	public void addResource(Resource resource) {
 		this.getResources().add(resource);
 		resource.getProgramPoints().add(this);

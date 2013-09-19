@@ -2,8 +2,6 @@ package learningresourcefinder.model;
 
 import java.util.List;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +16,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
-public class Cycle extends BaseEntity implements Serializable {
-private static final long serialVersionUID = 1L;
+public class Cycle extends BaseEntity  {
+
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     
