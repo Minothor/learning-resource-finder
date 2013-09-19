@@ -173,4 +173,10 @@
     <listener-class>learningresourcefinder.web.LuceneIndexContextListener</listener-class>
   </listener>
   
+  <listener>
+  
+  <listener-class>learningresourcefinder.web.Cache</listener-class>
+  
+  </listener>
+  
 </web-app>
