@@ -5,6 +5,7 @@ import java.util.List;
 
 import learningresourcefinder.model.Competence;
 import learningresourcefinder.repository.CompetenceRepository;
+import learningresourcefinder.repository.CycleRepository;
 
 /** Performs a recursive walk of a tree (depth first), calling methods of a given CompetenceTreeVisitor object at each node */
 public class CompetencesTreeWalker {
@@ -12,19 +13,25 @@ public class CompetencesTreeWalker {
     private CompetencesTreeVisitorImpl  mCompetenceTreeVisitor;
     private CompetenceRepository mCompetenceRepository;
     private Competence competenceFromRequest;
-    private int currentLevel; 
+    private int currentLevel;
+	private CycleRepository mCycleRepository; 
 
     public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor) {
         this(competenceRepository,competenceTreeVisitor,null);
     }
-   
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor,Competence competenceParent){
+ 
+    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor,CycleRepository mCycleRepository) {
+        this(competenceRepository,competenceTreeVisitor,null,mCycleRepository);
+    }
+    
+    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor,Competence competenceParent,CycleRepository mCycleRepository){
         this.mCompetenceRepository = competenceRepository;     
         this.mCompetenceTreeVisitor = competenceTreeVisitor;
         this.competenceFromRequest = competenceParent;
+        this.mCycleRepository = mCycleRepository;
     }
-    
-    public void walk() {
+        
+	public void walk() {
         List<Competence> listOfCompetences = null;
         
         if(competenceFromRequest == null){
@@ -47,7 +54,7 @@ public class CompetencesTreeWalker {
     }
 
     public void processCompetences(Competence competence) {
-        mCompetenceTreeVisitor.startCompetence(competence);
+        mCompetenceTreeVisitor.startCompetence(competence,mCycleRepository);
         currentLevel++;
         processCompetencesList(competence.getChildren());
         currentLevel--;
