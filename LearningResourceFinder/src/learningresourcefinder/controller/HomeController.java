@@ -2,6 +2,8 @@ package learningresourcefinder.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
@@ -14,14 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-public class HomeController extends BaseController<BaseEntity>{
+public class HomeController {
     @Autowired CycleRepository cycleRepository;
     
     @RequestMapping(value={"/", "/home"})
-    private ModelAndView home() {
-        ModelAndView mv = new ModelAndView("cyclelist"); 
+    private ModelAndView home(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("home"); 
         List<Cycle> list=cycleRepository.findAllCycles();
-        mv.addObject("cyclelist", list);
+       request.getSession().setAttribute("cyclelist",list);
          
         return mv;
     }
