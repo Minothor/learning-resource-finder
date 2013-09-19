@@ -17,7 +17,7 @@
  <lrf:competencetree/> 
  
   <!-- Button trigger modal -->
-  
+
  
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -33,7 +33,7 @@
         <div class="modal-body">
 	        <div class="form-group">
 	          <label for="codeField">Code parent</label>
-			  <input type="text" class="form-control" name="codeField"id="codeField" placeholder="Code">
+			  <input type="text" class="form-control" name="codeField"id="codeField" placeholder="Code"  maxlength="8">
 			  <span class="help-block">Code de la compétence qui sera parent après le déplacement.</span>
 			</div>
 			<input type="hidden" class="form-control" name="hiddenFieldMoveCompetency" id="hiddenFieldMoveCompetency" value=""> <%-- Value us set by javascript --%>
@@ -58,10 +58,10 @@
         </div>
         <div class="modal-body">
 			<div class="form-group">
-			  <input type="text" class="form-control" id="name" placeholder="Nom">
+			  <input type="text" class="form-control" id="name" placeholder="Nom" maxlength="40">
 			</div>
 			<div class="form-group">
-			  <input type="text" class="form-control" id="code" placeholder="Code">
+			  <input type="text" class="form-control" id="code" placeholder="Code"  maxlength="8">
 			</div>
 			<div class="form-group">
 			  <input type="text" class="form-control" id="description" placeholder="Description" value="">
@@ -88,11 +88,11 @@
         <div class="modal-body">
   
 		<div class="form-group">
-		  <input type="text" class="form-control" id="nameedit" placeholder="Nom" value="">
+		  <input type="text" class="form-control" id="nameedit" placeholder="Nom" value=""  maxlength="40">
 		</div>
 		
 		<div class="form-group">
-		  <input type="text" class="form-control" id="codeedit" placeholder="Code" value="">
+		  <input type="text" class="form-control" id="codeedit" placeholder="Code" value=""  maxlength="8">
 		</div>
 		
 		<div class="form-group">
@@ -128,10 +128,7 @@
   </div><!-- /.modal -->
   </div>
   
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://code.jquery.com/jquery.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  
   <script type="text/javascript">
   
 	$(document).ready(function() {
@@ -157,7 +154,8 @@
 		$("a[id^='R-']").attr('href', '#myRemove');
 		$("a[id^='R-']").click(click_removeCompetence);
 		
-		
+		// setCycle Init
+		$("a[id^='CY-']").click(click_setCycle);
 	});
   
   function click_me (){
@@ -185,7 +183,33 @@
 		var compId = this.id.substring(2);
 		$("button[id='removesubmit']").attr("onclick","ajaxCompetenceRemoveSubmit(" + compId +")");
 	}
+	
+	function click_setCycle(){
+		var temp = this.id.split('CP-');
+		var compId =  temp[1];
+		var cycleId = temp[0].substring(3);
+		$.ajax({
+			type : "POST",
+		    url : 'ajax/setCycle',
+		    data: "idcomp=" +compId + "&idcycle=" +cycleId,
+		    success : function(data) {
+		    	if (data == "success") {
+		    		alert("C'est ok pour le changement de cycle");
+		    	} else {
+		    		alert("souci lors de la soumission de l'attribution d'un cycle : " + data);
+		    	}
+		    	return false;
+		    },
+		    error : function(data) {
+		    	alert("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'assigner un cycle." + data);
+		    	//window.location.reload();
+        		return false;
+		    },
+		}); 
+
 		
+	}
+	
 	function ajaxCompetenceAddSubmit(idparent) {
 		var name = $('#name').val();
 		var code = $('#code').val();
