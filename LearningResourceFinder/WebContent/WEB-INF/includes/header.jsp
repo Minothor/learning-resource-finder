@@ -1,6 +1,7 @@
 ﻿
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 
 <script type="text/javascript" src="/js/int/resourceAdd.js"></script>
 
@@ -87,6 +88,11 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Lien 1</a></li>
+					<li><a href="#">Lien 2</a></li>
+					
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 					<li class="active">
 					<!-- <a href="#">Lien 1</a></li> -->
 					<li class="dropdown">
@@ -111,8 +117,17 @@
 							<li><a href="#">One more separated link</a></li>
 						</ul>
 				    </li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" 
+						data-toggle="dropdown">Cycles <b class="caret"></b></a> 
+						
+					<ul class="dropdown-menu"> 
+						<c:forEach items="${applicationScope.cache.cycles}" var="cycle">
+       <li><a href="<c:url value='cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
+</c:forEach>
+                    						
+						</ul></li> 
 				</ul>
-
+	
 				<c:choose>
 					<c:when test="${current.user!=null}">
 						<ul class="nav navbar-nav navbar-right">
@@ -130,36 +145,33 @@
 
 					<c:otherwise>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown">
-							
-							    <a id="loginDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Connexion <b class="caret"></b></a>
-								<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-								<div>
-								<p>
-								<small>
-								Ce site est gratuit et ouvert à tous, mais pour contribuer ou accéder à certaines fonctions, il faut se connecter.
-								</small>
-								</p>
-								<br>
-								</div>
-									<button data-icon="&#xe005;" type="button" class="btn btn-google btn-block connectionGoogle">
-										Connexion avec Google
-									</button>
-									<button data-icon="&#xe000;" type="button" class="btn btn-facebook btn-block connectionFacebook">
-										Connexion avec Facebook
-									</button>
-									<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>	
-									<form action="/loginsubmit" method="post" action="login" accept-charset="UTF-8" style="width: 200px;">	
-										<input class="form-control" style="margin-bottom: 15px;" type="text" placeholder="Username" id="userNameOrMail" name="userNameOrMail"> 
-										<input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
-										<label class="string optional" for="remember_me"> 
-											<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1"> 
-											Se souvenir de moi
-										</label> 
-										<input class="btn btn-bleu btn-block" type="button" id="sign-in" value="Connexion" onclick="ajaxlogin()">
-										<div>
-											<label > Pas de compte ?</label>	
-											<a href="#" id="registerLink">S'inscrire</a>
+							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle"
+								data-toggle="dropdown">Connexion <b class="caret"></b></a>
+								<div class="dropdown-menu"
+									style="padding: 15px; padding-bottom: 0px;">
+									<form action="/loginsubmit" method="post" action="login"
+										accept-charset="UTF-8" style="width: 200px;">
+										<button data-icon="&#xe005;" type="submit"
+											class="btn btn-google btn-block" id="login-googleplus">
+											Connexion avec Google</button>
+										<button data-icon="&#xe000;" type="submit"
+											class="btn btn-facebook btn-block" id="login-facebook">
+											Connexion avec Facebook</button>
+										<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
+										<input class="form-control" style="margin-bottom: 15px;"
+											type="text" placeholder="Username" id="userNameOrMail"
+											name="userNameOrMail"> <input class="form-control"
+											style="margin-bottom: 15px;" type="password"
+											placeholder="Password" id="password" name="password">
+										<label class="string optional" for="remember_me"> <input
+											style="float: left; margin-right: 10px;" type="checkbox"
+											name="remember-me" id="remember-me" value="1"> Se
+											souvenir de moi
+										</label> <input class="btn btn-bleu btn-block" type="button"
+											id="sign-in" value="Connexion" onclick="ajaxlogin()">
+											<div>
+										<label > Pas de compte ?</label>	
+										<a href="#" id="registerLink">S'inscrire</a>
 										</div>
 									</form>
 									<br />
