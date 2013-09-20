@@ -16,15 +16,15 @@
 	</lrf:breadcrumb>
 
 
-  <c:forEach items= "${cyclelist}" var="cycle">
+ 
    <ul>
-       <li><a href="<c:url value='cycle?id=${cycle.id}'/>">${cycle.name}</a>
-            </li>
-
+    <c:forEach items= "${cyclelist}" var="cycle">
+       <li><a href="<c:url value='cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
+</c:forEach>
   </ul>
   <br/>
   
-</c:forEach>
+
   <a href="cyclecreate">Add</a>
 </body>
 </html>
