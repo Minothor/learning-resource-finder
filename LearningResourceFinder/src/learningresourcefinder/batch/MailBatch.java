@@ -3,11 +3,7 @@ package learningresourcefinder.batch;
 import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
 
-import learningresourcefinder.web.UrlUtil;
-import learningresourcefinder.web.UrlUtil.Mode;
-
 import org.apache.log4j.BasicConfigurator;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;

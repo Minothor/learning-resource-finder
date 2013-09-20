@@ -1,11 +1,6 @@
 package learningresourcefinder.batch;
 
 import learningresourcefinder.exception.UserAlreadyExistsException;
-import learningresourcefinder.mail.MailCategory;
-import learningresourcefinder.mail.MailType;
-import learningresourcefinder.model.Mail;
-import learningresourcefinder.model.User;
-import learningresourcefinder.repository.MailRepository;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.service.MailService;
 import learningresourcefinder.service.UserService;
