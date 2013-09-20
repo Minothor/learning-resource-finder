@@ -171,6 +171,7 @@
 		var temp = this.id.split('CP-');
 		var compId =  temp[1];
 		var cycleId = temp[0].substring(3);
+		var newvalue = $(this).text();
 		$.ajax({
 			type : "GET",
 		    url : 'ajax/setCycle',
@@ -178,6 +179,8 @@
 		    success : function(data) {
 		    	if (data == "success") {
 		    		showNotificationText("Assignation du cycle réussie.");
+		    		$("a[id='CP-" +compId+ "']").text(newvalue);
+		    		$("a[id='CP-" +compId+ "']").dropdown('toggle');
 		    	} else {
 		    		showNotificationText(data);
 		    	}
@@ -185,7 +188,7 @@
 		    },
 		    error : function(data) {
 		    	alert("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'assigner un cycle." + data);
-		    	//window.location.reload();
+		    	
         		return false;
 		    },
 		}); 
