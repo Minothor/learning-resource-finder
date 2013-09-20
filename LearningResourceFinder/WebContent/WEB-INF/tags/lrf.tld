@@ -52,10 +52,13 @@
 		</attribute>
 	</tag>
     <tag>
-	<name>competencetree</name>
-	<tag-class>learningresourcefinder.tag.CompetenceTreeTag</tag-class>
-	<body-content>empty</body-content>
-	
-	
+		<name>competencetree</name>
+		<tag-class>learningresourcefinder.tag.CompetenceTreeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>root</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 </taglib>

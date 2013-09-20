@@ -22,8 +22,16 @@ public class CompetenceController extends BaseController<Competence> {
 	@Autowired CompetenceRepository competenceRepository;
 	
 	@RequestMapping ("/competencetree")
-	public ModelAndView competenceTree (){
+	// Parameter rootCode defines the node from which we display the tree (we display all if null)
+	public ModelAndView competenceTree (@RequestParam(value="rootCode", required=false) String rootCode) {
 		ModelAndView mv= new ModelAndView("competencetree");
+		Competence root;
+		if (rootCode != null) {
+			root = competenceRepository.findByCode(rootCode);
+		} else {
+			root = competenceRepository.findRoot();
+		}
+		mv.addObject("root", root);
 		return mv; 
 	}
 

@@ -17,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BatchPGM implements Runnable {
 
-
+    @Autowired
+    CompetenceRepository mCompetenceRepository;
 
     private CompetencesTreeVisitorImpl competenceTreeVisitor;
     private CompetencesTreeWalker competenceTreeWalker;
@@ -30,15 +31,14 @@ public class BatchPGM implements Runnable {
 
     @Override
     public void run() {
-
-      /*  competenceTreeVisitor = new CompetencesTreeVisitorImpl();
-        competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,
-                competenceTreeVisitor);
+    	/*
+        competenceTreeVisitor = new CompetencesTreeVisitorImpl();
+        competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,  competenceTreeVisitor);
 
         competenceTreeWalker.walk();
 
         System.out.println(competenceTreeVisitor.getHtmlResult());
-    */
+     */
     }
 
 }

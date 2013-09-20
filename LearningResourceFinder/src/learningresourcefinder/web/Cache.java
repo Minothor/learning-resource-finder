@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Cycle;
+import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.CycleRepository;
 
 
@@ -14,7 +16,6 @@ import learningresourcefinder.repository.CycleRepository;
 public class Cache implements ServletContextListener {
 
     List <Cycle> cycles;  // We need to display cycles in the header (menu bar) on each page.
-    
    
 
     @Override
@@ -29,8 +30,9 @@ public class Cache implements ServletContextListener {
     }
     
     public void fillCacheFromDB(){
-       CycleRepository cyclerepository = ContextUtil.getSpringBean(CycleRepository.class);
-       cycles = cyclerepository.findAllCycles(); 
+       CycleRepository cycleRepository = ContextUtil.getSpringBean(CycleRepository.class);
+       cycles = cycleRepository.findAllCycles();
+       
     }
     
     public static Cache getInstance(){
@@ -43,4 +45,6 @@ public class Cache implements ServletContextListener {
     public List<Cycle> getCycles() {
         return cycles;
     }
+
+    
 }

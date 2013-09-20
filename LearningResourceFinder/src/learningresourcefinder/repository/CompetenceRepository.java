@@ -33,8 +33,8 @@ public class CompetenceRepository extends BaseRepository<Competence> {
 				);
 	}
 
-	public List<Competence> findAllWithoutParent(){
-		return    em.createQuery("select c from Competence c where c.parent is null ").getResultList();
+	public Competence findRoot(){
+		return    (Competence) em.createQuery("select c from Competence c where c.parent is null ").getSingleResult();
 	}
 
 

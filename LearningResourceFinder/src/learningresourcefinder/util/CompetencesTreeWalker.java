@@ -1,5 +1,6 @@
 package learningresourcefinder.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,15 +17,8 @@ public class CompetencesTreeWalker {
     private int currentLevel;
 	private CycleRepository mCycleRepository; 
 
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor) {
-        this(competenceRepository,competenceTreeVisitor,null);
-    }
- 
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor,CycleRepository mCycleRepository) {
-        this(competenceRepository,competenceTreeVisitor,null,mCycleRepository);
-    }
-    
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitorImpl competenceTreeVisitor,Competence competenceParent,CycleRepository mCycleRepository){
+	
+    public CompetencesTreeWalker(CompetencesTreeVisitorImpl competenceTreeVisitor, Competence competenceParent, CompetenceRepository competenceRepository, CycleRepository mCycleRepository){
         this.mCompetenceRepository = competenceRepository;     
         this.mCompetenceTreeVisitor = competenceTreeVisitor;
         this.competenceFromRequest = competenceParent;
@@ -35,9 +29,10 @@ public class CompetencesTreeWalker {
         List<Competence> listOfCompetences = null;
         
         if(competenceFromRequest == null){
-            listOfCompetences = mCompetenceRepository.findAllWithoutParent();
+            listOfCompetences = new ArrayList<Competence>();
+            listOfCompetences.add(mCompetenceRepository.findRoot());
             
-        }else{
+		} else {
             listOfCompetences = competenceFromRequest.getChildren();
         }
         currentLevel = 0;

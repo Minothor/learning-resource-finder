@@ -2,7 +2,7 @@
 <html>
 <body>
 
- <lrf:competencetree/> 
+ <lrf:competencetree root="${root}"/> 
  
   <!-- Button trigger modal -->
 
