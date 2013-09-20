@@ -18,6 +18,7 @@
 		$("#notificationArea").slideDown(); // Was hidden at the beginning.
 	}
 	
+ 	// Call this method if you want to display a notification text from JavaScript code.
 	function showNotificationText(message) {
 		$("#notificationText").html(message);
 		showNotificationArea();
@@ -44,31 +45,26 @@
 
 
 <%-- ********** NOTIFICATIONS ************** --%>
-<%-- <c:if test="${!empty sessionScope.notifications}"> --%>
 	<div id="notificationArea" 
 	     class="alert alert-warning" <%-- from Bootstrap --%>
-		style="  text-align:center;
+		 style="text-align:center;
                      display:none;  <%-- display none because will be shown through animation by the docuiment ready javascript --%>
                      ">
-<!-- 		<a id="notificationCloser"
-			style="float: right; padding: 0px 0px 0px 10px; cursor: pointer;"
-			>×</a> -->
-			<button id="notificationCloser" type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="$('#notificationArea').slideUp();">&times;</button>
+        <%-- close cross button (bootstrap) --%>            
+		<button id="notificationCloser" type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="$('#notificationArea').slideUp();">&times;</button>
 		<span id="notificationText">
 			<c:forEach items="${sessionScope.notifications}" var="notif">
 			           ${notif.text}<br />
 			</c:forEach>
 		</span>
-		<%
-		    session.removeAttribute("notifications");
-		%>
+		<%  session.removeAttribute("notifications"); %>  <%-- once displayed, we take it out from the session. --%>
 	</div>
-<%-- </c:if> --%>
+
+
 
 <!-- Main Menu / Start
 ================================================== -->
-<header>
-
+<header>  <%-- Bootstrap style --%>
 	<nav class="navbar navbar-default" role="navigation">
 
 		<div class="container">
@@ -88,46 +84,26 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Lien 1</a></li>
-					<li><a href="#">Lien 2</a></li>
 					
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-					<li class="active">
-					<!-- <a href="#">Lien 1</a></li> -->
 					<li class="dropdown">
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
 							<li><a id="addResourceLink">Créer une ressource</a></li>
 					   </ul>
 					</li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Cycles <b class="caret"></b></a>
-					   <ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul>
-					</li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul>
-				    </li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" 
-						data-toggle="dropdown">Cycles <b class="caret"></b></a> 
-						
-					<ul class="dropdown-menu"> 
-						<c:forEach items="${applicationScope.cache.cycles}" var="cycle">
-       <li><a href="<c:url value='cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
-</c:forEach>
+					
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Cycles <b class="caret"></b></a> 
+					    <ul class="dropdown-menu"> 
+						  <c:forEach items="${applicationScope.cache.cycles}" var="cycle">
+                             <li><a href="<c:url value='cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
+                          </c:forEach>
                     						
-						</ul></li> 
+					    </ul>
+					 </li> 
 				</ul>
-	
+
+
+	            <%-- Login / Register / Profile display --%>
 				<c:choose>
 					<c:when test="${current.user!=null}">
 						<ul class="nav navbar-nav navbar-right">
@@ -196,8 +172,9 @@
 							</li>
 						</ul>
 					</c:otherwise>
-
-				</c:choose>
+				</c:choose>  <%-- Login / Register / Profile --%>
+				
+				<%-- Search --%>
 				<form class="navbar-form navbar-right" role="search" method="post" action="search">
 				   <div class="form-group">
 					<div class="input-group" style="width:150px;">
@@ -208,7 +185,6 @@
 					</div>
 				  </div>
 				</form>
-				<!-- /.col-lg-6 -->
 			</div>
 		</div>
 	</nav>

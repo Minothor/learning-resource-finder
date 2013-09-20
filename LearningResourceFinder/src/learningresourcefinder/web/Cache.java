@@ -9,26 +9,22 @@ import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
 
 
-// Cache accessible from the ServletContext and initialized when the web container starts.
+// Cache stored in the ServletContext and initialized when the web container starts.
 public class Cache implements ServletContextListener {
 
     List <Cycle> cycles;  // We need to display cycles in the header (menu bar) on each page.
-    
     
    
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
      //empty
-        
     }
 
     @Override
-    public void contextInitialized(ServletContextEvent arg0) {
+    public void contextInitialized(ServletContextEvent sce) {
         fillCacheFromDB(); 
-        arg0.getServletContext().setAttribute("cache", this); 
-        
-        
+        sce.getServletContext().setAttribute("cache", this); 
     }
     
     public void fillCacheFromDB(){
