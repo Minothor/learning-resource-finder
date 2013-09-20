@@ -1,9 +1,8 @@
 package learningresourcefinder.controller;
 
-import javax.validation.Valid;
-
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
+import learningresourcefinder.web.Cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,6 +60,7 @@ public class CycleEditController extends BaseController<Cycle> {
             cycleRepository.merge(cycle);
 
         }
+        Cache.getInstance().fillCacheFromDB();
         return new ModelAndView("redirect:/cycle?id="+cycle.getId());
     }
 
@@ -74,7 +74,6 @@ public class CycleEditController extends BaseController<Cycle> {
 
     @ModelAttribute
     public Cycle findCycle(@RequestParam(value="id",required =false)Long id){
-
         if (id==null){
             return new Cycle();
         } else{

@@ -21,19 +21,12 @@ public class CompetenceController extends BaseController<Competence> {
 
 	@Autowired CompetenceRepository competenceRepository;
 	
-	@RequestMapping ("/tree")
-	public ModelAndView DisplayCompTree (){
+	@RequestMapping ("/competencetree")
+	public ModelAndView competenceTree (){
 		ModelAndView mv= new ModelAndView("competencetree");
 		return mv; 
 	}
 
-	@RequestMapping({"/competence/test"}) // out of context test of ajax query to add/edit/remove a competence in pgm tree
-	public ModelAndView prepareModelAndView() {
-
-		ModelAndView mv = new ModelAndView("testAjaxCompetence", "competence", null);
-
-		return mv;
-	}
 
 	@RequestMapping(value="/ajax/competenceAddSubmit", method = RequestMethod.POST)
 	public @ResponseBody String ajaxAddCompetence( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("idparent") Long parentIdCompetence, @RequestParam("description") String descriptionCompetence){
@@ -96,7 +89,7 @@ public class CompetenceController extends BaseController<Competence> {
 			competence.setDescription(descriptionCompetence);
 			em.merge(competence);
 			return "success";
-		}else{
+		} else {
 			return "Le code existe déjà dans une autre compétence"; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
 		}
  
@@ -110,7 +103,7 @@ public class CompetenceController extends BaseController<Competence> {
         SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
         Competence newParent =   competenceRepository.findByCode(codeNewParent);
         if (competence.getParent()==null){
-            NotificationUtil.addNotificationMessage("Noeud principal, ne peut être déplacé!"); 
+            NotificationUtil.addNotificationMessage("La racine ne peut être déplacée."); 
             return mv;
         }
         if (newParent==null){
@@ -118,11 +111,11 @@ public class CompetenceController extends BaseController<Competence> {
             return mv;
         }
         if (competence.getChildrenAndSubChildren().contains(newParent)){
-        	NotificationUtil.addNotificationMessage("La compétence ne peut être déplacée dans ses propres sous compétences");
+        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée dans ses propres sous-compétences");
         	return mv;
         }
         if (competence.getId() == newParent.getId()){
-        	NotificationUtil.addNotificationMessage("La compétence ne peut être déplacée sur elle même");
+        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée sur elle même");
         	return mv;
         }
         
@@ -150,24 +143,33 @@ public class CompetenceController extends BaseController<Competence> {
 	@RequestMapping(value="/ajax/setCycle")
 	public @ResponseBody String setCycle(@RequestParam("idcomp") Long idCompetence, @RequestParam("idcycle") Long idCycle){ 
 		Competence competence = getRequiredEntity(idCompetence);
+		Cycle cycle = (Cycle)getRequiredEntity(idCycle, Cycle.class);
+		
 		//Verify if children, sub children or parents have a different cycle
 		List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
 		for(Competence cptChild : childrenAndSubChildren){
-			Long cycleId = cptChild.getCycle().getId();
-			Long cptCycleId = competence.getCycle().getId(); 
-			if(cptChild.getCycle()!=null && cptCycleId != cycleId){
-				return "Un enfant possède un cycle différent!";
+			if(cptChild.getCycle() != null  && ! cycle.equals(cptChild.getCycle())){
+				return "Une des sous-compétences ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-compétence de cycle afin que des enfants ne soient pas en contradicition avec leurs parent.";
 			}
 		}
+		
+		// Has one of the parent a different cycle ?
+		Competence parent = competence.getParent();
+		while(parent != null){
+			if(parent.getCycle() != null  &&  !cycle.equals(parent.getCycle())){
+				return "Une des compétences parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradicition avec leurs parent.";
+			}
+			parent = parent.getParent();
+		}
+		
+		
 		//FIXME DECOMMENT IN PROD : SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
-		Cycle c = em.find(Cycle.class, idCycle);
-		Competence competenceToUpdate = getRequiredDetachedEntity(idCompetence);
-		competenceToUpdate.setCycle(c);
-		em.merge(competenceToUpdate);
+		competence.setCycle(cycle);
+		em.merge(competence);
 		return "success";
 	} 
 
-	//we use CompetenceDataHolder because spring cannot perform entities to jSON 	
+	//we use CompetenceDataHolder because spring cannot does not convert our entities to jSON correctly. 	
 	public static class CompetenceDataHolder {
 		private String name;
 		private String code;   // Short identifier that users can use to quickly refer a Competence

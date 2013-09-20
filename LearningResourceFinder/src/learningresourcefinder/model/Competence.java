@@ -177,4 +177,8 @@ public class Competence extends BaseEntity implements Searchable{
 	public String getBoostedCriteriaName() {
 		return "name";
 	}
+
+	public String getFullName() {
+		return getCode() + " - " + getName();
+	}
 }

@@ -1,17 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
- <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
-</head>
 <body>
 
  <lrf:competencetree/> 
@@ -135,22 +123,22 @@
 		// Handler for .ready() called.
 		
 		// Add initialization
-		$("a[id^='A-']").attr('data-toggle', 'modal'); //FIXME $('#myModal').modal(options) ???
+		$("a[id^='A-']").attr('data-toggle', 'modal'); 
 		$("a[id^='A-']").attr('href', '#myAdd');
 		$("a[id^='A-']").click(click_addCompetence);
 		
 		// Modify initialization
-		$("a[id^='E-']").attr('data-toggle', 'modal'); //FIXME $('#myModal').modal(options) ???
+		$("a[id^='E-']").attr('data-toggle', 'modal'); 
 		$("a[id^='E-']").attr('href', '#myEdit');
 		$("a[id^='E-']").click(click_editCompetence);
 		
 		// Deplace initialization
-		$("a[id^='D-']").attr('data-toggle', 'modal'); //FIXME $('#myModal').modal(options) ???
+		$("a[id^='D-']").attr('data-toggle', 'modal'); 
 		$("a[id^='D-']").attr('href', '#myModal');
 		$("a[id^='D-']").click(click_me); 
 		
 		// Delete initialization
-		$("a[id^='R-']").attr('data-toggle', 'modal'); //FIXME $('#myModal').modal(options) ???
+		$("a[id^='R-']").attr('data-toggle', 'modal'); 
 		$("a[id^='R-']").attr('href', '#myRemove');
 		$("a[id^='R-']").click(click_removeCompetence);
 		
@@ -159,13 +147,8 @@
 	});
   
   function click_me (){
-	 var s= this.id; 
 	 var compId=this.id.substring(2); 
-	 
-	 //$(#myForm).modal("show");
 	 $("#hiddenFieldMoveCompetency").attr("value", compId);
-	;
-	
   }
   
   function click_addCompetence(){
@@ -189,14 +172,14 @@
 		var compId =  temp[1];
 		var cycleId = temp[0].substring(3);
 		$.ajax({
-			type : "POST",
+			type : "GET",
 		    url : 'ajax/setCycle',
 		    data: "idcomp=" +compId + "&idcycle=" +cycleId,
 		    success : function(data) {
 		    	if (data == "success") {
-		    		alert("C'est ok pour le changement de cycle");
+		    		showNotificationText("Assignation du cycle réussie.");
 		    	} else {
-		    		alert("souci lors de la soumission de l'attribution d'un cycle : " + data);
+		    		showNotificationText(data);
 		    	}
 		    	return false;
 		    },
@@ -206,8 +189,7 @@
         		return false;
 		    },
 		}); 
-
-		
+        return false;  // Prevents the link to be followed
 	}
 	
 	function ajaxCompetenceAddSubmit(idparent) {
