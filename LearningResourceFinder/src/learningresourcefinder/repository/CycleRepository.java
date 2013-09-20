@@ -19,16 +19,10 @@ public class CycleRepository extends BaseRepository<Cycle> {
     }
     
     public Cycle findByName(String name){
-        
         return getSingleOrNullResult(
                 em.createQuery("SELECT c FROM Cycle c WHERE lower(c.name) = :name")
-                .setParameter("name",name)
+                .setParameter("name",name.toLowerCase())
                 );
     }
-    public List<Competence> FindCompetencesbyCycles (String name) {
         
-        List<Competence> result = em.createQuery("SELECT c FROM Competence c WHERE c.cycle.name = :name").setParameter("name", name).getResultList();
-        return result; 
-        
-    }   
 }
