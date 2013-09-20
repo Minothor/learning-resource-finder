@@ -10,6 +10,7 @@ import learningresourcefinder.repository.CycleRepository;
 
 
 // Cache stored in the ServletContext and initialized when the web container starts.
+// If you put entities from the DB here, only put thoses who rarely change.
 public class Cache implements ServletContextListener {
 
     List <Cycle> cycles;  // We need to display cycles in the header (menu bar) on each page.
