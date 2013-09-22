@@ -179,8 +179,8 @@
 		    success : function(data) {
 		    	if (data == "success") {
 		    		showNotificationText("Assignation du cycle réussie.");
-		    		$("a[id='CP-" +compId+ "']").text(newvalue);
-		    		$("a[id='CP-" +compId+ "']").dropdown('toggle');
+		    		$("a[id='CP-" +compId+ "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
+		    		$("a[id='CP-" +compId+ "']").dropdown('toggle'); //hide dropdown list
 		    	} else {
 		    		showNotificationText(data);
 		    	}
