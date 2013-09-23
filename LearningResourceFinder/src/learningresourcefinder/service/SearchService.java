@@ -63,6 +63,33 @@ public class SearchService {
 	}
 	
 
+	//*********************Ressource pagination
+	public List<BaseEntity> getTotalEntities(List<SearchResult> searchResults, Class<? extends BaseEntity> clazz) {
+		final List<Long> entityIds = new ArrayList<>();
+		
+		
+		//List<Resource> resources =(List) searchService.getFirstEntities(searchService.search(searchResource), 5, Resource.class);
+		
+		for(SearchResult searchResult : searchResults) {
+			if (searchResult.isForClass(clazz)) {
+				entityIds.add(searchResult.getId());
+			}
+//			if (entityIds.size() >= maxResult) {
+//				break;
+//			}	
+		}
+
+		List<BaseEntity> entities = findEntitiesByIdList(entityIds, clazz);
+
+		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
+		Collections.sort(entities, new Comparator<BaseEntity>() {
+			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
+				return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
+			}
+		});
+
+		return entities;
+	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<BaseEntity> findEntitiesByIdList(List<Long> idList, Class clazz){
