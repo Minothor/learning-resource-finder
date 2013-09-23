@@ -48,7 +48,7 @@
 	<br />
 	<br />
 	<br />
-	<a href="searchresource?search=${searchValue}">More</a>
+	<a href="searchresource?search=${searchValue}&page=1">More</a>
 	<br />
 	<br />
 	<br />
