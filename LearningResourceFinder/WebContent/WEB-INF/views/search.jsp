@@ -33,6 +33,7 @@
 			<lrftag:resource resource="${resource}"></lrftag:resource>
 		</div>
 	</c:forEach>
+
 							<!-- Resource end -->
 	
 	<br />
@@ -47,6 +48,7 @@
 	<br />
 	<br />
 	<br />
+	<a href="searchresource?search=${searchValue}">More</a>
 	<br />
 	<br />
 	<br />
@@ -86,7 +88,7 @@
 							
 	<c:forEach items="${competenceList}" var="competence">
 		<div style="float: left; position: relative; padding-left: 5px; margin-top: 10px;">
-			<lrftag:competencepath competence="${competence.getName()} "></lrftag:competencepath>
+<%-- 			<lrftag:competencepath competence="${competence.getName()} "></lrftag:competencepath> --%>
 		</div>
 	</c:forEach>
 
