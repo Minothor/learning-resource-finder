@@ -6,6 +6,7 @@ import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.NotificationUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CompetenceController extends BaseController<Competence> {
 
 	@Autowired CompetenceRepository competenceRepository;
+	@Autowired IndexManagerService indexManager;
 	
 	@RequestMapping ("/competencetree")
 	// Parameter rootCode defines the node from which we display the tree (we display all if null)
@@ -61,6 +63,7 @@ public class CompetenceController extends BaseController<Competence> {
 		competence.setCode(codeCompetence);
 		competence.setDescription(descriptionCompetence);
 		em.persist(competence);
+		indexManager.add(competence);
 		return "success";
 
 	}
@@ -76,6 +79,7 @@ public class CompetenceController extends BaseController<Competence> {
         }
 		if (competence.getChildrenAndSubChildren().size() == 0){
 			em.remove(competence);
+			indexManager.delete(competence);
 			return "success";
 		}else{
 			return "La compétence possède une ou plusieurs compétences, veuillez d'abord les supprimer "; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
@@ -96,6 +100,7 @@ public class CompetenceController extends BaseController<Competence> {
 			competence.setCode(codeCompetence);
 			competence.setDescription(descriptionCompetence);
 			em.merge(competence);
+			indexManager.update(competence);
 			return "success";
 		} else {
 			return "Le code existe déjà dans une autre compétence"; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.

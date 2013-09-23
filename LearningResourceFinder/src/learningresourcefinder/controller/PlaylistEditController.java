@@ -6,6 +6,7 @@ import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/playlist")
 public class PlaylistEditController extends BaseController<PlayList>{
 	@Autowired PlayListRepository playlistRepository;
+	@Autowired IndexManagerService indexManager;
 	
 	 private ModelAndView prepareModelAndView(PlayList playlist ) {
 	        ModelAndView mv = new ModelAndView("playlistedit");
@@ -60,12 +62,14 @@ public class PlaylistEditController extends BaseController<PlayList>{
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
 			} 
 			playlistRepository.persist(playList);
+			indexManager.add(playList);
 			
 		} else {  // Edit existing playlist
 			if (playListHavingTheSameName != null && !playList.equals(playListHavingTheSameName)) {
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
 			}
 			playlistRepository.merge(playList);
+			indexManager.update(playList);
 		}
 		
 		return new ModelAndView("redirect:/playlist/"+playList.getShortId()+"/"+playList.getSlug());
@@ -86,6 +90,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
         if (playlist!= null && resource!=null){
             playlist.getResourceList().remove(resource);
             playlistRepository.merge(playlist);
+            indexManager.update(playlist);
         }
         return new ModelAndView("redirect:/playlist/"+playlist.getShortId()+"/"+playlist.getSlug());
     }
@@ -98,6 +103,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
         if (playlist!= null && resource!=null){
             playlist.getResourceList().add(resource);
             playlistRepository.merge(playlist);
+            indexManager.update(playlist);
         }
         return new ModelAndView("redirect:/playlist/"+playlist.getShortId()+"/"+playlist.getSlug());
     }
