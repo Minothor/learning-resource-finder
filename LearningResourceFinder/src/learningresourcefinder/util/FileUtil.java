@@ -384,9 +384,9 @@ public abstract class FileUtil {
 			for (Path path: directoryStream){
 				renameFile(directory, path.getFileName().toString(), path.getFileName().toString() + suffix);
 
-				File file = path.toFile();
-				File fileWithNewName = new File (file+suffix);
-				file.renameTo(fileWithNewName);
+				//File file = path.toFile();
+				//File fileWithNewName = new File (file+suffix);
+				//file.renameTo(fileWithNewName);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);

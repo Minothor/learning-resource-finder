@@ -1,11 +1,32 @@
-$(document).ready( function(){ // quand la page a fini de se charger
+$(document).ready( function() {
+	
+	var ids = [];
+	
 	$("#list-photos").sortable({ // initialisation de Sortable sur #list-photos
 		placeholder: 'highlight', // classe à ajouter à l'élément fantome
     	update: function() {  // callback quand l'ordre de la liste est changé
-    		var order = $('#list-photos').sortable('serialize'); // récupération des données à envoyer
-    		alert(order);
-    		$.post('/resource/change',order); // appel ajax au fichier ajax.php avec l'ordre des photos
+    		orderImageRefresh();
+    		$.ajax({
+    			type:"POST",
+    			headers:{
+    				'Accept': 'application/json',
+    				'Content-type': 'application/json'
+    			},
+    			'url': 'resource/change',
+    			'data': JSON.stringify(ids),
+    			'success': function(e) {} 
+    		});
     	}
 	});
+	
 	$("#list-photos").disableSelection(); // on désactive la possibilité au navigateur de faire des sélections
-}); 
+
+	function orderImageRefresh() {
+		ids = [];
+		$("#list-photos img").each(function() {
+			ids.push(this.id);
+		});	
+	}
+
+});
+

@@ -47,27 +47,25 @@ public class ResourceService {
 	// imageNameList names the image files in the desired order. 
 	// Files are supposed to have the structure nameBody + "-" + number + extention + suffix.
 	// for example: 4859-3.jpg-tmp  ("-tmp" being the extention")
-	private static void renumberImageFiles(String directory, String pattern, ArrayList<String> imageNameList) {
-		FileUtil.renameFileSetWithSuffix(directory, pattern, "-tmp");
+	private static void renumberImageFiles(String directory, String prefix, ArrayList<String> imageNameList) {
+		FileUtil.renameFileSetWithSuffix(directory, prefix+"*", "-tmp");
 
 		int i = 1;	 
 		for(String imageNameFromList : imageNameList){
-			String nameBody = ((String[])imageNameFromList.split("\\s*-\\s*"))[0];
-			FileUtil.renameFile(directory + "/", imageNameFromList + "-tmp", nameBody+"-"+i+".jpg");
+			FileUtil.renameFile(directory + "", imageNameFromList + ".jpg-tmp", prefix+i+".jpg");
 			i++;
 		}
 	}
 	
 	private void deleteOneImage(String directory, Resource resource) {
-		
-		String pattern = resource.getId()+"-*"; 
+		String prefix= resource.getId()+"-";
 		
 		// Collect the current image file names for that resource.
 		ArrayList<String> listImages = new ArrayList<String>();
 		
 		Path p = FileSystems.getDefault().getPath(directory);
 		
-		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(p, pattern)) {
+		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(p, prefix+"*")) {
 			for (Path path: directoryStream){
 				listImages.add(path.getFileName().toString());
 			}
@@ -75,7 +73,7 @@ public class ResourceService {
 			throw new RuntimeException(e);
 		}
 		
-		renumberImageFiles(directory, pattern, listImages);
+		renumberImageFiles(directory, prefix, listImages);
 		
 		resource.setNumberImage(listImages.size());
 		resourceRepository.merge(resource);
@@ -94,7 +92,7 @@ public class ResourceService {
 	}
 	
 	public void changeOneGalleryOrder(String directory, ArrayList<String> listImages, Resource resource) {
-		renumberImageFiles(directory, resource.getId()+"-*", listImages);
+		renumberImageFiles(directory+"/", resource.getId()+"-", listImages);
 		
 	}
 }

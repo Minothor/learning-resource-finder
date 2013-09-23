@@ -25,10 +25,18 @@ import learningresourcefinder.util.NotificationUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
+
+
 
 
 @Controller
@@ -136,13 +144,15 @@ public class ResourceImageController extends BaseController<User> {
 	}
 	
 	@RequestMapping("/change")
-	public ModelAndView resourceImageChange(@RequestParam("order") String order){	
-		ArrayList<String> arrayList = (ArrayList<String>) Arrays.asList(order);
-		System.out.println("----------------------------");
-		Resource resource = resourceRepository.find(1L);
+	public ModelAndView resourceImageChange(@RequestBody ArrayList<String> order){	
+
+		String idResource = ((String) (order.toArray()[0])).split("-")[0];
+		Resource resource = resourceRepository.find(Long.parseLong(idResource));
+		resourceService.changeGalleryOrder(order, resource);
+		
 		//Resource resource = resourceRepository.find(Long.parseLong(order[0].split("-")[0]));
 		
-		resourceService.changeGalleryOrder(arrayList, resource);
+		//resourceService.changeGalleryOrder(arrayList, resource);
 		
 		return new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
 	 }
@@ -158,5 +168,6 @@ public class ResourceImageController extends BaseController<User> {
 	 private boolean canEdit(User user) {
 		 return user.equals(SecurityContext.getUser()) || SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS);
 	 }
-	
 }
+
+
