@@ -6,6 +6,7 @@ import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
@@ -25,6 +26,7 @@ public class ResourceEditController extends BaseController<Resource> {
 
     @Autowired   ResourceRepository resourceRepository;
     @Autowired   UrlResourceRepository urlResourceRepository;
+    @Autowired   IndexManagerService indexManager;
     
     @RequestMapping("/ajax/resourceaddsubmit")
 //	public @ResponseBody String resourceAddSubmit() {
@@ -46,6 +48,8 @@ public class ResourceEditController extends BaseController<Resource> {
 
         urlResourceRepository.persist(urlResource);
         resourceRepository.persist(resource);
+        
+        indexManager.add(resource);
         
        return "La ressource a été ajoutée avec succès."+"<a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>";
     }
