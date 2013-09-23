@@ -175,5 +175,15 @@ label {
 			<restag:resource resource="${resource}"></restag:resource>
 		</div>
 	</c:forEach>
+	
+	<ul class="pagination">
+			
+  <li><a href="searchresource?search=${search}&page=${param.page-1}">&laquo;</a></li>
+  <c:forEach begin="1" end="${numberResource}" varStatus="loop">
+    <li><a href="searchresource?search=${search}&page=${loop.index}">${loop.index}</a></li>
+</c:forEach>
+  <li><a href="searchresource?search=${search}&page=${param.page+1}">&raquo;</a></li>
+</ul>
+	
 </body>
 </html>
