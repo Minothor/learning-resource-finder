@@ -195,32 +195,16 @@ public class LoginController extends BaseController<User> {
 			@RequestParam(value= "autoLogin", required = false) boolean autologin) {
 		
 		
-		String errorMsg = null;
 		User user = null;
 		try {
 			user = loginService.login(userNameOrMail, password, autologin,	null, AccountConnectedType.LOCAL);
 			NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "	+ UrlUtil.getWebSiteName(),Status.NOTICE);
 
 		} catch (UserNotFoundException e) {
-			errorMsg = "L'utilisateur '" + userNameOrMail + "' n'existe pas";
+			NotificationUtil.addNotificationMessage("L'utilisateur '" + userNameOrMail + "' n'existe pas", Status.ERROR);
 
 		} catch (InvalidPasswordException e) {
-
-			try {
-				User retrieveuser = loginService.identifyUserByEMailOrName(userNameOrMail);
-
-				// TOOD: restore (for social login)
-				// errorMsg = loginService.getRemainderLoginMessage(retrieveuser);
-
-			} catch (UserNotFoundException e1) {
-				NotificationUtil.addNotificationMessage("L'utilisateur '" + userNameOrMail
-						+ "' n'existe pas",Status.ERROR);
-			}
-
-			if (StringUtils.isBlank(errorMsg)) {
-				NotificationUtil.addNotificationMessage("Ce mot de passe n'est pas valide pour l'utilisateur '"
-						+ userNameOrMail + "'",Status.ERROR);
-			}
+			NotificationUtil.addNotificationMessage("Ce mot de passe n'est pas valide pour l'utilisateur '" 	+ userNameOrMail + "'", Status.ERROR);
 
 		} catch (UserNotValidatedException e) {
 			NotificationUtil.addNotificationMessage("L'utilisateur '"
@@ -234,9 +218,7 @@ public class LoginController extends BaseController<User> {
 
 		} catch (WaitDelayNotReachedException e) {
 			NotificationUtil.addNotificationMessage("Suite à de multiples tentatives de login échouées, votre utilisateur s'est vu imposé un délai d'attente avant de pouvoir se relogguer, ceci pour des raisons de sécurité."
-					+ " Actuellement, il reste "
-					+ DateUtil.formatIntervalFromToNow(e.getNextPossibleTry())
-					+ " à attendre.",Status.ERROR);
+					+ " Actuellement, il reste "+ DateUtil.formatIntervalFromToNow(e.getNextPossibleTry())	+ " à attendre.", Status.ERROR);
 		}
 	}
 

@@ -40,7 +40,7 @@ public class CompetenceController extends BaseController<Competence> {
 
 
 	@RequestMapping(value="/ajax/competenceAddSubmit", method = RequestMethod.POST)
-	public @ResponseBody String ajaxAddCompetence( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("idparent") Long parentIdCompetence, @RequestParam("description") String descriptionCompetence){
+	public @ResponseBody String competenceAddSubmit( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("idparent") Long parentIdCompetence, @RequestParam("description") String descriptionCompetence){
 		
 		//checking
 
