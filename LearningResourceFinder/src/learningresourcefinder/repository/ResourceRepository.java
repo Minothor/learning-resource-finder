@@ -43,19 +43,17 @@ public class ResourceRepository extends BaseRepository<Resource>
 		return result;
 	}
 	
-	public List<BaseEntity> getFilteredEntities(List<SearchResult> searchResults, int maxResult, Class<? extends BaseEntity> clazz, SearchOptions searchOptions) {
+	public List<BaseEntity> getFilteredEntities(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
 		final List<Long> entityIds = new ArrayList<>();
+		final int resourcePerPage = 1;
+		int begin = (page-1) * resourcePerPage;
+		int end = page * resourcePerPage;
 		
-		for(SearchResult searchResult : searchResults) {
-			if (searchResult.isForClass(clazz)) {
-				entityIds.add(searchResult.getId());
-			}
-			if (entityIds.size() >= maxResult) {
-				break;
-			}	
+		for (int i = begin; i<end; i++){
+				entityIds.add(searchResults.get(i).getId());
 		}
 
-		List<BaseEntity> entities = findFilteredEntitiesByIdList(entityIds, clazz, searchOptions);
+		List<BaseEntity> entities = findFilteredEntitiesByIdList(entityIds, searchOptions);
 		
 		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
 		Collections.sort(entities, new Comparator<BaseEntity>() {
@@ -68,7 +66,7 @@ public class ResourceRepository extends BaseRepository<Resource>
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<BaseEntity> findFilteredEntitiesByIdList(List<Long> idList, Class<? extends BaseEntity> clazz, SearchOptions searchOptions){
+	public List<BaseEntity> findFilteredEntitiesByIdList(List<Long> idList, SearchOptions searchOptions){
 		Map<String, Object> parameters = new HashMap<>();
 		List<String> whereConditions = new ArrayList<>();
 		

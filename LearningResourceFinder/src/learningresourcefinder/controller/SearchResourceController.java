@@ -22,21 +22,27 @@ public class SearchResourceController {
 	@Autowired private ResourceRepository resourceRepository;
 
 	@RequestMapping("/searchresource")
-	public String searchresource(String searchPhrase, Model model, @RequestParam("search") String searchResource){
+	public String searchresource(String searchPhrase, Model model, @RequestParam("search") String searchResource, @RequestParam("page") int page){
 		SearchOptions searchOptions = new SearchOptions();
 		model.addAttribute("searchOptions", searchOptions);
 		model.addAttribute("natureEnumAllValues", SearchOptions.Nature.values());
 		model.addAttribute("platformsEnumAllValues", SearchOptions.Platform.values());
 		model.addAttribute("formatEnumAllValues", SearchOptions.Format.values());
 		model.addAttribute("languagesEnumAllValues", SearchOptions.Language.values());
-		model.addAttribute("search", searchResource); // change math to searchResource
+		model.addAttribute("search", searchResource);
+		
+		List<BaseEntity> entities = resourceRepository.getFilteredEntities(searchService.search(searchResource), page, searchOptions);
+		int numberOfResourceFound = searchService.search(searchResource).size();
+		
+		model.addAttribute("numberResource", numberOfResourceFound);
+		model.addAttribute("resourcelist", entities);
 		return "searchresource";
 		
 	}
 	
 	@RequestMapping("/searchresourcesubmit")
-	public String searchresourcesubmit(@ModelAttribute SearchOptions searchOptions, Model model, @RequestParam("search") String searchResource){
-		List<BaseEntity> entities = resourceRepository.getFilteredEntities(searchService.search(searchResource), 5, Resource.class, searchOptions);
+	public String searchresourcesubmit(@ModelAttribute SearchOptions searchOptions, Model model, @RequestParam("search") String searchResource, @RequestParam("page") int page){
+		List<BaseEntity> entities = resourceRepository.getFilteredEntities(searchService.search(searchResource), page, searchOptions);
 		model.addAttribute("resourcelist", entities);
 		model.addAttribute("searchOptions", searchOptions);
 		return "searchresource";
