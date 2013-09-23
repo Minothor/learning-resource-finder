@@ -25,6 +25,7 @@ import learningresourcefinder.util.DateUtil;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
 import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.util.NotificationUtil.Status;
 import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.lang3.StringUtils;
@@ -74,7 +75,7 @@ public class LoginController extends BaseController<User> {
 	        urlToFacebookOrGoogle = socialManager.getAuthenticationUrl(providerId, successUrl)+"&display=popup"; //  We can use this method to add permissions later : getAuthenticationUrl(id, successUrl, permission) 
 	    } catch (Exception e) {
             log.error("Exception during social login (while getting the URL to " + providerId + "for user " + SecurityContext.getUser(), e);
-	        NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+". Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
+	        NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+". Veuillez vous connecter d'une autre manière ou réessayer plus tard.",Status.WARNING);
 	        return "redirect:login";
 	    }
 	    session.setAttribute("providerId", providerId);
@@ -102,7 +103,7 @@ public class LoginController extends BaseController<User> {
             profile = socialAuthManager.connect(paramsMap).getUserProfile();
         } catch (Exception e) {
             log.error("Exception during social login callback (while contacting "+providerId+" to get the e-mail address)", e);
-            NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+" pour obtenir votre adress e-mail afin de vous connecter sur notre site. Veuillez vous connecter d'une autre manière ou réessayer plus tard.");
+            NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+" pour obtenir votre adress e-mail afin de vous connecter sur notre site. Veuillez vous connecter d'une autre manière ou réessayer plus tard.",Status.ERROR);
             return "redirect:login";
         }
 
@@ -138,9 +139,9 @@ public class LoginController extends BaseController<User> {
         }
 
         if (errorMsg != null) {
-            NotificationUtil.addNotificationMessage(errorMsg);
+            NotificationUtil.addNotificationMessage(errorMsg,Status.ERROR);
         } else {
-            NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur " + UrlUtil.getWebSiteName());             
+            NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur " + UrlUtil.getWebSiteName(),Status.SUCCESS);             
         }
         return "loginsocialcallback"; // This contains a JavaScript to close the popup.
 	}
@@ -175,7 +176,7 @@ public class LoginController extends BaseController<User> {
                 BufferedImage image = ImageUtil.readImage(urlPicture);
                 userService.addOrUpdateUserImage(user, image, true);
             } catch (RuntimeException e) {
-                NotificationUtil.addNotificationMessage("Erreur lors de la récupération de votre photo chez "+providerId);
+                NotificationUtil.addNotificationMessage("Erreur lors de la récupération de votre photo chez "+providerId,Status.ERROR);
                 log.error(e);
                 // We just continue, this is a non-blocking error.
             }
@@ -198,7 +199,7 @@ public class LoginController extends BaseController<User> {
 		User user = null;
 		try {
 			user = loginService.login(userNameOrMail, password, autologin,	null, AccountConnectedType.LOCAL);
-			NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "	+ UrlUtil.getWebSiteName());
+			NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "	+ UrlUtil.getWebSiteName(),Status.NOTICE);
 
 		} catch (UserNotFoundException e) {
 			errorMsg = "L'utilisateur '" + userNameOrMail + "' n'existe pas";
@@ -213,29 +214,29 @@ public class LoginController extends BaseController<User> {
 
 			} catch (UserNotFoundException e1) {
 				NotificationUtil.addNotificationMessage("L'utilisateur '" + userNameOrMail
-						+ "' n'existe pas");
+						+ "' n'existe pas",Status.ERROR);
 			}
 
 			if (StringUtils.isBlank(errorMsg)) {
 				NotificationUtil.addNotificationMessage("Ce mot de passe n'est pas valide pour l'utilisateur '"
-						+ userNameOrMail + "'");
+						+ userNameOrMail + "'",Status.ERROR);
 			}
 
 		} catch (UserNotValidatedException e) {
 			NotificationUtil.addNotificationMessage("L'utilisateur '"
 					+ userNameOrMail
-					+ "' n'a pas été valide. Vérifiez vos mails reçus et cliquez sur le lien du mail qui vous a été envoyé à l'enregistrement.");
+					+ "' n'a pas été valide. Vérifiez vos mails reçus et cliquez sur le lien du mail qui vous a été envoyé à l'enregistrement.",Status.ERROR);
 
 		} catch (UserLockedException e) {
 			NotificationUtil.addNotificationMessage("L'utilisateur  '"
 					+ userNameOrMail
-					+ "' est verrouillé. Contacter un administrateur pour le déverrouiller.");
+					+ "' est verrouillé. Contacter un administrateur pour le déverrouiller.",Status.ERROR);
 
 		} catch (WaitDelayNotReachedException e) {
 			NotificationUtil.addNotificationMessage("Suite à de multiples tentatives de login échouées, votre utilisateur s'est vu imposé un délai d'attente avant de pouvoir se relogguer, ceci pour des raisons de sécurité."
 					+ " Actuellement, il reste "
 					+ DateUtil.formatIntervalFromToNow(e.getNextPossibleTry())
-					+ " à attendre.");
+					+ " à attendre.",Status.ERROR);
 		}
 	}
 

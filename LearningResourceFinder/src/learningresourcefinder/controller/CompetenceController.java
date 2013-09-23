@@ -8,6 +8,7 @@ import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.util.NotificationUtil.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,6 +65,7 @@ public class CompetenceController extends BaseController<Competence> {
 		competence.setDescription(descriptionCompetence);
 		em.persist(competence);
 		indexManager.add(competence);
+		NotificationUtil.addNotificationMessage("Compétence ajoutée.",Status.SUCCESS); 
 		return "success";
 
 	}
@@ -80,6 +82,7 @@ public class CompetenceController extends BaseController<Competence> {
 		if (competence.getChildrenAndSubChildren().size() == 0){
 			em.remove(competence);
 			indexManager.delete(competence);
+			NotificationUtil.addNotificationMessage("Compétence supprimée.",Status.SUCCESS); 
 			return "success";
 		}else{
 			return "La compétence possède une ou plusieurs compétences, veuillez d'abord les supprimer "; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
@@ -101,6 +104,7 @@ public class CompetenceController extends BaseController<Competence> {
 			competence.setDescription(descriptionCompetence);
 			em.merge(competence);
 			indexManager.update(competence);
+			NotificationUtil.addNotificationMessage("Compétence éditée.",Status.SUCCESS); 
 			return "success";
 		} else {
 			return "Le code existe déjà dans une autre compétence"; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
@@ -116,19 +120,19 @@ public class CompetenceController extends BaseController<Competence> {
         SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
         Competence newParent =   competenceRepository.findByCode(codeNewParent);
         if (competence.getParent()==null){
-            NotificationUtil.addNotificationMessage("La racine ne peut être déplacée."); 
+            NotificationUtil.addNotificationMessage("La racine ne peut être déplacée.",Status.ERROR); 
             return mv;
         }
         if (newParent==null){
-            NotificationUtil.addNotificationMessage("Code parent inexistant"); 
+            NotificationUtil.addNotificationMessage("Code parent inexistant",Status.ERROR); 
             return mv;
         }
         if (competence.getChildrenAndSubChildren().contains(newParent)){
-        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée dans ses propres sous-compétences");
+        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée dans ses propres sous-compétences",Status.ERROR);
         	return mv;
         }
         if (competence.getId() == newParent.getId()){
-        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée sur elle même");
+        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée sur elle même",Status.ERROR);
         	return mv;
         }
         
@@ -138,7 +142,7 @@ public class CompetenceController extends BaseController<Competence> {
         newParent.getChildren().add(competence);
         competence.setParent(newParent); 
         competenceRepository.merge(competence);
-
+        NotificationUtil.addNotificationMessage("Compétence déplacée.",Status.SUCCESS); 
         return mv; 
     }
 	

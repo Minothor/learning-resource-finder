@@ -206,7 +206,6 @@
 			    data: "name=" + name + "&code=" +code + "&idparent=" +idparent + "&description=" +description,
 			    success : function(data) {
 			    	if (data == "success") {
-			    		alert("Compétence ajoutée");
 			    		window.location.reload();
 			    	} else {
 			    		alert("souci lors de la soumission du formulaire : " + data);
@@ -231,7 +230,6 @@
 			    data: "id=" + id,
 			    success : function(data) {
 			    	if (data == "success") {
-			    		alert("Compétence supprimée");
 			    		window.location.reload();
 			    	} else {
 			    		alert("Souci lors de la soumission : " + data);
@@ -272,7 +270,6 @@
 			    data: "name=" + name + "&code=" +code + "&id=" +id + "&description=" +description,
 			    success : function(data) {
 			    	if (data == "success") {
-			    		alert("Compétence editée");
 			    		window.location.reload();
 			    	} else {
 			    		alert("Souci lors de la soumission du formulaire : " + data);

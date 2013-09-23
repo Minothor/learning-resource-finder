@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@ page import="learningresourcefinder.util.NotificationUtil.Status" %>
 
 <script type="text/javascript" src="/js/int/resourceAdd.js"></script>
 
@@ -46,9 +47,9 @@
 
 <%-- ********** NOTIFICATIONS ************** --%>
 	<div id="notificationArea" 
-	     class="alert alert-warning" <%-- from Bootstrap --%>
+		 class="${sessionScope.notifications[0].status.name}"
 		 style="text-align:center;
-                     display:none;  <%-- display none because will be shown through animation by the docuiment ready javascript --%>
+                     display:none;  
                      ">
         <%-- close cross button (bootstrap) --%>            
 		<button id="notificationCloser" type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="$('#notificationArea').slideUp();">&times;</button>
@@ -57,7 +58,7 @@
 			           ${notif.text}<br />
 			</c:forEach>
 		</span>
-		<%  session.removeAttribute("notifications"); %>  <%-- once displayed, we take it out from the session. --%>
+		<% session.removeAttribute("notifications"); %>  <%-- once displayed, we take it out from the session. --%>
 	</div>
 
 
