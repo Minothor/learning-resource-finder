@@ -34,15 +34,17 @@ $(document).ready(function() {
   function click_in_tree_addCompetence(){
 	    $("#competenceModalTitle").text("Ajouter une compétence");
 		var parentId = this.id.substring(2);
-//		$("button[id='addsubmit']").attr("onclick","ajaxCompetenceAddSubmit(" + parentId +")");  // TODO remove
         $("#hiddenField").attr("name", "idparent");
         $("#hiddenField").attr("value", parentId);
 		$("#competenceForm").submit(ajaxCompetenceAddSubmit);
 	}
 	
 	function click_in_tree_editCompetence(){
+	    $("#competenceModalTitle").text("Editer une compétence");
 		var compId = this.id.substring(2);
-		$("button[id='editsubmit']").attr("onclick","ajaxCompetenceEditSubmit(" + compId +")");
+        $("#hiddenField").attr("name", "id");
+        $("#hiddenField").attr("value", compId);
+		$("#competenceForm").submit(ajaxCompetenceEditSubmit);
 		ajaxCompetenceEditLoad(compId);
 	}
 
@@ -81,20 +83,23 @@ $(document).ready(function() {
 	}
 	
 	function ajaxCompetenceAddSubmit(event) {
+		ajaxCompetenceSubmit(event, "ajax/competenceAddSubmit");
+	}
+
+	function ajaxCompetenceEditSubmit(event) {
+		ajaxCompetenceSubmit(event, "ajax/competenceEditSubmit");
+	}
+
+	function ajaxCompetenceSubmit(event, url) {
 		event.preventDefault();  // Don't refresh the whole page.
-		var ser = $("#competenceForm").serialize();
-		console.log(ser);
-		ser = $( this ).serialize();
-		console.log(ser);
-		$.post("ajax/competenceAddSubmit", $("#competenceForm").serialize()).done( function(data) {
-			    	if (data == "success") {
-			    		window.location.reload();
-			    	} else {
-			    		showNotificationText("Souci lors de la soumission du formulaire : " + data);
-			    	}
-			    	return false;
-			    });
-		console.log("sent");
+		$.post(url, $( this ).serialize()).done( function(data) {
+		    	if (data == "success") {
+		    		window.location.reload();
+		    	} else {
+		    		showNotificationText("Souci lors de la soumission du formulaire : " + data);
+		    	}
+		    	return false;
+	    });
 	}
 	
 	function ajaxCompetenceRemoveSubmit(id) {

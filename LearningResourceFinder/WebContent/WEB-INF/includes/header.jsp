@@ -14,7 +14,6 @@
 		</c:if>
 	});
 	
-	
  	function showNotificationArea() {	
 		$("#notificationArea").slideDown(); // Was hidden at the beginning.
 	}
