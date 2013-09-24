@@ -5,10 +5,11 @@
 <%@ page import="learningresourcefinder.util.NotificationUtil.Status" %>
 
 <script type="text/javascript" src="/js/int/resourceAdd.js"></script>
+<script type="text/javascript" src="/js/int/ajaxLogin.js"></script>
 
 
 <script>
-	$(document).ready(function() {
+  $(document).ready(function() {
 		<c:if test="${!empty sessionScope.notifications}">
 		   showNotificationArea();
 		</c:if>
@@ -37,7 +38,7 @@
 	 	    e.preventDefault();// prevent the default anchor functionality
 	 	    e.stopPropagation();
 	 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
-	 	                     no='$("#loginDropDown").dropdown("toggle");'/>
+		 	    no='$("#loginDropDown").dropdown("toggle");'/>
 		});
 	 	
 	});
@@ -165,11 +166,11 @@
 										Inscription avec Facebook
 									</button>
 									<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>		
-									<form method="post" action="#" accept-charset="UTF-8" style="width: 200px;">		
-										<input class="form-control" style="margin-bottom: 15px;" type="email" placeholder="Email" id="emailRegister" name="emailRegister">
-										<input class="form-control" style="margin-bottom: 15px;" type="text" placeholder="Username" id="usernameRegister" name="usernameRegister"> 
-										<input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="Password" id="passwordRegister" name="passwordRegister">
-										<input class="btn btn-bleu btn-block" type="button" id="sign-in" value="Inscription" onclick="ajaxRegister()">
+									<form method="post" action="#"  id="checkvalidinput" accept-charset="UTF-8" style="width: 200px;" >		
+										<input class="form-control" style="margin-bottom: 15px;" type="email" placeholder="Email" id="emailRegister" name="emailRegister" required>
+										<input class="form-control" style="margin-bottom: 15px;" type="text" placeholder="Username" id="usernameRegister" name="usernameRegister" required> 
+										<input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="Password" id="passwordRegister" name="passwordRegister" required>
+										<input class="btn btn-bleu btn-block" type="submit" id="sign-in" value="Inscription" onclick="ajaxRegister()">
 									</form>
 									<br />
 								</div>
