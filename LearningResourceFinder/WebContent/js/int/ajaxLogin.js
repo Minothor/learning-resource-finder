@@ -20,7 +20,7 @@ function ajaxlogin() {
 
 $(document).ready(function() {
 	
-	$('# checkvalidinput').submit(ajaxRegister());
+	$('#checkvalidinput').submit(ajaxRegister);
     
   });
   
@@ -37,7 +37,6 @@ function ajaxRegister(e) {
 	    success : function(data) {	
 	    	if(data=="")
 	    		 location.reload();
-	    				
 	    },
 	    error : function(data) {
 	    	alert(data);
