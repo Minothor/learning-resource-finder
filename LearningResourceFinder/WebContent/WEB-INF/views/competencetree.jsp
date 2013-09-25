@@ -12,7 +12,7 @@
 
  
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="competenceMoveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
      <form action="competencemovesubmit" method="post">
        <div class="modal-content">
@@ -40,8 +40,8 @@
   </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
  
- <!-- Modal -->
-  <div class="modal fade" id="myAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <!-- Modal add -->
+  <div class="modal fade" id="competenceEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
        <form id="competenceForm">
@@ -53,12 +53,12 @@
         
             <input type="hidden" id="hiddenField" />  <!-- name and value will be filled via javascript -->
 			<div class="form-group">
-			  <label for="name">Intitulé</label>
-			  <input type="text" class="form-control" name="name" placeholder="Intitulé" maxlength="40" required> 
-			</div>
 			<div class="form-group">
 			  <label for="code">Code</label>
 			  <input type="text" class="form-control" name="code" placeholder="Code"  maxlength="8" style="width:100px;" required> 
+			</div>
+			  <label for="name">Intitulé</label>
+			  <input type="text" class="form-control" name="name" placeholder="Intitulé" maxlength="40" required> 
 			</div>
 			<div class="form-group">
 			  <label for="description">Description</label>
@@ -75,43 +75,8 @@
     </div>
   
   
-    <!-- Modal -->
-  <div class="modal fade" id="myEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Editer une compétence</h4>
-        </div>
-        <div class="modal-body">
-  
-		<div class="form-group">
-			  <label for="nameedit">Nom</label>
-		  <input type="text" class="form-control" id="nameedit" placeholder="Nom" value=""  maxlength="40">
-		</div>
-		
-		<div class="form-group">
-			  <label for="codeedit">Code</label>
-		  <input type="text" class="form-control" id="codeedit" placeholder="Code" value=""  maxlength="8">
-		</div>
-		
-		<div class="form-group">
-			  <label for="descriptionedit">Description</label>
-		  <input type="text" class="form-control" id="descriptionedit" placeholder="Description" value="">
-		</div>
-		
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-          <button type="button" class="btn btn-primary" id="editsubmit">Editer Compétence</button>
-        </div>
-        
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  </div>
-  
   <!-- Modal -->
-  <div class="modal fade" id="myRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="competenceRemoveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

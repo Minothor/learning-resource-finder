@@ -4,22 +4,22 @@ $(document).ready(function() {
 		
 		// Add initialization
 		$("a[id^='A-']").attr('data-toggle', 'modal'); 
-		$("a[id^='A-']").attr('href', '#myAdd');
+		$("a[id^='A-']").attr('href', '#competenceEditModal');
 		$("a[id^='A-']").click(click_in_tree_addCompetence);
 		
 		// Modify initialization
 		$("a[id^='E-']").attr('data-toggle', 'modal'); 
-		$("a[id^='E-']").attr('href', '#myEdit');
+		$("a[id^='E-']").attr('href', '#competenceEditModal');
 		$("a[id^='E-']").click(click_in_tree_editCompetence);
 		
 		// Deplace initialization
 		$("a[id^='D-']").attr('data-toggle', 'modal'); 
-		$("a[id^='D-']").attr('href', '#myModal');
+		$("a[id^='D-']").attr('href', '#competenceMoveModal');
 		$("a[id^='D-']").click(click_in_tree_moveCompetence); 
 		
 		// Delete initialization
 		$("a[id^='R-']").attr('data-toggle', 'modal'); 
-		$("a[id^='R-']").attr('href', '#myRemove');
+		$("a[id^='R-']").attr('href', '#competenceRemoveModal');
 		$("a[id^='R-']").click(click_in_tree_removeCompetence);
 		
 		// setCycle Init
@@ -47,7 +47,7 @@ $(document).ready(function() {
 		$("#competenceForm").submit(ajaxCompetenceEditSubmit);
 		ajaxCompetenceEditLoad(compId);
 	}
-
+	
 	
 	function click_in_tree_removeCompetence(){
 		var compId = this.id.substring(2);
@@ -66,15 +66,15 @@ $(document).ready(function() {
 		    success : function(data) {
 		    	if (data == "success") {
 		    		showNotificationText("Assignation du cycle réussie.");
-		    		$("a[id='CP-" +compId+ "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
-		    		$("a[id='CP-" +compId+ "']").dropdown('toggle'); //hide dropdown list
+		    		$("a[id='CP-" + compId + "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
+		    		$("a[id='CP-" + compId + "']").dropdown('toggle'); //hide dropdown list
 		    	} else {
 		    		showNotificationText(data);
 		    	}
 		    	return false;
 		    },
 		    error : function(data) {
-		    	alert("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'assigner un cycle." + data);
+		    	showNotificationText("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'assigner un cycle." + data);
 		    	
         		return false;
 		    },
@@ -83,16 +83,17 @@ $(document).ready(function() {
 	}
 	
 	function ajaxCompetenceAddSubmit(event) {
-		ajaxCompetenceSubmit(event, "ajax/competenceAddSubmit");
+		ajaxCompetenceSubmit(this, event, "ajax/competenceaddsubmit");
 	}
 
 	function ajaxCompetenceEditSubmit(event) {
-		ajaxCompetenceSubmit(event, "ajax/competenceEditSubmit");
+		ajaxCompetenceSubmit(this, event, "ajax/competenceeditsubmit");
 	}
 
-	function ajaxCompetenceSubmit(event, url) {
+	function ajaxCompetenceSubmit(form, event, url) {
 		event.preventDefault();  // Don't refresh the whole page.
-		$.post(url, $( this ).serialize()).done( function(data) {
+		var data = $(form).serialize();
+		$.post(url, data).done( function(data) {
 		    	if (data == "success") {
 		    		window.location.reload();
 		    	} else {
@@ -100,6 +101,9 @@ $(document).ready(function() {
 		    	}
 		    	return false;
 	    });
+		$(':input','#competenceForm')
+		   .not(':button, :submit')
+		   .val('');
 	}
 	
 	function ajaxCompetenceRemoveSubmit(id) {
@@ -112,18 +116,18 @@ $(document).ready(function() {
 			    	if (data == "success") {
 			    		window.location.reload();
 			    	} else {
-			    		alert("Souci lors de la soumission : " + data);
+			    		showNotificationText("Souci lors de la soumission : " + data);
 			    	}
 			    	return false;
 			    },
 			    error : function(data) {
-			    	alert("Il semble qu'il y ait eu une erreur sur notre serveur lorsque vous avez essayé \n " +
+			    	showNotificationText("Il semble qu'il y ait eu une erreur sur notre serveur lorsque vous avez essayé \n " +
 	    			"de supprimer une compétence.");
 	        return false;
 			    },
 			}); 
 		}else {
-			alert("Pas d'id reçu pour suppression !");
+			showNotificationText("Pas d'id reçu pour suppression !");
 		} 
 	}
 	
@@ -135,7 +139,7 @@ $(document).ready(function() {
 				$('#descriptionedit').val(competence.description);
 			});
 		}else {
-			alert("Pas d'id reçu!");
+			showNotificationText("Pas d'id reçu!");
 		} 
 	}
 	
@@ -152,17 +156,17 @@ $(document).ready(function() {
 			    	if (data == "success") {
 			    		window.location.reload();
 			    	} else {
-			    		alert("Souci lors de la soumission du formulaire : " + data);
+			    		showNotificationText("Souci lors de la soumission du formulaire : " + data);
 			    	}
 			    	return false;
 			    },
 			    error : function(data) {
-			    	alert("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'éditer une compétence.");
+			    	showNotificationText("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'éditer une compétence.");
 	        return false;
 			    },
 			}); 
 		}else {
-			alert("Vous n'avez pas entré de nom ou/et de code ou le code est déjà utilisé");
+			showNotificationText("Vous n'avez pas entré de nom ou/et de code ou le code est déjà utilisé");
 		} 
 	}
 	
