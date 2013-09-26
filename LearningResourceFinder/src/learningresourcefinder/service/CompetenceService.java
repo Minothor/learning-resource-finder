@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CompetenceService {
    
+	// "Filters" the competence tree (into an list of Competences) to only include the competences (and their childs/parents) related to a given cycle.
     public void computeAllCompetencesRelatedToCycle(Cycle cycle){
         List<Competence> competencesResult = new ArrayList<Competence>();
         List<Competence> competencesDirectlyAttachedToCycle = cycle.getCompetences();
@@ -32,27 +33,4 @@ public class CompetenceService {
         cycle.setComputedCompetences(competencesResult);
         
     }
-
-//    // Rebuilds the cache of Cycle.computedCompetences
-//    public void computeAllCompetencesRelatedToCycle(Cycle cycle) {
-//        List<Competence> competencesResult = new ArrayList<Competence>();
-//
-//        List<Competence> competencesDirectlyAttachedToCycle = cycle.getCompetences();
-//        for (Competence comp : competencesDirectlyAttachedToCycle) {
-//            gatherAllParents(comp.getParent(), competencesResult);  
-//            competencesResult.add(comp);
-//        }
-//        
-//        cycle.setComputedCompetences(competencesResult);        
-//    }
-//
-//    // This method is implemented with a false recursivity.
-//    private void gatherAllParents(Competence Competenceparent,List<Competence>  competencesResult) {
-//        if (Competenceparent != null && !competencesResult.contains(Competenceparent)) {
-//            gatherAllParents(Competenceparent.getParent(),competencesResult); // False recursivity (could be a simple loop)
-//            competencesResult.add(Competenceparent);
-//        }
-//    }
-    
-
 }

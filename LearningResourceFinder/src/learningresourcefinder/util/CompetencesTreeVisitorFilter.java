@@ -39,14 +39,4 @@ public class CompetencesTreeVisitorFilter implements CompetencesTreeVisitor {
 }
 
 
-// TODO In recursive Service method
-
-// void processNode(Competence competence, CompetenceNode cnParent) {
-//    
-// if level > 2
-// if competence is in competencesToInclude
-// cn = new CompetenceNode(competence, cnParent)
-// for each child of competence {
-//     processNode(child, cn) 
-
 

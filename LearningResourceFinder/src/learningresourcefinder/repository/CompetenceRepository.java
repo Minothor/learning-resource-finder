@@ -34,7 +34,7 @@ public class CompetenceRepository extends BaseRepository<Competence> {
 	}
 
 	public Competence findRoot(){
-		return    (Competence) em.createQuery("select c from Competence c where c.parent is null ").getSingleResult();
+		return    (Competence) em.createQuery("select c from Competence c where c.parent is null ").getSingleResult();  // Will throw an excpetion if no root found.
 	}
 
 

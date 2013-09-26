@@ -15,9 +15,11 @@ public class CompetenceNode {
     public CompetenceNode(Competence competence, CompetenceNode parent){
         this.competence = competence;
         this.parent = parent;
+        if (this.parent != null) { 
+        	this.parent.getChildren().add(this);
+        }
     }
     
-
     public Competence getCompetence() {
         return competence;
     }
@@ -25,5 +27,18 @@ public class CompetenceNode {
     public List<CompetenceNode> getChildren() {
         return children;
     }
+    
+    public void addChild(CompetenceNode e){
+    	this.children.add(e);
+    }
+
+	public CompetenceNode getParent() {
+		return parent;
+	}
+
+	@Override
+	public String toString() {
+		return "CompetenceNode [competence=" + competence + "]";
+	}
 
 }

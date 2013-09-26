@@ -19,13 +19,13 @@ public class CompetenceNodeController {
     
     @RequestMapping(value="/competencebycycle", method = RequestMethod.GET)
     public ModelAndView competencebycycle(@RequestParam("name") String cycleName){
-        ModelAndView mv = new ModelAndView("");
+        ModelAndView mv = new ModelAndView(""); 
         Cycle cycle = null;
         
         if(cycleName != null && !cycleName.isEmpty())
         cycle = cycleRep.findByName(cycleName);
         
-       // Call the competenceNodeService Method .... 
+       // Call the competenceNodeService Method .... else show notification with error message.
         
         return mv;
     }
