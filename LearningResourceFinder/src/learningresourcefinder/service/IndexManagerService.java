@@ -159,8 +159,6 @@ public class IndexManagerService {
 	
 	/**
 	 * Used to search the index, using one or more keywords
-	 * @param privilegeNeededToSeachAllCriteria privilege needed to search in all fields. For example Privilege.VIEW_UNPUBLISHED_ARTICLE to see Article.toClassify.
-	 * @return
 	 */
 	public ScoreDoc[] search(String keyWords) {
 

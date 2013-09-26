@@ -166,7 +166,7 @@ public class CompetenceController extends BaseController<Competence> {
 		List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
 		for(Competence cptChild : childrenAndSubChildren){
 			if(cptChild.getCycle() != null  && ! cycle.equals(cptChild.getCycle())){
-				return "Une des sous-compétences ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-compétence de cycle afin que des enfants ne soient pas en contradicition avec leurs parent.";
+				return "Une des sous-compétences ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-compétence de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
 			}
 		}
 		
@@ -174,7 +174,7 @@ public class CompetenceController extends BaseController<Competence> {
 		Competence parent = competence.getParent();
 		while(parent != null){
 			if(parent.getCycle() != null  &&  !cycle.equals(parent.getCycle())){
-				return "Une des compétences parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradicition avec leurs parent.";
+				return "Une des compétences parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
 			}
 			parent = parent.getParent();
 		}

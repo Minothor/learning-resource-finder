@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SearchResourceBatch implements Runnable{
 
 	@Autowired SearchService searchService;
-	@Autowired IndexManagerService indexService;
+	@Autowired IndexManagerService indexManagerService;
 	@Autowired ResourceRepository resourceRepository;
 
 	public static void main(String[] args){
@@ -49,20 +49,20 @@ public class SearchResourceBatch implements Runnable{
 
 	@Override
 	public void run() {	
-//		indexService.createIndexes();
+		indexManagerService.removeIndexes();
+		indexManagerService.createIndexes();
 		
-		List<BaseEntity> liste = searchService.getFirstEntities(searchService.search("math"), 30, Competence.class);
-		List<Competence> list = new ArrayList<>();
-		list.add((Competence) liste.get(0));
-		for(BaseEntity result : liste){
-			if(result instanceof Competence){
-				list.add( ((Competence) result).getParent() );
-			}
+		List<SearchResult> list = searchService.search("math");
+		
+		for (SearchResult sr : list) {
+			System.out.println(sr);
 		}
-		Collections.reverse(list);
-		for(Competence result : list){
-			System.out.print(result.getName() + "/ ");
-		}
-	}
+		
+		
+		
+		
+		
+		
 
+}
 }
