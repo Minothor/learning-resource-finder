@@ -119,11 +119,14 @@ public class CompetenceController extends BaseController<Competence> {
         Competence competence=getRequiredEntity(idCompetence);
         SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
         Competence newParent =   competenceRepository.findByCode(codeNewParent);
-        if (competence.getParent()==null){
+        
+        
+        /////////// Can we move that node?
+        if (competence.getParent()==null) {  // defensive coding
             NotificationUtil.addNotificationMessage("La racine ne peut être déplacée.",Status.ERROR); 
             return mv;
         }
-        if (newParent==null){
+        if (newParent==null){  // defensive coding
             NotificationUtil.addNotificationMessage("Code parent inexistant",Status.ERROR); 
             return mv;
         }
@@ -135,7 +138,20 @@ public class CompetenceController extends BaseController<Competence> {
         	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée sur elle même",Status.ERROR);
         	return mv;
         }
+        /// Has the new parent (or his parent), a cycle assigned which is different?
+        if (competence.getCycle() != null) {
+        	Competence parent = newParent;
+        	while(parent!=null){
+        		if(parent.getCycle() != null && !competence.getCycle().equals(parent.getCycle())){
+        			NotificationUtil.addNotificationMessage("Le cycle ("+parent.getCycle()+") lié à un des parents ("+parent.getFullName()+") ne peut pas être différent du cycle ("+competence.getCycle()+") de la compétence que vous déplacez.",Status.ERROR);
+        			return mv;
+        		}
+        		parent = parent.getParent();
+        	}
+        }
+
         
+        ////////////// OK, we move the node.
         if (competence.getParent() != null) {
             competence.getParent().getChildren().remove(competence);
         }

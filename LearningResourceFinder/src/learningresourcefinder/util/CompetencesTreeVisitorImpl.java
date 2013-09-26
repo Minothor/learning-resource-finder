@@ -12,10 +12,14 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
 
     private String htmlResult = "";
 
-
+    CycleRepository cycleRepository;
+    
+    public CompetencesTreeVisitorImpl(CycleRepository aCycleRepository) {
+    	this.cycleRepository = aCycleRepository;
+    }
 
 	@Override
-    public void startCompetence(Competence competence,CycleRepository cycleRepository) {
+    public void startCompetence(Competence competence, int recurtionLevel) {
         long id = competence.getId();
         List<Cycle> lc = cycleRepository.findAllCycles();
         String labelCycle;

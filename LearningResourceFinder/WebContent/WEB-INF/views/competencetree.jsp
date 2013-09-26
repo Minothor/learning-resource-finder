@@ -25,7 +25,7 @@
         <div class="modal-body">
 	        <div class="form-group">
 	          <label for="codeField">Code parent</label>
-			  <input type="text" class="form-control" name="codeField"id="codeField" placeholder="Code"  maxlength="8">
+			  <input type="text" class="form-control" name="codeField"id="codeField" placeholder="Code"  maxlength="8" required>
 			  <span class="help-block">Code de la compétence qui sera parent après le déplacement.</span>
 			</div>
 			<input type="hidden" class="form-control" name="hiddenFieldMoveCompetency" id="hiddenFieldMoveCompetency" value=""> <%-- Value us set by javascript --%>

@@ -22,13 +22,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SearchSummaryController extends BaseController<Resource> {
 
+	
+	
+	
+	
 	@Autowired private SearchService searchService;
-	@Autowired private IndexManagerService indexService;
+	@Autowired private IndexManagerService indexManagerService;
 	@Autowired private ResourceRepository resourceRepository;
+	
+
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/searchallresource")
 	public ModelAndView searchAllResource(@RequestParam("search") String searchResource){
+
+		
 		List<SearchResult> resultList = searchService.search(searchResource);
 		List<Resource> resources = (List) searchService.getFirstEntities(resultList, 300, Resource.class);
 		
@@ -37,9 +45,12 @@ public class SearchSummaryController extends BaseController<Resource> {
 		return mv;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("/search")
 	public ModelAndView getFirstFiveResource(@RequestParam("search") String searchResource){
+//		indexManagerService.removeIndexes();
+//		indexManagerService.createIndexes();
+		
 		List<SearchResult> listOfResult = searchService.search(searchResource);
 		List<Competence> listOfCompetence = (List)searchService.getFirstEntities(listOfResult, 50, Competence.class);
 

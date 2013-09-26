@@ -15,26 +15,18 @@ public class CompetencesTreeWalker {
     private Competence competenceFromRequest;
     private int currentLevel;
 	
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository,CompetencesTreeVisitor competenceTreeVisitor) {
-        this(competenceRepository,competenceTreeVisitor,null);
-    }
- 
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository, CompetencesTreeVisitor competenceTreeVisitor,CycleRepository mCycleRepository) {
-        this(competenceRepository,competenceTreeVisitor,null,mCycleRepository);
-    }
-    
-    public CompetencesTreeWalker(CompetenceRepository competenceRepository, CompetencesTreeVisitor competenceTreeVisitor,Competence competenceParent,CycleRepository mCycleRepository){
+    public CompetencesTreeWalker(CompetencesTreeVisitor competenceTreeVisitor, Competence competenceParent, CompetenceRepository competenceRepository){
         this.mCompetenceRepository = competenceRepository;     
         this.mCompetenceTreeVisitor = competenceTreeVisitor;
         this.competenceFromRequest = competenceParent;
     }
         
+        
 	public void walk() {
         List<Competence> listOfCompetences = null;
         
         if(competenceFromRequest == null){
-            listOfCompetences = mCompetenceRepository.findAllWithoutParent();
-            
+            listOfCompetences = mCompetenceRepository.findRoot().getChildren();
         } else {
             listOfCompetences = competenceFromRequest.getChildren();
         }
