@@ -171,7 +171,7 @@ label {
 		<div class="filterSubBlock">
 			<fieldset>
 				<legend>Competence</legend>
-				<lrf:competencepath competence="${competence}"/>
+				<lrf:competencepath competence="${searchOptions.competence}"/>
 			</fieldset>
 		</div>
 		<input type="hidden" name="search" value="${search}">

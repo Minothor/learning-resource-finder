@@ -43,37 +43,17 @@ public class ResourceRepository extends BaseRepository<Resource>
 		return result;
 	}
 	
-	public List<BaseEntity> getFilteredEntities(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
-		final List<Long> entityIds = new ArrayList<>();
-		final int resourcePerPage = 1;
-		int begin = (page-1) * resourcePerPage;
-		int end = page * resourcePerPage;
-		
-		for (int i = begin; i<end; i++){
-				entityIds.add(searchResults.get(i).getId());
-		}
-
-		List<BaseEntity> entities = findFilteredEntitiesByIdList(entityIds, searchOptions);
-		
-		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
-		Collections.sort(entities, new Comparator<BaseEntity>() {
-			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
-				return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
-			}
-		});
-		
-		return entities;
-	}
 	
 	@SuppressWarnings("unchecked")
-	public List<BaseEntity> findFilteredEntitiesByIdList(List<Long> idList, SearchOptions searchOptions){
-		Map<String, Object> parameters = new HashMap<>();
+	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions){
+		if (idList.isEmpty()) { // Defensive coding. An empty list would break the query
+			return new ArrayList<>();
+		}
+		
 		List<String> whereConditions = new ArrayList<>();
 		
 		//// Add Conditions and parameters
-		
 		// Language
-		boolean first = true;
 		String whereCondition = "";
 		for (Language language : searchOptions.getLanguage()) {
 			if (!whereCondition.equals("")) {
@@ -115,15 +95,14 @@ public class ResourceRepository extends BaseRepository<Resource>
 		if (!whereCondition.equals("")) whereConditions.add(whereCondition);				
 	
 		// Advertising
-		whereCondition = "";
-		whereCondition += " r.advertising='" + searchOptions.isAdvertising() + "' ";
-		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
-		
+		if (searchOptions.isAdvertising() == false) { // We do not accept advertising (other case is Resource.advertising = true or null)
+			whereConditions.add( " r.advertising = FALSE ");
+		}
 		
 		// Max Duration
-		whereCondition = "";
-		if (!(searchOptions.getMaxDuration() == null)) whereCondition += " r.duration<='" + searchOptions.getMaxDuration().intValue() + "' ";
-		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
+		if (searchOptions.getMaxDuration() != null) {
+			whereConditions.add(" r.duration<='" + searchOptions.getMaxDuration().intValue() + "' ");
+		}
 		
 		
 		
@@ -133,10 +112,10 @@ public class ResourceRepository extends BaseRepository<Resource>
 			whereClause += " AND ";
 			whereClause += "(" + condition + ")";
 		}
+		String queryString = "SELECT r FROM Resource r WHERE r.id in (:idList) " + whereClause;  // separate String, to debug.
 		
 
-		
-		List<BaseEntity> result = em.createQuery("SELECT r FROM Resource r WHERE r.id in(:idList) " + whereClause)
+		List<Resource> result = em.createQuery(queryString)
 				.setParameter("idList", idList)
 				.getResultList();
 		return result;

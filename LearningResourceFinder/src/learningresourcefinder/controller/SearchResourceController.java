@@ -24,7 +24,7 @@ public class SearchResourceController extends BaseController<Resource> {
 	@Autowired private ResourceRepository resourceRepository;
 
 	@RequestMapping("/searchresource")
-	public String searchresource(Model model, @RequestParam("searchphrase") String searchPhrase, @RequestParam(value="page", required=false) Integer page, @RequestParam(value="competenceid", required=false) Long idCompetence ){
+	public String searchResource(Model model, @RequestParam("searchphrase") String searchPhrase, @RequestParam(value="page", required=false) Integer page, @RequestParam(value="competenceid", required=false) Long idCompetence ){
 		if (page == null) page=1;
 		SearchOptions searchOptions = new SearchOptions();
 		model.addAttribute("searchOptions", searchOptions);
@@ -39,7 +39,7 @@ public class SearchResourceController extends BaseController<Resource> {
 		}
 		
 		List<SearchResult> searchResults = searchService.search(searchPhrase);
-		List<BaseEntity> entities = resourceRepository.getFilteredEntities(searchResults, page, searchOptions);
+		List<Resource> entities = searchService.getFilteredResources(searchResults, page, searchOptions);
 		model.addAttribute("resourcelist", entities);
 
 		int numberOfResourceFound = searchResults.size();
@@ -49,10 +49,10 @@ public class SearchResourceController extends BaseController<Resource> {
 		
 	}
 	
-	@RequestMapping("/searchresourcesubmit")
-	public String searchresourcesubmit(@ModelAttribute SearchOptions searchOptions, Model model, @RequestParam("search") String searchResource, @RequestParam(value="page", required=false) Integer page){
+	@RequestMapping("/searchresourcesubmit")  // FIXME Why does this method exist? John 2013-09-26
+	public String searchResourceSubmit(@ModelAttribute SearchOptions searchOptions, Model model, @RequestParam("searchPhrase") String searchPhrase, @RequestParam(value="page", required=false) Integer page){
 		if (page == null) page=1;
-		List<BaseEntity> entities = resourceRepository.getFilteredEntities(searchService.search(searchResource), page, searchOptions);
+		List<Resource> entities = searchService.getFilteredResources(searchService.search(searchPhrase), page, searchOptions);
 		model.addAttribute("resourcelist", entities);
 		model.addAttribute("searchOptions", searchOptions);
 		return "searchresource";

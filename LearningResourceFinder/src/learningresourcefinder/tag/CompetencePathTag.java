@@ -32,7 +32,7 @@ public class CompetencePathTag extends SimpleTagSupport {
 			competence = competence.getParent();
 		}
 		if (result == null) {
-			throw new RuntimeException("Bug - defensive coding: result should not be null here");
+			throw new RuntimeException("Bug - defensive coding: result should not be null here (competence was null from the start?)");
 		}
 		
 		JspWriter out = this.getJspContext().getOut();

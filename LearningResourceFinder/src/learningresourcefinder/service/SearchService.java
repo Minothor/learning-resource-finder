@@ -9,7 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import learningresourcefinder.model.BaseEntity;
+import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchResult;
 
 import org.apache.lucene.search.ScoreDoc;
@@ -20,6 +23,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchService {
 
+	final int RESOURCES_PAR_SEARCH_PAGE = 5*20;
+
+	
 	@Autowired private IndexManagerService indexManagerService;
 	@Autowired private ResourceRepository resourceRepository;
 	
@@ -102,4 +108,47 @@ public class SearchService {
 				.getResultList();
 		return result;
 	}
+	
+	
+	public List<Resource> getFilteredResources(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
+		final List<Long> resourceIds = new ArrayList<>();
+		
+		// Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
+//		int begin = Math.min(searchResults.size()-1, (page-1) * RESOURCES_PAR_SEARCH_PAGE);
+//		int end = Math.min(searchResults.size()-1,    page * RESOURCES_PAR_SEARCH_PAGE);
+//		
+//		for (int i = begin; i<end; i++){
+//			resourceIds.add(searchResults.get(i).getId());
+//		}
+
+		List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions);
+
+		// We remove the resources not within the specified competence.
+		if (searchOptions.getCompetence() != null) {
+			List<Resource> result = new ArrayList<>();
+			for (Resource resource : entities) {
+				for (Competence compOfResource :  resource.getCompetences()) {
+					if (compOfResource.isOrIsChildOrSubChildOf(searchOptions.getCompetence())) {
+						result.add(resource);
+						break;  // get out inner loop and continue with the next resource.
+					}
+				}
+			}
+			entities = result;
+		}
+		
+		
+		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
+		Collections.sort(entities, new Comparator<BaseEntity>() {
+			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
+				return (new Integer((resourceIds.indexOf(arg0.getId())))).compareTo( new Integer(resourceIds.indexOf(arg1.getId())));
+			}
+		});
+		
+		return entities;
+	}
+	
+
+
+
 }

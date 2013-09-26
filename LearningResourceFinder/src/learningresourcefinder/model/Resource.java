@@ -114,7 +114,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		return problems;
 	}
 
-	public List<Competence> getProgramPoints() {
+	public List<Competence> getCompetences() {
 		return competences;
 	}
 	

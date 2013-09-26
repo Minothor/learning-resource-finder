@@ -6,9 +6,15 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
+import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.search.SearchOptions;
+import learningresourcefinder.search.SearchResult;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
 
@@ -93,6 +99,8 @@ public class ResourceService {
 	
 	public void changeOneGalleryOrder(String directory, ArrayList<String> listImages, Resource resource) {
 		renumberImageFiles(directory+"/", resource.getId()+"-", listImages);
-		
 	}
+	
+
+
 }

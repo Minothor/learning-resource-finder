@@ -102,7 +102,7 @@ public class Competence extends BaseEntity implements Searchable{
 	
 	public void addResource(Resource resource) {
 		this.getResources().add(resource);
-		resource.getProgramPoints().add(this);
+		resource.getCompetences().add(this);
 	}
 
 	public void addChild(Competence child) {
@@ -180,5 +180,17 @@ public class Competence extends BaseEntity implements Searchable{
 
 	public String getFullName() {
 		return getCode() + " - " + getName();
+	}
+
+	public boolean isOrIsChildOrSubChildOf(Competence competence) {
+		// Est-ce que this est un (petit) enfant de competence ?
+		Competence myParent = this; 
+		while (myParent != null){
+			if (myParent.equals(competence)) { // Found
+				return true;
+			}
+			myParent = myParent.getParent();
+		}
+		return false;
 	}
 }
