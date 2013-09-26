@@ -133,4 +133,14 @@ public  class SearchResult {
         return visible;
     }
 
+
+	@Override
+	public String toString() {
+		return "SearchResult [id=" + id + ", title=" + title + ", text=" + text
+				+ ", url=" + url + ", entityClassName=" + entityClassName
+				+ ", visible=" + visible + "]";
+	}
+
+    
+    
 }
