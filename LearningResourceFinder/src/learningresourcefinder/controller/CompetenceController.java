@@ -39,7 +39,7 @@ public class CompetenceController extends BaseController<Competence> {
 	}
 
 
-	@RequestMapping(value="/ajax/competenceAddSubmit", method = RequestMethod.POST)
+	@RequestMapping(value="/ajax/competenceaddsubmit")
 	public @ResponseBody String competenceAddSubmit( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("idparent") Long parentIdCompetence, @RequestParam("description") String descriptionCompetence){
 		
 		//checking
@@ -70,7 +70,7 @@ public class CompetenceController extends BaseController<Competence> {
 
 	}
 
-	@RequestMapping(value="/ajax/competenceRemoveSubmit", method = RequestMethod.POST)
+	@RequestMapping(value="/ajax/competenceremovesubmit")
 	public @ResponseBody String ajaxRemoveCompetence( @RequestParam("id") Long idCompetence){
 		
 		Competence competence = getRequiredEntity(idCompetence);
@@ -89,7 +89,7 @@ public class CompetenceController extends BaseController<Competence> {
 		}
 	}
 	
-	@RequestMapping(value="/ajax/competenceEditSubmit", method = RequestMethod.POST)
+	@RequestMapping(value="/ajax/competenceeditsubmit")
 	public @ResponseBody String ajaxEditCompetence( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("description") String descriptionCompetence, @RequestParam("id") Long idCompetence){
 		
 		//checking
