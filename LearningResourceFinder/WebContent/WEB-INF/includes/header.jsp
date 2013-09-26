@@ -6,45 +6,43 @@
 
 <script type="text/javascript" src="/js/int/resourceAdd.js"></script>
 <script type="text/javascript" src="/js/int/ajaxLogin.js"></script>
-
-
-<script>
-  $(document).ready(function() {
-		<c:if test="${!empty sessionScope.notifications}">
-		   showNotificationArea();
-		</c:if>
-	});
 	
- 	function showNotificationArea() {	
-		$("#notificationArea").slideDown(); // Was hidden at the beginning.
-	}
-	
- 	// Call this method if you want to display a notification text from JavaScript code.
-	function showNotificationText(message) {
-		$("#notificationText").html(message);
-		showNotificationArea();
-	}
-	
-	
-	$(document).ready(function() {
-	 	$("#registerLink").click(function(e) {
-	 	    e.preventDefault();// prevent the default anchor functionality
-	 	    $('#loginDropDown').dropdown('toggle');
-	 	    $('#registerDropDown').dropdown('toggle');
-	 	    $('#email').focus();
+	<script>
+	  $(document).ready(function() {
+			<c:if test="${!empty sessionScope.notifications}">
+			   showNotificationArea();
+			</c:if>
 		});
-	 	
-	 	$("#addResourceLink").click(function(e) {
-	 	    e.preventDefault();// prevent the default anchor functionality
-	 	    e.stopPropagation();
-	 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
-		 	    no='$("#loginDropDown").dropdown("toggle");'/>
+		
+	 	function showNotificationArea() {	
+			$("#notificationArea").slideDown(); // Was hidden at the beginning.
+		}
+		
+	 	// Call this method if you want to display a notification text from JavaScript code.
+		function showNotificationText(message) {
+			$("#notificationText").html(message);
+			showNotificationArea();
+		}
+		
+		
+		$(document).ready(function() {
+		 	$("#registerLink").click(function(e) {
+		 	    e.preventDefault();// prevent the default anchor functionality
+		 	    $('#loginDropDown').dropdown('toggle');
+		 	    $('#registerDropDown').dropdown('toggle');
+		 	    $('#email').focus();
+			});
+		 	
+		 	$("#addResourceLink").click(function(e) {
+		 	    e.preventDefault();// prevent the default anchor functionality
+		 	    e.stopPropagation();
+		 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
+			 	    no='$("#loginDropDown").dropdown("toggle");'/>
+			});
+		 	
 		});
-	 	
-	});
-</script>
-
-
+		</script>
+		
 <%-- ********** NOTIFICATIONS ************** --%>
 	<div id="notificationArea" 
 		 class="${sessionScope.notifications[0].status.name}"
