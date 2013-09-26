@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+
 <html>
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Search</title>
 
 <style type="text/css">
@@ -89,7 +88,7 @@
 							
 	<c:forEach items="${competenceList}" var="competence">
 		<div style="float: left; position: relative; padding-left: 5px; margin-top: 10px;">
-<%-- 			<lrftag:competencepath competence="${competence.getName()} "></lrftag:competencepath> --%>
+				<lrf:competencepath competence="${competence}"/>
 		</div>
 	</c:forEach>
 
