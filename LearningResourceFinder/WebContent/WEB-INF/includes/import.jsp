@@ -27,9 +27,8 @@
     <![endif]-->
     
     <script src="/js/ext/jquery-1.9.0.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
-    <script src="js/ext/bootstrap.js"></script> 
-    <script src="js/int/ajaxLogin.js"></script>   
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+    <script src="js/ext/bootstrap.js"></script>   
 	<script src="js/int/search.js"></script> <!-- Growing search button script  -->
 	
 	<!-- FIXME -- to be removed when all modal dialog boxes are in bootstrap -->
