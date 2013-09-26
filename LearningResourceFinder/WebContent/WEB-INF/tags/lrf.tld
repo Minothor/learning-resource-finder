@@ -61,4 +61,14 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	 <tag>
+		<name>competencepath</name>
+		<tag-class>learningresourcefinder.tag.CompetencePathTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>competence</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>
