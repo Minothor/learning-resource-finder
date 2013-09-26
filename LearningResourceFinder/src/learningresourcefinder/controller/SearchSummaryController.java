@@ -1,10 +1,7 @@
 package learningresourcefinder.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
@@ -21,9 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class SearchSummaryController extends BaseController<Resource> {
-
-	
-	
 	
 	
 	@Autowired private SearchService searchService;
@@ -31,44 +25,17 @@ public class SearchSummaryController extends BaseController<Resource> {
 	@Autowired private ResourceRepository resourceRepository;
 	
 
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping("/searchallresource")
-	public ModelAndView searchAllResource(@RequestParam("search") String searchResource){
-
-		
-		List<SearchResult> resultList = searchService.search(searchResource);
-		List<Resource> resources = (List) searchService.getFirstEntities(resultList, 300, Resource.class);
-		
-		ModelAndView mv = new ModelAndView("search", "resourceList", resources);
-		
-		return mv;
-	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("/search")
-	public ModelAndView getFirstFiveResource(@RequestParam("search") String searchResource){
-//		indexManagerService.removeIndexes();
-//		indexManagerService.createIndexes();
-		
-		List<SearchResult> listOfResult = searchService.search(searchResource);
+	public ModelAndView search(@RequestParam("searchphrase") String searchPhrase) {
+		List<SearchResult> listOfResult = searchService.search(searchPhrase);
 		List<Competence> listOfCompetence = (List)searchService.getFirstEntities(listOfResult, 50, Competence.class);
 
-//		List<Competence> list = new ArrayList<>();
-//
-//		list.add((Competence) listOfCompetence.get(0));
-//		for(BaseEntity result : listOfCompetence){
-//			if(result instanceof Competence){
-//				list.add( ((Competence) result).getParent() );
-//			}
-//		}
-//		Collections.reverse(list);
-	
-		ModelAndView mv = new ModelAndView("search");
+		ModelAndView mv = new ModelAndView("searchsummary");
 		mv.addObject("resourceList", searchService.getFirstEntities(listOfResult, 5, Resource.class));
 		mv.addObject("playlistList", searchService.getFirstEntities(listOfResult, 5, PlayList.class));
 		mv.addObject("competenceList", listOfCompetence);
-		mv.addObject("searchValue", searchResource);
+		mv.addObject("searchPhrase", searchPhrase);
 		return mv;
 	}
 	

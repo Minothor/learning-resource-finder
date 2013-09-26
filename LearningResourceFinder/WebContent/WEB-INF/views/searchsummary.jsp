@@ -20,7 +20,7 @@
 
 	<center>
 		<h1>
-			Hello you are in the search page! <br> WELCOM
+			${searchPhrase}
 		</h1>
 	</center>
 							<!-- Resource start -->
@@ -48,7 +48,7 @@
 	<br />
 	<br />
 	<br />
-	<a href="searchresource?search=${searchValue}">${fn:length(searchResultsMore)}</a>
+	<a href="searchresource?searchphrase=${searchPhrase}">${fn:length(searchResultsMore)}</a>
 	<br />
 	<br />
 	<br />
@@ -88,7 +88,7 @@
 							
 	<c:forEach items="${competenceList}" var="competence">
 		<div style="float: left; position: relative; padding-left: 5px; margin-top: 10px;">
-				<lrf:competencepath competence="${competence}"/>
+			<a href="searchresource?searchphrase=${searchPhrase}&competenceid=${competence.getId()}"><lrf:competencepath competence="${competence}"/></a>	
 		</div>
 	</c:forEach>
 

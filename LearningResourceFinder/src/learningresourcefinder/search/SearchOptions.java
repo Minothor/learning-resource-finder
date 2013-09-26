@@ -3,9 +3,7 @@ package learningresourcefinder.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import learningresourcefinder.model.Competence;
 
 
 public class SearchOptions {
@@ -16,6 +14,8 @@ public class SearchOptions {
 	List<Nature> nature = new ArrayList<>();
 	boolean advertising;
 	Integer maxDuration;
+	String searchPhrase;
+	Competence competence; // Search restricted within this competence.
 	
 	public enum Language{
 		FR("Français"), 
@@ -99,6 +99,18 @@ public class SearchOptions {
 	}
 	public void setMaxDuration(Integer maxDuration) {
 		this.maxDuration = maxDuration;
+	}
+	public Competence getCompetence() {
+		return competence;
+	}
+	public void setCompetence(Competence competence) {
+		this.competence = competence;
+	}
+	public String getSearchPhrase() {
+		return searchPhrase;
+	}
+	public void setSearchPhrase(String searchPhrase) {
+		this.searchPhrase = searchPhrase;
 	}
 
 	

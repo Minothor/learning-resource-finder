@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -165,6 +166,12 @@ label {
 			<fieldset>
 				<legend>Durée</legend>
 				Moins de <input type="text" name="maxDuration">
+			</fieldset>
+		</div>
+		<div class="filterSubBlock">
+			<fieldset>
+				<legend>Competence</legend>
+				<lrf:competencepath competence="${competence}"/>
 			</fieldset>
 		</div>
 		<input type="hidden" name="search" value="${search}">

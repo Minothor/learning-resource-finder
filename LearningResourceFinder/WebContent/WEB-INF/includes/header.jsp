@@ -171,7 +171,7 @@
 				<form class="navbar-form navbar-right" role="search" method="post" action="search">
 				   <div class="form-group">
 					<div class="input-group" style="width:150px;">
-						<input name="search" id="search" style="min-width:150px; width:150px" type="text" class="form-control" placeholder="Recherche" required>
+						<input name="searchphrase" id="search" style="min-width:150px; width:150px" type="text" class="form-control" placeholder="Recherche" required>
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit">Go!</button>
 						</span>
