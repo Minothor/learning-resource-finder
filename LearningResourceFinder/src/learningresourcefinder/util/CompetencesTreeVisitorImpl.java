@@ -32,7 +32,6 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
         		///////////// Assign Cycle
         		/// First, we check if we can display the dropdown to enable the user selecting another cycle for that competence.
         		boolean canDisplayCycleDropdown = true;  // If the parent has a cycle, the user should not set cycles to kids (it would be a non-sense to select another cycle than the parent).
-        		if (competence.getCycle() == null) {
         			// Has a parent a defined cycle?
         			Competence parent = competence.getParent();
         			while(parent != null) {
@@ -42,7 +41,6 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
         				}
         				parent = parent.getParent();
         			}
-        		}
         		
         		// second, we generate the html
         		if (canDisplayCycleDropdown) {
