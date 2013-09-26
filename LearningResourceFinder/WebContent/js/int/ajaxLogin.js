@@ -19,10 +19,8 @@ function ajaxlogin() {
 }
 
 $(document).ready(function() {
-	
-	$('#checkvalidinput').submit(ajaxRegister);
-    
-  });
+	$('#registerForm').submit(ajaxRegister);
+});
   
 function ajaxRegister(e) {
 	e.preventDefault();
@@ -35,11 +33,12 @@ function ajaxRegister(e) {
 	    url : 'ajax/registersubmit',
 	    data: "emailRegister="+emailRegister+"&usernameRegister="+usernameRegister+"&passwordRegister="+passwordRegister,
 	    success : function(data) {	
-	    	if(data=="")
 	    		 location.reload();
 	    },
 	    error : function(data) {
-	    	alert(data);
+	    	alert("erreur register "+data);
+	    	return false;
 	    }
+	   
 	}); 
 }
