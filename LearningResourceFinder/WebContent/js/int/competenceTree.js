@@ -110,7 +110,7 @@ $(document).ready(function() {
 		if (id != '') {
 			$.ajax({
 				type : "POST",
-			    url : 'ajax/competenceRemoveSubmit',
+			    url : 'ajax/competenceremovesubmit',
 			    data: "id=" + id,
 			    success : function(data) {
 			    	if (data == "success") {
@@ -133,40 +133,14 @@ $(document).ready(function() {
 	
 	function ajaxCompetenceEditLoad(id) {
 		if (id != '') {
-			$.getJSON("ajax/competenceEditFillFields?id="+id, function(competence) {
+			$.getJSON("ajax/competenceeditfillfields?id="+id, function(competence) {
 				$('#nameedit').val(competence.name);
 				$('#codeedit').val(competence.code);
 				$('#descriptionedit').val(competence.description);
 			});
-		}else {
-			showNotificationText("Pas d'id reçu!");
+		} else {
+			showNotificationText("Bug (defensive coding): pas d'id reçu!");
 		} 
 	}
 	
-	function ajaxCompetenceEditSubmit(id) {
-		var name = $('#nameedit').val();
-		var code = $('#codeedit').val();
-		var description = $('#descriptionedit').val();
-		if (name != '' && code != '' && id != '') {
-			$.ajax({
-				type : "POST",
-			    url : 'ajax/competenceEditSubmit',
-			    data: "name=" + name + "&code=" +code + "&id=" +id + "&description=" +description,
-			    success : function(data) {
-			    	if (data == "success") {
-			    		window.location.reload();
-			    	} else {
-			    		showNotificationText("Souci lors de la soumission du formulaire : " + data);
-			    	}
-			    	return false;
-			    },
-			    error : function(data) {
-			    	showNotificationText("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'éditer une compétence.");
-	        return false;
-			    },
-			}); 
-		}else {
-			showNotificationText("Vous n'avez pas entré de nom ou/et de code ou le code est déjà utilisé");
-		} 
-	}
 	

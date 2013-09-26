@@ -114,7 +114,6 @@ public class LoginController extends BaseController<User> {
             user = userService.registerSocialUser(email);
         }
         
-        
         completeUserFromSocialProfile(providerId, profile, user);        
 
         ////// Login

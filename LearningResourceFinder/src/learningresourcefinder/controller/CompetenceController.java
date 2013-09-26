@@ -91,7 +91,6 @@ public class CompetenceController extends BaseController<Competence> {
 	
 	@RequestMapping(value="/ajax/competenceeditsubmit")
 	public @ResponseBody String ajaxEditCompetence( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("description") String descriptionCompetence, @RequestParam("id") Long idCompetence){
-		
 		//checking
 		if (competenceRepository.getIfCompetenceCodeExistOrIsCurrentlyBeingEdited(idCompetence,codeCompetence)) {
 			Competence competence = getRequiredDetachedEntity(idCompetence);
@@ -162,7 +161,7 @@ public class CompetenceController extends BaseController<Competence> {
         return mv; 
     }
 	
-	@RequestMapping(value="/ajax/competenceEditFillFields")
+	@RequestMapping(value="/ajax/competenceeditfillfields")
 	public @ResponseBody CompetenceDataHolder competenceEditFillFields( @RequestParam("id") Long idCompetence){ 
 		Competence competence = getRequiredEntity(idCompetence);
 		SecurityContext.assertCurrentUserMayEditThisCompetence(competence);

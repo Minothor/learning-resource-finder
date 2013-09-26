@@ -55,14 +55,14 @@
 			<div class="form-group">
 			<div class="form-group">
 			  <label for="code">Code</label>
-			  <input type="text" class="form-control" name="code" placeholder="Code"  maxlength="8" style="width:100px;" required> 
+			  <input type="text" class="form-control" id="codeedit" name="code" placeholder="Code"  maxlength="8" style="width:100px;" required> 
 			</div>
 			  <label for="name">Intitulé</label>
-			  <input type="text" class="form-control" name="name" placeholder="Intitulé" maxlength="40" required> 
+			  <input type="text" class="form-control" id="nameedit" name="name" placeholder="Intitulé" maxlength="40" required> 
 			</div>
 			<div class="form-group">
 			  <label for="description">Description</label>
-			  <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+			  <textarea class="form-control" rows="3" id="descriptionedit" name="description" placeholder="Description"></textarea>
 			</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
