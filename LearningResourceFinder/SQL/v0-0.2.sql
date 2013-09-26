@@ -36,7 +36,10 @@ ALTER TABLE programpoint
     
     
   
-    
+  ----
+  INSERT INTO cycle(
+            id, createdon, updatedon, name, createdby_id, updatedby_id)
+    VALUES (nextval('hibernate_sequence'), null, null, 'cycle5', null, null);
     
     
     
