@@ -43,7 +43,7 @@ public class NotificationUtil {
 	
 	public enum Status{
 		
-		ERROR("alert alert-danger"), // Red Notification // <> Bootstrap doc "alert alert-error" doesn't work
+		ERROR("alert alert-danger"), // Red Notification // with Bootstrap 3.0 we use alert-danger instead alert-error (V2.3 & -)
 		NOTICE("alert alert-info"), // Blue Notification
 		WARNING("alert alert-warning"), // Yellow Notification
 		SUCCESS("alert alert-success"); // Green Notification
