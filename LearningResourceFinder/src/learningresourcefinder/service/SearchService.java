@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchService {
 
-	final int RESOURCES_PER_SEARCH_PAGE = 1;//5*20;
+	final int RESOURCES_PER_SEARCH_PAGE = 5*20;
 
 	
 	@Autowired private IndexManagerService indexManagerService;
