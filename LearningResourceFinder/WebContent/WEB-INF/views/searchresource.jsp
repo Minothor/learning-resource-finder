@@ -151,11 +151,11 @@ label {
 			<fieldset>
 				<legend>Publicité</legend>
 				<div class="radio">
-					<label> <input type="radio" name="advertising" id="optionsRadio1" value="1" checked> Oui
+					<label> <form:radiobutton  path="advertising" id="optionsRadio1" value="true"/> Oui
 					</label>
 				</div>
 				<div class="radio">
-					<label> <input type="radio" name="advertising" id="optionsRadio2" value="0"> Non
+					<label> <form:radiobutton  path="advertising" id="optionsRadio2" value="false"/> Non
 					</label>
 				</div>
 			</fieldset>
@@ -164,14 +164,14 @@ label {
 		<div class="filterSubBlock">
 			<fieldset>
 				<legend>Durée</legend>
-				<input type="text" name="maxDuration" style=" width:30px"> minutes max.
+				<form:input type="text" path="maxDuration" style=" width:30px"/> minutes max.
 				
 			</fieldset>
 		</div>
 		<div class="filterSubBlock">
 			<fieldset>
 				<legend>Terme de recherche</legend>
-				<input type="text" name="maxDuration" style=" width:150px" value="${searchOptions.searchPhrase}"> 
+				<form:input type="text" path="searchPhrase" style="width:150px;"/>
 				
 			</fieldset>
 		</div>
@@ -187,7 +187,7 @@ label {
 		            	<button type="button" class="close" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="cliquer pour fermer">X</button>
 				</div>
 			</c:if>
-		<form:input type="hidden" path="searchPhrase"/>
+		
 		<button type="submit" class="btn btn-default">Filtrer</button>
 		
 	</form:form>

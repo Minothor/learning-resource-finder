@@ -12,7 +12,7 @@ public class SearchOptions {
 	List<Format> format = new ArrayList<>();
 	List<Platform> platform = new ArrayList<>();
 	List<Nature> nature = new ArrayList<>();
-	boolean advertising;
+	boolean advertising = true;
 	Integer maxDuration;
 	String searchPhrase;
 	Competence competence; // Search restricted within this competence.
