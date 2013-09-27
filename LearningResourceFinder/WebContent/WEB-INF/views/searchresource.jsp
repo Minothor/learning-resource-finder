@@ -164,7 +164,15 @@ label {
 		<div class="filterSubBlock">
 			<fieldset>
 				<legend>Durée</legend>
-				Moins de <input type="text" name="maxDuration">
+				<input type="text" name="maxDuration" style=" width:30px"> minutes max.
+				
+			</fieldset>
+		</div>
+		<div class="filterSubBlock">
+			<fieldset>
+				<legend>Terme de recherche</legend>
+				<input type="text" name="maxDuration" style=" width:150px" value="${searchOptions.searchPhrase}"> 
+				
 			</fieldset>
 		</div>
 		<!-- 	if searchOptions.competence différent de null.... -->
