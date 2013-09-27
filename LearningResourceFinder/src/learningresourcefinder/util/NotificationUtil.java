@@ -20,7 +20,7 @@ public class NotificationUtil {
 	    if(notifications==null){
 	    	notifications = new ArrayList<Notification>();
 	    }
-    	notifications.add(new Notification(notification,Status.NOTICE));
+    	notifications.add(new Notification(notification,Status.INFO));
 	    
 		httpSession.setAttribute("notifications",notifications);
 	}
@@ -44,7 +44,7 @@ public class NotificationUtil {
 	public enum Status{
 		
 		ERROR("alert alert-danger"), // Red Notification // with Bootstrap 3.0 we use alert-danger instead alert-error (V2.3 & -)
-		NOTICE("alert alert-info"), // Blue Notification
+		INFO("alert alert-info"), // Blue Notification
 		WARNING("alert alert-warning"), // Yellow Notification
 		SUCCESS("alert alert-success"); // Green Notification
 	

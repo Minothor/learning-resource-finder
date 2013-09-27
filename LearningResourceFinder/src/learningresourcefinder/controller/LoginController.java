@@ -197,7 +197,7 @@ public class LoginController extends BaseController<User> {
 		User user = null;
 		try {
 			user = loginService.login(userNameOrMail, password, autologin,	null, AccountConnectedType.LOCAL);
-			NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "	+ UrlUtil.getWebSiteName(),Status.NOTICE);
+			NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "	+ UrlUtil.getWebSiteName(),Status.SUCCESS);
 
 		} catch (UserNotFoundException e) {
 			NotificationUtil.addNotificationMessage("L'utilisateur '" + userNameOrMail + "' n'existe pas", Status.ERROR);
