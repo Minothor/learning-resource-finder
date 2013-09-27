@@ -1,5 +1,7 @@
 package learningresourcefinder.repository;
 
+import java.util.List;
+
 import learningresourcefinder.model.Rating;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
@@ -15,6 +17,15 @@ public class RatingRepository extends BaseRepository<Rating>{
 				.setParameter("resource", resource)
 				.getSingleResult();
 		
+	}
+	
+	public List<Rating> listRating(List<Resource> listResource, User user) {
+		List<Rating> listRating = (List<Rating>) em.createQuery("SELECT ra.score FROM Rating ra WHERE ra.user=:user AND ra.resource in (:listResource)")
+				.setParameter("user", user)
+				.setParameter("listResource", listResource)
+				.getResultList();
+		
+		return listRating;
 	}
 	
 	public Rating getRatingForUserAndResource(Resource resource, User user){
