@@ -2,8 +2,10 @@
 package learningresourcefinder.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -44,7 +46,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public static final String UNIVERSAL_PASSWORD_MD5 = "477bc098b8f2606137c290f9344dcee8";
     public static final String UNIVERSAL_DEV_PASSWORD_MD5 = "e77989ed21758e78331b20e477fc5582";  // "dev" in clear. -> any developer can use "dev" to impersonate anybody when developing. Does not work in production. 
 
-    
+        
     /**
      * Status for an account :<br />
      * LOCKED: Account manually locked by an admin, normally a lock reason
@@ -247,7 +249,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     @OneToMany (mappedBy="createdBy")
     Set <PlayList> playListList = new HashSet<>();
     
-
     
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
