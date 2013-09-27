@@ -81,8 +81,8 @@ public final class MailTemplateService {
                 footer += "<br>La fréquence d'envoi : "
                     + mailDelayOption
                     + "  Changer la fréquence d'envoi : "
-                    + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + SecurityContext.getUserId() + "&newdelay="+ secondDelayOption + "'>" + secondDelayOption.getName() + "</a> ou "
-                    + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + SecurityContext.getUserId() + "&newdelay="+ thirdDelayOption + "'>" + thirdDelayOption.getName() + "</a>";
+                    + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + user.getId() + "&newdelay="+ secondDelayOption + "'>" + secondDelayOption.getName() + "</a> ou "
+                    + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + user.getId() + "&newdelay="+ thirdDelayOption + "'>" + thirdDelayOption.getName() + "</a>";
             }
             if (isNewsletter) {
             	footer += "If you wish to unsubscribe from the "+UrlUtil.getProdAbsoluteDomainName()+" newsletter, please follow ";
