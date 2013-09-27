@@ -34,7 +34,7 @@ public class RessourceListController extends BaseController<Resource> {
 			User user = SecurityContext.getUser();
 			mv.addObject("user", user);
 			
-			List<Rating> listRating = ratingRepository.listRating(listResource, user);
+//			List<Rating> listRating = ratingRepository.listRating(listResource, user);
 			
 			
 		}
