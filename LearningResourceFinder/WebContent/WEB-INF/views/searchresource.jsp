@@ -8,6 +8,13 @@
 <head>
 <script src="/js/ext/jquery-1.9.0.min.js"></script>
 <script src="/js/ext/bootstrap.js"></script>
+<script type="text/javascript">
+$(document).ready(function reinitialize(){
+  $("button").click(function(){
+    $("#competenceIdHiddenField").val("");
+  });
+});
+</script>
 <link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" href="css/ext/bootstrap-theme.css"
@@ -87,8 +94,7 @@ label {
 			<fieldset>
 				<legend>Format</legend>
 				<c:forEach var="formats" items="${formatEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="format"
-							value="${formats}" />${formats.description}
+					<label class="checkbox"> <form:checkbox path="format" value="${formats}" />${formats.description}
 					</label>
 				</c:forEach>
 			</fieldset>
@@ -99,8 +105,7 @@ label {
 			<fieldset>
 				<legend>Plateforme</legend>
 				<c:forEach var="platform" items="${platformsEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="platform"
-							value="${platform}" />${platform.description}
+					<label class="checkbox"> <form:checkbox path="platform"	value="${platform}" />${platform.description}
 					</label>
 				</c:forEach>
 			</fieldset>
@@ -110,8 +115,7 @@ label {
 			<fieldset>
 				<legend>Nature pédagogique</legend>
 				<c:forEach var="nature" items="${natureEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="nature"
-							value="${nature}" />${nature.description}
+					<label class="checkbox"> <form:checkbox path="nature" value="${nature}" />${nature.description}
 					</label>
 				</c:forEach>
 			</fieldset>
@@ -134,14 +138,11 @@ label {
 					
 						<c:forEach var="language" items="${languagesEnumAllValues}">
 				
-							<label class="checkbox" style="margin-left: 1em"> <form:checkbox
-									path="language" value="${language}" />${language.description}
+							<label class="checkbox" style="margin-left: 1em"> <form:checkbox path="language" value="${language}" />${language.description}
 							</label>
 						</c:forEach>
 
-						<input type="button" id="btnclose" class="btn btn-default"
-							data-dismiss="modal" style="margin-left: 1em" onclick="addLang()"
-							value="Fermer">
+						<input type="button" id="btnclose" class="btn btn-default"	data-dismiss="modal" style="margin-left: 1em" onclick="addLang()" value="Fermer">
 					</ul>
 				</div>
 			</fieldset>
@@ -150,13 +151,11 @@ label {
 			<fieldset>
 				<legend>Publicité</legend>
 				<div class="radio">
-					<label> <input type="radio" name="advertising" id="optionsRadio1"
-						value="1" checked> Oui
+					<label> <input type="radio" name="advertising" id="optionsRadio1" value="1" checked> Oui
 					</label>
 				</div>
 				<div class="radio">
-					<label> <input type="radio" name="advertising" id="optionsRadio2"
-						value="0"> Non
+					<label> <input type="radio" name="advertising" id="optionsRadio2" value="0"> Non
 					</label>
 				</div>
 			</fieldset>
@@ -168,16 +167,27 @@ label {
 				Moins de <input type="text" name="maxDuration">
 			</fieldset>
 		</div>
-		<div class="filterSubBlock">
-			<fieldset>
-				<legend>Competence</legend>
-				<lrf:competencepath competence="${searchOptions.competence}"/>
-			</fieldset>
-		</div>
-		<input type="hidden" name="search" value="${search}">
+		<!-- 	if searchOptions.competence différent de null.... -->
+		
+			<c:if test="${searchOptions.competence != null}">
+				<div class="filterSubBlock">
+					<fieldset>
+						<legend>Competence</legend>
+						<lrf:competencepath competence="${searchOptions.competence}"/>
+						<input id="competenceIdHiddenField" name="competenceId" value="${searchOptions.competence.id }" type="hidden"/>
+					</fieldset>
+		            	<button type="button" class="close" data-dismiss="alert" onclick="reinitialize()">×</button>
+				</div>
+			</c:if>
+		<form:input type="hidden" path="searchPhrase"/>
 		<button type="submit" class="btn btn-default">Filtrer</button>
+		
 	</form:form>
-		<c:forEach items="${resourcelist}" var="resource">
+	
+	
+	
+	
+	<c:forEach items="${resourcelist}" var="resource">
 		<div style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
 			<lrftag:resource resource="${resource}"></lrftag:resource>
 		</div>
