@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchService {
 
-	final int RESOURCES_PAR_SEARCH_PAGE = 5*20;
+	final int RESOURCES_PER_SEARCH_PAGE = 1;//5*20;
 
 	
 	@Autowired private IndexManagerService indexManagerService;
@@ -113,19 +113,19 @@ public class SearchService {
 	public List<Resource> getFilteredResources(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
 		final List<Long> resourceIds = new ArrayList<>();
 		
+		for(SearchResult resource: searchResults){
+			resourceIds.add(resource.getId());
+		}
 		// Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
-//		int begin = Math.min(searchResults.size()-1, (page-1) * RESOURCES_PAR_SEARCH_PAGE);
-//		int end = Math.min(searchResults.size()-1,    page * RESOURCES_PAR_SEARCH_PAGE);
-//		
-//		for (int i = begin; i<end; i++){
-//			resourceIds.add(searchResults.get(i).getId());
-//		}
+		int posOfFirstElementPaging = Math.min(searchResults.size()-1, (page-1) * RESOURCES_PER_SEARCH_PAGE);
+		int amountOfElementsPaging = RESOURCES_PER_SEARCH_PAGE;
 
-		List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions);
+
+		List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions, posOfFirstElementPaging, amountOfElementsPaging);
 
 		// We remove the resources not within the specified competence.
 		if (searchOptions.getCompetence() != null) {
-			List<Resource> result = new ArrayList<>();
+			List<Resource> result = new ArrayList<>();  // We put the resources that we keep in a new list.
 			for (Resource resource : entities) {
 				for (Competence compOfResource :  resource.getCompetences()) {
 					if (compOfResource.isOrIsChildOrSubChildOf(searchOptions.getCompetence())) {

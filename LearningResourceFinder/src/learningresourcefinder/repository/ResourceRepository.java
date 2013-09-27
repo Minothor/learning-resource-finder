@@ -1,13 +1,7 @@
 package learningresourcefinder.repository;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.search.SearchOptions;
@@ -15,8 +9,6 @@ import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
-import learningresourcefinder.search.SearchResult;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -44,8 +36,7 @@ public class ResourceRepository extends BaseRepository<Resource>
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions){
+	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions, int posOfFirstElementPaging, int amountOfElementsPaging){
 		if (idList.isEmpty()) { // Defensive coding. An empty list would break the query
 			return new ArrayList<>();
 		}
@@ -98,13 +89,14 @@ public class ResourceRepository extends BaseRepository<Resource>
 		if (searchOptions.isAdvertising() == false) { // We do not accept advertising (other case is Resource.advertising = true or null)
 			whereConditions.add( " r.advertising = FALSE ");
 		}
+		else{
+			whereConditions.add( " r.advertising = TRUE ");
+		}
 		
 		// Max Duration
 		if (searchOptions.getMaxDuration() != null) {
 			whereConditions.add(" r.duration<='" + searchOptions.getMaxDuration().intValue() + "' ");
 		}
-		
-		
 		
 		//// Render the JP-QL statement
 		String whereClause = "";
@@ -117,6 +109,8 @@ public class ResourceRepository extends BaseRepository<Resource>
 
 		List<Resource> result = em.createQuery(queryString)
 				.setParameter("idList", idList)
+				.setFirstResult(posOfFirstElementPaging)
+				.setMaxResults(amountOfElementsPaging)
 				.getResultList();
 		return result;
 	}
