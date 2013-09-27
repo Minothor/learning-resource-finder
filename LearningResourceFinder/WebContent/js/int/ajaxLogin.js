@@ -7,7 +7,7 @@ function ajaxlogin() {
 	    url : 'ajax/loginsubmit',
 	    data: "userNameOrMail="+userNameOrMail+"&password="+password,
 	    success : function(data) {
-	    		 location.reload();
+	      location.reload();
 	    },
 	    error : function(data) {
 	    	alert(data);
