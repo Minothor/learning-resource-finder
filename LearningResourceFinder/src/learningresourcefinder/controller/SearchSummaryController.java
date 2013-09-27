@@ -30,12 +30,13 @@ public class SearchSummaryController extends BaseController<Resource> {
 	public ModelAndView search(@RequestParam("searchphrase") String searchPhrase) {
 		List<SearchResult> listOfResult = searchService.search(searchPhrase);
 		List<Competence> listOfCompetence = (List)searchService.getFirstEntities(listOfResult, 50, Competence.class);
-
+		int numberResource = listOfResult.size();
 		ModelAndView mv = new ModelAndView("searchsummary");
 		mv.addObject("resourceList", searchService.getFirstEntities(listOfResult, 5, Resource.class));
 		mv.addObject("playlistList", searchService.getFirstEntities(listOfResult, 5, PlayList.class));
 		mv.addObject("competenceList", listOfCompetence);
 		mv.addObject("searchPhrase", searchPhrase);
+		mv.addObject("numberResource", numberResource);
 		return mv;
 	}
 	
