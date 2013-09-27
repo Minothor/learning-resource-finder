@@ -6,6 +6,7 @@ import java.util.List;
 import learningresourcefinder.model.Mail;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.MailRepository;
+import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.UserService;
 import learningresourcefinder.web.UrlUtil;
 
@@ -77,15 +78,11 @@ public final class MailTemplateService {
                     secondDelayOption = MailingDelayType.DAILY;
                     thirdDelayOption = MailingDelayType.WEEKLY;
                 }
-                footer += "<br>group option is "
+                footer += "<br>La fréquence d'envoi : "
                     + mailDelayOption
-                    + "  change to : "
-                    
-                    + "secondDelayOption"
-                    + secondDelayOption
-                    
-                    + "thirdDelayOption"
-                    + thirdDelayOption;
+                    + "  Changer la fréquence d'envoi : "
+                    + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + SecurityContext.getUserId() + "&newdelay="+ secondDelayOption + "'>" + secondDelayOption.getName() + "</a> ou "
+                    + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + SecurityContext.getUserId() + "&newdelay="+ thirdDelayOption + "'>" + thirdDelayOption.getName() + "</a>";
             }
             if (isNewsletter) {
             	footer += "If you wish to unsubscribe from the "+UrlUtil.getProdAbsoluteDomainName()+" newsletter, please follow ";
