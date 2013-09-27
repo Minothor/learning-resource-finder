@@ -1,8 +1,11 @@
 package learningresourcefinder.controller;
 
+import java.util.List;
+
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.service.CompetenceNodeService;
+import learningresourcefinder.util.CompetenceNode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +22,14 @@ public class CompetenceNodeController {
     
     @RequestMapping(value="/competencebycycle", method = RequestMethod.GET)
     public ModelAndView competencebycycle(@RequestParam("name") String cycleName){
-        ModelAndView mv = new ModelAndView(""); 
-        Cycle cycle = null;
-        
-        if(cycleName != null && !cycleName.isEmpty())
-        cycle = cycleRep.findByName(cycleName);
-        
-       // Call the competenceNodeService Method .... else show notification with error message.
+
+    	ModelAndView mv = new ModelAndView("CyclePageDisplay"); 
+    	
+        Cycle cycle = cycleRep.findByName(cycleName);
+        CompetenceNode root = competenceNodeService.buildCompetenceNodeTree(cycle);
+        List<List<CompetenceNode>> listToShow =  competenceNodeService.splitCompetenceNodesInColumns(root);
+        mv.addObject("listColumns",listToShow);
+        mv.addObject("Cycle",cycle);
         
         return mv;
     }

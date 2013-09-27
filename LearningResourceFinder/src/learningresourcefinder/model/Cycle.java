@@ -46,10 +46,6 @@ public class Cycle extends BaseEntity  {
 	public Cycle(String aName) {
 		this.name = aName;
 	}
-
-	
-	
-	
 	@Override
 	public String toString()  {
 		return this.getId() + "-" + this.getName();

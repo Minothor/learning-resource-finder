@@ -99,7 +99,7 @@
                           
                           <li role="presentation" class="divider"></li>
                           <li><a href="<c:url value='competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a> </li>
-                          <li><a href="<c:url value='competencetree?rootCode=terminale'/>">Terminales (3-6 secondaire)</a> </li>
+                          <li><a href="<c:url value='competencetree?rootCode=term'/>">Terminales (3-6 secondaire)</a> </li>
                     						
 					    </ul>
 					 </li> 

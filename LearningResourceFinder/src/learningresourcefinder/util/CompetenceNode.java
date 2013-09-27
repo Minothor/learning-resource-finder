@@ -40,5 +40,6 @@ public class CompetenceNode {
 	public String toString() {
 		return "CompetenceNode [competence=" + competence + "]";
 	}
+	
 
 }

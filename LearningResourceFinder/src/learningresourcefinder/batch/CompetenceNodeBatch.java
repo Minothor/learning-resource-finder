@@ -26,7 +26,7 @@ public class CompetenceNodeBatch implements Runnable{
         
 	   
         if(cycle!=null){
-        	competenceNodeService.buildCompetenceNodeTree(cycle);
+        	competenceNodeService.splitCompetenceNodesInColumns(competenceNodeService.buildCompetenceNodeTree(cycle));
         }
 	   
     }

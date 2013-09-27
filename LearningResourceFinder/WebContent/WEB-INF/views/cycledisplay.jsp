@@ -15,10 +15,29 @@
 		<lrf:breadcrumbelement label="Liste des cycles" link="cyclelist" />
 	</lrf:breadcrumb>
 
-<h1>${cycle.name}</h1>
+
 
  <a href="<c:url value='cycleedit?id=${cycle.id}'/>">Edit Cycle</a>  <br>
-</body>
 
+	<h2 class="">${ Cycle.name }</h2>
+	<div class="row">
+		<c:forEach items="${listColumns}" var="cycleColumn">
+			<div class="col-xs-6 col-md-4"> COLUMN
+				<c:forEach items="${cycleColumn}" var="cycleitems">
+						<h2>${cycleitems.competence.name}</h2>
+						<ol>
+							<c:forEach items="${cycleitems.children}" var="subitems">
+								<li class=""><a class="" href=""> <span class="">${
+											subitems.competence.name }</span> <span class="">${
+											subitems.competence.description }</span>
+								</a></li>
+							</c:forEach>
+						</ol>
+				</c:forEach>
+			</div>
+		</c:forEach>
+	</div>
+		
+		
 
 </html>

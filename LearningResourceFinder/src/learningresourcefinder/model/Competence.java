@@ -29,12 +29,12 @@ public class Competence extends BaseEntity implements Searchable{
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     
-	@Column(length = 40)
-	@Size(max=40, message="le nom d'une compétence ne peut contenir que 40 caractères maximum")
+	@Column(length = 255)
+	@Size(max=255, message="le nom d'une compétence ne peut contenir que 255 caractères maximum")
 	private String name;
 
 	@Column(length = 8, unique = true, nullable=false)
-	@Size(max=8, message="le code d'une compétence ne peut contenir que 50 caractères maximum")
+	@Size(max=8, message="le code d'une compétence ne peut contenir que 8 caractères maximum")
 	private String code;   // Short identifier that users can use to quickly refer a Competence
 	
 	
@@ -192,5 +192,11 @@ public class Competence extends BaseEntity implements Searchable{
 			myParent = myParent.getParent();
 		}
 		return false;
+	}
+
+	/// Sets the bidirectional relationship in on call
+	public void bindWithParent(Competence newParent) {
+		this.parent = newParent;
+		newParent.getChildren().add(this);
 	}
 }

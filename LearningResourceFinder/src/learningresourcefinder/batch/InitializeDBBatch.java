@@ -35,35 +35,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class InitializeDBBatch implements Runnable {
 
-	@Autowired
-	ProblemRepository problemRepository;
-
-	@Autowired
-	UserRepository userRepository;
-
-	@Autowired
-	CommentRepository commentRepository;
-
-	@Autowired
-	ResourceRepository resourceRepository;
-
-	@Autowired
-	SchoolRepository schoolRepository;
-
-	@Autowired
-	CompetenceRepository competenceRepository;
-
-	@Autowired
-	TaskRepository taskRepository;
-
-	@Autowired
-	PlayListRepository playListRepository;
-
-	@Autowired
-	UrlResourceRepository urlResourceRepository;
-    
-	@Autowired
-	RatingRepository ratingRepository;
+	@Autowired	ProblemRepository problemRepository;
+	@Autowired	UserRepository userRepository;
+	@Autowired	CommentRepository commentRepository;
+	@Autowired	ResourceRepository resourceRepository;
+	@Autowired	SchoolRepository schoolRepository;
+	@Autowired	CompetenceRepository competenceRepository;
+	@Autowired	TaskRepository taskRepository;
+	@Autowired	PlayListRepository playListRepository;
+	@Autowired	UrlResourceRepository urlResourceRepository;
+	@Autowired	RatingRepository ratingRepository;
+	
 	Resource frDupont;
 	Resource mathGob;
 	Resource frOrtho1;
@@ -212,42 +194,70 @@ public class InitializeDBBatch implements Runnable {
 	public void insertCompetences() {
 		
 		//Main tree node with null parent
-		Competence cMainNode = new Competence("Les", "Compétences");
-		competenceRepository.persist(cMainNode);
+		Competence root = new Competence("root", "Compétences");
+		competenceRepository.persist(root);
 		//===============================
 		
-		Competence pFond = new Competence("Fon", "Fondamental");
-		competenceRepository.persist(pFond);
+		Competence socle = new Competence("socle", "Fondamental");
+		competenceRepository.persist(socle);
+		socle.bindWithParent(root);
 
-		Competence p1 = new Competence("1P", "1ère primaire");
-		competenceRepository.persist(p1);
+		Competence ff = new Competence("FF", "Français");
+		competenceRepository.persist(ff);
+	    ff.bindWithParent(socle);
 
-		Competence p2 = new Competence("2P", "2e primaire");
-		competenceRepository.persist(p2);
+		Competence sl = new Competence("FF-SL", "Savoir Lire");
+		competenceRepository.persist(sl);
+		sl.bindWithParent(ff);
 
-		Competence p1M = new Competence("1PM", "Math");
-		competenceRepository.persist(p1M);
+		Competence l1 = new Competence("L1", "Orienter sa lecture en fonction de la situation de communication");
+		competenceRepository.persist(l1);
+		l1.bindWithParent(sl);
 
-		Competence p1M1 = new Competence("1PM.Num", "Numération");
-		competenceRepository.persist(p1M1);
+		Competence l1a = new Competence("L1A", "Repérer les informations relatives aux références d’un livre, d’un texte, d’un document visuel.");
+		competenceRepository.persist(l1a);
+		l1a.bindWithParent(l1);
 
-		Competence p1M2 = new Competence("1PM.Add", "Additions");
-		competenceRepository.persist(p1M2);
+		Competence l1ap2 = new Competence("L1A-P2", "L1A pour 2e primaire");
+		competenceRepository.persist(l1ap2);
+		l1ap2.bindWithParent(l1a);
 
-		Competence p1F = new Competence("1PF", "Français");
-		competenceRepository.persist(p1F);
+		Competence l1ap4 = new Competence("L1A-P4", "L1A pour 4e primaire");
+		competenceRepository.persist(l1ap4);
+		l1ap4.bindWithParent(l1a);
 
-		cMainNode.addChild(pFond); 
-		pFond.addChild(p1);
-		pFond.addChild(p2);
-		p1.addChild(p1M);
-		p1M.addChild(p1M1);
-		p1M.addChild(p1M2);
-		p1.addChild(p1F);
+		Competence l1ap6 = new Competence("L1A-P6", "L1A pour 6e primaire");
+		competenceRepository.persist(l1ap6);
+		l1ap6.bindWithParent(l1a);
 
-		p1F.addResource(frDupont);
+		Competence l1b = new Competence("L1B", "Choisir un document en fonction du projet et du contexte de l’activité.");
+		competenceRepository.persist(l1b);
+		l1b.bindWithParent(l1);
 
-		p1M1.addResource(mathGob);
+		Competence l2 = new Competence("L2", "Elaborer des significations");
+		competenceRepository.persist(l2);
+		l2.bindWithParent(sl);
+
+		Competence l3 = new Competence("L3", "Dégager l’organisation d’un texte");
+		competenceRepository.persist(l3);
+		l3.bindWithParent(sl);
+
+		Competence math = new Competence("FM", "Math");
+		competenceRepository.persist(math);
+		math.bindWithParent(socle);
+		
+		Competence term = new Competence("term", "Terminales");
+		competenceRepository.persist(term);
+		term.bindWithParent(root);
+		
+		Competence tf = new Competence("TF", "Français (terminale)");
+		competenceRepository.persist(tf);
+		tf.bindWithParent(term);
+		
+
+		l1ap4.addResource(frDupont);
+
+		math.addResource(mathGob);
 
 		System.out.println("Competences done!");
 	}
