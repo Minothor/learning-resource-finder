@@ -2,10 +2,12 @@ package learningresourcefinder.batch;
 
 import java.util.Date;
 
+
 import learningresourcefinder.model.Comment;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.Rating;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.School;
 import learningresourcefinder.model.Task;
@@ -17,6 +19,7 @@ import learningresourcefinder.repository.CommentRepository;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.CompetenceRepository;
+import learningresourcefinder.repository.RatingRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.SchoolRepository;
 import learningresourcefinder.repository.TaskRepository;
@@ -58,7 +61,9 @@ public class InitializeDBBatch implements Runnable {
 
 	@Autowired
 	UrlResourceRepository urlResourceRepository;
-
+    
+	@Autowired
+	RatingRepository ratingRepository;
 	Resource frDupont;
 	Resource mathGob;
 	Resource frOrtho1;
@@ -67,6 +72,7 @@ public class InitializeDBBatch implements Runnable {
 	School school;  // Various methods need the created school
 	
 	User admin;
+	User nUser;
 
 	public static void main(String[] args) {
 		BatchUtil.startSpringBatch(InitializeDBBatch.class);
@@ -84,9 +90,48 @@ public class InitializeDBBatch implements Runnable {
 		insertTask();
 		insertPlayList();
 		insertUrlResource();
+		insertRating();
 		System.out.println("DataBase Initialized !");
 	}
 
+	public void insertRating() {
+		Rating  rating = new  Rating();
+		rating.setResource(frDupont);
+		rating.setUser(admin);
+		rating.setScore(5.0);
+		ratingRepository.persist(rating);
+		System.out.println("rating Done !");
+		
+		Rating  rating0 = new  Rating();
+		rating0.setResource(frDupont);
+		rating0.setUser(nUser);
+		rating0.setScore(3.0);
+		ratingRepository.persist(rating0);
+		System.out.println("rating 0 Done !");
+		
+		Rating  rating1 = new  Rating();
+		rating1.setResource(mathGob);
+		rating1.setUser(nUser);
+		rating1.setScore(4.0);
+		ratingRepository.persist(rating1);
+		System.out.println("rating 1 Done !");
+		
+		Rating  rating2 = new  Rating();
+		rating2.setResource(mathGob);
+		rating2.setUser(admin);
+		rating2.setScore(5.0);
+		ratingRepository.persist(rating2);
+		System.out.println("rating 2 Done !");
+		
+		Rating  rating3 = new  Rating();
+		rating3.setResource(mathGob);
+		rating3.setUser(admin);
+		rating3.setScore(3.0);
+		ratingRepository.persist(rating3);
+		System.out.println("rating 3 Done !");
+	}
+	
+	
 	public void insertSchool() {
 		school = new School();
 		school.setAddress("Rue du village 157, 5352 Perwez");
@@ -109,11 +154,11 @@ public class InitializeDBBatch implements Runnable {
 		admin.setPassword(SecurityUtils.md5Encode("aaaa"));
 		userRepository.persist(admin);
 		
-
+       
 
 
 		// Normal user
-		User nUser = new User();
+		nUser = new User();
 		nUser.setFirstName("Thomas");
 		nUser.setLastName("Delizee");
 		nUser.setBirthDate(new Date());
