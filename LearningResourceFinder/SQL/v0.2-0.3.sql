@@ -26,4 +26,8 @@ ALTER TABLE resource ADD COLUMN platform character varying(255);
         references cycle;
         
 -- Thomas 2013-09-16
-ALTER TABLE resource ADD COLUMN nature character varying(255);        
+ALTER TABLE resource ADD COLUMN nature character varying(255); 
+
+-- Emile 2013-09-27
+alter table resource 
+        add column score float8; 
