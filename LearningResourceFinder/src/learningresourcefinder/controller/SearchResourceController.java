@@ -50,9 +50,13 @@ public class SearchResourceController extends BaseController<Resource> {
 	}
 	
 	@RequestMapping("/searchresourcesubmit")  // FIXME Why does this method exist? John 2013-09-26
-	public String searchResourceSubmit(@ModelAttribute SearchOptions searchOptions, Model model, @RequestParam("searchPhrase") String searchPhrase, @RequestParam(value="page", required=false) Integer page){
+	public String searchResourceSubmit(@ModelAttribute SearchOptions searchOptions, 
+			@RequestParam(value="competenceId", required=false) Long competenceId, Model model, @RequestParam(value="page", required=false) Integer page) {
+		if (competenceId != null) {
+			searchOptions.setCompetence((Competence)getRequiredEntity(competenceId, Competence.class));
+		}
 		if (page == null) page=1;
-		List<Resource> entities = searchService.getFilteredResources(searchService.search(searchPhrase), page, searchOptions);
+		List<Resource> entities = searchService.getFilteredResources(searchService.search(searchOptions.getSearchPhrase()), page, searchOptions);
 		model.addAttribute("resourcelist", entities);
 		model.addAttribute("searchOptions", searchOptions);
 		return "searchresource";
