@@ -66,3 +66,5 @@ alter table resource
         foreign key (user_id) 
         references users;
         
+-- déployement effectué, merci d'indiquer les nouveaux scripts dans le fichier v0.3-0.4.sql
+        
