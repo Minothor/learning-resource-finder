@@ -114,6 +114,22 @@ ul li {
 .btn:hover {
  color: #FFF;
 }
+/*#### RATING #############################################################################*/
+ul.score {
+	padding: 0;
+}
+ul.score li {
+	display: inline;
+	text-decoration: none;
+	font-size: 22px;
+}
+.rating-input {
+	font-size: 22px;
+}
+.glyphicon-star, .glyphicon-star-empty {
+	color: #FFC926;
+	cursor: pointer;
+}
 /*#### FOOTER #############################################################################*/
 #footer-main {
 	background-color: #E9F0F4;

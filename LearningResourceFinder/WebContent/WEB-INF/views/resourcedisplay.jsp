@@ -8,16 +8,7 @@
 	<script type="text/javascript" src="/js/int/ajaxAddUrlResource.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css"  />
 	<script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
-<!-- 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
-<!-- 	<link rel="stylesheet" type="text/css" href="/css/ext/jquery-ui-1.8.5.custom.css" /> -->
-<!-- 	<script type="text/javascript" src="/js/ext/jquery-ui-1.8.5.custom.min.js"></script> -->
  	<script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
-
-	
-	<title>Insert title here</title>
-	<script type="text/javascript">
-		
-	</script>
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${resource.name}">

@@ -19,6 +19,8 @@
 						<c:forEach items="${resourceList}" var="resource">
 							<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
 								<restag:resource resource="${resource}"></restag:resource>
+								<br />
+								<lrf:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.score}" scoreUser="${resource.score}" />
 							</div>
 						</c:forEach>
 					</div>
