@@ -38,7 +38,16 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     @Column(length=50, nullable=false)
     @Size(max=50)
     private String slug;
-    
+    public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
+	}
+
+	@Column()
+    private Double score;
 	@Column()
 	private int numberImage;
 	
@@ -65,7 +74,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	@OneToMany(mappedBy="resource")
 	private Set<Problem> problems = new HashSet<>();
-
+    
 	@ManyToMany(mappedBy="resources")
 	List<Competence> competences = new ArrayList<>();
 	
@@ -85,6 +94,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	@OneToMany(mappedBy="resource")
 	List<UrlResource> urlResources = new ArrayList<>();
+	
 	
 	public int addImageOnDB(){
 		return numberImage;
