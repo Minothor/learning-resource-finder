@@ -38,12 +38,13 @@ public class SearchOptions {
 		public String getDescription(){return description;}
 	}
 
-	public enum Platform{
-		IPAD("iPad"), 
+	public enum Platform {
+		BROWSER("Navigateur"),
 		ANDROID("Android"), 
-		PC("PC"), 
-		MAC("Mac"), 
-		BROWSER("Navigateur");
+		IPAD("iPad/iPhone"), 
+	    WIN("Windows"), 
+		MAC("Mac"),
+		LINUX("Linux");
 		private Platform(String description){this.description = description;}
 		private final String description;
 		public String getDescription(){return description;}
@@ -57,9 +58,9 @@ public class SearchOptions {
 		private Nature(String description){this.description = description;}
 		private final String description;
 		public String getDescription(){return description;}
-
 	}
-	
+
+
 	public List<Language> getLanguage() {
 		// Spring nullifies the lists if they are empty (which is not nice from Spring...)
 		return language == null ? language = new ArrayList<>() : language;

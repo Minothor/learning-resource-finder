@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -28,16 +30,30 @@ import org.hibernate.annotations.Type;
 @SequenceGenerator(name="ResourceSequence", sequenceName="RESOURCE_SEQUENCE")
 public class Resource extends BaseEntityWithShortId implements Searchable {
     
-	@Id   @GeneratedValue(generator="ResourceSequence") // We wand Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
+	
+	public enum Topic {
+		MATH("Math"), FRENCH("Français"), DUTCH("Néerlandais"), ENGLISH("Anglais"), HISTORY("Histoire"), GEO("Géographie"), SCIENCE("Sciences"), OTHER("Autre");
+		private Topic(String description){this.description = description;}
+		private final String description;
+		public String getDescription(){return description;}
+	}
+
+	
+	@Id   @GeneratedValue(generator="ResourceSequence") // We want Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
     Long id;
         
     @Column(length = 50, nullable=false)
-    @Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
+    @Size(max=50, message="Le nom d'une ressource ne peut contenir que 50 caractères maximum")
 	private String name;
 	
     @Column(length=50, nullable=false)
     @Size(max=50)
     private String slug;
+    
+    @Column(length=20, nullable = true)
+    @Enumerated(EnumType.STRING)
+    private Topic topic;  // Temporary quick selection when adding a resource, before a contributor has the time to bing the resource with  a competency.
+    
     public Double getScore() {
 		return score;
 	}
