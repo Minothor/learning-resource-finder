@@ -7,8 +7,7 @@
 <%@ attribute name="title"  required="true" type="java.lang.String" %>
 
 <a href="#" id="${id}" class="btn popover-link pop" rel="popover" data-original-title="Voter pour : ${title}" style="outline:none;box-shadow:none">
-	<ul class="score">
-	
+	<ul class="score">	
 <c:forEach var="i" begin="0" end="4" step="1" varStatus ="status">
 	<c:choose>
 		<c:when test="${i < scoreResource}">

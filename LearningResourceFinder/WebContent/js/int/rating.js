@@ -30,4 +30,24 @@ $(document).ready(function(){
             }
         });
     });
+    
+    
+    // Take rating since star on click.
+    // Ajax request
+    $('i.glyphicon[data-value]').on('click', function() {
+    	var score = $(this).attr('data-value');
+    	alert(score + " " + currentID);
+    	$.ajax({
+    		type: "POST",
+    		url: "ajax/rateresource",
+    		data: "idresource="+currentID+"&score="+score,
+    		success: function(data) {
+    			alert(data + ' Vote OK');
+    		},
+    		error: function(data) {
+    			alert(data + ' Vote Erreur');
+    		}
+    	});
+    	
+    });
 });
