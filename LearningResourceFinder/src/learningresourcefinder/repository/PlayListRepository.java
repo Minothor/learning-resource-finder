@@ -1,7 +1,10 @@
 package learningresourcefinder.repository;
 
 
+import java.util.List;
+
 import learningresourcefinder.model.PlayList;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 
 import org.springframework.stereotype.Repository;
@@ -25,5 +28,11 @@ public class PlayListRepository extends BaseRepository<PlayList> {
         		em.createQuery("select d from Description d where lower(d.description)=:description")
             	.setParameter("description", description.toLowerCase())
         );
+    }
+	
+    public List<PlayList> getAllPlayLists() {
+        List<PlayList> results = em.createQuery("SELECT p FROM PlayList p ORDER BY p.name ASC")
+                                .getResultList();
+        return results;
     }
 }

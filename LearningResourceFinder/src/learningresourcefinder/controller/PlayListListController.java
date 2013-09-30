@@ -7,13 +7,16 @@ import java.util.TreeSet;
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.User;
+import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.security.SecurityContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PlayListListController  extends BaseController<PlayList> {
 
 	@Autowired UserRepository userRepository;
+	@Autowired PlayListRepository playlistRepository;
 	
 	@RequestMapping("/user/{userName}")
 	public String displayList(@PathVariable("userName") String userName, Model model) {
@@ -43,6 +47,13 @@ public class PlayListListController  extends BaseController<PlayList> {
 		model.addAttribute("playlistlist", playListSet);
 		model.addAttribute("user", user);
 		return "playlistlist";
+	}
+	
+	@RequestMapping("/all")
+	public String displayAllList(Model model) {
+	    model.addAttribute("playlistlist", playlistRepository.getAllPlayLists());
+
+	    return "playlistlist";
 	}
 
 }
