@@ -18,7 +18,9 @@ import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
 import learningresourcefinder.util.SecurityUtils;
+import learningresourcefinder.web.ContextUtil;
 import learningresourcefinder.web.UrlUtil;
+import learningresourcefinder.web.UrlUtil.Mode;
 
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,20 +112,17 @@ public class UserService {
         log.debug("mail sent: " + htmlMessage);  
     }
     
-    // Ahmed-Flag :
-    
-/*
     public void generateNewPasswordForUserAndSendEmail(User user) {
         // We generate a password
         String newPassword = SecurityUtils.generateRandomPassword(8, 12);
         // we set the new password to the user
         user.setPassword(SecurityUtils.md5Encode(newPassword));
-        user.setPasswordKnownByTheUser(true);  // it's a random pwd, but the user knows it.
+       
         userRepository.merge(user);
 
         mailService.sendMail(user.getMail(), "Recupération de mot de passe",  
                 "Vous avez demandé un nouveau mot de passe pour votre compte '"+ user.getUserName()+"' sur "+ContextUtil.servletContext.getAttribute("p_website_name")+"<br/>" + 
-                        "Nous ne pouvons pas vous transmettre votre ancien mot de passe parce que nous ne l'enregistrons pas directement, pour des raisons de sécurité et de protection de votre vie privée, il est crypté de mannière irréverssible.<br/><br/>"+
+                        "Nous ne pouvons pas vous transmettre votre ancien mot de passe parce que nous ne l'enregistrons pas directement, pour des raisons de sécurité et de protection de votre vie privée, il est crypté de manière irréversible.<br/><br/>"+
                       
                         "Voici votre nouveau mot de passe : "+ newPassword + 
                         "<ol>" +  
@@ -132,7 +131,7 @@ public class UserService {
                         "</ol>", 
                         MailType.IMMEDIATE, MailCategory.USER);
 
-    }*/
+    }
 
     /** Change the name of the user and note it in the log */
    public void changeUserName(User user, String newUserName, String newFirstName, String newLastName) {

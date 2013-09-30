@@ -103,6 +103,13 @@
                     						
 					    </ul>
 					 </li> 
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PlayLists <b class="caret"></b></a> 
+					    <ul class="dropdown-menu"> 
+                          <li><a href="<c:url value='competencetree?rootCode=socle'/>">Toutes les PlayLists</a> </li>
+                          <li><a href="<c:url value='competencetree?rootCode=term'/>">Mes PlayLists</a> </li>
+                    						
+					    </ul>
+					 </li> 					 
 				</ul>
 
 
@@ -126,12 +133,12 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle"data-toggle="dropdown">Connexion <b class="caret"></b></a>
 							  <div class="dropdown-menu"style="padding: 15px; padding-bottom: 0px;">
-								<form action="/loginsubmit" method="post"  style="width: 200px;">
-									<button data-icon="&#xe005;" type="submit"	class="btn btn-google btn-block" id="login-googleplus">Connexion avec Google</button>
-									<button data-icon="&#xe000;" type="submit"	class="btn btn-facebook btn-block" id="login-facebook">Connexion avec Facebook</button>
+							  	<button data-icon="&#xe005;" type="submit"	class="btn btn-google btn-block" id="login-googleplus">Connexion avec Google</button>
+								<button data-icon="&#xe000;" type="submit"	class="btn btn-facebook btn-block" id="login-facebook">Connexion avec Facebook</button>
+								<form action="javascript:ajaxlogin()" method="post"  style="width: 200px;">
 									<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
-									<input class="form-control" style="margin-bottom: 15px;"type="text" placeholder="Username" id="userNameOrMail"name="userNameOrMail"> 
-									<input class="form-control"style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
+									<input class="form-control" style="margin-bottom: 15px;"type="text" onKeyPress="submitenter(this,event)" placeholder="Username" id="userNameOrMail"name="userNameOrMail"> 
+									<input class="form-control"style="margin-bottom: 15px;" type="password" onKeyPress="submitenter(this,event)" placeholder="Password" id="password" name="password">
 									<label class="string optional" for="remember_me"> 
 									   <input style="float: left; margin-right: 10px;" type="checkbox"name="remember-me" id="remember-me" value="1"> Se souvenir de moi
 									</label> 
@@ -140,6 +147,9 @@
 									 <label > Pas de compte ?</label>	
 										<a href="#" id="registerLink">S'inscrire</a>
 									</div>
+								    <div>
+									 Mot de passe <a href="resendpassword">oublié</a> ?
+									</div>									
 								</form><br/>
 								</div>
 							 </li>

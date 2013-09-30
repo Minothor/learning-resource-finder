@@ -39,3 +39,11 @@ function ajaxRegister(e) {
 	   
 	}); 
 }
+
+function submitenter(myfield,e)
+{
+    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13))
+    {
+        myfield.form.submit();
+    }
+}
