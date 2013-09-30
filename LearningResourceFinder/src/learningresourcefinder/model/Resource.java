@@ -60,17 +60,21 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     
 
 
-	@Column()
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
 	private Language language;
 	
-	@Column()
-	private Format format;
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
+    private Format format;
 	
-	@Column()
-	private Platform platform;
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
+    private Platform platform;
 
-	@Column()
-	private Nature nature;
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
+    private Nature nature;
 	
 	@Column()
 	private Boolean advertising;
