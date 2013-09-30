@@ -520,7 +520,7 @@ public class InitializeDBBatch implements Runnable {
 
 		Competence l3ep4 = new Competence("L3E-P4", "L3E pour 4e primaire");
 		competenceRepository.persist(l3ep4);
-		l3dp4.bindWithParent(l3e);
+		l3ep4.bindWithParent(l3e);
 
 		Competence l3f = new Competence("L3F", "Repérer les marques de l'organisation générale : paragraphes, alinéas, ...");
 		competenceRepository.persist(l3f);
