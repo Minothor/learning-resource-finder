@@ -17,6 +17,10 @@ public class SearchOptions {
 	String searchPhrase;
 	Competence competence; // Search restricted within this competence.
 	
+	public SearchOptions () {
+		getLanguage().add(Language.FR);
+	}
+	
 	public enum Language{
 		FR("Français"), 
 		NL("Néerlandais"), 
