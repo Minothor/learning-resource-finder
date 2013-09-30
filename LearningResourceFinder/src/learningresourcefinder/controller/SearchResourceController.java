@@ -1,6 +1,10 @@
 package learningresourcefinder.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Resource;
@@ -23,27 +27,34 @@ public class SearchResourceController extends BaseController<Resource> {
 	@Autowired private SearchService searchService;
 	@Autowired private ResourceRepository resourceRepository;
 
+    Map<Long, SearchOptions> map = new HashMap<Long, SearchOptions>();
+    
 	@RequestMapping("/searchresource")
-	public ModelAndView searchResource(Model model, @RequestParam("searchphrase") String searchPhrase, @RequestParam(value="page", required=false) Integer page, @RequestParam(value="competenceid", required=false) Long competenceId ){
+	public ModelAndView searchResource(Model model, 
+	        @RequestParam("searchphrase") String searchPhrase, 
+	        @RequestParam(value="page", required=false) Integer page, 
+	        @RequestParam(value="competenceid", required=false) Long competenceId,
+	        HttpSession session,
+	        @RequestParam(value="so", required=false) Long timeStamp){ 
 		if (page == null) page=1;
 
 		SearchOptions searchOptions = new SearchOptions();
 		searchOptions.setSearchPhrase(searchPhrase);
 		
-
-		return prepareModelAndView (searchOptions, competenceId, page);
+		// we create timestamp which allows to keep the search options values in all pages while navigating to a different page
+		if(timeStamp == null){
+		    timeStamp = (new java.util.Date()).getTime();	
+		}
 		
-//		searchOptions.setSearchPhrase(searchPhrase);
-//		if (idCompetence != null) {
-//			searchOptions.setCompetence((Competence)getRequiredEntity(idCompetence, Competence.class));
-//		}
-//		
-//		List<SearchResult> searchResults = searchService.search(searchPhrase);
-//		List<Resource> entities = searchService.getFilteredResources(searchResults, page, searchOptions);
-//		model.addAttribute("resourcelist", entities);
-//
-//		int numberOfResourceFound = searchResults.size();
-//		model.addAttribute("numberResource", numberOfResourceFound); // tried to use fn:length in EL, but it did not work -- Thomas S 2013/09
+		// we iterate on the search options list stored in the session to get the right options
+		// it's useful when the user has many tab opened with differents search options
+		for(Map.Entry<Long, SearchOptions> entry : map.entrySet()){
+		    if (entry.getKey().equals(timeStamp)) {
+		        searchOptions = entry.getValue();                
+		    }
+		}
+		return prepareModelAndView (searchOptions, competenceId, page, session, timeStamp);
+		
 		
 		
 	}
@@ -51,24 +62,36 @@ public class SearchResourceController extends BaseController<Resource> {
 	@RequestMapping("/searchresourcesubmit")  // FIXME Why does this method exist? John 2013-09-26
 	public ModelAndView searchResourceSubmit(@ModelAttribute SearchOptions searchOptions, 
 			@RequestParam(value="competenceId", required=false) Long competenceId, 
-			@RequestParam(value="page", required=false) Integer page) {
+			@RequestParam(value="page", required=false) Integer page,
+			HttpSession session,
+			@RequestParam(value="so") Long timeStamp) {
 		
-		return prepareModelAndView(searchOptions, competenceId, page);
+		return prepareModelAndView(searchOptions, competenceId, page, session, timeStamp);
 	}
 	
-	private ModelAndView prepareModelAndView(SearchOptions searchOptions, Long competenceId, Integer page) {
+	
+	
+	private ModelAndView prepareModelAndView(SearchOptions searchOptions, Long competenceId, Integer page, HttpSession session, Long timeStamp) {
 		ModelAndView mv = new ModelAndView("searchresource");
 		if (page == null) page=1;
 		if (competenceId != null) {
 			searchOptions.setCompetence((Competence)getRequiredEntity(competenceId, Competence.class));
 		}
 
+
+		map.put(timeStamp, searchOptions);
+		
+		session.setAttribute("listSearchOptions", map);
+		
+
+		
 		mv.addObject("searchOptions", searchOptions);
 		mv.addObject("natureEnumAllValues", SearchOptions.Nature.values());
 		mv.addObject("platformsEnumAllValues", SearchOptions.Platform.values());
 		mv.addObject("formatEnumAllValues", SearchOptions.Format.values());
 		mv.addObject("languagesEnumAllValues", SearchOptions.Language.values());
-
+		mv.addObject("timeStamp", timeStamp);
+		
 		List<SearchResult> searchResults = searchService.search(searchOptions.getSearchPhrase());
 		List<Resource> entities = searchService.getFilteredResources(searchResults, page, searchOptions);
 		mv.addObject("resourcelist", entities);

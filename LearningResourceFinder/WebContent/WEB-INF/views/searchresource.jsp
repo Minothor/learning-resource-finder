@@ -192,7 +192,7 @@ window.onload = addLang;
 		            	<button type="button" class="close" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="cliquer pour fermer">X</button>
 				</div>
 			</c:if>
-		
+		<input type="hidden" id="so" name="so" value="${timeStamp}" />
 		<button type="submit" class="btn btn-default">Filtrer</button>
 		
 	</form:form>
@@ -208,11 +208,11 @@ window.onload = addLang;
 	
 	<ul class="pagination">
 			
-  <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${param.page-1}">&laquo;</a></li>
+  <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${param.page-1}&so=${timeStamp}">&laquo;</a></li>
   <c:forEach begin="1" end="${numberResource}" varStatus="loop">
-    <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${loop.index}">${loop.index}</a></li>
+    <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${loop.index}&so=${timeStamp}">${loop.index}</a></li>
 </c:forEach>
-  <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${param.page+1}">&raquo;</a></li>
+  <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${param.page+1}&so=${timeStamp}">&raquo;</a></li>
 </ul>
 	
 </body>
