@@ -13,11 +13,6 @@ function ajaxVerifyUrl() {
 								alert("url non valide ");   // TODO: display error in the form;
 							} else {
                                 toggleForm();
-                                // Initiate an ajax to get the additional form inputs.
-                                $.get('ajax/addresourceform', function(htmlInputs) {
-	                                  $('#addResourceFormPart2').html(htmlInputs);
-	                                  alert('Load was performed.');  // TODO remove me.
-                                });
 							}
 						} else {
 							alert("une resource avec une url similaire existe déjà sur le site");  // TODO: display error in the form;   
@@ -51,6 +46,11 @@ function clearForm() {
 	 .removeAttr('selected');
 }
 
+function closeForm1(){
+	$("#myModal").modal('show').on("hide", function(){
+		$("#addResourceModal").modal('hide');
+	});
+}
 
 function toggleForm() {
 	$("#bottomButtons").toggle();
@@ -58,21 +58,28 @@ function toggleForm() {
 	$("#urlCheckButton").toggle();
 }
 
-function ajaxResourceAddSubmit() {
+function ajaxResourceAddSubmitModal1() {
 	$.ajax({
 				type : "POST",
-				url : 'ajax/resourceaddsubmit',
-				data : $("#addResourceForm").serialize(),
-				success : function(msg) {
-					showNotificationText(msg);  // function defined in header.jsp
-					$('#addResourceModal').modal('hide');
-					clearForm();
-					toggleForm();
+				url : 'ajax/resourceaddsubmit1',
+				data : $("#addResourceForm1").serialize(),
+				success : function(messageAndId) {
+					alert(messageAndId.id);
+					showNotificationText(messageAndId.message);  // function defined in header.jsp
+					
+					// Hide and clear modal 1
+					setTimeout(function(){$('#addResourceModal1').modal('hide')}, 10)
+					
+//					clearForm();
+//					toggleForm();
+					
+					// Fill and show modal 2
+					$('#idresource').val = messageAndId.id;
+	setTimeout(function(){$('#addResourceModal2').modal('show')}, 900)
 				},
 				error : function(data) {
 					alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
 							+ data);
 				}
 			});
-
 }
