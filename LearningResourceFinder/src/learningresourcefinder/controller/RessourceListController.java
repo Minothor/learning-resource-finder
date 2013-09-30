@@ -1,6 +1,8 @@
 package learningresourcefinder.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import learningresourcefinder.model.Rating;
 import learningresourcefinder.model.Resource;
@@ -29,13 +31,20 @@ public class RessourceListController extends BaseController<Resource> {
 		
 		List<Resource> listResource = resourceRepository.findAllRessourceOrderByTitle();
 		mv.addObject("resourceList", listResource);
-		
+
 		if(SecurityContext.isUserLoggedIn()) {
 			User user = SecurityContext.getUser();
+			List<Rating> listRating = ratingRepository.listRating(listResource, user);
+			
+			Map<Resource, Rating> mapRating = new HashMap<Resource, Rating>();
+			
+			for(Rating rating : listRating) {
+				mapRating.put(rating.getResource(), rating);
+			}
+			
+			mv.addObject("mapRating", mapRating);
 			mv.addObject("user", user);
-			
-//			List<Rating> listRating = ratingRepository.listRating(listResource, user);
-			
+		
 			
 		}
 

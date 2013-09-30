@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<base href="<%= UrlUtil.getAbsoluteUrl("") %>"/>
+	<!-- <base href="<%= UrlUtil.getAbsoluteUrl("") %>"/> -->
 	<meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /><%-- force IE to doesn't use is compataibility mode--%>
 	<meta name="viewport" content="width=device-width"/><%--Define the base-width as the screen width --%>	

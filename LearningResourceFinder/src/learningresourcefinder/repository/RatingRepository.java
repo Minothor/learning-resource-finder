@@ -20,7 +20,7 @@ public class RatingRepository extends BaseRepository<Rating>{
 	}
 	
 	public List<Rating> listRating(List<Resource> listResource, User user) {
-		List<Rating> listRating = (List<Rating>) em.createQuery("SELECT ra.score FROM Rating ra WHERE ra.user=:user AND ra.resource in (:listResource)")
+		List<Rating> listRating = (List<Rating>) em.createQuery("SELECT ra FROM Rating ra WHERE ra.user=:user AND ra.resource in (:listResource)")
 				.setParameter("user", user)
 				.setParameter("listResource", listResource)
 				.getResultList();
@@ -29,7 +29,7 @@ public class RatingRepository extends BaseRepository<Rating>{
 	}
 	
 	public Rating getRatingForUserAndResource(Resource resource, User user){
-	    return (Rating)getSingleOrNullResult( em.createQuery("select r from  Rating r where r.resource_id=:resource and r.user_id=:user")
+	    return (Rating)getSingleOrNullResult( em.createQuery("select r from  Rating r where r.resource=:resource and r.user=:user")
 		.setParameter("resource",resource)
 		.setParameter("user",user) );
 	}

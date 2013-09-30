@@ -35,17 +35,18 @@ $(document).ready(function(){
     // Take rating since star on click.
     // Ajax request
     $('i.glyphicon[data-value]').on('click', function() {
-    	var score = $(this).attr('data-value');
-    	alert(score + " " + currentID);
+    	var score = $(this).attr('data-value');   	
     	$.ajax({
     		type: "POST",
     		url: "ajax/rateresource",
     		data: "idresource="+currentID+"&score="+score,
     		success: function(data) {
-    			alert(data + ' Vote OK');
+    			//alert(data);
+    			location.reload();
+    			//$('div[data-id='+currentID+']' ).replaceWith(data);
     		},
     		error: function(data) {
-    			alert(data + ' Vote Erreur');
+    			alert('Vote Erreur');
     		}
     	});
     	

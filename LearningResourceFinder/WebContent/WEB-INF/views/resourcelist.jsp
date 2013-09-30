@@ -18,7 +18,7 @@
 							<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
 								<lrftag:resource resource="${resource}"/>
 								<br />
-								<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.score}" scoreUser="${resource.score}" />
+								<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" />
 							</div>
 						</c:forEach>
 					</div>
