@@ -6,18 +6,44 @@
 <html>
 <head>
 <title>Insert title here</title>
+
+<script>
+
+   $(document).ready(function() {
+   	  $("#addPlayListLink").click(function(e) {
+	    e.preventDefault();// prevent the default anchor functionality
+	    e.stopPropagation();
+	    $("#loginDropDown").dropdown("toggle");
+   	  });
+   });
+
+</script>
+
 </head>
 <body>
-	<lrftag:breadcrumb linkactive="Mes PlayLists">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
-		<lrftag:breadcrumbelement label="${current.user.firstName}" link="/user/${current.user.userName}" />
+
+ <c:if test="${user!=null}">
+	<lrftag:breadcrumb linkactive="playLists">
+		<lrftag:breadcrumbelement label="home" link="/home" />
+		<lrftag:breadcrumbelement label="${user.firstName}" link="/user/${user.userName}" />
 	</lrftag:breadcrumb>
+</c:if>
+
 	
 <%-- 	${current.user.fullName} --%>
 	<div class="container">
-		<lrftag:pageheadertitle title="${user.fullName} : Mes PlayLists"/>
+		 <c:choose>
+    		<c:when test="${user!=null}">
+				<lrftag:pageheadertitle title="Play-lists de ${user.fullName}"/>
+			</c:when>
+			<c:otherwise>
+				<lrftag:pageheadertitle title="Toutes les PlayLists"/>
+			</c:otherwise>
+    	</c:choose>
 		<div class=" " style="font-size:14px">
-		   &nbsp&nbsp<a class="btn btn-primary pull-right" href="<c:url value='/playlist/create'/>"> Créer une PlayList</a>
+		   &nbsp&nbsp<a class="btn btn-primary pull-right" 
+		      <lrftag:loggedin yes='href="/playlist/create"' no='id="addPlayListLink" href="#"'/>
+		   > Créer une PlayList</a> 
 		</div>
 		<br />
 		<div class="table-responsive">
