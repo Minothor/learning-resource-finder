@@ -32,28 +32,27 @@
 	                            <div class="pull-right"></div>
                             </div>
                             <div class="form-group ">  
-                              <fieldset>
+                             
                                   <Legend>format</Legend>
-                                  <input type="radio" name="format" value="VIDEOS">
-<%--                                     <form:form modelAttribute="searchOptions">      --%>
-<%-- 				                        <c:forEach var="format" items="${applicationScope.cache.formatEnumAllValues}"> --%>
-<%-- 					                      <div class="radio"> <form:radiobutton path="format"  --%>
-<%-- 					                       value="${format}" />${format.description} </div> --%>
-<%-- 									    </c:forEach> --%>
-<%--                                    </form:form>  --%>
-                              </fieldset>
+                                   <form:form modelAttribute="searchOptions">     
+				                        <c:forEach var="formats" items="${applicationScope.cache.format}">
+					                       <div class="radio"> <form:radiobutton path="format" 
+				                           value="${formats}" />${formats.description} </div> 
+								       </c:forEach>
+                                   </form:form>  
+                              
                             </div>  
           
                             <div class="form-group">  
                                   <Legend>Platforme</Legend>
                                    <input type="radio" name="platform" value="PC">
-<%--                                       <form:form modelAttribute="searchOptions">      --%>
-<%-- 					                     <c:forEach var="platform" items="${platformsEnumAllValues}"> --%>
-<%-- 					                        <div class="radio"> <form:radiobutton path="platform"  --%>
-<%-- 					                         value="${platform}" />${platform.description} --%>
-<!-- 					                        </div> -->
-<%-- 				                       </c:forEach> --%>
-<%--                                      </form:form>  --%>
+                                      <form:form modelAttribute="searchOptions">     
+					                     <c:forEach var="platform" items="${platformsEnumAllValues}">
+					                        <div class="radio"> <form:radiobutton path="platform" 
+					                         value="${platform}" />${platform.description} 
+					                        </div>
+				                       </c:forEach>
+                                     </form:form> 
                             </div>  
                             
 						</div>
@@ -62,8 +61,8 @@
 				  <div class="modal-footer" style="display: none;" id="bottomButtons">
 					
 					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-				    <button type="button" class="btn btn-primary" onclick="ajaxResourceAddSubmitModal1()">Ajouter</button>
-				 
+				    <button type="button" class="btn" data-toggle="modal" href="#addResourceModal2" onclick="ajaxResourceAddSubmitModal1()">Ajouter</button>
+				 </div>
 			</div>
 			<!-- /.modal-content -->
 		</form>

@@ -65,17 +65,19 @@ function ajaxResourceAddSubmitModal1() {
 				data : $("#addResourceForm1").serialize(),
 				success : function(messageAndId) {
 					alert(messageAndId.id);
-					showNotificationText(messageAndId.message);  // function defined in header.jsp
+					//showNotificationText(messageAndId.message);  // function defined in header.jsp
+					$('#addResourceModal1').modal('hide');
 					
+					$('#addResourceModal2').modal('show');
 					// Hide and clear modal 1
-					setTimeout(function(){$('#addResourceModal1').modal('hide')}, 10)
+					//setTimeout(function(){$('#addResourceModal1').modal('hide')}, 10)
 					
 //					clearForm();
 //					toggleForm();
 					
 					// Fill and show modal 2
 					$('#idresource').val = messageAndId.id;
-	setTimeout(function(){$('#addResourceModal2').modal('show')}, 900)
+	//setTimeout(function(){$('#addResourceModal2').modal('show')}, 900)
 				},
 				error : function(data) {
 					alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "

@@ -5,10 +5,11 @@ import java.util.List;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Cycle;
-import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.CycleRepository;
+import learningresourcefinder.search.SearchOptions;
+import learningresourcefinder.search.SearchOptions.Format;
+import learningresourcefinder.search.SearchOptions.Nature;
 
 
 // Cache stored in the ServletContext and initialized when the web container starts.
@@ -16,7 +17,11 @@ import learningresourcefinder.repository.CycleRepository;
 public class Cache implements ServletContextListener {
 
     List <Cycle> cycles;  // We need to display cycles in the header (menu bar) on each page.
+  
+    Format[] format = SearchOptions.Format.values();  // We need them in the addResourceform includes in the header (via an included jsp) => we have no controller.
    
+    
+    //List<language> language=SearchOptions.Language.values(); 
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
@@ -26,7 +31,10 @@ public class Cache implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         fillCacheFromDB(); 
-        sce.getServletContext().setAttribute("cache", this); 
+       
+        
+       sce.getServletContext().setAttribute("cache", this); 
+     
     }
     
     public void fillCacheFromDB(){
@@ -44,6 +52,14 @@ public class Cache implements ServletContextListener {
     }
     public List<Cycle> getCycles() {
         return cycles;
+    }
+
+    public Format[] getFormat() {
+        return format;
+    }
+
+    public void setFormat(Format[] format) {
+        this.format = format;
     }
 
     
