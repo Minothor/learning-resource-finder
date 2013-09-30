@@ -34,72 +34,104 @@ import org.hibernate.annotations.Type;
 @SequenceGenerator(name="ResourceSequence", sequenceName="RESOURCE_SEQUENCE")
 public class Resource extends BaseEntityWithShortId implements Searchable {
     
-	
-	public enum Topic {
-		MATH("Math"), FRENCH("Français"), DUTCH("Néerlandais"), ENGLISH("Anglais"), HISTORY("Histoire"), GEO("Géographie"), SCIENCE("Sciences"), OTHER("Autre");
-		private Topic(String description){this.description = description;}
-		private final String description;
-		public String getDescription(){return description;}
-	}
-
-	
-	@Id   @GeneratedValue(generator="ResourceSequence") // We want Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
+    
+    public enum Topic {
+        MATH("Math"), FRENCH("Français"), DUTCH("Néerlandais"), ENGLISH("Anglais"), HISTORY("Histoire"), GEO("Géographie"), SCIENCE("Sciences"), OTHER("Autre");
+        private Topic(String description){this.description = description;}
+        private final String description;
+        public String getDescription(){return description;}
+    }
+	@Id   @GeneratedValue(generator="ResourceSequence") // We wand Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
     Long id;
         
     @Column(length = 50, nullable=false)
-    @Size(max=50, message="Le nom d'une ressource ne peut contenir que 50 caractères maximum")
+    @Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
 	private String name;
 	
     @Column(length=50, nullable=false)
     @Size(max=50)
     private String slug;
-    
     @Column(length=20, nullable = true)
     @Enumerated(EnumType.STRING)
     private Topic topic;  // Temporary quick selection when adding a resource, before a contributor has the time to bing the resource with  a competency.
+	
+    @Column(nullable = true)
+    @Enumerated(EnumType.STRING)
+    private Language language;
     
-
-
-    @Column(nullable = true)
-    @Enumerated(EnumType.STRING)
-	private Language language;
+    
+    @Column()
+	private int numberImage;
 	
-    @Column(nullable = true)
-    @Enumerated(EnumType.STRING)
-    private Format format;
 	
-    @Column(nullable = true)
-    @Enumerated(EnumType.STRING)
-    private Platform platform;
+	
+	public Language getLanguage() {
+        return language;
+    }
 
-    @Column(nullable = true)
-    @Enumerated(EnumType.STRING)
-    private Nature nature;
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public Format getFormat() {
+        return format;
+    }
+
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    public Nature getNature() {
+        return nature;
+    }
+
+    public void setNature(Nature nature) {
+        this.nature = nature;
+    }
+
+    @Column(nullable=true)
+	@Enumerated(EnumType.STRING)
+	private Format format;
 	
-	@Column()
+	@Column(nullable=true)
+	@Enumerated(EnumType.STRING)
+	private Platform platform;
+
+	@Column(nullable=true)
+	@Enumerated(EnumType.STRING)
+	private Nature nature;
+	
+	
+
+    @Column()
 	private Boolean advertising;
 	
 	@Column()
 	private Integer duration;
 	
 	
-	@Column()
-	private int numberImage;
-	
-	
-	@Column
-    private Double avgRatingScore;
-	
-	@Column
-	private Long countRating;
     
-	
+    
+    @Column
+    private Double avgRatingScore;
+    
+    @Column
+    private Long countRating;
+    
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
 	
 	@OneToMany(mappedBy="resource")
 	private Set<Problem> problems = new HashSet<>();
-    
+
 	@ManyToMany(mappedBy="resources")
 	List<Competence> competences = new ArrayList<>();
 	
@@ -120,7 +152,6 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@OneToMany(mappedBy="resource")
 	List<UrlResource> urlResources = new ArrayList<>();
 	
-	
 	public int addImageOnDB(){
 		return numberImage;
 	}
@@ -128,22 +159,27 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	/**************************** Getters & Setters ************************************/
 	
-    public Double getAvgRatingScore() {
-		return avgRatingScore;
-	}
-
-	public void setAvgRatingScore(Double score) {
-		this.avgRatingScore = score;
-	}
 	
-	public Long getCountRating() {
-		return countRating;
-	}
+	 public Double getAvgRatingScore() {
+	        return avgRatingScore;
+	    }
 
-	public void setCountRating(Long counter) {
-		this.countRating = counter;
-	}
+	    public void setAvgRatingScore(Double score) {
+	        this.avgRatingScore = score;
+	    }
+	
+	    public Long getCountRating() {
+	        return countRating;
+	    }
 
+	    public void setCountRating(Long counter) {
+	        this.countRating = counter;
+	    }
+	
+	
+	
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -171,6 +207,21 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	public List<UrlResource> getUrlResources() {
 		return this.urlResources;
 	}
+	public Boolean getAdvertising() {
+        return advertising;
+    }
+
+    public void setAdvertising(Boolean advertising) {
+        this.advertising = advertising;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
 
     @Override
     public Map<String, String> getCriterias() {
@@ -205,63 +256,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	public void setNumberImage(int resourceid) {
 		this.numberImage = resourceid;
 	}
-
 	public Topic getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Topic topic) {
-		this.topic = topic;
-	}
-
-	public Language getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
-
-	public Format getFormat() {
-		return format;
-	}
-
-	public void setFormat(Format format) {
-		this.format = format;
-	}
-
-	public Platform getPlatform() {
-		return platform;
-	}
-
-	public void setPlatform(Platform platform) {
-		this.platform = platform;
-	}
-
-	public Nature getNature() {
-		return nature;
-	}
-
-	public void setNature(Nature nature) {
-		this.nature = nature;
-	}
-
-	public Boolean getAdvertising() {
-		return advertising;
-	}
-
-	public void setAdvertising(Boolean advertising) {
-		this.advertising = advertising;
-	}
-
-	public Integer getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Integer duration) {
-		this.duration = duration;
-	}
-
-	
-	
+        return topic;
+    }
 }
