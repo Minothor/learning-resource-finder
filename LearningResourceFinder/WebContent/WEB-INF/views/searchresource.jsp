@@ -97,7 +97,6 @@ window.onload = addLang;
 	<form:form modelAttribute="searchOptions" action="searchresourcesubmit">
 		<div class="filterSubBlock">
 			<fieldset>
-				<legend>Format</legend>
 				<c:forEach var="formats" items="${formatEnumAllValues}">
 					<label class="checkbox"> <form:checkbox path="format" value="${formats}" />${formats.description}
 					</label>
@@ -108,7 +107,6 @@ window.onload = addLang;
 
 		<div class="filterSubBlock">
 			<fieldset>
-				<legend>Plateforme</legend>
 				<c:forEach var="platform" items="${platformsEnumAllValues}">
 					<label class="checkbox"> <form:checkbox path="platform"	value="${platform}" />${platform.description}
 					</label>
@@ -118,7 +116,6 @@ window.onload = addLang;
 
 		<div class="filterSubBlock">
 			<fieldset>
-				<legend>Nature pédagogique</legend>
 				<c:forEach var="nature" items="${natureEnumAllValues}">
 					<label class="checkbox"> <form:checkbox path="nature" value="${nature}" />${nature.description}
 					</label>
@@ -128,7 +125,6 @@ window.onload = addLang;
 
 		<div class="filterSubBlock" style="max-width: 200px;">
 			<fieldset>
-				<legend>Langues</legend>
 				<br> 
 				<span id="lang1" class="label label-primary" style="display: inline">Français</span> 
 				<span id="lang2" class="label label-primary" style="display: none">Néerlandais</span>
@@ -154,7 +150,6 @@ window.onload = addLang;
 		</div>
 		<div class="filterSubBlock">
 			<fieldset>
-				<legend>Publicité</legend>
 				<div class="radio">
 					<label> <form:radiobutton  path="advertising" id="optionsRadio1" value="true"/> Oui
 					</label>
@@ -168,14 +163,12 @@ window.onload = addLang;
 
 		<div class="filterSubBlock">
 			<fieldset>
-				<legend>Durée</legend>
 				<form:input type="text" path="maxDuration" style=" width:30px"/> minutes max.
 				
 			</fieldset>
 		</div>
 		<div class="filterSubBlock">
 			<fieldset>
-				<legend>Terme de recherche</legend>
 				<form:input type="text" path="searchPhrase" style="width:150px;"/>
 				
 			</fieldset>
@@ -185,7 +178,6 @@ window.onload = addLang;
 			<c:if test="${searchOptions.competence != null}">
 				<div class="filterSubBlock">
 					<fieldset>
-						<legend>Competence</legend>
 						<lrf:competencepath competence="${searchOptions.competence}"/>
 						<input id="competenceIdHiddenField" name="competenceId" value="${searchOptions.competence.id }" type="hidden"/>
 					</fieldset>
@@ -196,8 +188,6 @@ window.onload = addLang;
 		<button type="submit" class="btn btn-default">Filtrer</button>
 		
 	</form:form>
-	
-	
 	
 	
 	<c:forEach items="${resourcelist}" var="resource">
