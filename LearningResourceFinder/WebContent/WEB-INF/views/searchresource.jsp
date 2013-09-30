@@ -163,13 +163,13 @@ window.onload = addLang;
 
 		<div class="filterSubBlock">
 			<fieldset>
-				<form:input type="text" path="maxDuration" style=" width:30px"/> minutes max.
+				<form:input type="text" path="maxDuration" style=" width:30px" rel="tooltip" title="durée maximale" /> minutes max.
 				
 			</fieldset>
 		</div>
 		<div class="filterSubBlock">
 			<fieldset>
-				<form:input type="text" path="searchPhrase" style="width:150px;"/>
+				<form:input type="text" path="searchPhrase" style="width:150px;" rel="tooltip" title="terme de votre recherche" />
 				
 			</fieldset>
 		</div>

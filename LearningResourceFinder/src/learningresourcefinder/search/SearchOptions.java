@@ -1,6 +1,7 @@
 package learningresourcefinder.search;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import learningresourcefinder.model.Competence;
@@ -19,6 +20,10 @@ public class SearchOptions {
 	
 	public SearchOptions () {
 		getLanguage().add(Language.FR);
+		getFormat().addAll(Arrays.asList(Format.values()));
+		getPlatform().addAll(Arrays.asList(Platform.values()));
+		getNature().addAll(Arrays.asList(Nature.values()));
+
 	}
 	
 	public enum Language{
