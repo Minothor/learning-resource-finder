@@ -9,7 +9,6 @@
 <title></title>
 </head>
 <body>
-
 <lrf:breadcrumb linkactive="${cycle.name}">
 		<lrf:breadcrumbelement label="Home" link="home" />
 		<lrf:breadcrumbelement label="Liste des cycles" link="cyclelist" />
@@ -22,22 +21,26 @@
 	<h2 class="">${ Cycle.name }</h2>
 	<div class="row">
 		<c:forEach items="${listColumns}" var="cycleColumn">
-			<div class="col-xs-6 col-md-4"> COLUMN
-				<c:forEach items="${cycleColumn}" var="cycleitems">
-						<h2>${cycleitems.competence.name}</h2>
-						<ol>
+				<div class="col-xs-6 col-md-4"> 
+					<c:forEach items="${cycleColumn}" var="cycleitems">
+							<h2>${cycleitems.competence.name}</h2>
 							<c:forEach items="${cycleitems.children}" var="subitems">
-								<li class=""><a class="" href=""> <span class="">${
-											subitems.competence.name }</span> <span class="">${
-											subitems.competence.description }</span>
-								</a></li>
+								<span class="">${subitems.competence.code }</span>
+								<a class="" href=""> 
+									<span class="">${subitems.competence.name }</span> 
+								</a></br>
+								<ul>
+									<c:forEach items="${subitems.children}" var="subsubitems">
+										<li>
+											${subsubitems.competence.code } <a href="">${subsubitems.competence.name}</a></br>
+										</li>
+									</c:forEach>
+								</ul>
 							</c:forEach>
-						</ol>
-				</c:forEach>
-			</div>
+					</c:forEach>
+				</div>
 		</c:forEach>
 	</div>
-		
 		
 
 </html>
