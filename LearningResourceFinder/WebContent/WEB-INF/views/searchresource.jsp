@@ -3,18 +3,23 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@ page import="learningresourcefinder.search.SearchOptions"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <script src="/js/ext/jquery-1.9.0.min.js"></script>
 <script src="/js/ext/bootstrap.js"></script>
-<script type="text/javascript">
+
+<!-- To delete competence field -->
+ <script type="text/javascript"> 
 $(document).ready(function reinitialize(){
   $("button").click(function(){
     $("#competenceIdHiddenField").val("");
   });
 });
 </script>
+
 <link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" href="css/ext/bootstrap-theme.css"
@@ -65,7 +70,7 @@ label {
 
 </style>
 <script>
-
+window.onload = addLang;
 	function addLang() {
 		if ($("#monMenu input:checkbox:checked").length > 0) {
 			var i = 0;
@@ -137,8 +142,8 @@ label {
 						id="monMenu">
 					
 						<c:forEach var="language" items="${languagesEnumAllValues}">
-				
-							<label class="checkbox" style="margin-left: 1em"> <form:checkbox path="language" value="${language}" />${language.description}
+							<label class="checkbox" style="margin-left: 1em">
+							   <form:checkbox path="language" value="${language}" />${language.description}
 							</label>
 						</c:forEach>
 
