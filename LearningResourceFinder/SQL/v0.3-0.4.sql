@@ -15,5 +15,5 @@ alter table resource
 alter table resource 
         add column counter int4;  
         
-ALTER TABLE resource RENAME score  TO "avgRatingScore";
-ALTER TABLE resource RENAME counter  TO "countRating";
+ALTER TABLE resource RENAME score  TO avgratingscore;
+ALTER TABLE resource RENAME counter  TO countrating;
