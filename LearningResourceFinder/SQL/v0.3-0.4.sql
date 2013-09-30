@@ -13,7 +13,7 @@ alter table resource
 
 ---- Emile 2013-09-30
 alter table resource 
-        add column counter int4;  
+        add column counter int8;  
         
 ALTER TABLE resource RENAME score  TO avgratingscore;
 ALTER TABLE resource RENAME counter  TO countrating;
