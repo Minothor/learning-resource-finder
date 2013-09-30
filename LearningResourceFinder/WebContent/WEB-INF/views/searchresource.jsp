@@ -189,7 +189,7 @@ window.onload = addLang;
 						<lrf:competencepath competence="${searchOptions.competence}"/>
 						<input id="competenceIdHiddenField" name="competenceId" value="${searchOptions.competence.id }" type="hidden"/>
 					</fieldset>
-		            	<button type="button" class="close" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="cliquer pour fermer">X</button>
+		            	<button type="button" class="close" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="cliquer pour fermer">&times;</button>
 				</div>
 			</c:if>
 		<input type="hidden" id="so" name="so" value="${timeStamp}" />
