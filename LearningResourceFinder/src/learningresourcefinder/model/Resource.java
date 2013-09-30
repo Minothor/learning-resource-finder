@@ -19,6 +19,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import learningresourcefinder.search.SearchOptions.Format;
+import learningresourcefinder.search.SearchOptions.Language;
+import learningresourcefinder.search.SearchOptions.Nature;
+import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.web.Slugify;
 
@@ -68,16 +72,16 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	private int numberImage;
 	
 	@Column()
-	private String language;
+	private Language language;
 	
 	@Column()
-	private String format;
+	private Format format;
 	
 	@Column()
-	private String platform;
+	private Platform platform;
 
 	@Column()
-	private String nature;
+	private Nature nature;
 	
 	@Column()
 	private Boolean advertising;
@@ -110,7 +114,6 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	@OneToMany(mappedBy="resource")
 	List<UrlResource> urlResources = new ArrayList<>();
-	
 	
 	public int addImageOnDB(){
 		return numberImage;
