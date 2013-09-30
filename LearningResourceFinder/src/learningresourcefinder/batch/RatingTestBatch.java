@@ -24,11 +24,20 @@ public class RatingTestBatch implements Runnable {
     @Override
     public void run() {
        Resource resource = resourceRepository.find(2L);
-       System.out.println("Resource  : " +ratingRepository.avgRating(resource));
-       resource.setScore(ratingRepository.avgRating(resource));
+       Object[] avgAndCount = ratingRepository.avgAndCountRating(resource);
+        resource.setAvgRatingScore((Double)avgAndCount[0]);
+        
+       resource.setCountRating((Long)avgAndCount[1]);
+       System.out.println("Score avg  : "+resource.getAvgRatingScore());
+       System.out.println("Counter    : "+resource.getCountRating());
+
+    	   
+      
+       
+      
        
        Resource resource1 = resourceRepository.find(1L);
-       System.out.println("Resource 1 : " +ratingRepository.avgRating(resource1));
-       resource1.setScore(ratingRepository.avgRating(resource1));
+       Object[] avgAndCount1 = ratingRepository.avgAndCountRating(resource);
+       
     }
 }

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unchecked")
 public class RatingRepository extends BaseRepository<Rating>{
 	
-	public Double  avgRating(Resource resource){
-		return (Double)em.createQuery("select avg(r.score) from  Rating r where r.resource=:resource")
+	public Object[]  avgAndCountRating(Resource resource){
+		return (Object[])em.createQuery("select avg(r.score), count(r) from  Rating r where r.resource=:resource")
 				.setParameter("resource", resource)
 				.getSingleResult();
 		

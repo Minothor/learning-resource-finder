@@ -10,3 +10,10 @@ ALTER TABLE competence
 
 alter table resource 
         add column topic varchar(20);
+
+---- Emile 2013-09-30
+alter table resource 
+        add column counter int4;  
+        
+ALTER TABLE resource RENAME score  TO "avgRatingScore";
+ALTER TABLE resource RENAME counter  TO "countRating";

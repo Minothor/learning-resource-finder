@@ -34,7 +34,10 @@ public class ResourceRepository extends BaseRepository<Resource>
 				.getResultList();
 		return result;
 	}
-	
+	public Long counterResource(Resource resource){
+		return (Long)em.createQuery("SELECT  count(r.name) from Resource r WHERE r.name=:resource").getSingleResult();
+		
+	}
 	
 	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions, int posOfFirstElementPaging, int amountOfElementsPaging){
 		if (idList.isEmpty()) { // Defensive coding. An empty list would break the query
@@ -114,4 +117,6 @@ public class ResourceRepository extends BaseRepository<Resource>
 				.getResultList();
 		return result;
 	}
+	
+	
 }

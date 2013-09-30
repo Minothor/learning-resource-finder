@@ -31,8 +31,8 @@ public class RatingController extends BaseController<Rating> {
 			ratingRepository.merge(rating);
 		}
         Object[] avgAndCount = ratingRepository.avgAndCountRating(resource);
-		resource.setScore((Double)avgAndCount[0]);
-		resource.setCounter((Long)avgAndCount[1]);
+		resource.setAvgRatingScore((Double)avgAndCount[0]);
+		resource.setCountRating((Long)avgAndCount[1]);
 		
 		return "success";
 	}

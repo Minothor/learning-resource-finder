@@ -58,19 +58,8 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     @Enumerated(EnumType.STRING)
     private Topic topic;  // Temporary quick selection when adding a resource, before a contributor has the time to bing the resource with  a competency.
     
-    public Double getScore() {
-		return score;
-	}
 
-	public void setScore(Double score) {
-		this.score = score;
-	}
 
-	@Column()
-    private Double score;
-	@Column()
-	private int numberImage;
-	
 	@Column()
 	private Language language;
 	
@@ -88,7 +77,19 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	@Column()
 	private Integer duration;
+	
+	
+	@Column()
+	private int numberImage;
+	
+	
+	@Column
+    private Double avgRatingScore;
+	
+	@Column
+	private Long countRating;
     
+	
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
 	
@@ -115,6 +116,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@OneToMany(mappedBy="resource")
 	List<UrlResource> urlResources = new ArrayList<>();
 	
+	
 	public int addImageOnDB(){
 		return numberImage;
 	}
@@ -122,7 +124,22 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	/**************************** Getters & Setters ************************************/
 	
+    public Double getAvgRatingScore() {
+		return avgRatingScore;
+	}
+
+	public void setAvgRatingScore(Double score) {
+		this.avgRatingScore = score;
+	}
 	
+	public Long getCountRating() {
+		return countRating;
+	}
+
+	public void setCountRating(Long counter) {
+		this.countRating = counter;
+	}
+
 	public String getName() {
 		return name;
 	}
