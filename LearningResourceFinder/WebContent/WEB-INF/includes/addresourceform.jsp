@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 
@@ -7,7 +7,8 @@
 <!-- Modal for adding a resource (invisible until button clicked) -->
 <div class="modal fade" id="addResourceModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<form id="addResourceForm1" role="form" method="post" action="resourceaddsubmit">
+	
+ 		<form id="addResourceForm1" role="form" method="post" action="resourceaddsubmit">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
@@ -34,25 +35,30 @@
                             <div class="form-group ">  
                              
                                   <Legend>format</Legend>
-                                   <form:form modelAttribute="searchOptions">     
-				                        <c:forEach var="formats" items="${applicationScope.cache.format}">
-					                       <div class="radio"> <form:radiobutton path="format" 
-				                           value="${formats}" />${formats.description} </div> 
-								       </c:forEach>
-                                   </form:form>  
-                              
+                                      
+				                     <c:forEach var="format" items="${applicationScope.cache.format}">
+					                   <div class="radio"> 
+				                      <input type="radio" name="format" value="${format}">
+				                        ${format} 
+				                           
+				                       </div> 
+								     </c:forEach>
+                                 
                             </div>  
           
                             <div class="form-group">  
                                   <Legend>Platforme</Legend>
-                                   <input type="radio" name="platform" value="PC">
-                                      <form:form modelAttribute="searchOptions">     
-					                     <c:forEach var="platform" items="${platformsEnumAllValues}">
-					                        <div class="radio"> <form:radiobutton path="platform" 
-					                         value="${platform}" />${platform.description} 
-					                        </div>
-				                       </c:forEach>
-                                     </form:form> 
+                                                                
+					             <c:forEach var="platform" items="${applicationScope.cache.platform}">
+					                <div class "radio">
+					                   <input type="radio" name="platform" value="${platform}"> 
+					                      ${platform}
+					                      
+					                </div>
+					             </c:forEach>
+					                      
+				                       
+                                    
                             </div>  
                             
 						</div>
@@ -62,6 +68,7 @@
 					
 					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 				    <button type="button" class="btn" data-toggle="modal" href="#addResourceModal2" onclick="ajaxResourceAddSubmitModal1()">Ajouter</button>
+				     
 				 </div>
 			</div>
 			<!-- /.modal-content -->
@@ -74,7 +81,7 @@
 <div class="modal fade" id="addResourceModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
  <div class="modal-dialog">
 	<form id="addResourceForm2" role="form" method="post" action="resourceaddsubmit">
-	 <input type="hidden"  name="idresource" id="idresource"  />
+	 <input type="hidden"  name="idresource" id="idresource" />
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -85,24 +92,33 @@
 		  
 		  
 	          <div class="form-group">
-		       	   <label for="titre">Description</label> 
+		       	   <label for="description">Description</label> 
 				   <input type="text" class="form-control" id="description" name="description" placeholder="description">
 			       <div class="pull-right"> </div>
 			  </div>
 	          <div class="checkbox">
 	            <label>
-	              <input type="checkbox"> Pub
+	              <input type="checkbox" value="true" name="advertising"> Pub 	
 	            </label>
 	          </div>
 	     
-	          <select class="form-control">
-	            <option></option>
+	         <select class="form-control"name="language">
+	          <c:forEach var="language" items="${applicationScope.cache.language}">
+	            <option value="${language}">${language.description}</option>
+	          </c:forEach>
 	          </select>
+	          
+	          <div class="form-control">
+			<fieldset>
+				<legend>Durée</legend>
+				Moins de <input type="text" name="maxDuration">
+			</fieldset>
+		</div>
         </div>
     
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="ajaxResourceAddSubmitModal2()">Save changes</button>
         </div>
       </div><!-- /.modal-content -->
    </form>
