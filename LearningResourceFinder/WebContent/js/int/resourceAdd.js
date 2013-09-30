@@ -76,7 +76,7 @@ function ajaxResourceAddSubmitModal1() {
 //					toggleForm();
 					
 					// Fill and show modal 2
-					$('#idresource').val = messageAndId.id;
+					$('#idresource').val(messageAndId.id);
 	//setTimeout(function(){$('#addResourceModal2').modal('show')}, 900)
 				},
 				error : function(data) {
@@ -84,4 +84,32 @@ function ajaxResourceAddSubmitModal1() {
 							+ data);
 				}
 			});
+}
+function ajaxResourceAddSubmitModal2(){
+	
+	$.ajax({
+		type : "POST",
+		url : 'ajax/resourceaddsubmit2',
+		data : $("#addResourceForm2").serialize(),
+		success : function(messageAndId) {
+			alert(messageAndId.id);
+			//showNotificationText(messageAndId.message);  // function defined in header.jsp
+			
+			
+			
+			// Hide and clear modal 1
+	
+			// Fill and show modal 2
+			
+//setTimeout(function(){$('#addResourceModal2').modal('show')}, 900)
+		},
+		error : function(data) {
+			alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
+					+ data);
+		}
+	});
+	
+	
+	
+	
 }
