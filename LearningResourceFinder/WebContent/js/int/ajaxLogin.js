@@ -4,7 +4,7 @@ function ajaxlogin() {
 			
 	$.ajax({
 		type : "POST",
-	    url : 'ajax/loginsubmit',
+	    url : '/ajax/loginsubmit',
 	    data: "userNameOrMail="+userNameOrMail+"&password="+password,
 	    success : function(data) {
 	      location.reload();
@@ -27,7 +27,7 @@ function ajaxRegister(e) {
 			
 	$.ajax({
 		type : "POST",
-	    url : 'ajax/registersubmit',
+	    url : '/ajax/registersubmit',
 	    data: "emailRegister="+emailRegister+"&usernameRegister="+usernameRegister+"&passwordRegister="+passwordRegister,
 	    success : function(data) {	
 	    		 location.reload();

@@ -81,7 +81,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="http://toujoursplus.be/">ToujoursPlus</a>
+				<a class="navbar-brand" href="/">ToujoursPlus</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -98,12 +98,12 @@
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Compétences <b class="caret"></b></a> 
 					    <ul class="dropdown-menu"> 
 						  <c:forEach items="${applicationScope.cache.cycles}" var="cycle">
-                             <li><a href="<c:url value='cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
+                             <li><a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
                           </c:forEach>
                           
                           <li role="presentation" class="divider"></li>
-                          <li><a href="<c:url value='competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a> </li>
-                          <li><a href="<c:url value='competencetree?rootCode=terminale'/>">Terminales (3-6 secondaire)</a> </li>
+                          <li><a href="<c:url value='/competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a> </li>
+                          <li><a href="<c:url value='/competencetree?rootCode=terminale'/>">Terminales (3-6 secondaire)</a> </li>
                     						
 					    </ul>
 					 </li> 
@@ -119,9 +119,9 @@
 									class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="/user/${current.user.userName}">Profil</a></li>
-									<li><a href="playlist/user/${current.user.userName}">Playlist</a></li>
+									<li><a href="/playlist/user/${current.user.userName}">Playlist</a></li>
 								</ul></li>
-							<li><a href="logout" class="dropdown-toggle">Déconnexion</a>
+							<li><a href="/logout" class="dropdown-toggle">Déconnexion</a>
 							</li>
 						</ul>
 					</c:when>
@@ -145,7 +145,7 @@
 										<a href="#" id="registerLink">S'inscrire</a>
 									</div>
 								    <div>
-									 Mot de passe <a href="resendpassword">oublié</a> ?
+									 Mot de passe <a href="/resendpassword">oublié</a> ?
 									</div>									
 								</form><br/>
 								</div>
