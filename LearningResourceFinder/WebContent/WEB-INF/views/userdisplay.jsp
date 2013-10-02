@@ -10,17 +10,7 @@
 <head>
 <!-- Jquery for change input popup addImageUser -->
 	<script type="text/javascript" src="/js/int/addImageUrlUser.js"></script>
-
-<script type="text/javascript" >
-$(function() {
-    $( "#tabs" ).tabs();
-});
-</script>
-<!-- you can set variables starting with "p_" in the file named website_content.properties -->
-<link rel="canonical" href="${p_website_address}/user/${user.userName}"/>
-<meta name="description" content="${user.firstName} ${user.lastName}">
-</head>   
-
+</head>
 <body>
 	<lrftag:breadcrumb linkactive="${user.firstName} ${user.lastName}">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
@@ -29,15 +19,15 @@ $(function() {
 		<lrftag:pageheadertitle title="${user.fullName}"/>
 		<div class="btn-group">
 			<lrf:conditionDisplay privilege="MANAGE_USERS">
-				<a class="btn btn-default" href="user/privilegeedit?id=${user.id}">Privilèges</a>	
-				<a class="btn btn-default" href="user/usertypeedit?id=${user.id}">Editer le type d'un user</a>	
+				<a class="btn btn-default" href="/user/privilegeedit?id=${user.id}">Privilèges</a>	
+				<a class="btn btn-default" href="/user/usertypeedit?id=${user.id}">Editer le type d'un user</a>	
 				<c:if test="${not(current.user  eq user)}">
-				<a class="btn btn-default" href="user/delete?id=${user.id}">Supprimer le compte</a>
+				<a class="btn btn-default" href="/user/delete?id=${user.id}">Supprimer le compte</a>
 				</c:if>
 			</lrf:conditionDisplay>
 			<c:if test="${canEdit}">
-				<a class="btn btn-default" href="user/edit?id=${user.id}">Editer le Profil</a>
-				<a class="btn btn-default" href="user/changepassword?id=${user.id}">Modifier le mot de passe</a>
+				<a class="btn btn-default" href="/user/edit?id=${user.id}">Editer le Profil</a>
+				<a class="btn btn-default" href="/user/changepassword?id=${user.id}">Modifier le mot de passe</a>
 			</c:if>
 			<a class="btn btn-default" href="/playlist/user/${user.userName}">Play-lists</a>
 		</div>
