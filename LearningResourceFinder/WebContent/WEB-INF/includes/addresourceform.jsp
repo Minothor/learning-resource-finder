@@ -29,7 +29,7 @@
 
 						    <div class="form-group">
 	                           <label for="titre">Intitulé</label> 
-	                           <input type="text" class="form-control" id="title" name="title" placeholder="titre">
+	                           <input type="text" class="form-control" id="title" name="title" placeholder="titre" required="required">
 	                            <div class="pull-right"></div>
                             </div>
                             <div class="form-group ">  
@@ -38,8 +38,8 @@
                                       
 				                     <c:forEach var="format" items="${applicationScope.cache.format}">
 					                   <div class="radio"> 
-				                      <input type="radio" name="format" value="${format}">
-				                        ${format} 
+				                      <input type="radio" name="format" value="${format}" required="required">
+				                        ${format.description} 
 				                           
 				                       </div> 
 								     </c:forEach>
@@ -51,8 +51,8 @@
                                                                 
 					             <c:forEach var="platform" items="${applicationScope.cache.platform}">
 					                <div class "radio">
-					                   <input type="radio" name="platform" value="${platform}"> 
-					                      ${platform}
+					                   <input type="radio" name="platform" value="${platform}" required="required"> 
+					                      ${platform.description}
 					                      
 					                </div>
 					             </c:forEach>
@@ -67,7 +67,8 @@
 				  <div class="modal-footer" style="display: none;" id="bottomButtons">
 					
 					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-				    <button type="button" class="btn" data-toggle="modal" href="#addResourceModal2" onclick="ajaxResourceAddSubmitModal1()">Ajouter</button>
+				    <%--<button type="submit" class="btn" data-toggle="modal" href="#addResourceModal2">Ajouter</button>--%>
+				    <input class="btn" type="submit" value="Ajouter" >
 				     
 				 </div>
 			</div>

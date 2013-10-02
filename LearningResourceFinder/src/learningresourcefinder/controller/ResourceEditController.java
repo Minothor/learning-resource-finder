@@ -86,7 +86,7 @@ public class ResourceEditController extends BaseController<Resource> {
         resourceRepository.merge(resource); 
         indexManager.update(resource);
         
-        return new MessageAndId(id,"ressource updaté");
+        return new MessageAndId(id,"La ressource a bien été ajoutée");
     }
 
     
