@@ -228,14 +228,11 @@ header {
 
 
 #donation_slide{
-	background:#8e44ad;
+	background:#84BB04;
 	width: auto;
 	height: auto;
 	clear:both;
 	padding: 20px calc(50% - 345px);
-	
-	
-	
 }
 
 #btn_soutien{}
@@ -248,7 +245,7 @@ header {
 	
 	width: auto;
 	height: auto;
-	background:#16a085;
+	background:#F28F10;
 	clear:both;
 	padding-top:20px;
 	padding-bottom:20px;
