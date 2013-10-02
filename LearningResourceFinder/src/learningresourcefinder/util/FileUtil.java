@@ -395,6 +395,9 @@ public abstract class FileUtil {
 
 	// pathStr is for example "c:/img/" with a slash at the end.
 	public static void renameFile(String pathStr, String oldFileName, String newFileName) {
+		if(!pathStr.endsWith("/")) {
+			pathStr += "/";
+		}
 		Path pathToFile = FileSystems.getDefault().getPath(pathStr + oldFileName);	
 		File fileToRename = pathToFile.toFile();		
 		pathToFile = FileSystems.getDefault().getPath(pathStr + newFileName);

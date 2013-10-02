@@ -12,9 +12,11 @@ $(document).ready( function() {
     				'Accept': 'application/json',
     				'Content-type': 'application/json'
     			},
-    			'url': 'resource/change',
+    			'url': '/resource/change',
     			'data': JSON.stringify(ids),
-    			'success': function(e) {} 
+    			'success': function(e) {
+    				location.reload();
+    			} 
     		});
     	}
 	});

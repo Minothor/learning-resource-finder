@@ -58,7 +58,10 @@ public class ResourceService {
 
 		int i = 1;	 
 		for(String imageNameFromList : imageNameList){
-			FileUtil.renameFile(directory + "", imageNameFromList + ".jpg-tmp", prefix+i+".jpg");
+			if(!imageNameFromList.endsWith(".jpg")) {
+				imageNameFromList += ".jpg";
+			}
+			FileUtil.renameFile(directory + "", imageNameFromList + "-tmp", prefix+i+".jpg");
 			i++;
 		}
 	}
