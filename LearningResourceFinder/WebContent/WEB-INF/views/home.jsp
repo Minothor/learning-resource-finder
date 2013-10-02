@@ -7,7 +7,7 @@
 
 <ul>
     <c:forEach items= "${applicationScope.cache.cycles}" var="cycle">
-       <li><a href="<c:url value='cycle?id=${cycle.id}'/>">${cycle.name}</a></li>
+       <li><a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}</a></li>
     </c:forEach>
 </ul>
   
