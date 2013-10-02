@@ -5,34 +5,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<title></title>
 </head>
 <body>
 <lrf:breadcrumb linkactive="${cycle.name}">
-		<lrf:breadcrumbelement label="Home" link="home" />
-		<lrf:breadcrumbelement label="Liste des cycles" link="cyclelist" />
-	</lrf:breadcrumb>
+		<lrf:breadcrumbelement label="home" link="home" />
+		<lrf:breadcrumbelement label="cycles" link="cyclelist" />
+</lrf:breadcrumb>
 
 
 
  <a href="<c:url value='cycleedit?id=${cycle.id}'/>">Edit Cycle</a>  <br>
 
-	<h2 class="">${ Cycle.name }</h2>
+<h1>${ Cycle.name }</h1>
 	<div class="row">
 		<c:forEach items="${listColumns}" var="cycleColumn">
 				<div class="col-xs-6 col-md-4"> 
 					<c:forEach items="${cycleColumn}" var="cycleitems">
 							<h2>${cycleitems.competence.name}</h2>
 							<c:forEach items="${cycleitems.children}" var="subitems">
-								<span class="">${subitems.competence.code }</span>
-								<a class="" href=""> 
-									<span class="">${subitems.competence.name }</span> 
-								</a></br>
+								<span style="font-size:120%">${subitems.competence.code }
+								<a href="searchresource?competenceid=${subitems.competence.getId()}">${subitems.competence.name }</span> 
+								</a></span></br>
 								<ul>
 									<c:forEach items="${subitems.children}" var="subsubitems">
 										<li>
-											${subsubitems.competence.code } <a href="">${subsubitems.competence.name}</a></br>
+											${subsubitems.competence.code }
+											<a href="searchresource?competenceid=${subsubitems.competence.getId()}">${subsubitems.competence.name}</a></br>
 										</li>
 									</c:forEach>
 								</ul>
