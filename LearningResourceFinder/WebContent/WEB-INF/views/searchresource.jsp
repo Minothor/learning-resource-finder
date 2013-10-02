@@ -93,12 +93,21 @@ window.onload = addLang;
 <title>Insert title here</title>
 </head>
 <body>
-
+	
 	<form:form modelAttribute="searchOptions" action="searchresourcesubmit">
+			  <div class="filterSubBlock">
+ 				  	 <c:if test="${searchOptions.competence != null}">
+								<lrf:competencepath competence="${searchOptions.competence}"/>
+								<input id="competenceIdHiddenField" name="competenceId" value="${searchOptions.competence.id }" type="hidden"/>
+				            	<button type="button" class="close" style="margin-top:-18px; margin-left:10px;" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="cliquer pour fermer">&times;</button> 
+				      </c:if>
+				</div>
+			
+			<br>
 		<div class="filterSubBlock">
 			<fieldset>
 				<c:forEach var="formats" items="${formatEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="format" value="${formats}" />${formats.description}
+					<label class="checkbox" style="margin-bottom:3px;"> <form:checkbox path="format" value="${formats}" />${formats.description}
 					</label>
 				</c:forEach>
 			</fieldset>
@@ -108,7 +117,7 @@ window.onload = addLang;
 		<div class="filterSubBlock">
 			<fieldset>
 				<c:forEach var="platform" items="${platformsEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="platform"	value="${platform}" />${platform.description}
+					<label class="checkbox" style="margin-bottom:3px;"> <form:checkbox path="platform"	value="${platform}" />${platform.description}
 					</label>
 				</c:forEach>
 			</fieldset>
@@ -117,22 +126,22 @@ window.onload = addLang;
 		<div class="filterSubBlock">
 			<fieldset>
 				<c:forEach var="nature" items="${natureEnumAllValues}">
-					<label class="checkbox"> <form:checkbox path="nature" value="${nature}" />${nature.description}
+					<label class="checkbox" style="margin-bottom:3px;"> <form:checkbox path="nature" value="${nature}" />${nature.description}
 					</label>
 				</c:forEach>
 			</fieldset>
 		</div>
-
-		<div class="filterSubBlock" style="max-width: 200px;">
+		<div class="filterSubBlock">
 			<fieldset>
-				<br> 
+				<form:input type="text" path="searchPhrase" style="width:150px; margin-top:10px" rel="tooltip" title="terme de votre recherche" />
+			<fieldset> 
+				<div class="dropdown" style="margin-right:33px">
 				<span id="lang1" class="label label-primary" style="display: inline">Français</span> 
 				<span id="lang2" class="label label-primary" style="display: none">Néerlandais</span>
 				<span id="lang3" class="label label-primary" style="display: none">Allemand</span>
 				<span id="lang4" class="label label-primary" style="display: none">Anglais</span>
 				<span id="lang5" class="label label-primary" style="display: none">Russe</span>
-				<div class="dropdown">
-					<br> <a data-toggle="dropdown" href="#"
+					<a data-toggle="dropdown" href="#"
 						onclick="$('#monMenu').show();">Changer</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
 						id="monMenu">
@@ -147,45 +156,25 @@ window.onload = addLang;
 					</ul>
 				</div>
 			</fieldset>
-		</div>
-		<div class="filterSubBlock">
-			<fieldset>
-				<div class="radio">
-					<label> <form:radiobutton  path="advertising" id="optionsRadio1" value="true"/> Oui
-					</label>
-				</div>
-				<div class="radio">
-					<label> <form:radiobutton  path="advertising" id="optionsRadio2" value="false"/> Non
-					</label>
-				</div>
 			</fieldset>
-		</div>
-
-		<div class="filterSubBlock">
+			<div class="filterSubBlock">
 			<fieldset>
+				<div style="margin-right:40px">
+					<label> <form:checkbox  path="advertising" id="optionsCheck" value="true" /> sans pub
+					</label>
+				</div>
+				<div>
 				<form:input type="text" path="maxDuration" style=" width:30px" rel="tooltip" title="durée maximale" /> minutes max.
-				
-			</fieldset>
-		</div>
-		<div class="filterSubBlock">
-			<fieldset>
-				<form:input type="text" path="searchPhrase" style="width:150px;" rel="tooltip" title="terme de votre recherche" />
-				
-			</fieldset>
-		</div>
-		<!-- 	if searchOptions.competence différent de null.... -->
-		
-			<c:if test="${searchOptions.competence != null}">
-				<div class="filterSubBlock">
-					<fieldset>
-						<lrf:competencepath competence="${searchOptions.competence}"/>
-						<input id="competenceIdHiddenField" name="competenceId" value="${searchOptions.competence.id }" type="hidden"/>
-					</fieldset>
-		            	<button type="button" class="close" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="cliquer pour fermer">&times;</button>
 				</div>
-			</c:if>
+				<br>
+				<button type="submit" class="btn btn-default">Filtrer</button>
+		</fieldset>
+		</div>
+		
+		</div>
+		
 		<input type="hidden" id="so" name="so" value="${timeStamp}" />
-		<button type="submit" class="btn btn-default">Filtrer</button>
+		
 		
 	</form:form>
 	
@@ -195,6 +184,7 @@ window.onload = addLang;
 			<lrftag:resource resource="${resource}"></lrftag:resource>
 		</div>
 	</c:forEach>
+
 	<c:choose>
 		<c:when test="${empty param.page}">
 			<c:set var="page" value="1"></c:set>
