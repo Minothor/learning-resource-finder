@@ -81,7 +81,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">ToujoursPlus</a>
+				<a href="/"><img src="images/ToujoursPlus-logo-100px.png"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
