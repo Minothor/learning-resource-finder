@@ -9,7 +9,9 @@ import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Format;
+import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
+import learningresourcefinder.search.SearchOptions.Platform;
 
 
 // Cache stored in the ServletContext and initialized when the web container starts.
@@ -19,9 +21,12 @@ public class Cache implements ServletContextListener {
     List <Cycle> cycles;  // We need to display cycles in the header (menu bar) on each page.
   
     Format[] format = SearchOptions.Format.values();  // We need them in the addResourceform includes in the header (via an included jsp) => we have no controller.
-   
+    Platform[] platform= SearchOptions.Platform.values();
     
-    //List<language> language=SearchOptions.Language.values(); 
+    Language[] language=SearchOptions.Language.values(); 
+
+   
+
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
@@ -61,6 +66,20 @@ public class Cache implements ServletContextListener {
     public void setFormat(Format[] format) {
         this.format = format;
     }
-
     
+    public Platform[] getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform[] platform) {
+        this.platform = platform;
+    }
+
+    public Language[] getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language[] language) {
+        this.language = language;
+    }
 }
