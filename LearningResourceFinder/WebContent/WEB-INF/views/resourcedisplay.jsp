@@ -95,7 +95,7 @@
 							    	Url :
 							    </label>
 							    <div class="col-lg-10">
-							      	<input type="text" class="form-control" id="url" name="url" />
+							      	<input type="text" class="form-control" id="urlResource" name="url" />
 								</div>
 							</div>
 							
