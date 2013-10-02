@@ -31,7 +31,7 @@ public class SearchResourceController extends BaseController<Resource> {
     
 	@RequestMapping("/searchresource")
 	public ModelAndView searchResource(Model model, 
-	        @RequestParam("searchphrase") String searchPhrase, 
+	        @RequestParam(value="searchphrase", required=false) String searchPhrase, 
 	        @RequestParam(value="page", required=false) Integer page, 
 	        @RequestParam(value="competenceid", required=false) Long competenceId,
 	        HttpSession session,
@@ -96,7 +96,7 @@ public class SearchResourceController extends BaseController<Resource> {
 		List<Resource> entities = searchService.getFilteredResources(searchResults, page, searchOptions);
 		mv.addObject("resourcelist", entities);
 
-		int numberOfResourceFound = entities.size();
+		int numberOfResourceFound = searchResults.size();
 		mv.addObject("numberResource", numberOfResourceFound); // tried to use fn:length in EL, but it did not work -- Thomas S 2013/09
 		
 		return mv;
