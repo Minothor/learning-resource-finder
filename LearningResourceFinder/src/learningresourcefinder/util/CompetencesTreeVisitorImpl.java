@@ -25,7 +25,7 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
         String labelCycle;
 
 
-        htmlResult += "<li>" + " " + competence.getCode() + " - " + competence.getName() + " ";
+        htmlResult += "<li>" + " " + competence.getCode() + " - <a href='searchresource?competenceid=" + competence.getId() + "'>" + competence.getName() + "</a> ";
 
         if(SecurityContext.isUserHasPrivilege(Privilege.MANAGE_COMPETENCE)){
     		htmlResult += "<small>";
