@@ -79,6 +79,7 @@ public class ResourceEditController extends BaseController<Resource> {
         Resource resource=getRequiredEntity(id);
         resource.setLanguage(language);
         resource.setDescription(description);
+        if (advertising == null) advertising = false;
         resource.setAdvertising(advertising);
         resource.setDuration(duration); 
         
