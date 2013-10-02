@@ -18,7 +18,6 @@ public abstract class BaseEntityWithShortId extends BaseEntity  {
     public abstract Long getId();
         
     public String getShortId() {
-
         return getOrComputeShortId();
     }
     

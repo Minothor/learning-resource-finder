@@ -12,7 +12,7 @@
 	<lrftag:breadcrumb linkactive="${playlist.name}">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
 		<lrftag:breadcrumbelement label="${current.user.userName}" link="/user/${current.user.userName}" />
-		<lrftag:breadcrumbelement label="Mes playlists" link="playlist/user/${current.user.userName}" />
+		<lrftag:breadcrumbelement label="Mes playlists" link="/playlist/user/${current.user.userName}" />
 	</lrftag:breadcrumb>
 	
 	<div class="container">
@@ -21,7 +21,7 @@
 			<c:if test="${canEdit}">
 			<a class="btn btn-default" href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
 			</c:if>
-			<a class="btn btn-default"  href="playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a> 
+			<a class="btn btn-default"  href="/playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a> 
 			<a class="btn btn-default" href=<c:url value='/ressourcelist'/>>Vers l'arborescence des ressources</a>
 		</div>
 		<br />
