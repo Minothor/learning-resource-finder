@@ -4,17 +4,29 @@
 	<section id="footer-main">
 		<div class="container">
 			<div class="row">
-        		<div class="col-md-4">
-          			<h4>About Us</h4>
-          			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        		<div class="col-md-3">
+        			<h4><a href="/"><img src="images/ToujoursPlus-logo-footer.png"></a></h4>
+					<p>ToujoursPlus.be permet aux élèves et professeurs de trouver facilement les meilleures cours, jeux éducatifs et vidéos sur internet. 
+					Il facilite la pédagogie différenciée et le rattrapage scolaire.
+					</p> 
+				</div>
+        		<div class="col-md-3">
+          			<h4>Contribuer</h4>
+          			<p>
+          			<a href="/ressourcelist">Ressource</a>
+          			</p>
         		</div>
-        		<div class="col-md-4">
-          			<h4>Recent News</h4>
-          			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        		<div class="col-md-3">
+          			<h4>Compétence</h4>
+          			<p>
+          			<a href="/cyclelist">Compétence</a>
+          			</p>
         		</div>
-        		<div class="col-md-4">
-          			<h4>Latest Tweets</h4>
-          			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        		<div class="col-md-3">
+          			<h4>Playlist</h4>
+          			<p>
+          			<a href="playlist/all">Playlist</a>
+          			</p>
         		</div>
       		</div>
       	</div>
@@ -22,7 +34,7 @@
 	
 	<section id="footer">
 		<div class="container">
-			<p>©2013 ToujoursPlus.be - Create By XXX</p>
+<!-- 			<p>©2013 ToujoursPlus.be - Create By XXX</p> -->
 		</div>
 	</section>
 </footer>
