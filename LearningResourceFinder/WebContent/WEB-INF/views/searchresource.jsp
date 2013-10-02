@@ -195,15 +195,33 @@ window.onload = addLang;
 			<lrftag:resource resource="${resource}"></lrftag:resource>
 		</div>
 	</c:forEach>
-	
-	<ul class="pagination">
-			
-  <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${param.page-1}&so=${timeStamp}">&laquo;</a></li>
-  <c:forEach begin="1" end="${numberResource}" varStatus="loop">
-    <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${loop.index}&so=${timeStamp}">${loop.index}</a></li>
-</c:forEach>
-  <li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${param.page+1}&so=${timeStamp}">&raquo;</a></li>
-</ul>
-	
+	<c:choose>
+		<c:when test="${empty param.page}">
+			<c:set var="page" value="1"></c:set>
+		</c:when>
+		<c:otherwise>
+			<c:set var="page" value="${param.page}">
+			</c:set>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when test="${numberResource>0}">
+			<ul class="pagination">
+				<c:if test="${page>1}">
+					<li><a
+						href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page-1}&so=${timeStamp}">&laquo;</a></li>
+				</c:if>
+				<c:forEach begin="1" end="${numberResource}" varStatus="loop">
+					<li><a
+						href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${loop.index}&so=${timeStamp}">${loop.index}</a></li>
+				</c:forEach>
+				<c:if test="${page != numberResource}">
+				<li><a
+					href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page+1}&so=${timeStamp}">&raquo;</a></li>
+				</c:if>
+			</ul>
+		</c:when>
+	</c:choose>
 </body>
 </html>
