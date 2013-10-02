@@ -25,7 +25,7 @@ public class CycleDisplayController extends BaseController<Cycle> {
         CompetenceNode root = competenceNodeService.buildCompetenceNodeTree(cycle);
         List<List<CompetenceNode>> listToShow =  competenceNodeService.splitCompetenceNodesInColumns(root);
         mv.addObject("listColumns",listToShow);
-        mv.addObject("Cycle",cycle);
+        mv.addObject("cycle",cycle);
         return mv;
     }
 }

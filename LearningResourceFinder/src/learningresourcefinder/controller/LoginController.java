@@ -104,7 +104,7 @@ public class LoginController extends BaseController<User> {
         } catch (Exception e) {
             log.error("Exception during social login callback (while contacting "+providerId+" to get the e-mail address)", e);
             NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+" pour obtenir votre adress e-mail afin de vous connecter sur notre site. Veuillez vous connecter d'une autre manière ou réessayer plus tard.",Status.ERROR);
-            return "redirect:login";
+            return "redirect:/";
         }
 
         ///// Get the e-mail & user from e-mail

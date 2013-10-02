@@ -12,11 +12,9 @@
 		<lrf:breadcrumbelement label="cycles" link="cyclelist" />
 </lrf:breadcrumb>
 
-
-
  <a href="<c:url value='/cycleedit?id=${cycle.id}'/>">Edit Cycle</a>  <br>
 
-<h1>${ Cycle.name }</h1>
+<h1>${ cycle.name }</h1>
 	<div class="row">
 		<c:forEach items="${listColumns}" var="cycleColumn">
 				<div class="col-xs-6 col-md-4"> 

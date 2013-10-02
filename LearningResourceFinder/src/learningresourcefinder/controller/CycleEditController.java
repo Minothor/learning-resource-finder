@@ -2,6 +2,8 @@ package learningresourcefinder.controller;
 
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
+import learningresourcefinder.security.Privilege;
+import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.web.Cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,12 @@ public class CycleEditController extends BaseController<Cycle> {
 
     @RequestMapping("/cyclecreate")
     public ModelAndView cycleCreate() {
+        SecurityContext.assertUserHasPrivilege(Privilege.MANAGE_COMPETENCE);
         return prepareModelAndView(new Cycle());
     }
     @RequestMapping("/cycleedit")
     public ModelAndView cycleEdit(@RequestParam("id") long id){
+        SecurityContext.assertUserHasPrivilege(Privilege.MANAGE_COMPETENCE);
         Cycle cycle=(Cycle)getRequiredEntity(id,Cycle.class);
         return prepareModelAndView(cycle);
     }
@@ -36,6 +40,7 @@ public class CycleEditController extends BaseController<Cycle> {
  
     @RequestMapping("/cycleeditsubmit")
     public ModelAndView cycleEditSubmit( @ModelAttribute Cycle cycle, BindingResult bindingResult){
+        SecurityContext.assertUserHasPrivilege(Privilege.MANAGE_COMPETENCE);
 
         if (bindingResult.hasErrors()) { // If spring has detected validation errors, we redisplay the form.
             return new ModelAndView ("cycleedit", "cycle", cycle);
