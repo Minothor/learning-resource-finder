@@ -94,7 +94,7 @@ window.onload = addLang;
 </head>
 <body>
 	
-	<form:form modelAttribute="searchOptions" action="searchresourcesubmit">
+	<form:form modelAttribute="searchOptions" action="searchresourcesubmit" method="get">
 			  <div class="filterSubBlock">
  				  	 <c:if test="${searchOptions.competence != null}">
 								<lrf:competencepath competence="${searchOptions.competence}"/>

@@ -187,7 +187,7 @@
 				</c:choose>  <%-- Login / Register / Profile --%>
 				
 				<%-- Search --%>
-				<form class="navbar-form navbar-right" role="search" method="post" action="search">
+				<form class="navbar-form navbar-right" role="search" method="get" action="search">
 				   <div class="form-group">
 					<div class="input-group" style="width:150px;">
 						<input name="searchphrase" id="search" style="min-width:150px; width:150px" type="text" class="form-control" placeholder="Recherche" required>
