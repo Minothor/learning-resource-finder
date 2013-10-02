@@ -33,6 +33,6 @@
 			souhaite rester connecté</span> <br />
 
 
-	</label> J'ai <a href="resendpassword">oublié mon mot de passe</a> <br /> 
+	</label> J'ai <a href="/resendpassword">oublié mon mot de passe</a> <br /> 
 	<input id="ryc" class="image-login" type="submit" value="me connecter" />
 </form>
