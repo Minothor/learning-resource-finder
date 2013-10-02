@@ -91,7 +91,7 @@
 					<li class="dropdown">
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a id="addResourceLink">Créer une ressource </a></li>
+							<li><a id="addResourceLink">Ajouter une ressource </a></li>
 					   </ul>
 					</li>
 					
