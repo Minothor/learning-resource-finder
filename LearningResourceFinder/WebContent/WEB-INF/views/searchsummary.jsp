@@ -50,7 +50,7 @@
 	<br />
 	<c:if test="${numberResource>5}">
 	<div>
-	<a href="searchresource?searchphrase=${searchPhrase}">${numberResource-5} more</a>
+	<a href="/searchresource?searchphrase=${searchPhrase}">${numberResource-5} more</a>
 	</div>
 	</c:if>
 	<br />
@@ -92,7 +92,7 @@
 							
 	<c:forEach items="${competenceList}" var="competence">
 		<div style="float: left; position: relative; padding-left: 5px; margin-top: 10px;">
-			<a href="searchresource?searchphrase=${searchPhrase}&competenceid=${competence.getId()}"><lrf:competencepath competence="${competence}"/></a>	
+			<a href="/searchresource?searchphrase=${searchPhrase}&competenceid=${competence.getId()}"><lrf:competencepath competence="${competence}"/></a>	
 		</div>
 	</c:forEach>
 
