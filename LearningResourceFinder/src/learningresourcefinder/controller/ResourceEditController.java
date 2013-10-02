@@ -2,6 +2,7 @@ package learningresourcefinder.controller;
 
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
@@ -39,7 +40,7 @@ public class ResourceEditController extends BaseController<Resource> {
     @RequestMapping("/ajax/resourceaddsubmit1")
 //	public @ResponseBody String resourceAddSubmit() {
 	public @ResponseBody MessageAndId resourceAddSubmit(@RequestParam(value="url", required=false) String url, @RequestParam(value="title",required=false) String title,
-	        @RequestParam(value="format",required=false) Format format, @RequestParam(value="platform",required=false) Platform platform ) {
+	        @RequestParam(value="format",required=true) Format format, @RequestParam(value="platform",required=true) Platform platform, @RequestParam(value="topic",required=true) Topic topic) {
         SecurityContext.assertUserIsLoggedIn();
    
         Resource resource = new Resource();
@@ -49,7 +50,8 @@ public class ResourceEditController extends BaseController<Resource> {
         resource.setSlug(slug);
         resource.setFormat(format);
         resource.setPlatform(platform);
-
+        resource.setTopic(topic);
+        
         UrlResource urlResource = new UrlResource();
         urlResource.setName(title);
         urlResource.setUrl(url);
@@ -67,7 +69,7 @@ public class ResourceEditController extends BaseController<Resource> {
         return new MessageAndId(resource.getId(), "ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
     }
     
-    @RequestMapping("ajax/resourceaddsubmit2")
+    @RequestMapping("/ajax/resourceaddsubmit2")
     public @ResponseBody MessageAndId resourceAddSubmit2(@RequestParam(value="description",required=false)String description,
             @RequestParam(value="idresource",required=false) Long id,
             @RequestParam(value="language",required=false) Language language,

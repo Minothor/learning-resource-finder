@@ -6,6 +6,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import learningresourcefinder.model.Cycle;
+import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Format;
@@ -25,8 +27,16 @@ public class Cache implements ServletContextListener {
     
     Language[] language=SearchOptions.Language.values(); 
 
-   
+   Topic[] topic = Resource.Topic.values();
 
+
+    public Topic[] getTopic() {
+    return topic;
+}
+
+public void setTopic(Topic[] topic) {
+    this.topic = topic;
+}
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {

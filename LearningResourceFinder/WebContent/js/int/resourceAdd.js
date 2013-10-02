@@ -1,5 +1,6 @@
  $(document).ready(function() {
 	  $('#addResourceForm1').submit(ajaxResourceAddSubmitModal1);
+	  $('#addResourceForm2').submit(ajaxResourceAddSubmitModal2);
  });
    
    
@@ -82,8 +83,8 @@ function ajaxResourceAddSubmitModal1(e) {
 				}
 			});
 }
-function ajaxResourceAddSubmitModal2(){
-	
+function ajaxResourceAddSubmitModal2(e){
+	e.preventDefault();
 	$.ajax({
 		type : "POST",
 		url : '/ajax/resourceaddsubmit2',
