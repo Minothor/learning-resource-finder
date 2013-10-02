@@ -8,7 +8,7 @@
 <%@ attribute name="title"  required="true" type="java.lang.String" %>
 
 <div data-id="${id}">
-	<a href="#" id="${id}" class="btn popover-link pop" rel="popover" data-original-title="Voter pour : ${title}" style="outline:none;box-shadow:none">
+	<a href="#" id="${id}" class="btn popover-link pop" rel="popover" data-original-title="Voter pour : ${title}" style="outline:none;box-shadow:none;padding:0;">
 		<ul class="score">	
 	<c:forEach var="i" begin="0" end="4" step="1" varStatus ="status">
 		<c:choose>
@@ -24,7 +24,7 @@
 	</a>
 	
 	<div class="pop_display" data-container="${id}" style="display:none;">
-	    <div class="pop_content" data-container="${id}">
+	    <div class="pop_content" data-container="${id}" style="min-width:276px;">
 	        <form action="#" method="post">
 	            <input class="rating" data-max="4" data-min="0" value="<fmt:formatNumber value='${scoreUser - 1}'/>" name="rating" type="number" />
 	        </form>

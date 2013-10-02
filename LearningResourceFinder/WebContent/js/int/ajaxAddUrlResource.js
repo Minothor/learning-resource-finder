@@ -4,10 +4,10 @@ function ajaxPostUrlResource() {
 	var name = $('#name').val();
 	var url  = $('#url').val();
 	var idresource = $('#idresource').val();
-			
+	alert(url);		
 	$.ajax({
 		type : "POST",
-	    url : 'ajax/addurl',
+	    url : '/ajax/addurl',
 	    data: "idresource="+idresource+"&name="+name+"&url="+url,
 	    success : function(data) {
 	    	$('#response').html(data);

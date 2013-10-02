@@ -12,8 +12,8 @@
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${resource.name}">
-		<lrftag:breadcrumbelement label="Home" link="home" />
-		<lrftag:breadcrumbelement label="Ressource" link="ressourcelist" />
+		<lrftag:breadcrumbelement label="Home" link="/home" />
+		<lrftag:breadcrumbelement label="Ressource" link="/ressourcelist" />
 	</lrftag:breadcrumb>
 	<div class="container">
 		<lrftag:pageheadertitle title="${resource.name}"/>
@@ -30,9 +30,11 @@
 					  	<dd><a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a></dd>
 					</dl>
 					<br />
+					<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" />
+					<br />
 					<c:if test="${canEdit}">
 					<h4>Options :</h4>	
-					<a class="btn btn-primary" href="<c:url value='resourceedit?id=${resource.id}'/>">Edit resource</a>
+					<a class="btn btn-primary" href="<c:url value='/resourceedit?id=${resource.id}'/>">Edit resource</a>
 					</c:if>
 					<br />
 					<br />
@@ -51,7 +53,7 @@
 							<tr>
 								<td>${url.name}</td>
 								<td><a href="${url.url}">${url.url}</a></td>
-								<td><a href="<c:url value='removeurlresource?id=${url.id}'/>">Supprimer</a></td>
+								<td><a href="<c:url value='/removeurlresource?id=${url.id}'/>">Supprimer</a></td>
 							</tr>	
 						</c:forEach>
 						</table>
@@ -104,7 +106,7 @@
 				    	<div class="modal-footer">
 				    		<input type="hidden" name="idresource" id="idresource" value="${resource.id}" />
 			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
-			          		<button type="button" class="btn btn-primary closeModal btnSubmit" onclick="ajaxPostUrlResource()">Sauver le lien</button>
+			          		<button type="button" class="btn btn-primary closeModal btnSubmit" onclick="ajaxPostUrlResource();">Sauver le lien</button>
 			        	</div>
 				    </form>
 		      	</div><!-- /.modal-content -->

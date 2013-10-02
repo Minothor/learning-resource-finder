@@ -10,6 +10,9 @@ height: 200px;
  ">
 <a href="/resource/${resource.shortId}/${resource.slug}">
 	${resource.name}<br />
-   <p style="font-size: 10px;"><i>${resource.description}</i></p><br />
+   <p style="font-size: 10px;"><i>${resource.description}</i></p>
+   <br />
+   <br />
+   
 </a>
 </div>

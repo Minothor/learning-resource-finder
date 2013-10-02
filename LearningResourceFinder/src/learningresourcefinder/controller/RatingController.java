@@ -26,6 +26,7 @@ public class RatingController extends BaseController<Rating> {
         Resource resource = resourceRepository.find(idResource);
         
         Rating rating = ratingRepository.getRatingForUserAndResource(resource,SecurityContext.getUser());
+        
         if (rating == null) {
         	rating = new Rating((double)score, resource, SecurityContext.getUser());
         	ratingRepository.persist(rating);

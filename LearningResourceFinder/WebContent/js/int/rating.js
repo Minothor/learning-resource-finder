@@ -41,9 +41,7 @@ $(document).ready(function(){
     		url: "ajax/rateresource",
     		data: "idresource="+currentID+"&score="+score,
     		success: function(data) {
-    			//alert(data);
     			location.reload();
-    			//$('div[data-id='+currentID+']' ).replaceWith(data);
     		},
     		error: function(data) {
     			alert('Vote Erreur');
