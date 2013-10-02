@@ -88,14 +88,19 @@ public class LoginController extends BaseController<User> {
 	// In loginSocial, we redirect to facebook or google. Then FB or google tells the browser to redirect here.
 	@RequestMapping(value = "/loginsocialcallback")
 	public String loginSocialCallback(HttpSession session, HttpServletRequest request) {
-
+		log.error("On est passé : par là HAHAHA !!");
         SocialAuthManager socialAuthManager = (SocialAuthManager) session.getAttribute("socialmanager");
+        session.removeAttribute("socialmanager");
+        if (socialAuthManager == null) {
+        	throw new RuntimeException("socialAuthManager is not supposed to be null in the callback");
+        }
         
         // The following line does not work. We'd need to access SocialAuthManager.providerId which is private. 
         // String providerId = socialAuthManager.getCurrentAuthProvider().getProviderId();  // "facebook" or "google"
         // ==> We have been forced to store the providerId separately in the session.
-
         String providerId = (String) session.getAttribute("providerId");
+        session.removeAttribute("providerId");
+        
         // Contacting Facebook or Google to get the user's e-mail 
         Map<String, String> paramsMap = SocialAuthUtil.getRequestParametersMap(request);
         Profile profile = null;
