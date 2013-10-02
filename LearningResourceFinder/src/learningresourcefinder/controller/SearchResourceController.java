@@ -96,7 +96,7 @@ public class SearchResourceController extends BaseController<Resource> {
 		List<Resource> entities = searchService.getFilteredResources(searchResults, page, searchOptions);
 		mv.addObject("resourcelist", entities);
 
-		int numberOfResourceFound = searchResults.size();
+		int numberOfResourceFound = entities.size();
 		mv.addObject("numberResource", numberOfResourceFound); // tried to use fn:length in EL, but it did not work -- Thomas S 2013/09
 		
 		return mv;
