@@ -1,3 +1,8 @@
+ $(document).ready(function() {
+	  $('#addResourceForm1').submit(ajaxResourceAddSubmitModal1);
+ });
+   
+   
 // Sends an ajax request for the user who wants to upload an image from an URL (text field).
 function ajaxVerifyUrl() {
 	var url = $('#url').val();
@@ -58,26 +63,18 @@ function toggleForm() {
 	$("#urlCheckButton").toggle();
 }
 
-function ajaxResourceAddSubmitModal1() {
+function ajaxResourceAddSubmitModal1(e) {
+	e.preventDefault();
 	$.ajax({
 				type : "POST",
-				url : 'ajax/resourceaddsubmit1',
+				url : '/ajax/resourceaddsubmit1',
 				data : $("#addResourceForm1").serialize(),
 				success : function(messageAndId) {
-					alert(messageAndId.id);
-					//showNotificationText(messageAndId.message);  // function defined in header.jsp
-					$('#addResourceModal1').modal('hide');
-					
+					$('#addResourceModal1').modal('hide');			
 					$('#addResourceModal2').modal('show');
-					// Hide and clear modal 1
-					//setTimeout(function(){$('#addResourceModal1').modal('hide')}, 10)
-					
-//					clearForm();
-//					toggleForm();
-					
+
 					// Fill and show modal 2
 					$('#idresource').val(messageAndId.id);
-	//setTimeout(function(){$('#addResourceModal2').modal('show')}, 900)
 				},
 				error : function(data) {
 					alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
@@ -89,19 +86,11 @@ function ajaxResourceAddSubmitModal2(){
 	
 	$.ajax({
 		type : "POST",
-		url : 'ajax/resourceaddsubmit2',
+		url : '/ajax/resourceaddsubmit2',
 		data : $("#addResourceForm2").serialize(),
 		success : function(messageAndId) {
-			alert(messageAndId.id);
-			//showNotificationText(messageAndId.message);  // function defined in header.jsp
-			
-			
-			
-			// Hide and clear modal 1
-	
-			// Fill and show modal 2
-			
-//setTimeout(function(){$('#addResourceModal2').modal('show')}, 900)
+			showNotificationText(messageAndId.message);
+			$('#addResourceModal2').modal('hide');
 		},
 		error : function(data) {
 			alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
