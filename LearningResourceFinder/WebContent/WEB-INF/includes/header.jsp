@@ -144,8 +144,12 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle"data-toggle="dropdown">Connexion <b class="caret"></b></a>
 							  <div class="dropdown-menu"style="padding: 15px; padding-bottom: 0px;">
-							  	<button data-icon="&#xe005;" type="submit"	class="btn btn-google btn-block" id="login-googleplus">Connexion avec Google</button>
-								<button data-icon="&#xe000;" type="submit"	class="btn btn-facebook btn-block" id="login-facebook">Connexion avec Facebook</button>
+								<button data-icon="&#xe005;" type="button" class="btn btn-google btn-block connectionGoogle">
+									Connexion avec Google
+								</button>
+								<button data-icon="&#xe000;" type="button" class="btn btn-facebook btn-block connectionFacebook">
+									Connexion avec Facebook
+								</button>
 								<form action="javascript:ajaxlogin()" method="post"  style="width: 200px;">
 									<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
 									<input class="form-control" style="margin-bottom: 15px;"type="text" onKeyPress="submitenter(this,event)" placeholder="Username" id="userNameOrMail"name="userNameOrMail"> 
