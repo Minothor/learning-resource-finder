@@ -14,7 +14,7 @@
 
 
 
- <a href="<c:url value='cycleedit?id=${cycle.id}'/>">Edit Cycle</a>  <br>
+ <a href="<c:url value='/cycleedit?id=${cycle.id}'/>">Edit Cycle</a>  <br>
 
 <h1>${ Cycle.name }</h1>
 	<div class="row">
