@@ -25,7 +25,7 @@
 		<lrftag:pageheadertitle title="${user.firstName} ${user.lastName}"/>
 		<br />
 		<div >
-	    <form:form action="user/editsubmit" modelAttribute="user" class="form-horizontal" role="form">
+	    <form:form action="/user/editsubmit" modelAttribute="user" class="form-horizontal" role="form">
 	    
 	    <c:choose>
 	    	<c:when test="${canChangeUserName}"><%-- Only an admin can modify name of a certified user --%>
