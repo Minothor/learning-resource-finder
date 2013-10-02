@@ -158,18 +158,17 @@ window.onload = addLang;
 			</fieldset>
 			</fieldset>
 			<div class="filterSubBlock">
-			<fieldset>
-				<div style="margin-right:40px">
-					<label> <form:checkbox  path="advertising" id="optionsCheck" value="true" /> sans pub
-					</label>
-				</div>
-				<div>
-				<form:input type="text" path="maxDuration" style=" width:30px" rel="tooltip" title="durée maximale" /> minutes max.
-				</div>
-				<br>
-				<button type="submit" class="btn btn-default">Filtrer</button>
-		</fieldset>
-		</div>
+				<fieldset>
+					<div style="margin-right:40px">
+						<label> <form:checkbox  path="advertising" id="optionsCheck" value="true" /> sans pub</label>
+					</div>
+					<div>
+						<form:input type="text" path="maxDuration" style=" width:30px" rel="tooltip" title="durée maximale" /> minutes max.
+					</div>
+					<br>
+					<button type="submit" class="btn btn-default">Filtrer</button>
+				</fieldset>
+			</div>
 		
 		</div>
 		
@@ -199,8 +198,7 @@ window.onload = addLang;
 		<c:when test="${numberResource>0}">
 			<ul class="pagination">
 				<c:if test="${page>1}">
-					<li><a
-						href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page-1}&so=${timeStamp}">&laquo;</a></li>
+					<li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page-1}&so=${timeStamp}">&laquo;</a></li>
 				</c:if>
 				<c:forEach begin="1" end="${numberResource}" varStatus="loop">
 					<li><a
