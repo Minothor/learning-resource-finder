@@ -103,10 +103,21 @@
                           
                           <li role="presentation" class="divider"></li>
                           <li><a href="<c:url value='/competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a> </li>
-                          <li><a href="<c:url value='/competencetree?rootCode=terminale'/>">Terminales (3-6 secondaire)</a> </li>
+                          <li><a href="<c:url value='/competencetree?rootCode=term'/>">Terminales (3-6 secondaire)</a> </li>
                     						
 					    </ul>
-					 </li> 
+					 </li>
+					 
+					 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PlayLists <b class="caret"></b></a> 
+					    <ul class="dropdown-menu"> 
+                          <li><a href="/playlist/all">Toutes les PlayLists</a> </li>
+                          <c:choose>
+                          	<c:when test="${current.user!=null}">
+                          	<li><a href="playlist/user/${current.user.userName}">Mes PlayLists</a></li>
+                    	  </c:when>	
+                    	</c:choose>			
+					    </ul>
+					 </li> 	 
 				</ul>
 
 

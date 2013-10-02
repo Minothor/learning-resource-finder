@@ -22,11 +22,22 @@
 	</script>
 </head>
 <body>
-	<lrftag:breadcrumb linkactive="Edition">
+   <c:choose>
+	<c:when test="${playlist.id==null}">
+	  <lrftag:breadcrumb linkactive="créer une playlist">
+		<lrftag:breadcrumbelement label="Home" link="/home" />
+		<lrftag:breadcrumbelement label="${current.user.userName}" link="/user/${current.user.userName}" />
+	  </lrftag:breadcrumb>
+	</c:when>
+	<c:otherwise>
+	  <lrftag:breadcrumb linkactive="édition">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
 		<lrftag:breadcrumbelement label="${current.user.userName}" link="/user/${current.user.userName}" />
 		<lrftag:breadcrumbelement label="${playlist.name}" link="playlist/${playlist.shortId}/${playlist.slug}" />
-	</lrftag:breadcrumb>
+	  </lrftag:breadcrumb>
+	</c:otherwise>
+</c:choose>
+	 
 	
 	<div class="container">
 		
