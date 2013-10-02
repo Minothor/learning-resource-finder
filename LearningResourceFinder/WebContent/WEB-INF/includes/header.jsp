@@ -4,45 +4,47 @@
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ page import="learningresourcefinder.util.NotificationUtil.Status" %>
 
-<script type="text/javascript" src="/js/int/resourceAdd.js"></script>
+
 <script type="text/javascript" src="/js/int/ajaxLogin.js"></script>
+
+
+<script>
+  $(document).ready(function() {
+		<c:if test="${!empty sessionScope.notifications}">
+		   showNotificationArea();
+		</c:if>
+	});
 	
-	<script>
-	  $(document).ready(function() {
-			<c:if test="${!empty sessionScope.notifications}">
-			   showNotificationArea();
-			</c:if>
+ 	function showNotificationArea() {	
+		$("#notificationArea").slideDown(); // Was hidden at the beginning.
+	}
+	
+	
+ 	// Call this method if you want to display a notification text from JavaScript code.
+	function showNotificationText(message) {
+		$("#notificationText").html(message);
+		showNotificationArea();
+	}
+	
+	
+	$(document).ready(function() {
+	 	$("#registerLink").click(function(e) {
+	 	    e.preventDefault();// prevent the default anchor functionality
+	 	    $('#loginDropDown').dropdown('toggle');
+	 	    $('#registerDropDown').dropdown('toggle');
+	 	    $('#email').focus();
 		});
-		
-	 	function showNotificationArea() {	
-			$("#notificationArea").slideDown(); // Was hidden at the beginning.
-		}
-		
-	 	// Call this method if you want to display a notification text from JavaScript code.
-		function showNotificationText(message) {
-			$("#notificationText").html(message);
-			showNotificationArea();
-		}
-		
-		
-		$(document).ready(function() {
-		 	$("#registerLink").click(function(e) {
-		 	    e.preventDefault();// prevent the default anchor functionality
-		 	    $('#loginDropDown').dropdown('toggle');
-		 	    $('#registerDropDown').dropdown('toggle');
-		 	    $('#email').focus();
-			});
-		 	
-		 	$("#addResourceLink").click(function(e) {
-		 	    e.preventDefault();// prevent the default anchor functionality
-		 	    e.stopPropagation();
-		 	    <lrftag:loggedin yes='$("#addResourceModal").modal("show");'
-			 	    no='$("#loginDropDown").dropdown("toggle");'/>
-			});
-		 	
+	 	
+	 	$("#addResourceLink").click(function(e) {
+	 	    e.preventDefault();// prevent the default anchor functionality
+	 	    e.stopPropagation();
+	 	    <lrftag:loggedin yes='$("#addResourceModal1").modal("show");'
+		 	    no='$("#loginDropDown").dropdown("toggle");'/>
 		});
-		</script>
-		
+	 	
+	});
+</script>
+
 <%-- ********** NOTIFICATIONS ************** --%>
 	<div id="notificationArea" 
 		 class="${sessionScope.notifications[0].status.name}"
@@ -58,6 +60,8 @@
 		</span>
 		<% session.removeAttribute("notifications"); %>  <%-- once displayed, we take it out from the session. --%>
 	</div>
+
+
 
 
 
@@ -87,7 +91,7 @@
 					<li class="dropdown">
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a id="addResourceLink">Créer une ressource</a></li>
+							<li><a id="addResourceLink">Créer une ressource </a></li>
 					   </ul>
 					</li>
 					
@@ -99,20 +103,10 @@
                           
                           <li role="presentation" class="divider"></li>
                           <li><a href="<c:url value='competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a> </li>
-                          <li><a href="<c:url value='competencetree?rootCode=term'/>">Terminales (3-6 secondaire)</a> </li>
+                          <li><a href="<c:url value='competencetree?rootCode=terminale'/>">Terminales (3-6 secondaire)</a> </li>
                     						
 					    </ul>
 					 </li> 
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PlayLists <b class="caret"></b></a> 
-					    <ul class="dropdown-menu"> 
-                          <li><a href="/playlist/all">Toutes les PlayLists</a> </li>
-                          <c:choose>
-                          	<c:when test="${current.user!=null}">
-                          	<li><a href="playlist/user/${current.user.userName}">Mes PlayLists</a></li>
-                    	  </c:when>	
-                    	</c:choose>			
-					    </ul>
-					 </li> 					 
 				</ul>
 
 
@@ -197,46 +191,7 @@
 
 
 
-<!-- Modal for adding a resource (invisible until button clicked) -->
-<div class="modal fade" id="addResourceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		<form id="addResourceForm" role="form" method="post" action="resourceaddsubmit">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Ajouter une ressource</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-horizontal">
-						<div class="form-group">
-	                        <label for="url">site</label> 
-	                        <input type="text" class="form-control" id="url" name="url" placeholder="http://...">
-	                        <div class="pull-right"> 
-	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
-							</div>
-							<span class="help-block">URL vers le site que vous désirez ajouter.</span>
-							
-						</div>
-
-						<div id="addResourceFormPart2" style="display:none;">  <%-- will not be displayed until the url is valid --%>
-							
-						</div>
-					</div>
-                  </div>
-				  <div class="modal-footer" style="display: none;" id="bottomButtons">
-					
-					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-					<button type="button" class="btn btn-primary" onclick="ajaxResourceAddSubmit()" >Ajouter</button>
-				  </div>
-			</div>
-			<!-- /.modal-content -->
-		</form>
-	    </div>
-		<!-- /.modal-dialog -->
-</div>
-<!-- /.modal --> 
-
-
+<%@include  file="/WEB-INF/includes/addresourceform.jsp" %>
 
 
 
