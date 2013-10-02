@@ -17,3 +17,12 @@ alter table resource
         
 ALTER TABLE resource RENAME score  TO avgratingscore;
 ALTER TABLE resource RENAME counter  TO countrating;
+
+
+>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE
+>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE
+>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE
+>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE
+>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE
+>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE
+>>>>>>>>>>>>>>>>>>>>>>  DEPLOYED = STOP USING THIS FILE
