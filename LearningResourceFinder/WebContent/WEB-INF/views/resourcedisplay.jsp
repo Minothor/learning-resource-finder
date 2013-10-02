@@ -95,7 +95,7 @@
 							    	Url :
 							    </label>
 							    <div class="col-lg-10">
-							      	<input type="text" class="form-control" id="urlResource" name="url" />
+							      	<input type="text" class="form-control" id="urlResource" name="urlResource" />
 								</div>
 							</div>
 							
@@ -104,7 +104,7 @@
 				    	</div>
 				    	
 				    	<div class="modal-footer">
-				    		<input type="hidden" name="idresource" id="idresource" value="${resource.id}" />
+				    		<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
 			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
 			          		<button type="button" class="btn btn-primary closeModal btnSubmit" onclick="ajaxPostUrlResource();">Sauver le lien</button>
 			        	</div>

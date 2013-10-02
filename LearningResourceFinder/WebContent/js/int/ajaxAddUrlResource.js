@@ -3,7 +3,7 @@
 function ajaxPostUrlResource() {
 	var name = $('#name').val();
 	var url  = $('#urlResource').val();
-	var idresource = $('#idresource').val();	
+	var idresource = $('#idResource').val();
 	$.ajax({
 		type : "POST",
 	    url : '/ajax/addurl',
