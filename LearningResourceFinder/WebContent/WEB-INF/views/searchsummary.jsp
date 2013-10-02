@@ -48,7 +48,11 @@
 	<br />
 	<br />
 	<br />
-	<a href="searchresource?searchphrase=${searchPhrase}">${fn:length(searchResultsMore)}</a>
+	<c:if test="${numberResource>5}">
+	<div>
+	<a href="searchresource?searchphrase=${searchPhrase}">${numberResource-5} more</a>
+	</div>
+	</c:if>
 	<br />
 	<br />
 	<br />
