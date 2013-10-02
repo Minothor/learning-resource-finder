@@ -33,7 +33,7 @@
 	  <lrftag:breadcrumb linkactive="édition">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
 		<lrftag:breadcrumbelement label="${current.user.userName}" link="/user/${current.user.userName}" />
-		<lrftag:breadcrumbelement label="${playlist.name}" link="playlist/${playlist.shortId}/${playlist.slug}" />
+		<lrftag:breadcrumbelement label="${playlist.name}" link="/playlist/${playlist.shortId}/${playlist.slug}" />
 	  </lrftag:breadcrumb>
 	</c:otherwise>
 </c:choose>
