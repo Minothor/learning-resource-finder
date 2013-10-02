@@ -38,7 +38,7 @@ $(document).ready(function(){
     	var score = $(this).attr('data-value');   	
     	$.ajax({
     		type: "POST",
-    		url: "ajax/rateresource",
+    		url: "/ajax/rateresource",
     		data: "idresource="+currentID+"&score="+score,
     		success: function(data) {
     			location.reload();
