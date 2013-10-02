@@ -39,7 +39,7 @@ $(function() {
 				<a class="btn btn-default" href="user/edit?id=${user.id}">Editer le Profil</a>
 				<a class="btn btn-default" href="user/changepassword?id=${user.id}">Modifier le mot de passe</a>
 			</c:if>
-			<a class="btn btn-default" href="playlist/user/${user.userName}">Play-lists</a>
+			<a class="btn btn-default" href="/playlist/user/${user.userName}">Play-lists</a>
 		</div>
 		
 		<br />
