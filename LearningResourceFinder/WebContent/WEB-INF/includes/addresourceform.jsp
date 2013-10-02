@@ -108,9 +108,8 @@
 	          </c:forEach>
 	          </select>
 	          
-	          <div class="form-control">
-			<fieldset>
-				<legend>Durée</legend>
+	           <div class="form-group">
+				<label for="duration">Durée</label>
 				Moins de <input type="text" name="maxDuration">
 			</fieldset>
 		</div>
@@ -124,8 +123,6 @@
    </form>
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
---------------------------------------------------
 
 
                     

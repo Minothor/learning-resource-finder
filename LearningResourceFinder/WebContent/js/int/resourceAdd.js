@@ -5,7 +5,7 @@ function ajaxVerifyUrl() {
 
 		$.ajax({
 					type : "POST",
-					url : 'ajax/checkUrl',
+					url : '/ajax/checkUrl',
 					data : "url=" + url,
 					success : function(data) {
 						if (data == "") { // No other resource with the same url found in DB.

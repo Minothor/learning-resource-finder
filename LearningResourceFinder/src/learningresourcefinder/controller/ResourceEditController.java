@@ -83,7 +83,7 @@ public class ResourceEditController extends BaseController<Resource> {
         resource.setDuration(duration); 
         
         resourceRepository.merge(resource); 
-       
+        indexManager.update(resource);
         
         return new MessageAndId(id,"ressource updaté");
     }
