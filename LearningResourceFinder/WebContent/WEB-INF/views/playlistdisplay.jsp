@@ -22,7 +22,6 @@
 			<a class="btn btn-default" href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
 			</c:if>
 			<a class="btn btn-default"  href="/playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a> 
-			<a class="btn btn-default" href=<c:url value='/ressourcelist'/>>Vers l'arborescence des ressources</a>
 		</div>
 		<br />
 		<br />

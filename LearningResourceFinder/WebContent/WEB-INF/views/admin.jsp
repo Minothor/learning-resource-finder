@@ -5,6 +5,8 @@
 
 <html>
 <body>
+<div class="container">
     <a href="/createindex" class="btn btn-primary btn-lg">re-créer index</a>
+</div>    
 </body>
 </html>

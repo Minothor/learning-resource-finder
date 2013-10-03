@@ -5,7 +5,7 @@
 </head>
 
 <body>
-
+<div class="container">
  <lrf:competencetree root="${root}"/> 
  
   <!-- Button trigger modal -->
@@ -94,6 +94,6 @@
   </div><!-- /.modal -->
   </div>
   
-  
+</div>  
  </body> 
  </html> 

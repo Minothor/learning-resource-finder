@@ -17,12 +17,10 @@
 
 </head>
 <body>
+<div class="container">
 
-	<center>
-		<h1>
-			${searchPhrase}
-		</h1>
-	</center>
+	<h1>Recherche: ${searchPhrase}</h1>
+	
 							<!-- Resource start -->
 	<div class="ecart">
 		<h4>Resource:</h4>
@@ -120,6 +118,6 @@
 	<br />
 	<br />
 
-
+</div>
 </body>
 </html>

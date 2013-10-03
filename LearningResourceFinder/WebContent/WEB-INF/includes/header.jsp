@@ -147,6 +147,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle"data-toggle="dropdown">Connexion <b class="caret"></b></a>
 							  <div class="dropdown-menu"style="padding: 15px; padding-bottom: 0px;">
+							    <p>ToujoursPlus.be est libre d'accès. Cependant, pour contribuer ou enregistrer vos progrès, vous devez vous connecter.</p>
 								<button data-icon="&#xe005;" type="button" class="btn btn-google btn-block connectionGoogle">
 									Connexion avec Google
 								</button>

@@ -25,6 +25,7 @@
     </c:choose>
     
      
+<div class="container">
 <h1>Edit Cycle</h1>
 
 <form:form modelAttribute="cycle" method="post" action='<%=response.encodeURL("cycleeditsubmit")%>'>
@@ -32,6 +33,6 @@
     <label>Nom</label>       <form:input path="name"/>  <%--  --%> <form:errors path="name"/>
     <input type="submit" value="Sauver"/>
  </form:form>
-
+</div>
 </body>
 </html>

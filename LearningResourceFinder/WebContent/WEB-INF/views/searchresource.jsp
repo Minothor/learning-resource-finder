@@ -90,6 +90,7 @@ window.onload = addLang;
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container">
 	
 	<form:form modelAttribute="searchOptions" action="searchresourcesubmit" method="get">
 			  <div class="filterSubBlock">
@@ -173,7 +174,7 @@ window.onload = addLang;
 		
 		
 	</form:form>
-	
+	</div>
 	
 	<c:forEach items="${resourcelist}" var="resource">
 		<div style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">

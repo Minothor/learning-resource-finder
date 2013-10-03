@@ -12,6 +12,7 @@
 		<lrf:breadcrumbelement label="cycles" link="cyclelist" />
 </lrf:breadcrumb>
 
+<div class="container">
  <a href="<c:url value='/cycleedit?id=${cycle.id}'/>">Edit Cycle</a>  <br>
 
 <h1>${ cycle.name }</h1>
@@ -38,5 +39,5 @@
 		</c:forEach>
 	</div>
 		
-
+</div>
 </html>

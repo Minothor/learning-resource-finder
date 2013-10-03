@@ -19,6 +19,8 @@
 </style>
 </head>
 <body>
+<div class="container">
+
 	<h1>Resource Create / Edit :</h1> 
 	<form:form modelAttribute="resource" method="post" action='<%=response.encodeUrl("resourceeditsubmit")%>'>
 		<label for="name">Name :</label>               <form:input path="name" id="name" /> <form:errors path="name" /><br />
@@ -29,5 +31,6 @@
 	
 	<br />
 	<a href="ressourcelist">home page</a>
+</div>	
 </body>
 </html>

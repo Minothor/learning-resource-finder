@@ -6,6 +6,7 @@
 <html>
 
 <body>
+
 	<lrftag:breadcrumb linkactive="Permission">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
 		<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="user/${user.userName}" />
