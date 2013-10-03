@@ -31,7 +31,8 @@ function test(e){
         <input type="submit"  name="bouton" value="tester"> 
       </div>
    </form>   
-   <a href="/test/addMsg">Générer un message</a><br/>
+   <a href="/test/addMsg">Générer un message (serveur)</a><br/>
+   <span onclick='showNotificationText("Hello", "danger");'>Générer un message (javascript)</span>
    
 </body>
 </html>

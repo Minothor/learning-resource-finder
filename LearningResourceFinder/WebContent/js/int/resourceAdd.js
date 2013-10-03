@@ -90,7 +90,7 @@ function ajaxResourceAddSubmitModal2(e){
 		url : '/ajax/resourceaddsubmit2',
 		data : $("#addResourceForm2").serialize(),
 		success : function(messageAndId) {
-			showNotificationText(messageAndId.message);
+			showNotificationText(messageAndId.message, "success");
 			$('#addResourceModal2').modal('hide');
 		},
 		error : function(data) {

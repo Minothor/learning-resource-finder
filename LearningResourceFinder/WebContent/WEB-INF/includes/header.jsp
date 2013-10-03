@@ -21,7 +21,7 @@
  	// Call this method if you want to display a notification text from JavaScript code.
 	function showNotificationText(message, type) {
 		$("#notificationText").html(message);
-		$("#notificationArea").attr("class", type); 
+		$("#notificationArea").attr("class", "alert alert-"+type); 
 		showNotificationArea();
 	}
 	

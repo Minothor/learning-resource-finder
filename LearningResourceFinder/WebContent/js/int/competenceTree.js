@@ -65,7 +65,7 @@ $(document).ready(function() {
 		    data: "idcomp=" +compId + "&idcycle=" +cycleId,
 		    success : function(data) {
 		    	if (data == "success") {
-		    		showNotificationText("Assignation du cycle réussie.", "alert-success");
+		    		showNotificationText("Assignation du cycle réussie.", "success");
 		    		$("a[id='CP-" + compId + "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
 		    		$("a[id='CP-" + compId + "']").dropdown('toggle'); //hide dropdown list
 		    	} else {
@@ -74,7 +74,7 @@ $(document).ready(function() {
 		    	return false;
 		    },
 		    error : function(data) {
-		    	showNotificationText("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'assigner un cycle." + data);
+		    	showNotificationText("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'assigner un cycle." + data, "danger");
 		    	
         		return false;
 		    },
@@ -97,7 +97,7 @@ $(document).ready(function() {
 		    	if (data == "success") {
 		    		window.location.reload();
 		    	} else {
-		    		showNotificationText("Souci lors de la soumission du formulaire : " + data);
+		    		showNotificationText("Souci lors de la soumission du formulaire : " + data, "danger");
 		    	}
 		    	return false;
 	    });
@@ -116,18 +116,18 @@ $(document).ready(function() {
 			    	if (data == "success") {
 			    		window.location.reload();
 			    	} else {
-			    		showNotificationText("Souci lors de la soumission : " + data);
+			    		showNotificationText("Souci lors de la soumission : " + data, "danger");
 			    	}
 			    	return false;
 			    },
 			    error : function(data) {
 			    	showNotificationText("Il semble qu'il y ait eu une erreur sur notre serveur lorsque vous avez essayé \n " +
-	    			"de supprimer une compétence.");
+	    			"de supprimer une compétence.", "danger");
 	        return false;
 			    },
 			}); 
 		}else {
-			showNotificationText("Pas d'id reçu pour suppression !");
+			showNotificationText("Pas d'id reçu pour suppression !", "danger");
 		} 
 	}
 	
