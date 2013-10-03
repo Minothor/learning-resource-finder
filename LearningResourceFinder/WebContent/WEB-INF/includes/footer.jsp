@@ -12,21 +12,23 @@
 				</div>
         		<div class="col-md-3">
           			<h4>Contribuer</h4>
-          			<p>
-          			<li><a href="/ressourcelist">Ajouter une ressource</a></li>
-          			</p>
+          			
+          			<a href="/ressourcelist">Ajouter une ressource</a>
+          			
         		</div>
         		<div class="col-md-3">
           			<h4>Compétence</h4>
-          			<p>
+          			
           			<c:forEach items="${applicationScope.cache.cycles}" var="cycle">
-                             <li><a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
+                            	<a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}<br></a>
                           </c:forEach>
-          			</p>
+                           <a href="<c:url value='/competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a><br>
+                          <a href="<c:url value='/competencetree?rootCode=term'/>">Terminales (3-6 secondaire)</a>
+          			
         		</div>
         		<div class="col-md-3">
           			<h4>Playlist</h4>
-          			<li><a href="/playlist/all">Toutes les PlayLists</a></li>
+          			<a href="/playlist/all">Toutes les PlayLists</a>
         		</div>
       		</div>
       	</div>
