@@ -30,30 +30,11 @@
 						(primaire & 1-2 secondaire)</a><br> <a
 						href="<c:url value='/competencetree?rootCode=term'/>">Terminales
 						(3-6 secondaire)</a>
-
 				</div>
 				<div class="col-md-3">
 					<h4>Playlist</h4>
 					<a href="/playlist/all">Toutes les PlayLists</a>
 				</div>
-        		<div class="col-md-3">
-          			<h4>Contribuer</h4>
-          			<p>
-          			<a href="/ressourcelist">Ressource</a>
-          			</p>
-        		</div>
-        		<div class="col-md-3">
-          			<h4>Compétence</h4>
-          			<p>
-          			<a href="/cyclelist">Compétence</a>
-          			</p>
-        		</div>
-        		<div class="col-md-3">
-          			<h4>Playlist</h4>
-          			<p>
-          			<a href="playlist/all">Playlist</a>
-          			</p>
-        		</div>
       		</div>
       	</div>
 	</section>

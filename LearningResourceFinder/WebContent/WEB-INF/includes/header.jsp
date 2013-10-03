@@ -118,7 +118,7 @@
                           <li><a href="/playlist/all">Toutes les PlayLists</a> </li>
                           <c:choose>
                           	<c:when test="${current.user!=null}">
-                          	<li><a href="playlist/user/${current.user.userName}">Mes PlayLists</a></li>
+                          	<li><a href="/playlist/user/${current.user.userName}">Mes PlayLists</a></li>
                     	  </c:when>	
                     	</c:choose>			
 					    </ul>
