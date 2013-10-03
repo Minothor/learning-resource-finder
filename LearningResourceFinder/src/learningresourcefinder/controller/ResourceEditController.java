@@ -78,7 +78,7 @@ public class ResourceEditController extends BaseController<Resource> {
             @RequestParam(value="idresource",required=false) Long id,
             @RequestParam(value="language",required=false) Language language,
             @RequestParam(value="advertising",required=false) Boolean advertising,
-            @RequestParam(value="maxDuration",required=false)int duration,
+            @RequestParam(value="maxDuration",required=false) Integer duration,
             @RequestParam(value="nature", required=false) Nature nature){
         if(id==null){
              throw new InvalidUrlException("Missing resource id.");
@@ -86,7 +86,6 @@ public class ResourceEditController extends BaseController<Resource> {
         Resource resource=getRequiredEntity(id);
         resource.setLanguage(language);
         resource.setDescription(description);
-        if (advertising == null) advertising = false;
         resource.setAdvertising(advertising);
         resource.setDuration(duration); 
         resource.setNature(nature);

@@ -78,6 +78,7 @@ public class SearchResourceController extends BaseController<Resource> {
 			searchOptions.setCompetence((Competence)getRequiredEntity(competenceId, Competence.class));
 		}
 
+		if (searchOptions.isAdvertising()) searchOptions.setAdvertising(false);
 
 		map.put(timeStamp, searchOptions);
 		

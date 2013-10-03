@@ -80,23 +80,27 @@ public class ResourceRepository extends BaseRepository<Resource>
 
 		// Nature
 		whereCondition = "";
+        if(searchOptions.getNature().size() == 4){
+            whereCondition = whereCondition + " r.nature is NULL ";        
+                }
 		for (Nature nature : searchOptions.getNature()) {
 			if (!whereCondition.equals("")) {
 				whereCondition += " OR ";
 			}
 			whereCondition = whereCondition + " r.nature='" + nature.name() + "' ";
-	         if(searchOptions.getNature().size() == 4){
-	        whereCondition = whereCondition + " OR r.nature='' ";        
-	            }
+
 		}
-		if (!whereCondition.equals("")) whereConditions.add(whereCondition);				
+		
+
+		
+        if (!whereCondition.equals("")) whereConditions.add(whereCondition);				
 	
 		// Advertising
 		if (searchOptions.isAdvertising() == false) { // We do not accept advertising (other case is Resource.advertising = true or null)
 			whereConditions.add( " r.advertising = FALSE ");
 		}
 		else{
-			whereConditions.add( " r.advertising = TRUE ");
+			whereConditions.add( " r.advertising = FALSE OR r.advertising = TRUE OR r.advertising is NULL ");
 		}
 		
 		// Max Duration

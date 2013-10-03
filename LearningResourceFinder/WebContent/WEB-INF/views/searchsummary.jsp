@@ -48,11 +48,18 @@
 	<br />
 	<br />
 	<br />
-	<c:if test="${numberResource>5}">
+	<c:choose>
+	<c:when test="${numberResource>5}">
 	<div>
 	<a href="/searchresource?searchphrase=${searchPhrase}">${numberResource-5} more</a>
 	</div>
-	</c:if>
+	</c:when>
+	<c:otherwise>
+	<div>
+	<a href="/searchresource?searchphrase=${searchPhrase}">Recherche avancée</a>
+	</div>	
+	</c:otherwise>
+	</c:choose>
 	<br />
 	<br />
 	<br />

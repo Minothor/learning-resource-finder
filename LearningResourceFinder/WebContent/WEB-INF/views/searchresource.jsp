@@ -157,7 +157,7 @@ window.onload = addLang;
 			<div class="filterSubBlock">
 				<fieldset>
 					<div style="margin-right:40px">
-						<label> <form:checkbox  path="advertising" id="optionsCheck" value="true" /> sans pub</label>
+						<label> <form:checkbox  path="advertising" id="optionsCheck" value="false" /> sans pub</label>
 					</div>
 					<div>
 						<form:input type="text" path="maxDuration" style=" width:30px" rel="tooltip" title="durée maximale" /> minutes max.
@@ -197,11 +197,11 @@ window.onload = addLang;
 				<c:if test="${page>1}">
 					<li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page-1}&so=${timeStamp}">&laquo;</a></li>
 				</c:if>
-				<c:forEach begin="1" end="${numberResource}" varStatus="loop">
+				<c:forEach begin="1" end="${numberResource / 100}" varStatus="loop">
 					<li><a
 						href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${loop.index}&so=${timeStamp}">${loop.index}</a></li>
 				</c:forEach>
-				<c:if test="${page != numberResource}">
+				<c:if test="${page*100 < numberResource}">
 				<li><a
 					href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page+1}&so=${timeStamp}">&raquo;</a></li>
 				</c:if>

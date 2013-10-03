@@ -111,11 +111,19 @@
 							placeholder="Description" rows="3"></textarea>
 						<div class="pull-right"></div>
 					</div>
-					<div class="checkbox">
-						<label> <input type="checkbox" value="true"
-							name="advertising"> Présence de publicité
-						</label>
+
+					<div class="form-inline">
+						<label for="advertising"> Présence de publicité </label>
+						<div class="radio">
+							<input type="radio" value="true" name="advertising">Oui
+
+						</div>
+						<div class="radio">
+							<input type="radio" value="false" name="advertising">Non
+
+						</div>
 					</div>
+
 					<label for="language">Langue de la resource</label>
 
 						<select class="form-control" name="language">
