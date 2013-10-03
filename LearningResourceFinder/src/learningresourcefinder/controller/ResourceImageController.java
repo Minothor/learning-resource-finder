@@ -94,7 +94,7 @@ public class ResourceImageController extends BaseController<User> {
 		User user = resource.getCreatedBy();
 		SecurityContext.assertCurrentUserMayEditThisUser(user);
 		
-		ModelAndView mv = new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
+		ModelAndView mv = new ModelAndView("redirect:/resource/" + resource.getShortId() + "/" + resource.getName());
 		mv.addObject("random", System.currentTimeMillis());
 		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
 
