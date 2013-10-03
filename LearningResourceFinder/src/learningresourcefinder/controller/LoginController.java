@@ -76,7 +76,7 @@ public class LoginController extends BaseController<User> {
 	    } catch (Exception e) {
             log.error("Exception during social login (while getting the URL to " + providerId + "for user " + SecurityContext.getUser(), e);
 	        NotificationUtil.addNotificationMessage("Nous ne parvenons pas à contacter "+providerId+". Veuillez vous connecter d'une autre manière ou réessayer plus tard.",Status.WARNING);
-	        return "redirect:login";
+	        return "redirect:/";
 	    }
 	    session.setAttribute("providerId", providerId);
 	    session.setAttribute("socialmanager", socialManager); 
