@@ -15,6 +15,7 @@ jQuery(function($) {
 	  });
 	  
 	  $('.radioDefaut').on('change', function() {
+		  $('form.formUrlResource').attr('action', '/user/imagedelete');
 		  document.getElementById('inputUrl').type='hidden';
 		  document.getElementById('inputFile').type='hidden';
 		  $('.avatarDefault').css({'visibility':'visible'});
