@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <footer>
 	<section id="footer-main">
 		<div class="container">
@@ -13,20 +13,20 @@
         		<div class="col-md-3">
           			<h4>Contribuer</h4>
           			<p>
-          			<a href="/ressourcelist">Ressource</a>
+          			<li><a href="/ressourcelist">Ajouter une ressource</a></li>
           			</p>
         		</div>
         		<div class="col-md-3">
           			<h4>Compétence</h4>
           			<p>
-          			<a href="/cyclelist">Compétence</a>
+          			<c:forEach items="${applicationScope.cache.cycles}" var="cycle">
+                             <li><a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
+                          </c:forEach>
           			</p>
         		</div>
         		<div class="col-md-3">
           			<h4>Playlist</h4>
-          			<p>
-          			<a href="playlist/all">Playlist</a>
-          			</p>
+          			<li><a href="/playlist/all">Toutes les PlayLists</a></li>
         		</div>
       		</div>
       	</div>
