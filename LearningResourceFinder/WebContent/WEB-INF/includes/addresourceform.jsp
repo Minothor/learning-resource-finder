@@ -99,37 +99,49 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">Ajout d'une ressource (partie 2)</h4>
         </div>
-        <div class="modal-body">
-     
-		  
-		  
-	          <div class="form-group">
-		       	   <label for="description">Description</label> 
-				   <textarea class="form-control" id="description" name="description" placeholder="Description" rows="3"></textarea>
-			       <div class="pull-right"> </div>
-			  </div>
-	          <div class="checkbox">
-	            <label>
-	              <input type="checkbox" value="true" name="advertising"> Présence de publicité 	
-	            </label>
-	          </div>
-		     <label for="language">Langue de la resource</label>
-	     <div class="row">
-	         <select class="form-control col-md-3"name="language">
-	          <c:forEach var="language" items="${applicationScope.cache.language}">
-	            <option value="${language}">${language.description}</option>
-	          </c:forEach>
-	          </select>
-	          
-	           <div class="form-group">
-				<label for="duration">Durée</label>
-				Moins de <input type="text" name="maxDuration">
-			</fieldset>
-		</div>
-		</div>
-        </div>
-    
-        <div class="modal-footer">
+				<div class="modal-body">
+
+
+
+					<div class="form-group">
+						<label for="description">Description</label>
+						<textarea class="form-control" id="description" name="description"
+							placeholder="Description" rows="3"></textarea>
+						<div class="pull-right"></div>
+					</div>
+					<div class="checkbox">
+						<label> <input type="checkbox" value="true"
+							name="advertising"> Présence de publicité
+						</label>
+					</div>
+					<label for="language">Langue de la resource</label>
+
+						<select class="form-control" name="language">
+							<c:forEach var="language"
+								items="${applicationScope.cache.language}">
+								<option value="${language}">${language.description}</option>
+							</c:forEach>
+						</select>
+
+					<br>
+					<div class="form-group">
+						<label for="duration">Durée</label> Moins de <input type="text" class="form-control"
+							name="maxDuration">
+					</div>
+
+					<div class="form-group">
+						<label for="nature">Nature</label>
+
+						<c:forEach var="nature" items="${applicationScope.cache.nature}">
+							<div class="radio">
+								<input type="radio" name="nature" value="${nature}"> ${nature.description}
+							</div>
+						</c:forEach>
+
+					</div>
+				</div>
+
+				<div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <input class="btn btn-primary" type="submit" value="Save changes" >
         </div>
