@@ -14,11 +14,13 @@
 					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Ajouter une ressource</h4>
 				</div>
+				
 				<div class="modal-body">
-					<div class="form-horizontal">
+					<div class="form-horizontal container">
 						<div class="form-group">
 	                        <label for="url">site</label> 
 	                        <input type="text" class="form-control" id="url" name="url" placeholder="http://...">
+	                        <br />
 	                        <div class="pull-right"> 
 	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
 							</div>
@@ -27,60 +29,60 @@
 
 						<div id="addResourceFormPart2" style="display:none;">  <%-- will not be displayed until the url is valid --%>
 
-						    <div class="form-group">
-	                           <label for="titre">Intitulé</label> 
-	                           <input type="text" class="form-control" id="title" name="title" placeholder="titre" required="required">
-	                            <div class="pull-right"></div>
-                            </div>
+							<div class="form-group">
+		                        <label for="titre">Intitulé</label> 
+		                        <input type="text" class="form-control" id="title" name="title" placeholder="titre" required="required">
+		                   		<div class="pull-right"></div>
+							</div>
+							
+							<br />
+	                            
                             <div class="row">
-                            <div class="form-group col-md-4">  
-                             <label for="Format">Format</label>
-                                      
+                            	
+                            	<div class="form-group col-md-4">                            		 
+                            		<label for="Format">Format</label>
 				                     <c:forEach var="format" items="${applicationScope.cache.format}">
-					                   <div class="radio"> 
-				                      <input type="radio" name="format" value="${format}" required="required">
-				                        ${format.description} 
-				                           
+					                  	<div class="radio"> 
+					                   	<label for="${format.description}">
+					                   		<input type="radio" name="format" value="${format}" id="${format.description}" required="required">
+					                   		${format.description}
+					                   	</label>
 				                       </div> 
 								     </c:forEach>
-                                 
-                            </div>
+                            	</div>
 
 								<div class="form-group col-md-4">
 									<label for="platform">Platforme</label>
+									<c:forEach var="platform" items="${applicationScope.cache.platform}">
+									<div class="radio">
+										<label for="${platform.description}">	
+						                   	<input type="radio" name="platform" value="${platform}" id="${platform.description}" required="required"> 
+						                    ${platform.description}
+						                </label>  
+									</div>
+									</c:forEach>	                      
+                            	</div>
 
-									<c:forEach var="platform"
-										items="${applicationScope.cache.platform}">
-										<div class="radio">
-					                   <input type="radio" name="platform" value="${platform}" required="required"> 
-					                      ${platform.description}
-					                      
-					                
-								</div>
-								</c:forEach>	                      
-                            </div>
 								<div class="form-group col-md-4">
 									<label for="topic">Topic</label>
-
-									<c:forEach var="topic"
-										items="${applicationScope.cache.topic}">
-										<div class="radio">
-											<input type="radio" name="topic" value="${topic}"
-												required="required"> ${topic.description}
-										</div>
+									<c:forEach var="topic" items="${applicationScope.cache.topic}">
+									<div class="radio">
+										<label for="${topic.description}">
+											<input type="radio" name="topic" value="${topic}" id="${topic.description}" required="required"> 
+											${topic.description}
+										</label>
+									</div>
 									</c:forEach>
 								</div>
-
 							</div>
 						</div>
 					</div>
                   </div>
+                  	
 				  <div class="modal-footer" style="display: none;" id="bottomButtons">
-					
 					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 				    <%--<button type="submit" class="btn" data-toggle="modal" href="#addResourceModal2">Ajouter</button>--%>
 				    <input class="btn btn-primary" type="submit" value="Ajouter" >
-				     
 				 </div>
 			</div>
 			<!-- /.modal-content -->
