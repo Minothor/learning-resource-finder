@@ -1,5 +1,4 @@
-﻿
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ page import="learningresourcefinder.util.NotificationUtil.Status" %>
@@ -80,7 +79,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="/"><img src="images/ToujoursPlus-logo-header.png" ></a>
+				<a href="/"><img src="/images/ToujoursPlus-logo-header.png" ></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
