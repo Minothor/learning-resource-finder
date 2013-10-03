@@ -88,11 +88,12 @@ public class LoginController extends BaseController<User> {
 	// In loginSocial, we redirect to facebook or google. Then FB or google tells the browser to redirect here.
 	@RequestMapping(value = "/loginsocialcallback")
 	public String loginSocialCallback(HttpSession session, HttpServletRequest request) {
-		log.error("On est passé : par là HAHAHA !!");
+	  
+		log.debug("loginSocialCallback called.");
         SocialAuthManager socialAuthManager = (SocialAuthManager) session.getAttribute("socialmanager");
         session.removeAttribute("socialmanager");
         if (socialAuthManager == null) {
-        	throw new RuntimeException("socialAuthManager is not supposed to be null in the callback");
+        	throw new RuntimeException("socialAuthManager is not supposed to be null in the callback");  // It may happen if locainSocialCallbeck is called twice in a row for the same user by google or facebook (bug under investigation)
         }
         
         // The following line does not work. We'd need to access SocialAuthManager.providerId which is private. 
