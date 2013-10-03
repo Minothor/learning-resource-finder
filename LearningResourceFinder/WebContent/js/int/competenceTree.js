@@ -65,7 +65,7 @@ $(document).ready(function() {
 		    data: "idcomp=" +compId + "&idcycle=" +cycleId,
 		    success : function(data) {
 		    	if (data == "success") {
-		    		showNotificationText("Assignation du cycle réussie.");
+		    		showNotificationText("Assignation du cycle réussie.", "alert-success");
 		    		$("a[id='CP-" + compId + "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
 		    		$("a[id='CP-" + compId + "']").dropdown('toggle'); //hide dropdown list
 		    	} else {
