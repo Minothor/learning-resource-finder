@@ -36,7 +36,8 @@ function ajaxVerifyUrl() {
 }
 
 function isValidURL(url) {
-	var urlRegxp = /^(http:\/\/www.|https:\/\/www.|http:\/\/){1}([\w]+)(.[\w]+){1,2}$/;
+	//var urlRegxp = /^(http:\/\/www.|https:\/\/www.|http:\/\/){1}([\w]+)(.[\w]+){1,2}$/;
+	var urlRegxp = /^(http)/;
 	if (urlRegxp.test(url) != true) {
 		return false;
 	} else {
