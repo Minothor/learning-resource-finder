@@ -96,7 +96,7 @@ public class ResourceRepository extends BaseRepository<Resource>
         if (!whereCondition.equals("")) whereConditions.add(whereCondition);				
 	
 		// Advertising
-		if (searchOptions.isAdvertising() == false) { // We do not accept advertising (other case is Resource.advertising = true or null)
+		if (Boolean.FALSE.equals(searchOptions.isAdvertising())) { // We do not accept advertising (other case is Resource.advertising = true or null)
 			whereConditions.add( " r.advertising = FALSE ");
 		}
 		

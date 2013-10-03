@@ -92,7 +92,7 @@ window.onload = addLang;
 <body>
 	<div class="container">
 	
-	<form:form modelAttribute="searchOptions" action="searchresourcesubmit" method="get">
+	<form:form modelAttribute="searchOptions" action="searchresource" method="get">
 			  <div class="filterSubBlock">
  				  	 <c:if test="${searchOptions.competence != null}">
 								<lrf:competencepath competence="${searchOptions.competence}"/>
@@ -157,9 +157,9 @@ window.onload = addLang;
 			</fieldset>
 			<div class="filterSubBlock">
 				<fieldset>
-					<div style="margin-right:40px">
-						<label> <form:checkbox  path="advertising" id="optionsCheck" value="false" /> sans pub</label>
-					</div>
+					<div class="checkbox">
+				      <label><input type="checkbox" id="optionsCheck" name="noadvertizing" value="true" <c:if test="${searchOptions.wantsNoAd}">checked</c:if> />sans pub</label>
+				    </div>
 					<div>
 						<form:input type="text" path="maxDuration" style=" width:30px" rel="tooltip" title="durée maximale" /> minutes max.
 					</div>

@@ -98,8 +98,11 @@ public class SearchOptions {
 	public void setNature(List<Nature> nature) {
 		this.nature = nature;
 	}
-	public boolean isAdvertising() {
+	public Boolean isAdvertising() {
 		return advertising;
+	}
+	public boolean isWantsNoAd() {  // Useful for EL in JSPs (who does not like Boolean objects)
+	    return Boolean.FALSE.equals(advertising);
 	}
 	public void setAdvertising(Boolean advertising) {
 		this.advertising = advertising;

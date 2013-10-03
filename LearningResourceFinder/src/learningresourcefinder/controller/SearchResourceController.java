@@ -33,6 +33,7 @@ public class SearchResourceController extends BaseController<Resource> {
 	public ModelAndView searchResource(Model model, 
 	        @RequestParam(value="searchphrase", required=false) String searchPhrase, 
 	        @RequestParam(value="page", required=false) Integer page, 
+            @RequestParam(value="noadvertizing", required=false) Boolean noAdvertising,  // Handled separately from searchOptions because Spring MVC does not support Booleans (vs booleans) fields.
 	        @RequestParam(value="competenceid", required=false) Long competenceId,
 	        HttpSession session,
 	        @RequestParam(value="so", required=false) Long timeStamp){ 
@@ -53,32 +54,33 @@ public class SearchResourceController extends BaseController<Resource> {
 		        searchOptions = entry.getValue();                
 		    }
 		}
-		return prepareModelAndView (searchOptions, competenceId, page, session, timeStamp);
+		return prepareModelAndView (searchOptions, noAdvertising, competenceId, page, session, timeStamp);
 		
 		
 		
 	}
+//	
+//	@RequestMapping("/searchresourcesubmit")  // FIXME Why does this method exist? John 2013-09-26
+//	public ModelAndView searchResourceSubmit(@ModelAttribute SearchOptions searchOptions, 
+//            @RequestParam(value="noadvertizing", required=false) Boolean noAdvertising,  // Handled separately from searchOptions because Spring MVC does not support Booleans (vs booleans) fields.
+//			@RequestParam(value="competenceId", required=false) Long competenceId, 
+//			@RequestParam(value="page", required=false) Integer page,
+//			HttpSession session,
+//			@RequestParam(value="so") Long timeStamp) {
+//		
+//		return prepareModelAndView(searchOptions, noAdvertising, competenceId, page, session, timeStamp);
+//	}
+//	
 	
-	@RequestMapping("/searchresourcesubmit")  // FIXME Why does this method exist? John 2013-09-26
-	public ModelAndView searchResourceSubmit(@ModelAttribute SearchOptions searchOptions, 
-			@RequestParam(value="competenceId", required=false) Long competenceId, 
-			@RequestParam(value="page", required=false) Integer page,
-			HttpSession session,
-			@RequestParam(value="so") Long timeStamp) {
-		
-		return prepareModelAndView(searchOptions, competenceId, page, session, timeStamp);
-	}
 	
-	
-	
-	private ModelAndView prepareModelAndView(SearchOptions searchOptions, Long competenceId, Integer page, HttpSession session, Long timeStamp) {
+	private ModelAndView prepareModelAndView(SearchOptions searchOptions, Boolean noAdvertising, Long competenceId, Integer page, HttpSession session, Long timeStamp) {
 		ModelAndView mv = new ModelAndView("searchresource");
 		if (page == null) page=1;
 		if (competenceId != null) {
 			searchOptions.setCompetence((Competence)getRequiredEntity(competenceId, Competence.class));
 		}
 
-		if (searchOptions.isAdvertising()) {
+		if (Boolean.TRUE.equals(noAdvertising)) {
 		    searchOptions.setAdvertising(false);
 		} else {
 		    searchOptions.setAdvertising(null);  // We take all resources, with ad, without ad and those where we don't know.
