@@ -20,9 +20,9 @@ public class ResourceRepository extends BaseRepository<Resource>
                 .setParameter("name", name));
 	}
 	
-	public List<Resource> findAllResourceByUser(User author) {
-		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.author = :author")
-				.setParameter("author", author)
+	public List<Resource> findAllResourceByUser(User createdBy) {
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.createdBy = :createdBy")
+				.setParameter("createdBy", createdBy)
 				.getResultList();
 		
 		return results;
