@@ -19,7 +19,6 @@
 		$("#notificationArea").slideDown(); // Was hidden at the beginning.
 	}
 	
-	
  	// Call this method if you want to display a notification text from JavaScript code.
 	function showNotificationText(message) {
 		$("#notificationText").html(message);
