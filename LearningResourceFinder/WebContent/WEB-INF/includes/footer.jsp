@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row">
         		<div class="col-md-3">
-        			<h4><a href="/"><img src="images/ToujoursPlus-logo-footer.png"></a></h4>
+        			<h4><a href="/"><img src="/images/ToujoursPlus-logo-footer.png"></a></h4>
 					<p>ToujoursPlus.be permet aux élèves et professeurs de trouver facilement les meilleures cours, jeux éducatifs et vidéos sur internet. 
 					Il facilite la pédagogie différenciée et le rattrapage scolaire.
 					</p> 
