@@ -32,12 +32,6 @@
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" />
 					<br />
-					<c:if test="${canEdit}">
-					<h4>Options :</h4>	
-					<a class="btn btn-primary" href="<c:url value='/resourceedit?id=${resource.id}'/>">Edit resource</a>
-					</c:if>
-					<br />
-					<br />
 					<h4>Les liens</h4>
 					<a data-toggle="modal" href="#modalUrlResource" class="btn btn-primary">Ajouter une URL</a>
 					<br />
