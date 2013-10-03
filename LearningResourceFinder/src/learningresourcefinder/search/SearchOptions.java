@@ -13,7 +13,7 @@ public class SearchOptions {
 	List<Format> format = new ArrayList<>();
 	List<Platform> platform = new ArrayList<>();
 	List<Nature> nature = new ArrayList<>();
-	boolean advertising = true;
+	Boolean advertising = null;
 	Integer maxDuration;
 	String searchPhrase;
 	Competence competence; // Search restricted within this competence.
@@ -101,7 +101,7 @@ public class SearchOptions {
 	public boolean isAdvertising() {
 		return advertising;
 	}
-	public void setAdvertising(boolean advertising) {
+	public void setAdvertising(Boolean advertising) {
 		this.advertising = advertising;
 	}
 	public Integer getMaxDuration() {
