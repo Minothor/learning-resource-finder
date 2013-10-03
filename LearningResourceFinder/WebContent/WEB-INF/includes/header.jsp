@@ -19,8 +19,9 @@
 	}
 	
  	// Call this method if you want to display a notification text from JavaScript code.
-	function showNotificationText(message) {
+	function showNotificationText(message, type) {
 		$("#notificationText").html(message);
+		$("#notificationArea").attr("class", type); 
 		showNotificationArea();
 	}
 	
@@ -90,6 +91,9 @@
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
 							<li><a id="addResourceLink">Ajouter une ressource </a></li>
+							<c:if test="${current.user != null}">
+							   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Mes ressources</a></li>
+							</c:if>   
 					   </ul>
 					</li>
 					
@@ -189,7 +193,7 @@
 				</c:choose>  <%-- Login / Register / Profile --%>
 				
 				<%-- Search --%>
-				<form class="navbar-form navbar-right" role="search" method="get" action="search">
+				<form class="navbar-form navbar-right" role="search" method="get" action="/search">
 				   <div class="form-group">
 					<div class="input-group" style="width:150px;">
 						<input name="searchphrase" id="search" style="min-width:150px; width:150px" type="text" class="form-control" placeholder="Recherche" required>
