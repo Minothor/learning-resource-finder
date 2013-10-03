@@ -136,7 +136,10 @@
 
 						<c:forEach var="nature" items="${applicationScope.cache.nature}">
 							<div class="radio">
-								<input type="radio" name="nature" value="${nature}"> ${nature.description}
+								<label for="${nature.description}">
+									<input type="radio" name="nature" id="${nature.description}" value="${nature}"> 
+									${nature.description}
+								</label>
 							</div>
 						</c:forEach>
 

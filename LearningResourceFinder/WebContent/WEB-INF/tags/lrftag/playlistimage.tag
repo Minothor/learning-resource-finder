@@ -17,12 +17,12 @@
 			<c:when test="${playlist.picture}">
 				<%-- Random, to force the reload of the image in case it changes (but its name does not change) --%>
 				<img
-					src="gen/playlist/resized/large/${playlist.id}.jpg<c:if test="${random!=null}">?${random}</c:if>"
+					src="/gen/playlist/resized/large/${playlist.id}.jpg<c:if test="${random!=null}">?${random}</c:if>"
 					alt="" />
 			</c:when>
 			<c:otherwise>
 				<div class="playlist-no-image">
-					P L A Y<br />L I S T
+					P L A Y<br />L I S T<br />I M A G E
 				</div>
 			</c:otherwise>
 		</c:choose>

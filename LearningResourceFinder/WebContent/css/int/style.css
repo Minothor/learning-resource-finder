@@ -172,6 +172,14 @@ figcaption {
 figure:hover figcaption {
 	bottom: 0;
 }
+.playlist-no-image {
+	border: 1px solid #000000;
+    display: table-cell;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    width: 120px;
+}
 
 
 
