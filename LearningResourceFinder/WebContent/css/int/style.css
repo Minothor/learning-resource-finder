@@ -114,6 +114,9 @@ ul li {
 .btn:hover {
  color: #FFF;
 }
+.addResourceLink {
+	cursor: pointer;
+}
 /*#### RATING #############################################################################*/
 ul.score {
 	padding: 0;
