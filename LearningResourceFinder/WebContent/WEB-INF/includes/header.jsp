@@ -135,7 +135,8 @@
 									class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="/user/${current.user.userName}">Profil</a></li>
-									<li><a href="/playlist/user/${current.user.userName}">Playlist</a></li>
+									<li><a href="/playlist/user/${current.user.userName}">Playlists</a></li>
+        						   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Ressources</a></li>
 								</ul></li>
 							<li><a href="/logout" class="dropdown-toggle">Déconnexion</a>
 							</li>
