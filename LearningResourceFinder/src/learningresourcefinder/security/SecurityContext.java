@@ -199,6 +199,9 @@ public  class SecurityContext {
     }
 
     public static boolean canCurrentUserEditPlayList(PlayList playList) { 
+    	if (playList.getCreatedBy() == null) {  // May happen in case of playlist created by a batch program.
+    		return false;
+    	}
         return playList.getCreatedBy().equals(getUser()) // If the user is editing his own playlist
                 || isUserHasPrivilege(Privilege.MANAGE_PLAYLIST);     // or If this user has the privilege to edit other playlist
     }

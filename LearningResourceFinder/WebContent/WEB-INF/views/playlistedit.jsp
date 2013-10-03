@@ -68,7 +68,7 @@
 				    		<li style="display:inline;">
 				    			<input type="submit" class="btn btn-primary" value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>" onclick="javascript: return verifForm(this);" />
 				    		</li>
-				    		<li style="display:inline;"><button onclick="location.href='/user/';" class="btn" type="reset">Cancel</button></li>
+				    		<li style="display:inline;"><button onclick="location.href='/playlist/${playlist.shortId}/${playlist.slug}';" class="btn" type="reset">Annuler</button></li>
 				    	</ul>
 				    </div>
 				</form:form>

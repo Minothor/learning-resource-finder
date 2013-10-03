@@ -11,17 +11,17 @@
 <body>
 	<lrftag:breadcrumb linkactive="${playlist.name}">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
-		<lrftag:breadcrumbelement label="${current.user.userName}" link="/user/${current.user.userName}" />
-		<lrftag:breadcrumbelement label="Mes playlists" link="/playlist/user/${current.user.userName}" />
+        <c:if test="${playlist.createdBy eq current.user}">
+		   <lrftag:breadcrumbelement label="Mes playlists" link="/playlist/user/${current.user.userName}" />
+		</c:if>
 	</lrftag:breadcrumb>
 	
 	<div class="container">
 		<lrftag:pageheadertitle title="${playlist.name}"/>
 		<div class="btn-group">
 			<c:if test="${canEdit}">
-			<a class="btn btn-default" href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
+			   <a class="btn btn-default" href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
 			</c:if>
-			<a class="btn btn-default"  href="/playlist/user/${playlist.createdBy.userName}">Mes PlayLists</a> 
 		</div>
 		<br />
 		<br />
