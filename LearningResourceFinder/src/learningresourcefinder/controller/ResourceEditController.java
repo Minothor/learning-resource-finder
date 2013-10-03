@@ -8,6 +8,7 @@ import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
+import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
@@ -39,8 +40,11 @@ public class ResourceEditController extends BaseController<Resource> {
     
     @RequestMapping("/ajax/resourceaddsubmit1")
 //	public @ResponseBody String resourceAddSubmit() {
-	public @ResponseBody MessageAndId resourceAddSubmit(@RequestParam(value="url", required=false) String url, @RequestParam(value="title",required=false) String title,
-	        @RequestParam(value="format",required=true) Format format, @RequestParam(value="platform",required=true) Platform platform, @RequestParam(value="topic",required=true) Topic topic) {
+	public @ResponseBody MessageAndId resourceAddSubmit(@RequestParam(value="url", required=false) String url, 
+	        @RequestParam(value="title",required=false) String title,
+	        @RequestParam(value="format",required=true) Format format, 
+	        @RequestParam(value="platform",required=true) Platform platform, 
+	        @RequestParam(value="topic",required=true) Topic topic) {
         SecurityContext.assertUserIsLoggedIn();
    
         Resource resource = new Resource();
@@ -74,7 +78,8 @@ public class ResourceEditController extends BaseController<Resource> {
             @RequestParam(value="idresource",required=false) Long id,
             @RequestParam(value="language",required=false) Language language,
             @RequestParam(value="advertising",required=false) Boolean advertising,
-            @RequestParam(value="maxDuration",required=false)int duration){
+            @RequestParam(value="maxDuration",required=false)int duration,
+            @RequestParam(value="nature", required=false) Nature nature){
         if(id==null){
              throw new InvalidUrlException("Missing resource id.");
         }
@@ -84,7 +89,7 @@ public class ResourceEditController extends BaseController<Resource> {
         if (advertising == null) advertising = false;
         resource.setAdvertising(advertising);
         resource.setDuration(duration); 
-        
+        resource.setNature(nature);
         resourceRepository.merge(resource); 
         indexManager.update(resource);
         

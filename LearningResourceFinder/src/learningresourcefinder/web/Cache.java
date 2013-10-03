@@ -24,10 +24,18 @@ public class Cache implements ServletContextListener {
   
     Format[] format = SearchOptions.Format.values();  // We need them in the addResourceform includes in the header (via an included jsp) => we have no controller.
     Platform[] platform= SearchOptions.Platform.values();
-    
+    Nature[] nature = SearchOptions.Nature.values();
     Language[] language=SearchOptions.Language.values(); 
 
-   Topic[] topic = Resource.Topic.values();
+   public Nature[] getNature() {
+        return nature;
+    }
+
+    public void setNature(Nature[] nature) {
+        this.nature = nature;
+    }
+
+Topic[] topic = Resource.Topic.values();
 
 
     public Topic[] getTopic() {
