@@ -34,7 +34,7 @@
 	 	    $('#email').focus();
 		});
 	 	
-	 	$("#addResourceLink").click(function(e) {
+	 	$(".addResourceLink").click(function(e) {
 	 	    e.preventDefault();// prevent the default anchor functionality
 	 	    e.stopPropagation();
 	 	    <lrftag:loggedin yes='$("#addResourceModal1").modal("show");'
@@ -90,7 +90,7 @@
 					<li class="dropdown">
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
-							<li><a id="addResourceLink">Ajouter une ressource </a></li>
+							<li><a class="addResourceLink">Ajouter une ressource </a></li>
 							<c:if test="${current.user != null}">
 							   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Mes ressources</a></li>
 							</c:if>   

@@ -13,7 +13,7 @@
         		<div class="col-md-3">
           			<h4>Contribuer</h4>
           			
-          			<a href="/ressourcelist">Ajouter une ressource</a>
+          			<a class="addResourceLink">Ajouter une ressource </a>
           			
         		</div>
         		<div class="col-md-3">
