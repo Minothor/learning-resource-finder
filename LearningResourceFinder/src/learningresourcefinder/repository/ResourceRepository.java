@@ -85,6 +85,9 @@ public class ResourceRepository extends BaseRepository<Resource>
 				whereCondition += " OR ";
 			}
 			whereCondition = whereCondition + " r.nature='" + nature.name() + "' ";
+	         if(searchOptions.getNature().size() == 4){
+	        whereCondition = whereCondition + " OR r.nature='' ";        
+	            }
 		}
 		if (!whereCondition.equals("")) whereConditions.add(whereCondition);				
 	
