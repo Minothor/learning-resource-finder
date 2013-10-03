@@ -47,15 +47,15 @@
 				        		<c:choose>
 									<c:when test="${user.picture}">
 										<%-- Random, to force the reload of the image in case it changes (but its name does not change) --%>
-				            			<img src="gen/user/resized/large/${user.id}.jpg<c:if test="${random!=null}">?${random}</c:if>" alt=""  />
+				            			<img src="/gen/user/resized/large/${user.id}.jpg<c:if test="${random!=null}">?${random}</c:if>" alt=""  />
 				            		</c:when>
 					            	<c:otherwise>
 					            		<c:choose>
 					            			<c:when test="${user.isFemale()}">
-												<img src="images/Femme_anonyme.jpg" class="avatar" />
+												<img src="/images/Femme_anonyme.jpg" class="avatar" />
 											</c:when>
 											<c:otherwise>
-												<img src="images/Homme_anonyme.jpg"  class="avatar" />
+												<img src="/images/Homme_anonyme.jpg"  class="avatar" />
 											</c:otherwise>
 										</c:choose>
 									</c:otherwise>
@@ -150,10 +150,10 @@
 							    <div class="col-lg-8">
 							    	<c:choose>
 							    		<c:when test="${user.isFemale()}">
-												<img class="avatarDefault" style="visibility:hidden;margin:-95px 211px;position:absolute;" src="images/Femme_anonyme.jpg" alt="Femme" />
+												<img class="avatarDefault" style="visibility:hidden;margin:-95px 211px;position:absolute;" src="/images/Femme_anonyme.jpg" alt="Femme" />
 										</c:when>
 										<c:otherwise>
-												<img class="avatarDefault" style="visibility:hidden;margin:-95px 211px;position:absolute;" src="images/Homme_anonyme.jpg" alt="Homme" />
+												<img class="avatarDefault" style="visibility:hidden;margin:-95px 211px;position:absolute;" src="/images/Homme_anonyme.jpg" alt="Homme" />
 										</c:otherwise>
 									</c:choose>
 							    </div>
