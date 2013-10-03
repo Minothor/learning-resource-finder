@@ -18,11 +18,13 @@ function test(e){
  </script>
 </head> 
 <body>
- <table visible=0>
-   <tr><i>Add a line per feature</i></tr>
-   	<!-- Add a line per feature--> 
-   	<tr><td>PlayList list</td><td><a href="/playlist/user/${user.userName}" > My list of PlayLists</a></td><td>JU/NOR/EM</td><td></td></tr> 
-   	<tr><td>Resources list</td><td><a href="/ressourcelist" >List of Resources</a></td><td>THD/SEB</td><td></td></tr>
+<div class="container">
+
+   <table visible=0>
+	   <tr><i>Add a line per feature</i></tr>
+	   	<!-- Add a line per feature--> 
+	   	<tr><td>PlayList list</td><td><a href="/playlist/user/${user.userName}" > My list of PlayLists</a></td><td>JU/NOR/EM</td><td></td></tr> 
+	   	<tr><td>Resources list</td><td><a href="/ressourcelist" >List of Resources</a></td><td>THD/SEB</td><td></td></tr>
    </table>
    <form  id="testForm" action="" methode="post">
       <div>
@@ -34,5 +36,6 @@ function test(e){
    <a href="/test/addMsg">Générer un message (serveur)</a><br/>
    <span onclick='showNotificationText("Hello", "danger");'>Générer un message (javascript)</span>
    
+</div>   
 </body>
 </html>

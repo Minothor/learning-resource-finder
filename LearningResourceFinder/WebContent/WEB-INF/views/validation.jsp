@@ -1,4 +1,8 @@
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %> 
+<html>
+<body>
+<div class="container">
+
 <c:choose>
     <c:when test="${result eq 'VALID_AND_LOGGED' }">
         <p>Merci pour votre inscription. Votre compte utilisateur a été validé avec succès. Vous pouvez à présent l'utiliser.</p>
@@ -16,3 +20,6 @@
         <p>Veuillez utiliser le lien fournit dans votre e-mail d'inscription (en cliquant sur le lien ou en le copiant en entier dans la barre d'adresse de votre navigateur).</p>
     </c:when>
 </c:choose>
+</div>
+</body>
+</html>

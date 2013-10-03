@@ -21,7 +21,10 @@
 <ryctag:breadcrumb>
 	<ryctag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
 	<ryctag:breadcrumbelement label="Ajouter une image" />
-</ryctag:breadcrumb>	
+</ryctag:breadcrumb>
+
+<div class="container">
+	
 <ryctag:pageheadertitle title="Ajouter une image"/>
 
 	<!-- If there is a error message, show it! -->
@@ -47,6 +50,6 @@
 			
 		<a href="/user/${user.userName}">Annuler</a><br>
 	</form>
-	
+</div>
 </body>
 </html>

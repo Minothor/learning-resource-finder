@@ -23,6 +23,8 @@
 </head>
 
 <body>
+<div class="container">
+
 <ryctag:pageheadertitle title="Utilisateurs"/>
 <div id="tabs">
 		<ul>
@@ -68,5 +70,6 @@
 		</div>
 		</c:if>
 	</div>
+</div>	
 </body>
 </html>
