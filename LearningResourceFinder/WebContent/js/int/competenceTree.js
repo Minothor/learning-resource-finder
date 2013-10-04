@@ -3,24 +3,24 @@ $(document).ready(function() {
 		// Handler for .ready() called.
 		
 		// Add initialization
-		$("a[id^='A-']").attr('data-toggle', 'modal'); 
-		$("a[id^='A-']").attr('href', '#competenceEditModal');
-		$("a[id^='A-']").click(click_in_tree_addCompetence);
+		$("span[id^='A-']").attr('data-toggle', 'modal'); 
+		$("span[id^='A-']").attr('href', '#competenceEditModal');
+		$("span[id^='A-']").click(click_in_tree_addCompetence);
 		
 		// Modify initialization
-		$("a[id^='E-']").attr('data-toggle', 'modal'); 
-		$("a[id^='E-']").attr('href', '#competenceEditModal');
-		$("a[id^='E-']").click(click_in_tree_editCompetence);
+		$("span[id^='E-']").attr('data-toggle', 'modal'); 
+		$("span[id^='E-']").attr('href', '#competenceEditModal');
+		$("span[id^='E-']").click(click_in_tree_editCompetence);
 		
-		// Deplace initialization
-		$("a[id^='D-']").attr('data-toggle', 'modal'); 
-		$("a[id^='D-']").attr('href', '#competenceMoveModal');
-		$("a[id^='D-']").click(click_in_tree_moveCompetence); 
+		// Move initialization
+		$("span[id^='D-']").attr('data-toggle', 'modal'); 
+		$("span[id^='D-']").attr('href', '#competenceMoveModal');
+		$("span[id^='D-']").click(click_in_tree_moveCompetence); 
 		
-		// Delete initialization
-		$("a[id^='R-']").attr('data-toggle', 'modal'); 
-		$("a[id^='R-']").attr('href', '#competenceRemoveModal');
-		$("a[id^='R-']").click(click_in_tree_removeCompetence);
+		// Remove-Delete initialization
+		$("span[id^='R-']").attr('data-toggle', 'modal'); 
+		$("span[id^='R-']").attr('href', '#competenceRemoveModal');
+		$("span[id^='R-']").click(click_in_tree_removeCompetence);
 		
 		// setCycle Init
 		$("a[id^='CY-']").click(click_in_tree_setCycle);
@@ -66,8 +66,8 @@ $(document).ready(function() {
 		    success : function(data) {
 		    	if (data == "success") {
 		    		showNotificationText("Assignation du cycle réussie.", "success");
-		    		$("a[id='CP-" + compId + "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
-		    		$("a[id='CP-" + compId + "']").dropdown('toggle'); //hide dropdown list
+		    		$("span[id='CP-" + compId + "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
+		    		$("span[id='CP-" + compId + "']").dropdown('toggle'); //hide dropdown list
 		    	} else {
 		    		showNotificationText(data);
 		    	}
@@ -139,7 +139,7 @@ $(document).ready(function() {
 				$('#descriptionedit').val(competence.description);
 			});
 		} else {
-			showNotificationText("Bug (defensive coding): pas d'id reçu!");
+			showNotificationText("Bug (defensive coding): no id received!");
 		} 
 	}
 	

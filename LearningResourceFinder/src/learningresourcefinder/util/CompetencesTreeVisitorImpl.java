@@ -52,14 +52,15 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
         				labelCycle = "Allouer un cycle";
         			}
         			htmlResult +="<span class=\"dropdown\">"
-        					+"<a id=\"CP-"+ competence.getId() +"\" role=\"button\" data-toggle=\"dropdown\" data-target=\"#\" href=\"/page.html\" value=" + labelCycle + ">"
+        					+"<span id=\"CP-"+ competence.getId() +"\" role=\"button\" data-toggle=\"dropdown\" data-target=\"#\" value=" + labelCycle + ">"
         					+ labelCycle + "<span class=\"caret\"></span>"
-        					+"</a>"
+        					+"</span>"
         					+"<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dLabel\">";
-
+        			
         			for(Cycle c : lc){
         				htmlResult +="<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/competencetree\" id=" + "CY-" +c.getId() + "CP-"+ competence.getId() +"" +">"+c.getName()+"</a></li>";
         			}
+        			
         			htmlResult += "</ul>"
         					+"</span>";
         		} else if (competence.getCycle() != null) { // Display non modifiable name.
@@ -81,6 +82,10 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
 
         	htmlResult += "</small>";
 
+        } else { // No privilege
+        	 if (competence.getCycle() != null) { // Display non modifiable name.
+     			htmlResult += competence.getCycle().getName();
+     		}
         }
 	}
 
