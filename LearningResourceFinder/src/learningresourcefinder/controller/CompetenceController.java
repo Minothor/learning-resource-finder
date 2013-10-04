@@ -172,30 +172,37 @@ public class CompetenceController extends BaseController<Competence> {
 		return competenceDH; 
 	} 
 	
-	@RequestMapping(value="/ajax/setCycle")
-	public @ResponseBody String setCycle(@RequestParam("idcomp") Long idCompetence, @RequestParam("idcycle") Long idCycle){ 
+	@RequestMapping(value="/ajax/setcycle")
+	public @ResponseBody String setCycle(@RequestParam("idcomp") Long idCompetence, @RequestParam("idcycle") String idCycleStr){ 
 		Competence competence = getRequiredEntity(idCompetence);
-		Cycle cycle = (Cycle)getRequiredEntity(idCycle, Cycle.class);
+
+		SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
 		
-		//Verify if children, sub children or parents have a different cycle
-		List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
-		for(Competence cptChild : childrenAndSubChildren){
-			if(cptChild.getCycle() != null  && ! cycle.equals(cptChild.getCycle())){
-				return "Une des sous-compétences ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-compétence de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
-			}
+		Cycle cycle;
+		if (idCycleStr==null || "null".equals(idCycleStr)) {
+		    cycle = null;
+		    
+		} else {
+	        cycle = (Cycle)getRequiredEntity(Long.parseLong(idCycleStr), Cycle.class);
+	        
+	        //Verify if children, sub children or parents have a different cycle
+	        List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
+	        for(Competence cptChild : childrenAndSubChildren){
+	            if(cptChild.getCycle() != null  && ! cycle.equals(cptChild.getCycle())){
+	                return "Une des sous-compétences ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-compétence de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
+	            }
+	        }
+	        
+	        // Has one of the parent a different cycle ?
+	        Competence parent = competence.getParent();
+	        while(parent != null){
+	            if(parent.getCycle() != null  &&  !cycle.equals(parent.getCycle())){
+	                return "Une des compétences parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
+	            }
+	            parent = parent.getParent();
+	        }
 		}
 		
-		// Has one of the parent a different cycle ?
-		Competence parent = competence.getParent();
-		while(parent != null){
-			if(parent.getCycle() != null  &&  !cycle.equals(parent.getCycle())){
-				return "Une des compétences parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
-			}
-			parent = parent.getParent();
-		}
-		
-		
-		//FIXME DECOMMENT IN PROD : SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
 		competence.setCycle(cycle);
 		em.merge(competence);
 		return "success";

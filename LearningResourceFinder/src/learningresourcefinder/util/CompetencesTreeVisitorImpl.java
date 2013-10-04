@@ -54,13 +54,15 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
         			htmlResult +="<span class=\"dropdown\">"
         					+"<span id=\"CP-"+ competence.getId() +"\" role=\"button\" data-toggle=\"dropdown\" data-target=\"#\" value=" + labelCycle + ">"
         					+ labelCycle + "<span class=\"caret\"></span>"
-        					+"</span>"
-        					+"<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dLabel\">";
-        			
+        					+"</span>";
+
+        			// Items in the drop down menu
+        			htmlResult += "<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dLabel\">";
         			for(Cycle c : lc){
-        				htmlResult +="<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/competencetree\" id=" + "CY-" +c.getId() + "CP-"+ competence.getId() +"" +">"+c.getName()+"</a></li>";
+        				htmlResult +="<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/competencetree\" id=" + "CY-" +c.getId() + "CP-"+ competence.getId() +">"+c.getName()+"</a></li>";
         			}
-        			
+        			// "unassign" cycle choice
+        			htmlResult +="<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/competencetree\" id=" + "CY-null" + "CP-"+ competence.getId() +">- aucun -</a></li>"; 
         			htmlResult += "</ul>"
         					+"</span>";
         		} else if (competence.getCycle() != null) { // Display non modifiable name.

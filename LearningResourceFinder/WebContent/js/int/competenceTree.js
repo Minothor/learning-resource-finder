@@ -61,12 +61,12 @@ $(document).ready(function() {
 		var newvalue = $(this).text();
 		$.ajax({
 			type : "GET",
-		    url : 'ajax/setCycle',
+		    url : 'ajax/setcycle',
 		    data: "idcomp=" +compId + "&idcycle=" +cycleId,
 		    success : function(data) {
 		    	if (data == "success") {
 		    		showNotificationText("Assignation du cycle réussie.", "success");
-		    		$("span[id='CP-" + compId + "']").text(newvalue); //Refresh dropdown text value with new cycle value without refresh all the page
+		    		$("span[id='CP-" + compId + "']").html(newvalue + "<span class='caret'/>"); //Refresh dropdown text value with new cycle value without refresh all the page
 		    		$("span[id='CP-" + compId + "']").dropdown('toggle'); //hide dropdown list
 		    	} else {
 		    		showNotificationText(data);
