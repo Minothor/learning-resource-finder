@@ -74,14 +74,14 @@ public class ResourceEditController extends BaseController<Resource> {
     }
     
     @RequestMapping("/ajax/resourceaddsubmit2")
-    public @ResponseBody MessageAndId resourceAddSubmit2(@RequestParam(value="description",required=false)String description,
+    public @ResponseBody MessageAndId resourceAddSubmit2(@RequestParam(value="description",required=false) String description,
             @RequestParam(value="idresource",required=false) Long id,
             @RequestParam(value="language",required=false) Language language,
             @RequestParam(value="advertising",required=false) Boolean advertising,
             @RequestParam(value="maxDuration",required=false) Integer duration,
             @RequestParam(value="nature", required=false) Nature nature){
-        if(id==null){
-             throw new InvalidUrlException("Missing resource id.");
+        if (id == null) {
+            throw new InvalidUrlException("Missing resource id.");
         }
         Resource resource=getRequiredEntity(id);
         resource.setLanguage(language);

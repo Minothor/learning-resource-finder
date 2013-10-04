@@ -75,6 +75,7 @@ function ajaxResourceAddSubmitModal1(e) {
 					$('#addResourceModal1').modal('hide');			
 					$('#addResourceModal2').modal('show');
 
+					showNotificationText(messageAndId.message, "success");
 					// Fill and show modal 2
 					$('#idresource').val(messageAndId.id);
 				},
@@ -84,6 +85,8 @@ function ajaxResourceAddSubmitModal1(e) {
 				}
 			});
 }
+
+
 function ajaxResourceAddSubmitModal2(e){
 	e.preventDefault();
 	$.ajax({

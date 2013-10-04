@@ -39,7 +39,7 @@
 	                            
                             <div class="row">
                             	
-                            	<div class="form-group col-md-4">                            		 
+                            	<div class="form-group col-sm-4">                            		 
                             		<label for="Format">Format</label>
 				                     <c:forEach var="format" items="${applicationScope.cache.format}">
 					                  	<div class="radio"> 
@@ -51,20 +51,22 @@
 								     </c:forEach>
                             	</div>
 
-								<div class="form-group col-md-4">
-									<label for="platform">Platforme</label>
+								<div class="form-group col-sm-4">
+									<label for="platform">Plate-forme</label>
+									<c:set var="firstIteration" scope="page" value="true"/>
 									<c:forEach var="platform" items="${applicationScope.cache.platform}">
-									<div class="radio">
-										<label for="${platform.description}">	
-						                   	<input type="radio" name="platform" value="${platform}" id="${platform.description}" required="required"> 
-						                    ${platform.description}
-						                </label>  
-									</div>
+										<div class="radio">
+											<label for="${platform.description}">	
+							                   	<input type="radio" name="platform" value="${platform}" id="${platform.description}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
+							                    ${platform.description}
+							                </label>  
+										</div>
+										<c:set var="firstIteration" scope="page" value="false"/>
 									</c:forEach>	                      
                             	</div>
 
-								<div class="form-group col-md-4">
-									<label for="topic">Topic</label>
+								<div class="form-group col-sm-4">
+									<label for="topic">Matière</label>
 									<c:forEach var="topic" items="${applicationScope.cache.topic}">
 									<div class="radio">
 										<label for="${topic.description}">
@@ -113,30 +115,33 @@
 					</div>
 
 					<div class="form-inline">
-						<label for="advertising"> Présence de publicité </label>
+						Présence de publicité:
 						<div class="radio">
-							<input type="radio" value="true" name="advertising">Oui
-
+						    <label>
+							   <input type="radio" value="true" name="advertising"/> Oui 
+							</label>
 						</div>
 						<div class="radio">
-							<input type="radio" value="false" name="advertising">Non
-
+						    <label>
+						     	<input type="radio" value="false" name="advertising"/> Non
+							</label>
 						</div>
 					</div>
 
-					<label for="language">Langue de la resource</label>
-
+                    <div class="form-group col-lg-3">
+	   				    <label for="language">Langue de la resource</label>
 						<select class="form-control" name="language">
-							<c:forEach var="language"
-								items="${applicationScope.cache.language}">
+							<c:forEach var="language" items="${applicationScope.cache.language}">
 								<option value="${language}">${language.description}</option>
 							</c:forEach>
 						</select>
-
+                    </div>
 					<br>
-					<div class="form-group">
-						<label for="duration">Durée</label> Moins de <input type="text" class="form-control"
-							name="maxDuration">
+					
+					<div class="form-inline col-lg-2">
+						<label for="duration">Durée</label>
+						<input type="text" class="form-control" name="maxDuration"> minutes
+						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou visionner la vidéo proposée.</span>
 					</div>
 
 					<div class="form-group">
@@ -155,8 +160,8 @@
 				</div>
 
 				<div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <input class="btn btn-primary" type="submit" value="Save changes" >
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+          <input class="btn btn-primary" type="submit" value="Enregistrer" >
         </div>
       </div><!-- /.modal-content -->
    </form>

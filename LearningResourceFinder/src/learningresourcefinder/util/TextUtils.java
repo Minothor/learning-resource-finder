@@ -61,9 +61,6 @@ public class TextUtils {
 
     //Java code to generate alphanumeric code from id
     public static String generateShortId(long id) {
-        System.out.println("Entering generateShortId(id)");
-        System.out.println("Original id: "+id);
-
         //To convert id to alphanumeric code.
         //We need to convert base10(decimal) to base36
         String strBaseDigits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -76,9 +73,7 @@ public class TextUtils {
             strTempVal=strBaseDigits.substring(mod,mod+1)+strTempVal;
             id=id/36;
         }
-        System.out.println("alphanumeric code generated from id : "+strTempVal);
         return strTempVal;
-
     }
 
 

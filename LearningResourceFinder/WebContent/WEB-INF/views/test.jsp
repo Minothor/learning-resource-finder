@@ -36,6 +36,16 @@ function test(e){
    <a href="/test/addMsg">Générer un message (serveur)</a><br/>
    <span onclick='showNotificationText("Hello", "danger");'>Générer un message (javascript)</span>
    
+   	<form id="addResourceForm2" role="form" method="post" action="/ajax/resourceaddsubmit">
+   
+   					<div class="form-inline col-lg-2">
+						<label for="duration">Durée</label>
+						<input type="text" class="form-control" name="maxDuration"> minutes
+						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou visionner la vidéo proposée.</span>
+					</div>
+   
+   </form>
+   
 </div>   
 </body>
 </html>
