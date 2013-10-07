@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+body{
+	background:#fff;
+	font-family:'heliosregular', Arial, Helvetica, sans-serif;
+	font-family:16px;
+	line-height:22px;
+	color:#838383;
+}
+
+img, iframe{
+	width:100%;
+}
+
+a{
+	text-decoration:none;
+	outline:none;
+	color:#fff;
+}
+
+a img{
+	border:none;
+}
+
+h1,h2,h3,h4, h5, h6{
+	line-height:59px;
+	font-weight:normal;
+	font-family: 'museo700';
+}
+
+h1{
+	font-size:43px;
+}
+
+h2{
+	font-size:40px;
+}
+
+h3{
+	font-size:35px;
+}
+
+h4{
+	font-size:30px;
+}
+
+h5{
+	font-size:24px;	
+}
+
+h6{
+	font-size:22px;
+}
+
+
+ul,li{
+	list-style:none;
+}
+
+.container{
+	padding:40px 10px;
+	display:table;
+	margin:0 auto;
+	vertical-align:top;
+	width:820px;
+}
+
+.wrapper{
+	width:100%;
+	display:table;
+}
+
+.space1{
+	margin-right:107px;
+}
+
+
+.space2{
+	margin-left:267px;
+}

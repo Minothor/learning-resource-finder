@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ComingSoonController extends BaseController<ComingSoonMail> {
 
 	
-	@RequestMapping(value="/ajax/addMailOnTable", method = RequestMethod.POST)
+	@RequestMapping(value="/ajax/addMailOnTable")
 	public @ResponseBody String  addMailOnTable( @RequestParam("mail") String addresemail){
 	
 		ComingSoonMail comingSoonMail = new ComingSoonMail();	
 		comingSoonMail.setEmail(addresemail);
 		em.persist(comingSoonMail);
-		em.getTransaction().commit();
 		return "OK";  // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
 	}
 }

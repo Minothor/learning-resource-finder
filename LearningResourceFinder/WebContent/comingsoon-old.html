@@ -1,0 +1,565 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/ext/flexslider.css" type="text/css">
+
+<script src="/js/ext/jquery.flexslider.js"></script>
+
+
+<!-- Do not update to jquery 1.9, the countdown needs 1.8 version -->
+<script src="/js/ext/jquery-1.8.3.min.js"></script><!-- do not update to the new version of jquery, it would break the with countdown -->
+
+<!-- start countdown script -->
+<link rel="stylesheet" type="text/css" href="css/ext/countdownstyle.css">
+
+<script type="text/javascript" src="js/ext/jq.countdown.js"></script>
+<script type="text/javascript" src="js/ext/jq.placeholder.js"></script>
+<script type="text/javascript" src="js/ext/customcountdown.js"></script>
+
+<!-- end countdown script -->
+<script src="/js/ext/bootstrap.js"></script>
+<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="css/ext/bootstrap-theme.css" type="text/css" media="screen" /> 
+
+<script type="text/javascript" src="/js/ext/jquery.innerfade.js"></script>
+
+
+<link rel="stylesheet" href="css/ext/flexslider.css" type="text/css">
+<script src="/js/ext/jquery.flexslider.js"></script>
+
+<!-- Background -->
+
+<!-- start popover -->
+
+<script type="text/javascript">
+$(function (){
+	   $(".pop").popover({placement:'right', trigger: "hover"});
+	   $(".pup").popover({placement:'left', trigger: "hover"});
+	});
+</script>
+
+<!-- start popover -->
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#background-slide').innerfade({
+			speed : 'slow',
+			timeout : 4000,
+			type : 'sequence',
+			containerheight : '220px'
+		});
+		$('.fade').innerfade({
+			speed : 'slow',
+			timeout : 1000,
+			type : 'sequence',
+			containerheight : '1.5em'
+		});
+	});
+</script>
+
+
+
+<script type="text/javascript" charset="utf-8">
+  $(window).load(function() {
+    $('.flexslider').flexslider({
+    	animation: "slide",
+    	slideshowSpeed: 5000
+    });
+  });
+</script>
+
+<!-- start mail -->
+<script type="text/javascript">
+	function ajaxPostUrlResource() {
+		var mail = $('#mail').val();
+		if (mail != '') {
+			$.ajax({
+				type : "POST",
+			    url : 'ajax/addMailOnTable',
+			    data: "mail=" + mail,
+			    success : function(data) {
+			    	alert("Merci pour votre intérêt, nous vous tiendrons informés des prochaines grandes étapes.");
+			    	return false;
+			    },
+			    error : function(data) {
+			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
+	    			"votre e-mail. Cela montre bien que nous ne sommes pas encore prêts :-( Toutes nos excuses.");
+	        return false;
+			    },
+			}); 
+		}else {
+			alert("Vous n'avez pas entreé de mail.");
+		} 
+	}
+	</script>
+<!-- end mail -->
+
+<script>
+function sendDonation(){
+	var sender = $('#email').val();
+	var subject = $('#subject').val();
+	var content = $('#body').val();
+			
+	$.ajax({
+		type : "POST",
+	    url : 'ajax/sendmail',
+	    data: "sender="+sender+"&subject="+subject+"&content="+content,
+	    dataType: 'text',
+	    success : function(data) {
+	    	alert('Merci. Votre message a été envoyé avec succès. Nous vous répondons par e-mail dès que possible.');
+	    	$("#myModal").modal('hide');
+	    },
+	    error : function(data) {
+	    	alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
+	    }
+	}); 
+}
+
+</script>
+
+<!-- /Donation -->
+
+
+<style>
+body {
+	
+}
+
+label,input {
+	display: block;
+}
+
+input.text {
+	margin-bottom: 12px;
+	width: 95%;
+	padding: .4em;
+}
+
+fieldset {
+	padding: 0;
+	border: 0;
+	margin-top: 25px;
+}
+
+h1 {
+	font-size: 1.2em;
+	margin: .6em 0;
+}
+
+div#users-contain {
+	width: 350px;
+	margin: 20px 0;
+}
+
+div#users-contain table {
+	margin: 1em 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+div#users-contain table td,div#users-contain table th {
+	border: 1px solid #eee;
+	padding: .6em 10px;
+	text-align: left;
+}
+
+.ui-dialog .ui-state-error {
+	padding: .3em;
+}
+
+.validateTips {
+	border: 1px solid transparent;
+	padding: 0.3em;
+}
+
+.pop:hover, .pup:hover {
+    cursor:pointer;
+    color:#AAA;
+}
+
+.popover-content {   /* We redefine Bootstrap popover text color because our page text color is white */
+     color: #555;
+ }
+
+
+</style>
+
+
+
+
+<title>Under Construction</title>
+</head>
+<body>
+<!-- Script facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1414750432070920";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- /Script facebook -->
+
+		
+
+	<div id="wrapper">
+		<!-- BEGIN HEADER -->
+		<header>
+			<center><img src="/images/ToujoursPlus-logo-500px.png" /></center>
+		 </header>
+		<!-- END HEADER -->
+
+		<!-- BEGIN TIMER -->
+		<section id="countdown">
+		<div id="count-wrap">
+			<div class="number_wrapper">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">jours</div>
+			</div>
+
+			<div class="number_wrapper">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">heures</div>
+			</div>
+
+			<div class="number_wrapper">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">minutes</div>
+			</div>
+
+			<div class="number_wrapper nmr">
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+				<div class="num">
+					<div>-</div>
+					<div>0</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="lable">secondes</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div id="ct" style="display: none"></div>
+		</section>
+		<!-- END TIMER -->
+		
+		
+		
+		<div id="divbackgroud">
+			
+			<!-- Background image -->
+			
+			<div id="backgroudimage" >
+				<ul id="background-slide">
+					<li>
+						<div id="back">
+							<img src="css/ext/images/Background_1.jpg">
+						</div>
+					</li>
+					<li>
+						<div id="back">
+							<img src="css/ext/images/Background_2.jpg">
+						</div>
+					</li>
+					<li>
+						<div id="back">
+							<img src="css/ext/images/Background_3.jpg">
+						</div>
+					</li>
+					<li>
+						<div id="back">
+							<img src="css/ext/images/Background_4.jpg">
+						</div>
+					</li>
+					<li>
+						<div id="back">
+							<img src="css/ext/images/Background_5.jpg">
+						</div>
+					</li>
+					<li>
+						<div id="back">
+							<img src="css/ext/images/Background_6.jpg">
+						</div>
+					</li>
+										<li>
+						<div id="back">
+							<img src="css/ext/images/Background_7.jpg">
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+			<!-- END background -->
+			
+			<div id="textbackground">
+				
+				<p style="font-size:14px;">Pour nos enfants (6-18) et nos enseignants.</p>
+				<p style="font-size:9px;">gratuit, sans pub, sans but lucratif.</p>
+			
+			</div>
+      </div>
+			
+		
+		
+	  <div style="width:auto;clear:both;"></div>
+		
+			<!-- BEGIN mail -->
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-5">
+						<input type="text" class="form-control" name="addresemail" id="mail" placeholder="Entrez votre adresse e-mail" />
+					</div>
+                    <div class="col-sm-1">
+						<button type="submit" class="btn btn-primary" onclick="ajaxPostUrlResource()">Envoyer</button>
+						
+					</div>
+					
+                    <div class="col-sm-3"></div>
+				</div>
+
+                <div class="row" style="margin-top:40px;">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+						<p style="font-size:11px;">Suivez-nous sur facebook pour être informé du lancement et/ou discuter du développement en cours.</p>
+						<div class="fb-follow"
+							data-href="https://www.facebook.com/toujoursplus.be"
+							data-width="450" data-layout="button_count" data-show-faces="true">
+						</div>
+					</div>
+                    <div class="col-sm-3"></div>
+				</div>
+	
+			</div>
+	
+			<br/>
+			<br/>
+			<!-- END mail -->
+ 	</div>
+
+<!--***************************************************************************************************************  -->
+	
+	<div id="donation_slide">
+	
+	
+			<!-- Donation -->
+				  <a data-toggle="modal" href="#myModal" id="btn_soutien" class="btn btn-default btn-sm" style="margin-top:100px;">Comment pouvez-vous nous soutenir? - contact</a>
+				
+				  <!-- Modal -->
+				  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    <div class="modal-dialog">
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				          <h4 class="modal-title">Comment pouvez-vous nous soutenir? </h4>
+				        </div>
+								<div class="modal-body">
+									<div class="form-group">
+										<p>Nous avons besoin de vous pour témoigner, diffuser le concept dans votre école/association, tester le site en version beta, 
+										participer à des réunions d’analyse et de feedback, donner des millions de dollars.</p>
+										<p>Contactez-nous!</p>
+										<label for="email">Votre e-mail</label> <input type="text" name="email"
+											id="email" value="" class="form-control" /> <label for="subject">Sujet</label>
+										<input type="text" name="subject" id="subject"
+											class="form-control" /> <label for="body">Message</label>
+										<TEXTAREA rows="3" name="body" id="body" value=""
+											class="form-control" /></TEXTAREA>
+									</div>
+								</div>
+								<div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+				          <button type="button" class="btn btn-primary" onclick="sendDonation()">Envoyer</button>
+				        </div>
+				      </div><!-- /.modal-content -->
+				    </div><!-- /.modal-dialog -->
+				  </div><!-- /.modal -->
+	
+	
+	
+			<!-- END Donation -->
+	
+
+				
+				<!-- slide flex -->
+				
+				<div class="flexslider">
+							<ul class="slides"  style="font-size:10px;">
+								<li><img
+									src="images/portrait/Marianne-Poumay.png"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption">Les outils au service des enseignants sont nombreux. ToujousPlus n’est pas juste un outil de plus, c’est aussi un outil différent. Il libère l’enseignant de certains contenus pour lui permettre de se centrer sur le suivi des élèves, la partie la plus complexe de son métier. ToujoursPlus est aux côtés des enseignants pour aider les élèves à piloter leur apprentissage. Un programme ambitieux!
+									<br/><br/><br/>
+									Marianne Poumay - Liège<br/>
+									Directrice du Laboratoire de Soutien à l'Enseignement par Télématique, ULg.</p>
+									</li>
+								<li><img
+									src="images/portrait/Pierre-Pirard.jpg"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption"> Super initiative qui si elle tient ses promesses nous permettra comme enseignants d’avoir des outils pratiques et pour nous élèves de progresser à leur rythme. Initiative qui me semble win-win.
+									<br/><br/><br/>
+									Pierre Pirard - Bruxelles<br/>
+									Managing Director de Teach for Belgium.</p>
+									</li>
+								<li><img
+									src="images/portrait/Philippe-le-Hady.jpg"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption">C'est gai d'apprendre, voilà le message fort envoyé par ToujoursPlus.
+									<br/><br/><br/>
+									Philippe le Hardy - Bruxelles<br/>
+									Formateur en méthode de travail pour les mathématiques et sciences économiques.</p>
+									</li>
+
+								<li><img
+									src="images/portrait/Francois-Georges.jpg"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption">« Toujours plus… » d’activités, de choix, d’échanges, d’implication, de plaisir pour « Toujours mieux… » apprendre.
+									<br/><br/><br/>
+									François Georges - Liège<br/>
+									Directeur et chargé de cours adjoint au Laboratoire de Soutien à l'Enseignement par Télématique, ULg.</p>
+									</li>									
+								<li><img
+									src="images/portrait/Nicole-Streitz.jpg"
+									style="width: 100%; height: 100%" />
+									<p class="flex-caption">ToujoursPlus.be facilitera la tâche des enseignants dans leur recherche d'adaptation de la matière à enseigner aux méthodes modernes. Beaucoup de parents apprécieront de pouvoir évaluer l'évolution de leurs enfants et de pouvoir les aider à se mettre à niveau dans les matières où leurs compétences sont plus faibles.
+									<br/><br/><br/>
+									Nicole Streitz - Nivelles<br/>
+									Jeune assistante sociale PMS retraitée</p>
+									</li>							
+									
+						
+				
+							</ul>
+				</div>
+						
+						
+					<div style="clear:both;"></div>
+	
+	</div>
+	
+<!--***************************************************************************************************************  -->
+
+
+	
+	<!-- BEGIN VIDEO -->
+	<div id="videoyoutube">
+		<div id="vid1">
+		    <div style="height:70px;">  <!--  to have the same height in both columns -->
+				<p>Qu’est-ce que profs et élèves feront sur toujoursPlus.be?</p>
+			</div>
+			<ul class="vid_li">
+			    <li>Trier et aider à <strong>trouver facilement des ressources scolaires</strong> (vidéos, documents, jeux, etc.) de qualité sur internet sans chercher des heures. Ces ressources sont indiquées/téléchargées sur le site par les autres enseignants et élèves (crowd-sourcing de type wikipedia).</li>
+                <li>Donner un outil (un cadre) aux élèves et professeurs pour <strong>mesurer/suivre</strong> leur <strong>progression académique</strong> (<em>qu’avons-nous couvert du programme et y arriverons-nous pour la fin de l’année</em>).			
+			</ul>
+			<iframe marginwidth="40" width="280" height="210"
+				src="http://www.youtube.com/embed/RRhiv3mvBiM?rel=0" frameborder="0" allowfullscreen></iframe>
+			<br/> <br/>
+		</div>
+
+		<div id="vid2">
+		    <div style="height:70px;">  <!--  to have the same height in both columns -->
+			   <p>Quels bénéfices dans les écoles?</p>
+			</div>
+			
+			<ul>
+			<li><span style="font-size:130%">Pour les enseignants</span>
+			
+			  <ul>
+				<li><strong>Temps de préparation</strong>
+				<p>Préparation facilitée des cours magistraux et différenciés.</p>
+				</li>
+			
+				<li><strong>Suivi</strong>
+				<p>Aide à l'identification précise des lacunes des exercices/vidéos pour y remédier.</p>
+				</li>
+			
+				<li><strong>Echange</strong>
+				<p>Confection, publication et partage entre collègues de séquences d'apprentissage.</p>
+				</li>
+			
+				<li><strong>Motivation</strong>
+				<p>Adaptation plus facile de l'enseignement à la motivation fluctuante des élèves via des ressources de type très varié.</p>
+				</li>
+				
+				<li><strong>Perfectionnement</strong>
+				<p>Contact avec les pédagogues les plus appréciés par les internautes via leurs vidéos et autres productions.</p>
+				</li>
+			
+			  </ul>
+			 </li>
+			
+			<li><span style="font-size:130%">Pour les élèves</span>
+			  <ul>
+				<li><strong>Cours particuliers</strong>
+				<p>Substitution partielle et gratuite à un soutien extra-scolaire.</p>
+				</li>
+			
+				<li><strong>Acquis et lacunes</strong>
+				<p>Présenation neutre et claires des lacunes et progrès.</p>
+				</li>
+			
+				<li><strong>Mixité</strong>
+				<p>Mise en contact avec des élèves d'autres écoles travaillant sur le même sujet.</p>
+				</li>
+			
+				<li><strong>Immersion linguistique</strong>
+				<p>Possibilité de mini-immersion via des ressources dans une autre langue.</p>
+				</li>
+			
+				<li><strong>Etudes supérieures</strong>
+				<p>Présentation claire des compétences nécessaires pour chaque type d'étude supérieure et identification des lacunes à combler.</p>
+				</li>
+			
+			  </ul>
+			</li>
+			</ul>  
+						
+
+			<iframe width="280" height="210" style="margin-bottom:10px;"
+				src="http://www.youtube.com/embed/gaIfbsmmuMs?rel=0" frameborder="0"
+				allowfullscreen> </iframe>
+		</div>
+
+		<div id="spacediv3"></div>
+	</div>
+	<!-- END VIDEO -->
+</body>
+</html>

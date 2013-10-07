@@ -1,0 +1,72 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media(max-width:800px){
+	.container{
+		width:100%;
+	}
+	
+	.countdown_section{
+		margin:0 2px;
+	}
+	
+	.cbp-fbscroller > nav{
+		right:9px;
+	}
+}
+
+@media(max-width:750px){
+	.imgbox{
+		display:table;
+		float:none;
+		margin:0 auto;
+	}
+	
+	.subscribebox{
+		width:100%;
+	}
+}
+
+
+@media(max-width:680px){
+	.countdown_section{
+		margin:7px auto;
+		display:table;
+	}
+}
+
+@media(max-width:580px){
+	.logo{
+		width:100%;
+	}
+	
+	.contact-us form{
+		width:100%;
+	}
+}
+
+@media(max-width:500px){
+	.testimonial-img{
+		float:none;
+		margin:5px auto;
+		display:table;
+	}
+	
+	.space2{
+		text-align:center;
+		width:100%;
+		display:table;
+		margin:5px auto;
+	}
+	
+	.testimonialIn label{
+		text-align:center;
+	}
+}
+
+@media(max-width:380px){
+	h1{
+		font-size:30px;
+		line-height:30px;
+	}
+}

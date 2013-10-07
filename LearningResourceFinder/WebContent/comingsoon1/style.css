@@ -1,0 +1,502 @@
+@charset "utf-8";
+/* CSS Document */
+
+.logo{
+	width:584px;
+	display:table;
+	margin:0 auto;
+}
+
+.timer-wrapper{
+	width:100%;
+	text-align:center;
+	display:inline-block;
+	margin:35px 0;
+}
+
+.timer-wrapper li, .countdown_section{
+	border-radius:2px;
+	background:#f28f10;
+	display:inline-block;
+	color:#fff;
+	padding:10px 3px 10px;
+	width:167px;
+	height:177px;
+	vertical-align:top;
+	margin:0 12px;
+	font-size:30px;
+	font-family: 'heliosregular';
+	line-height:45px;
+}
+
+.timer-wrapper li:first-child{
+	margin-left:0;
+}
+
+.timer-wrapper li:last-child{
+	margin-right:0;
+}
+
+.timer-wrapper li label{
+	display:inline-block;
+	width:100%;
+	margin:5px 0;
+	 height: 100px;
+    line-height: 108px;
+}
+
+.timer-wrapper li span{
+	display:block;
+	width:100%;
+	font-size:30px;
+	font-family: 'heliosregular';
+	margin-top:10px;
+}
+
+.imgbox{
+	width:275px;
+	float:left;
+	font-size:14px;
+	color:#0f0000;
+	font-family: 'heliosregular';
+	text-align:center;
+}
+
+.subscribebox{
+	float:right;
+	width:400px;
+	margin:68px 0;
+}
+
+.subscribebox h6{
+	color:#000;
+	font-family: 'heliosregular';
+}
+
+.subscribe-search{
+	width:100%;
+	display:table;
+	margin:7px 0 25px;
+}
+
+.subscribe-search a{
+	display:block;
+	float:right;
+	background:#84bb04;
+	padding:10px 20px;
+	font-size:18px;
+	border-radius:0 2px 2px 0;
+}
+
+.subscribe-search input[type="text"]{
+	width:100%;
+	padding:12px 15px;
+	color:#9e9e9e;
+	border:solid 1px #ccc;
+	font-style:italic;
+	border-radius:2px 0 0 2px;
+}
+
+
+.subscribe-search input[type="text"]:focus{
+	font-style:normal;
+	color:#666;
+}
+
+.subscribebox p{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#8b8b8b;
+}
+
+.fb-follow{
+	width:83px;
+	float:left;
+	margin:20px 0;
+}
+
+.green-bgnd{
+	background:#84bb04;
+	border:solid 1px #80b504;
+	color:#fff;
+}
+
+.green-bgnd h1, .whitebgnd h1, .blue-bgnd h1, .contact-us h1{
+	width:100%;
+	text-align:center;
+	display:table;
+	margin-bottom:27px;
+}
+
+.testimonialIn{
+	margin-top:27px;
+}
+
+.testimonialIn, .testimonialIn ul, .testimonialIn ul li{
+	width:100%;
+	display:table;
+}
+
+.testimonial-img{
+	width:239px;
+	height:239px;
+	float:left;
+}
+
+.testimonial-img img{
+	width:100%;
+	height:100%;
+	border:solid 1px #74a404;
+}
+
+.testimonialIn label{
+	width:100%;
+	display:table;
+	text-align:right;
+}
+
+.testimonialIn p{
+	margin-bottom:45px;
+}
+
+.testimonialIn span{
+	font-size:21px;
+}
+
+.whitebgnd{
+	background:#fff;
+}
+
+.whitebgnd h1{
+	color:#021015;
+}
+
+.stuteach-point, .stuteach-point li{
+	width:100%;
+	display:table;
+}
+
+.stuteach-point li{
+	margin:15px 0;
+	background:url(/comingsoon1/arrow.jpg) no-repeat 0 3px;
+	padding-left:27px;
+	font-size:16px;
+}
+
+.iframebox{
+	width:100%;
+	min-height:335px;
+	margin:25px 0 0;
+}
+
+.blue-bgnd{
+	background:#17a7d6;
+	border:solid 1px #17a7d6;
+	color:#fff;
+}
+
+.blue-bgnd p{
+	margin:7px 0;
+}
+
+.blue-bgnd p span{
+	color:#000;
+}
+
+.contact-us{
+	text-align:center;
+}
+
+.contact-us h1{
+	color:#000;
+}
+
+.contact-us p{
+	color:#838383;
+}
+
+.contact-us form{
+	width:540px;
+	display:inline-block;
+	margin-top:32px;
+}
+
+.contact-us form input[type="text"], .contact-us form input[type="email"], .contact-us form textarea{
+	width:100%;
+	padding:7px 15px;
+	color:#aaa;
+	font-family:'heliosregular', Arial, Helvetica, sans-serif;
+	font-size:14px;
+	margin:10px 0;
+	border:solid 1px #dcdcdc;
+	font-style:italic;
+	border-radius:2px;
+	height:42px
+}
+
+
+.contact-us form input[type="text"]:focus, .contact-us form textarea:focus{
+	color:#666;
+	font-style:normal;
+}
+
+.contact-us form textarea{
+	height:150px;
+	resize:none;
+}
+
+.contact-us form button{
+	width:130px;
+	height:42px;
+	text-align:center;
+	line-height:37px;
+	color:#fff;
+	background:#84bb04;
+	border:solid 1px #7eb304;
+	font-size:18px;
+	cursor:pointer;
+}
+
+.contact-us form button:active{
+	position:relative;
+	top:1px;
+}
+
+/* dots css */
+/* Set all parents to full height */
+/*html, body, 
+.container,
+.cbp-fbscroller,
+.cbp-fbscroller section { 
+	height: 100%; 
+}*/
+
+/* The nav is fixed on the right side  and we center it by translating it 50% 
+(we don't know it's height so we can't use the negative margin trick) */
+.cbp-fbscroller > nav {
+	position: fixed;
+	z-index: 9999;
+	right: 100px;
+	top: 50%;
+	width: 26px;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.cbp-fbscroller > nav a {
+	display: block;
+	position: relative;
+	z-index: 9999;
+	color: transparent;
+	width: 26px;
+	height: 26px;
+	outline: none;
+	margin: 25px 0;
+	border-radius: 50%;
+	border: 4px solid #e81578;
+	background: #e81578;
+}
+
+.no-touch .cbp-fbscroller > nav a:hover {
+	background: rgba(232,21,190,0.55);
+}
+
+.cbp-fbscroller > nav a.cbp-fbcurrent {
+	background: rgba(232,21,190,0.85);
+	border:solid 1px rgba(232,21,190,0.85);
+}
+
+/* background-attachment does the trick */
+.cbp-fbscroller section {
+	position: relative;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+nav{
+	position:fixed;
+}
+
+
+/* counter css */
+
+.hasCountdown{
+	text-align:center;
+	display:table;
+	width:100%;
+	margin:60px 0 30px;
+}
+
+.countdown_rtl {
+	direction: rtl;
+}
+.countdown_holding span {
+	color: #888;
+}
+.countdown_row {
+	width: 100%;
+	display:table;
+}
+/*.countdown_show1 .countdown_section {
+	width: 98%;
+}
+.countdown_show2 .countdown_section {
+	width: 48%;
+}
+.countdown_show3 .countdown_section {
+	width: 32.5%;
+}
+.countdown_show4 .countdown_section {
+	width: 24.5%;
+}
+.countdown_show5 .countdown_section {
+	width: 19.5%;
+}
+.countdown_show6 .countdown_section {
+	width: 16.25%;
+}
+.countdown_show7 .countdown_section {
+	width: 14%;
+}*/
+.countdown_section {
+	display: inline-block;
+	text-align: center;
+}
+.countdown_amount {
+	font-size:96px;
+	 font-family: 'museo700';
+	 line-height:95px;
+}
+.countdown_descr {
+	display: block;
+	width: 100%;
+}
+
+
+/* boy slider */
+
+#slides2{
+	   display: none;
+    }
+
+    .slidesjs-navigation {
+      margin-top:3px;
+    }
+
+    .slidesjs-previous {
+      margin-right: 5px;
+      float: left;
+    }
+
+    .slidesjs-next {
+      margin-right: 5px;
+      float: left;
+    }
+
+    .slidesjs-pagination {
+      margin: 6px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-image: url(img/pagination.png);
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+    .navbar {
+      overflow: hidden
+    }
+
+/* flexslider css */
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  }
+
+
+.rslides_tabs{
+	width:100%;
+	display:table;
+	text-align:center;
+	margin:40px 0;
+}
+
+.rslides_tabs li{
+	height:26px;
+	width:26px !important;
+	background:rgba(255,255,255,0.55);
+	border-radius:250px;
+	display:inline-block !important;
+	font-size:0px;
+	margin:0 10px;
+	
+}
+
+.rslides_tabs li a{
+	width:26px;
+	height:26px;
+	display:block;
+}
+
+.green-bgnd .container{
+	padding:70px 0;
+}
+
+.green-bgnd h1{
+	margin-bottom:40px;
+}
+
+.rslides_here{
+	background:rgba(255,255,255,1) !important;
+}
