@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css"  />
 	<script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
  	<script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
+ 	<script type="text/javascript" src="/js/int/problemReport.js"></script>
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${resource.name}">
@@ -31,6 +32,9 @@
 					</dl>
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" />
+					<br />					
+					<lrftag:problemreport title="${resource.name}" resourceid="${resource.id}" />
+					<br />
 					<br />
 					<h4>Les liens</h4>
 					<a data-toggle="modal" href="#modalUrlResource" class="btn btn-primary">Ajouter une URL</a>

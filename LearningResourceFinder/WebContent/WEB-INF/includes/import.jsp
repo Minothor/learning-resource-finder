@@ -22,7 +22,7 @@
 
 <!-- ***************************** JAVASCRIPT **************************** -->   
     <script src="/js/ext/jquery-1.9.0.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+	<script src="/js/ext/jquery-ui.min.js"></script>
     <script src="/js/ext/bootstrap.js"></script>  
     <script src="/js/ext/bootstrap-rating-input.min.js"></script>
     <script src="/js/int/rating.js"></script> 
