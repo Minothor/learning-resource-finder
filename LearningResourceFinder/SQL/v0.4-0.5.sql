@@ -18,7 +18,7 @@ alter table resource
 ALTER TABLE resource RENAME score  TO avgratingscore;
 ALTER TABLE resource RENAME counter  TO countrating;
 
----- Julien 2013-10-09
+---- Julien 2013-10-09 bis
 
 CREATE TABLE discussion
 (
@@ -29,15 +29,20 @@ CREATE TABLE discussion
   createdby_id bigint,
   updatedby_id bigint,
   problem_id bigint,
-  CONSTRAINT discussion_pkey PRIMARY KEY (id),
-  CONSTRAINT fk_64c8p2264i0wkgfvr3kponjht FOREIGN KEY (updatedby_id)
-      REFERENCES users (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_6ynxjag4dmgajl7tygossaiw FOREIGN KEY (problem_id)
-      REFERENCES problem (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_ohin2xg4qy49afti4qr47l3xq FOREIGN KEY (createdby_id)
-      REFERENCES users (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
-)
+  CONSTRAINT discussion_pkey PRIMARY KEY (id)
+);
 
+    alter table discussion 
+        add constraint fk_64c8p2264i0wkgfvr3kponjht 
+        foreign key (updatedby_id) 
+        references users;
+        
+    alter table discussion 
+        add constraint fk_6ynxjag4dmgajl7tygossaiw 
+        foreign key (problem_id) 
+        references problem;
+
+    alter table discussion 
+        add constraint fk_ohin2xg4qy49afti4qr47l3xq 
+        foreign key (createdby_id) 
+        references users;
