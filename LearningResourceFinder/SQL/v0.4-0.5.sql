@@ -18,6 +18,7 @@ alter table resource
 ALTER TABLE resource RENAME score  TO avgratingscore;
 ALTER TABLE resource RENAME counter  TO countrating;
 
+
 ---- Julien 2013-10-09 bis
 
 CREATE TABLE discussion
@@ -46,3 +47,15 @@ CREATE TABLE discussion
         add constraint fk_ohin2xg4qy49afti4qr47l3xq 
         foreign key (createdby_id) 
         references users;
+        
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED, DO NOT USE THIS FILE ANYMORE
+
+        

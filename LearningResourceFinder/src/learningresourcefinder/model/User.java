@@ -46,8 +46,83 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public static final String UNIVERSAL_PASSWORD_MD5 = "477bc098b8f2606137c290f9344dcee8";
     public static final String UNIVERSAL_DEV_PASSWORD_MD5 = "e77989ed21758e78331b20e477fc5582";  // "dev" in clear. -> any developer can use "dev" to impersonate anybody when developing. Does not work in production. 
 
-        
-    /**
+    /*
+     * Ahmed Flag : Add enum level and accountlevel column with getters and setters.     
+     */
+    
+    public enum LEVEL_STATE{
+    	
+    	LEVEL_1(1,30),LEVEL_2(2,100),LEVEL_3(3,200),LEVEL_4(4,300),LEVEL_5(5,400),LEVEL_6(6,500);
+    	
+    	int levelProgressPoints;
+    	int levelIndex;
+    	
+    	LEVEL_STATE(int levelProgressPoints,int levelIndex){
+    		this.levelProgressPoints = levelProgressPoints;
+    		this.levelIndex = levelIndex;
+    	}
+
+		public int getLevelProgressPoints() {
+			return levelProgressPoints;
+		}
+
+		public int getLevelIndex() {
+			return levelIndex;
+		}
+		
+    }
+    
+    @Column(nullable=false)
+    @Enumerated(EnumType.ORDINAL)
+    private LEVEL_STATE accountLevel;
+    
+	public LEVEL_STATE getAccountLevel() {
+		return accountLevel;
+	}
+
+//	public void setAccountLevel(int levelIndex) {
+//		
+//		switch(levelIndex){
+//		
+//		case 1 :
+//			
+//			this.accountLevel = accountLevel;
+//			
+//			break;
+//		case 2 :
+//			
+//			break;
+//			
+//		case 3 :
+//			
+//			break;
+//		case 4 : 
+//			
+//			break;
+//			
+//		case 5 : 
+//			
+//			
+//			break;
+//		case 6 :
+//			
+//			break;
+//		
+//		}
+//	}
+	
+	@Column(nullable=false)
+	private int userProgressPoints;
+	
+	public int getUserProgressPoints() {
+		return userProgressPoints;
+	}
+
+	public void setUserProgressPoints(int userProgressPoints) {
+		this.userProgressPoints = userProgressPoints;
+	}
+
+	/**
      * Status for an account :<br />
      * LOCKED: Account manually locked by an admin, normally a lock reason
      * should be available.<br />
@@ -490,6 +565,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public Long getId() {
         return id;
     }
-    
+   
     
 }
