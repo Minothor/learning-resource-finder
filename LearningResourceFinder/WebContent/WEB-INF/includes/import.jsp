@@ -14,7 +14,6 @@
 
 
 
-
 <!-- ***************************** ICON **************************** -->    
 <%--maybe must we put an ie condition --%>
 <link rel="icon" type="image/png" href="/images/favicon.png"/>
@@ -30,7 +29,6 @@
     <script src="/js/int/rating.js"></script> 
 	<script src="/js/int/search.js"></script> <!-- Growing search button script  -->
 	<script src="/js/ext/bootstrap-editable.min.js"> </script>
-	
 
 
 <!-- ***************************** END JAVASCRIPT **************************** -->   

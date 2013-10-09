@@ -42,6 +42,19 @@
 		});
 	 	
 	});
+	
+	// Refreshes the ajax progress bar from the server
+	function progressBarAjax(){
+		$.ajax({
+			type : "GET",
+		    url : '/ajax/progressbar',
+		    dataType: 'text',
+		    success : function(data) {
+		    	$('#progressbar').html(data);
+		    }
+		}); 
+	}
+	
 </script>
 
 <%-- ********** NOTIFICATIONS ************** --%>
@@ -69,7 +82,7 @@
 <header>  <%-- Bootstrap style --%>
 	<nav class="navbar navbar-default" role="navigation">
 
-		<div class="container">
+		<div class="container" style="position:relative;">
 
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header" style="padding-right:10px">
@@ -207,12 +220,11 @@
 				  </div>
 				</form>
 			</div>
-		</div>
+			<%@include  file="/WEB-INF/views/progressbar.jsp" %>  <%-- Cannot be dans WEB-INF/includes/ because we also need the SpringMVC dispatcher servlet to find it as a controller result. --%>
+		</div> 
 	</nav>
 
 </header>
-
-
 
 <%@include  file="/WEB-INF/includes/addresourceform.jsp" %>
 

@@ -38,7 +38,6 @@ import org.jsoup.helper.StringUtil;
 public class User extends BaseEntity implements Cloneable, Comparable<User>, Serializable {
    
     private static final long serialVersionUID = 4144665927166518905L;
-    public static final int LAST_LEVEL = 6;
 
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -58,7 +57,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     	int levelProgressPoints;
     	int levelIndex;
     	
-    	LEVEL_STATE(int levelProgressPoints,int levelIndex){
+    	LEVEL_STATE(int levelIndex, int levelProgressPoints){
     		this.levelProgressPoints = levelProgressPoints;
     		this.levelIndex = levelIndex;
     	}
