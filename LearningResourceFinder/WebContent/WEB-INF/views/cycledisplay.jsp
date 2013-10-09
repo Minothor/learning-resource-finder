@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
+    <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrs'%>
     <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrf" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +14,10 @@
 </lrf:breadcrumb>
 
 <div class="container">
- <a href="<c:url value='/cycleedit?id=${cycle.id}'/>">Edit Cycle</a>  <br>
+      <lrs:conditionDisplay privilege="MANAGE_COMPETENCE">
+          <li><a href="<c:url value='/cycleedit?id=${cycle.id}'/>">Edit Cycle</a></li> 
+         
+      </lrs:conditionDisplay>
 
 <h1>${ cycle.name }</h1>
 	<div class="row">
