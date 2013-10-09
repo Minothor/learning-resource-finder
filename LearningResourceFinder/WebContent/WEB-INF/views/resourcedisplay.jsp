@@ -32,8 +32,10 @@
 					</dl>
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" />
-					<br />					
-					<lrftag:problemreport title="${resource.name}" resourceid="${resource.id}" />
+					<br />	
+					<c:if test="${canEdit}">				
+						<lrftag:problemreport title="${resource.name}" resourceid="${resource.id}" />
+					</c:if>
 					<br />
 					<br />
 					<h4>Les liens</h4>
