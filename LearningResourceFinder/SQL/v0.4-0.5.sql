@@ -17,3 +17,27 @@ alter table resource
         
 ALTER TABLE resource RENAME score  TO avgratingscore;
 ALTER TABLE resource RENAME counter  TO countrating;
+
+---- Julien 2013-10-09
+
+CREATE TABLE discussion
+(
+  id bigint NOT NULL,
+  createdon timestamp without time zone,
+  updatedon timestamp without time zone,
+  message text NOT NULL,
+  createdby_id bigint,
+  updatedby_id bigint,
+  problem_id bigint,
+  CONSTRAINT discussion_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_64c8p2264i0wkgfvr3kponjht FOREIGN KEY (updatedby_id)
+      REFERENCES users (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_6ynxjag4dmgajl7tygossaiw FOREIGN KEY (problem_id)
+      REFERENCES problem (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_ohin2xg4qy49afti4qr47l3xq FOREIGN KEY (createdby_id)
+      REFERENCES users (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
