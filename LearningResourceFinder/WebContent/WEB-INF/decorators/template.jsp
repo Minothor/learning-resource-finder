@@ -9,7 +9,19 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-		<!--start google Analytics  -->
+		
+
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<%-- force IE to doesn't use is compataibility mode--%>
+<meta name="viewport" content="width=device-width" />
+<%--Define the base-width as the screen width --%>
+<%@ include file="/WEB-INF/includes/import.jsp"%>
+<decorator:head />
+<link rel="shortcut icon" href="#" />
+<title><decorator:title /></title>
+<!--start google Analytics  -->
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -23,16 +35,6 @@
 		
 		<!-- End google analytics -->
 
-
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<%-- force IE to doesn't use is compataibility mode--%>
-<meta name="viewport" content="width=device-width" />
-<%--Define the base-width as the screen width --%>
-<%@ include file="/WEB-INF/includes/import.jsp"%>
-<decorator:head />
-<link rel="shortcut icon" href="#" />
-<title><decorator:title /></title>
 <!-- Script Connection With Facebook -->
 <script type="text/javascript">
 		function mPopupLogin(provid) {			
