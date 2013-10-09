@@ -1,6 +1,7 @@
 package learningresourcefinder.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -29,6 +30,9 @@ public class Problem extends BaseEntity
 	@OneToMany(mappedBy="problem")
 	private Set<Comment> comments;
 	
+    @OneToMany(mappedBy="problem")
+    private List<Discussion> problemDiscussions;
+
 	@ManyToOne
 	private User solver;
 	
@@ -63,8 +67,12 @@ public class Problem extends BaseEntity
 	public boolean getResolved() {
 		return this.resolved;
 	}
+	
+	public List<Discussion> getProblemDiscussions() {
+        return problemDiscussions;
+    }
 
-	/**************************** Setters *************************************/
+    /**************************** Setters *************************************/
 
 	public void setName(String name) {
 		this.name = name;
@@ -85,6 +93,10 @@ public class Problem extends BaseEntity
 	public void setResolved(boolean resolved) {
 		this.resolved = resolved;
 	}
+	
+    public void setProblemDiscussions(List<Discussion> problemDiscussions) {
+        this.problemDiscussions = problemDiscussions;
+    }
 		
 	/**************************** Methods *************************************/
 	
