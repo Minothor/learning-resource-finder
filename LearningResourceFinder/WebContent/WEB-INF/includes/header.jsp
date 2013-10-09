@@ -134,6 +134,7 @@
 								data-toggle="dropdown">${current.user.userName} <b
 									class="caret"></b></a>
 								<ul class="dropdown-menu">
+									<li><a href="/history/problem">Historique des problèmes</a></li>
 									<li><a href="/user/${current.user.userName}">Profil</a></li>
 									<li><a href="/playlist/user/${current.user.userName}">Playlists</a></li>
         						   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Ressources</a></li>
