@@ -8,6 +8,8 @@
  
 <!-- Style Files -->
 <link rel="stylesheet" href="/css/int/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/ext/bootstrap-editable.css">
+
 
 
 
@@ -27,6 +29,8 @@
     <script src="/js/ext/bootstrap-rating-input.min.js"></script>
     <script src="/js/int/rating.js"></script> 
 	<script src="/js/int/search.js"></script> <!-- Growing search button script  -->
+	<script src="/js/ext/bootstrap-editable.min.js"> </script>
+	
 
 
 <!-- ***************************** END JAVASCRIPT **************************** -->   

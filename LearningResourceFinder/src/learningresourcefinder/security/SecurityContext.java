@@ -208,7 +208,7 @@ public  class SecurityContext {
     
     public static boolean canCurrentUserEditResource(Resource resource) { 
         return resource.getCreatedBy().equals(getUser()) // If the user is editing his own resource
-                || isUserHasPrivilege(Privilege.MANAGE_RESOURCE);     // or If this user has the privilege to edit other playlist
+                || isUserHasPrivilege(Privilege.MANAGE_RESOURCE);     // or If this user has the privilege to edit other resource
     }
 
     public static  void assertCurrentUserMayEditThisUser(User user) {

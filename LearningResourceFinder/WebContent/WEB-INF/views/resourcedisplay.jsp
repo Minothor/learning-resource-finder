@@ -10,6 +10,25 @@
 	<script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
  	<script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
  	<script type="text/javascript" src="/js/int/problemReport.js"></script>
+ 	
+ 	<script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$.fn.editable.defaults.mode = 'inline';
+ 	    $('#title,#description').editable({      
+ 	    	  type: 'text',
+ 	    	  inputclass: 'largerTextArea',
+ 	    	  url: '/ajax/resourceeditfieldsubmit',
+ 	    	  pk: '${resource.id}',
+			});
+		});
+	</script>
+	
+	<STYLE type="text/css">
+	   .largerTextArea {
+	       width:500px;
+	   }
+    </STYLE>
+	   
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${resource.name}">
@@ -23,10 +42,12 @@
 				<div class="col-md-12">
 				<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>Nom :</dt>
-					  	<dd>${resource.name}</dd>
+						<dt>Intitulé :</dt>
+						<dd><a href="#" id="title" > ${resource.name}</a></dd>
+					  	
 					  	<dt>Description :</dt>
-					  	<dd>${resource.description}</dd>
+					  	<dd><a href="#" id="description" data-type="textarea">${resource.description}</a></dd>
+					  	
 					  	<dt>Auteur :</dt>
 					  	<dd><a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a></dd>
 					</dl>

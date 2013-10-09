@@ -37,6 +37,9 @@ public class ResourceEditController extends BaseController<Resource> {
          Resource resource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
          return resource == null ? "" : resource.getId() + "";
     }
+
+   
+    
     
     @RequestMapping("/ajax/resourceaddsubmit1")
 //	public @ResponseBody String resourceAddSubmit() {
