@@ -23,14 +23,14 @@ public class LevelService {
 	}
 
 	public void addActionPoints(User user, ACTIONS_STATE action) {
+		int lastLevel = LEVEL_STATE.getHighestLevelIndex();
+		
 		user.setUserProgressPoints(user.getUserProgressPoints()
 				+ action.getActionPoints());
-		if (user.getUserProgressPoints() > user.getAccountLevel().getLevelProgressPoints()) {
-
-		//	user.setAccountLevel(LEVEL_STATE.LEVEL_1);
-			
-			// point = modulo de ce qui reste.
-			// leve ++
+		if (user.getUserProgressPoints() > user.getAccountLevel().getLevelProgressPoints() && user.getAccountLevel().getLevelIndex() != lastLevel) {
+		      user.setAccountLevel(user.getAccountLevel().getLevelIndex());
+		      user.setUserProgressPoints(0); // Initialize user Points.
+		      // Notify User .
 		}
 	}
 

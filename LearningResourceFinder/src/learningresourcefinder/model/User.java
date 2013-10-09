@@ -38,6 +38,7 @@ import org.jsoup.helper.StringUtil;
 public class User extends BaseEntity implements Cloneable, Comparable<User>, Serializable {
    
     private static final long serialVersionUID = 4144665927166518905L;
+    public static final int LAST_LEVEL = 6;
 
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -69,6 +70,10 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 		public int getLevelIndex() {
 			return levelIndex;
 		}
+	
+		public static int getHighestLevelIndex() {
+			return LEVEL_STATE.values().length;
+		}
 		
     }
     
@@ -80,36 +85,9 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 		return accountLevel;
 	}
 
-//	public void setAccountLevel(int levelIndex) {
-//		
-//		switch(levelIndex){
-//		
-//		case 1 :
-//			
-//			this.accountLevel = accountLevel;
-//			
-//			break;
-//		case 2 :
-//			
-//			break;
-//			
-//		case 3 :
-//			
-//			break;
-//		case 4 : 
-//			
-//			break;
-//			
-//		case 5 : 
-//			
-//			
-//			break;
-//		case 6 :
-//			
-//			break;
-//		
-//		}
-//	}
+	public void setAccountLevel(int levelIndex) {
+		this.accountLevel = LEVEL_STATE.values()[levelIndex-1];
+	}
 	
 	@Column(nullable=false)
 	private int userProgressPoints;
