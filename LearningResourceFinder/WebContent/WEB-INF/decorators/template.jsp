@@ -1,21 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="learningresourcefinder.web.UrlUtil" %>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="learningresourcefinder.web.UrlUtil"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
+	prefix="decorator"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='ryc'%>
-<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" /><%-- force IE to doesn't use is compataibility mode--%>
-	<meta name="viewport" content="width=device-width"/><%--Define the base-width as the screen width --%>	
-	<%@ include file="/WEB-INF/includes/import.jsp"%>
-	<decorator:head />
-	<link rel="shortcut icon" href="#"/>
-	<title><decorator:title /></title>
-	<!-- Script Connection With Facebook -->
-	<script type="text/javascript">
+		<!--start google Analytics  -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-44711958-1', 'toujoursplus.be');
+		  ga('send', 'pageview');
+		
+		</script>
+		
+		<!-- End google analytics -->
+
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<%-- force IE to doesn't use is compataibility mode--%>
+<meta name="viewport" content="width=device-width" />
+<%--Define the base-width as the screen width --%>
+<%@ include file="/WEB-INF/includes/import.jsp"%>
+<decorator:head />
+<link rel="shortcut icon" href="#" />
+<title><decorator:title /></title>
+<!-- Script Connection With Facebook -->
+<script type="text/javascript">
 		function mPopupLogin(provid) {			
 			var w = 780;
 			var h = 410;
@@ -38,15 +57,15 @@
 </head>
 <body>
 	<div id="wrap">
-	
+
 		<%@ include file="/WEB-INF/includes/header.jsp"%>
-	
+
 		<decorator:body />
-		
+
 	</div>
-	
+
 	<%@ include file="/WEB-INF/includes/footer.jsp"%>
 
-  	 
+
 </body>
 </html>
