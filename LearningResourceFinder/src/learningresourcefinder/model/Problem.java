@@ -108,6 +108,14 @@ public class Problem extends BaseEntity
 		this.comments.remove(c);
 	}
 	
+   public void addDiscussion(Discussion d) {
+        this.problemDiscussions.add(d);
+    }
+    
+    public void removeDiscussion(Discussion d) {
+        this.problemDiscussions.remove(d);
+    }
+	    
     @Override
     public Long getId() {
         return id;

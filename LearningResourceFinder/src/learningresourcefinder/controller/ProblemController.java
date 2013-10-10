@@ -44,4 +44,21 @@ public class ProblemController extends BaseController<Problem> {
 		NotificationUtil.addNotificationMessage("Le problème à bien été transmit. Merci de votre contribution !");
 		return "success";
 	}
+	
+    @RequestMapping(value="/addDiscussion", method=RequestMethod.POST)
+    public ModelAndView addDiscussion(@RequestParam("idProblem")long idProblem,@RequestParam("textDiscussion")String message) {
+        Problem problem = (Problem) getRequiredEntity(idProblem);
+        Discussion d = new Discussion(message);
+        d.setProblem(problem);
+        discussionRepository.persist(d);
+        return new ModelAndView("redirect:/problem?id="+ idProblem+"#anchorResponse");  
+    }
+    
+    @RequestMapping(value="/closeproblem")
+    public ModelAndView addDiscussion(@RequestParam("id")long idProblem) {
+        Problem problem = (Problem) getRequiredDetachedEntity(idProblem);
+        problem.setResolved(true);
+        problemRepository.merge(problem);
+        return new ModelAndView("redirect:/home"); //FIXME rediriger par la suite vers la liste des problèmes ou l'historique des problèmes remontés par le user  
+    }
 }

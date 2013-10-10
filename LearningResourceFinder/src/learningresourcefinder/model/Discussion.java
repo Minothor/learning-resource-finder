@@ -25,6 +25,15 @@ public class Discussion extends BaseEntity {
     @Column(nullable = false)
     private String message;
     
+    
+    public Discussion() {
+    }
+
+    public Discussion(String message) {
+        super();
+        this.message = message;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -37,6 +46,16 @@ public class Discussion extends BaseEntity {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public Problem getProblem() {
+        return problem;
+    }
+
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+    
+    
     
     
 
