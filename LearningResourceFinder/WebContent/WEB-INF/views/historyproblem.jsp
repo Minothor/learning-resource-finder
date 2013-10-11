@@ -35,7 +35,7 @@
 					<td><a href="/problem/${problem.id}">${problem.name}</a></td>
 					<td>${problem.description}</td>
 					<td><a href="/user/${problem.createdBy.userName}">${problem.createdBy.userName}</a></td>
-					<td>${problem.createdOn}</td>
+					<td><fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"  value="${problem.createdOn}" /></td>
 				</tr>
 					</c:otherwise>
 		    	</c:choose>		
