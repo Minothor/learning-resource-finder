@@ -134,6 +134,8 @@ public class InitializeDBBatch implements Runnable {
 		admin.setRole(Role.ADMIN);
 		admin.hasAdminPrivileges();
 		admin.setPassword(SecurityUtils.md5Encode("aaaa"));
+		
+		
 		userRepository.persist(admin);
 
 

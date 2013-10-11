@@ -106,6 +106,8 @@
 							Raison blocage compte : ${user.lockReason}<br /> 
 						</c:if>
 					</li>
+					<li><label>Points de contribution :</label><a href="/rights?username=${user.userName}"> ${current.user.userProgressPoints} points de contribution sur ${current.user.accountLevel.levelProgressPoints} pour arriver au niveau suivant.</a></li>
+					<li><label>Niveau : </label>${current.user.accountLevel.levelIndex}</li>
 				</ul>
 		  	</div>
 		</div>

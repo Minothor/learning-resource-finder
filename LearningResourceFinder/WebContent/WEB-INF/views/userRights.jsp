@@ -13,27 +13,13 @@
 
 	<c:forEach items="${actions}" var="action">
 		<div class="row">
-
-			<c:if test="${user != null}">
-			
-				<c:choose>
-
-					<c:when test="${user.accountLevel.levelIndex >= action.level.levelIndex}">
+					<c:if test="${user != null && user.accountLevel.levelIndex >= action.level.levelIndex}">
+					    <c:set var="style" value="text-success"/>
+						</c:if>
 						
-						<div class="col-md-9 col-md-push-3 text-success">${action} --> ${action.describe}</div>
-						<div class="col-md-3 col-md-pull-9 text-success">Level : ${action.level.levelIndex }</div>
-
-					</c:when>
-					<c:otherwise>
-
-						<div class="col-md-9 col-md-push-3">${action} --> ${action.describe }</div>
-						<div class="col-md-3 col-md-pull-9">Level : ${action.level.levelIndex }</div>
-
-					</c:otherwise>
-
-				</c:choose>
-			</c:if>
-
+						<div class="col-md-9 col-md-push-3 ${style}">${action} --> ${action.describe}</div>
+						<div class="col-md-3 col-md-pull-9  ${style}">Level : ${action.level.levelIndex }</div>
+                        <c:set var="style" value=""/>
 		</div>
 	</c:forEach>
 
