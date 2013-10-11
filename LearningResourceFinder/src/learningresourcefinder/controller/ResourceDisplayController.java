@@ -1,11 +1,14 @@
 package learningresourcefinder.controller;
 
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.User;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
+import learningresourcefinder.service.LevelService;
+import learningresourcefinder.util.Action;
 import learningresourcefinder.util.EnumUtil;
 import learningresourcefinder.web.Slugify;
 
@@ -20,21 +23,29 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ResourceDisplayController extends BaseController<Resource> {
-	@Autowired ResourceRepository resourceRepository;
-	@Autowired IndexManagerService indexManager;
-
-	@RequestMapping({"/resource/{shortId}/{slug}",
-		"/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
-		"/resource/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
-	})  
-
-	public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
-		Resource resource = getRequiredEntityByShortId(shortId);
-
-		ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
-		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
-		addDataEnumPlatformToModelAndView(mv, Platform.class);
-		return mv;
+    @Autowired ResourceRepository resourceRepository;
+    @Autowired IndexManagerService indexManager;
+    @Autowired LevelService levelService;
+    
+    @RequestMapping({"/resource/{shortId}/{slug}",
+        "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
+        "/resource/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
+    })  
+    
+    public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
+        Resource resource = getRequiredEntityByShortId(shortId);
+        ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
+        
+        boolean canvote = false;
+        if(SecurityContext.isUserLoggedIn()){
+        	User user = SecurityContext.getUser();
+            canvote = levelService.canDoAction(user, Action.VOTE);
+        }
+		mv.addObject("usercanvote",canvote);
+        
+    	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
+    	addDataEnumPlatformToModelAndView(mv, Platform.class);
+    	return mv;
 	}
 
 	@RequestMapping("/ajax/resourceeditfieldsubmit")

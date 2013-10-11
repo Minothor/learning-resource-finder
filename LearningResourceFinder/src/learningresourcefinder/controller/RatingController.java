@@ -21,6 +21,7 @@ public class RatingController extends BaseController<Rating> {
     
     @RequestMapping("ajax/rateresource")  // ajax
     public @ResponseBody String rateResource(@RequestParam("idresource")long idResource,@RequestParam("score") int score) {
+    	
     	score++; // On the client side, 1 star = 0 (because component used) and server side 1 star = 1 (to get correct numbers in averages and co).
     	SecurityContext.assertUserIsLoggedIn();
         Resource resource = resourceRepository.find(idResource);

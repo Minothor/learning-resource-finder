@@ -31,7 +31,6 @@ $(document).ready(function(){
         });
     });
     
-    
     // Take rating since star on click.
     // Ajax request
     $('i.glyphicon[data-value]').on('click', function() {

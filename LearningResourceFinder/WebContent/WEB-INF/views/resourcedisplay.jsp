@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>	
 	<!-- Script for Add a URL in a Resource-->
@@ -17,7 +17,6 @@
  	    $('#title,#description,#platform').editable({      
  	    	  type: 'text',
  	    	  inputclass: 'largerTextArea',
- 	    	 
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
 		});
@@ -77,8 +76,8 @@
 					  	
 					</dl>
 					<br />
-					<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" />
-					<br />	
+					<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}"  canvote="${usercanvote}"/>
+					<br />	 
 					<c:if test="${canEdit}">				
 						<lrftag:problemreport title="${resource.name}" resourceid="${resource.id}" />
 					</c:if>
@@ -141,10 +140,11 @@
 							    	Url :
 							    </label>
 							    <div class="col-lg-10">
-							      	<input type="text" class="form-control" id="urlField" name="url" required />
+							      	<input type="text" class="form-control" id="urlResource" name="urlResource" />
 								</div>
 							</div>
 							
+							<p id="response">${response}</p>
 							
 				    	</div>
 				    	
