@@ -1,7 +1,5 @@
 package learningresourcefinder.controller;
 
-import java.util.List;
-
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Discussion;
 import learningresourcefinder.repository.DiscussionRepository;
@@ -29,6 +27,7 @@ public class ProblemController extends BaseController<Problem> {
     public @ResponseBody ModelAndView problemDisplay(@RequestParam("id") Long idProblem) {
         Problem problem = getRequiredEntity(idProblem);
         ModelAndView mv = new ModelAndView("problemdisplay", "problem", problem);
+        mv.addObject("user",SecurityContext.getUser());
         mv.addObject("resource", problem.getResource());
         mv.addObject("problemDiscussions",problem.getProblemDiscussions());
         return mv;
