@@ -7,6 +7,8 @@ import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
+import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.util.NotificationUtil.Status;
 import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		playList.setSlug(slug);
 		if(playList.getId()==null) {  // Create
 			if(playListHavingTheSameName != null ) {
+				NotificationUtil.addNotificationMessage("Ce titre existe déjà, veuillez en choisir un autre", Status.WARNING);
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
 			} 
 			playlistRepository.persist(playList);
