@@ -14,13 +14,21 @@
  	<script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('#title,#description').editable({      
+ 	    $('#title,#description,#urlresouce').editable({      
  	    	  type: 'text',
  	    	  inputclass: 'largerTextArea',
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
-			});
 		});
+ 	
+	});
+ 	
+ 	function onEditClick(id, url, name) {
+ 		$("#idField").attr("value", id);
+ 		$("#urlField").attr("value", url);
+ 		$("#nameField").attr("value", name);
+ 		$("#modalUrlResource").modal("show");
+ 	}
 	</script>
 	
 	<STYLE type="text/css">
@@ -44,6 +52,17 @@
 					<dl class="dl-horizontal">
 						<dt>Intitulé :</dt>
 						<dd><a href="#" id="title" > ${resource.name}</a></dd>
+					  	
+						<dt>Url :</dt>
+						
+					  	<dd>
+					  	   <c:forEach items="${resource.urlResources}" var="urlResource">
+					  	      <a href="${urlResource.url}" target="_blank"  id="urlresource" data-type="text">${urlResource.url}</a>
+					  	      <c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
+					  	      <span class="glyphicon glyphicon-pencil" onclick="onEditClick(${urlResource.id}, '${urlResource.url}', '${urlResource.name}')" ></span>
+					  	      <br/>
+					  	   </c:forEach>
+					    </dd>
 					  	
 					  	<dt>Description :</dt>
 					  	<dd><a href="#" id="description" data-type="textarea">${resource.description}</a></dd>
@@ -99,15 +118,15 @@
 		          		<button type="button" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
 		          		<h4 class="modal-title">Ajouter une URL</h4>
 		        	</div>		        	
-		     		<form method="post" action="#" enctype="multipart/form-data" class="form-horizontal formUrlResource">	
+		     		<form method="post" action="/resource/urleditsubmit" enctype="multipart/form-data" class="form-horizontal formUrlResource">	
 		     			<div class="modal-body">
 		     			
 		     				<div class="form-group">
 							    <label class="col-lg-2 control-label" style="text-align:left;">
-							    	Nom :
+							    	Intitulé (optionnel) :
 							    </label>
 							    <div class="col-lg-10">
-							      	<input type="text" class="form-control" id="name" name="name" />
+							      	<input type="text" class="form-control" id="nameField" name="name" />
 								</div>
 							</div>
 							
@@ -116,18 +135,18 @@
 							    	Url :
 							    </label>
 							    <div class="col-lg-10">
-							      	<input type="text" class="form-control" id="urlResource" name="urlResource" />
+							      	<input type="text" class="form-control" id="urlField" name="urlResource" required />
 								</div>
 							</div>
 							
-							<p id="response">${response}</p>
 							
 				    	</div>
 				    	
 				    	<div class="modal-footer">
-				    		<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
+				    		<input type="hidden" name="resourceid" value="${resource.id}" />  <%-- used for create --%>
+							<input type="hidden" name="urlresourceid" />  <%-- Value set via JavaScript -- used for edit --%>
 			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
-			          		<button type="button" class="btn btn-primary closeModal btnSubmit" onclick="ajaxPostUrlResource();">Sauver le lien</button>
+			          		<input class="btn btn-primary" type="submit" value="Enregistrer" />
 			        	</div>
 				    </form>
 		      	</div><!-- /.modal-content -->

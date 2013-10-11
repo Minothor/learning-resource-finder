@@ -25,7 +25,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
         "/resource/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
     })  
-    
     public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
         Resource resource = getRequiredEntityByShortId(shortId);
         
