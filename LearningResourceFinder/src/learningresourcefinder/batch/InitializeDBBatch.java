@@ -133,6 +133,7 @@ public class InitializeDBBatch implements Runnable {
 		admin.setUserName("admin");
 		admin.setRole(Role.ADMIN);
 		admin.hasAdminPrivileges();
+		admin.setAccountLevel(1);
 		admin.setPassword(SecurityUtils.md5Encode("aaaa"));
 		
 		
@@ -154,6 +155,7 @@ public class InitializeDBBatch implements Runnable {
 		nUser.setPicture(false);
 		nUser.setSpammer(false);
 		nUser.setUserName("deli");
+		nUser.setAccountLevel(1);
 		nUser.getSchools().add(school);
 		userRepository.persist(nUser);
 		System.out.println("User Thomas Done !");
