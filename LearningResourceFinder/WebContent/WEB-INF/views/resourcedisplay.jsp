@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>	
 	<!-- Script for Add a URL in a Resource-->
@@ -14,13 +14,13 @@
  	<script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('#title,#description,#urlresouce').editable({      
+ 	    $('#title,#description,#platform').editable({      
  	    	  type: 'text',
  	    	  inputclass: 'largerTextArea',
+ 	    	 
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
 		});
- 	
 	});
  	
  	function onEditClick(id, url, name) {
@@ -67,8 +67,14 @@
 					  	<dt>Description :</dt>
 					  	<dd><a href="#" id="description" data-type="textarea">${resource.description}</a></dd>
 					  	
+					  	<dt>Plate-forme :</dt>
+						<dd><a href="#" id="platform" data-type="select" data-source="${dataEnumPlatform}"> ${resource.platform}</a></dd>
+						
 					  	<dt>Auteur :</dt>
 					  	<dd><a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a></dd>
+					  	
+					  	
+					  	
 					</dl>
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" />

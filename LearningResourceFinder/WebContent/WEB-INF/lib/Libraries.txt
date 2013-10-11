@@ -48,6 +48,9 @@ Lucene :
 			-lucene-highlighter-4.0.0
 			-lucene-memory-4.0.0
 			
+Apache commons:
+    . BeanUtil: commons-beanutils*			
+			
 ****************************** Spring Social : ******************************
  
 commons-dbcp-1.4.jar // In relation with the data source
