@@ -107,6 +107,7 @@
 							<li><a class="addResourceLink">Ajouter une ressource </a></li>
 							<c:if test="${current.user != null}">
 							   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Mes ressources</a></li>
+							   <li><a href="<c:url value='/contribution'/>" >Contribution</a></li>
 							</c:if>   
 					   </ul>
 					</li>
