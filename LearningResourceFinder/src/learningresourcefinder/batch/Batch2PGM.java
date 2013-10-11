@@ -20,6 +20,9 @@ public class Batch2PGM implements Runnable {
     @Autowired CompetenceService competenceService;
     @Autowired CycleRepository repCycle;
     
+   // 
+    
+    
     public static void main(String[] args) {
         BatchUtil.startSpringBatch(Batch2PGM.class);
     }
