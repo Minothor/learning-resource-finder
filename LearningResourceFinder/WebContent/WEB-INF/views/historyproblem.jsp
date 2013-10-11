@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>	
 </head>
@@ -26,7 +27,7 @@
 					<td><a class="linethrough" href="/problem?id=${problem.id}">${problem.name}</a></td>
 					<td  class="linethrough">${problem.description}</td>
 					<td><a href="/user/${problem.createdBy.userName}">${problem.createdBy.userName}</a></td>
-					<td>${problem.createdOn}</td>
+					<td><fmt:formatDate type="both" dateStyle="medium" timeStyle="medium"  value="${problem.createdOn}" /></td>
 				</tr>
 					</c:when>
 					<c:otherwise>
