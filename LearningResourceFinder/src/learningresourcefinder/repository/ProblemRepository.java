@@ -3,6 +3,7 @@ package learningresourcefinder.repository;
 import java.util.List;
 
 import learningresourcefinder.model.Problem;
+import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.User;
 
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,33 @@ public class ProblemRepository extends BaseRepository<Problem>
 				.getResultList();
 		return results;
 	}
+	
+	public Long countOpenProblemsForTopic(Topic topic) {
+		Long result = (long) em.createQuery("SELECT COUNT(p) FROM Problem p where p.resolved = false and p.resource.topic = :topic")
+				.setParameter("topic", topic)
+				.getSingleResult();
+		return result;
+	}
+	
+	public Long countProblemOfFieldNull(Topic topic) {
+		Long result = (long) em.createQuery("SELECT COUNT(r) FROM Resource r where (r.name = null OR r.description = null OR r.language = null OR r.format = null"
+				+ " OR r.platform = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic")
+				.setParameter("topic", topic)
+				.getSingleResult();
+		return result;
+	}
+	
+	public Long countProblemOfCompetenceNull(Topic topic) {
+		Long result = (long) em.createQuery("SELECT COUNT(r) FROM Resource r  WHERE 0 = SIZE(r.competences) AND r.topic = :topic")
+				.setParameter("topic", topic)
+				.getSingleResult();
+		return result;
+	}
+	
+	
+	
+ 
+	
 }
 
 
