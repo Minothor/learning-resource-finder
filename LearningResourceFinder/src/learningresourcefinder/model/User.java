@@ -50,14 +50,14 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
      * Ahmed Flag : Add enum level and accountlevel column with getters and setters.     
      */
     
-    public enum LEVEL_STATE{
+    public enum Level{
     	
     	LEVEL_1(1,30),LEVEL_2(2,100),LEVEL_3(3,200),LEVEL_4(4,300),LEVEL_5(5,400),LEVEL_6(6,500);
     	
     	int levelProgressPoints;
     	int levelIndex;
     	
-    	LEVEL_STATE(int levelIndex, int levelProgressPoints){
+    	Level(int levelIndex, int levelProgressPoints){
     		this.levelProgressPoints = levelProgressPoints;
     		this.levelIndex = levelIndex;
     	}
@@ -71,21 +71,21 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 		}
 	
 		public static int getHighestLevelIndex() {
-			return LEVEL_STATE.values().length;
+			return Level.values().length;
 		}
 		
     }
     
     @Column(nullable=false)
     @Enumerated(EnumType.ORDINAL)
-    private LEVEL_STATE accountLevel;
+    private Level accountLevel;
     
-	public LEVEL_STATE getAccountLevel() {
+	public Level getAccountLevel() {
 		return accountLevel;
 	}
 
 	public void setAccountLevel(int levelIndex) {
-		this.accountLevel = LEVEL_STATE.values()[levelIndex-1];
+		this.accountLevel = Level.values()[levelIndex-1];
 	}
 	
 	@Column(nullable=false)
