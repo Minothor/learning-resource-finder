@@ -118,7 +118,7 @@
 		          		<button type="button" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
 		          		<h4 class="modal-title">Ajouter une URL</h4>
 		        	</div>		        	
-		     		<form method="post" action="/resource/urleditsubmit" enctype="multipart/form-data" class="form-horizontal formUrlResource">	
+		     		<form method="post" action="/urlresourceeditsubmit" enctype="multipart/form-data" class="form-horizontal formUrlResource">	
 		     			<div class="modal-body">
 		     			
 		     				<div class="form-group">
@@ -135,7 +135,7 @@
 							    	Url :
 							    </label>
 							    <div class="col-lg-10">
-							      	<input type="text" class="form-control" id="urlField" name="urlResource" required />
+							      	<input type="text" class="form-control" id="urlField" name="url" required />
 								</div>
 							</div>
 							

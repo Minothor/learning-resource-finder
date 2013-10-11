@@ -38,7 +38,7 @@ public class UrlResourceController extends BaseController<UrlResource> {
 	}
 	
 	
-	@RequestMapping("/urleditsubmit")
+	@RequestMapping("/urlresourceeditsubmit")
 	public String urlSubmit(@RequestParam(value="urlresourceid", required=false) Long urlResourceId, @RequestParam("resourceid") long resourceId, @RequestParam("name") String name, @RequestParam("url") String url) 
 	{
 		// TODO: voir si url est valide (sinon ajouter une erreur sur result)
