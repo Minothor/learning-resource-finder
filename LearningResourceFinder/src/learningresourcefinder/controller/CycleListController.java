@@ -2,7 +2,10 @@ package learningresourcefinder.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import learningresourcefinder.model.BaseEntity;
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
 
@@ -16,10 +19,13 @@ public class CycleListController extends BaseController<BaseEntity> {
 @Autowired CycleRepository cyclerepository;
 
 @RequestMapping("/cyclelist")
-public ModelAndView showCycleList() {
+public ModelAndView showCycleList(HttpServletRequest request) {
     ModelAndView mv = new ModelAndView("cyclelist"); 
     List<Cycle> list=cyclerepository.findAllCycles();
-    mv.addObject("cyclelist", list);
+    request.getSession().setAttribute("cyclelist",list);
+    //mv.addObject("cyclelist", list);
+     
+   
     return mv;
         }
 

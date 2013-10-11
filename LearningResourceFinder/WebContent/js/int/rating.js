@@ -15,6 +15,14 @@ $(document).ready(function(){
             return $('.pop_content[data-container='+currentID+']'); // Return the current content.
         }
     });
+    
+    $('.novotepop').popover({
+    	html :true,
+    	content: "TU PEUX PAS!!!"
+    }
+    		
+    
+    );
 
     // On close : replace the content to div ".pop_display".
     $('.pop').on('hidden.bs.popover', function () {
