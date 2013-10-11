@@ -9,6 +9,7 @@
 <!-- Style Files -->
 <link rel="stylesheet" href="/css/int/style.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/css/ext/bootstrap-editable.css">
+<link rel="stylesheet" media="screen,projection" href="/css/ext/ui.totop.css" />
 
 
 
@@ -29,6 +30,8 @@
     <script src="/js/int/rating.js"></script> 
 	<script src="/js/int/search.js"></script> <!-- Growing search button script  -->
 	<script src="/js/ext/bootstrap-editable.min.js"> </script>
+	<script src="/js/ext/jquery.ui.totop.js"></script>
+	<script src="/js/ext/jquery.easing.1.3.js" type="text/javascript"></script>
 
 
 <!-- ***************************** END JAVASCRIPT **************************** -->   

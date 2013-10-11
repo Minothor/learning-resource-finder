@@ -12,6 +12,7 @@
 		<c:if test="${!empty sessionScope.notifications}">
 		   showNotificationArea();
 		</c:if>
+		$().UItoTop({ easingType: 'easeOutQuart' });
 	});
 	
  	function showNotificationArea() {	
