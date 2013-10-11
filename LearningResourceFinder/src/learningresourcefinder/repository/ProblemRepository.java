@@ -23,7 +23,7 @@ public class ProblemRepository extends BaseRepository<Problem>
 	}
 	
 	public List<Problem> findProblemOfAuthor(User createdBy) {
-		List<Problem> results = em.createQuery("SELECT p FROM Problem p WHERE p.createdBy = :createdBy")
+		List<Problem> results = em.createQuery("SELECT p FROM Problem p WHERE p.createdBy = :createdBy ORDER BY p.id DESC")
 				.setParameter("createdBy", createdBy)
 				.getResultList();
 		return results;

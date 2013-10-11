@@ -12,22 +12,32 @@
 		<table class="table table-condensed">
 			<thead>
 				<tr>
-					<th>Titre</th>
-					<th>Description</th>
-					<th>Auteur</th>
-					<th>Date</th>
-					<th>Statut</th>
+					<th class="col-md-2">Titre</th>
+					<th class="col-md-6">Description</th>
+					<th class="col-md-2">Auteur</th>
+					<th class="col-md-2">Date</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach items="${problemList}" var="problem">
+				<c:choose>
+		    		<c:when test="${problem.resolved}">
 				<tr>
-					<td>${problem.name}</td>
-					<td>${problem.description}</td>
-					<td>${problem.createdBy.userName}</td>
+					<td><a class="linethrough" href="/problem?id=${problem.id}">${problem.name}</a></td>
+					<td  class="linethrough">${problem.description}</td>
+					<td><a href="/user/${problem.createdBy.userName}">${problem.createdBy.userName}</a></td>
 					<td>${problem.createdOn}</td>
-					<td></td>
-				</tr>		
+				</tr>
+					</c:when>
+					<c:otherwise>
+				<tr>
+					<td><a href="/problem/${problem.id}">${problem.name}</a></td>
+					<td>${problem.description}</td>
+					<td><a href="/user/${problem.createdBy.userName}">${problem.createdBy.userName}</a></td>
+					<td>${problem.createdOn}</td>
+				</tr>
+					</c:otherwise>
+		    	</c:choose>		
 			</c:forEach>
 			</tbody>
 		</table>

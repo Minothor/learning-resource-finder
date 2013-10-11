@@ -183,6 +183,10 @@ figure:hover figcaption {
     vertical-align: middle;
     width: 120px;
 }
+/*#### HISTORY PROBLEM #######################################################################*/
+.linethrough {
+	text-decoration: line-through;	
+}
 
 
 
