@@ -50,10 +50,13 @@ public class PlayListListController  extends BaseController<PlayList> {
 	}
 	
 	@RequestMapping("/all")
-	public String displayAllList(Model model) {
-	    model.addAttribute("playlistlist", playlistRepository.getAllPlayLists());
-
-	    return "playlistlist";
+	public ModelAndView displayAllList() {
+	    User user = SecurityContext.getUser();
+	    ModelAndView mv = new ModelAndView("playlistlist", "playlist", new PlayList());
+	    mv.addObject("playlistlist", playlistRepository.getAllPlayLists());
+	    mv.addObject("user", user);
+	    mv.addObject("displaytype", "all");
+	    return mv;
 	}
 
 }

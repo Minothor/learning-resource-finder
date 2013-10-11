@@ -23,15 +23,15 @@
 <body>
    <c:choose>
 	<c:when test="${playlist.id==null}">
-	  <lrftag:breadcrumb linkactive="créer une playlist">
+	  <lrftag:breadcrumb linkactive="Créer une playlist">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
-		<lrftag:breadcrumbelement label="${current.user.userName}" link="/user/${current.user.userName}" />
+		<lrftag:breadcrumbelement label="${current.user.fullName}" link="/user/${current.user.userName}" />
 	  </lrftag:breadcrumb>
 	</c:when>
 	<c:otherwise>
 	  <lrftag:breadcrumb linkactive="édition">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
-		<lrftag:breadcrumbelement label="${current.user.userName}" link="/user/${current.user.userName}" />
+		<lrftag:breadcrumbelement label="${current.user.fullName}" link="/user/${current.user.userName}" />
 		<lrftag:breadcrumbelement label="${playlist.name}" link="/playlist/${playlist.shortId}/${playlist.slug}" />
 	  </lrftag:breadcrumb>
 	</c:otherwise>
@@ -46,7 +46,7 @@
 				<lrftag:pageheadertitle title="Création d'une PlayList"/>
 			</c:when>
 			<c:otherwise>
-				<lrftag:pageheadertitle title="Edition : ${playlist.name}"/>
+				<lrftag:pageheadertitle title="Edition : ${playlist.fullName}"/>
 			</c:otherwise>
 		</c:choose>
 	
@@ -56,15 +56,15 @@
 				<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playlist" class="form-horizontal" role="form" method="post">
 					<div class="col-md-12">
 						<form:hidden path="id" />
-						<lrftag:input path="name" label="Titre" />
-						<lrftag:input path="description" label="Description" />
-				
-							
+						<form:input class="form-control" path="name" label="Titre" placeholder="Titre" />
+						<br />
+						<form:textarea class="form-control" rows="5" path="description" label="Description" placeholder="Description" />
+						<br />
 					</div>
 					
 					<div class="form-group">
-				   		<label class="col-lg-2"></label>
-				   		<ul class="col-lg-2" >
+				   		<label class="col-lg-0"></label>
+				   		<ul class="col-lg-0" >
 				    		<li style="display:inline;">
 				    			<input type="submit" class="btn btn-primary" value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>" onclick="javascript: return verifForm(this);" />
 				    		</li>

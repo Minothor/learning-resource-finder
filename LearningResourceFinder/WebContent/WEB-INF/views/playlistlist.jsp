@@ -21,19 +21,24 @@
 
 </head>
 <body>
-
- <c:if test="${user!=null}">
-	<lrftag:breadcrumb linkactive="playLists">
+<c:choose>
+ <c:when test="${(user!=null && displaytype!='all')}">
+	<lrftag:breadcrumb linkactive="PlayLists">
 		<lrftag:breadcrumbelement label="home" link="/home" />
 		<lrftag:breadcrumbelement label="${user.firstName}" link="/user/${user.userName}" />
 	</lrftag:breadcrumb>
-</c:if>
-
+ </c:when>
+ <c:otherwise>
+ 	<lrftag:breadcrumb linkactive="Toutes les PlayLists">
+		<lrftag:breadcrumbelement label="home" link="/home" />
+	</lrftag:breadcrumb>
+ </c:otherwise>
+</c:choose>
 	
 <%-- 	${current.user.fullName} --%>
 	<div class="container">
 		 <c:choose>
-    		<c:when test="${user!=null}">
+    		<c:when test="${displaytype!='all'}">
 				<lrftag:pageheadertitle title="Play-lists de ${user.fullName}"/>
 			</c:when>
 			<c:otherwise>
