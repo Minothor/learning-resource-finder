@@ -14,7 +14,7 @@
  	<script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('#title,#description,#platform').editable({      
+ 	    $('#title,#description,#urlresouce,#platform').editable({      
  	    	  type: 'text',
  	    	  inputclass: 'largerTextArea',
  	    	  url: '/ajax/resourceeditfieldsubmit',
@@ -58,7 +58,7 @@
 					  	   <c:forEach items="${resource.urlResources}" var="urlResource">
 					  	      <a href="${urlResource.url}" target="_blank"  id="urlresource" data-type="text">${urlResource.url}</a>
 					  	      <c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
-					  	      <span class="glyphicon glyphicon-pencil" onclick="onEditClick(${urlResource.id}, '${urlResource.url}', '${urlResource.name}')" ></span>
+					  	      <span class="glyphicon glyphicon-pencil" onclick="onEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')" ></span>
 					  	      <br/>
 					  	   </c:forEach>
 					    </dd>
@@ -140,7 +140,8 @@
 							    	Url :
 							    </label>
 							    <div class="col-lg-10">
-							      	<input type="text" class="form-control" id="urlResource" name="urlResource" />
+							        <input type="text" class="form-control" id="urlField" name="url" required />
+							      	
 								</div>
 							</div>
 							
