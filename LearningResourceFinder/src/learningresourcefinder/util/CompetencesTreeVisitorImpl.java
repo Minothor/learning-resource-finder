@@ -73,13 +73,17 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
 
         		/////////// Move node
         		// Main node hasn't parent, it must just be take like parent and only "Add" option is permit
-        		htmlResult += " <a href=\"#\" " + "id='D-" + id + "'>Déplacer</a>";
+        		htmlResult += " <span class='clickable' href=\"#\" " + "id='D-" + id + "'>Déplacer</span>";
         	}
 
         	//////////////// Add, Edit, Delete node 
-        	htmlResult += " <a href=\"#\" " + "id=" + "\"" + "A-" + id + "\"" + ">" + "Ajouter" + "</a>";
-        	if (competence.getParent() != null){ htmlResult +=" <a href=\"#\" " + "id=" + "\"" +  "E-" +id + "\"" + ">"+ "Éditer" +"</a>"
-        			+" <a href=\"#\" " + "id='R-" + id + "'>" + "Supprimer" + "</a>";
+        	htmlResult += " <span class='clickable' href=\"#\" " + "id=" + "\"" + "A-" + id + "\"" + ">" + "Ajouter" + "</span>";
+        	if (competence.getParent() != null){ 
+        	    htmlResult +=" <span class='clickable' href=\"#\" " + "id=" + "\"" +  "E-" +id + "\"" + ">"+ "Éditer" +"</span>";
+
+        	    if (competence.getChildren().size() == 0) {
+        	        htmlResult += " <span class='clickable' href=\"#\" " + "id='R-" + id + "'>" + "Supprimer" + "</span>";
+        	    }
         	} 
 
         	htmlResult += "</small>";
