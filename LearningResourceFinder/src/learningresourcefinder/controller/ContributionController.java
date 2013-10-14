@@ -19,24 +19,15 @@ public class ContributionController extends BaseController<Problem> {
 	@Autowired ProblemRepository problemRepository;
 	
 	@RequestMapping("/contribution")
-	public ModelAndView contribution() {
-		
-//		Map<Topic, Long> mapProblem = new TreeMap<Topic, Long>();
-//		
-//		for(Topic topic : Resource.Topic.values()) {
-//			mapProblem.put(topic, problemRepository.sortProblemOfTopic(topic));
-//		}
-		
-
-		
+	public ModelAndView contribution() {		
+		// Long[] = Number of problem on a topic, Number of fields null, Number of topic with competence null 
 		Map<Topic, Long[]> mapProblem = new TreeMap<Topic, Long[]>();
 		
 		for(Topic topic : Resource.Topic.values()) {
 			Long[] results = {problemRepository.countOpenProblemsForTopic(topic), problemRepository.countProblemOfFieldNull(topic), problemRepository.countProblemOfCompetenceNull(topic)};
 			mapProblem.put(topic, results);
 		}
-		
-		
+				
 		ModelAndView mv = new ModelAndView("contribution");
 		mv.addObject("mapProblem", mapProblem);
 		

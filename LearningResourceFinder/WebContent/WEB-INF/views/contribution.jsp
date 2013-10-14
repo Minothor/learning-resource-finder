@@ -19,7 +19,7 @@
 		  	</a>
 			<li class="list-group-item">
 		    	<span class="badge">${topic.value[0]}</span>
-		    	<a href="/problemlist?topic=${topic.key.description}">Problèmes à corriger.</a>
+		    	<a href="/problemresourcelist/${topic.key.description}">Problèmes à corriger.</a>
 		  	</li>
 		  	<li class="list-group-item">
 		    	<span class="badge">${topic.value[1]}</span>
