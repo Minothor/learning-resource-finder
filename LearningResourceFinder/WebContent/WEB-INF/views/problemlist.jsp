@@ -11,7 +11,17 @@
 		<lrftag:breadcrumbelement label="Home" link="home" />
 	</lrftag:breadcrumb>
 	<div class="container">
-		Hello ProblemList
+		<div class="panel panel-default">
+			<div class="panel-body">
+				Hello ProblemList
+				<c:forEach items="${resourceList}" var="resource">
+					<div
+						style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
+						<lrftag:resource resource="${resource}"></lrftag:resource>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

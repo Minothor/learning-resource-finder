@@ -23,11 +23,11 @@
 		  	</li>
 		  	<li class="list-group-item">
 		    	<span class="badge">${topic.value[1]}</span>
-		    	<a href="/problemlist?topic=${topic.key.description}">Ressoures incomplètes.</a>
+		    	<a href="/incompleteresourcelist/${topic.key.description}">Ressoures incomplètes.</a>
 		  	</li>
 		  	<li class="list-group-item">
 		    	<span class="badge">${topic.value[2]}</span>
-		    	<a href="/problemlist?topic=${topic.key.description}">Ressources liées à aucunes compétences.</a>
+		    	<a href="/unboundresourcelist/${topic.key.description}">Ressources liées à aucunes compétences.</a>
 		  	</li>
 		</ul>	
 		</c:forEach>
