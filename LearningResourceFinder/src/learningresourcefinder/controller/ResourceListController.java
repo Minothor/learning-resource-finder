@@ -55,7 +55,7 @@ public class ResourceListController extends BaseController<Resource> {
         mv.addObject("user", user);
         mv.addObject("usercanvote",canvote);
         
-		return mv;
+		return mv; 
 	
 	}
 	
