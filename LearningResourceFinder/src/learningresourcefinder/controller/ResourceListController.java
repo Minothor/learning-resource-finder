@@ -65,7 +65,8 @@ public class ResourceListController extends BaseController<Resource> {
 		List<Resource> listResource = resourceRepository.findAllResourceWhereProblemByTopic(topic);
 		ModelAndView mv = new ModelAndView("resourcelist");
 		mv.addObject("resourceList", listResource);
-		mv.addObject("problemTitle","Liste des ressources contenants des problèmes.");
+		mv.addObject("topic", topic);
+		mv.addObject("problemTitle","Liste des ressources contenant des problèmes.");
 		return mv;
 	}
 	
@@ -75,6 +76,7 @@ public class ResourceListController extends BaseController<Resource> {
 		List<Resource> listResource = resourceRepository.findAllResourceWhereFieldsNullByTopic(topic);
 		ModelAndView mv = new ModelAndView("resourcelist");
 		mv.addObject("resourceList", listResource);
+	    mv.addObject("topic", topic);
 		mv.addObject("problemTitle","Liste des ressources incomplètes.");
 		return mv;
 	}
@@ -85,6 +87,7 @@ public class ResourceListController extends BaseController<Resource> {
 		List<Resource> listResource = resourceRepository.findAllResourceWhoNotCompetencesByTopic(topic);
 		ModelAndView mv = new ModelAndView("resourcelist");
 		mv.addObject("resourceList", listResource);
+	    mv.addObject("topic", topic);
 		mv.addObject("problemTitle","Liste des ressources qui ne sont pas liées à une compétence.");
 		return mv;
 	}

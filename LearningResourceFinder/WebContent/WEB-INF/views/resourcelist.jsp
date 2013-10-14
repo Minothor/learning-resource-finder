@@ -5,13 +5,13 @@
 <title>Catalog</title>
 </head>
 <body>
-	<lrftag:breadcrumb linkactive="Liste des ressources">
-		<lrftag:breadcrumbelement label="Home" link="home" />
+	<lrftag:breadcrumb linkactive="${topic.description}">
+	<lrftag:breadcrumbelement label="Home" link="home" />
+	<lrftag:breadcrumbelement label="Contributions" link="contribution" />
 	</lrftag:breadcrumb>
 	<div class="container">
-	
+	<h1>${problemTitle}</h1>
 	<section id="resourcelist">
-		<div class="container">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="sixteen columns">
@@ -26,7 +26,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 	</div>
 </body>
