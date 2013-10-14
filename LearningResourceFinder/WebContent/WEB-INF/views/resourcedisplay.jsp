@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
-
+<script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
@@ -100,6 +100,9 @@
 						scoreUser="${mapRating[resource].score}"
 						countRating="${resource.countRating}" canvote="${usercanvote}" />
 					<br />
+					
+					<a href="#favorite" id="addResourceFavorite">Ajouter aux favoris</a>
+					
 					<c:if test="${canEdit}">
 						<lrftag:problemreport title="${resource.name}"
 							resourceid="${resource.id}" />

@@ -27,12 +27,11 @@ public class RegisterController extends BaseController<User> {
 		return "register"; 
 	}
 
-	@RequestMapping("/ajax/registersubmit")  
-	public @ResponseBody String registerSubmit(@RequestParam(value="emailRegister") String email, 
+	@RequestMapping("/ajax/registersubmit")                         
+	public @ResponseBody String registerSubmit(@RequestParam(value="emailRegister") String email, 			                                                        			
 											   @RequestParam(value="usernameRegister") String username,
 											   @RequestParam(value="passwordRegister") String password) {
-	
-
+		                                                         
 		/////// Errors detection
 		if (StringUtils.isNotEmpty(username) && !HTMLUtil.isHtmlSecure(username)) {
 			NotificationUtil.addNotificationMessage("Vous avez introduit du HTML/Javascript dans vos informations d'enregistrement", Status.ERROR);
