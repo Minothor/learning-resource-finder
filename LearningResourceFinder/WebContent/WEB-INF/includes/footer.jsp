@@ -32,7 +32,7 @@
 						(3-6 secondaire)</a>
 				</div>
 				<div class="col-md-3">
-					<h4>Playlist</h4>
+					<h4>Séquences</h4>
 					<a href="/playlist/all">Toutes les séquences</a>
 				</div>
       		</div>

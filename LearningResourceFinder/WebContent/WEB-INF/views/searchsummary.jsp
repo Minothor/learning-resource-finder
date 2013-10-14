@@ -23,7 +23,7 @@
 	
 							<!-- Resource start -->
 	<div class="ecart">
-		<h4>Resource:</h4>
+		<h4>Resources:</h4>
 	</div>
 
 	<c:forEach items="${resourceList}" var="resource">
@@ -92,7 +92,7 @@
 	
 							<!-- compétence start -->
 	<div class="ecart">
-		<h4>Compétence:</h4>
+		<h4>Compétences:</h4>
 	</div>							
 							
 	<c:forEach items="${competenceList}" var="competence">

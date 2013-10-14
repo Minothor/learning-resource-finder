@@ -78,8 +78,7 @@
 
 
 
-<!-- Main Menu / Start
-================================================== -->
+<!-- Main Menu / Start ================================================== -->
 <header>  <%-- Bootstrap style --%>
 	<nav class="navbar navbar-default" role="navigation">
 
@@ -87,8 +86,7 @@
 
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header" style="padding-right:10px">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-ex1-collapse">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"	data-target=".navbar-ex1-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
