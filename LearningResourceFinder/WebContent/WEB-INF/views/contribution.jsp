@@ -27,7 +27,7 @@
 		  	</li>
 		  	<li class="list-group-item">
 		    	<span class="badge">${topic.value[2]}</span>
-		    	<a href="/unboundresourcelist/${topic.key.description}">Ressources liées à aucunes compétences.</a>
+		    	<a href="/notcompetencesresourcelist/${topic.key}">Ressources liées à aucunes compétences.</a>
 		  	</li>
 		</ul>	
 		</c:forEach>

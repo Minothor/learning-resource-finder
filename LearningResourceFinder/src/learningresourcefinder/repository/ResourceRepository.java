@@ -140,5 +140,12 @@ public class ResourceRepository extends BaseRepository<Resource>
 		return results;
 	}
 	
+	public List<Resource> findAllResourceWhoNotCompetencesByTopic(Topic topic) {
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE SIZE(r.competences) = 0 AND r.topic = :topic")
+				.setParameter("topic", topic)
+				.getResultList();
+		return results;
+	}
+	
 	
 }
