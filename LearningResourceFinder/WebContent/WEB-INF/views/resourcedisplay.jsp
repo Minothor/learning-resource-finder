@@ -29,7 +29,9 @@
  		$("#nameField").attr("value", name);
  		$("#modalUrlResource").modal("show");
  	}
- 	
+ 	function onAddClick(){
+ 		$("#modalUrlResource").modal("show");
+ 	}
  	function onUrlRemoveClick(id) {
  		$("#urlResourceHiddenField").attr("value", id);
  	    $("#modalConfirmDeleteResource").modal("show");	
@@ -67,13 +69,12 @@
 								<a href="${urlResource.url}" target="_blank" id="urlresource"
 									data-type="text">${urlResource.url}</a>
 								<c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
-								<span class="glyphicon glyphicon-pencil close" style="float:none; font-size:15px"
-									onclick="onEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"></span>
+								<span class="glyphicon glyphicon-pencil close" style="float:none; font-size:15px" onclick="onEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"></span>
 								<button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
 		                        <br />
-							</c:forEach>
-						</dd>
-
+		                    </c:forEach>
+		                    <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddClick()"></span>
+		                </dd>          
 						<dt>Description :</dt>
 						<dd>
 							<a href="#" id="description" data-type="textarea">${resource.description}</a>
@@ -136,8 +137,7 @@
 		</div>
 
 		<!-- Modal : ADD URL -->
-		<div class="modal fade" id="modalUrlResource" tabindex="-1"
-			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalUrlResource" tabindex="-1"role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -151,35 +151,25 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">
-									Intitulé (optionnel) : </label>
+								<label class="col-lg-2 control-label" style="text-align: left;">Intitulé (optionnel): </label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="nameField"
-										name="name" />
+									<input type="text" class="form-control" id="nameField"	name="name" />
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">
-									Url : </label>
+								<label class="col-lg-2 control-label" style="text-align: left;">Url : </label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="urlField"
-										name="url" required />
-
+									<input type="text" class="form-control" id="urlField"	name="url" required />
 								</div>
 							</div>
-
-							<p id="response">${response}</p>
-
 						</div>
 
 						<div class="modal-footer">
 							<input type="hidden" name="resourceid" value="${resource.id}" />
 							<%-- used for create --%>
-							<input type="hidden" name="urlresourceid" />
-							<%-- Value set via JavaScript -- used for edit --%>
-							<button type="button" class="btn btn-default closeModal"
-								data-dismiss="modal">Annuler</button>
+							<input type="hidden" name="urlresourceid" />	<%-- Value set via JavaScript -- used for edit --%>
+							<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Annuler</button>
 							<input class="btn btn-primary" type="submit" value="Enregistrer" />
 						</div>
 					</form>
