@@ -6,7 +6,12 @@
    
 // Sends an ajax request for the user who wants to upload an image from an URL (text field).
 function ajaxVerifyUrl() {
-	var url = $('#url').val();
+	var url = $('#urlAddField').val();
+	if (isValidURL(url) == false) {
+		alert("url non valide ");
+		return;
+	}
+	
 	if (url != '') {
 
 		$.ajax({
@@ -15,11 +20,7 @@ function ajaxVerifyUrl() {
 					data : "url=" + url,
 					success : function(data) {
 						if (data == "") { // No other resource with the same url found in DB.
-							if (isValidURL(url) == false) {
-								alert("url non valide ");   // TODO: display error in the form;
-							} else {
-                                toggleForm();
-							}
+                            toggleForm();
 						} else {
 							alert("une resource avec une url similaire existe déjà sur le site");  // TODO: display error in the form;   
 						}
@@ -36,13 +37,8 @@ function ajaxVerifyUrl() {
 }
 
 function isValidURL(url) {
-	//var urlRegxp = /^(http:\/\/www.|https:\/\/www.|http:\/\/){1}([\w]+)(.[\w]+){1,2}$/;
-	var urlRegxp = /^(http)/;
-	if (urlRegxp.test(url) != true) {
-		return false;
-	} else {
-		return true;
-	}
+	var result = url.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/);
+	return result == null ? false : true;
 }
 
 function clearForm() {
@@ -53,11 +49,7 @@ function clearForm() {
 	 .removeAttr('selected');
 }
 
-function closeForm1(){
-	$("#myModal").modal('show').on("hide", function(){
-		$("#addResourceModal").modal('hide');
-	});
-}
+
 
 function toggleForm() {
 	$("#bottomButtons").toggle();
