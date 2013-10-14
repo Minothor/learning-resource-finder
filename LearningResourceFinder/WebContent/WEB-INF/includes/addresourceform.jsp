@@ -19,7 +19,7 @@
 					<div class="form-horizontal container">
 						<div class="form-group">
 	                        <label for="url">site</label> 
-	                        <input type="text" class="form-control" id="url" name="url" placeholder="http://...">
+	                        <input type="text" class="form-control" id="urlAddField" name="url" placeholder="http://...">
 	                        <br />
 	                        <div class="pull-right"> 
 	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
@@ -31,7 +31,7 @@
 
 							<div class="form-group">
 		                        <label for="titre">Intitulé</label> 
-		                        <input type="text" class="form-control" id="title" name="title" placeholder="titre" required="required">
+		                        <input type="text" class="form-control" name="title" placeholder="intitulé" required="required">
 		                   		<div class="pull-right"></div>
 							</div>
 							
@@ -44,7 +44,7 @@
 				                     <c:forEach var="format" items="${applicationScope.cache.format}">
 					                  	<div class="radio"> 
 					                   	<label for="${format.description}">
-					                   		<input type="radio" name="format" value="${format}" id="${format.description}" required="required">
+					                   		<input type="radio" name="format" value="${format}" required="required">
 					                   		${format.description}
 					                   	</label>
 				                       </div> 
@@ -57,7 +57,7 @@
 									<c:forEach var="platform" items="${applicationScope.cache.platform}">
 										<div class="radio">
 											<label for="${platform.description}">	
-							                   	<input type="radio" name="platform" value="${platform}" id="${platform.description}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
+							                   	<input type="radio" name="platform" value="${platform}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
 							                    ${platform.description}
 							                </label>  
 										</div>
@@ -70,7 +70,7 @@
 									<c:forEach var="topic" items="${applicationScope.cache.topic}">
 									<div class="radio">
 										<label for="${topic.description}">
-											<input type="radio" name="topic" value="${topic}" id="${topic.description}" required="required"> 
+											<input type="radio" name="topic" value="${topic}" required="required"> 
 											${topic.description}
 										</label>
 									</div>
@@ -109,7 +109,7 @@
 
 					<div class="form-group">
 						<label for="description">Description</label>
-						<textarea class="form-control" id="description" name="description"
+						<textarea class="form-control"  name="description"
 							placeholder="Description" rows="3"></textarea>
 						<div class="pull-right"></div>
 					</div>
@@ -150,7 +150,7 @@
 						<c:forEach var="nature" items="${applicationScope.cache.nature}">
 							<div class="radio">
 								<label for="${nature.description}">
-									<input type="radio" name="nature" id="${nature.description}" value="${nature}"> 
+									<input type="radio" name="nature" value="${nature}"> 
 									${nature.description}
 								</label>
 							</div>
