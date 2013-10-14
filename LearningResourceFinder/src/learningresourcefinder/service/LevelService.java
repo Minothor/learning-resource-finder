@@ -2,6 +2,7 @@ package learningresourcefinder.service;
 
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Level;
+import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.Action;
 
 
@@ -16,7 +17,7 @@ public class LevelService {
 		int userlevelIndex = user.getAccountLevel().getLevelIndex();
 		int actionlevelIndex = action.getLevel().getLevelIndex();
 		
-		if (userlevelIndex >= actionlevelIndex) {
+		if (userlevelIndex >= actionlevelIndex && SecurityContext.isUserLoggedIn()) {
 			return true;
 		}
 		
