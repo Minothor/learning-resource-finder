@@ -29,7 +29,7 @@
 	</lrftag:breadcrumb>
  </c:when>
  <c:otherwise>
- 	<lrftag:breadcrumb linkactive="Toutes les PlayLists">
+ 	<lrftag:breadcrumb linkactive="Toutes les séquences">
 		<lrftag:breadcrumbelement label="home" link="/home" />
 	</lrftag:breadcrumb>
  </c:otherwise>
@@ -39,16 +39,16 @@
 	<div class="container">
 		 <c:choose>
     		<c:when test="${displaytype!='all'}">
-				<lrftag:pageheadertitle title="Play-lists de ${user.fullName}"/>
+				<lrftag:pageheadertitle title="Séquences de ${user.fullName}"/>
 			</c:when>
 			<c:otherwise>
-				<lrftag:pageheadertitle title="Toutes les PlayLists"/>
+				<lrftag:pageheadertitle title="Toutes les séquences"/>
 			</c:otherwise>
     	</c:choose>
 		<div class=" " style="font-size:14px">
 		   &nbsp&nbsp<a class="btn btn-primary pull-right" 
 		      <lrftag:loggedin yes='href="/playlist/create"' no='id="addPlayListLink" href="#"'/>
-		   > Créer une PlayList</a> 
+		   >Créer une séquence</a> 
 		</div>
 		<br />
 		<div class="table-responsive">

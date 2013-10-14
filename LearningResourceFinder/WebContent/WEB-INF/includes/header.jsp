@@ -128,12 +128,12 @@
 					    </ul>
 					 </li>
 					 
-					 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PlayLists <b class="caret"></b></a> 
+					 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Séquences <b class="caret"></b></a> 
 					    <ul class="dropdown-menu"> 
-                          <li><a href="/playlist/all">Toutes les PlayLists</a> </li>
+                          <li><a href="/playlist/all">Toutes les séquences</a> </li>
                           <c:choose>
                           	<c:when test="${current.user!=null}">
-                          	<li><a href="/playlist/user/${current.user.userName}">Mes PlayLists</a></li>
+                          	<li><a href="/playlist/user/${current.user.userName}">Mes séquences</a></li>
                     	  </c:when>	
                     	</c:choose>			
 					    </ul>
@@ -150,8 +150,8 @@
 									class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="/history/problem">Historique des problèmes</a></li>
-									<li><a href="/user/${current.user.userName}">Profil</a></li>
-									<li><a href="/playlist/user/${current.user.userName}">Playlists</a></li>
+									<li><a href="/user/${current.user.userName}">Profile</a></li>
+									<li><a href="/playlist/user/${current.user.userName}">Séquences</a></li>
         						   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Ressources</a></li>
 								</ul></li>
 							<li><a href="/logout" class="dropdown-toggle">Déconnexion</a>

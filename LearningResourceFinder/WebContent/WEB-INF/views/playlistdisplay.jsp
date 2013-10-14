@@ -6,7 +6,7 @@
 <head>
 <!-- Jquery for change input popup addImageUser -->
 <script type="text/javascript" src="/js/int/addImageUrlPlaylist.js"></script>
-<title>PlayList</title>
+<title>Séquence</title>
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${playlist.name}">

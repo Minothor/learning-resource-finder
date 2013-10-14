@@ -9,7 +9,7 @@
 	<!-- Jquery for change input popup addImageUser -->
 	<script type="text/javascript" src="/js/int/addImageUtil.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Playlist editing</title>
+	<title>Edition d'une séquence</title>
 	<script type="text/javascript">
 		function verifForm(form) {
 			if (document.form.name.value == "") {
@@ -23,7 +23,7 @@
 <body>
    <c:choose>
 	<c:when test="${playlist.id==null}">
-	  <lrftag:breadcrumb linkactive="Créer une playlist">
+	  <lrftag:breadcrumb linkactive="Créer une séquence">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
 		<lrftag:breadcrumbelement label="${current.user.fullName}" link="/user/${current.user.userName}" />
 	  </lrftag:breadcrumb>
@@ -43,7 +43,7 @@
 		
 		<c:choose>
 			<c:when test="${playlist.id==null}">
-				<lrftag:pageheadertitle title="Création d'une PlayList"/>
+				<lrftag:pageheadertitle title="Création d'une séquence"/>
 			</c:when>
 			<c:otherwise>
 				<lrftag:pageheadertitle title="Edition : ${playlist.fullName}"/>
@@ -66,7 +66,7 @@
 				   		<label class="col-lg-0"></label>
 				   		<ul class="col-lg-0" >
 				    		<li style="display:inline;">
-				    			<input type="submit" class="btn btn-primary" value="<c:choose><c:when test="${playlist.id==null}">Créer la play-list</c:when><c:otherwise>Sauver</c:otherwise></c:choose>" onclick="javascript: return verifForm(this);" />
+				    			<input type="submit" class="btn btn-primary" value="<c:choose><c:when test="${playlist.id==null}">Créer la séquence</c:when><c:otherwise>Sauver</c:otherwise></c:choose>" onclick="javascript: return verifForm(this);" />
 				    		</li>
 				    		<c:if test="${playlist.id != null}">
 				    		    <li style="display:inline;"><button onclick="location.href='/playlist/${playlist.shortId}/${playlist.slug}';" class="btn" type="reset">Annuler</button></li>

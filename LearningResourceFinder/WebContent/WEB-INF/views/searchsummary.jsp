@@ -64,7 +64,7 @@
 
 							<!-- Playlist start -->
 	<div class="ecart">
-		<h4>Playlist:</h4>
+		<h4>Séquences:</h4>
 	</div>							
 							
 	<c:forEach items="${playlistList}" var="playlist">

@@ -57,12 +57,12 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>Intitulé :</dt>
+						<dt>Intitulé:</dt>
 						<dd>
 							<a href="#" id="title"> ${resource.name}</a>
 						</dd>
 
-						<dt>Url :</dt>
+						<dt>Url:</dt>
 
 						<dd>
 							<c:forEach items="${resource.urlResources}" var="urlResource">
@@ -75,18 +75,18 @@
 		                    </c:forEach>
 		                    <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddClick()"></span>
 		                </dd>          
-						<dt>Description :</dt>
+						<dt>Description:</dt>
 						<dd>
 							<a href="#" id="description" data-type="textarea">${resource.description}</a>
 						</dd>
 
-						<dt>Plate-forme :</dt>
+						<dt>Plate-forme:</dt>
 						<dd>
 							<a href="#" id="platform" data-type="select"
 								data-source="${dataEnumPlatform}"> ${resource.platform}</a>
 						</dd>
 
-						<dt>Auteur :</dt>
+						<dt>Contributeur:</dt>
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>

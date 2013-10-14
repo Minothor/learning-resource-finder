@@ -33,7 +33,7 @@
 				</div>
 				<div class="col-md-3">
 					<h4>Playlist</h4>
-					<a href="/playlist/all">Toutes les PlayLists</a>
+					<a href="/playlist/all">Toutes les séquences</a>
 				</div>
       		</div>
       	</div>
