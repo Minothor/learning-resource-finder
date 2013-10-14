@@ -18,7 +18,7 @@ $(document).ready(function(){
     
     $('.novotepop').popover({
     	html :true,
-    	content: "TU PEUX PAS!!!"
+    	content: "Pour voter, il faut être connecté et avoir un niveau 2 de contribution."
     }
     		
     
