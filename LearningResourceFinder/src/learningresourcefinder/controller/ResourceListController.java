@@ -11,6 +11,9 @@ import learningresourcefinder.model.User;
 import learningresourcefinder.repository.RatingRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.service.LevelService;
+import learningresourcefinder.util.Action;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,7 @@ public class ResourceListController extends BaseController<Resource> {
 	@Autowired ResourceRepository resourceRepository;
 	@Autowired UserRepository userRepository; //
 	@Autowired RatingRepository ratingRepository; //
+	@Autowired LevelService levelService;
 
 	@RequestMapping("/ressourcelist/{userName}")
 	public ModelAndView resourceList(@PathVariable("userName") String userName) {
@@ -31,7 +35,9 @@ public class ResourceListController extends BaseController<Resource> {
         if (user == null) {
         	throw new InvalidUrlException("L'utilisateur ayant le pseudonyme (userName) '"+userName+"' est introuvable.");
         }
-
+       
+        boolean canvote = false;
+        canvote = levelService.canDoAction(user, Action.VOTE);
         ModelAndView mv = new ModelAndView("resourcelist");
 
         List<Resource> listResource = resourceRepository.findAllResourceByUser(user);
@@ -46,8 +52,10 @@ public class ResourceListController extends BaseController<Resource> {
         mv.addObject("resourceList", listResource);
         mv.addObject("mapRating", mapRating);
         mv.addObject("user", user);
-
+        mv.addObject("usercanvote",canvote);
+        
 		return mv;
+	
 	}
 	
 	@RequestMapping("/problemresourcelist/{topic}")
