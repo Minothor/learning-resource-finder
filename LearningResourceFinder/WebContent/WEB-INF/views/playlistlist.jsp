@@ -15,7 +15,15 @@
 	    e.stopPropagation();
 	    $("#loginDropDown").dropdown("toggle");
    	  });
+   	  
+   	  
+      $('.noaddplaylistpop').popover({
+    	   	html :true,
+    	   	content: "Pour créer une séquence, il faut être connecté et avoir un niveau 3 de contribution."
+      });
+   	  
    });
+   
 
 </script>
 
@@ -45,11 +53,11 @@
 				<lrftag:pageheadertitle title="Toutes les séquences"/>
 			</c:otherwise>
     	</c:choose>
-		<div class=" " style="font-size:14px">
-		   &nbsp&nbsp<a class="btn btn-primary pull-right" 
-		      <lrftag:loggedin yes='href="/playlist/create"' no='id="addPlayListLink" href="#"'/>
-		   >Créer une séquence</a> 
-		</div>
+   	
+		<a class="btn btn-primary pull-right ${canaddplaylist == true ? '\" href=\"/playlist/create\"' : 'noaddplaylistpop' }">
+			Créer une PlayList
+		</a>
+	
 		<br />
 		<div class="table-responsive">
 		  	<table class="table table-bordered">
