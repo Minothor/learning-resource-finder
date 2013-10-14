@@ -60,10 +60,18 @@ public class ResourceListController extends BaseController<Resource> {
 	}
 	
 	@RequestMapping("/problemresourcelist/{topic}")
-	public ModelAndView problemresourcelist(@PathVariable("topic") String topicName) {
-		
+	public ModelAndView problemresourcelist(@PathVariable("topic") String topicName) {		
 		Topic topic = Resource.Topic.valueOf(topicName);
 		List<Resource> listResource = resourceRepository.findAllResourceWhereProblemByTopic(topic);
+		ModelAndView mv = new ModelAndView("resourcelist");
+		mv.addObject("resourceList", listResource);
+		return mv;
+	}
+	
+	@RequestMapping("/fieldsnullresourcelist/{topic}")
+	public ModelAndView fieldsnullresourcelist(@PathVariable("topic") String topicName) {
+		Topic topic = Resource.Topic.valueOf(topicName);
+		List<Resource> listResource = resourceRepository.findAllResourceWhereFieldsNullByTopic(topic);
 		ModelAndView mv = new ModelAndView("resourcelist");
 		mv.addObject("resourceList", listResource);
 		return mv;

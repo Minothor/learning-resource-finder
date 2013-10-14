@@ -132,5 +132,13 @@ public class ResourceRepository extends BaseRepository<Resource>
 		return results;
 	}
 	
+	public List<Resource> findAllResourceWhereFieldsNullByTopic(Topic topic) {
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE(r.name = null OR r.description = null OR r.language = null OR r.format = null"
+				+ " OR r.platform = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic")
+				.setParameter("topic", topic)
+				.getResultList();
+		return results;
+	}
+	
 	
 }

@@ -23,7 +23,7 @@
 		  	</li>
 		  	<li class="list-group-item">
 		    	<span class="badge">${topic.value[1]}</span>
-		    	<a href="/incompleteresourcelist/${topic.key.description}">Ressoures incomplètes.</a>
+		    	<a href="/fieldsnullresourcelist/${topic.key}">Ressoures incomplètes.</a>
 		  	</li>
 		  	<li class="list-group-item">
 		    	<span class="badge">${topic.value[2]}</span>
