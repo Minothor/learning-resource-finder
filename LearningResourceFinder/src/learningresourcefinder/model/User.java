@@ -79,7 +79,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     
     @Column(nullable=false)
     @Enumerated(EnumType.ORDINAL)
-    private Level accountLevel;
+    private Level accountLevel = Level.LEVEL_1;
     
 	public Level getAccountLevel() {
 		return accountLevel;
@@ -301,6 +301,10 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     
     @OneToMany (mappedBy="createdBy")
     Set <PlayList> playListList = new HashSet<>();
+    
+    
+    @OneToMany
+    private Set<Resource> favorites = new HashSet<>();
     
     
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
