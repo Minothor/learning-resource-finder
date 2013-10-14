@@ -9,11 +9,11 @@ import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
+import learningresourcefinder.util.HTMLUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -217,19 +217,19 @@ public class CompetenceController extends BaseController<Competence> {
 			return name;
 		}
 		public void setName(String name) {
-			this.name = name;
+			this.name = HTMLUtil.removeHtmlTags(name);
 		}
 		public String getCode() {
 			return code;
 		}
 		public void setCode(String code) {
-			this.code = code;
+			this.code = HTMLUtil.removeHtmlTags(code);
 		}
 		public String getDescription() {
 			return description;
 		}
 		public void setDescription(String description) {
-			this.description = description;
+			this.description = HTMLUtil.removeHtmlTags(description);
 		}
 	}
 }

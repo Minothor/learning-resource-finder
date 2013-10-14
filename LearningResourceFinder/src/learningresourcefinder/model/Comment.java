@@ -2,6 +2,8 @@ package learningresourcefinder.model;
 
 import javax.persistence.*;
 
+import learningresourcefinder.util.HTMLUtil;
+
 @Entity
 public class Comment extends BaseEntity
 {
@@ -34,11 +36,11 @@ public class Comment extends BaseEntity
 	/**************************** Setters *************************************/
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = HTMLUtil.removeHtmlTags(title);
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 	
 	public void setProblem(Problem problem) {

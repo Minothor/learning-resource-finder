@@ -8,6 +8,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import learningresourcefinder.util.HTMLUtil;
+
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -54,7 +56,7 @@ public class Task extends BaseEntity
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = HTMLUtil.removeHtmlTags(description);
     }
 
     public User getAssigner() {
@@ -70,7 +72,7 @@ public class Task extends BaseEntity
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public void setAssigner(User assigner) {

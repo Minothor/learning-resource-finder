@@ -24,6 +24,7 @@ import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.search.Searchable;
+import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.Slugify;
 
 import org.apache.commons.lang3.StringUtils;
@@ -106,8 +107,8 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	public Resource() {} // No arg constructor for Hibernate
 	
 	public Resource(String name, String description, User author) {
-		this.name = name;
-		this.description = description;
+		this.name = HTMLUtil.removeHtmlTags(name);
+		this.description = HTMLUtil.removeHtmlTags(description);
 		this.slug = Slugify.slugify(name);
 		this.createdBy = author;  // We are probably executing this constructor with params in a test batch code (=> no logged in user to be the author).
 	}
@@ -149,7 +150,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public String getDescription() {
@@ -157,7 +158,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 
 	public Set<Problem> getProblems() {

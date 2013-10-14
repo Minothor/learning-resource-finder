@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 import learningresourcefinder.search.Searchable;
+import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.Slugify;
 
 import org.apache.commons.lang3.StringUtils;
@@ -51,8 +52,8 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
     public PlayList() {} // No arg constructor for Hibernate
     
     public PlayList(String name, String description) {
-		this.name = name;
-		this.description = description;
+		this.name = HTMLUtil.removeHtmlTags(name);
+		this.description = HTMLUtil.removeHtmlTags(description);
 		this.slug = Slugify.slugify(name);
 	}
 
@@ -61,13 +62,13 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         return name;
     }
     public void setName(String name) {
-        this.name = name;
+        this.name = HTMLUtil.removeHtmlTags(name);
     }
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
-        this.description = description;
+        this.description = HTMLUtil.removeHtmlTags(description);
     }
 
     public List<Resource> getResourceList() {
@@ -78,7 +79,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         return slug;
     }
     public void setSlug(String slug) {
-        this.slug = slug;
+        this.slug = HTMLUtil.removeHtmlTags(slug);
     }
 
     @Override

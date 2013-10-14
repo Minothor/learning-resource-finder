@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+import learningresourcefinder.util.HTMLUtil;
+
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -75,11 +77,11 @@ public class Problem extends BaseEntity
     /**************************** Setters *************************************/
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 	
 	public void setResource(Resource resource) {

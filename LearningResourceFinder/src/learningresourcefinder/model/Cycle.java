@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.validation.constraints.Size;
 
-
 import learningresourcefinder.service.CompetenceService;
+import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.ContextUtil;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -59,7 +59,7 @@ public class Cycle extends BaseEntity  {
 
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
     @Override

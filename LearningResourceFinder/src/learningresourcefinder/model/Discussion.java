@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import learningresourcefinder.util.HTMLUtil;
+
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -31,7 +33,7 @@ public class Discussion extends BaseEntity {
 
     public Discussion(String message) {
         super();
-        this.message = message;
+        this.message = HTMLUtil.removeHtmlTags(message);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class Discussion extends BaseEntity {
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.message = HTMLUtil.removeHtmlTags(message);
     }
 
     public Problem getProblem() {
@@ -54,10 +56,4 @@ public class Discussion extends BaseEntity {
     public void setProblem(Problem problem) {
         this.problem = problem;
     }
-    
-    
-    
-    
-
-
 }

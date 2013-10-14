@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 import javax.persistence.OrderBy;
 
 import learningresourcefinder.search.Searchable;
+import learningresourcefinder.util.HTMLUtil;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
@@ -77,10 +78,10 @@ public class Competence extends BaseEntity implements Searchable{
 
 	public Competence(String codeCompetence, String nameCompetence,
 			Competence parent, String descriptionCompetence) {
-			this.code = codeCompetence;
-			this.name = nameCompetence;
+			this.code = HTMLUtil.removeHtmlTags(codeCompetence);
+			this.name = HTMLUtil.removeHtmlTags(nameCompetence);
 			this.parent = parent;
-			this.description = descriptionCompetence;
+			this.description = HTMLUtil.removeHtmlTags(descriptionCompetence);
 			
 	}
 
@@ -137,7 +138,7 @@ public class Competence extends BaseEntity implements Searchable{
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public String getDescription() {
@@ -145,7 +146,7 @@ public class Competence extends BaseEntity implements Searchable{
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 
 	public List<Resource> getResources() {
@@ -157,7 +158,7 @@ public class Competence extends BaseEntity implements Searchable{
 	}
 
 	public void setCode(String code) {
-		this.code = code;
+		this.code = HTMLUtil.removeHtmlTags(code);
 	}
 
 	@Override

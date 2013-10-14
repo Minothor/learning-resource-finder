@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import learningresourcefinder.util.HTMLUtil;
+
 @Entity
 public class School extends BaseEntity {
 	
@@ -21,13 +23,13 @@ public class School extends BaseEntity {
 		return name;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
-		this.address = address;
+		this.address = HTMLUtil.removeHtmlTags(address);
 	}
 	
     @Override
