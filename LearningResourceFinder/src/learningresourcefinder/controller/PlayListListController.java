@@ -6,10 +6,13 @@ import java.util.TreeSet;
 
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.PlayList;
+import learningresourcefinder.model.Rating;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.LevelService;
+import learningresourcefinder.util.Action;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,7 @@ public class PlayListListController  extends BaseController<PlayList> {
 
 	@Autowired UserRepository userRepository;
 	@Autowired PlayListRepository playlistRepository;
+    @Autowired LevelService levelService;
 	
 	@RequestMapping("/user/{userName}")
 	public String displayList(@PathVariable("userName") String userName, Model model) {
@@ -52,11 +56,13 @@ public class PlayListListController  extends BaseController<PlayList> {
 	@RequestMapping("/all")
 	public ModelAndView displayAllList() {
 	    User user = SecurityContext.getUser();
+	    
 	    ModelAndView mv = new ModelAndView("playlistlist", "playlist", new PlayList());
+	
+	    mv.addObject("canaddplaylist",levelService.canDoAction(user,Action.ADD_PLAYLIST));
 	    mv.addObject("playlistlist", playlistRepository.getAllPlayLists());
 	    mv.addObject("user", user);
 	    mv.addObject("displaytype", "all");
 	    return mv;
 	}
-
 }
