@@ -52,7 +52,12 @@
 						<lrftag:resource resource="${resource}"></lrftag:resource>
 			
 						<div style="padding: 10px; width: 180px; height: 10px; background-color: #F6CEF5">
+						
+						<c:if test="${playlist.createdBy eq current.user}">
 							<a href=<c:url value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>>Remove</a>
+						</c:if>	
+							
+							
 						</div>
 					</div>
 					</c:forEach>
