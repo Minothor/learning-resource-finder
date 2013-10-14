@@ -30,6 +30,13 @@ public class ProblemRepository extends BaseRepository<Problem>
 				.getResultList();
 		return results;
 	}
+
+    public List<Problem> findProblemOfResource(Resource resource) {
+        List<Problem> results = em.createQuery("SELECT p FROM Problem p WHERE p.resource = :resource ORDER BY p.id DESC")
+                .setParameter("resource", resource)
+                .getResultList();
+        return results;
+    }   
 	
 	public Long countOpenProblemsForTopic(Topic topic) {
 		Long result = (long) em.createQuery("SELECT COUNT(p) FROM Problem p where p.resolved = false and p.resource.topic = :topic")
@@ -52,8 +59,6 @@ public class ProblemRepository extends BaseRepository<Problem>
 				.getSingleResult();
 		return result;
 	}
-	
-	
 	
 	
 	

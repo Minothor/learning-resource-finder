@@ -132,6 +132,9 @@
 					</c:if>
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
+					
+					<h4>Problème</h4>
+					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
 		</div>

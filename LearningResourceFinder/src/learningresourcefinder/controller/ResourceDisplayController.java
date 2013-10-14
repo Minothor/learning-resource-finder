@@ -1,9 +1,13 @@
 package learningresourcefinder.controller;
 
+import java.util.List;
+
+import learningresourcefinder.model.Problem;
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
+import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.search.SearchOptions;
@@ -33,6 +37,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired UrlResourceRepository urlResourceRepository;
     @Autowired IndexManagerService indexManager;
     @Autowired LevelService levelService;
+    @Autowired ProblemRepository problemRepository;
     
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -49,8 +54,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
             canvote = levelService.canDoAction(user, Action.VOTE);
         }
 		mv.addObject("usercanvote",canvote);
-        
     	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
+    	
+    	List<Problem> problemList = problemRepository.findProblemOfResource(resource);
+    	
+    	mv.addObject("problemList", problemList);
     	addDataEnumPlatformToModelAndView(mv, Platform.class);
     	return mv;
 	}
