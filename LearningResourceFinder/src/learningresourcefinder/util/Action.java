@@ -16,7 +16,6 @@ public enum Action {
 		DISCUSS_PROBLEM(0, Level.LEVEL_1, "Discuter sur un problème"),
 		CLOSE_PROBLEM(3, Level.LEVEL_5, "Clôturer un problème");
 		
-		
 		int actionPoints;
 	    Level level;
 		String describe;
