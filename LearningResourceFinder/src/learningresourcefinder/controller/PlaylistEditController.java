@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.User;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
@@ -33,9 +34,10 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	        return mv; 
 	    }
 	
+
 	@RequestMapping("/create")
 	public ModelAndView playListCreate() {
-		 return prepareModelAndView(new PlayList());     
+		return prepareModelAndView(new PlayList());
 	}
 	
 	@RequestMapping("/edit")
@@ -60,6 +62,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		String slug = Slugify.slugify(playList.getName());
 		playList.setSlug(slug);
 		if(playList.getId()==null) {  // Create
+			SecurityContext.getUser().setUserProgressPoints(2); 
 			if(playListHavingTheSameName != null ) {
 				NotificationUtil.addNotificationMessage("Ce titre existe déjà, veuillez en choisir un autre", Status.WARNING);
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);

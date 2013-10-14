@@ -47,12 +47,10 @@ public class ResourceDisplayController extends BaseController<Resource> {
     public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
         Resource resource = getRequiredEntityByShortId(shortId);
         ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
-        
-        boolean canvote = false;
-        if(SecurityContext.isUserLoggedIn()){
-        	User user = SecurityContext.getUser();
-            canvote = levelService.canDoAction(user, Action.VOTE);
-        }
+ 
+        User user = SecurityContext.getUser();
+        boolean canvote  = levelService.canDoAction(user, Action.VOTE);
+  
 		mv.addObject("usercanvote",canvote);
     	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
     	
