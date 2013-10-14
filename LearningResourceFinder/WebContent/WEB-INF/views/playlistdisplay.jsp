@@ -53,7 +53,7 @@
 			
 						<div style="padding: 10px; width: 180px; height: 10px; background-color: #F6CEF5">
 						
-						<c:if test="${playlist.createdBy eq current.user}">
+						<c:if test="${current.user != null && playlist.createdBy eq current.user}">
 							<a href=<c:url value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>>Remove</a>
 						</c:if>	
 							
