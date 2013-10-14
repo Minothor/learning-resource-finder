@@ -35,8 +35,7 @@ public class RessourceListController extends BaseController<Resource> {
         if (user == null) {
         	throw new InvalidUrlException("L'utilisateur ayant le pseudonyme (userName) '"+userName+"' est introuvable.");
         }
-
-        
+       
         boolean canvote = false;
         canvote = levelService.canDoAction(user, Action.VOTE);
         ModelAndView mv = new ModelAndView("resourcelist");
@@ -55,7 +54,7 @@ public class RessourceListController extends BaseController<Resource> {
         mv.addObject("user", user);
         mv.addObject("usercanvote",canvote);
         
-
+///sdfsfdsf
 		return mv;
 	
 	}
