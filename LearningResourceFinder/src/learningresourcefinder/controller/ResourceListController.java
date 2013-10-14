@@ -7,6 +7,7 @@ import java.util.Map;
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Rating;
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.RatingRepository;
 import learningresourcefinder.repository.ResourceRepository;
@@ -60,7 +61,11 @@ public class ResourceListController extends BaseController<Resource> {
 	
 	@RequestMapping("/problemresourcelist/{topic}")
 	public ModelAndView problemresourcelist(@PathVariable("topic") String topicName) {
-		ModelAndView mv = new ModelAndView("problemlist");
-		return null;
+		
+		Topic topic = Resource.Topic.valueOf(topicName);
+		List<Resource> listResource = resourceRepository.findAllResourceWhereProblemByTopic(topic);
+		ModelAndView mv = new ModelAndView("resourcelist");
+		mv.addObject("resourceList", listResource);
+		return mv;
 	}
 }

@@ -2,13 +2,16 @@ package learningresourcefinder.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
+import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -120,6 +123,13 @@ public class ResourceRepository extends BaseRepository<Resource>
 				.setMaxResults(amountOfElementsPaging)
 				.getResultList();
 		return result;
+	}
+	
+	public List<Resource> findAllResourceWhereProblemByTopic(Topic topic) {
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.topic = :topic AND SIZE(r.problems) > 0")
+				.setParameter("topic", topic)
+				.getResultList();
+		return results;
 	}
 	
 	

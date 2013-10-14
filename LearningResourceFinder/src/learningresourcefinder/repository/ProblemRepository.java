@@ -3,6 +3,7 @@ package learningresourcefinder.repository;
 import java.util.List;
 
 import learningresourcefinder.model.Problem;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.User;
 
@@ -51,6 +52,8 @@ public class ProblemRepository extends BaseRepository<Problem>
 				.getSingleResult();
 		return result;
 	}
+	
+	
 	
 	
 	
