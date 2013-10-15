@@ -92,7 +92,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="/"><img src="/images/ToujoursPlus-logo-header.png" ></a>
+				<div>
+				   <a href="/"><img src="/images/ToujoursPlus-logo-header.png" ></a> &nbsp;&nbsp;&nbsp;
+				   <span style="font-size:9px;" class="label label-info">beta</span>
+				</div>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
