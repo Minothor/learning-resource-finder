@@ -24,27 +24,28 @@
 		});
 	});
  	
+ 	function onUrlAddClick(){
+ 		$("#modalUrlResource").modal("show");
+ 	}
  	function onUrlEditClick(id, url, name) {
  		$("#urlResourceIdField").attr("value", id);
  		$("#urlField").attr("value", url);
  		$("#nameField").attr("value", name);
  		$("#modalUrlResource").modal("show");
  	}
- 	
- 	
- 	function onCompetenceRemoveClick(competenceid, resourceid){
- 		$("#competenceHiddenField").attr("value", competenceid);
- 		$("#modalConfirmDeleteCompetence").modal("show");	
- 	}
- 	function onUrlAddClick(){
- 		$("#modalUrlResource").modal("show");
- 	}
- 	function onAddCompetenceClick(){
- 		$("#modalCompetence").modal("show");
- 	}
  	function onUrlRemoveClick(id) {
  		$("#urlResourceHiddenField").attr("value", id);
  	    $("#modalConfirmDeleteResource").modal("show");	
+ 	}
+ 	
+ 	
+
+ 	function onAddCompetenceClick(){
+ 		$("#modalCompetence").modal("show");
+ 	}
+ 	function onCompetenceRemoveClick(competenceid, resourceid){
+ 		$("#competenceHiddenField").attr("value", competenceid);
+ 		$("#modalConfirmDeleteCompetence").modal("show");	
  	}
 	</script>
 
@@ -105,7 +106,7 @@
                               <button type="button" class="close" style="float:none;" onclick="onCompetenceRemoveClick(${competence.id})">&times;</button>
                             <br/>                           
                           </c:forEach>
-                            <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddCompetenceClick()"></span> 
+                          <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddCompetenceClick()"></span> 
                         </dd>
 					</dl>
 					<br />
@@ -325,17 +326,17 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title">Confirmation </h4>
+	        <h4 class="modal-title">Confirmation</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>Voulez-vous supprimer cette competence ?</p>
+	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removecompetencefromresource">
 	        <input id="competenceHiddenField" type="hidden" name="competenceid" />  <%-- Filled by JavaScript --%>
 	        <input id="resourceHiddenField" type="hidden" name="resourceid" value="${resource.id}" />
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-	        <button type="submit" class="btn btn-primary">Supprimer</button>
+	        <button type="submit" class="btn btn-primary">Retirer</button>
 	       </form>
 	      </div>
 	   </div><!-- /.modal-dialog -->
