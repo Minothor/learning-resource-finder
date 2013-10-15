@@ -50,3 +50,10 @@
         add constraint fk_qs8gh92wph8nvxwm8yh5jb1d 
         foreign key (users_id) 
         references users;
+        
+        
+        
+        
+-- Add Constraint for unique favorite
+        ALTER TABLE favorite
+		ADD CONSTRAINT resource_user UNIQUE (resource_id,user_id)

@@ -31,4 +31,12 @@ public class Favorite extends BaseEntity {
 	public Resource getResource() {
 		return resource;
 	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
 }

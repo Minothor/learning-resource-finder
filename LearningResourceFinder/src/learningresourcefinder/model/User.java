@@ -547,6 +547,14 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public Long getId() {
         return id;
     }
+    
+    /*public Set<Favorite> getFavorite() {
+		return favorites;
+	}*/
+    
+    public void setFavorite(Resource resource) {
+		this.favorites.add(resource);
+	}
    
     
 }
