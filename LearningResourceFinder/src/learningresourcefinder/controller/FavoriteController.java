@@ -20,28 +20,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class FavoriteController {
+public class FavoriteController extends BaseController<Favorite> {
 	
 	@Autowired ResourceRepository resourceRepository;
 	@Autowired FavoriteRepository favoriteRepository;
 	
+	// ADD OR DEL Resource since Favorite
 	@RequestMapping("/ajax/addfavorite")
-	public @ResponseBody String addfavorite(@RequestParam("idResource")long idResource) {
-		
+	public ModelAndView addfavorite(@RequestParam("idResource")long idResource) {
+		ModelAndView mv = new ModelAndView("favorite");
 		if(SecurityContext.isUserLoggedIn()) {
 			User user = SecurityContext.getUser();	
-			Resource resource = resourceRepository.find(idResource);
-			Favorite favorite = new Favorite();
-			favorite.setUser(user);
-			favorite.setResource(resource);
-			favoriteRepository.persist(favorite);
-			user.setFavorite(resource);
+			Resource resource = (Resource)getRequiredEntity(idResource, Resource.class);
+			
+			if(favoriteRepository.isFavorite(resource, user)) {  // User unlike this resource
+				Favorite favorite = favoriteRepository.findFavorite(resource, user);
+				favoriteRepository.remove(favorite);
+				
+			} else { // new like on this resource
+				Favorite favorite = new Favorite();
+				favorite.setUser(user);
+				favorite.setResource(resource);
+				user.setFavorite(resource);
+				favoriteRepository.persist(favorite);
+			}
+			mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));
+			mv.addObject("resource", resource);
 		} 
-		else {
-			NotificationUtil.addNotificationMessage("Vous devez être connecté pour ajouter une ressource en favori.");
-		}
-
-		return "ok";
+		return mv;
 	}
 	
 	@RequestMapping("/favoris/{user}")

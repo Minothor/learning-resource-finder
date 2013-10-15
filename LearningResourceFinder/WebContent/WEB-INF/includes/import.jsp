@@ -32,6 +32,7 @@
 	<script src="/js/ext/bootstrap-editable.min.js"> </script>
 	<script src="/js/ext/jquery.ui.totop.js"></script>
 	<script src="/js/ext/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 
 
 <!-- ***************************** END JAVASCRIPT **************************** -->   

@@ -21,7 +21,7 @@ public class Favorite extends BaseEntity {
 	
 	@Override
 	public Long getId() {
-		return null;
+		return id;
 	}
 	
 	public User getUser() {

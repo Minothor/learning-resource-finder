@@ -17,4 +17,24 @@ public class FavoriteRepository extends BaseRepository<Favorite> {
 				.getResultList();
 		return results;
 	}
+	
+	public Favorite findFavorite(Resource resource, User user) {
+		Favorite favorite = (Favorite) em.createQuery("SELECT f FROM Favorite f WHERE f.resource = :resource AND f.user = :user")
+				.setParameter("resource", resource)
+				.setParameter("user", user)
+				.getSingleResult();
+		return favorite;
+	}
+	
+	public boolean isFavorite(Resource resource, User user) {
+		long result = (long) em.createQuery("SELECT COUNT(f) FROM Favorite f WHERE f.resource = :resource AND f.user = :user") 
+				.setParameter("resource", resource)
+				.setParameter("user", user)
+				.getSingleResult();
+		
+		if(result > 0)
+			return true;
+		else
+			return false;
+	}
 }

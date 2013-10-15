@@ -187,6 +187,15 @@ figure:hover figcaption {
 .linethrough {
 	text-decoration: line-through;	
 }
+/*#### RESOURCE DISPLAY ######################################################################*/
+.iconFavorite {
+	color: #e81578;
+	font-size: 30px;
+}
+.iconNotFavorite {
+	color: #ccc;
+	font-size: 30px;	
+}
 
 
 
