@@ -12,7 +12,6 @@
 <script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
-<script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
@@ -120,8 +119,9 @@
 						countRating="${resource.countRating}" canvote="${usercanvote}" />
 					<br />
 					
-					<a href="#favorite" id="addResourceFavorite">Ajouter aux favoris</a>
-					
+					<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}" />
+
+					<br />
 					<c:if test="${canEdit}">
 						<lrftag:problemreport title="${resource.name}"
 							resourceid="${resource.id}" />
@@ -276,7 +276,7 @@
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removeurlresource">
-	        <input id="urlResourceHiddenField" type="hidden" name="urlresourceid" value="" />  <%-- Filled by JavaScript --%>
+	        <input id="urlResourceHiddenField" type="hidden" name="id" value="" />  <%-- Filled by JavaScript --%>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 	        <button type="submit" class="btn btn-primary">Supprimer</button>
 	       </form>
@@ -322,29 +322,6 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-		
-		
-		<!-- Modal : COMPETENCE REMOVE CONFIRM  -->
-   <div class="modal fade" id="modalConfirmDeleteCompetence">
-	   <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title">Confirmation</h4>
-	      </div>
-	      <div class="modal-body">
-	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
-	      </div>
-	      <div class="modal-footer">
-	       <form action="/removecompetencefromresource">
-	        <input id="competenceHiddenField" type="hidden" name="competenceid" />  <%-- Filled by JavaScript --%>
-	        <input id="resourceHiddenField" type="hidden" name="resourceid" value="${resource.id}" />
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-	        <button type="submit" class="btn btn-primary">Retirer</button>
-	       </form>
-	      </div>
-	   </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
     
 	
 </body>

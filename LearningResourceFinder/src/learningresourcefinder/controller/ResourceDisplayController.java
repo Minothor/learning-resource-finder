@@ -2,13 +2,14 @@ package learningresourcefinder.controller;
 
 import java.util.List;
 
-import learningresourcefinder.model.Problem;
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.CompetenceRepository;
+import learningresourcefinder.repository.FavoriteRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
@@ -41,6 +42,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired LevelService levelService;
     @Autowired CompetenceRepository competenceRepository;
     @Autowired ProblemRepository problemRepository;
+    @Autowired FavoriteRepository favoriteRepository;
     
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -60,6 +62,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	
     	mv.addObject("problemList", problemList);
     	addDataEnumPlatformToModelAndView(mv, Platform.class);
+    	
+    	mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));
+    	
     	return mv;
 	}
 
