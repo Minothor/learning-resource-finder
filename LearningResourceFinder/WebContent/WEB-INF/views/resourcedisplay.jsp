@@ -30,6 +30,12 @@
  		$("#nameField").attr("value", name);
  		$("#modalUrlResource").modal("show");
  	}
+ 	
+ 	
+ 	function onCompetenceRemoveClick(competenceid, resourceid){
+ 		$("#competenceHiddenField").attr("value", competenceid);
+ 		$("#modalConfirmDeleteCompetence").modal("show");	
+ 	}
  	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
  	}
@@ -94,21 +100,13 @@
 						</dd>
 						<dt>Compétence :</dt>
                         <dd>
-                          
                           <c:forEach items="${resource.competences}" var="competence">
-                            <lrf:competencepath competence="${competence}"/>                           
+                            <lrf:competencepath competence="${competence}"/>
+                              <button type="button" class="close" style="float:none;" onclick="onCompetenceRemoveClick(${competence.id})">&times;</button>
+                            <br/>                           
                           </c:forEach>
                             <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddCompetenceClick()"></span> 
-                         
-                         
                         </dd>
-                       
-                       <dt>Description :</dt>
-                        <dd>
-                         <a href="#" target="_blank" id="competencedescription" data-type="text">${competence.description}</a>
-                        </dd>
-                       
-                       
 					</dl>
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
@@ -273,7 +271,7 @@
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removeurlresource">
-	        <input id="urlResourceHiddenField" type="hidden" name="id" value="" />  <%-- Filled by JavaScript --%>
+	        <input id="urlResourceHiddenField" type="hidden" name="urlresourceid" value="" />  <%-- Filled by JavaScript --%>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 	        <button type="submit" class="btn btn-primary">Supprimer</button>
 	       </form>
@@ -319,6 +317,29 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		
+		
+		<!-- Modal : COMPETENCE REMOVE CONFIRM  -->
+   <div class="modal fade" id="modalConfirmDeleteCompetence">
+	   <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">Confirmation </h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Voulez-vous supprimer cette competence ?</p>
+	      </div>
+	      <div class="modal-footer">
+	       <form action="/removecompetencefromresource">
+	        <input id="competenceHiddenField" type="hidden" name="competenceid" />  <%-- Filled by JavaScript --%>
+	        <input id="resourceHiddenField" type="hidden" name="resourceid" value="${resource.id}" />
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+	        <button type="submit" class="btn btn-primary">Supprimer</button>
+	       </form>
+	      </div>
+	   </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     
 	
 </body>
