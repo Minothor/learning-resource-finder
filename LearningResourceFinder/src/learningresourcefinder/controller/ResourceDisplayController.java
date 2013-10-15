@@ -46,7 +46,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
         "/resource/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
     })  
-    
     public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
         Resource resource = getRequiredEntityByShortId(shortId);
         ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
@@ -91,7 +90,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
 
 
-	public void addDataEnumPlatformToModelAndView(ModelAndView mv, Class enumClass) {
+	private void addDataEnumPlatformToModelAndView(ModelAndView mv, Class enumClass) {
 		int i = 1, sizeplatform = EnumUtil.getValues(enumClass).length;
 		String dataEnumPlatform = "[";
 
