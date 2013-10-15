@@ -15,12 +15,17 @@
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('#title,#description,#urlresouce,#platform,#author').editable({      
+ 	    $('.editableField').editable({      
  	    	  type: 'text',
  	    	  inputclass: 'largerTextArea',
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
 		});
+ 	    
+ 	    $('.nonurleditpop').popover({
+ 	    	html :true,
+ 	        content :"Pour modifier une url, il faut ï¿½tre connectï¿½ et avoir un niveau 4 de contribution. "
+ 	    });
 	});
  	
  	function onUrlAddClick(){
@@ -31,6 +36,12 @@
  		$("#urlField").attr("value", url);
  		$("#nameField").attr("value", name);
  		$("#modalUrlResource").modal("show");
+ 	}
+ 	
+ 	
+ 	function onCompetenceRemoveClick(competenceid, resourceid){
+ 		$("#competenceHiddenField").attr("value", competenceid);
+ 		$("#modalConfirmDeleteCompetence").modal("show");	
  	}
  	function onUrlRemoveClick(id) {
  		$("#urlResourceHiddenField").attr("value", id);
@@ -67,9 +78,9 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>Intitulé:</dt>
+						<dt>IntitulÃ©:</dt>
 						<dd>
-							<a href="#" id="title"> ${resource.name}</a>
+							<a href="#" class="editableField"> ${resource.name}</a>
 						</dd>
 
 						<dt>Url:</dt>
@@ -78,7 +89,16 @@
 							<c:forEach items="${resource.urlResources}" var="urlResource">
 								<a href="${urlResource.url}" target="_blank" id="urlresource"data-type="text">${urlResource.url}</a>
 								<c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
-								<span class="glyphicon glyphicon-pencil close" style="float:none; font-size:15px" onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"></span>
+								<span style="float:none; font-size:15px"  class="glyphicon glyphicon-pencil close 
+								  <c:choose>
+								        <c:when test="${(canEditUrl== true)}">
+								          " onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"> 
+								        </c:when>
+								        <c:otherwise>
+								          nonurleditpop">
+								        </c:otherwise>
+								  </c:choose>
+								</span>
 								<button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
 		                        <br />
 		                    </c:forEach>
@@ -86,30 +106,30 @@
 		                </dd>          
 						<dt>Description:</dt>
 						<dd>
-							<a href="#" id="description" data-type="textarea">${resource.description}</a>
+							<a ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea">${resource.description}</a>
 						</dd>
 
 						<dt>Plate-forme:</dt>
 						<dd>
-							<a href="#" id="platform" data-type="select" data-source="${dataEnumPlatform}"> ${resource.platform}</a>
+							<a href="#" class="editableField" data-type="select" data-source="${dataEnumPlatform}"> ${resource.platform}</a>
 						</dd>
 
 						<dt>Contributeur:</dt>
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-						<dt>Compétence :</dt>
+						<dt>CompÃ©tence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
                             <lrf:competencepath competence="${competence}"/>
                               <button type="button" class="close" style="float:none;" onclick="onCompetenceRemoveClick(${competence.id})">&times;</button>
                             <br/>                           
                           </c:forEach>
-                          <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddCompetenceClick()"></span> 
+                          <span class="glyphicon glyphicon-plus close ${canEdit==false ? "noneditresource\"" :  " \" onclick= 'onAddCompetenceClick()'"} style="float:none; font-size:15px" ></span> 
                         </dd>
                         <dt>Auteur:</dt>
 						<dd>
-							<a href="#" id="author"> ${resource.author}</a>
+							<a href="#" class="editableField"> ${resource.author}</a>
 						</dd>
 					</dl>
 					<br />
@@ -155,7 +175,7 @@
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>Problème</h4>
+					<h4>ProblÃ¨me</h4>
 					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
@@ -176,7 +196,7 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">Intitulé (optionnel): </label>
+								<label class="col-lg-2 control-label" style="text-align: left;">Intitulï¿½ (optionnel): </label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="nameField"	name="name" />
 								</div>
@@ -211,7 +231,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Ajouter une image à la galerie</h4>
+						<h4 class="modal-title">Ajouter une image Ã  la galerie</h4>
 					</div>
 					<form method="post" action="/resource/imageadd"
 						enctype="multipart/form-data"
@@ -292,7 +312,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Placer la ressource dans une compétence</h4>
+						<h4 class="modal-title">Placer la ressource dans une compÃ©tence</h4>
 					</div>
 					<form method="post" action="/competenceaddtoresourcesubmit"  role="form">
 						<div class="modal-body">
@@ -305,8 +325,8 @@
 								  </div>
 								</row>
 								<br/><br/><br/>
-								<div class="help-block">Code de la compétence dans laquelle vous désirez placer la ressource.<br/>
-								   Astuce: affichez la liste des compétences dans un autre onglet de votre navigateur.</div>
+								<div class="help-block">Code de la compï¿½tence dans laquelle vous dï¿½sirez placer la ressource.<br/>
+								   Astuce: affichez la liste des compï¿½tences dans un autre onglet de votre navigateur.</div>
 							</div>
 						</div>
 
@@ -322,6 +342,29 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
+		
+		
+		<!-- Modal : COMPETENCE REMOVE CONFIRM  -->
+   <div class="modal fade" id="modalConfirmDeleteCompetence">
+	   <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">Confirmation</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Voulez-vous retirer cette compÃ©tence de la ressource ?</p>
+	      </div>
+	      <div class="modal-footer">
+	       <form action="/removecompetencefromresource">
+	        <input id="competenceHiddenField" type="hidden" name="competenceid" />  <%-- Filled by JavaScript --%>
+	        <input id="resourceHiddenField" type="hidden" name="resourceid" value="${resource.id}" />
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+	        <button type="submit" class="btn btn-primary">Retirer</button>
+	       </form>
+	      </div>
+	   </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     
 	
 </body>

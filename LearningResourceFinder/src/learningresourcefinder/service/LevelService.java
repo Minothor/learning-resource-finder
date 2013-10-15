@@ -5,8 +5,6 @@ import learningresourcefinder.model.User.Level;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.Action;
 
-
-
 import org.springframework.stereotype.Service;
 
 @Service
