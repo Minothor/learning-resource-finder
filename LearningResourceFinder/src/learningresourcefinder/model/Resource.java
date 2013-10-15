@@ -94,6 +94,8 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@Column()
 	private Long countRating;
     
+	@Column()
+	private String author;
 	
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
@@ -259,6 +261,14 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	public void setNature(Nature nature) {
 		this.nature = nature;
 	}
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 	
 	
 }

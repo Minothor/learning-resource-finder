@@ -16,7 +16,7 @@
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('#title,#description,#urlresouce,#platform').editable({      
+ 	    $('#title,#description,#urlresouce,#platform,#author').editable({      
  	    	  type: 'text',
  	    	  inputclass: 'largerTextArea',
  	    	  url: '/ajax/resourceeditfieldsubmit',
@@ -108,6 +108,10 @@
                           </c:forEach>
                           <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddCompetenceClick()"></span> 
                         </dd>
+                        <dt>Auteur:</dt>
+						<dd>
+							<a href="#" id="author"> ${resource.author}</a>
+						</dd>
 					</dl>
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
