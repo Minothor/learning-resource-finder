@@ -109,12 +109,14 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
     
     @RequestMapping("/removeurlresource")
-    public ModelAndView removeResource(@RequestParam("id") long id) {
-        UrlResource urlResource = (UrlResource)getRequiredEntity(id, UrlResource.class); 
+    public ModelAndView removeResource(@RequestParam("urlresourceid") long urlresourceid) {
+        UrlResource urlResource = (UrlResource)getRequiredEntity(urlresourceid, UrlResource.class); 
         Resource resource = urlResource.getResource();
 
-        resource.getUrlResources().remove(id);
-        em.remove(urlResource); 
+        resource.getUrlResources().remove(urlResource);
+        urlResource.setResource(null);
+        urlResourceRepository.remove(urlResource);
+        
         NotificationUtil.addNotificationMessage("Url supprimée avec succès.<br/>"+urlResource.getUrl(),Status.SUCCESS);
         return new ModelAndView ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     }
@@ -171,5 +173,20 @@ public class ResourceDisplayController extends BaseController<Resource> {
         
         return ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     }
+
+    @RequestMapping("/removecompetencefromresource")
+    public ModelAndView removeCompetenceFromResource(@RequestParam("competenceid") long competenceId, @RequestParam("resourceid") long resourceId) {
+        Resource resource = getRequiredEntity(resourceId);
+        Competence competence = (Competence)getRequiredEntity(competenceId, Competence.class);
+
+        resource.getCompetences().remove(competence);
+        competence.getResources().remove(resource);
+        resourceRepository.merge(resource);
+        competenceRepository.merge(competence);
+        
+        NotificationUtil.addNotificationMessage("Compétence déliée de la ressource avec succès.", Status.SUCCESS);
+        return new ModelAndView ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
+    }
+    
 
 } 
