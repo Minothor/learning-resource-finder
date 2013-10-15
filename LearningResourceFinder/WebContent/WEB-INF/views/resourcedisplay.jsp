@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,6 +32,9 @@
  	}
  	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
+ 	}
+ 	function onAddCompetenceClick(){
+ 		$("#modalCompetence").modal("show");
  	}
  	function onUrlRemoveClick(id) {
  		$("#urlResourceHiddenField").attr("value", id);
@@ -66,8 +70,7 @@
 
 						<dd>
 							<c:forEach items="${resource.urlResources}" var="urlResource">
-								<a href="${urlResource.url}" target="_blank" id="urlresource"
-									data-type="text">${urlResource.url}</a>
+								<a href="${urlResource.url}" target="_blank" id="urlresource"data-type="text">${urlResource.url}</a>
 								<c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
 								<span class="glyphicon glyphicon-pencil close" style="float:none; font-size:15px" onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"></span>
 								<button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
@@ -82,17 +85,30 @@
 
 						<dt>Plate-forme:</dt>
 						<dd>
-							<a href="#" id="platform" data-type="select"
-								data-source="${dataEnumPlatform}"> ${resource.platform}</a>
+							<a href="#" id="platform" data-type="select" data-source="${dataEnumPlatform}"> ${resource.platform}</a>
 						</dd>
 
 						<dt>Contributeur:</dt>
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-
-
-
+						<dt>Compétence :</dt>
+                        <dd>
+                          
+                          <c:forEach items="${resource.competences}" var="competence">
+                            <lrf:competencepath competence="${competence}"/>                           
+                          </c:forEach>
+                            <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddCompetenceClick()"></span> 
+                         
+                         
+                        </dd>
+                       
+                       <dt>Description :</dt>
+                        <dd>
+                         <a href="#" target="_blank" id="competencedescription" data-type="text">${competence.description}</a>
+                        </dd>
+                       
+                       
 					</dl>
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
@@ -265,6 +281,45 @@
 	    </div><!-- /.modal-content -->
 	   </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    
+    <!-- Modal : ADD COMPETENCE -->
+		<div class="modal fade" id="modalCompetence" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close closeModal"
+							data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Placer la ressource dans une compétence</h4>
+					</div>
+					<form method="post" action="/competenceaddtoresourcesubmit"  role="form">
+						<div class="modal-body">
+						    <div class="form-group">
+								<row>
+								  <div class="col-lg-4">
+								    <label for="codeField">Code:</label>
+								
+									<input type="text" class="form-control" id="codeField"	name="code" />
+								  </div>
+								</row>
+								<br/><br/><br/>
+								<div class="help-block">Code de la compétence dans laquelle vous désirez placer la ressource.<br/>
+								   Astuce: affichez la liste des compétences dans un autre onglet de votre navigateur.</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<input type="hidden" name="resourceid" value="${resource.id}" />
+							<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Annuler</button>
+							<input class="btn btn-primary" type="submit" value="Enregistrer" />
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+    
 	
 </body>
 </html>

@@ -4,9 +4,11 @@ import java.util.List;
 
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.exception.InvalidUrlException;
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
+import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
@@ -37,6 +39,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired UrlResourceRepository urlResourceRepository;
     @Autowired IndexManagerService indexManager;
     @Autowired LevelService levelService;
+    @Autowired CompetenceRepository competenceRepository;
     @Autowired ProblemRepository problemRepository;
     
     @RequestMapping({"/resource/{shortId}/{slug}",
@@ -154,4 +157,19 @@ public class ResourceDisplayController extends BaseController<Resource> {
         return ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     }
 
-}
+    @RequestMapping("/competenceaddtoresourcesubmit")
+    public String competenceAddToResourceSubmit(@RequestParam(value="resourceid",required=false) long resourceId, @RequestParam("code") String code) {
+        Resource resource = getRequiredEntity(resourceId);
+        Competence competence = competenceRepository.findByCode(code) ;
+        
+        if (competence == null) { 
+            NotificationUtil.addNotificationMessage("Le code '"+code+"' ne correspond à aucune compétence connue.", Status.ERROR);         
+        } else {  // Edit
+            competence.addResource(resource);
+            NotificationUtil.addNotificationMessage("Competence liée avec succès", Status.SUCCESS);         
+        }
+        
+        return ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
+    }
+
+} 
