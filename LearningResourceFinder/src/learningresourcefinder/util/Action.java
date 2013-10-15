@@ -9,7 +9,7 @@ public enum Action {
 		EDIT_RESOURCE(1,Level.LEVEL_3,"Editer une ressource introduite par un autre utilisateur"),
 		REMOVE_RESOURCE(0,Level.LEVEL_3,"Supprimer une ressource introduite par un autre utilisateur"),
 		COMPLETE_RESOURCE(1, Level.LEVEL_1,"Completer les champs manquants d'une ressouce"),
-		EDIT_RESOURCE_URL(1, Level.LEVEL_4,"Editer les champs d'une ressouce"),
+		EDIT_RESOURCE_URL(1, Level.LEVEL_4,"Moifier l'URL d'une ressource introduite par un autre utilisateur"),
 		LINK_RESOURCE_TO_COMPETENCE(1, Level.LEVEL_4,"lier une ressouce à une compétence"),
 		ADD_PLAYLIST(2,Level.LEVEL_3,"Ajouter une playliste"),
 		ADD_PROBLEM(1, Level.LEVEL_1, "Signaler un problème"),

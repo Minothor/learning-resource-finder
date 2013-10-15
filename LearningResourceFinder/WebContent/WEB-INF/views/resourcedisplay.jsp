@@ -23,13 +23,13 @@
 		});
 	});
  	
- 	function onEditClick(id, url, name) {
- 		$("#idField").attr("value", id);
+ 	function onUrlEditClick(id, url, name) {
+ 		$("#urlResourceIdField").attr("value", id);
  		$("#urlField").attr("value", url);
  		$("#nameField").attr("value", name);
  		$("#modalUrlResource").modal("show");
  	}
- 	function onAddClick(){
+ 	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
  	}
  	function onUrlRemoveClick(id) {
@@ -69,11 +69,11 @@
 								<a href="${urlResource.url}" target="_blank" id="urlresource"
 									data-type="text">${urlResource.url}</a>
 								<c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
-								<span class="glyphicon glyphicon-pencil close" style="float:none; font-size:15px" onclick="onEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"></span>
+								<span class="glyphicon glyphicon-pencil close" style="float:none; font-size:15px" onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"></span>
 								<button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
 		                        <br />
 		                    </c:forEach>
-		                    <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onAddClick()"></span>
+		                    <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onUrlAddClick()"></span>
 		                </dd>          
 						<dt>Description:</dt>
 						<dd>
@@ -172,9 +172,8 @@
 						</div>
 
 						<div class="modal-footer">
-							<input type="hidden" name="resourceid" value="${resource.id}" />
-							<%-- used for create --%>
-							<input type="hidden" name="urlresourceid" />	<%-- Value set via JavaScript -- used for edit --%>
+							<input type="hidden" name="resourceid" value="${resource.id}" /> <%-- used for create --%>
+							<input id="urlResourceIdField" type="hidden" name="urlresourceid" />	<%-- Value set via JavaScript -- used for edit --%>
 							<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Annuler</button>
 							<input class="btn btn-primary" type="submit" value="Enregistrer" />
 						</div>
