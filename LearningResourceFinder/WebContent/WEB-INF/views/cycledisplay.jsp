@@ -6,6 +6,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<script type="text/javascript">
+$(function ()  
+ { $(".mycompetencePopover").popover({trigger:'hover'});  
+});  
+
+</script>
+
 </head>
 <body>
 <lrf:breadcrumb linkactive="${cycle.name}">
@@ -25,15 +33,17 @@
 				<div class="col-xs-6 col-md-4"> 
 					<c:forEach items="${cycleColumn}" var="cycleitems">
 							<h2>${cycleitems.competence.name}</h2>
-							<c:forEach items="${cycleitems.children}" var="subitems">
-								<span style="font-size:120%">${subitems.competence.code }
-								<a href="searchresource?competenceid=${subitems.competence.getId()}">${subitems.competence.name }</span> 
-								</a></span></br>
+							<c:forEach items="${cycleitems.children}" var="subitem">
+								<span  class="mycompetencePopover" data-content="${subitem.competence.description}" style="font-size:120%">${subitem.competence.code }
+								  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }</span> 
+								  </a>
+								</span>
+								</br>
 								<ul>
-									<c:forEach items="${subitems.children}" var="subsubitems">
-										<li>
-											${subsubitems.competence.code }
-											<a href="searchresource?competenceid=${subsubitems.competence.getId()}">${subsubitems.competence.name}</a></br>
+									<c:forEach items="${subitem.children}" var="subsubitem">
+										<li class ="mycompetencePopover" data-content="${subitem.competence.description}">
+											${subsubitem.competence.code }
+											<a href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
 										</li>
 									</c:forEach>
 								</ul>
