@@ -67,7 +67,6 @@
 					</div>
 			</div>	
 		</c:forEach>
-		<c:if test="${user!=null}">
 			<div class="panel panel-info">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">Message</h3>
@@ -84,7 +83,6 @@
 				</div>
 			  </div>
 			</div>
-		</c:if>
 	</div>
 	
 </body>

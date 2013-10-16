@@ -2,10 +2,13 @@ package learningresourcefinder.controller;
 
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Discussion;
+import learningresourcefinder.model.User;
 import learningresourcefinder.repository.DiscussionRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.LevelService;
+import learningresourcefinder.util.Action;
 import learningresourcefinder.util.NotificationUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +25,17 @@ public class ProblemController extends BaseController<Problem> {
 	@Autowired ResourceRepository resourceRepository;
 	@Autowired ProblemRepository problemRepository;
 	@Autowired DiscussionRepository discussionRepository;
-	
-   @RequestMapping(value="/problem")
+	@Autowired LevelService levelService;
+   
+	@RequestMapping(value="/problem")
     public @ResponseBody ModelAndView problemDisplay(@RequestParam("id") Long idProblem) {
+	    User user = SecurityContext.getUser();
         Problem problem = getRequiredEntity(idProblem);
         ModelAndView mv = new ModelAndView("problemdisplay", "problem", problem);
         mv.addObject("user",SecurityContext.getUser());
         mv.addObject("resource", problem.getResource());
         mv.addObject("problemDiscussions",problem.getProblemDiscussions());
+        mv.addObject("canCloseProblem", levelService.canDoAction(user, Action.CLOSE_PROBLEM));
         return mv;
     }
 	

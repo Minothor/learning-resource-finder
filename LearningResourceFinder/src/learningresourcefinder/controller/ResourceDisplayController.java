@@ -1,6 +1,8 @@
 package learningresourcefinder.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Competence;
@@ -19,6 +21,7 @@ import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
+import learningresourcefinder.util.DateUtil;
 import learningresourcefinder.util.EnumUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
@@ -50,6 +53,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
     })  
     public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
         Resource resource = getRequiredEntityByShortId(shortId);
+        Map<Long, String> problemDate = new HashMap<Long, String>();
+       
         ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
  
         User user = SecurityContext.getUser();
@@ -61,8 +66,13 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
     	
     	List<Problem> problemList = problemRepository.findProblemOfResource(resource);
+    	for(Problem problem: problemList){
+    	    problemDate.put(problem.getId(), DateUtil.formatIntervalFromToNowFR(problem.getCreatedOn()));
+    	}
     	
     	mv.addObject("problemList", problemList);
+    	mv.addObject("problemDate", problemDate);
+    	
     	addDataEnumPlatformToModelAndView(mv, Platform.class);
     	
     	mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));

@@ -44,7 +44,7 @@
 				                     <c:forEach var="format" items="${applicationScope.cache.format}">
 					                  	<div class="radio"> 
 					                   	<label for="${format.description}">
-					                   		<input type="radio" name="format" value="${format}" required="required">
+					                   		<input type="radio" name="format" value="${format}" id="${format.description}" required="required">
 					                   		${format.description}
 					                   	</label>
 				                       </div> 
@@ -57,7 +57,7 @@
 									<c:forEach var="platform" items="${applicationScope.cache.platform}">
 										<div class="radio">
 											<label for="${platform.description}">	
-							                   	<input type="radio" name="platform" value="${platform}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
+							                   	<input type="radio" name="platform" value="${platform}" id="${platform.description}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
 							                    ${platform.description}
 							                </label>  
 										</div>
@@ -70,7 +70,7 @@
 									<c:forEach var="topic" items="${applicationScope.cache.topic}">
 									<div class="radio">
 										<label for="${topic.description}">
-											<input type="radio" name="topic" value="${topic}" required="required"> 
+											<input type="radio" name="topic" value="${topic}" id="${topic.description}" required="required"> 
 											${topic.description}
 										</label>
 									</div>
@@ -101,7 +101,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Ajout d'une ressource (partie 2)</h4>
+          <h4 class="modal-title">Ajout d'une ressource (partie 2, optionnelle)</h4>
         </div>
 				<div class="modal-body">
 
@@ -127,8 +127,10 @@
 							</label>
 						</div>
 					</div>
-
-                    <div class="form-group col-lg-3">
+					<br>
+					<div class="row">
+					<div class="col-md-5">
+                    <div class="form-group">
 	   				    <label for="language">Langue de la resource</label>
 						<select class="form-control" name="language">
 							<c:forEach var="language" items="${applicationScope.cache.language}">
@@ -136,29 +138,30 @@
 							</c:forEach>
 						</select>
                     </div>
-					<br>
-					
-					<div class="form-inline col-lg-2">
-						<label for="duration">Durée</label>
-						<input type="text" class="form-control" name="maxDuration"> minutes
-						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou visionner la vidéo proposée.</span>
-					</div>
 
 					<div class="form-group">
 						<label for="nature">Nature</label>
 
 						<c:forEach var="nature" items="${applicationScope.cache.nature}">
 							<div class="radio">
-								<label for="${nature.description}">
-									<input type="radio" name="nature" value="${nature}"> 
+								<label for="N-${nature}">
+									<input type="radio" name="nature" id="N-${nature}" <%-- id needed for the label (else can't click the text) --%> value="${nature}"> 
 									${nature.description}
 								</label>
 							</div>
 						</c:forEach>
-
+					</div>
+					</div>
+					
+					<div class="control-group col-md-7">
+						<label for="duration">Durée</label>
+						<div class="form-inline">
+							<input type="text" class="form-control" name="maxDuration" style="width:50px"> minutes
+						</div>
+						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou visionner la vidéo proposée.</span>
 					</div>
 				</div>
-
+				</div>
 				<div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
           <input class="btn btn-primary" type="submit" value="Enregistrer" >
