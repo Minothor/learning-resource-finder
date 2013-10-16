@@ -69,23 +69,7 @@ SLIDER...
 <%------------------------------------ TESTIMONIALS ---------------------------------%>
 <div style="background-color:#84BB04;">
 <div class="container" style="padding:20px 20px; color:white;">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-TESTIMONIALS
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+	<%@include file="/WEB-INF/includes/testimonials.jsp" %>
 </div>
 </div>
 </body>
