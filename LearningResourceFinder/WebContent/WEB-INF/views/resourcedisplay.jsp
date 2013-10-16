@@ -24,7 +24,11 @@
  	    
  	    $('.nonurleditpop').popover({
  	    	html :true,
- 	        content :"Pour modifier une url, il faut ï¿½tre connectï¿½ et avoir un niveau 4 de contribution. "
+ 	        content :"Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution."
+ 	    });
+ 	    
+ 	    $(".noAddProblemPop").popover({
+ 	    	content: "Pour signaler un problème, il faut être connecté."
  	    });
 	});
  	
@@ -142,11 +146,13 @@
 					<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}" />
 
 					<br />
-					<c:if test="${canEdit}">
-						<lrftag:problemreport title="${resource.name}"
-							resourceid="${resource.id}" />
-					</c:if>
+					
+					
+					<a ${canAddProblem ? "href='#modalProblemReport' data-toggle='modal'" : "class='noAddProblemPop' style=cursor:pointer"}>Signaler un problème.</a>
+					<lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
 					<br /> <br />
+					
+					
 					<h4>Les liens</h4>
 					<a data-toggle="modal" href="#modalUrlResource" class="btn btn-primary">Ajouter une URL</a> <br /> <br />
 					<div class="table-responsive">
@@ -175,7 +181,7 @@
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>ProblÃ¨me</h4>
+					<h4>Problème</h4>
 					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
@@ -196,7 +202,7 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">Intitulï¿½ (optionnel): </label>
+								<label class="col-lg-2 control-label" style="text-align: left;">Intitulé (optionnel): </label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="nameField"	name="name" />
 								</div>
@@ -312,7 +318,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Placer la ressource dans une compÃ©tence</h4>
+						<h4 class="modal-title">Placer la ressource dans une compétence</h4>
 					</div>
 					<form method="post" action="/competenceaddtoresourcesubmit"  role="form">
 						<div class="modal-body">
@@ -325,8 +331,8 @@
 								  </div>
 								</row>
 								<br/><br/><br/>
-								<div class="help-block">Code de la compï¿½tence dans laquelle vous dï¿½sirez placer la ressource.<br/>
-								   Astuce: affichez la liste des compï¿½tences dans un autre onglet de votre navigateur.</div>
+								<div class="help-block">Code de la compétence dans laquelle vous désirez placer la ressource.<br/>
+								   Astuce: affichez la liste des compétences dans un autre onglet de votre navigateur.</div>
 							</div>
 						</div>
 
@@ -353,7 +359,7 @@
 	        <h4 class="modal-title">Confirmation</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>Voulez-vous retirer cette compÃ©tence de la ressource ?</p>
+	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removecompetencefromresource">

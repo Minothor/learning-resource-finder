@@ -4,7 +4,7 @@
 <%@ attribute name="title" required="true" type="java.lang.String"%> 
 <%@ attribute name="resourceid" required="true" type="java.lang.Long"%>
 
-<a href="#modalProblemReport" data-toggle="modal">Signaler un problème.</a>
+
 <!-- Modal -->
   <div class="modal fade" id="modalProblemReport" tabindex="-1" role="dialog" aria-labelledby="modalProblemReport" aria-hidden="true">
     <div class="modal-dialog">

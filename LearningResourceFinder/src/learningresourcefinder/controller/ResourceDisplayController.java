@@ -53,11 +53,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
         ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
  
         User user = SecurityContext.getUser();
-        boolean canvote  = levelService.canDoAction(user, Action.VOTE);
         boolean canEditUrl=levelService.canDoAction(user, Action.EDIT_RESOURCE_URL);
         mv.addObject("canEditUrl", canEditUrl);
+        boolean canvote  = levelService.canDoAction(user, Action.VOTE);
 		mv.addObject("usercanvote",canvote);
     	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE));
+    	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
     	
     	List<Problem> problemList = problemRepository.findProblemOfResource(resource);
     	
