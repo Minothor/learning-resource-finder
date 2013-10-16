@@ -3,6 +3,7 @@ package learningresourcefinder.controller;
 
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.Action;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,15 @@ public class RightsPageController extends BaseController<User>{
 	  @Autowired UserRepository userRep;
 
 	   @RequestMapping(value="/rights", method=RequestMethod.GET)
-	   public ModelAndView showRightsPage(@RequestParam("username") String userName){
-  
-	       User user = userRep.getUserByUserName(userName);
+	   public ModelAndView showRightsPage(@RequestParam(value="username",required=false) String userName){
+		   
+		   User user = null;
+		   
+		   if(userName != null && userName.trim().length() > 0){
+			   user = userRep.getUserByUserName(userName);
+		   }else if(SecurityContext.isUserLoggedIn()){
+			   user = userRep.getUserByUserName(SecurityContext.getUser().getUserName());
+		   }
 	       
 	       ModelAndView mv = new ModelAndView("userRights");
 		   mv.addObject("actions",Action.values());

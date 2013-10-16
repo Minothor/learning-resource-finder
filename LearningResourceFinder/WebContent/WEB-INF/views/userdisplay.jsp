@@ -30,6 +30,7 @@
 				<a class="btn btn-default" href="/user/changepassword?id=${user.id}">Modifier le mot de passe</a>
 			</c:if>
 			<a class="btn btn-default" href="/playlist/user/${user.userName}">Play-lists</a>
+			<a href="<c:url value='/rights?username=${user.userName}'/>" class="btn btn-default">Droits</a>
 		</div>
 		
 		<br />

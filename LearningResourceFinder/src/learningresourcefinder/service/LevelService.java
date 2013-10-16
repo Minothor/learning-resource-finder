@@ -20,10 +20,9 @@ public class LevelService {
 				return true;
 			}
 		}
-
 		return false;
 	}
-
+	
 	public void addActionPoints(User user, Action action) {
 		int lastLevel = Level.getHighestLevelIndex();
 
@@ -34,7 +33,5 @@ public class LevelService {
 			user.setUserProgressPoints(0); // Initialize user Points.
 			// Notify User . And Refresh Progress Bar
 		}
-
 	}
-
 }

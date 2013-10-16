@@ -106,6 +106,7 @@
 					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
 							<li><a class="addResourceLink">Ajouter une ressource </a></li>
+							<li><a href="<c:url value='/rights'/>" class="">Droits</a></li>
 							<c:if test="${current.user != null}">
 							   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Mes ressources</a></li>
 							   <li><a href="<c:url value='/contribution'/>" >Contribution</a></li>
