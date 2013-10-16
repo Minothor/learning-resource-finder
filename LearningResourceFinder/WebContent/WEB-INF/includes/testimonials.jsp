@@ -31,10 +31,10 @@
 	  </div>
 	
 	  <!-- Controls -->
- 	  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+ 	  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="background-image:none">
 	    <span class="glyphicon glyphicon-chevron-left"></span>
 	  </a> 
-	  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+	  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next" style="background-image:none">
 	    <span class="glyphicon glyphicon-chevron-right"></span>
 	  </a>
 </div>
