@@ -8,6 +8,7 @@ import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.CompetenceRepository;
@@ -80,6 +81,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	addDataEnumToModelAndView(mv, Format.class);
     	addDataEnumToModelAndView(mv, Nature.class);
     	addDataEnumToModelAndView(mv, Language.class);
+    	addDataEnumToModelAndView(mv, Topic.class);
     	
     	
     	mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));
@@ -115,6 +117,16 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		else if(fieldName.equals("language")){
 			resource.setLanguage(Language.values()[Integer.parseInt(value)-1]);
 		}
+		else if(fieldName.equals("advertising")){
+			resource.setAdvertising(Boolean.valueOf(value));
+		}
+		else if(fieldName.equals("duration")){
+			resource.setDuration(Integer.parseInt(value));
+		}
+		else if(fieldName.equals("topic")){
+			resource.setTopic(Topic.values()[Integer.parseInt(value)-1]);
+		}
+		
 		resourceRepository.merge(resource);
 
 		indexManager.update(resource);
@@ -145,8 +157,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
 			mv.addObject("dataEnumNature", dataEnum);
 		else if(enumClass.getSimpleName().equals("Language"))
 			mv.addObject("dataEnumLanguage", dataEnum);
+		else if(enumClass.getSimpleName().equals("Topic"))
+			mv.addObject("dataEnumTopic", dataEnum);
 	}
 
+	
     
     @RequestMapping("/removeurlresource")
     public ModelAndView removeResource(@RequestParam("urlresourceid") long urlresourceid) {
