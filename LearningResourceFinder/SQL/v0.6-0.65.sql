@@ -56,7 +56,7 @@
         
 -- Add Constraint for unique favorite
         ALTER TABLE favorite
-		ADD CONSTRAINT resource_user UNIQUE (resource_id,user_id)
+		ADD CONSTRAINT resource_user UNIQUE (resource_id,user_id);
 		
 		
 		
@@ -64,3 +64,16 @@
 
     alter table resource 
         add column author varchar(255);
+        
+        
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+-- DEPLOYED - DO NOT USE THIS FILE ANYMORE
+        
