@@ -12,8 +12,7 @@
 <link rel="stylesheet" media="screen,projection" href="/css/ext/ui.totop.css" />
 
 
-<!-- css sheets -->
-<link rel="stylesheet" type="text/css" href="/css/ext/circular-countdown.css"/>
+
 
 
 <!-- ***************************** ICON **************************** -->    
@@ -36,11 +35,7 @@
 	<script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 	
 	
-	<!--  ************************** COUNTER ****************************** -->	
-	<script type="text/javascript" src="/js/ext/jquery.countdown.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/js/ext/jquery.circular-countdown.js"></script>
-	<script type="text/javascript" src="/js/ext/counter-home.js"></script>
+	
 
 
 <!-- ***************************** END JAVASCRIPT **************************** -->   
