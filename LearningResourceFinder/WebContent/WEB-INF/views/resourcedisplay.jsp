@@ -30,6 +30,7 @@
  	    $(".noAddProblemPop").popover({
  	    	content: "Pour signaler un problème, il faut être connecté."
  	    });
+ 	    
 	});
  	
  	function onUrlAddClick(){
@@ -160,8 +161,12 @@
 					<br />
 					
 					
-					<a ${canAddProblem ? "href='#modalProblemReport' data-toggle='modal'" : "class='noAddProblemPop' style=cursor:pointer"}>Signaler un problème.</a>
+					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problème...'
+					   class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
+					   style="cursor:pointer; line-height:20px; font-size:30px"> 
+					   </a>
 					<lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
+ 	    
 					<br /> <br />
 					
 					
