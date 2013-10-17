@@ -64,7 +64,7 @@ public class ContactController extends BaseController<User> {
            mailService.sendMail(mailService.ADMIN_MAIL, sender, subject,content, MailType.IMMEDIATE, MailCategory.CONTACT);
            NotificationUtil.addNotificationMessage("Votre message est bien envoyé");
            
-           return "OK";  // Go to home page.
+           return "SUCCESS";  // Go to home page.
     }
     
     

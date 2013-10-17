@@ -17,6 +17,6 @@ public class ComingSoonController extends BaseController<ComingSoonMail> {
 		ComingSoonMail comingSoonMail = new ComingSoonMail();	
 		comingSoonMail.setEmail(addresemail);
 		em.persist(comingSoonMail);
-		return "OK";  // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
+		return "SUCCESS";  // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
 	}
 }

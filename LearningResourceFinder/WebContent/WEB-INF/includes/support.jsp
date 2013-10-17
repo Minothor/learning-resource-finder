@@ -14,7 +14,14 @@ function sendDonation(e){
 	    data: $("#formContact").serialize(),
 	    dataType: 'text',
 	    success : function(data) {
-	    	alert('Merci. Votre message a été envoyé avec succès. Nous vous répondons par e-mail dès que possible.');
+	    	if (data == 'SUCCESS'){
+	    		alert('Merci. Votre message a été envoyé avec succès. Nous vous répondons par e-mail dès que possible.');
+	    	}
+	    	else
+	    		{
+	    		alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
+	    		}
+	    	
 	    },
 	    error : function(data) {
 	    	alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
@@ -39,7 +46,7 @@ function sendDonation(e){
   <div class="form-group">
     <textarea id="body" placeholder="Votre message" name="content" class="form-control" rows="5" required></textarea>
   </div>
-  <button type="submit" class="btn ">Envoyer</button>
+  <button type="submit" class="btn btn-primary">Envoyer</button>
 </form>
 </section>
 </section>
