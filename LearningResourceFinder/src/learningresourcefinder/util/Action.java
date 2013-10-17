@@ -4,11 +4,11 @@ import learningresourcefinder.model.User.Level;
 
 public enum Action {
 	
-		VOTE(10,Level.LEVEL_2, "Voter sur les ressources"),
+		VOTE(1,Level.LEVEL_2, "Voter sur les ressources"),
 		ADD_RESOURCE(2,Level.LEVEL_2,"Ajouter une ressource"),
 		EDIT_RESOURCE(1,Level.LEVEL_3,"Editer une ressource introduite par un autre utilisateur"),
 		REMOVE_RESOURCE(0,Level.LEVEL_3,"Supprimer une ressource introduite par un autre utilisateur"),
-		COMPLETE_RESOURCE(1, Level.LEVEL_1,"Completer les champs manquants d'une ressouce"),
+		COMPLETE_RESOURCE(1, Level.LEVEL_1,"Completer les champs manquants d'une ressouce introduite par un autre utilisateur"),
 		EDIT_RESOURCE_URL(1, Level.LEVEL_4,"Moifier l'URL d'une ressource introduite par un autre utilisateur"),
 		LINK_RESOURCE_TO_COMPETENCE(1, Level.LEVEL_4,"lier une ressouce à une compétence"),
 		ADD_PLAYLIST(2,Level.LEVEL_3,"Ajouter une playliste"),

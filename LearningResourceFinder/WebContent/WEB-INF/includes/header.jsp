@@ -116,10 +116,20 @@
 					
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Compétences <b class="caret"></b></a> 
 					    <ul class="dropdown-menu"> 
+
+                          <li><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> primaire</a></li>
+                          <li><a href="<c:url value='/cycle?id=300'/>">3<sup>ème</sup> - 4<sup>ème</sup> primaire</a></li>
+                          <li><a href="<c:url value='/cycle?id=300'/>">5<sup>ème</sup> - 6<sup>ème</sup> primaire</a></li>
+                          <li role="presentation" class="divider"></li>
+                          <li><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> secondaire</a></li>
+                          <li><a href="<c:url value='/cycle?id=300'/>">3<sup>ère</sup> - 6<sup>ème</sup> secondaire</a></li>
+
+<%-- We hardcode links to have nicer names and sorting					    
 						  <c:forEach items="${applicationScope.cache.cycles}" var="cycle">
                              <li><a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
                           </c:forEach>
-                          
+ --%>
+                           
                           <li role="presentation" class="divider"></li>
                           <lrf:conditionDisplay privilege="MANAGE_COMPETENCE">
                         	  <li><a href="<c:url value='/cyclelist'/>">Gestion des Cycles</a> </li> 
