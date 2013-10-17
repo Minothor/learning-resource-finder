@@ -16,6 +16,9 @@ import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.search.SearchOptions;
+import learningresourcefinder.search.SearchOptions.Format;
+import learningresourcefinder.search.SearchOptions.Language;
+import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
@@ -73,7 +76,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	mv.addObject("problemList", problemList);
     	mv.addObject("problemDate", problemDate);
     	
-    	addDataEnumPlatformToModelAndView(mv, Platform.class);
+    	addDataEnumToModelAndView(mv, Platform.class);
+    	addDataEnumToModelAndView(mv, Format.class);
+    	addDataEnumToModelAndView(mv, Nature.class);
+    	addDataEnumToModelAndView(mv, Language.class);
+    	
     	
     	mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));
     	
@@ -83,7 +90,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
 	@RequestMapping("/ajax/resourceeditfieldsubmit")
 	public @ResponseBody String resourceAddSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
 		
-		SearchOptions searchOptions=new SearchOptions();
+		
 		Resource resource = getRequiredEntity(id);
 		SecurityContext.assertCurrentUserMayEditThisResource(resource);
 
@@ -96,7 +103,17 @@ public class ResourceDisplayController extends BaseController<Resource> {
 			resource.setDescription(value);
 		}
 		else if(fieldName.equals("platform")){
-			resource.setPlatform(searchOptions.getPlatform().get(Integer.parseInt(value)-1));
+			resource.setPlatform(Platform.values()[Integer.parseInt(value)-1]);
+		
+		}
+		else if(fieldName.equals("format")){
+			resource.setFormat(Format.values()[Integer.parseInt(value)-1]);
+		}
+		else if(fieldName.equals("nature")){
+			resource.setNature(Nature.values()[Integer.parseInt(value)-1]);
+		}
+		else if(fieldName.equals("language")){
+			resource.setLanguage(Language.values()[Integer.parseInt(value)-1]);
 		}
 		resourceRepository.merge(resource);
 
@@ -107,20 +124,27 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
 
 
-	private void addDataEnumPlatformToModelAndView(ModelAndView mv, Class enumClass) {
+	private void addDataEnumToModelAndView(ModelAndView mv, Class enumClass) {
 		int i = 1, sizeplatform = EnumUtil.getValues(enumClass).length;
-		String dataEnumPlatform = "[";
+		String dataEnum = "[";
 
 		for (Object enumValue : EnumUtil.getValues(enumClass)) {
 			if (i == sizeplatform) {
-				dataEnumPlatform = dataEnumPlatform + "{value:" + i + "," + "text:" + "'" + EnumUtil.getDescription(enumValue) + "'}]";
+				dataEnum = dataEnum + "{value:" + i + "," + "text:" + "'" + EnumUtil.getDescription(enumValue) + "'}]";
 				break;
 			}
-			dataEnumPlatform = dataEnumPlatform + "{value:" + i + "," + "text:" + "'" + EnumUtil.getDescription(enumValue) + "'},";
+			dataEnum = dataEnum + "{value:" + i + "," + "text:" + "'" + EnumUtil.getDescription(enumValue) + "'},";
 			i++;
 		}
-
-		mv.addObject("dataEnumPlatform",dataEnumPlatform );
+		
+		if(enumClass.getSimpleName().equals("Platform"))
+			mv.addObject("dataEnumPlatform", dataEnum);
+		else if(enumClass.getSimpleName().equals("Format"))
+			mv.addObject("dataEnumFormat", dataEnum);
+		else if(enumClass.getSimpleName().equals("Nature"))
+			mv.addObject("dataEnumNature", dataEnum);
+		else if(enumClass.getSimpleName().equals("Language"))
+			mv.addObject("dataEnumLanguage", dataEnum);
 	}
 
     

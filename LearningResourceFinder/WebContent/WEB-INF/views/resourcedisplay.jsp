@@ -15,7 +15,7 @@
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('.editableField').editable({      
+ 	    $('#description,#title,#platform,#format,#nature,#language').editable({      
  	    	  type: 'text',
  	    	  inputclass: 'largerTextArea',
  	    	  url: '/ajax/resourceeditfieldsubmit',
@@ -82,9 +82,9 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>IntitulÃ©:</dt>
+						<dt>Intitulé:</dt>
 						<dd>
-							<a href="#" class="editableField"> ${resource.name}</a>
+							<a id="title"  href="#" class="editableField"> ${resource.name}</a>
 						</dd>
 
 						<dt>Url:</dt>
@@ -110,19 +110,31 @@
 		                </dd>          
 						<dt>Description:</dt>
 						<dd>
-							<a ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea">${resource.description}</a>
+							<a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea">${resource.description}</a>
 						</dd>
 
 						<dt>Plate-forme:</dt>
 						<dd>
-							<a href="#" class="editableField" data-type="select" data-source="${dataEnumPlatform}"> ${resource.platform}</a>
+							<a id="platform" href="#" class="editableField" data-type="select" data-source="${dataEnumPlatform}"> ${resource.platform.description}</a>
+						</dd>
+						<dt>Format:</dt>
+						<dd>
+							<a id="format" href="#" class="editableField" data-type="select" data-source="${dataEnumFormat}"> ${resource.format.description}</a>
+						</dd>
+						<dt>Nature:</dt>
+						<dd>
+							<a id="nature" href="#" class="editableField" data-type="select" data-source="${dataEnumNature}"> ${resource.nature.description}</a>
+						</dd>
+						<dt>Langue:</dt>
+						<dd>
+							<a id="language" href="#" class="editableField" data-type="select" data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 						</dd>
 
 						<dt>Contributeur:</dt>
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-						<dt>CompÃ©tence:</dt>
+						<dt>Compétence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
                             <lrf:competencepath competence="${competence}"/>
