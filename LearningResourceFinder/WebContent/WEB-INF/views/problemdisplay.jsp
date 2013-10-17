@@ -22,9 +22,6 @@
 <%-- 			<c:if test="${canEdit}"> --%>
 <%-- 			   <a class="btn btn-default" href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a> --%>
 <%-- 			</c:if> --%>
-				<c:if test="${problem.resolved!=true}">
-					<a class="btn btn-primary" href=<c:url value='/closeproblem?id=${problem.id}'/>>Clôturer</a> <!-- FIXME ajouter gestion des droits : i.e seuls les contributeurs peuvent clôturer -->
-				</c:if>
 		</div>
 		<br />
 		<br />
@@ -47,12 +44,17 @@
 					  	<dt>Etat :</dt>
 					  	<c:choose>
 						  	<c:when test="${problem.resolved!=true}">
-						  		<dd style="color:red;"><b>Ouvert</b></dd>					  	
+						  		<dd style="color:red;"><b>Ouvert</b>
+						  			<c:if test="${problem.resolved!=true}">
+										<a class="btn btn-primary btn-sm" href=<c:url value='/closeproblem?id=${problem.id}'/>>Clôturer</a> <!-- FIXME ajouter gestion des droits : i.e seuls les contributeurs peuvent clôturer -->
+									</c:if>
+						  		</dd>					  	
 						  	</c:when>
 						  	<c:otherwise>
 						  		<dd style="color:green;"><b>Résolu</b></dd>	
 						  	</c:otherwise>
 					  	</c:choose>
+						<dt>&nbsp;</dt>
 					</dl>
 				</div>
 			</div>

@@ -10,6 +10,7 @@ import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
 import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.web.UrlUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,8 +63,9 @@ public class ProblemController extends BaseController<Problem> {
     @RequestMapping(value="/closeproblem")
     public ModelAndView addDiscussion(@RequestParam("id")long idProblem) {
         Problem problem = (Problem) getRequiredDetachedEntity(idProblem);
+        
         problem.setResolved(true);
         problemRepository.merge(problem);
-        return new ModelAndView("redirect:/home"); //FIXME rediriger par la suite vers la liste des problèmes ou l'historique des problèmes remontés par le user  
+        return new ModelAndView("redirect:/"+UrlUtil.getRelativeUrlToResourceDisplay(problem.getResource())); //FIXME rediriger par la suite vers la liste des problèmes ou l'historique des problèmes remontés par le user  
     }
 }
