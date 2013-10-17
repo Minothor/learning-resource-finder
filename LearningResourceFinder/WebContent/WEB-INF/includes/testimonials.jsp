@@ -20,6 +20,11 @@
 .testimonialtext span{
 	font-size: 21px;
 }
+
+a:focus { 
+    outline: none; 
+}
+
 </style>
 <div id="carousel-testimonial" data-interval="10000" class="carousel slide">
 	  <!-- Indicators -->
