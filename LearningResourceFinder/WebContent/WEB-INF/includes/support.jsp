@@ -1,20 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<script type="text/javascript" src="/js/ext/jquery-1.9.0.min.js"></script>
 <script>
 $(document).ready(function() {
     $("#formContact").submit(sendDonation);
 });
 function sendDonation(e){
 	e.preventDefault();
-	var sender = $('#email').val();
-	var subject = $('#subject').val();
-	var content = $('#body').val();
 			
 	$.ajax({
 		type : "POST",
 	    url : '/ajax/sendmail',
-	    data: "sender="+sender+"&subject="+subject+"&content="+content,
+	    data: $("#formContact").serialize(),
 	    dataType: 'text',
 	    success : function(data) {
 	    	alert('Merci. Votre message a été envoyé avec succès. Nous vous répondons par e-mail dès que possible.');
@@ -34,15 +31,15 @@ function sendDonation(e){
 <br>
 <form id="formContact" role="form" style="margin-left:15%; width:70%;">
   <div class="form-group">
-    <input type="email" class="form-control" id="email" placeholder="Votre e-mail">
+    <input type="email" class="form-control" id="email" name="sender" placeholder="Votre e-mail" required>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="subject" placeholder="Sujet">
+    <input type="text" class="form-control" id="subject" name="subject" placeholder="Sujet" required>
   </div>
   <div class="form-group">
-    <textarea id="body" placeholder="Votre message" name="body" class="form-control" rows="5"></textarea>
+    <textarea id="body" placeholder="Votre message" name="content" class="form-control" rows="5" required></textarea>
   </div>
-  <button type="submit" class="btn btn-default">Envoyer</button>
+  <button type="submit" class="btn ">Envoyer</button>
 </form>
 </section>
 </section>
