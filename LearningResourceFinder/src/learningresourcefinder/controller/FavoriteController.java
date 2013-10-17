@@ -25,7 +25,7 @@ public class FavoriteController extends BaseController<Favorite> {
 	@Autowired ResourceRepository resourceRepository;
 	@Autowired FavoriteRepository favoriteRepository;
 	
-	// ADD OR DEL Resource since Favorite
+	// ADD OR DEL Favorite for a resource
 	@RequestMapping("/ajax/addfavorite")
 	public ModelAndView addfavorite(@RequestParam("idResource")long idResource) {
 		ModelAndView mv = new ModelAndView("favorite");

@@ -4,6 +4,7 @@
 <%@ attribute name="isFavorite" required="true" type="java.lang.Boolean"%>
 <%@ attribute name="idResource" required="true" type="java.lang.Long"%>
 
+<%-- This tag is used within the display of a resource, or directly as an ajax call result --%>
 <c:choose>
 	<c:when test="${isFavorite}">
 		<c:set var="title" value="Retirer de mes favoris" />
