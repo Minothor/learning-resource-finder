@@ -196,7 +196,10 @@ figure:hover figcaption {
 	color: #ccc;
 	font-size: 30px;	
 }
-
+.centered{
+    float: none;
+    margin: 0 auto;
+}
 
 
 

@@ -5,6 +5,9 @@
 </head>
 <body>
 
+<%---------------------------------- COUNTER ----------------------------------%>
+<%@include file="/WEB-INF/includes/counter.jsp" %>
+
 <%----------------------------------- SLIDER ----------------------------------%>
 <div class="container" style="padding:20px 20px;">
 <br/>
