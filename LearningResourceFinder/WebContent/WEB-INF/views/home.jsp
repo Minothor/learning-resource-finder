@@ -69,11 +69,33 @@ SLIDER...
   
 </div>  
 
+<%------------------------------------ BENEFITS -------------------------------------%>
+<div style="background-color:#17A7D6;">
+<div class="container" style="padding:20px 20px; color:white;">
+	<%@include file="/WEB-INF/includes/benefits.jsp" %>
+</div>
+</div>
+
+<%------------------------------------ PURPOSES -------------------------------------%>
+<div style="background-color:white;">
+<div class="container" style="padding:20px 20px; color:white;">
+	<%@include file="/WEB-INF/includes/purposes.jsp" %>
+</div>
+</div>
+
 <%------------------------------------ TESTIMONIALS ---------------------------------%>
 <div style="background-color:#84BB04;">
 <div class="container" style="padding:20px 20px; color:white;">
 	<%@include file="/WEB-INF/includes/testimonials.jsp" %>
 </div>
 </div>
+
+<%------------------------------------ SUPPORT --------------------------------------%>
+<div style="background-color:white;">
+<div class="container" style="padding:20px 20px; color:black;">
+	<%@include file="/WEB-INF/includes/support.jsp" %>
+</div>
+</div>
+
 </body>
 </html>

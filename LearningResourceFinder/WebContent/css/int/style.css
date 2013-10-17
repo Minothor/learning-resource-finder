@@ -201,18 +201,21 @@ figure:hover figcaption {
     margin: 0 auto;
 }
 
+h1, h2, h3, h4, h5, h6 {
+font-family: 'museo700';
+}
 
+.wrapper {
+	width: 100%;
+}
 
+.mainlist, .mainlist li {
+width: 100%;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.mainlist li {
+margin: 15px 0;
+background: url(/comingsoon1/arrow.png) no-repeat 0 3px;
+padding-left: 27px;
+font-size: 16px;
+}
