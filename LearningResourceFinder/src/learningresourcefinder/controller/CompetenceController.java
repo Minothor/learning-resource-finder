@@ -90,9 +90,9 @@ public class CompetenceController extends BaseController<Competence> {
 	}
 	
 	@RequestMapping(value="/ajax/competenceeditsubmit")
-	public @ResponseBody String ajaxEditCompetence( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("description") String descriptionCompetence, @RequestParam("id") Long idCompetence){
+	public @ResponseBody String competenceEditSubmit( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("description") String descriptionCompetence, @RequestParam("id") Long idCompetence){
 		//checking
-		if (competenceRepository.getIfCompetenceCodeExistOrIsCurrentlyBeingEdited(idCompetence,codeCompetence)) {
+		if (competenceRepository.isThereAnotherCompetenceWithThatCode(idCompetence,codeCompetence)) {
 			Competence competence = getRequiredDetachedEntity(idCompetence);
 			SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
 	        if (competence.getParent()==null){
@@ -112,7 +112,7 @@ public class CompetenceController extends BaseController<Competence> {
 	}
 	
     @RequestMapping(value="/competencemovesubmit")
-    public ModelAndView CompetenceMoveSubmit(@RequestParam ("hiddenFieldMoveCompetency") Long idCompetence, @RequestParam("codeField") String codeNewParent ){
+    public ModelAndView competenceMoveSubmit(@RequestParam ("hiddenFieldMoveCompetency") Long idCompetence, @RequestParam("codeField") String codeNewParent ){
         ModelAndView mv= new ModelAndView("competencetree"); 
         
         Competence competence=getRequiredEntity(idCompetence);
