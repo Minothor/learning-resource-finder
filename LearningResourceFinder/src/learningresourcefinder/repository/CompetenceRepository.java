@@ -38,17 +38,24 @@ public class CompetenceRepository extends BaseRepository<Competence> {
 	}
 
 
-	public boolean getIfCompetenceCodeExistOrIsCurrentlyBeingEdited(Long id,String codeCompetence) {
+	public boolean isThereAnotherCompetenceWithThatCode(Long editedCompetenceId, String newCode) {
 		
 		List<Competence> result = em
 				.createQuery("select c from Competence c where lower(c.code) = :code")
-				.setParameter("code", codeCompetence.toLowerCase())
+				.setParameter("code", newCode.toLowerCase())
 				.getResultList();
 		
 		switch (result.size()){
 			case 0: return true;
-			case 1: if (result.get(0).getId() == id ) {return true;}else{return false;}
-			default : return false;
+			case 1: {
+			    Competence competence = result.get(0);
+			    if (competence.getId().equals(editedCompetenceId) ) {  // It's the same competence as the one we are editing.
+			        return true;
+			    } else {  // Another competence has that code already.
+			        return false;
+			    }
+			}
+			default : return false;  // Should never happen: the code is an unique DB column.
 		}
 	}
 
