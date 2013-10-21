@@ -16,9 +16,8 @@
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
  	    $('.editableField').editable({   
- 	    	  emptytext: 'Vide',
+ 	    	  emptytext: '? ?',
  	    	  type: 'text',
- 	    	  defaultValue: 'vide',
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
 		});
@@ -148,7 +147,7 @@
 						</dd>
 						<dt>Durée:</dt>
 						<dd>
-							<a id="duration" href="#" class="editableField" data-type="text"> ${resource.duration}</a>
+							<a id="duration" href="#" class="editableField" data-type="text"> ${resource.duration} </a> minutes
 						</dd>
 
 						<dt>Contributeur:</dt>
