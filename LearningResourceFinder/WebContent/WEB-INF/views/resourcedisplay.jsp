@@ -30,6 +30,10 @@
  	    	content: "Pour signaler un problÃ¨me, il faut Ãªtre connectÃ©."
  	    });
  	    
+ 	    $(".noneditresource").popover({
+ 	    	content : "Pour modifier ce champ, il faut Ãªtre connectÃ© et avoir un niveau 3 de contribution."
+ 	    });
+ 	    
 	});
  	
  	function onUrlAddClick(){
@@ -82,7 +86,7 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>Intitulé:</dt>
+						<dt>Intitulï¿½:</dt>
 						<dd>
 							<a id="title"  href="#" class="editableField"> ${resource.name}</a>
 						</dd>
@@ -112,7 +116,7 @@
 						<dd>
 							<a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
 						</dd>
-						<dt>Matière:</dt>
+						<dt>Matiï¿½re:</dt>
 						<dd>
 							<a id="topic" href="#" class="editableField" data-type="select" data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
 						</dd>
@@ -133,7 +137,7 @@
 						<dd>
 							<a id="language" href="#" class="editableField" data-type="select" data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 						</dd>
-						<dt>Publicité:</dt>
+						<dt>Publicitï¿½:</dt>
 						<dd>
 							<a id="advertising" href="#" class="editableField" data-type="select" data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 							<c:if test="${resource.advertising == true}">
@@ -144,7 +148,7 @@
 							</c:if>
 							 </a>
 						</dd>
-						<dt>Durée:</dt>
+						<dt>Durï¿½e:</dt>
 						<dd>
 							<a id="duration" href="#" class="editableField" data-type="text"> ${resource.duration}</a>
 						</dd>
@@ -153,7 +157,7 @@
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-						<dt>Compétence:</dt>
+						<dt>Compï¿½tence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
                             <lrf:competencepath competence="${competence}"/>
@@ -179,7 +183,7 @@
 					<br />
 					
 					
-					<a ${canAddProblem ? "href='#modalProblemReport' data-toggle='modal'" : "class='noAddProblemPop' style=cursor:pointer"}>Signaler un problème.</a>
+					<a ${canAddProblem ? "href='#modalProblemReport' data-toggle='modal'" : "class='noAddProblemPop' style=cursor:pointer"}>Signaler un problï¿½me.</a>
 					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problï¿½me...'
 					   class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
 					   style="cursor:pointer; line-height:20px; font-size:30px"> 
@@ -217,7 +221,7 @@
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>Problèmes</h4>
+					<h4>Problï¿½mes</h4>
 					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
