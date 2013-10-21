@@ -69,7 +69,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
     	
-    	List<Problem> problemList = problemRepository.findProblemOfResource(resource);
+    	List<Problem> problemList = problemRepository.findProblemOfResourceNoResolved(resource);
     	for(Problem problem: problemList){
     	    problemDate.put(problem.getId(), DateUtil.formatIntervalFromToNowFR(problem.getCreatedOn()));
     	}

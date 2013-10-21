@@ -217,7 +217,7 @@
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>ProblÃ¨me</h4>
+					<h4>Problèmes</h4>
 					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
