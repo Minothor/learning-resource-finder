@@ -34,6 +34,7 @@ public class Discussion extends BaseEntity {
     public Discussion(String message) {
         super();
         this.message = HTMLUtil.removeHtmlTags(message);
+        this.message = message.replace("\n", "<br />\n");
     }
 
     @Override

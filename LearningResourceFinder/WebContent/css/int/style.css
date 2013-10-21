@@ -11,6 +11,7 @@
 
 }
 
+/* Change the bootstrap defaults for the titles */
 @font-face {
     font-family: 'museo700';
     src: url('../fonts/museo_700_regular-webfont.eot');
@@ -20,8 +21,9 @@
          url('../fonts/museo_700_regular-webfont.svg#museo700') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
+
+
 /* Use the following CSS code if you want to use data attributes for inserting your icons */
 [data-icon]:before {
 	font-family: 'icomoon';
