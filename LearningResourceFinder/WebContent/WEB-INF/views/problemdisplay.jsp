@@ -11,7 +11,7 @@
 	<lrftag:breadcrumb linkactive="${problem.name}">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
         <c:if test="${problem.createdBy eq user}">
-		   <lrftag:breadcrumbelement label="Mes problèmes" link="/history/problem" />
+		   <lrftag:breadcrumbelement label="Mes problèmes" link="/problem/history" />
 		</c:if>
 <%-- 		<lrftag:breadcrumbelement label="${problem.name}"  /> --%>
 	</lrftag:breadcrumb>
