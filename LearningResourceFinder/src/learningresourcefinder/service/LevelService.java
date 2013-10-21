@@ -2,6 +2,7 @@ package learningresourcefinder.service;
 
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Level;
+import learningresourcefinder.model.User.Role;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.Action;
 
@@ -11,17 +12,20 @@ import org.springframework.stereotype.Service;
 public class LevelService {
 
 	public boolean canDoAction(User user, Action action) {
-		if(user != null && SecurityContext.isUserLoggedIn()){
-
-			int userlevelIndex = user.getAccountLevel().getLevelIndex();
-			int actionlevelIndex = action.getLevel().getLevelIndex();
-
-			if (userlevelIndex >= actionlevelIndex) {
-				return true;
-			}
+		if(user == null || !SecurityContext.isUserLoggedIn()){
+	        return false;
 		}
-		return false;
+		
+		if (SecurityContext.isUserHasRole(Role.ADMIN)) {
+		    return true;
+		}
+
+		int userlevelIndex = user.getAccountLevel().getLevelIndex();
+		int actionlevelIndex = action.getLevel().getLevelIndex();
+
+		return (userlevelIndex >= actionlevelIndex);
 	}
+	
 	
 	public void addActionPoints(User user, Action action) {
 		int lastLevel = Level.getHighestLevelIndex();
