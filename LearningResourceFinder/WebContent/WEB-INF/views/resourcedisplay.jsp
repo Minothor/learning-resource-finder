@@ -15,23 +15,21 @@
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('.editableField').editable({      
+ 	    $('.editableField').editable({   
+ 	    	  emptytext: 'Vide',
  	    	  type: 'text',
+ 	    	  defaultValue: 'vide',
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
 		});
  	    
  	    $('.nonurleditpop').popover({
  	    	html :true,
- 	        content :"Pour modifier une url, il faut Ãªtre connectÃ© et avoir un niveau 4 de contribution."
+ 	        content :"Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution."
  	    });
  	    
  	    $(".noAddProblemPop").popover({
- 	    	content: "Pour signaler un problÃ¨me, il faut Ãªtre connectÃ©."
- 	    });
- 	    
- 	    $(".noneditresource").popover({
- 	    	content : "Pour modifier ce champ, il faut Ãªtre connectÃ© et avoir un niveau 3 de contribution."
+ 	    	content: "Pour signaler un problème, il faut être connecté."
  	    });
  	    
 	});
@@ -86,7 +84,7 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>Intitulï¿½:</dt>
+						<dt>Intitulé:</dt>
 						<dd>
 							<a id="title"  href="#" class="editableField"> ${resource.name}</a>
 						</dd>
@@ -116,9 +114,9 @@
 						<dd>
 							<a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
 						</dd>
-						<dt>Matiï¿½re:</dt>
+						<dt>Matière:</dt>
 						<dd>
-							<a id="topic" href="#" class="editableField" data-type="select" data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
+							<a id="topic" href="#" class="editableField" data-type="select" data-defaultValue="1" data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
 						</dd>
 
 						<dt>Plate-forme:</dt>
@@ -137,7 +135,7 @@
 						<dd>
 							<a id="language" href="#" class="editableField" data-type="select" data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 						</dd>
-						<dt>Publicitï¿½:</dt>
+						<dt>Publicité:</dt>
 						<dd>
 							<a id="advertising" href="#" class="editableField" data-type="select" data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 							<c:if test="${resource.advertising == true}">
@@ -148,7 +146,7 @@
 							</c:if>
 							 </a>
 						</dd>
-						<dt>Durï¿½e:</dt>
+						<dt>Durée:</dt>
 						<dd>
 							<a id="duration" href="#" class="editableField" data-type="text"> ${resource.duration}</a>
 						</dd>
@@ -157,7 +155,7 @@
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-						<dt>Compï¿½tence:</dt>
+						<dt>Compétence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
                             <lrf:competencepath competence="${competence}"/>
@@ -168,7 +166,11 @@
                         </dd>
                         <dt>Auteur:</dt>
 						<dd>
-							<a href="#" class="editableField"> ${resource.author}</a>
+							
+							<c:if test="${resource.author == null}">
+    							Vide
+							</c:if>
+							
 						</dd>
 					</dl>
 					<br />
@@ -183,8 +185,7 @@
 					<br />
 					
 					
-					<a ${canAddProblem ? "href='#modalProblemReport' data-toggle='modal'" : "class='noAddProblemPop' style=cursor:pointer"}>Signaler un problï¿½me.</a>
-					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problï¿½me...'
+					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problème...'
 					   class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
 					   style="cursor:pointer; line-height:20px; font-size:30px"> 
 					   </a>
@@ -221,7 +222,7 @@
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>Problï¿½mes</h4>
+					<h4>Problème</h4>
 					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
@@ -242,7 +243,7 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">IntitulÃ© (optionnel): </label>
+								<label class="col-lg-2 control-label" style="text-align: left;">Intitulé (optionnel): </label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="nameField"	name="name" />
 								</div>
@@ -277,7 +278,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Ajouter une image ÃƒÂ  la galerie</h4>
+						<h4 class="modal-title">Ajouter une image Ã  la galerie</h4>
 					</div>
 					<form method="post" action="/resource/imageadd"
 						enctype="multipart/form-data"
@@ -358,7 +359,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Placer la ressource dans une compÃ©tence</h4>
+						<h4 class="modal-title">Placer la ressource dans une compétence</h4>
 					</div>
 					<form method="post" action="/competenceaddtoresourcesubmit"  role="form">
 						<div class="modal-body">
@@ -371,8 +372,8 @@
 								  </div>
 								</row>
 								<br/><br/><br/>
-								<div class="help-block">Code de la compÃ©tence dans laquelle vous dÃ©sirez placer la ressource.<br/>
-								   Astuce: affichez la liste des compÃ©tences dans un autre onglet de votre navigateur.</div>
+								<div class="help-block">Code de la compétence dans laquelle vous désirez placer la ressource.<br/>
+								   Astuce: affichez la liste des compétences dans un autre onglet de votre navigateur.</div>
 							</div>
 						</div>
 
@@ -399,7 +400,7 @@
 	        <h4 class="modal-title">Confirmation</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>Voulez-vous retirer cette compÃ©tence de la ressource ?</p>
+	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removecompetencefromresource">
