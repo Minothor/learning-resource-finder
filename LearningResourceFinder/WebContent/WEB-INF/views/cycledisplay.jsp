@@ -33,14 +33,14 @@ $(function ()
 					<c:forEach items="${cycleColumn}" var="cycleitems">
 							<h2>${cycleitems.competence.name}</h2>
 							<c:forEach items="${cycleitems.children}" var="subitem">
-								<span  class="mycompetencePopover" data-content="<lrftag:competencedescription competence="${subitem}" mustlistchildren="false"/>" style="font-size:120%">${subitem.competence.code }
+								<span  class="mycompetencePopover" data-content="<lrftag:competencedescription competenceNode='${subitem}' mustlistchildren='false'/>" style="font-size:120%">${subitem.competence.code }
 								  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }</span> 
 								  </a>
 								</span>
 								</br>
 								<ul>
 									<c:forEach items="${subitem.children}" var="subsubitem">
-										<li class ="mycompetencePopover" data-content="<lrftag:competencedescription competence="${subitem}" mustlistchildren="true"/>">
+										<li class ="mycompetencePopover" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true'/>">
 											${subsubitem.competence.code }
 											<a href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
 										</li>
