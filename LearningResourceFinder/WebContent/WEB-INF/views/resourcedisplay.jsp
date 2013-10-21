@@ -82,7 +82,7 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>IntitulÃ©:</dt>
+						<dt>Intitulé:</dt>
 						<dd>
 							<a id="title"  href="#" class="editableField"> ${resource.name}</a>
 						</dd>
@@ -112,7 +112,7 @@
 						<dd>
 							<a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
 						</dd>
-						<dt>MatiÃ¨re:</dt>
+						<dt>Matière:</dt>
 						<dd>
 							<a id="topic" href="#" class="editableField" data-type="select" data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
 						</dd>
@@ -133,7 +133,7 @@
 						<dd>
 							<a id="language" href="#" class="editableField" data-type="select" data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 						</dd>
-						<dt>PublicitÃ©:</dt>
+						<dt>Publicité:</dt>
 						<dd>
 							<a id="advertising" href="#" class="editableField" data-type="select" data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 							<c:if test="${resource.advertising == true}">
@@ -144,7 +144,7 @@
 							</c:if>
 							 </a>
 						</dd>
-						<dt>DurÃ©e:</dt>
+						<dt>Durée:</dt>
 						<dd>
 							<a id="duration" href="#" class="editableField" data-type="text"> ${resource.duration}</a>
 						</dd>
@@ -153,7 +153,7 @@
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-						<dt>CompÃ©tence:</dt>
+						<dt>Compétence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
                             <lrf:competencepath competence="${competence}"/>
@@ -179,7 +179,7 @@
 					<br />
 					
 					
-					<a ${canAddProblem ? "href='#modalProblemReport' data-toggle='modal'" : "class='noAddProblemPop' style=cursor:pointer"}>Signaler un problÃ¨me.</a>
+					<a ${canAddProblem ? "href='#modalProblemReport' data-toggle='modal'" : "class='noAddProblemPop' style=cursor:pointer"}>Signaler un problème.</a>
 					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problï¿½me...'
 					   class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
 					   style="cursor:pointer; line-height:20px; font-size:30px"> 
