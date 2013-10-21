@@ -18,6 +18,9 @@ public class HTMLUtil {
 	 * Remove as much HTML as possible.
 	 * */
 	public static String removeHtmlTags(String textToFormat) {
+		if (textToFormat == null) {
+		    return null;
+		}
 		String result = textToFormat.replaceAll("\\<(.|\n)*?>", "");
 		return result;
 	}
