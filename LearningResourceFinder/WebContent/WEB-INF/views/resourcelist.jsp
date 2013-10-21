@@ -10,7 +10,7 @@
 	<lrftag:breadcrumbelement label="Contributions" link="contribution" />
 	</lrftag:breadcrumb>
 	<div class="container">
-	<h1>${problemTitle}</h1>
+	<h1>${topic} : ${problemTitle}</h1>
 	<section id="resourcelist">
 			<div class="panel panel-default">
 				<div class="panel-body">
