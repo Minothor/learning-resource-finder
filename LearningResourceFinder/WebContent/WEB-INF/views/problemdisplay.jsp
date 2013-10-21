@@ -5,7 +5,7 @@
 <html>
 <head>
 
-<title>Problème</title>
+<title>${problem.name}</title>
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${problem.name}">
@@ -62,7 +62,8 @@
 		<!-- discussion thread -->	
 		<c:forEach items="${problem.problemDiscussions}" var="discussion">
 			<div class="panel panel-default">
-					<div class="panel-heading"><a href="/user/${discussion.createdBy.userName}">${discussion.createdBy.fullName}</a> <span style="font-size:70%;position:relative;float:right;" ><fmt:formatDate value="${discussion.createdOn}" pattern="dd-MM-yyyy HH:mm:ss" /></span></div>
+					<div class="panel-heading"><a href="/user/${discussion.createdBy.userName}">${discussion.createdBy.fullName}</a> <span style="font-size:70%;position:relative;float:right;" >
+					<c:out value="${discussionDate[discussion.id]}"></c:out></span></div>
 					<div class="panel-body">
 						<span>${discussion.message}</span>
 					</div>
@@ -78,7 +79,7 @@
 <!-- 						  <input type="text" class="form-control" name="textDiscussion" placeholder="Votre message"> -->
 							<textarea class="form-control" rows="5" name="textDiscussion" placeholder="Votre message" required></textarea>
 						  <br />
-						  <button type="submit" class="btn btn-primary"> Envoyer</button>
+						  <button type="submit" class="btn btn-primary">Répondre</button>
 						  <input type="hidden" name="idProblem" value="${problem.id}" />
 						</form>  
 				</div>

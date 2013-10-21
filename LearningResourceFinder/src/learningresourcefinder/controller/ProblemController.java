@@ -1,5 +1,8 @@
 package learningresourcefinder.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Discussion;
 import learningresourcefinder.model.User;
@@ -9,6 +12,7 @@ import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
+import learningresourcefinder.util.DateUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.web.UrlUtil;
 
@@ -32,10 +36,16 @@ public class ProblemController extends BaseController<Problem> {
     public @ResponseBody ModelAndView problemDisplay(@RequestParam("id") Long idProblem) {
 	    User user = SecurityContext.getUser();
         Problem problem = getRequiredEntity(idProblem);
+        Map<Long, String> discussionDate = new HashMap<Long, String>();
+        
         ModelAndView mv = new ModelAndView("problemdisplay", "problem", problem);
         mv.addObject("user",SecurityContext.getUser());
         mv.addObject("resource", problem.getResource());
         mv.addObject("problemDiscussions",problem.getProblemDiscussions());
+        for(Discussion discussion: problem.getProblemDiscussions()){
+            discussionDate.put(discussion.getId(), DateUtil.formatIntervalFromToNowFR(discussion.getCreatedOn()));
+        }
+        mv.addObject("discussionDate", discussionDate);
         mv.addObject("canCloseProblem", levelService.canDoAction(user, Action.CLOSE_PROBLEM));
         return mv;
     }
