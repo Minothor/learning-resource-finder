@@ -97,6 +97,8 @@ local   LRF     lrfuser trust
 
 Here, for example, we see that lrfuser could only modify the LRF DB and can only be connected in local, no password will be requested because trust option is set.
 
+
+
 Restore backups on developer's PC
 ========
 To restore prod DB on Dev windows desktop with pgadmin & psql.exe:
