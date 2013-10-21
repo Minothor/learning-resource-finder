@@ -8,7 +8,11 @@
 
 <script type="text/javascript">
 $(function ()  
- { $(".mycompetencePopover").popover({html:true, trigger:'hover'});  
+ { $(".mycompetencePopover").popover({
+	 	html:true,
+	 	trigger:'hover',
+	 	delay: { show: 500, hide: 2000 }
+	 });  
 });  
 
 </script>
