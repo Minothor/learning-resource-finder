@@ -24,11 +24,15 @@
  	    
  	    $('.nonurleditpop').popover({
  	    	html :true,
- 	        content :"Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution."
+ 	        content :"Pour modifier une url, il faut Ãªtre connectÃ© et avoir un niveau 4 de contribution."
  	    });
  	    
  	    $(".noAddProblemPop").popover({
- 	    	content: "Pour signaler un problème, il faut être connecté."
+ 	    	content: "Pour signaler un problÃ¨me, il faut Ãªtre connectÃ©."
+ 	    });
+ 	    
+ 	    $(".noneditresource").popover({
+ 	    	content : "Pour modifier ce champ, il faut Ãªtre connectÃ© et avoir un niveau 3 de contribution."
  	    });
  	    
 	});
@@ -83,7 +87,7 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>Intitulé:</dt>
+						<dt>Intitulï¿½:</dt>
 						<dd>
 							<a id="title"  href="#" class="editableField"> ${resource.name}</a>
 						</dd>
@@ -113,30 +117,30 @@
 						<dd>
 							<a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
 						</dd>
-						<dt>Matière:</dt>
+						<dt>Matiï¿½re:</dt>
 						<dd>
-							<a id="topic" href="#" class="editableField" data-type="select" data-defaultValue="1" data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
+							<a id="topic" ${canEdit==true ? " href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
 						</dd>
 
 						<dt>Plate-forme:</dt>
 						<dd>
-							<a id="platform" href="#" class="editableField" data-type="select" data-source="${dataEnumPlatform}"> ${resource.platform.description}</a>
+							<a id="platform" ${canEdit==true? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="${dataEnumPlatform}"> ${resource.platform.description}</a>
 						</dd>
 						<dt>Format:</dt>
 						<dd>
-							<a id="format" href="#" class="editableField" data-type="select" data-source="${dataEnumFormat}"> ${resource.format.description}</a>
+							<a id="format"  ${canEdit==true? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="${dataEnumFormat}"> ${resource.format.description}</a>
 						</dd>
 						<dt>Nature:</dt>
 						<dd>
-							<a id="nature" href="#" class="editableField" data-type="select" data-source="${dataEnumNature}"> ${resource.nature.description}</a>
+							<a id="nature" ${canEdit==true? "href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${dataEnumNature}"> ${resource.nature.description}</a>
 						</dd>
 						<dt>Langue:</dt>
 						<dd>
-							<a id="language" href="#" class="editableField" data-type="select" data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
+							<a id="language" ${canEdit==true ? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 						</dd>
-						<dt>Publicité:</dt>
+						<dt>Publicitï¿½:</dt>
 						<dd>
-							<a id="advertising" href="#" class="editableField" data-type="select" data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
+							<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 							<c:if test="${resource.advertising == true}">
     							Oui
 							</c:if>
@@ -145,16 +149,16 @@
 							</c:if>
 							 </a>
 						</dd>
-						<dt>Durée:</dt>
+						<dt>Durï¿½e:</dt>
 						<dd>
-							<a id="duration" href="#" class="editableField" data-type="text"> ${resource.duration} </a> minutes
+							<a id="duration" ${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}> ${resource.duration}</a> minutes
 						</dd>
 
 						<dt>Contributeur:</dt>
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-						<dt>Compétence:</dt>
+						<dt>Compï¿½tence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
                             <lrf:competencepath competence="${competence}"/>
@@ -165,11 +169,7 @@
                         </dd>
                         <dt>Auteur:</dt>
 						<dd>
-							
-							<c:if test="${resource.author == null}">
-    							Vide
-							</c:if>
-							
+							<a ${canEdit==true ? "href='#' class='editableField'":" class='noneditresource'"}> ${resource.author}</a>
 						</dd>
 					</dl>
 					<br />
@@ -184,7 +184,7 @@
 					<br />
 					
 					
-					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problème...'
+					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problï¿½me...'
 					   class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
 					   style="cursor:pointer; line-height:20px; font-size:30px"> 
 					   </a>
@@ -221,7 +221,7 @@
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>Problème</h4>
+					<h4>ProblÃ¨mes</h4>
 					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
@@ -242,7 +242,7 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">Intitulé (optionnel): </label>
+								<label class="col-lg-2 control-label" style="text-align: left;">IntitulÃ© (optionnel): </label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="nameField"	name="name" />
 								</div>
@@ -358,7 +358,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Placer la ressource dans une compétence</h4>
+						<h4 class="modal-title">Placer la ressource dans une compÃ©tence</h4>
 					</div>
 					<form method="post" action="/competenceaddtoresourcesubmit"  role="form">
 						<div class="modal-body">
@@ -371,8 +371,8 @@
 								  </div>
 								</row>
 								<br/><br/><br/>
-								<div class="help-block">Code de la compétence dans laquelle vous désirez placer la ressource.<br/>
-								   Astuce: affichez la liste des compétences dans un autre onglet de votre navigateur.</div>
+								<div class="help-block">Code de la compÃ©tence dans laquelle vous dÃ©sirez placer la ressource.<br/>
+								   Astuce: affichez la liste des compÃ©tences dans un autre onglet de votre navigateur.</div>
 							</div>
 						</div>
 
@@ -399,7 +399,7 @@
 	        <h4 class="modal-title">Confirmation</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
+	        <p>Voulez-vous retirer cette compÃ©tence de la ressource ?</p>
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removecompetencefromresource">
