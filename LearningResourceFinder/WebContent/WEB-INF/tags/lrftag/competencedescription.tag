@@ -8,11 +8,17 @@
 <p>${competenceNode.competence.description}</p>
 
 <c:if test="${mustlistchildren}">
-
-  <ul>
-	  <c:forEach items="${competenceNode.competence.children}" var="child">
-			<li>${child.competence.code} - <a href='searchresource?competenceid=${child.competence.id}'>${child.competence.name}</a></li>
+<div style='min-width:250px;'>
+ <small>
+  <p>${competenceNode.competence.description}</p>
+  <ul style='padding-left:0px'>
+	  <c:forEach items="${competenceNode.children}" var="child">  		
+			<li style='padding-bottom:10px;'>
+				${child.competence.code} - <a href='searchresource?competenceid=${child.competence.id}'>${child.competence.name}</a>
+			</li>
 	 </c:forEach>
   </ul>
+ </small>
+</div>
 
 </c:if>
