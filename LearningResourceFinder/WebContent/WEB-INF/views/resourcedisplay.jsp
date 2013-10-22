@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
@@ -24,18 +25,25 @@
  	    
  	    $('.nonurleditpop').popover({
  	    	html :true,
- 	        content :"Pour modifier une url, il faut Ãªtre connectÃ© et avoir un niveau 4 de contribution."
+ 	        content :"Pour modifier une url, il faut Ãªtre connecté et avoir un niveau 4 de contribution."
  	    });
  	    
  	    $(".noAddProblemPop").popover({
- 	    	content: "Pour signaler un problÃ¨me, il faut Ãªtre connectÃ©."
+ 	    	content: "Pour signaler un problÃ¨me, il faut Ãªtre connecté."
  	    });
  	    
  	    $(".noneditresource").popover({
- 	    	content : "Pour modifier ce champ, il faut Ãªtre connectÃ© et avoir un niveau 3 de contribution."
+ 	    	content : "Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution."
  	    });
  	    
 	});
+ 	
+ 	function pop(){
+ 		 $('#nonpopoveredit').popover({
+  	    	html :true,
+  	        content :"Pour modifier une url, il faut Ãªtre connecté et avoir un niveau 4 de contribution."
+  	    });
+ 	}
  	
  	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
@@ -87,9 +95,9 @@
 				<div class="col-md-12">
 					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
-						<dt>Intitulï¿½:</dt>
+						<dt>Intitulé:</dt>
 						<dd>
-							<a id="title"  href="#" class="editableField"> ${resource.name}</a>
+							<a id="title"  ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}> ${resource.name}</a>
 						</dd>
 
 						<dt>Url:</dt>
@@ -100,7 +108,7 @@
 								<c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
 								<span style="float:none; font-size:15px"  class="glyphicon glyphicon-pencil close 
 								  <c:choose>
-								        <c:when test="${(canEditUrl== true)}">
+								        <c:when test="${(canEditUrl == true)}">
 								          " onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"> 
 								        </c:when>
 								        <c:otherwise>
@@ -108,10 +116,15 @@
 								        </c:otherwise>
 								  </c:choose>
 								</span>
+							
 								<button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
 		                        <br />
-		                    </c:forEach>
-		                    <span class="glyphicon glyphicon-plus close" style="float:none; font-size:15px" onclick="onUrlAddClick()"></span>
+		                    </c:forEach>		                
+		                 <span  class="glyphicon glyphicon-plus close ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" ></span> 
+		                		                
+		             
+		                
+		                
 		                </dd>          
 						<dt>Description:</dt>
 						<dd>
@@ -184,44 +197,19 @@
 					<br />
 					
 					
-					<a data-placement="top" data-toggle="tooltip" data-original-title='Signaler un problï¿½me...'
-					   class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
+					<a class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
 					   style="cursor:pointer; line-height:20px; font-size:30px"> 
 					   </a>
 					<lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
  	    
 					<br /> <br />
 					
-					
-					<h4>Les liens</h4>
-					<a data-toggle="modal" href="#modalUrlResource" class="btn btn-primary">Ajouter une URL</a> <br /> <br />
-					<div class="table-responsive">
-						<table class="table table-bordered ">
-							<tr>
-								<th>Nom</th>
-								<th>Url</th>
-								<th>Action</th>
-							</tr>
-							<c:forEach items="${resource.urlResources}" var="url">
-								<tr>
-									<td>${url.name}</td>
-									<td><a href="${url.url}">${url.url}</a></td>
-									<td><a
-										href="<c:url value='/removeurlresource?id=${url.id}'/>">Supprimer</a></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-					<br />
 					<h4>Galerie</h4>
-					<c:if test="${canEdit}">
-						<a data-toggle="modal" href="#modalImageGalerieResource"
-							class="btn btn-primary">Ajouter une Image</a>
-					</c:if>
+					<a data-toggle="modal" id="nonpopoveredit" ${canEdit == true ? "href='#modalImageGalerieResource'":"onclick='pop()'"}" class="btn btn-primary">Ajouter une Image</a>
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>ProblÃ¨mes</h4>
+					<h4>Problèmes</h4>
 					<%@ include file="problemlist.jsp" %>
 				</div>
 			</div>
