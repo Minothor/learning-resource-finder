@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
@@ -25,11 +24,11 @@
  	    
  	    $('.nonurleditpop').popover({
  	    	html :true,
- 	        content :"Pour modifier une url, il faut Ãªtre connecté et avoir un niveau 4 de contribution."
+ 	        content :"Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution."
  	    });
  	    
  	    $(".noAddProblemPop").popover({
- 	    	content: "Pour signaler un problÃ¨me, il faut Ãªtre connecté."
+ 	    	content: "Pour signaler un problème, il faut être connecté."
  	    });
  	    
  	    $(".noneditresource").popover({
@@ -41,7 +40,7 @@
  	function pop(){
  		 $('#nonpopoveredit').popover({
   	    	html :true,
-  	        content :"Pour modifier une url, il faut Ãªtre connecté et avoir un niveau 4 de contribution."
+  	        content :"Pour modifier une url, il faut étre connecté et avoir un niveau 4 de contribution."
   	    });
  	}
  	
@@ -86,7 +85,7 @@
 <body>
 	<lrftag:breadcrumb linkactive="${resource.name}">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
-		<lrftag:breadcrumbelement label="Ressource" link="/ressourcelist" />
+		<lrftag:breadcrumbelement label="Ressource" link="/resourcelist" />
 	</lrftag:breadcrumb>
 	<div class="container">
 		<lrftag:pageheadertitle title="${resource.name}" />
@@ -130,7 +129,7 @@
 						<dd>
 							<a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
 						</dd>
-						<dt>Matiï¿½re:</dt>
+						<dt>Matière:</dt>
 						<dd>
 							<a id="topic" ${canEdit==true ? " href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
 						</dd>
@@ -151,7 +150,7 @@
 						<dd>
 							<a id="language" ${canEdit==true ? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 						</dd>
-						<dt>Publicitï¿½:</dt>
+						<dt>Publicité:</dt>
 						<dd>
 							<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 							<c:if test="${resource.advertising == true}">
@@ -162,7 +161,7 @@
 							</c:if>
 							 </a>
 						</dd>
-						<dt>Durï¿½e:</dt>
+						<dt>Durée:</dt>
 						<dd>
 							<a id="duration" ${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}> ${resource.duration}</a> minutes
 						</dd>
@@ -171,7 +170,7 @@
 						<dd>
 							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
 						</dd>
-						<dt>Compï¿½tence:</dt>
+						<dt>Compétence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
                             <lrf:competencepath competence="${competence}"/>
@@ -230,7 +229,7 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">IntitulÃ© (optionnel): </label>
+								<label class="col-lg-2 control-label" style="text-align: left;">Intitulé (optionnel): </label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="nameField"	name="name" />
 								</div>
@@ -346,7 +345,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Placer la ressource dans une compÃ©tence</h4>
+						<h4 class="modal-title">Placer la ressource dans une compétence</h4>
 					</div>
 					<form method="post" action="/competenceaddtoresourcesubmit"  role="form">
 						<div class="modal-body">
@@ -359,7 +358,7 @@
 								  </div>
 								</row>
 								<br/><br/><br/>
-								<div class="help-block">Code de la compÃ©tence dans laquelle vous dÃ©sirez placer la ressource.<br/>
+								<div class="help-block">Code de la compÃ©tence dans laquelle vous désirez placer la ressource.<br/>
 								   Astuce: affichez la liste des compÃ©tences dans un autre onglet de votre navigateur.</div>
 							</div>
 						</div>
@@ -387,7 +386,7 @@
 	        <h4 class="modal-title">Confirmation</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>Voulez-vous retirer cette compÃ©tence de la ressource ?</p>
+	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removecompetencefromresource">
