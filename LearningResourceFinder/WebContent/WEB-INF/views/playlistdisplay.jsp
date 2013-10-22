@@ -6,6 +6,21 @@
 <head>
 <!-- Jquery for change input popup addImageUser -->
 <script type="text/javascript" src="/js/int/addImageUrlPlaylist.js"></script>
+<script type="text/javascript">
+ 	$(document).ready(function() {
+ 		$.fn.editable.defaults.mode = 'inline';
+ 	    $('.editableField').editable({   
+ 	    	  emptytext: '? ?',
+ 	    	  type: 'text',
+ 	    	  url: '/ajax/playlisteditfieldsubmit',
+ 	    	  pk: '${playlist.id}',
+		});
+ 	    
+ 	    $(".noneditplaylist").popover({
+ 	    	content : "Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution."
+ 	    });
+ 	});
+</script> 	    
 <title>Séquence</title>
 </head>
 <body>
@@ -18,11 +33,6 @@
 	
 	<div class="container">
 		<lrftag:pageheadertitle title="${playlist.name}"/>
-		<div class="btn-group">
-			<c:if test="${canEdit}">
-			   <a class="btn btn-default" href=<c:url value='/playlist/edit?id=${playlist.id}'/>>Editer</a>
-			</c:if>
-		</div>
 		<br />
 		<br />
 		<div class="panel panel-default">
@@ -33,9 +43,9 @@
 				<div class="col-md-4">
 					<dl class="dl-horizontal">
 						<dt>Nom :</dt>
-					  	<dd>${playlist.name}</dd>
+					  	<dd><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
 					  	<dt>Description :</dt>
-					  	<dd>${playlist.description}</dd>
+					  	<dd><a id="description"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
 					  	<dt>Auteur :</dt>
 					  	<dd><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
 					</dl>
