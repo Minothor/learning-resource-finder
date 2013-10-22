@@ -10,20 +10,21 @@ import javax.imageio.ImageIO;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.PlayListRepository;
-import learningresourcefinder.repository.UserRepository;
-import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.FileUtil.InvalidImageFileException;
+import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PlayListDisplayController extends BaseController<PlayList> {
 	@Autowired CurrentEnvironment currentEnvironment;
 	@Autowired PlayListRepository playlistRepository;
+	@Autowired IndexManagerService indexManager;
 	
     @RequestMapping({"/playlist/{shortId}/{slug}",
         "/playlist/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -127,5 +129,29 @@ public class PlayListDisplayController extends BaseController<PlayList> {
         }
 
         return mv;
-	}    
+	}
+    
+    @RequestMapping("/ajax/playlisteditfieldsubmit")
+    public @ResponseBody String playListEditSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
+        
+        
+        PlayList playlist = getRequiredEntity(id);
+        SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
+
+        if (fieldName.equals("name")){
+            playlist.setName(value);
+            String slug = Slugify.slugify(playlist.getName());
+            playlist.setSlug(slug);
+        }
+        else if(fieldName.equals("description")){
+            playlist.setDescription(value);
+        }
+        
+        
+        playlistRepository.merge(playlist);
+
+        indexManager.update(playlist);
+
+        return "success";
+    }
 }
