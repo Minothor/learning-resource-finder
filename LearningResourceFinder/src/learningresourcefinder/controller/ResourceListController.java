@@ -40,7 +40,7 @@ public class ResourceListController extends BaseController<Resource> {
         boolean canvote = false;
         canvote = levelService.canDoAction(user, Action.VOTE);
         ModelAndView mv = new ModelAndView("resourcelist");
-
+        //FIXME crash if listResource is empty
         List<Resource> listResource = resourceRepository.findAllResourceByUser(user);
         List<Rating> listRating = ratingRepository.listRating(listResource, user);
 

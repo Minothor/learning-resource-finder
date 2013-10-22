@@ -66,6 +66,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         mv.addObject("canEditUrl", canEditUrl);
         boolean canvote  = levelService.canDoAction(user, Action.VOTE);
 		mv.addObject("usercanvote",canvote);
+		mv.addObject("user",user);
     	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
     	

@@ -5,12 +5,29 @@
 <title>Catalog</title>
 </head>
 <body>
-	<lrftag:breadcrumb linkactive="${topic.description}">
-	<lrftag:breadcrumbelement label="Home" link="home" />
-	<lrftag:breadcrumbelement label="Contributions" link="contribution" />
-	</lrftag:breadcrumb>
+	<c:choose>
+		<c:when test="${topic != null}">
+			<lrftag:breadcrumb linkactive="${topic.description}">
+			<lrftag:breadcrumbelement label="Home" link="/home" />
+			<lrftag:breadcrumbelement label="Contributions" link="/contribution" />
+			</lrftag:breadcrumb>
+		</c:when>
+		<c:otherwise>
+			<lrftag:breadcrumb linkactive="Ressources">
+			<lrftag:breadcrumbelement label="Home" link="/home" />
+			<lrftag:breadcrumbelement label="${user.fullName}" link="/user/${user.userName}" />
+			</lrftag:breadcrumb>
+		</c:otherwise>
+	</c:choose>
 	<div class="container">
-	<h1>${topic} : ${problemTitle}</h1>
+	<c:choose>
+		 <c:when test="${topic != null}">
+			<h1>${topic} : ${problemTitle}</h1>
+		 </c:when>
+		 <c:otherwise>
+		 	<h1>Ressources : <a href="/user/${user.userName}">${user.fullName}</a></h1>
+		 </c:otherwise>
+	</c:choose>
 	<section id="resourcelist">
 			<div class="panel panel-default">
 				<div class="panel-body">
