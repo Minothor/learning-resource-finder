@@ -58,7 +58,7 @@
 			Créer une PlayList
 		</a>
 	
-		<br />
+		<br /><br />
 		<div class="table-responsive">
 		  	<table class="table table-bordered">
 				<tr>
