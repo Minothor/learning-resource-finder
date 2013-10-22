@@ -48,6 +48,7 @@ public class PlayListListController  extends BaseController<PlayList> {
         playListSet.addAll(user.getPlayListList());
 
 		//return "playlistlist", 
+        model.addAttribute("canaddplaylist",levelService.canDoAction(user,Action.ADD_PLAYLIST));
 		model.addAttribute("playlistlist", playListSet);
 		model.addAttribute("user", user);
 		return "playlistlist";
