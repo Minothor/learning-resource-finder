@@ -11,11 +11,11 @@
 <li>Apportera-t-il la paix dans le monde ?</li>
 <li>Permettra-t-il aux enseignants d'être encore plus fascinants ?</li>
 <li>Parents et enfants comprendont-ils mieux les socles de compétences avec ce site ?</li>
-<li>Favorisera-t-il la mixité sociale, naturellement et sans contrainte?</li>
+<li>Favorisera-t-il la mixité sociale, naturellement et sans contrainte ?</li>
 <li>Augmentera-t-il la motivation de mes élèves ?</li>
 <li>Aidera-t-il les enseignants dans leurs préparations de cours ?</li>
 <li>Comment et vis-à-vis de quoi créea-t-il de la curiosité ?</li>
-<li>Corrigera-t-il automatiquement toutes les interros?</li>
+<li>Corrigera-t-il automatiquement toutes les interros ?</li>
 </ul>
 </section>
 </section>
