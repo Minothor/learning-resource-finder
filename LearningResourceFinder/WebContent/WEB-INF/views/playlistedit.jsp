@@ -56,7 +56,7 @@
 				<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playlist" class="form-horizontal" role="form" method="post">
 					<div class="col-md-12">
 						<form:hidden path="id" />
-						<form:input class="form-control" path="name" label="Titre" placeholder="Titre" />
+						<form:input class="form-control" path="name" label="Titre" placeholder="Titre" required="true" />
 						<br />
 						<form:textarea class="form-control" rows="5" path="description" label="Description" placeholder="Description" />
 						<br />
