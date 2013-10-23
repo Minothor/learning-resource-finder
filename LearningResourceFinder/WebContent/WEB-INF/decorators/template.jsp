@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page import="learningresourcefinder.web.UrlUtil"%>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
-	prefix="decorator"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"	prefix="decorator"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='ryc'%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,7 +18,6 @@
 <%@ include file="/WEB-INF/includes/import.jsp"%>
 <decorator:head />
 <link rel="shortcut icon" href="#" />
-<title><decorator:title /></title>
 <!--start google Analytics  -->
 
 <script>
@@ -63,6 +60,9 @@
 			});	
 		});
 	</script>
+	
+	<title><decorator:title /></title>
+	
 </head>
 <body>
 	<div id="wrap">
