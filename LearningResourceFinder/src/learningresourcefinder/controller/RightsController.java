@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller()
-public class UserRightsController extends BaseController<User>{
+public class RightsController extends BaseController<User>{
 	
-	  @Autowired UserRepository userRep;
+	  @Autowired UserRepository userRepository;
 
 	   @RequestMapping(value="/rights", method=RequestMethod.GET)
-	   public ModelAndView showRightsPage(@RequestParam(value="username",required=false) String userName){
+	   public ModelAndView rights(@RequestParam(value="username",required=false) String userName){
 		   
 		   User user = null;
 		   
 		   if(userName != null && userName.trim().length() > 0){
-			   user = userRep.getUserByUserName(userName);
-		   }else if(SecurityContext.isUserLoggedIn()){
-			   user = userRep.getUserByUserName(SecurityContext.getUser().getUserName());
+			   user = userRepository.getUserByUserName(userName);
+		   } else if (SecurityContext.isUserLoggedIn()) {
+			   user = SecurityContext.getUser();
 		   }
 	       
-	       ModelAndView mv = new ModelAndView("userRights");
-		   mv.addObject("actions",Action.values());
+	       ModelAndView mv = new ModelAndView("rights");
+		   mv.addObject("actions", Action.values());
 		   mv.addObject("user",user);
 		   
 		   return mv;

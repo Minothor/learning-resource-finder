@@ -32,8 +32,7 @@
 	
 	<div class="container">
 		<lrftag:pageheadertitle title="${playlist.name}"/>
-		<br />
-		<br />
+
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="col-md-2">
@@ -54,14 +53,12 @@
 		
 		
 		<h3>Ressources incluses</h3>
-		<div style="vertical-align:middle;">
 			<c:forEach items="${playlist.resourceList}" var="resource">
 					<c:if test="${current.user != null && playlist.createdBy eq current.user}">
 						<c:set var="closeUrl" value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>
 					</c:if>	
 					<lrftag:resource resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
 			</c:forEach>
-        </div>
 		
 		<!-- Modal -->
 		<div class="modal fade" id="modalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

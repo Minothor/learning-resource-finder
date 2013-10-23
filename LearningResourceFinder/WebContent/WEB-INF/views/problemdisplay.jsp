@@ -29,9 +29,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="col-md-3">
-					<div style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
-						<lrftag:resource resource="${resource}"></lrftag:resource>
-					</div>
+						<lrftag:resource resource="${resource}"/>
 				</div>
 				<div class="col-md-9" style="position:relative;" >
 					<dl class="dl-horizontal">

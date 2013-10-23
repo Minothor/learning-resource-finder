@@ -109,8 +109,8 @@
 							<li><a href="<c:url value='/rights'/>" class="">Droits</a></li>
 							<c:if test="${current.user != null}">
 							   <li><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Mes ressources</a></li>
-							   <li><a href="<c:url value='/contribution'/>" >Contribution</a></li>
 							</c:if>   
+						    <li><a href="<c:url value='/contribution'/>" >Améliorer des ressources</a></li>
 					   </ul>
 					</li>
 					

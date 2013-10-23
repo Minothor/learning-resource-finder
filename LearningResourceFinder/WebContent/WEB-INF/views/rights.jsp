@@ -24,12 +24,18 @@
 	<c:forEach items="${actions}" var="action">
 		<div class="row">
 					<c:if test="${user != null && user.accountLevel.levelIndex >= action.level.levelIndex}">
-					    <c:set var="style" value="text-success"/>
+					    <c:set var="greenClass" value="text-success"/>
+					    <c:set var="strongStart" value="<strong>"/>			    
+					    <c:set var="strongEnd" value="</strong>"/>			    
 					</c:if>
 						
-					<div class="col-xs-1 ${style}">niveau ${action.level.levelIndex}</div>
-					<div class="col-xs-8 ${style}">${action.describe}</div>
-                    <c:set var="style" value=""/>
+					${strongStart}	
+					  <div class="col-xs-1 ${greenClass} text-right">niveau ${action.level.levelIndex}</div>
+					  <div class="col-xs-8 ${greenClass}">${action.describe}</div>
+					${strongEnd}
+                    <c:set var="greenClass" value=""/>
+				    <c:set var="strongStart" value=""/>			    
+				    <c:set var="strongEnd" value=""/>			    
 		</div>
 	</c:forEach>
 	
@@ -51,7 +57,7 @@
 	<c:forEach items="${actions}" var="action">
 	  <c:if test="${action.actionPoints > 0}"> <%-- it's not worth displaying actions that get the user no point here --%>
 		<div class="row">
-					<div class="col-xs-1 ${style}">${action.actionPoints} point${action.actionPoints >1 ? "s" : "" }</div>
+					<div class="col-xs-1 ${style} text-right">${action.actionPoints} point${action.actionPoints >1 ? "s" : "" }</div>
 					<div class="col-xs-8 ${style}">${action.describe}</div>
                     <c:set var="style" value=""/>
 		</div>

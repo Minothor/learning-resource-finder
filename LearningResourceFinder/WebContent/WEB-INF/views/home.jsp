@@ -46,28 +46,31 @@ SLIDER...
 
 
 <%------------------------------------ YEARS ---------------------------------%>
-<div class="container" style="padding:20px 20px;">
-<div class="row">
-  <div class="col-xs-6"><h3>primaire</h3></div>
-  <div class="col-xs-6"><h3>secondaire</h3></div>
-</div>
-<br/>
-<div class="row">
-  <div class="col-xs-6"><a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a></div>
-  <div class="col-xs-6"><a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=304'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a></div>
-</div>
-<br/>
-<div class="row">
-  <div class="col-xs-6"><a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=301'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>ème</sup></a></div>
-  <div class="col-xs-6"><a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=305'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a></div>
-</div>
-<br/>
-<div class="row">
-  <div class="col-xs-6"><a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a></div>
-  <div class="col-xs-6"></div>
-</div>
-  
+<div class="container" style="padding-top:20px; padding-bottom:40px;">
+	<div class="row">
+	  <div class="col-sm-4 col-sm-offset-2">
+	      <h3>primaire</h3><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
+	      <br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=301'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>ème</sup></a><br/>
+	      <br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
+	  </div>
+	  <div class="col-sm-4 col-sm-offset-2">
+	      <h3>secondaire</h3><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=304'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
+	      <br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=305'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
+	  </div>
+	</div>
 </div>  
+
+<%------------------------------------ TESTIMONIALS ---------------------------------%>
+<div style="background-color:#84BB04;">
+<div class="container" style="padding:20px 20px; color:white;">
+	<%@include file="/WEB-INF/includes/testimonials.jsp" %>
+</div>
+</div>
 
 <%------------------------------------ BENEFITS -------------------------------------%>
 <div style="background-color:#17A7D6;">
@@ -80,13 +83,6 @@ SLIDER...
 <div style="background-color:white;">
 <div class="container" style="padding:20px 20px; color:white;">
 	<%@include file="/WEB-INF/includes/purposes.jsp" %>
-</div>
-</div>
-
-<%------------------------------------ TESTIMONIALS ---------------------------------%>
-<div style="background-color:#84BB04;">
-<div class="container" style="padding:20px 20px; color:white;">
-	<%@include file="/WEB-INF/includes/testimonials.jsp" %>
 </div>
 </div>
 

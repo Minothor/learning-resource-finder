@@ -2,13 +2,11 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <!-- Script for Add a URL in a Resource-->
 <script type="text/javascript" src="/js/int/ajaxAddUrlResource.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="/css/int/resource-image-gallery.css" />
+<link rel="stylesheet" type="text/css"	href="/css/int/resource-image-gallery.css" />
 <script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
@@ -94,7 +92,6 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="col-md-12">
-					<h4>Informations :</h4>
 					<dl class="dl-horizontal">
 						<dt>Intitulé:</dt>
 						<dd>

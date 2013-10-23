@@ -27,9 +27,7 @@
 	</div>
 
 	<c:forEach items="${resourceList}" var="resource">
-		<div style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
-			<lrftag:resource resource="${resource}"></lrftag:resource>
-		</div>
+			<lrftag:resource resource="${resource}"/>
 	</c:forEach>
 
 							<!-- Resource end -->

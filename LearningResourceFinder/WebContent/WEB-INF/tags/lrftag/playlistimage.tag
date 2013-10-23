@@ -22,7 +22,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="playlist-no-image">
-					P L A Y<br />L I S T<br />I M A G E
+					I M A G E<br/>S E Q U E N C E
 				</div>
 			</c:otherwise>
 		</c:choose>
