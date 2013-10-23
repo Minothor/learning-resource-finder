@@ -55,7 +55,7 @@
     	</c:choose>
    	
 		<a class="btn btn-primary pull-right ${canaddplaylist == true ? '\" href=\"/playlist/create\"' : 'noaddplaylistpop' }">
-			Créer une PlayList
+			Créer une séquence
 		</a>
 	
 		<br /><br />

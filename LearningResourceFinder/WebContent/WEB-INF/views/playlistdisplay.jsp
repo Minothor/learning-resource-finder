@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
@@ -53,29 +52,16 @@
 			</div>
 		</div>
 		
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="col-md-12">
-					<h2>Ressources incluses</h2>
-					<c:forEach items="${playlist.resourceList}" var="resource">
-					<div style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
-						<lrftag:resource resource="${resource}"></lrftag:resource>
-			
-						<div style="padding: 10px; width: 180px; height: 10px; background-color: #F6CEF5">
-						
-						<c:if test="${current.user != null && playlist.createdBy eq current.user}">
-							<a href=<c:url value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>>Remove</a>
-						</c:if>	
-							
-							
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-
-
+		
+		<h3>Ressources incluses</h3>
+		<div style="vertical-align:middle;">
+			<c:forEach items="${playlist.resourceList}" var="resource">
+					<c:if test="${current.user != null && playlist.createdBy eq current.user}">
+						<c:set var="closeUrl" value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>
+					</c:if>	
+					<lrftag:resource resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
+			</c:forEach>
+        </div>
 		
 		<!-- Modal -->
 		<div class="modal fade" id="modalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
