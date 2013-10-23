@@ -138,13 +138,12 @@ ul.score {
 ul.score li {
 	display: inline;
 	text-decoration: none;
-	font-size: 22px;
+	font-size: 18px;
 }
 .rating-input {
 	font-size: 22px;
 }
 .glyphicon-star, .glyphicon-star-empty {
-	color: #FFC926;
 	cursor: pointer;
 }
 /*#### FOOTER #############################################################################*/

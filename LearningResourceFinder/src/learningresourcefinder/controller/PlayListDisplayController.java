@@ -17,6 +17,7 @@ import learningresourcefinder.util.FileUtil;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.FileUtil.InvalidImageFileException;
+import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,16 @@ public class PlayListDisplayController extends BaseController<PlayList> {
         "/playlist/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
         "/playlist/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
     }) 
-	public ModelAndView prepareModelAndView(@PathVariable String shortId) {
+	public ModelAndView playListDisplay(@PathVariable String shortId) {
 		PlayList playlist = getRequiredEntityByShortId(shortId);
 		
 		ModelAndView mv = new ModelAndView("playlistdisplay", "playlist", playlist);
     	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditPlayList(playlist)));
+    	ModelAndViewUtil.addRatingMapToModelAndView(mv, playlist.getResources());
 		return mv;
 	}
+    
+    
     @RequestMapping("/playlist/imageadd")
 	public ModelAndView userImageAdd( @RequestParam("idPlayList") long playlistid,@RequestParam("file") MultipartFile multipartFile) throws Exception{
 		

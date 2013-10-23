@@ -19,30 +19,21 @@
 			</lrftag:breadcrumb>
 		</c:otherwise>
 	</c:choose>
+	
 	<div class="container">
-	<c:choose>
-		 <c:when test="${topic != null}">
-			<h1>${topic} : ${problemTitle}</h1>
-		 </c:when>
-		 <c:otherwise>
-		 	<h1>Ressources : <a href="/user/${user.userName}">${user.fullName}</a></h1>
-		 </c:otherwise>
-	</c:choose>
-	<section id="resourcelist">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="sixteen columns">
+		<c:choose>
+			 <c:when test="${topic != null}">
+				<h1>${topic.description}: ${problemTitle}</h1>
+			 </c:when>
+			 <c:otherwise>
+			 	<h1>Ressources : <a href="/user/${user.userName}">${user.fullName}</a></h1>
+			 </c:otherwise>
+		</c:choose>
+	    <section id="resourcelist">
 						<c:forEach items="${resourceList}" var="resource">
-							<div style="float: left; position: relative; margin-top: 10px; width: 210px;">
 								<lrftag:resource resource="${resource}"/>
-								<br />
-								<lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" canvote="${usercanvote}" />
-							</div>
 						</c:forEach>
-					</div>
-				</div>
-			</div>
-	</section>
+	    </section>
 	</div>
 </body>
 </html>

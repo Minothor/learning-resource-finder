@@ -10,7 +10,9 @@ import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.service.LevelService;
 import learningresourcefinder.service.LoginService;
+import learningresourcefinder.util.Action;
 import learningresourcefinder.web.ContextUtil;
 
 
@@ -123,7 +125,7 @@ public  class SecurityContext {
         }
         
         if (user.get() == null) {  // User not loaded yet.
-            User user = ((UserRepository) ContextUtil.getSpringBean("userRepository")).find(getUserId());
+            User user = ((UserRepository) ContextUtil.getSpringBean(UserRepository.class)).find(getUserId());
             
 
             setUser( user );  // Lazy loading if needed.
@@ -155,7 +157,7 @@ public  class SecurityContext {
 
        if (userId.get() == null) { // Then try to get it from the HttpSession.
 
-            LoginService loginService = (LoginService) ContextUtil.getSpringBean("loginService");              // This is not beauty, but life is sometimes ugly. -- no better idea (except making SecurityContext a bean managed by Spring... but for not much benefit...) -- John 2009-07-02
+            LoginService loginService = (LoginService) ContextUtil.getSpringBean(LoginService.class);              // This is not beauty, but life is sometimes ugly. -- no better idea (except making SecurityContext a bean managed by Spring... but for not much benefit...) -- John 2009-07-02
 
            Long id = loginService.getLoggedInUserIdFromSession();  
  
@@ -237,6 +239,10 @@ public  class SecurityContext {
     
     public static boolean canCurrentUserEditCompetence() { 
         return isUserHasPrivilege(Privilege.MANAGE_COMPETENCE);     // If this user has the privilege to edit other competence
+    }
+
+    public static boolean canCurrentDoAction(Action action) {
+        return  ((LevelService) ContextUtil.getSpringBean(LevelService.class)).canDoAction(getUser(), action);
     }
     
 

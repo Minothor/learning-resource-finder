@@ -47,7 +47,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
     String description;
 
     @ManyToMany
-    private List<Resource> resourceList = new ArrayList<Resource>();
+    private List<Resource> resources = new ArrayList<Resource>();
 
     public PlayList() {} // No arg constructor for Hibernate
     
@@ -71,8 +71,8 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         this.description = HTMLUtil.removeHtmlTags(description);
     }
 
-    public List<Resource> getResourceList() {
-        return resourceList;
+    public List<Resource> getResources() {
+        return resources;
     }
 
     public String getSlug() {

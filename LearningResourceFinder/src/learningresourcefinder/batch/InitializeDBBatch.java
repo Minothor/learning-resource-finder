@@ -745,10 +745,10 @@ public class InitializeDBBatch implements Runnable {
 
 	public void insertPlayList() {
 		PlayList p = new PlayList("PlayList 1", "");
-		p.getResourceList().add(frDupont);
-		p.getResourceList().add(mathGob);
-		p.getResourceList().add(frOrtho1);
-		p.getResourceList().add(mathFraction1);
+		p.getResources().add(frDupont);
+		p.getResources().add(mathGob);
+		p.getResources().add(frOrtho1);
+		p.getResources().add(mathFraction1);
 		playListRepository.persist(p);
 		System.out.println("PlayList Done !");
 	}

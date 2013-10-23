@@ -1,6 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
 <head>
@@ -187,7 +187,7 @@
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
 						scoreResource="${resource.avgRatingScore}"
 						scoreUser="${mapRating[resource].score}"
-						countRating="${resource.countRating}" canvote="${usercanvote}" />
+						countRating="${resource.countRating}" canvote="${Current.canVote}" />
 					<br />
 					
 					<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}" />

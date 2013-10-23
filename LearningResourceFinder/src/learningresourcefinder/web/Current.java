@@ -2,6 +2,7 @@ package learningresourcefinder.web;
 
 import learningresourcefinder.model.User;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.Action;
 
 import org.springframework.stereotype.Component;
 
@@ -22,5 +23,7 @@ public class Current {
         return SecurityContext.getUser();
     }
          
-
+    public boolean getCanVote() {
+        return SecurityContext.canCurrentDoAction(Action.VOTE);
+    }
 }

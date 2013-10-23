@@ -12,14 +12,14 @@
 	
 	
 	<a href="#" id="${id}" class="btn popover-link ${canvote == true ? 'pop' : 'novotepop' }" rel="popover" data-original-title="Voter pour : ${title}" style="outline:none;box-shadow:none;padding:0;">
-		<ul class="score">	
+		<ul class="score" style='color:${countRating > 0 ? " #F28F10" : "#DBDBDB"};'>	
 			<c:forEach var="i" begin="0" end="4" step="1" varStatus ="status">
 				<c:choose>
 					<c:when test="${i < scoreResource}">
-					<li><span class="glyphicon glyphicon-star"></span></li>		
+					   <li><span class="glyphicon glyphicon-star"></span></li>		
 					</c:when> 
 					<c:otherwise>
-					<li><span class="glyphicon glyphicon-star-empty"></span></li>
+					   <li><span class="glyphicon glyphicon-star-empty"></span></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>

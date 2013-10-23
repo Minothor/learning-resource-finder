@@ -94,7 +94,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
         Resource resource = (Resource) getRequiredEntity(idResource,Resource.class);
         
         if (playlist!= null && resource!=null){
-            playlist.getResourceList().remove(resource);
+            playlist.getResources().remove(resource);
             playlistRepository.merge(playlist);
             indexManager.update(playlist);
         }
@@ -107,7 +107,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
         Resource resource = (Resource) getRequiredEntity(idResource,Resource.class);
         
         if (playlist!= null && resource!=null){
-            playlist.getResourceList().add(resource);
+            playlist.getResources().add(resource);
             playlistRepository.merge(playlist);
             indexManager.update(playlist);
         }

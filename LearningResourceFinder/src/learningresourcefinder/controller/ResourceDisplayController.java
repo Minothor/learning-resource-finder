@@ -1,5 +1,6 @@
 package learningresourcefinder.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,6 @@ import learningresourcefinder.repository.FavoriteRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
-import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
@@ -26,9 +26,9 @@ import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
 import learningresourcefinder.util.DateUtil;
-import learningresourcefinder.util.EnumUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
+import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
@@ -62,11 +62,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
         ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
  
         User user = SecurityContext.getUser();
+        mv.addObject("user",user);
         boolean canEditUrl=levelService.canDoAction(user, Action.EDIT_RESOURCE_URL);
         mv.addObject("canEditUrl", canEditUrl);
-        boolean canvote  = levelService.canDoAction(user, Action.VOTE);
-		mv.addObject("usercanvote",canvote);
-		mv.addObject("user",user);
     	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
     	
@@ -78,12 +76,13 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	mv.addObject("problemList", problemList);
     	mv.addObject("problemDate", problemDate);
     	
-    	addDataEnumToModelAndView(mv, Platform.class);
-    	addDataEnumToModelAndView(mv, Format.class);
-    	addDataEnumToModelAndView(mv, Nature.class);
-    	addDataEnumToModelAndView(mv, Language.class);
-    	addDataEnumToModelAndView(mv, Topic.class);
+    	ModelAndViewUtil.addDataEnumToModelAndView(mv, Platform.class);
+    	ModelAndViewUtil.addDataEnumToModelAndView(mv, Format.class);
+    	ModelAndViewUtil.addDataEnumToModelAndView(mv, Nature.class);
+    	ModelAndViewUtil.addDataEnumToModelAndView(mv, Language.class);
+    	ModelAndViewUtil.addDataEnumToModelAndView(mv, Topic.class);
     	
+    	ModelAndViewUtil.addRatingMapToModelAndView(mv, resource);
     	
     	mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));
     	
@@ -136,31 +135,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
 	}
 
 
-
-	private void addDataEnumToModelAndView(ModelAndView mv, Class enumClass) {
-		int i = 1, sizeplatform = EnumUtil.getValues(enumClass).length;
-		String dataEnum = "[";
-
-		for (Object enumValue : EnumUtil.getValues(enumClass)) {
-			if (i == sizeplatform) {
-				dataEnum = dataEnum + "{value:" + i + "," + "text:" + "'" + EnumUtil.getDescription(enumValue) + "'}]";
-				break;
-			}
-			dataEnum = dataEnum + "{value:" + i + "," + "text:" + "'" + EnumUtil.getDescription(enumValue) + "'},";
-			i++;
-		}
-		
-		if(enumClass.getSimpleName().equals("Platform"))
-			mv.addObject("dataEnumPlatform", dataEnum);
-		else if(enumClass.getSimpleName().equals("Format"))
-			mv.addObject("dataEnumFormat", dataEnum);
-		else if(enumClass.getSimpleName().equals("Nature"))
-			mv.addObject("dataEnumNature", dataEnum);
-		else if(enumClass.getSimpleName().equals("Language"))
-			mv.addObject("dataEnumLanguage", dataEnum);
-		else if(enumClass.getSimpleName().equals("Topic"))
-			mv.addObject("dataEnumTopic", dataEnum);
-	}
 
 	
     
