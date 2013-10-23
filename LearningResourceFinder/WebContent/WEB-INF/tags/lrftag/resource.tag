@@ -15,7 +15,7 @@
 
 	 <c:if test='${! empty closeUrl}'>
 		<a href="<c:url value='${closeUrl}'/>">
-		   <button type="button" class="tooltip close" style="position:absolute; top:-20px; right:5px;"
+		   <button type="button" class="addToolTip close" style="position:absolute; top:-20px; right:5px;"
 		           data-toggle="tooltip" title="retirer cette ressource de la séquence">&times;</button>
 		</a>
 	 </c:if>	     
