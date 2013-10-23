@@ -190,7 +190,7 @@
 									<label class="string optional" for="remember_me"> 
 									   <input style="float: left; margin-right: 10px;" type="checkbox"name="remember-me" id="remember-me" value="1"> Se souvenir de moi
 									</label> 
-									<input class="btn btn-bleu btn-block" type="button" id="sign-in" value="Connexion" onclick="ajaxlogin()">
+									<input class="btn btn-primary btn-block" type="button" id="sign-in" value="Connexion" onclick="ajaxlogin()">
 								    <div>
 									 <label > Pas de compte ?</label>	
 										<a href="#" id="registerLink">S'inscrire</a>
@@ -214,7 +214,7 @@
 										<input class="form-control" style="margin-bottom: 15px;" type="email" placeholder="Email" id="emailRegister" name="emailRegister" required>
 										<input class="form-control" style="margin-bottom: 15px;" type="text" placeholder="Username" id="usernameRegister" name="usernameRegister" required> 
 										<input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="Password" id="passwordRegister" name="passwordRegister" required>
-										<input class="btn btn-bleu btn-block" type="submit" value="Inscription" >
+										<input class="btn btn-primary btn-block" type="submit" value="Inscription" >
 									</form>
 									<br />
 								</div>
