@@ -10,29 +10,27 @@
 		<lrftag:breadcrumbelement label="Home" link="home" />
 	</lrftag:breadcrumb>
 	<div class="container">
-		<h2>Contribution</h2>
-		<br />
-		<c:forEach var="topic" items="${mapProblem}" varStatus="status">
-		<ul class="list-group">
-			<a href="#" class="list-group-item active">
-		    	${topic.key.description}
-		  	</a>
-			<li class="list-group-item">
-		    	<span class="badge">${topic.value[0]}</span>
-		    	<a href="/problemresourcelist/${topic.key}">Problèmes à corriger.</a>
-		  	</li>
-		  	<li class="list-group-item">
-		    	<span class="badge">${topic.value[1]}</span>
-		    	<a href="/fieldsnullresourcelist/${topic.key}">Ressoures incomplètes.</a>
-		  	</li>
-		  	<li class="list-group-item">
-		    	<span class="badge">${topic.value[2]}</span>
-		    	<a href="/notcompetencesresourcelist/${topic.key}">Ressources liées à aucunes compétences.</a>
-		  	</li>
-		</ul>	
-		</c:forEach>
+		<lrftag:pageheadertitle title="Améliorer des ressources" />
 
-		
+		<c:forEach var="topic" items="${mapProblem}" varStatus="status">
+			<div class="panel panel-default" style="display:inline-block; vertical-align:middle; width:330px; margin-right:20px; margin-bottom:20px;">
+			
+  				<div class="panel-heading"><h4>${topic.key.description}</h4></div>
+
+		       		<ul class="list-group" >
+					  	<li class="list-group-item">
+			    			<a href="/problemresourcelist/${topic.key}">${topic.value[0]} problème${topic.value[0] > 1 ? "s" : ""} à corriger.</a>
+					  	</li>
+					  	<li class="list-group-item">
+			    			<a href="/fieldsnullresourcelist/${topic.key}">${topic.value[1]} ressource${topic.value[1] > 1 ? "s" : ""} incomplète${topic.value[1] > 1 ? "s" : ""}.</a>
+					  	</li>
+					  	<li class="list-group-item">
+			    			<a href="/notcompetencesresourcelist/${topic.key}">${topic.value[2]} ressource${topic.value[2] > 1 ? "s" : ""} liée${topic.value[2] > 1 ? "s" : ""} à aucune compétence.</a>
+					  	</li>
+                   </ul>					  	
+
+			</div>
+		</c:forEach>
 	</div>
 </body>
 </html>
