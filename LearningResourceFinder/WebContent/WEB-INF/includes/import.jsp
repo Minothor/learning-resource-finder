@@ -2,7 +2,7 @@
     
 <!-- ***************************** CSS **************************** --> <!-- Style Files [BootStrap] -->
 
-<link rel="stylesheet" href="/css/int/bootstrap.min.custom.css" media="screen" />
+<link rel="stylesheet" href="/css/int/bootstrap-ToujoursPlus-bootswatchr-Custom.css" media="screen" />
 <!-- <link rel="stylesheet" href="/css/ext/bootstrap.css" type="text/css" media="screen" /> -->
 <!-- <link rel="stylesheet" href="/css/ext/bootstrap-theme.css" type="text/css" media="screen" />  -->
 <link rel="stylesheet" href="/css/ext/sticky-footer-navbar.css">
