@@ -20,12 +20,8 @@
 <body>
   <div id="wrap">
 
-	<%@ include file="/WEB-INF/includes/header.jsp"%>
-
 	<decorator:body />
 
   </div>
-
-  <%@ include file="/WEB-INF/includes/footer.jsp"%>
 </body>
 </html>

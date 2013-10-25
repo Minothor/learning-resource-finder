@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>learningresourcefinder</display-name>
+
   <welcome-file-list>
-    <welcome-file>/comingsoonTease/comingsoon.html</welcome-file>
+    <welcome-file>/</welcome-file>
   </welcome-file-list>
-  <servlet> 
-      <servlet-name>ComingSoonExplaining</servlet-name>
-      <jsp-file>/comingsoon1/comingsoon.html</jsp-file>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>ComingSoonExplaining</servlet-name>
-      <url-pattern>/explication</url-pattern>
-  </servlet-mapping>
   
   <error-page>
     <error-code>404</error-code>

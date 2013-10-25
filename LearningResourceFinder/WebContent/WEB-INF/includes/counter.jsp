@@ -10,8 +10,7 @@
 	<script type="text/javascript" src="/js/ext/counter-home.js"></script>
 </head>
 
-<div class="container">
-	<div class="col-lg-9 centered">
-		<div class="countdown"></div><%-- counter.js and circular-countdown.css will do the job --%>
-	</div>
-</div>
+
+ <div style="float:none; margin: 0 auto; max-width:820px;">
+		<div class="countdown" ></div><%-- counter.js and circular-countdown.css will do the job --%>
+ </div> 

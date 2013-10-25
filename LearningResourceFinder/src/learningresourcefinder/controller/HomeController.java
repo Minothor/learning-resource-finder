@@ -13,11 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
     @Autowired CycleRepository cycleRepository;
     
-    @RequestMapping(value={"/", "/home"})
-    private ModelAndView home() {
-        ModelAndView mv = new ModelAndView("home"); 
-         
-        return mv;
+    @RequestMapping(value={/*"/",*/ "/home"})
+    public String home() {
+        return "home";
     }
     
 }

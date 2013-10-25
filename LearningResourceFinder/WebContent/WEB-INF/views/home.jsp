@@ -9,17 +9,7 @@
 <%@include file="/WEB-INF/includes/counter.jsp" %>
 
 <%----------------------------------- SLIDER ----------------------------------%>
-<div class="container" style="padding:20px 20px;">
-<br/>
-<br/>
-<br/>
-<br/>
-SLIDER...
-<br/>
-<br/>
-<br/>
-<br/>
-</div>
+<%-- TODO... --%>
 
 
 
