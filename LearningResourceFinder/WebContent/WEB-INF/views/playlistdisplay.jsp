@@ -53,7 +53,7 @@
 		
 		
 		<h3>Ressources incluses</h3>
-			<c:forEach items="${playlist.resourceList}" var="resource">
+			<c:forEach items="${playlist.resources}" var="resource">
 					<c:if test="${current.user != null && playlist.createdBy eq current.user}">
 						<c:set var="closeUrl" value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>
 					</c:if>	
