@@ -186,11 +186,29 @@
 						<dd>
 							<a ${canEdit==true ? "href='#' class='editableField'":" class='noneditresource'"}> ${resource.author}</a>
 						</dd>
+						<c:if test="${listMyPlayListsWithThisResource != null}">
+							<dt>Mes séquences:</dt>
+							<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
+								<dd>
+									<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a>
+								</dd>
+                          	</c:forEach>
+						</c:if>
+						<br/> 
 						<c:if test="${listPlayList != null}">
 							<dt>Ajouter à la séquence:</dt>
 							<dd>
 								<a id="addToPlayList" ${canEdit==true? "href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${listPlayList}">Sélectionner</a>
 							</dd>
+						</c:if>
+						<br/> 
+						<c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
+							<dt>Autres séquences:</dt>
+							<c:forEach items="${listOtherPeoplePlayListsWithThisResource}" var="playlist">
+								<dd>
+									<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a>
+								</dd>
+                          	</c:forEach>
 						</c:if>
 					</dl>
 					<br />
