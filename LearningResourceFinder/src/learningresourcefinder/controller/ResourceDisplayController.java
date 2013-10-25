@@ -78,9 +78,22 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	}
     	
     	if(user!=null){
+    	    //for add Resource in PlayList
     	    Set<PlayList> tpl = playListService.getAllUserPlayListsDontContainAResource(user,resource);
     	    if(tpl.size() != 0){
     	        mv.addObject("listPlayList", playListService.setPlayListToJSONWithIdAndName(tpl));
+    	    }
+    	    
+    	    //for watch user's playlists with this resource
+    	    Set<PlayList> tpl2 = playListService.getUserPlayListsWithResource(resource, user);
+    	    if(tpl2.size() != 0){
+    	        mv.addObject("listMyPlayListsWithThisResource",tpl2 );
+    	    }
+    	    
+    	    //for watch other playlists contain this resource
+    	    Set<PlayList> tpl3 = playListService.getOtherPeoplePlayListsWithResource(resource, user);
+    	    if(tpl3.size() != 0){
+    	        mv.addObject("listOtherPeoplePlayListsWithThisResource", tpl3);
     	    }
     	}
         
