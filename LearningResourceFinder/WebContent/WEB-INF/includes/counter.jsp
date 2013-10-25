@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="/css/ext/circular-countdown.css"/>
 	<!--  ************************** COUNTER ****************************** -->	
 	<script type="text/javascript" src="/js/ext/jquery.countdown.js"></script>
-	<script type="text/javascript" src="/js/ext/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/js/ext/jquery.circular-countdown.js"></script>
 	<script type="text/javascript" src="/js/ext/counter-home.js"></script>
 </head>
