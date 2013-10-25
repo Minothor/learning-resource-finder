@@ -8,8 +8,10 @@ import java.util.TreeSet;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
+import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.util.EnumUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Scope("singleton")
 public class PlayListService {
 
+    @Autowired PlayListRepository playListRepository;
 
     public Set<PlayList> getAllUserPlayListsDontContainAResource(User user, Resource resource){
 
@@ -56,6 +59,49 @@ public class PlayListService {
         
         // example below of key/value template to display playlist in x-editable combobox 
         //[{value:'false',text:'Non'},{value:'true',text:'Oui'}]
+    }
+    
+    public Set<PlayList> getUserPlayListsWithResource(Resource resource,User user){
+        
+        // We want the playlist list sorted by name
+        Comparator<PlayList> comparator = new Comparator<PlayList>() {
+            @Override  public int compare(PlayList pl1, PlayList pl2) {
+                return pl1.getName().compareToIgnoreCase(pl2.getName());
+            }
+        };
+        
+        Set<PlayList> spl = user.getPlayListList();
+        Set<PlayList> splContainingResource = new TreeSet<PlayList>(comparator);
+        
+        for(PlayList pl : spl){
+            if(pl.getResources().contains(resource)){
+                splContainingResource.add(pl);
+            }
+        }
+        
+        return splContainingResource;
+    }
+    
+    public Set<PlayList> getOtherPeoplePlayListsWithResource(Resource resource,User user){
+        
+        // We want the playlist list sorted by name
+        Comparator<PlayList> comparator = new Comparator<PlayList>() {
+            @Override  public int compare(PlayList pl1, PlayList pl2) {
+                return pl1.getName().compareToIgnoreCase(pl2.getName());
+            }
+        };
+        
+        Set<PlayList> spl = new TreeSet<PlayList>(comparator);
+        spl.addAll(playListRepository.getAllPlayLists());
+        Set<PlayList> splOtherPeopleWithResource = new TreeSet<PlayList>(comparator);
+        
+        for(PlayList pl : spl){
+            if(pl.getResources().contains(resource) && pl.getCreatedBy() != user){
+                splOtherPeopleWithResource.add(pl);
+            }
+        }
+        
+        return splOtherPeopleWithResource;
     }
     
 
