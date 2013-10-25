@@ -99,5 +99,5 @@
                     onFinish:function(){}
                 });
 
-            cbpFixedScrollLayout.init();
+           
     });
