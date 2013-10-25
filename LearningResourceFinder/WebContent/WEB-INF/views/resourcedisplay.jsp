@@ -18,6 +18,9 @@
  	    	  type: 'text',
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
+ 	 		  success: function(response) {
+ 				location.reload();
+ 		      }
 		});
  	    
  	    $('.nonurleditpop').popover({
@@ -71,6 +74,7 @@
  		$("#competenceHiddenField").attr("value", competenceid);
  		$("#modalConfirmDeleteCompetence").modal("show");	
  	}
+
 	</script>
 
 <STYLE type="text/css">
@@ -182,6 +186,12 @@
 						<dd>
 							<a ${canEdit==true ? "href='#' class='editableField'":" class='noneditresource'"}> ${resource.author}</a>
 						</dd>
+						<c:if test="${listPlayList != null}">
+							<dt>Ajouter à la séquence:</dt>
+							<dd>
+								<a id="addToPlayList" ${canEdit==true? "href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${listPlayList}">Choix</a>
+							</dd>
+						</c:if>
 					</dl>
 					<br />
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
@@ -263,7 +273,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Ajouter une image Ã  la galerie</h4>
+						<h4 class="modal-title">Ajouter une image à la galerie</h4>
 					</div>
 					<form method="post" action="/resource/imageadd"
 						enctype="multipart/form-data"
@@ -357,8 +367,8 @@
 								  </div>
 								</row>
 								<br/><br/><br/>
-								<div class="help-block">Code de la compÃ©tence dans laquelle vous désirez placer la ressource.<br/>
-								   Astuce: affichez la liste des compÃ©tences dans un autre onglet de votre navigateur.</div>
+								<div class="help-block">Code de la compétence dans laquelle vous désirez placer la ressource.<br/>
+								   Astuce: affichez la liste des compétences dans un autre onglet de votre navigateur.</div>
 							</div>
 						</div>
 
