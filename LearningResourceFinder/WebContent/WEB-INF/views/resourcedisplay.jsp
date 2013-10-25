@@ -189,7 +189,7 @@
 						<c:if test="${listPlayList != null}">
 							<dt>Ajouter à la séquence:</dt>
 							<dd>
-								<a id="addToPlayList" ${canEdit==true? "href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${listPlayList}">Choix</a>
+								<a id="addToPlayList" ${canEdit==true? "href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${listPlayList}">Sélectionner</a>
 							</dd>
 						</c:if>
 					</dl>
