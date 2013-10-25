@@ -1,12 +1,12 @@
 package learningresourcefinder.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
@@ -14,6 +14,7 @@ import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.FavoriteRepository;
+import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.ProblemRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
@@ -24,6 +25,7 @@ import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
+import learningresourcefinder.service.PlayListService;
 import learningresourcefinder.util.Action;
 import learningresourcefinder.util.DateUtil;
 import learningresourcefinder.util.NotificationUtil;
@@ -47,6 +49,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired UrlResourceRepository urlResourceRepository;
     @Autowired IndexManagerService indexManager;
     @Autowired LevelService levelService;
+    @Autowired PlayListRepository playListRepository;
+    @Autowired PlayListService playListService;
     @Autowired CompetenceRepository competenceRepository;
     @Autowired ProblemRepository problemRepository;
     @Autowired FavoriteRepository favoriteRepository;
@@ -73,6 +77,13 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	    problemDate.put(problem.getId(), DateUtil.formatIntervalFromToNowFR(problem.getCreatedOn()));
     	}
     	
+    	if(user!=null){
+    	    Set<PlayList> tpl = playListService.getAllUserPlayListsDontContainAResource(user,resource);
+    	    if(tpl.size() != 0){
+    	        mv.addObject("listPlayList", playListService.setPlayListToJSONWithIdAndName(tpl));
+    	    }
+    	}
+        
     	mv.addObject("problemList", problemList);
     	mv.addObject("problemDate", problemDate);
     	
@@ -91,7 +102,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
 	@RequestMapping("/ajax/resourceeditfieldsubmit")
 	public @ResponseBody String resourceAddSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
-		
 		
 		Resource resource = getRequiredEntity(id);
 		SecurityContext.assertCurrentUserMayEditThisResource(resource);
@@ -126,6 +136,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		else if(fieldName.equals("topic")){
 			resource.setTopic(Topic.values()[Integer.parseInt(value)-1]);
 		}
+        else if(fieldName.equals("addToPlayList")){
+            PlayList pl = playListRepository.find(Long.parseLong(value));
+            pl.getResources().add(resource);
+            NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " bien ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
+        }
 		
 		resourceRepository.merge(resource);
 
