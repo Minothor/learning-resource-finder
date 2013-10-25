@@ -58,6 +58,7 @@ public class FavoriteController extends BaseController<Favorite> {
 		mv.addObject("resourceList", listResource);
 	    //mv.addObject("topic", topic);
 		mv.addObject("problemTitle","Liste des favoris");
+		mv.addObject("user", user);
 		
 		return mv;
 	}
