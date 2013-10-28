@@ -20,6 +20,9 @@ public class RatingRepository extends BaseRepository<Rating>{
 	}
 	
 	public List<Rating> listRating(List<Resource> listResource, User user) {
+	    
+	    if(listResource.size()==0){listResource = null;} //fix bug when listResource is instanced with a size of 0 but not null, causing sql query below error
+	    
 		List<Rating> listRating = (List<Rating>) em.createQuery("SELECT ra FROM Rating ra WHERE ra.user=:user AND ra.resource in (:listResource)")
 				.setParameter("user", user)
 				.setParameter("listResource", listResource)
