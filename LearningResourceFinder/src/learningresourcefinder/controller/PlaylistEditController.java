@@ -37,7 +37,9 @@ public class PlaylistEditController extends BaseController<PlayList>{
 
 	@RequestMapping("/create")
 	public ModelAndView playListCreate() {
-		return prepareModelAndView(new PlayList());
+	    
+	    SecurityContext.assertUserIsLoggedIn();
+	    return prepareModelAndView(new PlayList());
 	}
 	
 	@RequestMapping("/edit")
@@ -55,6 +57,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 			return new ModelAndView("playlistedit","playlist",playList);
 		}
 		
+		SecurityContext.assertCurrentUserMayEditThisPlaylist(playList);
 		PlayList playListHavingTheSameName = playlistRepository.findByNameAndAuthor(playList.getName(), SecurityContext.getUser());
 
 		// set the slug based on the (maybe changed) title
@@ -93,6 +96,8 @@ public class PlaylistEditController extends BaseController<PlayList>{
         PlayList playlist = (PlayList) getRequiredEntity(idPlayList,PlayList.class);
         Resource resource = (Resource) getRequiredEntity(idResource,Resource.class);
         
+        SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
+        
         if (playlist!= null && resource!=null){
             playlist.getResources().remove(resource);
             playlistRepository.merge(playlist);
@@ -105,6 +110,8 @@ public class PlaylistEditController extends BaseController<PlayList>{
     public ModelAndView playListAddResource(@RequestParam("idplaylist")long idPlayList,@RequestParam("idresource")long idResource) {
         PlayList playlist = (PlayList) getRequiredEntity(idPlayList,PlayList.class);
         Resource resource = (Resource) getRequiredEntity(idResource,Resource.class);
+        
+        SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
         
         if (playlist!= null && resource!=null){
             playlist.getResources().add(resource);
