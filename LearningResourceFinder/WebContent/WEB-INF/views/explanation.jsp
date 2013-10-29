@@ -1,7 +1,7 @@
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <html>
 <head>
-	<title>ToujoursPlus.be - Coming Soon...</title>
+	<title>ToujoursPlus.be - Explication</title>
 </head>
 <body>
 
@@ -10,6 +10,12 @@
    <div class="text-center"><img src="/images/ToujoursPlus-logo-500px.png" alt="ToujoursPlus.be logo" /></div>
 </div>
 
+<%------------------------------------ PURPOSES -------------------------------------%>
+<div style="background-color:white;">
+<div class="container" style="padding-top:20px; padding-bottom:20px;">
+	<%@include file="/WEB-INF/includes/purposes.jsp" %>
+</div>
+</div>
 
 <%------------------------------------ BENEFITS -------------------------------------%>
 <div style="background-color:#17A7D6;">
@@ -18,12 +24,6 @@
 </div>
 </div>
 
-<%------------------------------------ PURPOSES -------------------------------------%>
-<div style="background-color:white;">
-<div class="container" style="padding-top:20px; padding-bottom:20px;">
-	<%@include file="/WEB-INF/includes/purposes.jsp" %>
-</div>
-</div>
 
 <%---------------------------------- COUNTER ----------------------------------%>
 <div class="container" style="padding-top:40px; padding-bottom:40px;">

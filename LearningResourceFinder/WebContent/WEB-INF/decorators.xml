@@ -4,7 +4,6 @@
     	<pattern>*.html</pattern>
         <pattern>/ajax/*</pattern>
         <pattern>/loginsocialcallback*</pattern>  <!-- The first view displayed after loginsocialcallback is the popup that immediately closes (it should not display any notification => it should not be decorated with the template and header) -->      
-        <pattern>/explication</pattern>  <!-- Coming soon page-->      
     </excludes>
     
     <decorator name="basic-theme" page="template.jsp">

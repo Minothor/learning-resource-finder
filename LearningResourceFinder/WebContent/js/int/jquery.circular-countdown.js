@@ -6,6 +6,8 @@
  * @author: flashblue - http://www.codegrape.com/user/flashblue
 **************************************************************************/
 
+/** MODIFIED by John Rizzo 2013-10 to remove the "s" to the labels ("secondeS") when the amount of time is 0 or 1 */
+
 ;(function($) {
 	$.fn.circularCountdown = function(options) {		
 		
@@ -238,7 +240,7 @@
 			};
 			
 			//Counter circle
-			this.circle = function($item, now, total) {
+			this.circle = function($item, now, total, plurialText) {
 				var diameter = $item.data("diameter");
 				var circleWidth = $item.data("circleWidth");
 				var circleColor = $item.data("circleColor");
@@ -265,6 +267,15 @@
 					circle.stroke();
 					circle.closePath();
 				}
+				
+				// ADDED BY JOHN RIZZO 2013-10 *************************************************************************************************
+				var $text = $item.find(".text");
+				var textString = plurialText; 
+				if (now < 2) {  // Remove the "s" at the end (HOURS -> HOUR)
+					textString = textString.substring(0, textString.length - 1);
+				}
+				$text.text(textString);
+				// END OF CHANGE *****************************************************************************************************************
 			};
 			
 			//Check current time
@@ -291,22 +302,22 @@
 				
 				//Day
 				if (options.showDay) {
-					this.circle($days, d, dTotal);
+					this.circle($days, d, dTotal, options.dayText);
 				}
 				
 				//Hour
 				if (options.showHour) {
-					this.circle($hours, h, 24);
+					this.circle($hours, h, 24, options.hourText);
 				}
 				
 				//Minute
 				if (options.showMinute) {
-					this.circle($minutes, i, 60);
+					this.circle($minutes, i, 60, options.minuteText);
 				}
 				
 				//Second
 				if (options.showSecond) {
-					this.circle($seconds, s, 60);
+					this.circle($seconds, s, 60, options.secondText);
 				}
 			};
 			

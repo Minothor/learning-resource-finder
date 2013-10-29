@@ -214,14 +214,10 @@ figure:hover figcaption {
     margin: 0 auto;
 }
 
-
 .wrapper {
 	width: 100%;
 }
 
-.mainlist, .mainlist li {
-width: 100%;
-}
 
 .mainlist li {
 margin: 15px 0;
