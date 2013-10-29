@@ -154,18 +154,22 @@ ul.score li {
 	cursor: pointer;
 }
 /*#### FOOTER #############################################################################*/
-#footer-main {
-	background-color: #E9F0F4;
-	color: #1D1D1D;
-	padding: 40px 0;
+ #footer-main {
+	background-color: #F8F8F8;
+	border-color: #E7E7E7;
+	border-width: 1px 0px 0px 0px;
+	border-style:solid;
+	padding-top:14px;
+	margin-top: 40px;
+/* 	padding: 40px 0;
 	margin-top: 50px;
-}
-#footer {
+ */}
+/*#footer {
 	background-color: #34495E;
 	color: #fff;
 	bottom: 0;
 	padding-top: 22px;
-}
+} */
 /*#### CAPTION IMAGE #######################################################################*/
 figure {
 	position: relative;
