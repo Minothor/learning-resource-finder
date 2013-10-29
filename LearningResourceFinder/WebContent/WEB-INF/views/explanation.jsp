@@ -10,6 +10,21 @@
    <div class="text-center"><img src="/images/ToujoursPlus-logo-500px.png" alt="ToujoursPlus.be logo" /></div>
 </div>
 
+
+<%------------------------------------ BENEFITS -------------------------------------%>
+<div style="background-color:#17A7D6;">
+<div class="container" style="padding-top:20px; padding-bottom:20px; color:white;">
+	<%@include file="/WEB-INF/includes/benefits.jsp" %>
+</div>
+</div>
+
+<%------------------------------------ PURPOSES -------------------------------------%>
+<div style="background-color:white;">
+<div class="container" style="padding-top:20px; padding-bottom:20px;">
+	<%@include file="/WEB-INF/includes/purposes.jsp" %>
+</div>
+</div>
+
 <%---------------------------------- COUNTER ----------------------------------%>
 <div class="container" style="padding-top:40px; padding-bottom:40px;">
   <%@include file="/WEB-INF/includes/counter.jsp" %>
@@ -26,21 +41,6 @@
 <%--------------------------------- PEOPLE + SUBSCRIBE MAIL ------------------------%>
 <div class="container" style="padding-top:0px; padding-bottom:20px;">
   <%@include file="/WEB-INF/includes/peopleAndSubscribe.jsp" %>
-</div>
-
-
-<%------------------------------------ BENEFITS -------------------------------------%>
-<div style="background-color:#17A7D6;">
-<div class="container" style="padding-top:20px; padding-bottom:20px; color:white;">
-	<%@include file="/WEB-INF/includes/benefitsTease.jsp" %>
-</div>
-</div>
-
-<%------------------------------------ PURPOSES -------------------------------------%>
-<div style="background-color:white;">
-<div class="container" style="padding-top:20px; padding-bottom:20px;">
-	<%@include file="/WEB-INF/includes/purposesTease.jsp" %>
-</div>
 </div>
 
 <%------------------------------------ SUPPORT --------------------------------------%>

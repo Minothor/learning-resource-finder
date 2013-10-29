@@ -1,22 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<section id="fbsection3" class="wrapper whitebgnd">
-<section class="container">
-<h1 style="color:black; text-align:center;">Qu’est-ce que profs et élèves feront sur ToujoursPlus.be?</h1>
-<ul class="mainlist" style="color:#838383; font-family:'heliosregular',Arial,Helvetica,sans-serif; margin-left:16%; padding-left:0px;">
-<li>Les enseignants qui n'ont pas d'ordinateur en classe pourront-ils en bénéficier?</li>
-<li>Mes enfants pourront-ils l'utiliser directement?</li>
-<li>Qui a osé initier ce truc?</li>
-<li>Les professeurs de géographie seront-ils obligés de l'utiliser?</li>
-<li>Le site sera-t-il collaboratif, comme Wikipedia?</li>
-<li>Est-ce encore un machin imaginé par des pédagogues en chambre?</li>
-<li>Le site est-il basé sur les compétences officielles de la FWB?</li>
-<li>Dans quelle(s) langue(s) sera-t-il?</li>
-<li>Combien ça va encore me coûter?</li>
-<li>Aurais-je mon mot à dire sur le contenu?</li>
-<li>"ToujoursPlus" de quoi, au fait? </li>
-<li>Le gouvernement est-il au courant?</li>
+
+<h1 class="text-center">Qu’est-ce que profs et élèves feront sur ToujoursPlus.be?</h1>
+<br/>
+<ul class="stuteach-point">
+   <li>Trier et aider à <strong>trouver facilement des ressources scolaires</strong> (vidéos, documents, jeux, etc.) de qualité sur internet sans chercher des heures. Ces ressources sont indiquées/téléchargées sur le site par les autres enseignants et élèves (crowd-sourcing de type wikipedia).</li>
+   <li>Donner un outil (un cadre) aux élèves et professeurs pour <strong>mesurer/suivre</strong> leur <strong>progression académique</strong> (<em>qu’avons-nous couvert du programme et y arriverons-nous pour la fin de l’année</em>).			
 </ul>
-</section>
-</section>
+<div class="iframebox"><iframe marginwidth="40" width="100%" height="500" src="http://www.youtube.com/embed/RRhiv3mvBiM?rel=0" frameborder="0" allowfullscreen=""></iframe></div>
+

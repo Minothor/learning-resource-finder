@@ -20,7 +20,12 @@ public class ComingSoonController extends BaseController<ComingSoonMail> {
     public String comingSoon() {
         return "comingsoon";
     }
-	
+
+    @RequestMapping("/explication")
+    public String explanation() {
+        return "explanation";
+    }
+
 	@RequestMapping(value="/ajax/addMailOnTable")
 	public @ResponseBody String  addMailOnTable( @RequestParam("mail") String addresemail){
 	
