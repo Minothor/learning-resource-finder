@@ -39,6 +39,23 @@
 		});
 /* end script Connection With Facebook */
 
+		
+		
+/****** Defines new jQuery functions */
+jQuery.fn.extend({
+    popoverWithAutoHide: function (popoverText) {
+	 	    	$(this).popover({
+	 	 	    	content : popoverText
+	 	  	    }).on('shown.bs.popover', function () {
+	 	  	    	  var $this = $(this); // CLosure: http://stackoverflow.com/a/5409858/174831
+	 	  	    	  setTimeout(function() {
+	 	  	 	    	  $this.popover("hide");
+	 	  	    	  }, 3000);
+	 	 	   });
+	 	    }
+}); 
+
+
 
 $(document).ready(function(event) {		
 	$(".addToolTip").tooltip();  /* prepares all elements in the page that need a tooltip to get a bootstrap tooltip */

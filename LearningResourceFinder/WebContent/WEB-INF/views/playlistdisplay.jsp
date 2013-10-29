@@ -6,7 +6,7 @@
 <!-- Jquery for change input popup addImageUser -->
 <script type="text/javascript" src="/js/int/addImageUrlPlaylist.js"></script>
 <script type="text/javascript">
- 	$(document).ready(function() {
+	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
  	    $('.editableField').editable({   
  	    	  emptytext: '? ?',
@@ -15,10 +15,10 @@
  	    	  pk: '${playlist.id}',
 		});
  	    
- 	    $(".noneditplaylist").popover({
- 	    	content : "Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution."
- 	    });
+ 	    $(".noneditplaylist").popoverWithAutoHide("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
  	});
+ 	
+ 	
 </script> 	    
 <title>Séquence</title>
 </head>

@@ -10,6 +10,10 @@
    <li>Trier et aider à <strong>trouver facilement des ressources scolaires</strong> (vidéos, documents, jeux, etc.) de qualité sur internet sans chercher des heures. Ces ressources sont indiquées/téléchargées sur le site par les autres enseignants et élèves (crowd-sourcing de type wikipedia).</li>
    <li>Donner un outil (un cadre) aux élèves et professeurs pour <strong>mesurer/suivre</strong> leur <strong>progression académique</strong> (<em>qu’avons-nous couvert du programme et y arriverons-nous pour la fin de l’année</em>).			
 </ul>
+
+<br/>
+<br/>
 <iframe marginwidth="40" width="100%" height="500" src="http://www.youtube.com/embed/RRhiv3mvBiM?rel=0" frameborder="0" allowfullscreen=""></iframe></div>
+<br/>
 </div>
 

@@ -23,18 +23,11 @@
  		      }
 		});
  	    
- 	    $('.nonurleditpop').popover({
- 	    	html :true,
- 	        content :"Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution."
- 	    });
+ 	    $('.nonurleditpop')..popoverWithAutoHide("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
  	    
- 	    $(".noAddProblemPop").popover({
- 	    	content: "Pour signaler un problème, il faut être connecté."
- 	    });
+ 	    $(".noAddProblemPop")..popoverWithAutoHide("Pour signaler un problème, il faut être connecté.");
  	    
- 	    $(".noneditresource").popover({
- 	    	content : "Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution."
- 	    });
+ 	    $(".noneditresource")..popoverWithAutoHide("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
  	    
 	});
  	

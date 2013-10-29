@@ -32,7 +32,11 @@
 	<p><span>Etudes supérieures: </span>Présentation claire des compétences nécessaires pour chaque type d'étude supérieure et identification des lacunes à combler.</p>
 
     <br/>
+    <br/>
+
     <iframe marginwidth="40" width="100%" height="400" src="http://www.youtube.com/embed/hEwGj3VXXt0?rel=0" frameborder="0" allowfullscreen=""></iframe>
+    <br/>
+    <br/>
 </div>
 
 
