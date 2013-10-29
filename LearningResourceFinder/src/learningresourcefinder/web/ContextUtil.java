@@ -148,15 +148,10 @@ public class ContextUtil implements Filter, ServletContextListener {
 	public static HttpSession getHttpSession() {
 		return getHttpServletRequest().getSession();
 	}
-
-	public static String getSessionId() {
-		HttpSession session = getHttpServletRequest().getSession(false);
-		if(session != null){
-			return session.getId();
-		}
-		return null;
+	/** This method cares to not create a session if it does not exists (you don't want a web crawler to create a session and get jsessionids in the urls, do you?) */
+	public static Object getAttributFromHttpSession(String attributeName) {
+	    HttpSession httpSession = getHttpServletRequest().getSession(false);
+	    return httpSession == null ? null : httpSession.getAttribute(attributeName);
 	}
-
-	
 }	
 	

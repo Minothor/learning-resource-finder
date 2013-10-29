@@ -293,7 +293,7 @@ public class LoginService {
         if (!ContextUtil.isInWebRequestProcessingThread()) {
             return null;  // Nobody logged in during in batch jobs
         } else { // normal web case
-            return (Long) ContextUtil.getHttpSession().getAttribute(USERID_KEY);
+            return (Long) ContextUtil.getAttributFromHttpSession(USERID_KEY);
         }
     }
 
@@ -344,7 +344,7 @@ public class LoginService {
 
         ////// 1. Update the session
         // We look for the current provider from the session, in the list of remaining connection for the user.
-        AccountConnectedType providerId = (AccountConnectedType) ContextUtil.getHttpSession().getAttribute(LoginController.PROVIDERSIGNEDIN_KEY);
+        AccountConnectedType providerId = (AccountConnectedType) ContextUtil.getAttributFromHttpSession(LoginController.PROVIDERSIGNEDIN_KEY);
         boolean found = false;
         for(Connection<?> con : socialConnections){    
             if(con.getKey().getProviderId().equals(providerId.getProviderId())){

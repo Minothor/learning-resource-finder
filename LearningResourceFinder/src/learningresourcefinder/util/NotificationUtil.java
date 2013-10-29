@@ -11,18 +11,7 @@ public class NotificationUtil {
 
 	/** Sets a message string to be displayed by the next JSP in the Notification bar */
 	public static void addNotificationMessage(String notification){
-	    
-	    HttpSession httpSession = ContextUtil.getHttpSession();
-	       
-	    @SuppressWarnings("unchecked")
-		List<Notification> notifications=(List<Notification>) httpSession.getAttribute("notifications");
-	    
-	    if(notifications==null){
-	    	notifications = new ArrayList<Notification>();
-	    }
-    	notifications.add(new Notification(notification,Status.INFO));
-	    
-		httpSession.setAttribute("notifications",notifications);
+	    addNotificationMessage(notification,Status.INFO);
 	}
 	
 	/** Sets a message string to be displayed by the next JSP in the Notification bar, add type parameter to change notification's color */
@@ -60,7 +49,7 @@ public class NotificationUtil {
 	}
 	
 	
-	static public class  Notification{
+	static public class Notification {
 		
 		String text;
 		Status status;
@@ -85,8 +74,6 @@ public class NotificationUtil {
 		public String toString() {
 			return "Notification [text=" + text + ", status=" + status + "]";
 		}
-		
-		
 	}
 	
 	

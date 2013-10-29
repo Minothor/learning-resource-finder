@@ -181,4 +181,9 @@
     <listener-class>learningresourcefinder.web.Cache</listener-class>
   </listener>
   
+  
+  <session-config>
+    <!-- Disables URL-based sessions (no more 'jsessionid' in the URL using Tomcat) -->
+    <tracking-mode>COOKIE</tracking-mode>
+</session-config>
 </web-app>
