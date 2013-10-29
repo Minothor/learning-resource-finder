@@ -26,10 +26,17 @@
 a:focus { 
     outline: none; 
 }
-
 </style>
+
+<script>
+$(document).ready(function() {
+    $("#carousel-testimonial").carousel('cycle');
+});
+</script>
+
+
 <h1 class="text-center">Témoignages</h1>
-<div id="carousel-testimonial" data-interval="10000" class="carousel slide">
+<div id="carousel-testimonial" data-interval="5000" class="carousel slide">
 	  <!-- Indicators -->
 	  <ol class="carousel-indicators">
 	    <li data-target="#carousel-testimonial" data-slide-to="0" class="active"></li>

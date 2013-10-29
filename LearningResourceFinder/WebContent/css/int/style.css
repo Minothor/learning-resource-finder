@@ -101,6 +101,13 @@ you can use the generic selector below, but it's slower:
 .icon-key-3:before {
 	content: "\e00f";
 }
+
+
+.popover {
+	width: auto;
+}
+
+
 /*#### FROMS #############################################################################*/
 ul li {
 	list-style-type: none; 
@@ -225,3 +232,7 @@ background: url(/comingsoon1/arrow.png) no-repeat 0 3px;
 padding-left: 27px;
 font-size: 16px;
 }
+
+
+
+

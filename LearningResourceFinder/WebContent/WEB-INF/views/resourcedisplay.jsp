@@ -32,10 +32,7 @@
 	});
  	
  	function pop(){
- 		 $('#nonpopoveredit').popover({
-  	    	html :true,
-  	        content :"Pour modifier une url, il faut étre connecté et avoir un niveau 4 de contribution."
-  	    });
+ 		 $('#nonpopoveredit').popoverWithAutoHide("Pour modifier une url, il faut étre connecté et avoir un niveau 4 de contribution.");
  	}
  	
  	function onUrlAddClick(){
