@@ -240,6 +240,11 @@
 					<br />
 					
 					
+
+					<h4>Galerie</h4>
+					<a data-toggle="modal" id="nonpopoveredit" ${canEdit == true ? "href='#modalImageGalerieResource'":"onclick='pop()'"}" class="btn btn-primary">Ajouter une Image</a>
+					<br /> <br />
+					<%@ include file="resourceimagegallery.jsp"%>
  	    
 					<br /> <br />
 
@@ -268,11 +273,6 @@
                     </c:if>	
 					
 					<br /> <br />
-
-					<h4>Galerie</h4>
-					<a data-toggle="modal" id="nonpopoveredit" ${canEdit == true ? "href='#modalImageGalerieResource'":"onclick='pop()'"}" class="btn btn-primary">Ajouter une Image</a>
-					<br /> <br />
-					<%@ include file="resourceimagegallery.jsp"%>
 					
 	       </div>
 
