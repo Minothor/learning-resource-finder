@@ -4,6 +4,8 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.util.CurrentEnvironment;
@@ -134,7 +136,30 @@ public class UrlUtil {
     	nameParam = nameParam.replaceAll("___", "_"); //Sometimes, there is a '&' in the title. The name is compute like : Java___OO_etc. Whith this method, the name will be Java_OO_etc.
         return nameParam;
     }
+    
+    
 	public static String getRelativeUrlToResourceDisplay(Resource resource) {
 		return "/resource/" + resource.getShortId() + "/" + resource.getSlug();
 	}
+	
+    
+    // From there: http://androidsnippets.wordpress.com/2012/10/11/how-to-get-extract-video-id-from-an-youtube-url-in-android-java/
+    // Return null if no vido id found (probably not a youtube url)
+    public static String getYoutubeVideoId(String youtubeUrl)  {
+        String video_id=null;
+        if (youtubeUrl != null && youtubeUrl.trim().length() > 0 && youtubeUrl.startsWith("http")
+                && (youtubeUrl.contains("youtube") || youtubeUrl.contains("youtu.be")))  {
+
+            String expression = "^.*((youtu.be"+ "\\/)" + "|(v\\/)|(\\/u\\/w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#\\&\\?]*).*"; // var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+            CharSequence input = youtubeUrl;
+            Pattern pattern = Pattern.compile(expression,Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(input);
+            if (matcher.matches()) {
+                String groupIndex1 = matcher.group(7);
+                if(groupIndex1!=null && groupIndex1.length()==11)
+                    video_id = groupIndex1;
+            }
+        }
+        return video_id;
+    }
 }
