@@ -219,7 +219,33 @@
 					<lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
  	    
 					<br /> <br />
+
+                    <c:if test="${not empty youtubeVideoId}">  <%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
+	                      <style type="text/css">  <%-- to have a responsive layout - See more at: http://avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%>
+	                        .video-container {
+							    position: relative;
+							    padding-bottom: 56.25%;
+							    padding-top: 30px; height: 0; overflow: hidden;
+							}
+							 
+							.video-container iframe,
+							.video-container object,
+							.video-container embed {
+							    position: absolute;
+							    top: 0;
+							    left: 0;
+							    width: 100%;
+							    height: 100%;
+							}
+						  </style>	
+	
+	                      <div class="video-container"> 
+	                         <iframe width="420" height="315" src="//www.youtube.com/embed/${youtubeVideoId}?rel=0" frameborder="0" allowfullscreen></iframe>
+	                      </div> 
+                    </c:if>	
 					
+					<br /> <br />
+
 					<h4>Galerie</h4>
 					<a data-toggle="modal" id="nonpopoveredit" ${canEdit == true ? "href='#modalImageGalerieResource'":"onclick='pop()'"}" class="btn btn-primary">Ajouter une Image</a>
 					<br /> <br />

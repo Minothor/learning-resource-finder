@@ -113,6 +113,10 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	
     	mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));
     	
+    	if (resource.getUrlResources().size() > 0) {
+    	    mv.addObject("youtubeVideoId", UrlUtil.getYoutubeVideoId(resource.getUrlResources().get(0).getUrl()));
+    	}
+    	
     	return mv;
 	}
 
