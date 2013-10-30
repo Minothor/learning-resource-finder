@@ -15,4 +15,8 @@
 		<c:set var="iconClass" value="glyphicon-heart-empty iconNotFavorite" />		
 	</c:otherwise>
 </c:choose>
-<a href="#" onclick="favoriteToggle(${idResource})" id="favorite${idResource}" class="addResourceFavorite" data-placement="top" data-toggle="tooltip" data-original-title='${title}'><span class="glyphicon ${iconClass}"></span></a>
+<a  id="favorite${idResource}" class="glyphicon ${iconClass} addToolTip
+   <c:if test="${current.user != null}">" onclick="favoriteToggle(${idResource})"</c:if>
+   <c:if test="${current.user == null}">nonaddfavorite"</c:if>
+    style="text-decoration:initial;" 
+    data-placement="top" title='${title}'></a>

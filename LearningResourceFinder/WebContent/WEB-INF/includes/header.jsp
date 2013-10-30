@@ -61,9 +61,7 @@
 <%-- ********** NOTIFICATIONS ************** --%>
 	<div id="notificationArea" 
 		 class="${sessionScope.notifications[0].status.name}"
-		 style="text-align:center;
-                     display:none;  
-                     ">
+		 style="text-align:center; display:none; margin-bottom:0px">
         <%-- close cross button (bootstrap) --%>            
 		<button id="notificationCloser" type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="$('#notificationArea').slideUp();">&times;</button>
 		<span id="notificationText">

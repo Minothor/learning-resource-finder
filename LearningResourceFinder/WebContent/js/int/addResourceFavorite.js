@@ -1,6 +1,5 @@
 $(document).ready(function() {	
-	// Declaration tooltip favorite. 
-	$('.addResourceFavorite').tooltip();
+	    $(".nonaddfavorite").popoverWithAutoHide("Pour avoir des favoris, il faut être connecté.");
 });
 
 function favoriteToggle(id) {

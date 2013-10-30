@@ -4,12 +4,11 @@
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
 <head>
-<!-- Script for Add a URL in a Resource-->
-<script type="text/javascript" src="/js/int/ajaxAddUrlResource.js"></script>
 <link rel="stylesheet" type="text/css"	href="/css/int/resource-image-gallery.css" />
 <script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
+<script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
@@ -23,12 +22,12 @@
  		      }
 		});
  	    
- 	    $('.nonurleditpop')..popoverWithAutoHide("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
+ 	    $('.nonurleditpop').popoverWithAutoHide("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
  	    
- 	    $(".noAddProblemPop")..popoverWithAutoHide("Pour signaler un problème, il faut être connecté.");
+ 	    $(".noAddProblemPop").popoverWithAutoHide("Pour signaler un problème, il faut être connecté.");
  	    
- 	    $(".noneditresource")..popoverWithAutoHide("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
- 	    
+ 	    $(".noneditresource").popoverWithAutoHide("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
+
 	});
  	
  	function pop(){
@@ -213,9 +212,9 @@
 					<br />
 					
 					
-					<a class='glyphicon glyphicon-exclamation-sign ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
-					   style="cursor:pointer; line-height:20px; font-size:30px"> 
-					   </a>
+					<a class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
+					   style="cursor:pointer; text-decoration:initial; line-height:20px; font-size:30px"
+					   title="Signaler un problème pour cette ressource..."></a>
 					<lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
  	    
 					<br /> <br />
@@ -272,16 +271,18 @@
 						<div class="modal-body">
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">Intitulé (optionnel): </label>
+								<label class="col-lg-2 control-label">Intitulé (optionnel): </label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="nameField"	name="name" />
+									<span class="help-block">indication de la nature de cette url supplémentaire.<br/>
+									   ex: "solutions", "vidéo de cette activité en classe", "version éditable", etc.</span>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label class="col-lg-2 control-label" style="text-align: left;">Url : </label>
+								<label class="col-lg-2 control-label" >Url : </label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="urlField"	name="url" required />
+									<input type="text" class="form-control" id="urlField"	name="url" placeholder="http://..." required />
 								</div>
 							</div>
 						</div>
