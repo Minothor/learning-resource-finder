@@ -30,7 +30,6 @@ import learningresourcefinder.web.Slugify;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
-import sun.org.mozilla.javascript.internal.regexp.SubString;
 
 @Entity
 @Table(name="resource")
