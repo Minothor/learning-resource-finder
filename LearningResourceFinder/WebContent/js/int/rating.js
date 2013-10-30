@@ -11,7 +11,7 @@ $(document).ready(function(){
         html : true, // Active format HTML.
         content: function() {
             currentID = $(this).attr('id'); // Take the ID of current link.
-            $('.rating-input > .glyphicon').css('color','#73DCFF'); // Add color CSS.
+            $('.rating-input > .glyphicon').css('color','#17A7D6'); // Add color CSS.
             return $('.pop_content[data-container='+currentID+']'); // Return the current content.
         }
     });

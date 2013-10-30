@@ -71,7 +71,7 @@
 	width: 500px;
 }
 </STYLE>
-
+<title>${resource.name}</title>
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${resource.name}">
@@ -80,95 +80,127 @@
 			<lrftag:breadcrumbelement label="Ressource" link="/ressourcelist/${user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
+	 
 	<div class="container">
-		<lrftag:pageheadertitle title="${resource.name}" />
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="col-md-12">
+		<div class="row">
+   	       <div class="col-md-10">
+		      <h1><a id="title"  ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}>${resource.name}</a></h1>
+		   </div>
+   	       <div class="col-md-2 text-right">
+					<lrftag:rating id="${resource.id}" title="${resource.name}"
+						scoreResource="${resource.avgRatingScore}"
+						scoreUser="${mapRating[resource].score}"
+						countRating="${resource.countRating}" canvote="${current.canVote}" />
+					
+					<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}" />
+		   </div>
+        </div>
+        
+        
+		<div class="row">
+   	       <div class="col-md-6">
+ 			   <a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
+		   </div>
+   	       <div class="col-md-6">
+	   		   <c:forEach items="${resource.urlResources}" var="urlResource">
+   	              <div class="row">
+   	                  <div class="col-md-3">
+							<c:if test="${urlResource.name != null}">${urlResource.name}</c:if>
+   	                  </div>
+   	                  <div class="col-md-9">
+							<a href="${urlResource.url}" target="_blank" id="urlresource"data-type="text">${urlResource.url}</a>
+							<span style="float:none; font-size:15px"  class="glyphicon glyphicon-pencil close 
+							  <c:choose>
+							        <c:when test="${canEditUrl}">
+							          " onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"> 
+							        </c:when>
+							        <c:otherwise>
+							          nonurleditpop">
+							        </c:otherwise>
+							  </c:choose>
+							</span>
+						
+						    <c:choose>
+							        <c:when test="${canEditUrl}">
+							            <button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
+							        </c:when>
+							        <c:otherwise>
+							            <button type="button" class="close nonurleditpop" style="float:none;" >&times;</button>
+							        </c:otherwise>
+							</c:choose>
+   	                  </div>
+			       </div>  <%-- end row --%>
+	             </c:forEach>		                
+	             <span  class="glyphicon glyphicon-plus close addTooltip ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" title="ajouter une url"></span>
+	                   
+		   </div>
+		</div>  <%-- end row --%>
+
+
+   	    <div class="row">
+   	        <div class="col-md-6">
+		        <div class="panel panel-default">
+		           <div class="panel-body">
+				   	    <div class="row">
+				   	        <div class="col-md-3">
+							    <a id="format"  ${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?format?'":" class='noneditresource'"} data-source="${dataEnumFormat}">${resource.format.description}</a>
+				            </div>						
+				   	        <div class="col-md-3">
+								<a id="nature" ${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?nature?'": " class='noneditresource'"}
+								      data-source="${dataEnumNature}">${resource.nature.description}</a>
+				            </div>						
+				   	        <div class="col-md-3">
+								<a id="topic" ${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?matière?'": " class='noneditresource'"} data-source="${dataEnumTopic}">${resource.topic.description}</a>
+				            </div>						
+				   	        <div class="col-md-3">
+								<a id="platform" ${canEdit==true? "href='#' class='editableField' data-type='select'  data-emptytext='?plate-forme?'":" class='noneditresource'"} data-source="${dataEnumPlatform}">${resource.platform.description}</a>
+				            </div>						
+						</div>  <%-- end row --%>
+				   	    <div class="row">
+				   	        <div class="col-md-3">
+							   <a id="duration" ${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}> ${resource.duration}</a> minutes
+				            </div>						
+				   	        <div class="col-md-3">
+							    <a id="language" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?langue?'":" class='noneditresource'"} data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
+				            </div>						
+				   	        <div class="col-md-3">
+								<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicité?'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
+									<c:if test="${resource.advertising == true}">
+		    							pub
+									</c:if>
+									<c:if test="${resource.advertising == false}">
+		    							sans pub
+									</c:if>
+								 </a>
+				            </div>						
+				   	        <div class="col-md-3">
+							     <a href="/user/${resource.createdBy.userName}" class="addToolTip" title="contributeur">${resource.createdBy.fullName}</a>
+				            </div>						
+						</div>  <%-- end row --%>
+				   	    <div class="row">
+				   	        <div class="col-md-3 col-md-offset-9">
+	     						<a ${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}> ${resource.author}</a>
+				            </div>						
+						</div>  <%-- end row --%>
+					</div> <%-- end panel body --%>
+				</div>  <%-- end panel --%>
+            </div>						
+		</div>  <%-- end row --%>
+
+
+        <h4>Problèmes &nbsp; &nbsp; &nbsp;
+	        <a class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
+			  style="cursor:pointer; text-decoration:initial; line-height:20px; font-size:30px"
+			  title="Signaler un problème pour cette ressource..."></a>
+		</h4>
+	    <lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
+		<%@ include file="problemlist.jsp" %>
+		
+   	    <div class="col-md-12">
 					<dl class="dl-horizontal">
-						<dt>Intitulé:</dt>
-						<dd>
-							<a id="title"  ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}> ${resource.name}</a>
-						</dd>
-
-						<dt>Url:</dt>
-
-						<dd>
-							<c:forEach items="${resource.urlResources}" var="urlResource">
-								<a href="${urlResource.url}" target="_blank" id="urlresource"data-type="text">${urlResource.url}</a>
-								<c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
-								<span style="float:none; font-size:15px"  class="glyphicon glyphicon-pencil close 
-								  <c:choose>
-								        <c:when test="${canEditUrl}">
-								          " onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"> 
-								        </c:when>
-								        <c:otherwise>
-								          nonurleditpop">
-								        </c:otherwise>
-								  </c:choose>
-								</span>
-							
-							    <c:choose>
-								        <c:when test="${canEditUrl}">
-								            <button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
-								        </c:when>
-								        <c:otherwise>
-								            <button type="button" class="close nonurleditpop" style="float:none;" >&times;</button>
-								        </c:otherwise>
-								</c:choose>
-		                        <br />
-		                    </c:forEach>		                
-		                 <span  class="glyphicon glyphicon-plus close ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" ></span> 
-		                		                
-		             
 		                
-		                
-		                </dd>          
-						<dt>Description:</dt>
-						<dd>
-							<a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
-						</dd>
-						<dt>Matière:</dt>
-						<dd>
-							<a id="topic" ${canEdit==true ? " href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${dataEnumTopic}"> ${resource.topic.description}</a>
-						</dd>
 
-						<dt>Plate-forme:</dt>
-						<dd>
-							<a id="platform" ${canEdit==true? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="${dataEnumPlatform}"> ${resource.platform.description}</a>
-						</dd>
-						<dt>Format:</dt>
-						<dd>
-							<a id="format"  ${canEdit==true? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="${dataEnumFormat}"> ${resource.format.description}</a>
-						</dd>
-						<dt>Nature:</dt>
-						<dd>
-							<a id="nature" ${canEdit==true? "href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${dataEnumNature}"> ${resource.nature.description}</a>
-						</dd>
-						<dt>Langue:</dt>
-						<dd>
-							<a id="language" ${canEdit==true ? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
-						</dd>
-						<dt>Publicité:</dt>
-						<dd>
-							<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
-							<c:if test="${resource.advertising == true}">
-    							Oui
-							</c:if>
-							<c:if test="${resource.advertising == false}">
-    							Non
-							</c:if>
-							 </a>
-						</dd>
-						<dt>Durée:</dt>
-						<dd>
-							<a id="duration" ${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}> ${resource.duration}</a> minutes
-						</dd>
 
-						<dt>Contributeur:</dt>
-						<dd>
-							<a href="/user/${resource.createdBy.userName}">${resource.createdBy.fullName}</a>
-						</dd>
 						<dt>Compétence:</dt>
                         <dd>
                           <c:forEach items="${resource.competences}" var="competence">
@@ -178,10 +210,6 @@
                           </c:forEach>
                           <span class="glyphicon glyphicon-plus close ${canEdit==false ? "noneditresource\"" :  " \" onclick= 'onAddCompetenceClick()'"} style="float:none; font-size:15px" ></span> 
                         </dd>
-                        <dt>Auteur:</dt>
-						<dd>
-							<a ${canEdit==true ? "href='#' class='editableField'":" class='noneditresource'"}> ${resource.author}</a>
-						</dd>
 						<c:if test="${listMyPlayListsWithThisResource != null}">
 							<dt>Mes séquences:</dt>
 							<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
@@ -208,21 +236,10 @@
 						</c:if>
 					</dl>
 					<br />
-					<lrftag:rating id="${resource.id}" title="${resource.name}"
-						scoreResource="${resource.avgRatingScore}"
-						scoreUser="${mapRating[resource].score}"
-						countRating="${resource.countRating}" canvote="${current.canVote}" />
-					<br />
-					
-					<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}" />
 
 					<br />
 					
 					
-					<a class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
-					   style="cursor:pointer; text-decoration:initial; line-height:20px; font-size:30px"
-					   title="Signaler un problème pour cette ressource..."></a>
-					<lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
  	    
 					<br /> <br />
 
@@ -257,11 +274,7 @@
 					<br /> <br />
 					<%@ include file="resourceimagegallery.jsp"%>
 					
-					<h4>Problèmes</h4>
-					<%@ include file="problemlist.jsp" %>
-				</div>
-			</div>
-		</div>
+	       </div>
 
 <%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
 <%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
