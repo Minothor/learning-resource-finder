@@ -20,6 +20,7 @@ import learningresourcefinder.util.FileUtil;
 import learningresourcefinder.util.FileUtil.InvalidImageFileException;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.web.UrlUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,7 +81,7 @@ public class ResourceImageController extends BaseController<User> {
 			NotificationUtil.addNotificationMessage(e.getMessageToUser());
 		}
 		
-		ModelAndView mv = new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
+		ModelAndView mv = new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
 		mv.addObject("random", System.currentTimeMillis());
 		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
 
@@ -94,7 +95,7 @@ public class ResourceImageController extends BaseController<User> {
 		User user = resource.getCreatedBy();
 		SecurityContext.assertCurrentUserMayEditThisUser(user);
 		
-		ModelAndView mv = new ModelAndView("redirect:/resource/" + resource.getShortId() + "/" + resource.getName());
+		ModelAndView mv = new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
 		mv.addObject("random", System.currentTimeMillis());
 		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
 
@@ -148,14 +149,14 @@ public class ResourceImageController extends BaseController<User> {
 		
 		//resourceService.changeGalleryOrder(arrayList, resource);
 		
-		return new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
+		return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
 	 }
 	
 	 @RequestMapping("/delete")
 	 public ModelAndView resourceImageDelete(@RequestParam("id") long resrouceid, @RequestParam("img") long imgid){	
 		 Resource resource = resourceRepository.find(resrouceid);
 		 resourceService.resourceImageDelete(resource, imgid);
-		 return new ModelAndView("redirect:/resource/" + resource.getId() + "/" + resource.getName());
+		 return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
 		 
 	 }
 

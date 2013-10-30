@@ -30,8 +30,8 @@
 					</c:if>
 						
 					${strongStart}	
-					  <div class="col-xs-1 ${greenClass} text-right">niveau ${action.level.levelIndex}</div>
-					  <div class="col-xs-8 ${greenClass}">${action.describe}</div>
+					  <div class="col-xs-2 ${greenClass} text-right">niveau ${action.level.levelIndex}</div>
+					  <div class="col-xs-10 ${greenClass}">${action.describe}</div>
 					${strongEnd}
                     <c:set var="greenClass" value=""/>
 				    <c:set var="strongStart" value=""/>			    
@@ -57,8 +57,8 @@
 	<c:forEach items="${actions}" var="action">
 	  <c:if test="${action.actionPoints > 0}"> <%-- it's not worth displaying actions that get the user no point here --%>
 		<div class="row">
-					<div class="col-xs-1 ${style} text-right">${action.actionPoints} point${action.actionPoints >1 ? "s" : "" }</div>
-					<div class="col-xs-8 ${style}">${action.describe}</div>
+					<div class="col-xs-2 ${style} text-right">${action.actionPoints} point${action.actionPoints >1 ? "s" : "" }</div>
+					<div class="col-xs-10 ${style}">${action.describe}</div>
                     <c:set var="style" value=""/>
 		</div>
 	  </c:if>

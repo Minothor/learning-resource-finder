@@ -47,11 +47,13 @@ public class ProblemController extends BaseController<Problem> {
         }
         mv.addObject("discussionDate", discussionDate);
         mv.addObject("canCloseProblem", levelService.canDoAction(user, Action.CLOSE_PROBLEM));
+        mv.addObject("canDiscussProblem", levelService.canDoAction(user, Action.DISCUSS_PROBLEM));
         return mv;
     }
 	
 	@RequestMapping(value="/ajax/problemreport", method=RequestMethod.POST)
 	public @ResponseBody String problemReport(@RequestParam("idresource") Long idResource, @RequestParam("title") String title, @RequestParam("description") String description) {
+        SecurityContext.assertCanCurrentDoAction(Action.ADD_PROBLEM);
 		Problem p = new Problem();
 		p.setName(title);
 		p.setDescription(description);
@@ -63,6 +65,7 @@ public class ProblemController extends BaseController<Problem> {
 	
     @RequestMapping(value="/addDiscussion", method=RequestMethod.POST)
     public ModelAndView addDiscussion(@RequestParam("idProblem")long idProblem,@RequestParam("textDiscussion")String message) {
+        SecurityContext.assertCanCurrentDoAction(Action.DISCUSS_PROBLEM);
         Problem problem = (Problem) getRequiredEntity(idProblem);
         Discussion d = new Discussion(message);
         d.setProblem(problem);
@@ -71,11 +74,14 @@ public class ProblemController extends BaseController<Problem> {
     }
     
     @RequestMapping(value="/closeproblem")
-    public ModelAndView addDiscussion(@RequestParam("id")long idProblem) {
+    public ModelAndView closeProblem(@RequestParam("id")long idProblem) {
+        SecurityContext.assertCanCurrentDoAction(Action.CLOSE_PROBLEM);
         Problem problem = (Problem) getRequiredDetachedEntity(idProblem);
         
         problem.setResolved(true);
         problemRepository.merge(problem);
-        return new ModelAndView("redirect:/"+UrlUtil.getRelativeUrlToResourceDisplay(problem.getResource())); //FIXME rediriger par la suite vers la liste des problèmes ou l'historique des problèmes remontés par le user  
+        levelService.addActionPoints(SecurityContext.getUser(), Action.CLOSE_PROBLEM);
+        NotificationUtil.addNotificationMessage("Problème clôturé. Merci!");
+        return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(problem.getResource())); //FIXME rediriger par la suite vers la liste des problèmes ou l'historique des problèmes remontés par le user  
     }
 }

@@ -73,13 +73,18 @@
 			  </div>
 			  <div class="panel-body">
 			  	<div class="col-md-12">
+  				    <label>Alimenter la discussion (préciser, argumenter, etc.) sur ce problème.</label>
+			  	    <c:if test="${canDiscussProblem}">
 						<form action="/addDiscussion" method="post"  id="anchorResponse">
-<!-- 						  <input type="text" class="form-control" name="textDiscussion" placeholder="Votre message"> -->
-							<textarea class="form-control" rows="5" name="textDiscussion" placeholder="Votre message" required></textarea>
+						  <textarea class="form-control" rows="5" name="textDiscussion" placeholder="Votre message" required></textarea>
 						  <br />
 						  <button type="submit" class="btn btn-primary">Répondre</button>
 						  <input type="hidden" name="idProblem" value="${problem.id}" />
-						</form>  
+						</form>
+					</c:if>	  
+			  	    <c:if test="${!canDiscussProblem}">  <%-- We do not display the text area, because we don't invite to type text if we'll say that it was useless at the end... --%>
+						  <br/><button class="btn btn-primary addPopover" data-content="Vous devez être connecté pour répondre.">Répondre</button>
+				    </c:if>
 				</div>
 			  </div>
 			</div>

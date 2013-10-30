@@ -245,6 +245,11 @@ public  class SecurityContext {
         return  ((LevelService) ContextUtil.getSpringBean(LevelService.class)).canDoAction(getUser(), action);
     }
     
+    public static void assertCanCurrentDoAction(Action action) {
+        if (!canCurrentDoAction(action)) {
+            throw new UnauthorizedAccessException(" cannot do that action: " + action.getDescribe());
+        }
+    }
 
 
 }
