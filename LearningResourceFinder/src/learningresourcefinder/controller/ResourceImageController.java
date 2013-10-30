@@ -3,6 +3,7 @@ package learningresourcefinder.controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -64,18 +65,7 @@ public class ResourceImageController extends BaseController<User> {
 			FileUtil.uploadFile(multipartFile, FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER, 
 					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, resource.getId() + "-" + (resource.getNumberImage() + 1)));
 			
-			BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()), 400 * 400, 400, 400);
-						
-			ImageUtil.saveImageToFileAsJPEG(resizedImage,  
-					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
-			
-			BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()), 200*350, 200, 350);
-			
-			ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
-					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
-
-			resource.setNumberImage(resource.getNumberImage() + 1);
-			resourceRepository.merge(resource);
+			scaleAndSaveImage(multipartFile.getBytes(), resource);
 			
 		} catch (InvalidImageFileException e) {  
 			NotificationUtil.addNotificationMessage(e.getMessageToUser());
@@ -87,7 +77,8 @@ public class ResourceImageController extends BaseController<User> {
 
 		return mv;
 	}
-	
+
+
 	@RequestMapping("/imageaddUrl" )
 	public ModelAndView resourceImageAddUrl(@RequestParam("idResource") long resourceid, @RequestParam("strUrl") String url) throws Exception {
 		
@@ -111,18 +102,9 @@ public class ResourceImageController extends BaseController<User> {
         try {
             ByteArrayOutputStream outStream= new ByteArrayOutputStream();
             ImageIO.write(image, "jpg", outStream);
-            
-            image = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),120 * 200, 200, 200);
-            
-            ImageUtil.saveImageToFileAsJPEG(image, 
-            		FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);           
-            
-            BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),40 * 40, 60, 60);
 
-            ImageUtil.saveImageToFileAsJPEG(resizedImage,  
-            		FileUtil.getGenFolderPath(currentEnvironment) + 
-            		FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
-            
+            scaleAndSaveImage(outStream.toByteArray(), resource);
+
             resource.setNumberImage(resource.getNumberImage() + 1);
 			resourceRepository.merge(resource);
         } catch (IOException e) {
@@ -132,6 +114,20 @@ public class ResourceImageController extends BaseController<User> {
         return mv;
 	}
 	
+    private void scaleAndSaveImage(byte[] imageInBytes,  Resource resource) throws IOException, FileNotFoundException {
+        BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(imageInBytes), 400 * 400, 400, 400);
+        ImageUtil.saveImageToFileAsJPEG(resizedImage,  
+                FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
+        
+        BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(imageInBytes), 200*350, 200, 350);
+        ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
+                FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
+
+        resource.setNumberImage(resource.getNumberImage() + 1);
+        resourceRepository.merge(resource);
+    }
+    
+    
 	@RequestMapping("/change")
 	public ModelAndView resourceImageChange(@RequestBody ArrayList<String> order){	
 
