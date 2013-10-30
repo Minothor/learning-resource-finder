@@ -1,6 +1,5 @@
 /*resource-image-gallery.css*/
 ul#list-photos {
-    height: 140px;
     list-style: none outside none;
     padding-left: 0;
 }
@@ -11,11 +10,7 @@ ul#list-photos li {
     cursor: move;
     float: left;
     font-size: 12px;
-    height: 75px;
     margin-right: 10px;
     padding: 10px;
-    width: 75px;
-    height: 108px;
     text-align: center;
-    width: 96px;
 }

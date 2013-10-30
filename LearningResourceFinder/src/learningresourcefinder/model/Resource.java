@@ -30,6 +30,8 @@ import learningresourcefinder.web.Slugify;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
+import sun.org.mozilla.javascript.internal.regexp.SubString;
+
 @Entity
 @Table(name="resource")
 @SequenceGenerator(name="ResourceSequence", sequenceName="RESOURCE_SEQUENCE")
@@ -159,6 +161,15 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		return description;
 	}
 
+	/** Shorter version of the description (for lists) */
+	public String getDescriptionCut() {
+	    final int MAX_LENGTH_DESCRIPTION_CUT = 100;
+	    if (description.length() > MAX_LENGTH_DESCRIPTION_CUT) {
+	        return description.substring(0 , MAX_LENGTH_DESCRIPTION_CUT) + "…";
+	    } else {
+	        return description;
+	    }
+	}
 	public void setDescription(String description) {
 		this.description = HTMLUtil.removeHtmlTags(description);
 	}

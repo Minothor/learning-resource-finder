@@ -64,12 +64,12 @@ public class ResourceImageController extends BaseController<User> {
 			FileUtil.uploadFile(multipartFile, FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER, 
 					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, resource.getId() + "-" + (resource.getNumberImage() + 1)));
 			
-			BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),120 * 200, 200, 200);
+			BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()), 400 * 400, 400, 400);
 						
 			ImageUtil.saveImageToFileAsJPEG(resizedImage,  
 					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
 			
-			BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()),40 * 40, 60, 60);
+			BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(multipartFile.getBytes()), 200*350, 200, 350);
 			
 			ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
 					FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
@@ -101,18 +101,14 @@ public class ResourceImageController extends BaseController<User> {
 
 		BufferedImage image = null;
 		
-		try 
-		{
+		try {
             image = ImageUtil.readImage(url);
-        } 
-		catch (RuntimeException e) 
-		{
+        } catch (RuntimeException e) {
         	NotificationUtil.addNotificationMessage("veuillez indiquer une URL valide");
             return mv;//useless to try to save image if we don't have it
         }
 		
-        try 
-        {
+        try {
             ByteArrayOutputStream outStream= new ByteArrayOutputStream();
             ImageIO.write(image, "jpg", outStream);
             
@@ -129,9 +125,7 @@ public class ResourceImageController extends BaseController<User> {
             
             resource.setNumberImage(resource.getNumberImage() + 1);
 			resourceRepository.merge(resource);
-        } 
-        catch (IOException e) 
-        {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 

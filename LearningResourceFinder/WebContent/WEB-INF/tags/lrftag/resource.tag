@@ -5,7 +5,7 @@
 <%@ attribute name="closeUrl" type="java.lang.String" required="false"%>
 
 
-<div style="display:inline-block; position:relative; vertical-align:middle; width: 200px; height: 200px; margin-right:20px; margin-bottom:20px;"
+<div style="display:inline-block; position:relative; vertical-align:top; width: 200px; margin-right:20px; margin-bottom:20px;"
      class="panel panel-default">
   <div class="panel-heading">
        <a href="/resource/${resource.shortId}/${resource.slug}" class="lead">${resource.name}</a>
@@ -17,17 +17,16 @@
 		    </a>
 	   </c:if>
   </div>
+  
+  <c:if test="${resource.numberImage >= 1}">
+    <img src="/gen/resource/resized/small/${resource.id}-1.jpg" alt="${resource.name}" />
+  </c:if>
 
-  <div class="panel-body">
-     <p><small>${resource.description}</small></p>
-
-     <c:if test="${resource.numberImage >= 1}">
-       <img src="/gen/resource/resized/small/${resource.id}-1.jpg" alt="${resource.name}" />
-     </c:if>
-
+  <div class="panel-body" style="margin-bottom:20px;">
+     <p><small>${resource.descriptionCut}</small></p>
   </div>
   
-  <div style="position:absolute; bottom:8px; left:8px;">
+  <div style="position:absolute; bottom:0px; left:15px;">
 	    <lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" canvote="${current.canVote}" />
   </div>
 </div>

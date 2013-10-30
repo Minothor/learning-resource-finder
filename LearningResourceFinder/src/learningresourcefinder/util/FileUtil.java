@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -380,17 +381,29 @@ public abstract class FileUtil {
 	public static void renameFileSetWithSuffix(String directory, String pattern, String suffix) {
 		Path p = FileSystems.getDefault().getPath(directory);
 
-		try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(p, pattern)) {
-			for (Path path: directoryStream){
-				renameFile(directory, path.getFileName().toString(), path.getFileName().toString() + suffix);
-
-				//File file = path.toFile();
-				//File fileWithNewName = new File (file+suffix);
-				//file.renameTo(fileWithNewName);
-			}
+		DirectoryStream<Path> directoryStream = null;
+		try {
+		    directoryStream = Files.newDirectoryStream(p, pattern);
+		} catch (NoSuchFileException nsfe) {
+		    // Too bad, but this may happen if the DB is not in sync with the files.
+		    return;
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+           throw new RuntimeException();
+        }
+		
+		for (Path path: directoryStream){
+		    renameFile(directory, path.getFileName().toString(), path.getFileName().toString() + suffix);
+
+		    //File file = path.toFile();
+		    //File fileWithNewName = new File (file+suffix);
+		    //file.renameTo(fileWithNewName);
 		}
+		
+		try {
+            directoryStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
 	}
 
 	// pathStr is for example "c:/img/" with a slash at the end.

@@ -4,20 +4,17 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
-import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
-import learningresourcefinder.search.SearchOptions;
-import learningresourcefinder.search.SearchResult;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
+import learningresourcefinder.util.Logger;
 
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -29,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Scope("singleton")
 public class ResourceService {
 
+    @Logger Log logger;
 
 	@Autowired   private CurrentEnvironment currentEnvironment;
 	@Autowired ResourceRepository resourceRepository;
@@ -78,9 +76,12 @@ public class ResourceService {
 			for (Path path: directoryStream){
 				listImages.add(path.getFileName().toString());
 			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		} catch (NoSuchFileException e) {
+			// Ok, let's do nothing. It's not normal, but not a big deal.
+		    logger.warn("trying to delete image, but file not found", e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 		
 		renumberImageFiles(directory, prefix, listImages);
 		
