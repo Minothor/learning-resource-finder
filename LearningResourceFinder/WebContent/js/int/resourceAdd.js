@@ -18,16 +18,20 @@ function ajaxVerifyUrl() {
 					type : "POST",
 					url : '/ajax/checkUrl',
 					data : "url=" + url,
-					success : function(data) {
-						if (data == "") { // No other resource with the same url found in DB.
+					success : function(response) {
+						if (response == "video" || response == "ok") { // No other resource with the same url found in DB.
+							$("#urlErrorMessage").html("");  // empty the error message
                             toggleForm();
+                            if (response == "video") {  // Pre-select the "vidéo" radio button
+                            	$('input:radio[name="format"]').filter('[value="VIDEOS"]').attr('checked', true);
+                            }
 						} else {
-							alert("une resource avec une url similaire existe déjà sur le site");  // TODO: display error in the form;   
+                        	$("#urlErrorMessage").html("<a href='"+response+"'>Une resource avec une url similaire</a> existe déjà sur le site"); 
 						}
 
 					},
 					error : function(data) {
-						alert("Problème en contactant le serveur - " + data);
+						alert("Problème en contactant le serveur - " + response);
 					}
 				});
 	} else {

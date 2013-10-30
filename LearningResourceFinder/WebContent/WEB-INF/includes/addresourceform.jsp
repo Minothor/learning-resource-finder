@@ -20,11 +20,11 @@
 						<div class="form-group">
 	                        <label for="url">site</label> 
 	                        <input type="text" class="form-control" id="urlAddField" name="url" placeholder="http://...">
-	                        <br />
+							<span class="help-block">URL vers le site que vous désirez ajouter.</span>
 	                        <div class="pull-right"> 
 	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
 							</div>
-							<span class="help-block">URL vers le site que vous désirez ajouter.</span>
+							<span id="urlErrorMessage" class="text-warning"></span> <%-- Place holder filled by JavaScript after ajax response --%>
 						</div>
 
 						<div id="addResourceFormPart2" style="display:none;">  <%-- will not be displayed until the url is valid --%>

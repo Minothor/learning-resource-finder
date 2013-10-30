@@ -15,7 +15,7 @@
 	
 	<lrftag:pageheadertitle title="Droits et niveaux"/>
 	
-	<p>Les actions listées ci-dessous nécessitent des droits. Plus votre niveau d'utilisateur est élevé, plus vous aurez de droits.</p>
+	<p>Les actions listées ci-dessous nécessitent des droits. Plus votre niveau d'utilisateur est élevé, plus vous avez de droits.</p>
     
     <c:if test="${user != null}">
       <p>Niveau de ${user.fullName}: <strong>${user.accountLevel.levelIndex}</strong></p>

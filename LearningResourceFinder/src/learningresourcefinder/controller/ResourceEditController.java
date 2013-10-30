@@ -33,9 +33,16 @@ public class ResourceEditController extends BaseController<Resource> {
 
     @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
     public @ResponseBody String urlSubmit(@RequestParam("url") String url) {
-         String checkUrlOk = "";
-         Resource resource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
-         return resource == null ? "" : resource.getId() + "";
+         Resource duplicateResource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
+         if (duplicateResource == null) {
+             if (UrlUtil.getYoutubeVideoId(url) != null) {
+                 return "video";
+             } else {
+                 return "ok";
+             }
+         } else {
+             return UrlUtil.getRelativeUrlToResourceDisplay(duplicateResource);
+         }
     }
 
    
@@ -73,7 +80,8 @@ public class ResourceEditController extends BaseController<Resource> {
         
         indexManager.add(resource);
         
-        return new MessageAndId(resource.getId(), "ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
+        return new MessageAndId(resource.getId(),
+                "ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
     }
     
     @RequestMapping("/ajax/resourceaddsubmit2")
@@ -117,7 +125,8 @@ public class ResourceEditController extends BaseController<Resource> {
         }
         public void setId(long id) {
             this.id = id;
-        } 
+        }
+        
     }
     
 }
