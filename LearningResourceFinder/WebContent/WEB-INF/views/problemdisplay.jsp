@@ -35,7 +35,7 @@
 					<dl class="dl-horizontal">
 						<dt>Nom :</dt>
 					  	<dd>${problem.name}</dd>
-					  	<dt>Auteur :</dt>
+					  	<dt>Rapporteur :</dt>
 					  	<dd><a href="/user/${problem.createdBy.userName}">${problem.createdBy.fullName}</a></dd>
 					  	<dt>Description :</dt>
 					  	<dd>${problem.description}</dd>

@@ -204,7 +204,7 @@
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
 						scoreResource="${resource.avgRatingScore}"
 						scoreUser="${mapRating[resource].score}"
-						countRating="${resource.countRating}" canvote="${Current.canVote}" />
+						countRating="${resource.countRating}" canvote="${current.canVote}" />
 					<br />
 					
 					<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}" />
