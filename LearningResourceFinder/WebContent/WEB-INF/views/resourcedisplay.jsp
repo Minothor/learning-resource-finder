@@ -99,7 +99,7 @@
 								<c:if test="${urlResource.name != null}"> (${urlResource.name})</c:if>
 								<span style="float:none; font-size:15px"  class="glyphicon glyphicon-pencil close 
 								  <c:choose>
-								        <c:when test="${(canEditUrl == true)}">
+								        <c:when test="${canEditUrl}">
 								          " onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"> 
 								        </c:when>
 								        <c:otherwise>
@@ -108,7 +108,14 @@
 								  </c:choose>
 								</span>
 							
-								<button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
+							    <c:choose>
+								        <c:when test="${canEditUrl}">
+								            <button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
+								        </c:when>
+								        <c:otherwise>
+								            <button type="button" class="close nonurleditpop" style="float:none;" >&times;</button>
+								        </c:otherwise>
+								</c:choose>
 		                        <br />
 		                    </c:forEach>		                
 		                 <span  class="glyphicon glyphicon-plus close ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" ></span> 
