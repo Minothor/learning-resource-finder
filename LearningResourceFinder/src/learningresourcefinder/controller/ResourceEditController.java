@@ -81,7 +81,7 @@ public class ResourceEditController extends BaseController<Resource> {
         indexManager.add(resource);
         
         return new MessageAndId(resource.getId(),
-                "ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
+                "Ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
     }
     
     @RequestMapping("/ajax/resourceaddsubmit2")
@@ -103,7 +103,8 @@ public class ResourceEditController extends BaseController<Resource> {
         resourceRepository.merge(resource); 
         indexManager.update(resource);
         
-        return new MessageAndId(id,"La ressource a bien été ajoutée");
+        return new MessageAndId(resource.getId(),
+                "Information complémentaires enregistrées - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a> la ressource.");
     }
 
     
