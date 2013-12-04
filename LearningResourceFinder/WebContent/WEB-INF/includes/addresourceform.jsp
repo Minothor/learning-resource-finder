@@ -158,7 +158,7 @@
 						<div class="form-inline">
 							<input type="text" class="form-control" name="maxDuration" style="width:50px"> minutes
 						</div>
-						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou visionner la vidéo proposée.</span>
+						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou regarder la vidéo proposée.</span>
 					</div>
 				</div>
 				</div>

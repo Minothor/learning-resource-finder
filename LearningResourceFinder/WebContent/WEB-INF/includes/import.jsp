@@ -12,12 +12,6 @@
 <link rel="stylesheet" media="screen,projection" href="/css/ext/ui.totop.css" />  <%-- bottom right corner button to move to the top of the page --%>
 
 
-<!-- ***************************** ICON **************************** -->    
-<%--maybe must we put an ie condition --%>
-<link rel="icon" type="image/png" href="/images/favicon.png"/>
-<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
-<!-- ***************************** END ICON **************************** -->    
-
 
 <!-- ***************************** JAVASCRIPT **************************** -->   
 <script src="/js/ext/jquery-1.9.0.min.js"></script>

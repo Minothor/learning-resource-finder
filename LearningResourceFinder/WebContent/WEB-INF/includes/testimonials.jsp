@@ -112,4 +112,3 @@ $(document).ready(function() {
 	    <span class="glyphicon glyphicon-chevron-right"></span>
 	  </a>
 </div>
-<%-- <script src="http://getbootstrap.com/assets/js/holder.js"></script>  <%-- for carrousel --%>

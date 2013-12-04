@@ -102,11 +102,11 @@ public class UserService {
         String validationUrl = UrlUtil.getAbsoluteUrl( "validationsubmit?code=" + user.getValidationCode());
         String htmlMessage = "Bienvenue sur "+ currentEnvironment.getSiteName()+", " + user.getUserName() + "." + 
                 "<br/>Il reste une dernière étape pour créer votre compte : " +
-                "veuillez s'il vous plait cliquer sur le lien ci-dessous pour valider votre e-mail !" +
+                "veuillez cliquer sur le lien ci-dessous pour valider votre adresse électronique." +
                 "<br/><a href='"+ validationUrl + "'>" + validationUrl + "</a>" +
-                "<br/><br/>Si vous rencontrez un problème, essayez de copier/coller l'URL dans votre navigateur (au lieu de cliquer sur le lien), ou en dernier recours " +
-                "<a href='" + UrlUtil.getAbsoluteUrl("contact") + "'>nous contacter</a>" + 
-                "<br/><br/>merci de vous être inscrit sur "+currentEnvironment.getSiteName()+".";
+                "<br/><br/>Si vous rencontrez un problème, essayez de copier/coller l'URL ci-dessus dans votre navigateur (au lieu de cliquer sur le lien). Si cette tentative ne fonctionne toujours pas, " +
+                "<a href='" + UrlUtil.getAbsoluteUrl("contact") + "'>contactez-nous</a>" + 
+                "<br/><br/>Merci de vous être inscrit sur "+currentEnvironment.getSiteName()+".";
         mailService.sendMail(user, "Votre nouveau compte", htmlMessage, MailType.IMMEDIATE, MailCategory.USER);
         
         log.debug("mail sent: " + htmlMessage);  

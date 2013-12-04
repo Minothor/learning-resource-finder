@@ -2,9 +2,9 @@ package learningresourcefinder.mail;
 
 public enum MailingDelayType {
 	
-    IMMEDIATELY("Immédiatement", "A mail is sent as soon as an event occur (new belt, someone edits one of your question ...)."),
-	DAILY("Journalier", "The notification mails are grouped and sent once a day in a single mail, except for urgent mail."),
-	WEEKLY("Hebdomadaire", "The notification mails are grouped and sent once a week in a single mail, except for urgent mail.");
+    IMMEDIATELY("Envoi immédiat", "Un e-mail est envoyé dès qu'un événement se produit."),
+	DAILY("Envoi journalier", "Les notifications sont groupées et envoyées dans, au plus, un mail par jour, sauf pour les messages urgents."),
+	WEEKLY("Envoi hebdomadaire", "Les notifications sont groupées et envoyées dans, au plus, un mail par semaine, sauf pour les messages urgents.");
 
     
 	private MailingDelayType(String name, String description){

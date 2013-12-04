@@ -78,9 +78,9 @@ public final class MailTemplateService {
                     secondDelayOption = MailingDelayType.DAILY;
                     thirdDelayOption = MailingDelayType.WEEKLY;
                 }
-                footer += "<br>La fréquence d'envoi des mails est : "
+                footer += "<br>La fréquence d'envoi des messages est : "
                     + mailDelayOption.getName()
-                    + "  Changer la fréquence en : "
+                    + "<br/>Changer la fréquence en : "
                     + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + user.getId() + "&newdelay="+ secondDelayOption + "'>" + secondDelayOption.getName() + "</a> ou "
                     + "<a href='" + UrlUtil.getAbsoluteUrl("changemaildelay") + "?iduser=" + user.getId() + "&newdelay="+ thirdDelayOption + "'>" + thirdDelayOption.getName() + "</a>";
             }

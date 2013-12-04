@@ -32,7 +32,7 @@
 	 	    e.preventDefault();// prevent the default anchor functionality
 	 	    $('#loginDropDown').dropdown('toggle');
 	 	    $('#registerDropDown').dropdown('toggle');
-	 	    $('#email').focus();
+	 	    $('#emailRegister').focus();
 		});
 	 	
 	 	$(".addResourceLink").click(function(e) {
