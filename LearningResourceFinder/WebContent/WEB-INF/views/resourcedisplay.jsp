@@ -23,17 +23,16 @@
 		});
  	    
  	    $('.nonurleditpop').popoverWithAutoHide("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
- 	    
+
+ 	    $('.nonimageeditpop').popoverWithAutoHide("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution.");
+
  	    $(".noAddProblemPop").popoverWithAutoHide("Pour signaler un problème, il faut être connecté.");
  	    
  	    $(".noneditresource").popoverWithAutoHide("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
 
 	});
  	
- 	function pop(){
- 		 $('#nonpopoveredit').popoverWithAutoHide("Pour modifier une url, il faut étre connecté et avoir un niveau 4 de contribution.");
- 	}
- 	
+
  	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
  	}
@@ -43,7 +42,12 @@
  		$("#nameField").attr("value", name);
  		$("#modalUrlResource").modal("show");
  	}
+
+ 	function onAddImageClick(){
+ 		$("#modalImageGalerieResource").modal("show");
+ 	}
  	
+
  	
  	function onCompetenceRemoveClick(competenceid, resourceid){
  		$("#competenceHiddenField").attr("value", competenceid);
@@ -104,7 +108,7 @@
    	       <div class="col-md-6">
 	   		   <c:forEach items="${resource.urlResources}" var="urlResource">
    	              <div class="row">
-   	                  <div class="col-md-3">
+   	                  <div class="col-md-3 text-right">
 							<c:if test="${urlResource.name != null}">${urlResource.name}</c:if>
    	                  </div>
    	                  <div class="col-md-9">
@@ -190,11 +194,19 @@
 
         <h4>Problèmes &nbsp; &nbsp; &nbsp;
 	        <a class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
-			  style="cursor:pointer; text-decoration:initial; line-height:20px; font-size:30px"
+			  style="cursor:pointer; text-decoration:initial; line-height:20px; font-size:25px; color:#CCC"
 			  title="Signaler un problème pour cette ressource..."></a>
 		</h4>
 	    <lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
 		<%@ include file="problemlist.jsp" %>
+
+		<h4>Images &nbsp; &nbsp; &nbsp;
+        <span  class='glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonimageeditpop":""}'	 ${canEditUrl==true ? "onclick='onAddImageClick()'":""}  style="float:none; font-size:15px" title="ajouter une image (typiquement une capture d'écran)"></span>
+        </h4>
+		<%@ include file="resourceimagegallery.jsp"%>
+   
+		<br /> <br />
+
 		
    	    <div class="col-md-12">
 					<dl class="dl-horizontal">
@@ -241,12 +253,6 @@
 					
 					
 
-					<h4>Galerie</h4>
-					<a data-toggle="modal" id="nonpopoveredit" ${canEdit == true ? "href='#modalImageGalerieResource'":"onclick='pop()'"}" class="btn btn-primary">Ajouter une Image</a>
-					<br /> <br />
-					<%@ include file="resourceimagegallery.jsp"%>
- 	    
-					<br /> <br />
 
                     <c:if test="${not empty youtubeVideoId}">  <%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
 	                      <style type="text/css">  <%-- to have a responsive layout - See more at: http://avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%>

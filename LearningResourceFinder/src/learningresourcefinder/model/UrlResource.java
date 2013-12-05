@@ -20,8 +20,7 @@ public class UrlResource extends BaseEntity
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     
-	@NotBlank
-	@Column(length = 50, nullable=false)
+	@Column(length = 50, nullable=true)
 	@Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
 	private String name;
 	

@@ -1,0 +1,2 @@
+ALTER TABLE urlresource
+   ALTER COLUMN name DROP NOT NULL;

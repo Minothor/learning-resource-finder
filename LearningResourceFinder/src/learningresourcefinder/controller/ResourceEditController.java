@@ -67,7 +67,7 @@ public class ResourceEditController extends BaseController<Resource> {
         resource.setTopic(topic);
         
         UrlResource urlResource = new UrlResource();
-        urlResource.setName(title);
+        // urlResource.setName();  The first (and probably only) URL has no name.
         urlResource.setUrl(url);
         urlResource.setResource(resource);
         resource.getUrlResources().add(urlResource);
