@@ -24,6 +24,8 @@
  	    
  	    $('.nonurleditpop').popoverWithAutoHide("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
 
+ 	    $('.nonCompetenceLinkPop').popoverWithAutoHide("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution.");
+
  	    $('.nonimageeditpop').popoverWithAutoHide("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution.");
 
  	    $(".noAddProblemPop").popoverWithAutoHide("Pour signaler un problème, il faut être connecté.");
@@ -113,7 +115,7 @@
    	                  </div>
    	                  <div class="col-md-9">
 							<a href="${urlResource.url}" target="_blank" id="urlresource"data-type="text">${urlResource.url}</a>
-							<span style="float:none; font-size:15px"  class="glyphicon glyphicon-pencil close 
+							<span style="float:none; font-size:15px"   title="Modifier cette URL" class="glyphicon glyphicon-pencil close addToolTip
 							  <c:choose>
 							        <c:when test="${canEditUrl}">
 							          " onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')"> 
@@ -123,20 +125,50 @@
 							        </c:otherwise>
 							  </c:choose>
 							</span>
-						
+							
+						    <button type="button" style="float:none;" title="Retirer cette URL" class="close addToolTip
 						    <c:choose>
 							        <c:when test="${canEditUrl}">
-							            <button type="button" class="close" style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">&times;</button>
+							            " style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})"
 							        </c:when>
 							        <c:otherwise>
-							            <button type="button" class="close nonurleditpop" style="float:none;" >&times;</button>
+							            nonurleditpop"  
 							        </c:otherwise>
 							</c:choose>
+							>&times;</button>
    	                  </div>
 			       </div>  <%-- end row --%>
-	             </c:forEach>		                
-	             <span  class="glyphicon glyphicon-plus close addTooltip ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" title="ajouter une url"></span>
-	                   
+	           </c:forEach>		                
+	           <div class="row">
+	              <div class="col-md-3">
+	              </div>
+	              <div class="col-md-9">
+			           <span  class="glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" 
+			              title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
+	              </div>
+	           </div>
+	           
+	           
+	           
+     		   <c:if test="${listMyPlayListsWithThisResource != null}">
+					Mes séquences contenant cette ressource:<br/>
+					<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
+						<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a><br/>
+                        	</c:forEach>
+                        	<br/> 
+			   </c:if>
+			   <c:if test="${listMyPlayListWithoutThisResource != null}">
+					<a id="addToPlayList" href='#' class='editableField' data-type='select' data-source="${listMyPlayListWithoutThisResource}">Ajouter à une de mes séquences</a><br/> 
+			   </c:if>
+			   <c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
+					Séquences d'autres utilisateurs contenant cette ressource:<br/>
+					<c:forEach items="${listOtherPeoplePlayListsWithThisResource}" var="playlist">
+							<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a>
+                        	</c:forEach>
+			   </c:if>
+			   <br />
+			   <br />
+				
 		   </div>
 		</div>  <%-- end row --%>
 
@@ -192,6 +224,58 @@
 		</div>  <%-- end row --%>
 
 
+        <c:forEach items="${resource.competences}" var="competence">
+           <lrf:competencepath competence="${competence}"/>
+           <button type="button" style="float:none;"  class="close
+	           <c:choose>
+			        <c:when test="${canLinkToCompetence}">
+			          " onclick="onCompetenceRemoveClick(${competence.id})"> 
+			        </c:when>
+			        <c:otherwise>
+			          nonCompetenceLinkPop">
+			        </c:otherwise>
+			  </c:choose>
+		   &times;</button>
+           <br/>                           
+        </c:forEach>
+ 
+        <c:if test="${empty resource.competences}">aucune compétence liée</c:if>
+        <span class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'" :  "' onclick='onAddCompetenceClick()'"} style="float:none; font-size:15px" title="Ajouter une compétence" ></span>  
+ 
+        <c:if test="${not empty youtubeVideoId}">  <%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
+          <style type="text/css">  <%-- to have a responsive layout - See more at: http://avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%>
+            .video-container {
+			    position: relative;
+			    padding-bottom: 56.25%;
+			    padding-top: 30px; height: 0; overflow: hidden;
+			}
+			 
+			.video-container iframe,
+			.video-container object,
+			.video-container embed {
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			}
+		  </style>	
+          <div class="video-container"> 
+              <iframe width="420" height="315" src="//www.youtube.com/embed/${youtubeVideoId}?rel=0" frameborder="0" allowfullscreen></iframe>
+          </div> 
+        </c:if>	
+     	<br /> <br />
+
+
+
+		<h4>Images &nbsp; &nbsp; &nbsp;
+        <span  class='glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonimageeditpop":""}'	 ${canEditUrl==true ? "onclick='onAddImageClick()'":""}  style="float:none; font-size:15px" title="ajouter une image (typiquement une capture d'écran)"></span>
+        </h4>
+		<%@ include file="resourceimagegallery.jsp"%>
+   
+   		<br /> <br />
+   		
+   		
         <h4>Problèmes &nbsp; &nbsp; &nbsp;
 	        <a class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
 			  style="cursor:pointer; text-decoration:initial; line-height:20px; font-size:25px; color:#CCC"
@@ -200,87 +284,10 @@
 	    <lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
 		<%@ include file="problemlist.jsp" %>
 
-		<h4>Images &nbsp; &nbsp; &nbsp;
-        <span  class='glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonimageeditpop":""}'	 ${canEditUrl==true ? "onclick='onAddImageClick()'":""}  style="float:none; font-size:15px" title="ajouter une image (typiquement une capture d'écran)"></span>
-        </h4>
-		<%@ include file="resourceimagegallery.jsp"%>
-   
 		<br /> <br />
 
 		
-   	    <div class="col-md-12">
-					<dl class="dl-horizontal">
-		                
 
-
-						<dt>Compétence:</dt>
-                        <dd>
-                          <c:forEach items="${resource.competences}" var="competence">
-                            <lrf:competencepath competence="${competence}"/>
-                              <button type="button" class="close" style="float:none;" onclick="onCompetenceRemoveClick(${competence.id})">&times;</button>
-                            <br/>                           
-                          </c:forEach>
-                          <span class="glyphicon glyphicon-plus close ${canEdit==false ? "noneditresource\"" :  " \" onclick= 'onAddCompetenceClick()'"} style="float:none; font-size:15px" ></span> 
-                        </dd>
-						<c:if test="${listMyPlayListsWithThisResource != null}">
-							<dt>Mes séquences:</dt>
-							<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
-								<dd>
-									<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a>
-								</dd>
-                          	</c:forEach>
-                          	<br/> 
-						</c:if>
-						<c:if test="${listPlayList != null}">
-							<dt>Ajouter à la séquence:</dt>
-							<dd>
-								<a id="addToPlayList" ${canEdit==true? "href='#' class='editableField' data-type='select'": " class='noneditresource'"} data-source="${listPlayList}">Sélectionner</a>
-							</dd>
-							<br/> 
-						</c:if>
-						<c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
-							<dt>Autres séquences:</dt>
-							<c:forEach items="${listOtherPeoplePlayListsWithThisResource}" var="playlist">
-								<dd>
-									<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a>
-								</dd>
-                          	</c:forEach>
-						</c:if>
-					</dl>
-					<br />
-
-					<br />
-					
-					
-
-
-                    <c:if test="${not empty youtubeVideoId}">  <%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
-	                      <style type="text/css">  <%-- to have a responsive layout - See more at: http://avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%>
-	                        .video-container {
-							    position: relative;
-							    padding-bottom: 56.25%;
-							    padding-top: 30px; height: 0; overflow: hidden;
-							}
-							 
-							.video-container iframe,
-							.video-container object,
-							.video-container embed {
-							    position: absolute;
-							    top: 0;
-							    left: 0;
-							    width: 100%;
-							    height: 100%;
-							}
-						  </style>	
-	
-	                      <div class="video-container"> 
-	                         <iframe width="420" height="315" src="//www.youtube.com/embed/${youtubeVideoId}?rel=0" frameborder="0" allowfullscreen></iframe>
-	                      </div> 
-                    </c:if>	
-					
-					<br /> <br />
-					
-	       </div>
 
 <%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
 <%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>

@@ -74,6 +74,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
         mv.addObject("canEditUrl", canEditUrl);
     	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
+        mv.addObject("canLinkToCompetence", levelService.canDoAction(user, Action.LINK_RESOURCE_TO_COMPETENCE));
+    	    	
     	
     	List<Problem> problemList = problemRepository.findProblemOfResourceNoResolved(resource);
     	for(Problem problem: problemList){
@@ -84,7 +86,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	    //for add Resource in PlayList
     	    Set<PlayList> tpl = playListService.getAllUserPlayListsDontContainAResource(user,resource);
     	    if(tpl.size() != 0){
-    	        mv.addObject("listPlayList", playListService.setPlayListToJSONWithIdAndName(tpl));
+    	        mv.addObject("listMyPlayListWithoutThisResource", playListService.setPlayListToJSONWithIdAndName(tpl));
     	    }
     	    
     	    //for watch user's playlists with this resource

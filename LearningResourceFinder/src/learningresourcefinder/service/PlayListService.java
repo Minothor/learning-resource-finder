@@ -26,11 +26,8 @@ public class PlayListService {
     public Set<PlayList> getAllUserPlayListsDontContainAResource(User user, Resource resource){
 
         // We want the playlist list sorted by name
-        Comparator<PlayList> comparator = new Comparator<PlayList>() {
-            @Override  public int compare(PlayList pl1, PlayList pl2) {
-                return pl1.getName().compareToIgnoreCase(pl2.getName());
-            }
-        };
+        Comparator<PlayList> comparator = new PlayListNameComparator();
+
         SortedSet<PlayList> playListSet =  new TreeSet<PlayList>(comparator);
         SortedSet<PlayList> playListSetToReturn =  new TreeSet<PlayList>(comparator);
         playListSet.addAll(user.getPlayListList());
@@ -44,31 +41,11 @@ public class PlayListService {
         return playListSetToReturn;
     }   
     
-    public String setPlayListToJSONWithIdAndName(Set<PlayList> spl){
-        
-        String json = "[";
 
-        for(PlayList pl : spl){
-            json = json +"{value:'"+ pl.getId() + "',text:'"+ pl.getName() + "'},";
-        }
-        if(!json.equals("[")){
-            json = json.substring(0, json.length() - 1);
-        }
-        
-        return json + "]";
-        
-        // example below of key/value template to display playlist in x-editable combobox 
-        //[{value:'false',text:'Non'},{value:'true',text:'Oui'}]
-    }
-    
     public Set<PlayList> getUserPlayListsWithResource(Resource resource,User user){
         
         // We want the playlist list sorted by name
-        Comparator<PlayList> comparator = new Comparator<PlayList>() {
-            @Override  public int compare(PlayList pl1, PlayList pl2) {
-                return pl1.getName().compareToIgnoreCase(pl2.getName());
-            }
-        };
+        Comparator<PlayList> comparator = new PlayListNameComparator();
         
         Set<PlayList> spl = user.getPlayListList();
         Set<PlayList> splContainingResource = new TreeSet<PlayList>(comparator);
@@ -85,11 +62,7 @@ public class PlayListService {
     public Set<PlayList> getOtherPeoplePlayListsWithResource(Resource resource,User user){
         
         // We want the playlist list sorted by name
-        Comparator<PlayList> comparator = new Comparator<PlayList>() {
-            @Override  public int compare(PlayList pl1, PlayList pl2) {
-                return pl1.getName().compareToIgnoreCase(pl2.getName());
-            }
-        };
+        Comparator<PlayList> comparator = new PlayListNameComparator();
         
         Set<PlayList> spl = new TreeSet<PlayList>(comparator);
         spl.addAll(playListRepository.getAllPlayLists());
@@ -105,7 +78,28 @@ public class PlayListService {
     }
     
 
-    
+    public String setPlayListToJSONWithIdAndName(Set<PlayList> spl){
+        
+        String json = "[";
 
+        for(PlayList pl : spl){
+            json = json +"{value:'"+ pl.getId() + "',text:'"+ pl.getName() + "'},";
+        }
+        if(!json.equals("[")){
+            json = json.substring(0, json.length() - 1);
+        }
+        
+        return json + "]";
+        
+        // example below of key/value template to display playlist in x-editable combobox 
+        //[{value:'false',text:'Non'},{value:'true',text:'Oui'}]
+    }
+        
+
+    static class PlayListNameComparator implements Comparator<PlayList> {
+        @Override  public int compare(PlayList pl1, PlayList pl2) {
+            return pl1.getName().compareToIgnoreCase(pl2.getName());
+        }
+    };
 
 }
