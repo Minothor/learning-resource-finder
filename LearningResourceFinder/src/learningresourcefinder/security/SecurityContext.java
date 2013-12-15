@@ -200,12 +200,14 @@ public  class SecurityContext {
                 || isUserHasPrivilege(Privilege.MANAGE_USERS);     // or If this user has the privilege to edit other users
     }
 
-    public static boolean canCurrentUserEditPlayList(PlayList playList) { 
+    public static boolean canCurrentUserEditPlayList(PlayList playList) {
+        if (isUserHasPrivilege(Privilege.MANAGE_PLAYLIST)) {               // If this user has the privilege to edit other playlist
+            return true;
+        }
     	if (playList.getCreatedBy() == null) {  // May happen in case of playlist created by a batch program.
     		return false;
     	}
-        return playList.getCreatedBy().equals(getUser()) // If the user is editing his own playlist
-                || isUserHasPrivilege(Privilege.MANAGE_PLAYLIST);     // or If this user has the privilege to edit other playlist
+        return playList.getCreatedBy().equals(getUser()); // If the user is editing his own playlist
     }
     
     public static boolean canCurrentUserEditResource(Resource resource) { 

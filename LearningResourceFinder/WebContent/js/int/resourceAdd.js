@@ -8,7 +8,7 @@
 function ajaxVerifyUrl() {
 	var url = $('#urlAddField').val();
 	if (isValidURL(url) == false) {
-		alert("url non valide ");
+		alert('Veuillez entrer une URL valide, commençant par "http://"');
 		return;
 	}
 	

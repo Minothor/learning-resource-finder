@@ -53,11 +53,12 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	@RequestMapping("/editsubmit")
 	public ModelAndView playListEditSubmit(@Valid @ModelAttribute PlayList playList, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
-
 			return new ModelAndView("playlistedit","playlist",playList);
 		}
 		
-		SecurityContext.assertCurrentUserMayEditThisPlaylist(playList);
+		if (playList.getId() != null) { // Existing playlist (not creating)
+		    SecurityContext.assertCurrentUserMayEditThisPlaylist(playList);
+		}
 		PlayList playListHavingTheSameName = playlistRepository.findByNameAndAuthor(playList.getName(), SecurityContext.getUser());
 
 		// set the slug based on the (maybe changed) title
@@ -67,7 +68,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		if(playList.getId()==null) {  // Create
 			SecurityContext.getUser().setUserProgressPoints(2); 
 			if(playListHavingTheSameName != null ) {
-				NotificationUtil.addNotificationMessage("Ce titre existe déjà, veuillez en choisir un autre", Status.WARNING);
+				NotificationUtil.addNotificationMessage("Cet intitulé existe déjà pour une de vos séquences, veuillez en choisir un autre", Status.WARNING);
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
 			} 
 			playlistRepository.persist(playList);
@@ -86,7 +87,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	
 	private ModelAndView otherPlayListError(PlayList playList, PlayList otherPlayList, BindingResult bindingResult) {
 		ModelAndView mv = new ModelAndView ("playlistedit", "playlist", playList);
-		bindingResult.rejectValue("name", "sss", "Une de vos playList a déjà ce titre. Merci d'en choisir un différent.");
+		bindingResult.rejectValue("name", "sss", "Une de vos séquences a déjà ce titre. Merci d'en choisir un différent.");
 		return mv;
 	}
 
