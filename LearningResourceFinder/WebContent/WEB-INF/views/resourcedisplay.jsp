@@ -148,14 +148,14 @@
 	              </div>
 	           </div>
 	           
-	           
+	           <br/><br/>
 	           
      		   <c:if test="${listMyPlayListsWithThisResource != null}">
 					Mes séquences contenant cette ressource:<br/>
 					<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
-						<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a><br/>
-                        	</c:forEach>
-                        	<br/> 
+						<lrftag:playlist playlist="${playlist}"/>
+                    </c:forEach>
+                    <br/> 
 			   </c:if>
 			   <c:if test="${listMyPlayListWithoutThisResource != null}">
 					<a id="addToPlayList" href='#' class='editableField' data-type='select' data-source="${listMyPlayListWithoutThisResource}">Ajouter à une de mes séquences</a><br/> 
@@ -163,8 +163,8 @@
 			   <c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
 					Séquences d'autres utilisateurs contenant cette ressource:<br/>
 					<c:forEach items="${listOtherPeoplePlayListsWithThisResource}" var="playlist">
-							<a href="<c:url value='/playlist/${playlist.shortId}/${playlist.slug}'/>">${playlist.name}</a>
-                        	</c:forEach>
+						<lrftag:playlist playlist="${playlist}"/>
+                   	</c:forEach>
 			   </c:if>
 			   <br />
 			   <br />
