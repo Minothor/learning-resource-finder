@@ -163,6 +163,9 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	/** Shorter version of the description (for lists) */
 	public String getDescriptionCut() {
 	    final int MAX_LENGTH_DESCRIPTION_CUT = 150;
+	    if (description == null) {
+	        return "";
+	    }
 	    if (description.length() > MAX_LENGTH_DESCRIPTION_CUT) {
 	        return description.substring(0 , MAX_LENGTH_DESCRIPTION_CUT) + "...";
 	    } else {

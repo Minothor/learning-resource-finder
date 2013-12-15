@@ -60,10 +60,12 @@ public class SearchOptions {
 	}
 	
 	public enum Nature {
-		FORMATIVE("Formatif sans correction"),
-		EVALUATIVE("Evaluatif sans correction"), 
-		FORMATIVECORR("Formatif avec correction"), 
-		EVALUATIVECORR("Evaluatif avec correction");
+		FORMATIVE_EXPL("Formatif (jeu/exploration)"),
+        FORMATIVE_THEO("Formatif (théorie)"),
+		EVALUATIVE_NOANSWER("Evaluatif sans correction"), 
+        EVALUATIVE_WITHANSWER("Evaluatif avec correction"), 
+		FORMATIVE_EVAL_NOANSWER("Formatif et évaluatif sans correction"), 
+        FORMATIVE_EVAL_WITHANSWER("Formatif et évaluatif avec correction"); 
 		private Nature(String description){this.description = description;}
 		private final String description;
 		public String getDescription(){return description;}

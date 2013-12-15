@@ -41,8 +41,14 @@ function ajaxVerifyUrl() {
 }
 
 function isValidURL(url) {
-	var result = url.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/);
-	return result == null ? false : true;
+	// I've tried many clever regexp from the web, but all make a valid url fail soon or later. The one below does not accept this: http://www.asblentraide.be/docs%5CFICHE%205.2%20-%20SUITES%20ARITHMETIQUES%20ET%20SUITES%20GEOMETRIQUES.pdf
+	// var result = url.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/);
+	url = url.toLowerCase();
+	if (url.indexOf("http://") == 0 || url.indexOf("https://")==0 ) { // url starts with "http://" or "https://"
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function clearForm() {

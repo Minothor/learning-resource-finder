@@ -23,5 +23,7 @@
 <script src="/js/ext/bootstrap-editable.min.js"> </script>
 <script src="/js/ext/jquery.ui.totop.js"></script>
 <script src="/js/ext/jquery.easing.1.3.js" type="text/javascript"></script>
-<script type="text/javascript" src="/js/int/allPages.js"></script>
+<script src="/js/ext/modernizr.custom.08676.js"></script>
+<script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ -->
+<script src="/js/int/allPages.js"></script>
 <!-- ***************************** END JAVASCRIPT **************************** -->   

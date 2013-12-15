@@ -39,7 +39,8 @@
 		});
 /* end script Connection With Facebook */
 
-		
+// plolyfill to make browser HTML5 compatible  http://afarkas.github.io/webshim/demos/
+$.webshims.polyfill();		
 		
 /****** Defines new jQuery functions */
 jQuery.fn.extend({

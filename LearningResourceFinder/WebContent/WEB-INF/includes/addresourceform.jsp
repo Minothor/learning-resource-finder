@@ -19,7 +19,8 @@
 					<div class="form-horizontal container">
 						<div class="form-group">
 	                        <label for="url">site</label> 
-	                        <input type="text" class="form-control" id="urlAddField" name="url" placeholder="http://...">
+	                        <input type="text" class="form-control" id="urlAddField" name="url" placeholder="http://..." 
+	                               pattern="https?://.+"  title="Votre URL doit commencer par http:// ou https://">
 							<span class="help-block">URL vers le site que vous désirez ajouter.</span>
 	                        <div class="pull-right"> 
 	                           <button type="button" class="btn btn-mini btn-primary" id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
