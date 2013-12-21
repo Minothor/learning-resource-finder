@@ -37,11 +37,11 @@
 					<h4>Compétences</h4>
 
                      <p><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> primaire</a></p>
-                     <p><a href="<c:url value='/cycle?id=300'/>">3<sup>ème</sup> - 4<sup>ème</sup> primaire</a></p>
-                     <p><a href="<c:url value='/cycle?id=300'/>">5<sup>ème</sup> - 6<sup>ème</sup> primaire</a></p>
+                     <p><a href="<c:url value='/cycle?id=303'/>">3<sup>ème</sup> - 4<sup>ème</sup> primaire</a></p>
+                     <p><a href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> - 6<sup>ème</sup> primaire</a></p>
                      <br/>
-                     <p><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> secondaire</a></p>
-                     <p><a href="<c:url value='/cycle?id=300'/>">3<sup>ère</sup> - 6<sup>ème</sup> secondaire</a></p>
+                     <p><a href="<c:url value='/cycle?id=304'/>">1<sup>ère</sup> - 2<sup>ème</sup> secondaire</a></p>
+                     <p><a href="<c:url value='/cycle?id=305'/>">3<sup>ère</sup> - 6<sup>ème</sup> secondaire</a></p>
                      <br/>
 <%-- We hardcode links to have nicer names and sorting					    
 						  <c:forEach items="${applicationScope.cache.cycles}" var="cycle">

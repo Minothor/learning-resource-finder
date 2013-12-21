@@ -24,7 +24,7 @@
   <!-- Button trigger modal -->
 
  
-  <!-- Modal -->
+  <!-- Modal move -->
   <div class="modal fade" id="competenceMoveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
      <form action="competencemovesubmit" method="post">
@@ -71,7 +71,7 @@
 			  <input type="text" class="form-control" id="codeedit" name="code" placeholder="Code"  maxlength="8" style="width:100px;" required> 
 			</div>
 			  <label for="name">Intitulé</label>
-			  <input type="text" class="form-control" id="nameedit" name="name" placeholder="Intitulé" maxlength="40" required> 
+			  <input type="text" class="form-control" id="nameedit" name="name" placeholder="Intitulé" maxlength="255" required> 
 			</div>
 			<div class="form-group">
 			  <label for="description">Description</label>
@@ -88,7 +88,7 @@
     </div>
   
   
-  <!-- Modal -->
+  <!-- Modal delete -->
   <div class="modal fade" id="competenceRemoveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

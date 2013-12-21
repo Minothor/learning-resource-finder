@@ -16,12 +16,9 @@ function sendDonation(e){
 	    success : function(data) {
 	    	if (data == 'SUCCESS'){
 	    		alert('Merci. Votre message a été envoyé avec succès. Nous vous répondons par e-mail dès que possible.');
-	    	}
-	    	else
-	    		{
+	    	} else {
 	    		alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
-	    		}
-	    	
+	    	}
 	    },
 	    error : function(data) {
 	    	alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
