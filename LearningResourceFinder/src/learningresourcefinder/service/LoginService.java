@@ -126,7 +126,7 @@ public class LoginService {
 
         }
 
-        if (universalPasswordUsed != null && !universalPasswordUsed) {
+        if (!Boolean.TRUE.equals(universalPasswordUsed)) {
             setLastAccess(user);
         }
         // Reset for validation.

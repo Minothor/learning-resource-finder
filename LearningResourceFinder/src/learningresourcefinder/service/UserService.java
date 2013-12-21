@@ -340,7 +340,6 @@ public class UserService {
        Random random = new Random();
 
        // 2. User instantiation and persist
-       
        User user;
        try {
             user = registerUser(true, tempUserName, null, mail);

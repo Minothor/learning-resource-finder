@@ -22,14 +22,13 @@
     </layout>
   </appender>
 
-  
-	
-	<!-- Application Loggers -->
-	<logger name="org.springframework.social" additivity="false">
-		<level value="warn" />
+
+	<logger name="learningresourcefinder" additivity="false">
+		<level value="debug" />
 		<appender-ref ref="console"/>
 	</logger>
 	
+  	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core" additivity="false">
 		<level value="error" />

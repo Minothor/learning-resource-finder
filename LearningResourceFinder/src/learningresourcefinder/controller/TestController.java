@@ -9,8 +9,10 @@ import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.service.CompetenceNodeService;
 import learningresourcefinder.util.CompetenceNode;
+import learningresourcefinder.util.Logger;
 import learningresourcefinder.util.NotificationUtil;
 
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +26,13 @@ public class TestController extends BaseController<BaseEntity>{
     @Autowired CycleRepository cycleRepository;
     @Autowired CompetenceRepository competenceRepository;
     @Autowired CompetenceNodeService competenceNodeService;
-    
+    @Logger Log log;
+
     @RequestMapping("/test")
     public ModelAndView test() {
         Competence competence = competenceRepository.find(12L);
+        log.debug("test log");
+
         return new ModelAndView("test", "competence", competence);
     }
     

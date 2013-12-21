@@ -153,11 +153,14 @@ public class LoginController extends BaseController<User> {
 
     private void completeUserFromSocialProfile(String providerId,  Profile profile, User user) {
         ///// Get general info
+        log.debug("user.getFirstName = '"+user.getFirstName()+"'");
         if (user.getFirstName() != null) {
             user.setFirstName(profile.getFirstName());
+            log.debug("setting profile.getFirstName(): " + profile.getFirstName());
         }
         if (user.getLastName() != null) {
             user.setLastName(profile.getLastName());
+            log.debug("setting profile.getLastName(): " + profile.getLastName());
         }
         if (user.getBirthDate() != null && profile.getDob() != null) {  // I've not seen this worked (as if FB & Google don't send the birthdate) - JOHN 2013-09-06
             Calendar cal = new GregorianCalendar(profile.getDob().getYear(), profile.getDob().getMonth()+1, profile.getDob().getDay());

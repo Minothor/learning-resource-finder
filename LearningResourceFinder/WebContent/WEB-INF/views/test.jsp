@@ -21,7 +21,7 @@ $(function ()
 <a  id="mycyclePopover" data-content="hello teste " href="#"> un message</a><br/>
 
    <a href="/test/addMsg">Générer un message (serveur)</a><br/>
-   <span onclick='showNotificationText("Hello", "danger");'>GÃ©nÃ©rer un message (javascript)</span>
+   <span onclick='showNotificationText("Hello", "danger");'>Générer un message (javascript)</span>
    <button onclick="progressBarAjax();">Progress bar ajax</button>
 </div>
 </body>
