@@ -215,7 +215,7 @@
 						</div>  <%-- end row --%>
 				   	    <div class="row">
 				   	        <div class="col-md-3 col-md-offset-9">
-	     						<a ${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}> ${resource.author}</a>
+	     						<a id="author" ${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}> ${resource.author}</a>
 				            </div>						
 						</div>  <%-- end row --%>
 					</div> <%-- end panel body --%>

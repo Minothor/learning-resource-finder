@@ -127,7 +127,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		
 		Resource resource = getRequiredEntity(id);
 		SecurityContext.assertCurrentUserMayEditThisResource(resource);
-
+        value = value.trim();
+        
 		if (fieldName.equals("title")){
 			resource.setName(value);
 			String slug = Slugify.slugify(resource.getName());
@@ -155,6 +156,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		else if(fieldName.equals("duration")){
 			resource.setDuration(Integer.parseInt(value));
 		}
+        else if(fieldName.equals("author")){
+            resource.setAuthor(value);
+        }
 		else if(fieldName.equals("topic")){
 			resource.setTopic(Topic.values()[Integer.parseInt(value)-1]);
 		}
