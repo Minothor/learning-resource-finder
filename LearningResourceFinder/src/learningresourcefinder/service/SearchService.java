@@ -118,7 +118,7 @@ public class SearchService {
 		for(SearchResult resource: searchResults){
 			resourceIds.add(resource.getId());
 		}
-		// Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
+		// TODO Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
 		int posOfFirstElementPaging = Math.min(searchResults.size()-1, (page-1) * RESOURCES_PER_SEARCH_PAGE);
 		int amountOfElementsPaging = RESOURCES_PER_SEARCH_PAGE;
 

@@ -51,52 +51,59 @@ public class ResourceRepository extends BaseRepository<Resource>
 		
 		//// Add Conditions and parameters
 		// Language
-		String whereCondition = "";
-		for (Language language : searchOptions.getLanguage()) {
-			if (!whereCondition.equals("")) {
-				whereCondition += " OR ";
-			}
-			whereCondition = whereCondition + " r.language='" + language.name() + "' ";
-		}
-		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
+        if (searchOptions.getLanguage().size() < Language.values().length) {  // else we don't filter on that criteria, we take any value
+            // filter for each selected value
+            String whereCondition = "";
+            for (Language language : searchOptions.getLanguage()) {
+                if (!whereCondition.equals("")) {
+                    whereCondition += " OR ";
+                }
+                whereCondition += " r.language='" + language.name() + "' ";
+            }
+            if (searchOptions.getLanguage().size() == 1 && searchOptions.getLanguage().get(0).equals(Language.FR)) {  // If FR is the only selected language (usual case)
+                whereCondition += " OR r.language is null ";  // We include all resources having an undefined language. 
+            }
+            whereConditions.add(whereCondition);
+        }
 
 		// Format
-		whereCondition = "";
-		for (Format format : searchOptions.getFormat()) {
-			if (!whereCondition.equals("")) {
-				whereCondition += " OR ";
-			}
-			whereCondition = whereCondition + " r.format='" + format.name() + "' ";
-		}
-		if (!whereCondition.equals("")) whereConditions.add(whereCondition);
-		
-		
+        if (searchOptions.getFormat().size() < Format.values().length) {  // else we don't filter on that criteria, we take any value
+            // filter for each selected value
+            String whereCondition = "";
+            for (Format format : searchOptions.getFormat()) {
+                if (!whereCondition.equals("")) {
+                    whereCondition += " OR ";
+                }
+                whereCondition = whereCondition + " r.format='" + format.name() + "' ";
+            }
+            whereConditions.add(whereCondition);
+        }
+
 		// Platform
-		whereCondition = "";
-		for (Platform platform : searchOptions.getPlatform()) {
-			if (!whereCondition.equals("")) {
-				whereCondition += " OR ";
-			}
-			whereCondition = whereCondition + " r.platform='" + platform.name() + "' ";
-		}
-		if (!whereCondition.equals("")) whereConditions.add(whereCondition);		
+        if (searchOptions.getPlatform().size() < Platform.values().length) {  // else we don't filter on that criteria, we take any value
+            // filter for each selected value
+            String whereCondition = "";
+            for (Platform platform : searchOptions.getPlatform()) {
+                if (!whereCondition.equals("")) {
+                    whereCondition += " OR ";
+                }
+                whereCondition = whereCondition + " r.platform='" + platform.name() + "' ";
+            }
+            whereConditions.add(whereCondition);
+        }
 
 		// Nature
-		whereCondition = "";
-        if(searchOptions.getNature().size() == 4){
-            whereCondition = whereCondition + " r.nature is NULL ";        
+        if (searchOptions.getNature().size() < Nature.values().length) {  // else we don't filter on that criteria, we take any value
+            // filter for each selected value
+            String whereCondition = "";
+            for (Nature nature : searchOptions.getNature()) {
+                if (!whereCondition.equals("")) {
+                    whereCondition += " OR ";
                 }
-		for (Nature nature : searchOptions.getNature()) {
-			if (!whereCondition.equals("")) {
-				whereCondition += " OR ";
-			}
-			whereCondition = whereCondition + " r.nature='" + nature.name() + "' ";
-
-		}
-		
-
-		
-        if (!whereCondition.equals("")) whereConditions.add(whereCondition);				
+                whereCondition = whereCondition + " r.nature='" + nature.name() + "' ";
+            }
+            whereConditions.add(whereCondition);
+        }
 	
 		// Advertising
 		if (Boolean.FALSE.equals(searchOptions.isAdvertising())) { // We do not accept advertising (other case is Resource.advertising = true or null)

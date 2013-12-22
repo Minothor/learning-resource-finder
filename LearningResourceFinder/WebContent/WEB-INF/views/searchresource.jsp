@@ -4,12 +4,11 @@
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ page import="learningresourcefinder.search.SearchOptions"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
 <!-- To delete competence field -->
- <script type="text/javascript"> 
+<script type="text/javascript"> 
 $(document).ready(function reinitialize(){
   $("button").click(function(){
     $("#competenceIdHiddenField").val("");
@@ -17,12 +16,11 @@ $(document).ready(function reinitialize(){
 });
 </script>
 
-<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css"
-	media="screen" />
-<link rel="stylesheet" href="css/ext/bootstrap-theme.css"
-	type="text/css" media="screen" />
+<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css"	media="screen" />
+<link rel="stylesheet" href="css/ext/bootstrap-theme.css"type="text/css" media="screen" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <style>
 label {
 	font-weight: normal;
@@ -66,6 +64,7 @@ label {
 }
 
 </style>
+
 <script>
 window.onload = addLang;
 	function addLang() {
@@ -87,10 +86,13 @@ window.onload = addLang;
 		}
 	}
 </script>
-<title>Insert title here</title>
 </head>
+
+
 <body>
 	<div class="container">
+	
+	<lrftag:pageheadertitle title="Recherche ${searchOptions.searchPhrase}"/>
 	
 	<form:form modelAttribute="searchOptions" action="searchresource" method="get">
 			  <div class="filterSubBlock">
@@ -194,15 +196,13 @@ window.onload = addLang;
 		<c:when test="${numberResource>0}">
 			<ul class="pagination">
 				<c:if test="${page>1}">
-					<li><a href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page-1}&so=${timeStamp}">&laquo;</a></li>
+					<li><a href="searchresource?page=${page-1}&so=${timeStamp}">&laquo;</a></li>
 				</c:if>
 				<c:forEach begin="1" end="${numberResource / 100}" varStatus="loop">
-					<li><a
-						href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${loop.index}&so=${timeStamp}">${loop.index}</a></li>
+					<li><a href="searchresource?page=${loop.index}&so=${timeStamp}">${loop.index}</a></li>
 				</c:forEach>
 				<c:if test="${page*100 < numberResource}">
-				<li><a
-					href="searchresource?searchphrase=${searchOptions.searchPhrase}&page=${page+1}&so=${timeStamp}">&raquo;</a></li>
+				    <li><a href="searchresource?page=${page+1}&so=${timeStamp}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</c:when>

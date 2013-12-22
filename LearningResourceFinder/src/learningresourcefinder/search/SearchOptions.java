@@ -15,7 +15,7 @@ public class SearchOptions {
 	List<Nature> nature = new ArrayList<>();
 	Boolean advertising = null;
 	Integer maxDuration;
-	String searchPhrase;
+	String searchPhrase = "";
 	Competence competence; // Search restricted within this competence.
 	
 	public SearchOptions () {
