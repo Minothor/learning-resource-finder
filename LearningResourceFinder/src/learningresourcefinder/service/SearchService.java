@@ -15,6 +15,7 @@ import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchResult;
 
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.ScoreDoc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,7 @@ public class SearchService {
 	
 
 	public List<SearchResult> search(String keyWord) {
+	    keyWord = QueryParser.escape(keyWord); // Else, lucene throws an exception in case the user uses special chars. http://stackoverflow.com/questions/17798300/lucene-queryparser-with-in-query-criteria
 		List<SearchResult> searchResultList = new ArrayList<SearchResult>();
 		ScoreDoc[] scoreDocs = indexManagerService.search(keyWord);
 		for (ScoreDoc sd : scoreDocs) {
