@@ -225,7 +225,7 @@
 				<form class="navbar-form navbar-right" role="search" method="get" action="/search">
 				   <div class="form-group">
 					<div class="input-group" style="width:150px;">
-						<input name="searchphrase" id="search" style="min-width:150px; width:150px; max-width:300px;" type="text" class="form-control" placeholder="Recherche" required>
+						<input name="searchphrase" id="search" style="min-width:150px; width:150px; max-width:220px;" type="text" class="form-control" placeholder="Recherche" required>
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit">Go!</button>
 						</span>
