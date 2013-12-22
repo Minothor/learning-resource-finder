@@ -23,8 +23,15 @@ public class SearchOptions {
 		getFormat().addAll(Arrays.asList(Format.values()));
 		getPlatform().addAll(Arrays.asList(Platform.values()));
 		getNature().addAll(Arrays.asList(Nature.values()));
-
 	}
+	
+	public String toString() {
+	    return getSearchPhrase() + " " +
+	           isAdvertising() + " " + getMaxDuration() + " " +
+	           getLanguage().toString() + " " + getFormat().toString() + " " + getPlatform().toString() + " " + getNature().toString()
+	           + " " + competence;
+	}
+	
 	
 	public enum Language{
 		FR("Français"), 
