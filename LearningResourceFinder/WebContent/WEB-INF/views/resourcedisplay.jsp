@@ -15,6 +15,7 @@
  	    $('.editableField').editable({   
  	    	  emptytext: '? ?',
  	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+ 	    	  mode: 'popup',
  	    	  type: 'text',
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
@@ -22,7 +23,19 @@
  				location.reload();
  		      }
 		});
- 	    
+
+ 	    $('.editableFieldInline').editable({   
+	    	  emptytext: '? ?',
+	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+	    	  mode: 'inline',
+	    	  type: 'text',
+	    	  url: '/ajax/resourceeditfieldsubmit',
+	    	  pk: '${resource.id}',
+	 		  success: function(response) {
+				location.reload();
+		      }
+		});
+
  	    $('.nonurleditpop').popoverWithAutoHide("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
 
  	    $('.nonCompetenceLinkPop').popoverWithAutoHide("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution.");
@@ -91,7 +104,7 @@
 	<div class="container">
 		<div class="row">
    	       <div class="col-md-10">
-		      <h1><a id="title"  ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}>${resource.name}</a></h1>
+		      <h1><a id="title"  ${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}>${resource.name}</a></h1>
 		   </div>
    	       <div class="col-md-2 text-right">
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
@@ -106,7 +119,7 @@
         
 		<div class="row">
    	       <div class="col-md-6">
- 			   <a id="description" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
+ 			   <a id="description" ${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
 		   </div>
    	       <div class="col-md-6">
 	   		   <c:forEach items="${resource.urlResources}" var="urlResource">
