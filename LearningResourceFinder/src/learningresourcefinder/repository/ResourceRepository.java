@@ -3,6 +3,7 @@ package learningresourcefinder.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.Resource.Topic;
@@ -153,6 +154,16 @@ public class ResourceRepository extends BaseRepository<Resource>
 				.getResultList();
 		return results;
 	}
+
+    public List<Long> findIdsByCompetence(Competence competence) {
+        List<Competence> allCompetences = competence.getChildrenAndSubChildren();
+        allCompetences.add(competence);
+        
+        List<Long> results = em.createQuery("SELECT r.id FROM Resource r join r.competences c WHERE c in (:allCompetences)")
+                .setParameter("allCompetences", allCompetences)
+                .getResultList();
+        return results;
+    }
 	
 	
 }

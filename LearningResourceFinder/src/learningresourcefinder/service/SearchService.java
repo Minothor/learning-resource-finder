@@ -112,18 +112,22 @@ public class SearchService {
 	}
 	
 	
-	public List<Resource> getFilteredResources(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
+	public List<Resource> getFilteredResources1(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
 		final List<Long> resourceIds = new ArrayList<>();
 		
 		for(SearchResult resource: searchResults){
 			resourceIds.add(resource.getId());
 		}
-		// TODO Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
-		int posOfFirstElementPaging = Math.min(searchResults.size()-1, (page-1) * RESOURCES_PER_SEARCH_PAGE);
-		int amountOfElementsPaging = RESOURCES_PER_SEARCH_PAGE;
 
+		return getFilteredResources2(resourceIds, page, searchOptions);
+	}
+	
+    public List<Resource> getFilteredResources2(final List<Long> resourceIds, int page, SearchOptions searchOptions) {
+        // TODO Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
+        int posOfFirstElementPaging = Math.min(resourceIds.size()-1, (page-1) * RESOURCES_PER_SEARCH_PAGE);
+        int amountOfElementsPaging = RESOURCES_PER_SEARCH_PAGE;
 
-		List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions, posOfFirstElementPaging, amountOfElementsPaging);
+        List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions, posOfFirstElementPaging, amountOfElementsPaging);
 
 		// We remove the resources not within the specified competence.
 		if (searchOptions.getCompetence() != null) {

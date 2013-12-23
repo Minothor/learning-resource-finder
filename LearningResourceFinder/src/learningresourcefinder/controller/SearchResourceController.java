@@ -1,5 +1,6 @@
 package learningresourcefinder.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchResult;
 import learningresourcefinder.service.SearchService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,9 +64,10 @@ public class SearchResourceController extends BaseController<Resource> {
 
    
    
-	@RequestMapping("/searchresource")  // used as initial entry point from the header, or when the user clicks a page number.
+	@RequestMapping("/searchresource")  // used as initial entry point from the header, or when the user clicks a page number, or clicks a competence
 	public ModelAndView searchResource(Model model, 
 	        @RequestParam(value="searchphrase", required=false) String searchPhrase, 
+            @RequestParam(value="competenceid", required=false) Long competenceId,
 	        @RequestParam(value="page", required=false) Integer page, 
 	        HttpSession session,
 	        @RequestParam(value="so", required=false) Long timeStamp){ 
@@ -78,6 +81,10 @@ public class SearchResourceController extends BaseController<Resource> {
             searchOptions.setSearchPhrase(searchPhrase);
         }
                 
+        if (competenceId != null) {
+            searchOptions.setCompetence((Competence)getRequiredEntity(competenceId, Competence.class));
+        }
+
         if (page == null) {
             page=1;
         }
@@ -87,8 +94,19 @@ public class SearchResourceController extends BaseController<Resource> {
 	}
 
     private ModelAndView prepareModelAndView(Long timeStamp, SearchOptions searchOptions, int page) {
-        List<SearchResult> searchResults = searchService.search(searchOptions.getSearchPhrase());
-        List<Resource> resourceList = searchService.getFilteredResources(searchResults, page, searchOptions);
+        List<Resource> resourceList;
+        if (StringUtils.isNotBlank(searchOptions.getSearchPhrase())) {
+            List<SearchResult> searchResults = searchService.search(searchOptions.getSearchPhrase());
+            resourceList = searchService.getFilteredResources1(searchResults, page, searchOptions);
+        } else {  // User searches on a competence or on a rare filter combinations (i.e. "all the Arabic interactive resources")
+            if (searchOptions.getCompetence() != null) {
+                List<Long> resourceIdsForCompetence = resourceRepository.findIdsByCompetence(searchOptions.getCompetence());
+                resourceList = searchService.getFilteredResources2(resourceIdsForCompetence, page, searchOptions);
+            } else {  // Probably a rare option combination
+                // TODO get all resources with that filter option
+                resourceList = new ArrayList<>();
+            }
+        }
         
         ModelAndView mv = new ModelAndView("searchresource");
         mv.addObject("searchOptions", searchOptions);
