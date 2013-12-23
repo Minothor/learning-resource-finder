@@ -99,12 +99,12 @@ public class SearchResourceController extends BaseController<Resource> {
             List<SearchResult> searchResults = searchService.search(searchOptions.getSearchPhrase());
             resourceList = searchService.getFilteredResources1(searchResults, page, searchOptions);
         } else {  // User searches on a competence or on a rare filter combinations (i.e. "all the Arabic interactive resources")
-            if (searchOptions.getCompetence() != null) {
+            if (searchOptions.getCompetence() != null) { // No phrase but a competence => we first query for resources on the competence (we don't use Lucene)
                 List<Long> resourceIdsForCompetence = resourceRepository.findIdsByCompetence(searchOptions.getCompetence());
                 resourceList = searchService.getFilteredResources2(resourceIdsForCompetence, page, searchOptions);
             } else {  // Probably a rare option combination
                 // TODO get all resources with that filter option
-                resourceList = new ArrayList<>();
+                resourceList = searchService.getFilteredResources3(page, searchOptions);
             }
         }
         

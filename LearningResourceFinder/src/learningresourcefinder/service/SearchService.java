@@ -111,14 +111,12 @@ public class SearchService {
 		return result;
 	}
 	
-	
 	public List<Resource> getFilteredResources1(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
 		final List<Long> resourceIds = new ArrayList<>();
-		
-		for(SearchResult resource: searchResults){
-			resourceIds.add(resource.getId());
-		}
 
+		for(SearchResult resource: searchResults){
+		    resourceIds.add(resource.getId());
+		}
 		return getFilteredResources2(resourceIds, page, searchOptions);
 	}
 	
@@ -129,19 +127,7 @@ public class SearchService {
 
         List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions, posOfFirstElementPaging, amountOfElementsPaging);
 
-		// We remove the resources not within the specified competence.
-		if (searchOptions.getCompetence() != null) {
-			List<Resource> result = new ArrayList<>();  // We put the resources that we keep in a new list.
-			for (Resource resource : entities) {
-				for (Competence compOfResource :  resource.getCompetences()) {
-					if (compOfResource.isOrIsChildOrSubChildOf(searchOptions.getCompetence())) {
-						result.add(resource);
-						break;  // get out inner loop and continue with the next resource.
-					}
-				}
-			}
-			entities = result;
-		}
+		entities = removeResourcesNotInCompetence(searchOptions, entities);
 		
 		
 		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
@@ -155,6 +141,34 @@ public class SearchService {
 	}
 	
 
+    public List<Resource> getFilteredResources3(int page, SearchOptions searchOptions) {
+        // TODO Pages : foireux (il faut faire cela après le filtre sur les options....) --- John 2013-09-26
+        int posOfFirstElementPaging = (page-1) * RESOURCES_PER_SEARCH_PAGE;
+        int amountOfElementsPaging = RESOURCES_PER_SEARCH_PAGE;
+
+        List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(null, searchOptions, posOfFirstElementPaging, amountOfElementsPaging);
+
+        entities = removeResourcesNotInCompetence(searchOptions, entities);
+        
+        return entities;
+    }
+
+    private List<Resource> removeResourcesNotInCompetence(SearchOptions searchOptions, List<Resource> entities) {
+        // We remove the resources not within the specified competence.
+        if (searchOptions.getCompetence() != null) {
+            List<Resource> result = new ArrayList<>();  // We put the resources that we keep in a new list.
+            for (Resource resource : entities) {
+                for (Competence compOfResource :  resource.getCompetences()) {
+                    if (compOfResource.isOrIsChildOrSubChildOf(searchOptions.getCompetence())) {
+                        result.add(resource);
+                        break;  // get out inner loop and continue with the next resource.
+                    }
+                }
+            }
+            entities = result;
+        }
+        return entities;
+    }
 
 
 }

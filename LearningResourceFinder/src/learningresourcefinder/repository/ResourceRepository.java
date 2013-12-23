@@ -1,12 +1,16 @@
 package learningresourcefinder.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.Query;
 
 import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Resource;
-import learningresourcefinder.model.User;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.User;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
@@ -43,12 +47,15 @@ public class ResourceRepository extends BaseRepository<Resource>
 		
 	}
 	
+	
+	/** @param idList can be null if we don't want to limit the query to some resources */
 	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions, int posOfFirstElementPaging, int amountOfElementsPaging){
-		if (idList.isEmpty()) { // Defensive coding. An empty list would break the query
+	    if (idList != null && idList.isEmpty()) { // Defensive coding. An empty list would break the query
 			return new ArrayList<>();
 		}
-		
+	    
 		List<String> whereConditions = new ArrayList<>();
+		Map<String, Object> parameterMap = new HashMap<>();
 		
 		//// Add Conditions and parameters
 		// Language
@@ -116,22 +123,44 @@ public class ResourceRepository extends BaseRepository<Resource>
 			whereConditions.add(" r.duration<='" + searchOptions.getMaxDuration().intValue() + "' ");
 		}
 		
+		
+		if (idList != null) {
+		    whereConditions.add("r.id in (:idList)");
+		    parameterMap.put("idList", idList);
+		}
+		
 		//// Render the JP-QL statement
 		String whereClause = "";
+		boolean firstLoop = true;
 		for (String condition : whereConditions) {
-			whereClause += " AND ";
+			if (firstLoop) {
+			    firstLoop = false;
+			} else {			    
+			    whereClause += " AND ";
+			}
 			whereClause += "(" + condition + ")";
 		}
-		String queryString = "SELECT r FROM Resource r WHERE r.id in (:idList) " + whereClause;  // separate String, to debug.
 		
-
-		List<Resource> result = em.createQuery(queryString)
-				.setParameter("idList", idList)
+		
+		
+		
+		String queryString = "SELECT r FROM Resource r WHERE " + whereClause + " ORDER BY r.avgRatingScore desc NULLS LAST";
+		
+	
+		
+        Query query = em.createQuery(queryString);
+        for (String paramName : parameterMap.keySet()) {
+            query.setParameter(paramName, parameterMap.get(paramName));
+        }
+        
+		List<Resource> result = query
 				.setFirstResult(posOfFirstElementPaging)
 				.setMaxResults(amountOfElementsPaging)
 				.getResultList();
 		return result;
 	}
+	
+	
 	
 	public List<Resource> findAllResourceWhereProblemByTopic(Topic topic) {
 		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.topic = :topic AND SIZE(r.problems) > 0")
