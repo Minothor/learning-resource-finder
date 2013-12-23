@@ -26,7 +26,7 @@
 	<lrftag:breadcrumb linkactive="${playlist.name}">
 		<lrftag:breadcrumbelement label="Home" link="/home" />
         <c:if test="${playlist.createdBy eq current.user}">
-		   <lrftag:breadcrumbelement label="Mes playlists" link="/playlist/user/${current.user.userName}" />
+		   <lrftag:breadcrumbelement label="mes séquences" link="/playlist/user/${current.user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
 	
@@ -59,6 +59,8 @@
 					</c:if>	
 					<lrftag:resource resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
 			</c:forEach>
+		
+		    <p>Pour ajouter une ressource à cette séquence, passez par la page détaillant la ressource à ajouter (en étant connecté avec votre compte).</p>
 		
 		<!-- Modal -->
 		<div class="modal fade" id="modalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

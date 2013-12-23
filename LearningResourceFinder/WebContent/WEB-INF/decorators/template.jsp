@@ -13,7 +13,9 @@
   <%@ include file="/WEB-INF/includes/import.jsp"%>
   
   <decorator:head />
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />  <%-- for IE --%>
+  <link rel="icon" type="image/png" href="/favicon.png">  <%-- for Chrome, Safari and Firefox --%>
 
   <title><decorator:title /></title>
 </head>
