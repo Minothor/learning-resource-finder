@@ -24,10 +24,12 @@ public class CompetencePathTag extends SimpleTagSupport {
 	@Override
 	public void doTag() throws IOException {
 		while (competence != null) { 
-			if (result == null) {
-				result =  competence.getFullName();
+			if (result == null) {  // First competence
+				result =  "<strong>" + competence.getFullName() + "</strong>";
 			} else {
-				result =  competence.getFullName() + " / " + result;
+			    if (competence.getParent() != null) { // we don't display the root (space consuming)
+				    result =  competence.getFullName() + " / " + result;
+			    }
 			}
 			competence = competence.getParent();
 		}
