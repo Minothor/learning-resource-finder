@@ -14,6 +14,7 @@
  		$.fn.editable.defaults.mode = 'inline';
  	    $('.editableField').editable({   
  	    	  emptytext: '? ?',
+ 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
  	    	  type: 'text',
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
