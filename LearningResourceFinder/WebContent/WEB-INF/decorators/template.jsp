@@ -18,6 +18,9 @@
   <title><decorator:title /></title>
 </head>
 <body>
+
+  <%@ include file="/WEB-INF/includes/badbrowserwarning.jsp"%>
+    
   <div id="wrap">
 
 	<%@ include file="/WEB-INF/includes/header.jsp"%>
