@@ -61,4 +61,5 @@ jQuery.fn.extend({
 $(document).ready(function(event) {		
 	$(".addToolTip").tooltip();  /* prepares all elements in the page that need a tooltip to get a bootstrap tooltip */
 	$(".addPopover").popoverWithAutoHide();  /* Content taken from attribute data-content (see bootstrap doc) */
+	
 });

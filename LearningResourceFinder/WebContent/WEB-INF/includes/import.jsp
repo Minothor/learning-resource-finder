@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/css/int/style.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/css/ext/bootstrap-editable.css">  <%-- In place editor --%>
 <link rel="stylesheet" media="screen,projection" href="/css/ext/ui.totop.css" />  <%-- bottom right corner button to move to the top of the page --%>
+<link rel="stylesheet" href="/plugins/yoxview/yoxview.css">   <%--http://yoxigen.com/yoxview --%>
 
 
 
@@ -25,5 +26,6 @@
 <script src="/js/ext/jquery.easing.1.3.js" type="text/javascript"></script>
 <script src="/js/ext/modernizr.custom.08676.js"></script>
 <script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ -->
+<script src="/plugins/yoxview/jquery.yoxview-2.21.min-modified.js"></script>  <%--http://yoxigen.com/yoxview --%>
 <script src="/js/int/allPages.js"></script>
 <!-- ***************************** END JAVASCRIPT **************************** -->   

@@ -1,0 +1,2 @@
+The plugin seems abandoned from his author and John changed the file from this post:
+http://stackoverflow.com/questions/9333178/how-do-i-put-the-yoxview-infopanel-right-under-the-image/20759586#20759586

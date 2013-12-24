@@ -100,7 +100,6 @@
 			<lrftag:breadcrumbelement label="Ressource" link="/ressourcelist/${user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
-	 
 	<div class="container">
 		<div class="row">
    	       <div class="col-md-10">

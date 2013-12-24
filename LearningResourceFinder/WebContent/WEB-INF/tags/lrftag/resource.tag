@@ -19,7 +19,25 @@
   </div>
   
   <c:if test="${resource.numberImage >= 1}">
-    <img src="/gen/resource/resized/small/${resource.id}-1.jpg" alt="${resource.name}" />
+    <div id="yoxview-resource-${resource.id}">
+        <a href="/gen/resource/original/${resource.id}-1.jpg">
+            <img src="/gen/resource/resized/small/${resource.id}-1.jpg" alt="${resource.name}" />
+        </a>
+    </div>        
+    <script type="text/javascript">
+       $(document).ready(function(){
+    	  $("#yoxview-resource-${resource.id}").yoxview({
+    		  lang:"fr",
+    		  <%-- Additional images if any, will be displayed by yoxview if the user clicks arrows to view next --%>
+    	      images: [
+    		  <c:forEach var="i" begin="2" end="${resource.numberImage}" step="1">
+    		      { media: { src: '/gen/resource/original/${resource.id}-${i}.jpg' }}
+    		      <c:if test="${i < resource.numberImage}">,</c:if>
+    		  </c:forEach>
+    		  ]
+    	  }) 
+       });
+    </script>
   </c:if>
 
   <div class="panel-body" style="margin-bottom:20px;">
