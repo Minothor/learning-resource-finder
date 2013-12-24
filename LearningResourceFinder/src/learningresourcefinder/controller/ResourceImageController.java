@@ -3,6 +3,7 @@ package learningresourcefinder.controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -100,13 +101,17 @@ public class ResourceImageController extends BaseController<User> {
         }
 		
         try {
+            // Save original image in jpg
+            String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
+            String fileName = resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg";
+            FileUtil.ensureFolderExists(path);
+            ImageIO.write(image,  "jpg", new File(path, fileName));
+
+            // Save scaled images
             ByteArrayOutputStream outStream= new ByteArrayOutputStream();
             ImageIO.write(image, "jpg", outStream);
-
             scaleAndSaveImage(outStream.toByteArray(), resource);
 
-            resource.setNumberImage(resource.getNumberImage() + 1);
-			resourceRepository.merge(resource);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
