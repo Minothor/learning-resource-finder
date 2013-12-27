@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"    prefix="fn" %>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
@@ -22,100 +22,74 @@
 	<h1>Recherche: ${searchPhrase}</h1>
 	
 							<!-- Resource start -->
-	<div class="ecart">
-		<h4>Resources:</h4>
-	</div>
+	<section>
+	<h2>Resources:</h2>
 
-	<c:forEach items="${resourceList}" var="resource">
-			<lrftag:resource resource="${resource}"/>
-	</c:forEach>
-
-							<!-- Resource end -->
-	
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />			
-	<br />
-	<br />		<!--  les <br/> sont là just pour testé il faudra les modifier avec du css -->
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
 	<c:choose>
-	<c:when test="${numberResource>5}">
-	<div>
-	<a href="/searchresource?searchphrase=${searchPhrase}">${numberResource-5} more</a>
-	</div>
-	</c:when>
-	<c:otherwise>
-	<div>
-	<a href="/searchresource?searchphrase=${searchPhrase}">Recherche avancée</a>
-	</div>	
-	</c:otherwise>
+		<c:when test="${numberResource==0}">
+		     Aucune ressource ne correspond à ce critère de recherche.
+		</c:when>
+		<c:otherwise>
+			<c:forEach items="${resourceList}" var="resource">
+					<lrftag:resource resource="${resource}"/>
+			</c:forEach>
+		</c:otherwise>
 	</c:choose>
-	<br />
-	<br />
-	<br />
+	
+	<c:choose>
+		<c:when test="${numberResource>5}">
+		   <c:set var="moreResourceText" value="voir les ${numberResource-5} autres ressources"/>
+		</c:when>
+		<c:otherwise>
+		   <c:set var="moreResourceText" value="Recherche avancée"/>
+		</c:otherwise>
+	</c:choose>
+	<div>
+		<a href="/searchresource?searchphrase=${searchPhrase}">${moreResourceText}</a>
+	</div>
+	</section>
+							<!-- Resource end -->
+
+
+
 
 							<!-- Playlist start -->
-	<div class="ecart">
-		<h4>Séquences:</h4>
-	</div>							
+    <section>	
+	<h2>Séquences:</h2>
 							
-	<c:forEach items="${playlistList}" var="playlist">
-		<div style="float: left; position: relative; padding: 10px; margin-top: 10px; width: 210px;">
-			<lrftag:playlist playlist="${playlist}"></lrftag:playlist>
-		</div>
-	</c:forEach>
+	<c:choose>
+		<c:when test="${fn:length(playlistList)==0}">
+		     Aucune séquence ne correspond à ce critère de recherche.
+		</c:when>
+		<c:otherwise>
+			<c:forEach items="${playlistList}" var="playlist">
+					<lrftag:playlist playlist="${playlist}"></lrftag:playlist>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
 
+	</section>
 							<!-- Playlist end -->
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />		<!--  les <br/> sont là just pour avoir une bonne position il faudra les modifier avec du css -->
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	
-							<!-- compétence start -->
-	<div class="ecart">
-		<h4>Compétences:</h4>
-	</div>							
 							
-	<c:forEach items="${competenceList}" var="competence">
-		<div style="float: left; position: relative; padding-left: 5px; margin-top: 10px;">
-			<a href="/searchresource?searchphrase=${searchPhrase}&competenceid=${competence.getId()}"><lrf:competencepath competence="${competence}"/></a>	
-		</div>
-	</c:forEach>
+							
+							<!-- compétence start -->
+    <section>
+	<h2>Compétences:</h2>
 
+	<c:choose>
+		<c:when test="${fn:length(competenceList)==0}">
+		     Aucune compétence ne correspond à ce critère de recherche.
+		</c:when>
+		<c:otherwise>
+			<c:forEach items="${competenceList}" var="competence">
+				<div style="float: left; position: relative; padding-left: 5px; margin-top: 10px;">
+					<a href="/searchresource?searchphrase=${searchPhrase}&competenceid=${competence.getId()}"><lrf:competencepath competence="${competence}"/></a>	
+				</div>
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
 							<!-- compétence end -->
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />		<!--  les <br/> sont là just pour avoir une bonne position il faudra les modifier avec du css -->
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-
+    </section>
 </div>
 </body>
 </html>

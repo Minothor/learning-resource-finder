@@ -2,7 +2,6 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ attribute name="playlist" type="learningresourcefinder.model.PlayList"%>
 
-
 <div style="display:inline-block; position:relative; vertical-align:top; width: 200px; margin-right:20px; margin-bottom:20px;"
      class="panel panel-default">
   <div class="panel-heading">
