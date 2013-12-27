@@ -45,6 +45,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.restfb.util.StringUtils;
+
 
 @Controller
 public class ResourceDisplayController extends BaseController<Resource> {
@@ -77,6 +79,16 @@ public class ResourceDisplayController extends BaseController<Resource> {
         mv.addObject("canLinkToCompetence", levelService.canDoAction(user, Action.LINK_RESOURCE_TO_COMPETENCE));
     	    	
     	
+        // If none of the Urls has a String name, then the JSP will opt for a simplified layout.
+        boolean oneUrlHasAName = false;
+        for (UrlResource urlResource: resource.getUrlResources()) {
+            if (!StringUtils.isBlank(urlResource.getName())) {
+                oneUrlHasAName = true;
+            }
+        }
+        mv.addObject("oneUrlHasAName", oneUrlHasAName);
+        
+        
     	List<Problem> problemList = problemRepository.findProblemOfResourceNoResolved(resource);
     	for(Problem problem: problemList){
     	    problemDate.put(problem.getId(), DateUtil.formatIntervalFromToNowFR(problem.getCreatedOn()));

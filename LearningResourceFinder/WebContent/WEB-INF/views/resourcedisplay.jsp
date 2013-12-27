@@ -123,10 +123,17 @@
    	       <div class="col-md-6">
 	   		   <c:forEach items="${resource.urlResources}" var="urlResource">
    	              <div class="row">
+   	                <c:choose>
+   	                 <c:when test="${oneUrlHasAName}">  <%-- One extra column for the URL's name --%>
    	                  <div class="col-md-3 text-right">
 							<c:if test="${urlResource.name != null}">${urlResource.name}</c:if>
    	                  </div>
    	                  <div class="col-md-9">
+   	                 </c:when>
+   	                 <c:otherwise>  <%-- Full width for the URLs --%>
+   	                  <div class="col-md-12">
+   	                 </c:otherwise>
+   	                </c:choose>
 							<a href="${urlResource.url}" target="_blank" id="urlresource"data-type="text">${urlResource.url}</a>
 							<span style="float:none; font-size:15px"   title="Modifier cette URL" class="glyphicon glyphicon-pencil close addToolTip
 							  <c:choose>
@@ -153,9 +160,16 @@
 			       </div>  <%-- end row --%>
 	           </c:forEach>		                
 	           <div class="row">
-	              <div class="col-md-3">
-	              </div>
-	              <div class="col-md-9">
+   	                <c:choose>
+   	                 <c:when test="${oneUrlHasAName}">  <%-- One extra column for the URL's name --%>
+			              <div class="col-md-3">
+			              </div>
+			              <div class="col-md-9">
+   	                 </c:when>
+   	                 <c:otherwise>  <%-- Full width for the URLs --%>
+   	                      <div class="col-md-12">
+   	                 </c:otherwise>
+   	                </c:choose>
 			           <span  class="glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" 
 			              title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
 	              </div>
