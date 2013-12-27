@@ -85,7 +85,7 @@ public class ResourceEditController extends BaseController<Resource> {
     }
     
     @RequestMapping("/ajax/resourceaddsubmit2")
-    public @ResponseBody MessageAndId resourceAddSubmit2(@RequestParam(value="description",required=false) String description,
+    public /*@ResponseBody MessageAndId*/ String resourceAddSubmit2(@RequestParam(value="description",required=false) String description,
             @RequestParam(value="idresource",required=false) Long id,
             @RequestParam(value="language",required=false) Language language,
             @RequestParam(value="advertising",required=false) Boolean advertising,
@@ -103,8 +103,9 @@ public class ResourceEditController extends BaseController<Resource> {
         resourceRepository.merge(resource); 
         indexManager.update(resource);
         
-        return new MessageAndId(resource.getId(),
-                "Information complémentaires enregistrées - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher la ressource</a>.");
+        return "redirect:" + UrlUtil.getRelativeUrlToResourceDisplay(resource);
+//        return new MessageAndId(resource.getId(),
+//                "Information complémentaires enregistrées - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher la ressource</a>.");
     }
 
     

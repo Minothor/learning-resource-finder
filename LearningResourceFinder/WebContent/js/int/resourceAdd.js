@@ -1,6 +1,6 @@
  $(document).ready(function() {
 	  $('#addResourceForm1').submit(ajaxResourceAddSubmitModal1);
-	  $('#addResourceForm2').submit(ajaxResourceAddSubmitModal2);
+//	  $('#addResourceForm2').submit(ajaxResourceAddSubmitModal2);
  });
    
    
@@ -89,23 +89,21 @@ function ajaxResourceAddSubmitModal1(e) {
 }
 
 
-function ajaxResourceAddSubmitModal2(e){
-	e.preventDefault();
-	$.ajax({
-		type : "POST",
-		url : '/ajax/resourceaddsubmit2',
-		data : $("#addResourceForm2").serialize(),
-		success : function(messageAndId) {
-			showNotificationText(messageAndId.message, "success");
-			$('#addResourceModal2').modal('hide');
-		},
-		error : function(data) {
-			alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
-					+ data);
-		}
-	});
-	
-	
-	
-	
-}
+//////// The 2nd modal form is not submitted via ajax anymore because we show the added resource page now -- John 2013/12
+//function ajaxResourceAddSubmitModal2(e){
+//	e.preventDefault();
+//	$.ajax({
+//		type : "POST",
+//		url : '/ajax/resourceaddsubmit2',
+//		data : $("#addResourceForm2").serialize(),
+//		success : function(messageAndId) {  // 
+//			showNotificationText(messageAndId.message, "success");
+//			$('#addResourceModal2').modal('hide');
+//
+//		},
+//		error : function(data) {
+//			alert("Suite à un problème du côté serveur, les informations de la seconde boite de dialogue n'ont probablement pas été sauvegardées. - "
+//					+ data);
+//		}
+//	});
+//}
