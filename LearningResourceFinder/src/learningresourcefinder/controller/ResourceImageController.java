@@ -45,7 +45,7 @@ public class ResourceImageController extends BaseController<User> {
 	@Autowired UserService userService;
 	@Autowired CurrentEnvironment currentEnvironment;
 	
-	@RequestMapping("/image")
+	@RequestMapping("/image")  // FIXME Is this method still used? John 2013-12
 	public ModelAndView resourceImage(@RequestParam("id") long userid){
 		User user = getRequiredEntity(userid);
 		ModelAndView mv= new ModelAndView("resourceimage", "user", user);
@@ -73,8 +73,6 @@ public class ResourceImageController extends BaseController<User> {
 		}
 		
 		ModelAndView mv = new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
-		mv.addObject("random", System.currentTimeMillis());
-		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
 
 		return mv;
 	}
@@ -88,8 +86,6 @@ public class ResourceImageController extends BaseController<User> {
 		SecurityContext.assertCurrentUserMayEditThisUser(user);
 		
 		ModelAndView mv = new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
-		mv.addObject("random", System.currentTimeMillis());
-		mv.addObject("canEdit", (SecurityContext.canCurrentUserEditResource(resource)));
 
 		BufferedImage image = null;
 		
@@ -155,9 +151,6 @@ public class ResourceImageController extends BaseController<User> {
 		 
 	 }
 
-	 private boolean canEdit(User user) {
-		 return user.equals(SecurityContext.getUser()) || SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS);
-	 }
 }
 
 

@@ -91,7 +91,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<div>
-				   <a href="/"><img src="/images/ToujoursPlus-logo-header.png" ></a> &nbsp;&nbsp;&nbsp;
+				   <a href="/"><img src="/images/ToujoursPlus-logo-header.png" style="margin-top:3px;"></a> &nbsp;&nbsp;&nbsp;
 				   <span style="font-size:9px;" class="label label-info">beta</span>
 				</div>
 			</div>

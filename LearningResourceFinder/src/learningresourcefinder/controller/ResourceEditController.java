@@ -104,7 +104,7 @@ public class ResourceEditController extends BaseController<Resource> {
         indexManager.update(resource);
         
         return new MessageAndId(resource.getId(),
-                "Information complémentaires enregistrées - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a> la ressource.");
+                "Information complémentaires enregistrées - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher la ressource</a>.");
     }
 
     

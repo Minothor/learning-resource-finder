@@ -3,15 +3,24 @@ package learningresourcefinder.util;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferInt;
+import java.awt.image.DirectColorModel;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageProducer;
+import java.awt.image.PixelGrabber;
+import java.awt.image.Raster;
 import java.awt.image.RenderedImage;
+import java.awt.image.WritableRaster;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -45,20 +54,52 @@ public class ImageUtil {
 
 	}
 
+     /** fullUrl must be a full url like "http://www.knowledgeblackbelt.com/img/...", not just like "/img/..."
+     * Use BlackBeltUriAnalyzer.getFullUrl() if you start from a Resource */
+    public static BufferedImage readImageOld(String fullUrl) {
+        BufferedImage bImg;
+        try {
+            bImg = ImageIO.read(new URL(fullUrl));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return bImg;
+    }
+
+    private static final int[] RGB_MASKS = {0xFF0000, 0xFF00, 0xFF};
+    private static final ColorModel RGB_OPAQUE = new DirectColorModel(32, RGB_MASKS[0], RGB_MASKS[1], RGB_MASKS[2]);
 	/** fullUrl must be a full url like "http://www.knowledgeblackbelt.com/img/...", not just like "/img/..."
 	 * Use BlackBeltUriAnalyzer.getFullUrl() if you start from a Resource */
 	public static BufferedImage readImage(String fullUrl) {
-		BufferedImage bImg;
 		try {
-			bImg = ImageIO.read(new URL(fullUrl));
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return bImg;
+    	    URL url = new URL(fullUrl);
+    	    Image img = Toolkit.getDefaultToolkit().createImage(url);  // We don't just do ImageIO.read because of color problems:  http://stackoverflow.com/a/4388542/174831
+    
+    	    PixelGrabber pg = new PixelGrabber(img, 0, 0, -1, -1, true);
+    	    pg.grabPixels();
+    	    int width = pg.getWidth(), height = pg.getHeight();
+    
+    	    DataBuffer buffer = new DataBufferInt((int[]) pg.getPixels(), pg.getWidth() * pg.getHeight());
+    	    WritableRaster raster = Raster.createPackedRaster(buffer, width, height, width, RGB_MASKS, null);
+    	    BufferedImage bImg = new BufferedImage(RGB_OPAQUE, raster, false, null);
+    
+    //	    String to = "D:/temp/result.jpg";
+    //	    ImageIO.write(bi, "jpg", new File(to));
+    		return bImg;
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 	}
 
+	
+
+
+	
+	
 
 	public static void saveImageToFileAsJPEG(RenderedImage image,
 			String folderPath, String fileName, float quality)
