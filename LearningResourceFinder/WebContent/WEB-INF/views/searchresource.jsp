@@ -16,11 +16,6 @@ $(document).ready(function reinitialize(){
 });
 </script>
 
-<link rel="stylesheet" href="css/ext/bootstrap.css" type="text/css"	media="screen" />
-<link rel="stylesheet" href="css/ext/bootstrap-theme.css"type="text/css" media="screen" />
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
 <style>
 label {
 	font-weight: normal;
@@ -90,7 +85,7 @@ window.onload = addLang;
 
 
 <body>
-	<div class="container">
+	<div class="container" style="margin-bottom:20px;">
 	
 	<lrftag:pageheadertitle title="Recherche ${searchOptions.searchPhrase}"/>
 	
@@ -134,6 +129,7 @@ window.onload = addLang;
 		<div class="filterSubBlock">
 			<fieldset>
 				<form:input type="text" path="searchPhrase" style="width:150px; margin-top:10px" rel="tooltip" title="terme de votre recherche" />
+			</fieldset>
 			<fieldset> 
 				<div class="dropdown" style="margin-right:33px">
 				<span id="lang1" class="label label-primary" style="display: inline">Français</span> 
@@ -156,7 +152,6 @@ window.onload = addLang;
 					</ul>
 				</div>
 			</fieldset>
-			</fieldset>
 			<div class="filterSubBlock">
 				<fieldset>
 					<div class="checkbox">
@@ -165,19 +160,21 @@ window.onload = addLang;
 					<div>
 						<form:input type="text" path="maxDuration" style=" width:30px" rel="tooltip" title="durée maximale" /> minutes max.
 					</div>
-					<br>
-					<button type="submit" class="btn btn-default">Filtrer</button>
 				</fieldset>
+			</div>
+			<div class="filterSubBlock" style="margin-left:30px;">
+					<button type="submit" class="btn btn-default">Filtrer</button>
 			</div>
 		
 		</div>
 		
 		<input type="hidden" id="so" name="so" value="${timeStamp}" />
 		
-		
 	</form:form>
 	</div>
 	
+	
+	<section style="margin:10px;">
 	<c:forEach items="${resourcelist}" var="resource">
 			<lrftag:resource resource="${resource}"/>
 	</c:forEach>
@@ -207,5 +204,6 @@ window.onload = addLang;
 			</ul>
 		</c:when>
 	</c:choose>
+	</section>
 </body>
 </html>
