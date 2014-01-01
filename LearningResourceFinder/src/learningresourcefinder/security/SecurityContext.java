@@ -233,9 +233,9 @@ public  class SecurityContext {
         }
     }
     
-    public static  void assertCurrentUserMayEditThisCompetence(Competence competence) {
+    public static  void assertCurrentUserMayEditThisCompetence() {
         if (! canCurrentUserEditCompetence()) {
-            throw new UnauthorizedAccessException(" cannot edit that competence: " + competence.getName());
+            throw new UnauthorizedAccessException(" cannot edit a competence");
         }
     }
     

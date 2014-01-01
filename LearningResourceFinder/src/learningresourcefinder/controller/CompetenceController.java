@@ -11,6 +11,7 @@ import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
 import learningresourcefinder.util.HTMLUtil;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +60,7 @@ public class CompetenceController extends BaseController<Competence> {
 		
 		Competence parent = getRequiredEntity(parentIdCompetence); 
 		Competence competence = new Competence(codeCompetence,nameCompetence,parent,descriptionCompetence);
-		SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
+		SecurityContext.assertCurrentUserMayEditThisCompetence();
 		competence.setName(nameCompetence);
 		competence.setCode(codeCompetence);
 		competence.setDescription(descriptionCompetence);
@@ -74,7 +75,7 @@ public class CompetenceController extends BaseController<Competence> {
 	public @ResponseBody String ajaxRemoveCompetence( @RequestParam("id") Long idCompetence){
 		
 		Competence competence = getRequiredEntity(idCompetence);
-		SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
+		SecurityContext.assertCurrentUserMayEditThisCompetence();
 		//checking
         if (competence.getParent()==null){
             return "Noeud principal, ne peut être déplacé!";
@@ -91,13 +92,15 @@ public class CompetenceController extends BaseController<Competence> {
 	
 	@RequestMapping(value="/ajax/competenceeditsubmit")
 	public @ResponseBody String competenceEditSubmit( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("description") String descriptionCompetence, @RequestParam("id") Long idCompetence){
-		//checking
+	    codeCompetence = codeCompetence == null ? null : codeCompetence.trim();
+	    if (StringUtils.isBlank(codeCompetence)) {
+	        return "Chaque compétence doit avoir un code";
+	    }
 		if (competenceRepository.isThereAnotherCompetenceWithThatCode(idCompetence,codeCompetence)) {
 			Competence competence = getRequiredDetachedEntity(idCompetence);
-			SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
-	        if (competence.getParent()==null){
-	            return "Noeud principal, ne peut être déplacé!";
-	        }
+			if (! SecurityContext.canCurrentUserEditCompetence()) {  // May happen with session time out
+			    return "Problème de sécurité: êtes-vous encore connecté avec votre compte utilisateur?";
+			}
 			competence.setName(nameCompetence);
 			competence.setCode(codeCompetence);
 			competence.setDescription(descriptionCompetence);
@@ -106,7 +109,7 @@ public class CompetenceController extends BaseController<Competence> {
 			NotificationUtil.addNotificationMessage("Compétence éditée.",Status.SUCCESS); 
 			return "success";
 		} else {
-			return "Le code existe déjà dans une autre compétence"; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
+			return "Ce code est déjà pris par une autre compétence"; 
 		}
  
 	}
@@ -116,7 +119,7 @@ public class CompetenceController extends BaseController<Competence> {
         ModelAndView mv= new ModelAndView("competencetree"); 
         
         Competence competence=getRequiredEntity(idCompetence);
-        SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
+        SecurityContext.assertCurrentUserMayEditThisCompetence();
         Competence newParent =   competenceRepository.findByCode(codeNewParent);
         
         
@@ -164,7 +167,7 @@ public class CompetenceController extends BaseController<Competence> {
 	@RequestMapping(value="/ajax/competenceeditfillfields")
 	public @ResponseBody CompetenceDataHolder competenceEditFillFields( @RequestParam("id") Long idCompetence){ 
 		Competence competence = getRequiredEntity(idCompetence);
-		SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
+		SecurityContext.assertCurrentUserMayEditThisCompetence();
 		CompetenceDataHolder competenceDH = new CompetenceDataHolder();
 		competenceDH.setCode(competence.getCode());
 		competenceDH.setDescription(competence.getDescription());
@@ -176,7 +179,7 @@ public class CompetenceController extends BaseController<Competence> {
 	public @ResponseBody String setCycle(@RequestParam("idcomp") Long idCompetence, @RequestParam("idcycle") String idCycleStr){ 
 		Competence competence = getRequiredEntity(idCompetence);
 
-		SecurityContext.assertCurrentUserMayEditThisCompetence(competence);
+		SecurityContext.assertCurrentUserMayEditThisCompetence();
 		
 		Cycle cycle;
 		if (idCycleStr==null || "null".equals(idCycleStr)) {

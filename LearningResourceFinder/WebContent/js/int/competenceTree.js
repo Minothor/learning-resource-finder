@@ -95,15 +95,20 @@ $(document).ready(function() {
 		var data = $(form).serialize();
 		$.post(url, data).done( function(data) {
 		    	if (data == "success") {
+		    		$(':input','#competenceForm')  // Clear the form field content (probably useless since we reload the page anyway).
+		 		   .not(':button, :submit')
+		 		   .val('');
+		    		$("#codeedit").parent().removeClass("has-error");  // Clear Bootstrap class to draw the field in red
+		    		$("#codeedithelp").text("");
 		    		window.location.reload();
 		    	} else {
-		    		showNotificationText("Souci lors de la soumission du formulaire : " + data, "danger");
+		    		showNotificationText("Souci lors de la soumission du formulaire : " + data, "danger");  // Probably not visible because of scrolling on that very long page
+		    		$("#codeedit").parent().addClass("has-error");  // Bootstrap class to draw the field in red
+		    		$("#codeedithelp").text(data);
 		    	}
 		    	return false;
 	    });
-		$(':input','#competenceForm')
-		   .not(':button, :submit')
-		   .val('');
+
 	}
 	
 	function ajaxCompetenceRemoveSubmit(id) {
