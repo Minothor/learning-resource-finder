@@ -7,6 +7,8 @@
 <body>
 <div class="container">
     <a href="/createindex" class="btn btn-primary btn-lg">re-créer index</a>
+    
+    <a href="/importfromvraisforum" class="btn btn-primary btn-lg">importer les compétences de http://findecycle.vraiforum.com/</a>
 </div>    
 </body>
 </html>

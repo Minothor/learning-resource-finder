@@ -87,4 +87,5 @@ log4jdbc4-1.2.jar //test jdbc trace with driver spy
 jsoup-1.7.1.jar //collection of APIs for safely allowing users to supply 
 				   //their own HTML and CSS without exposing the site to XSS vulnerabilities.
 				   //https://code.google.com/p/owaspantisamy/
+				Used also to parse html from other sites to analyze and import data: http://findecycle.vraiforum.com/
 ***************************************************************************** 

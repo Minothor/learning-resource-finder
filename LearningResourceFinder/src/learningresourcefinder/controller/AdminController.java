@@ -3,6 +3,8 @@ package learningresourcefinder.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import learningresourcefinder.batch.ImportCompetencesFromVraiForumBatch;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.BaseRepository;
@@ -15,6 +17,7 @@ import learningresourcefinder.util.NotificationUtil.Status;
 public class AdminController extends BaseRepository<User> {
 	
 	@Autowired IndexManagerService indexManagerService;
+	@Autowired ImportCompetencesFromVraiForumBatch importCompetencesFromVraiForumBatch;
    
 	@RequestMapping("/admin")
 	public String admin() {
@@ -31,4 +34,12 @@ public class AdminController extends BaseRepository<User> {
 		return "admin";  // JSP
     	
     }
+    
+    @RequestMapping("/importfromvraisforum")
+    public String importFromVraisForum() {
+        importCompetencesFromVraiForumBatch.run();
+        NotificationUtil.addNotificationMessage("Import réussi");
+        return "admin";
+    }
+    
 }

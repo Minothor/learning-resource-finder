@@ -78,7 +78,7 @@ public class CycleEditController extends BaseController<Cycle> {
 
 
     @ModelAttribute
-    public Cycle findCycle(@RequestParam(value="id",required =false)Long id){
+    public Cycle findCycle(@RequestParam(value="id", required=false)Long id){
         if (id==null){
             return new Cycle();
         } else{

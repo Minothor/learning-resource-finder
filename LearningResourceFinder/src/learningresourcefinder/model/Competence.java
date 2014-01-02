@@ -55,6 +55,10 @@ public class Competence extends BaseEntity implements Searchable{
 	@ManyToOne
 	Cycle cycle;   // Could be null (typical of non leaf cycles)
 	
+	
+	String vraisForumPage;  // We remember it when we created the competence automatically from that site: http://findecycle.vraiforum.com/index.php
+	                        // Maybe some day we'll be happy to have it.  John 2014-01
+	
 	public Cycle getCycle() {
 		return cycle;
 	}
@@ -113,7 +117,7 @@ public class Competence extends BaseEntity implements Searchable{
 
 	@Override
 	public String toString()  {
-		return this.getId() + "-" + this.getName();
+		return this.getId() + "-" + this.getCode() + "-" + this.getName();
 	}
 	
 	
@@ -161,7 +165,17 @@ public class Competence extends BaseEntity implements Searchable{
 		this.code = HTMLUtil.removeHtmlTags(code);
 	}
 
-	@Override
+	
+	
+	public String getVraisForumPage() {
+        return vraisForumPage;
+    }
+
+    public void setVraisForumPage(String vraisForumPage) {
+        this.vraisForumPage = vraisForumPage;
+    }
+
+    @Override
     public Long getId() {
         return id;
     }
