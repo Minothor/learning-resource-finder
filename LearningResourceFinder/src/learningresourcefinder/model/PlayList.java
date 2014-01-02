@@ -70,7 +70,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
     /** Shorter version of the description (for lists) */
     public String getDescriptionCut() {
         final int MAX_LENGTH_DESCRIPTION_CUT = 150;
-        if (description.length() > MAX_LENGTH_DESCRIPTION_CUT) {
+        if (description != null && description.length() > MAX_LENGTH_DESCRIPTION_CUT) {
             return description.substring(0 , MAX_LENGTH_DESCRIPTION_CUT) + "...";
         } else {
             return description;
