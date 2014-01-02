@@ -8,6 +8,7 @@ import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.util.NotificationUtil;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -136,7 +137,11 @@ public class ImportCompetencesFromVraiForumBatch implements Runnable {
 
         Elements linksToSubTopics = document.select("a.topictitle");
         for (Element linkToSubTopic : linksToSubTopics) {
-            processPage(competence, linkToSubTopic.attr("href"));
+            String pageName = linkToSubTopic.attr("href");
+            if (StringUtils.isBlank(pageName)) {
+                break;  // Special case (the rest of the links do not lead to interesting pages)
+            }
+            processPage(competence, pageName);
         }
         
         ident--;
@@ -151,6 +156,10 @@ public class ImportCompetencesFromVraiForumBatch implements Runnable {
         
         // Extract name and code
         Element titleElement = document.select("a.maintitle").first();
+        if (titleElement == null)   {
+            printlnWithIdent("problemo: " + pageName);
+        }
+            
         String titleWithCode = titleElement.text();
         String code = null;
         String title = null;

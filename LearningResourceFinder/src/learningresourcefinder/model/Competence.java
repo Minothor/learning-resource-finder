@@ -34,8 +34,8 @@ public class Competence extends BaseEntity implements Searchable{
 	@Size(max=255, message="l'intitulé d'une compétence ne peut contenir que 255 caractères maximum")
 	private String name;
 
-	@Column(length = 8, unique = true, nullable=false)
-	@Size(max=8, message="le code d'une compétence ne peut contenir que 8 caractères maximum")
+	@Column(length = 10, unique = true, nullable=false)
+	@Size(max=10, message="le code d'une compétence ne peut contenir que 8 caractères maximum")
 	private String code;   // Short identifier that users can use to quickly refer a Competence
 	
 	
