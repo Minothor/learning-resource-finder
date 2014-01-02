@@ -157,6 +157,14 @@ File environment
 ================
   put the content of this file int your own /etc/environment or just copy the file if you haven't already one.
   contains TOMCAT_HOME variable
+
+etc/hosts file
+==============
+We had to change the /etc/hosts file to make ehCache work: http://stackoverflow.com/questions/1881546/inetaddress-getlocalhost-throws-unknownhostexception
+We changed the line:
+...IP ADDRESS...    learningresourcefinder
+into:
+...IP ADDRESS...    learningresourcefinder learningresourcefinder.localdomain
   
 FAQ
 ===
