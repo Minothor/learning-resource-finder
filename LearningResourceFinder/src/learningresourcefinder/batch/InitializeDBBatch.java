@@ -726,9 +726,9 @@ public class InitializeDBBatch implements Runnable {
 		competenceRepository.persist(tf);
 		tf.bindWithParent(term);
 
-		l1ap4.addResource(frDupont);
+		frDupont.getCompetences().add(l1ap4);
 
-		math.addResource(mathGob);
+		mathGob.getCompetences().add(math);
 
 		System.out.println("Competences done!");
 	}

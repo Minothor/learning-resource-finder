@@ -55,6 +55,16 @@
 		<appender-ref ref="console"/>
 	</logger> 
 	
+	 <logger name="org.hibernate.SQL" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console"/>
+	</logger> 
+	
+	 <logger name="org.hibernate.type" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console"/>
+	</logger> 
+	
 	
 	<!-- SQL and JDBC loggers -->
 	

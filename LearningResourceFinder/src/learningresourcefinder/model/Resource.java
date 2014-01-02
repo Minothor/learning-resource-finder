@@ -28,12 +28,15 @@ import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.Slugify;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 
 @Entity
 @Table(name="resource")
 @SequenceGenerator(name="ResourceSequence", sequenceName="RESOURCE_SEQUENCE")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Resource extends BaseEntityWithShortId implements Searchable {
     
 
@@ -102,9 +105,11 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	private String description;
 	
 	@OneToMany(mappedBy="resource")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<Problem> problems = new HashSet<>();
     
-	@ManyToMany(mappedBy="resources")
+	@ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	List<Competence> competences = new ArrayList<>();
 	
 	public Resource() {} // No arg constructor for Hibernate

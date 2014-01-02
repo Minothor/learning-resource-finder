@@ -31,6 +31,7 @@ public class BatchPGM implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Hello World");
     	/*
         competenceTreeVisitor = new CompetencesTreeVisitorImpl();
         competenceTreeWalker = new CompetencesTreeWalker(mCompetenceRepository,  competenceTreeVisitor);

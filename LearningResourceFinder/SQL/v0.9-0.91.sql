@@ -5,10 +5,16 @@ alter table competence
         
 ALTER TABLE competence
    ALTER COLUMN code TYPE character varying(10);
-        
+      
+   
+   
+ALTER TABLE competence_resource
+  RENAME TO resource_competence;
+ALTER TABLE resource_competence RENAME resources_id  TO resource_id;
+  
+  
 -- DEPLOYED
 -- DEPLOYED
 -- DEPLOYED
 -- DEPLOYED
 -- DEPLOYED
-        

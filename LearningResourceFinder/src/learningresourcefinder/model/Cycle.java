@@ -1,8 +1,8 @@
 package learningresourcefinder.model;
 
-import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +16,15 @@ import learningresourcefinder.service.CompetenceService;
 import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.ContextUtil;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotBlank;
 
 
 
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Cycle extends BaseEntity  {
 
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +37,7 @@ public class Cycle extends BaseEntity  {
 
 	@OneToMany (mappedBy="cycle")
 	@OrderBy("code")
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private List<Competence> competences;
 	
 	// This is a cache (not to be persisted) of competences concerned by this cycle.

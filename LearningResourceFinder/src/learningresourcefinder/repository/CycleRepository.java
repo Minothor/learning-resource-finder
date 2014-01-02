@@ -13,6 +13,7 @@ public class CycleRepository extends BaseRepository<Cycle> {
     
     public List<Cycle> findAllCycles() {
         List<Cycle> result=em.createQuery("SELECT c FROM Cycle c ORDER BY c.name ASC")
+                .setHint("org.hibernate.cacheable", true) 
                 .getResultList(); 
         return result;
         
@@ -21,7 +22,8 @@ public class CycleRepository extends BaseRepository<Cycle> {
     public Cycle findByName(String name){
         return getSingleOrNullResult(
                 em.createQuery("SELECT c FROM Cycle c WHERE lower(c.name) = :name")
-                .setParameter("name",name.toLowerCase())
+                    .setHint("org.hibernate.cacheable", true) 
+                    .setParameter("name",name.toLowerCase())
                 );
     }
         

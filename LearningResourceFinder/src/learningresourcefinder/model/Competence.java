@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,18 +14,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
 import javax.persistence.OrderBy;
+import javax.validation.constraints.Size;
 
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 
 
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Competence extends BaseEntity implements Searchable{
 
     @Id   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,17 +47,17 @@ public class Competence extends BaseEntity implements Searchable{
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
 
-	@ManyToMany
-	List <Resource> resources  = new ArrayList<>();
 
 	@ManyToOne
 	Competence parent;
 	
 	@OneToMany (mappedBy="parent")
 	@OrderBy("code")
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	List<Competence> children = new ArrayList <Competence>();
 
 	@ManyToOne
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	Cycle cycle;   // Could be null (typical of non leaf cycles)
 	
 	
@@ -105,10 +110,6 @@ public class Competence extends BaseEntity implements Searchable{
 		}
 	}
 	
-	public void addResource(Resource resource) {
-		this.getResources().add(resource);
-		resource.getCompetences().add(this);
-	}
 
 	public void addChild(Competence child) {
 		this.children.add(child);
@@ -153,9 +154,6 @@ public class Competence extends BaseEntity implements Searchable{
 		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 
-	public List<Resource> getResources() {
-		return resources;
-	}
 	
     public String getCode() {
 		return code;

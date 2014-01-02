@@ -29,12 +29,15 @@ public class CompetenceRepository extends BaseRepository<Competence> {
 	public Competence findByCode(String code){
 		return getSingleOrNullResult(
 				em.createQuery("select c from Competence c where lower(c.code) = :code")
-				.setParameter("code",code.toLowerCase())
+	                .setHint("org.hibernate.cacheable", true) 
+	                .setParameter("code",code.toLowerCase())
 				);
 	}
 
 	public Competence findRoot(){
-		return    (Competence) em.createQuery("select c from Competence c where c.parent is null ").getSingleResult();  // Will throw an excpetion if no root found.
+		return    (Competence) em.createQuery("select c from Competence c where c.parent is null ")
+                  .setHint("org.hibernate.cacheable", true) 
+		          .getSingleResult();  // Will throw an excpetion if no root found.
 	}
 
 

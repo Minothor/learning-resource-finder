@@ -250,7 +250,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         if (competence == null) { 
             NotificationUtil.addNotificationMessage("Le code '"+code+"' ne correspond à aucune compétence connue.", Status.ERROR);         
         } else {  // Edit
-            competence.addResource(resource);
+            resource.getCompetences().add(competence);
             NotificationUtil.addNotificationMessage("Competence liée avec succès", Status.SUCCESS);         
         }
         
@@ -263,7 +263,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
         Competence competence = (Competence)getRequiredEntity(competenceId, Competence.class);
 
         resource.getCompetences().remove(competence);
-        competence.getResources().remove(resource);
         resourceRepository.merge(resource);
         competenceRepository.merge(competence);
         

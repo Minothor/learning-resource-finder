@@ -16,6 +16,9 @@ Hibernate & dependencies :
 			-sfl4j-ext-1.6.6
 			-sfl4j-log4j12-1.6.6
 			-log4j-1.2.17
+			
+EhCache: both hibernate-ehcache-xxx.jar and ehcache-core-xxx.jar are needed with Hibernate 4 as explained here http://architects.dzone.com/articles/hibernate-4-and-ehcache-higher			
+			
 JDBC drivers :
 			-postgresql-9.1-902.jdbc4
 JPA Specs :
