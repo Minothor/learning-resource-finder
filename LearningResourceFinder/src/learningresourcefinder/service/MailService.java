@@ -117,7 +117,7 @@ public class MailService {
     public void sendMail(Mail mail){
         mailRepository.persist(mail);
 
-        // wake up the thread each time we send a mail to database because if there isn't any mail to send the thread goes to sleep for a certain time.
+        // wake up the thread each time we send a mail to database because if there isn't any mail to send the thread goes to sleep for some time.
         synchronized(mailSender) {
             mailSender.notify();
         }

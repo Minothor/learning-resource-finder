@@ -42,7 +42,7 @@ public class MailSender extends Thread {
 
    
     public final static int DELAY_BETWEEN_EACH_MAIL = 50;  // in ms. In case the SMTP server is too slow (cannot accept too many mails too fast). Use this const to temporize between 2 SMTP calls. 
-    public final static int WAKE_UP_DELAY_WHEN_NO_MAIL = 15 * 1000;  // ms. When there is no mail anymore, how long should this batch sleep before querying the DB again for mails to be sent ?
+    public final static int WAKE_UP_DELAY_WHEN_NO_MAIL = 5 * 60 * 1000;  // ms. When there is no mail anymore, how long should this batch sleep before querying the DB again for batch (grouped) mails to be sent ? (note: priority mails wake up this thread without waiting for this delay)
 
     private boolean isShutDown = false;
 
@@ -96,7 +96,7 @@ public class MailSender extends Thread {
 
         log.info("MailSender thread started");
         try {
-			Thread.sleep(2 * 60 * 1000);  // sleep 2 minute to make sure all the bean are ready
+			Thread.sleep(2 * 60 * 1000);  // sleep 2 minutes to make sure all the Spring beans are ready
 		} catch (InterruptedException e) {
 	        log.info("MailSender initial sleep interrupted");
 		}
