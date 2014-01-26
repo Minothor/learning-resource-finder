@@ -44,6 +44,7 @@ $(document).ready(function() {
 	    <li data-target="#carousel-testimonial" data-slide-to="2"></li>
 	    <li data-target="#carousel-testimonial" data-slide-to="3"></li>
 	    <li data-target="#carousel-testimonial" data-slide-to="4"></li>
+	    <li data-target="#carousel-testimonial" data-slide-to="5"></li>
 	  </ol>
 	
 	  <!-- Wrapper for slides -->
@@ -105,7 +106,7 @@ $(document).ready(function() {
 	       <lrftag:testimonial 
 	          imageName = "Pascal-Bonnet.jpg"
 	          name="Pascal Bonnet, Bruxelles"
-	          function="enseignant"
+	          function="enseignant et psychopédagogue"
 	          mainText = "Toujours plus d'aide à l'élève et à l'enseignant, c'est un (toujours) plus à l'apprentissage. A l'heure où on cherche à réduire les inégalités, gageons que ce site y apportera sa petite pierre.
 Pierre à tailler encore et encore et avec l'aide de tous." />
 	    </div>
