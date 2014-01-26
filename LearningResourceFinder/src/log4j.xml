@@ -56,7 +56,7 @@
 	</logger> 
 	
 	 <logger name="org.hibernate.SQL" additivity="false">
-		<level value="debug" />
+		<level value="warn" />
 		<appender-ref ref="console"/>
 	</logger> 
 	

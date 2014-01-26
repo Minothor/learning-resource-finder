@@ -16,7 +16,7 @@
         $(".countdown").circularCountdown (
                 {
                     startDate:"2013/09/14 12:30:00",  //Year/Month/Day Hours:Minutes:Seconds
-                    endDate:"2014/01/15 14:30:00",
+                    endDate:"2014/05/15 14:30:00",
                     timeZone:+2,
                     past:false,
 
