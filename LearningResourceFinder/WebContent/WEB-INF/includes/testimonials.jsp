@@ -106,7 +106,7 @@ $(document).ready(function() {
 	       <lrftag:testimonial 
 	          imageName = "Pascal-Bonnet.jpg"
 	          name="Pascal Bonnet, Bruxelles"
-	          function="enseignant et psychopédagogue"
+	          function="Enseignant et psychopédagogue"
 	          mainText = "Toujours plus d'aide à l'élève et à l'enseignant, c'est un (toujours) plus à l'apprentissage. A l'heure où on cherche à réduire les inégalités, gageons que ce site y apportera sa petite pierre.
 Pierre à tailler encore et encore et avec l'aide de tous." />
 	    </div>
