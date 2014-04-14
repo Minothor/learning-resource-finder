@@ -217,7 +217,7 @@
 								<a id="topic" ${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?matière?'": " class='noneditresource'"} data-source="${dataEnumTopic}">${resource.topic.description}</a>
 				            </div>						
 				   	        <div class="col-md-3">
-								<a id="platform" ${canEdit==true? "href='#' class='editableField' data-type='select'  data-emptytext='?plate-forme?'":" class='noneditresource'"} data-source="${dataEnumPlatform}">${resource.platform.description}</a>
+								<a id="platform" ${canEdit==true? "href='#' class='editableField' data-type='select'  data-emptytext='?plate-forme?'":" class='noneditresource'"} data-source="${dataEnumPlatform}">${resource.platform.name}</a>
 				            </div>						
 						</div>  <%-- end row --%>
 				   	    <div class="row">

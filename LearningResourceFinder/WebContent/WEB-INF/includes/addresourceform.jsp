@@ -56,10 +56,10 @@
 									<label for="platform">Plate-forme</label>
 									<c:set var="firstIteration" scope="page" value="true"/>
 									<c:forEach var="platform" items="${applicationScope.cache.platform}">
-										<div class="radio">
-											<label for="${platform.description}">	
-							                   	<input type="radio" name="platform" value="${platform}" id="${platform.description}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
-							                    ${platform.description}
+										<div class="radio addToolTip" title="${platform.description}">
+											<label for="${platform.name}">	
+							                   	<input type="radio" name="platform" value="${platform}" id="${platform.name}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
+							                    ${platform.name}
 							                </label>  
 										</div>
 										<c:set var="firstIteration" scope="page" value="false"/>

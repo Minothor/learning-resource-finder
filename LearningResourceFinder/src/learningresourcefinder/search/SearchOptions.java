@@ -55,15 +55,18 @@ public class SearchOptions {
 	}
 
 	public enum Platform {
-		BROWSER("Navigateur"),
-		ANDROID("Android"), 
-		IPAD("iPad/iPhone"), 
-	    WIN("Windows"), 
-		MAC("Mac"),
-		LINUX("Linux");
-		private Platform(String description){this.description = description;}
-		private final String description;
-		public String getDescription(){return description;}
+		BROWSER("Navigateur", "Fonctionne dans un navigateur tel que chrome, firefox ou internet exploreur. N'est pas lié à une plate-forme particulière (Android, Linux, Windows, etc.)"),
+		ANDROID("Android", "Application nécessitant une tablette ou un smartphone avec Android"), 
+		IPAD("iPad/iPhone", "Application nécessitant une tablette ou un smartphone avec iOs"), 
+	    WIN("Windows", "Application à installer sous Windows"), 
+		MAC("Mac", "Application à installer sous Mac OS"),
+		LINUX("Linux", "Application à installer sous Linux");
+		private Platform(String name, String description){
+		    this.name = name; this.description = description;}
+		private final String name;
+        private final String description;
+		public String getName(){return name;}
+        public String getDescription(){return description;}
 	}
 	
 	public enum Nature {

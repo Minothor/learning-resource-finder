@@ -97,7 +97,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 	}
 
 	public void setUserProgressPoints(int userProgressPoints) {
-		this.userProgressPoints += userProgressPoints;
+		this.userProgressPoints = userProgressPoints;
 	}
 
 	/**

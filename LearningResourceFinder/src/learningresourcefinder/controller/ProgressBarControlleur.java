@@ -12,13 +12,6 @@ public class ProgressBarControlleur extends BaseController<User> {
 	
 	@RequestMapping("/ajax/progressbar")
 	public String progressBar(){
-		// FIXME remove this Test code
-		User user = SecurityContext.getUser();
-		if (user != null) {
-			user.setUserProgressPoints(user.getUserProgressPoints() + 3);
-		}
-		// END OF TEST CODE
-		
 		return "progressbar";
 	}
 

@@ -39,11 +39,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 
 	@RequestMapping("/create")
 	public ModelAndView playListCreate() {
-	    
 	    SecurityContext.assertUserIsLoggedIn();
-	    
-        levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_PLAYLIST);
-
 	    return prepareModelAndView(new PlayList());
 	}
 	
@@ -71,13 +67,13 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		String slug = Slugify.slugify(playList.getName());
 		playList.setSlug(slug);
 		if(playList.getId()==null) {  // Create
-			SecurityContext.getUser().setUserProgressPoints(2); 
 			if(playListHavingTheSameName != null ) {
 				NotificationUtil.addNotificationMessage("Cet intitulé existe déjà pour une de vos séquences, veuillez en choisir un autre", Status.WARNING);
 				return otherPlayListError(playList, playListHavingTheSameName, bindingResult);
 			} 
 			playlistRepository.persist(playList);
 			indexManager.add(playList);
+            levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_PLAYLIST); 
 			
 		} else {  // Edit existing playlist
 			if (playListHavingTheSameName != null && !playList.equals(playListHavingTheSameName)) {

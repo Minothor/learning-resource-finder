@@ -17,11 +17,10 @@
  	    
  	    $(".noneditplaylist").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
  	});
- 	
- 	
 </script> 	    
 <title>Séquence</title>
 </head>
+
 <body>
 	<lrftag:breadcrumb linkactive="${playlist.name}">
 		<lrftag:breadcrumbelement label="Home" link="/home" />

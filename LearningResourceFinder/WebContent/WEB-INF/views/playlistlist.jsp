@@ -5,7 +5,6 @@
 
 <html>
 <head>
-<title>Insert title here</title>
 
 <script>
 
@@ -28,6 +27,7 @@
 </script>
 
 </head>
+
 <body>
 <c:choose>
  <c:when test="${(user!=null && displaytype!='all')}">
@@ -53,6 +53,10 @@
 				<lrftag:pageheadertitle title="Toutes les séquences"/>
 			</c:otherwise>
     	</c:choose>
+   	
+   	
+   		<p>Une séquence est une suite de ressources qu'un enseignant assemble parce qu'il a constaté qu'elle fonctionnait bien avec ses élèves. C'est, par exemple, une vidéo puis un petit jeu interractif, puis un devoir, plus un document à lire.</p>
+   	
    	
 		<a class="btn btn-primary pull-right ${canaddplaylist == true ? '\" href=\"/playlist/create\"' : 'noaddplaylistpop' }">
 			Créer une séquence
