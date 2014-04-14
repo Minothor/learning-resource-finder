@@ -1,5 +1,6 @@
 package learningresourcefinder.service;
 
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Level;
 import learningresourcefinder.model.User.Role;
@@ -16,21 +17,30 @@ public class LevelService {
 
     @Autowired UserRepository userRepository;
 
+    public boolean canDoAction(User user, Action action) {
+        return canDoAction(user, action, null);
+    }
 
-	public boolean canDoAction(User user, Action action) {
-		if(user == null || !SecurityContext.isUserLoggedIn()){
-	        return false;
-		}
-		
-		if (SecurityContext.isUserHasRole(Role.ADMIN)) {
-		    return true;
-		}
+    public boolean canDoAction(User user, Action action, Resource resource) {
+        if(user == null || !SecurityContext.isUserLoggedIn()){
+            return false;
+        }
+        
+        if (SecurityContext.isUserHasRole(Role.ADMIN)) {
+            return true;
+        }
 
-		int userlevelIndex = user.getAccountLevel().getLevelIndex();
-		int actionlevelIndex = action.getLevel().getLevelIndex();
+        if (resource != null && resource.getCreatedBy().equals(user)
+                && (action == Action.EDIT_RESOURCE || action == Action.EDIT_RESOURCE_URL || action == Action.COMPLETE_RESOURCE )) {
+            return true; // A user who created a resource should be authorized to modify it.
+        }
+        
+        int userlevelIndex = user.getAccountLevel().getLevelIndex();
+        int actionlevelIndex = action.getLevel().getLevelIndex();
 
-		return (userlevelIndex >= actionlevelIndex);
-	}
+        return (userlevelIndex >= actionlevelIndex);
+    }
+
 	
 	
 	public void addActionPoints(User user, Action action) {

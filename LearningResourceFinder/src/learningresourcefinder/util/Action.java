@@ -3,7 +3,7 @@ package learningresourcefinder.util;
 import learningresourcefinder.model.User.Level;
 
 public enum Action {
-        ADD_RESOURCE(1, Level.LEVEL_1, "Ajouter une ressource"),  // Maybe later should be level 2.
+        ADD_RESOURCE(2, Level.LEVEL_1, "Ajouter une ressource"),  // Maybe later should be level 2.
         COMPLETE_RESOURCE(1, Level.LEVEL_1,"Completer les champs manquants d'une ressouce introduite par un autre utilisateur"),
         ADD_PROBLEM(1, Level.LEVEL_1, "Signaler un problème"),
         DISCUSS_PROBLEM(0, Level.LEVEL_1, "Discuter sur un problème"),

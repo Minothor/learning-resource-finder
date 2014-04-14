@@ -72,9 +72,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
  
         User user = SecurityContext.getUser();
         mv.addObject("user",user);
-        boolean canEditUrl=levelService.canDoAction(user, Action.EDIT_RESOURCE_URL);
-        mv.addObject("canEditUrl", canEditUrl);
-    	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE));
+        mv.addObject("canEditUrl", levelService.canDoAction(user, Action.EDIT_RESOURCE_URL, resource));
+    	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE, resource));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
         mv.addObject("canLinkToCompetence", levelService.canDoAction(user, Action.LINK_RESOURCE_TO_COMPETENCE));
     	    	
