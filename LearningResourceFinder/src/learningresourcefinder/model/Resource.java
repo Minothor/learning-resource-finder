@@ -213,7 +213,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
         Map<String,String> criterias = new HashMap<String,String>();
         criterias.put("name",StringUtils.defaultIfEmpty(name,""));
         criterias.put("description",StringUtils.defaultIfEmpty(description,""));
-        criterias.put("topic",StringUtils.defaultIfEmpty(topic.getDescription(),""));
+        criterias.put("topic", topic==null ? "" : topic.getDescription() );
         return criterias;
     }
     
