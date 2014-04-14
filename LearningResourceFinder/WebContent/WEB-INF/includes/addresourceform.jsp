@@ -28,11 +28,12 @@
 							<span id="urlErrorMessage" class="text-warning"></span> <%-- Place holder filled by JavaScript after ajax response --%>
 						</div>
 
+
 						<div id="addResourceFormPart2" style="display:none;">  <%-- will not be displayed until the url is valid --%>
 
 							<div class="form-group">
 		                        <label for="titre">Intitulé</label> 
-		                        <input type="text" class="form-control" name="title" placeholder="intitulé" required="required">
+		                        <input type="text" class="form-control" name="title" placeholder="intitulé" required="required" maxlength="50">
 		                   		<div class="pull-right"></div>
 							</div>
 							
@@ -94,6 +95,7 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal --> 
+
 
 <div class="modal fade" id="addResourceModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
  <div class="modal-dialog">
@@ -157,7 +159,7 @@
 					<div class="control-group col-md-7">
 						<label for="duration">Durée</label>
 						<div class="form-inline">
-							<input type="text" class="form-control" name="maxDuration" style="width:50px"> minutes
+							<input type="number" class="form-control" name="maxDuration" style="width:80px"> minutes
 						</div>
 						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou regarder la vidéo proposée.</span>
 					</div>

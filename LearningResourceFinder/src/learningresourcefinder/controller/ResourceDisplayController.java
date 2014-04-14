@@ -133,6 +133,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	return mv;
 	}
 
+    // FIXME: what happens if the input value is wrong (decimal number when int expected, for example) ?  - John 2014/04
 	@RequestMapping("/ajax/resourceeditfieldsubmit")
 	public @ResponseBody String resourceAddSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
 		
@@ -143,7 +144,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		if (fieldName.equals("title")){
 			resource.setName(value);
 			String slug = Slugify.slugify(resource.getName());
-			resource.setSlug(slug);
+			resource.setSlug(slug);  
 		}
 		else if(fieldName.equals("description")){
 			resource.setDescription(value);
