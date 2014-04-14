@@ -12,6 +12,8 @@ import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
+import learningresourcefinder.service.LevelService;
+import learningresourcefinder.util.Action;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
@@ -28,6 +30,7 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired   ResourceRepository resourceRepository;
     @Autowired   UrlResourceRepository urlResourceRepository;
     @Autowired   IndexManagerService indexManager;
+    @Autowired   LevelService levelService;
     
     
 
@@ -79,6 +82,8 @@ public class ResourceEditController extends BaseController<Resource> {
         resourceRepository.persist(resource);
         
         indexManager.add(resource);
+        
+        levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_RESOURCE);
         
         return new MessageAndId(resource.getId(),
                 "Ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");

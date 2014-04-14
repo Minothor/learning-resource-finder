@@ -36,6 +36,7 @@ public class RatingController extends BaseController<Rating> {
             if (rating == null) {
                 rating = new Rating((double)score, resource, SecurityContext.getUser());
                 ratingRepository.persist(rating);
+                levelService.addActionPoints(SecurityContext.getUser(), Action.VOTE);
             } else {
                 rating.setScore((double)score);
                 ratingRepository.merge(rating);

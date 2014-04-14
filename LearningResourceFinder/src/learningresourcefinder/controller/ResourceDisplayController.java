@@ -183,6 +183,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		resourceRepository.merge(resource);
 
 		indexManager.update(resource);
+		
+		if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
+            levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE);
+		}
+        
+
 
 		return "success";
 	}
@@ -211,7 +217,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         // TODO: voir si url est valide (sinon ajouter une erreur sur result)
         
         Resource resource = resourceRepository.find(resourceId);
-        if(true) {   // No errors
+        if (true) {   // No errors
             UrlResource urlResource;
             if (urlResourceId != null) {
                 urlResource = urlResourceRepository.find(urlResourceId);
@@ -234,6 +240,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 NotificationUtil.addNotificationMessage("Url modifiée avec succès", Status.SUCCESS);         
             }
             
+            if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
+                levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE_URL);
+            }
             
         } else {
             NotificationUtil.addNotificationMessage("Erreur sur un des champs. Url non sauvée.", Status.ERROR);
@@ -251,6 +260,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
             NotificationUtil.addNotificationMessage("Le code '"+code+"' ne correspond à aucune compétence connue.", Status.ERROR);         
         } else {  // Edit
             resource.getCompetences().add(competence);
+            levelService.addActionPoints(SecurityContext.getUser(), Action.LINK_RESOURCE_TO_COMPETENCE);
             NotificationUtil.addNotificationMessage("Competence liée avec succès", Status.SUCCESS);         
         }
         

@@ -4,10 +4,11 @@ import javax.validation.Valid;
 
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
-import learningresourcefinder.model.User;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
+import learningresourcefinder.service.LevelService;
+import learningresourcefinder.util.Action;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
 import learningresourcefinder.web.Slugify;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PlaylistEditController extends BaseController<PlayList>{
 	@Autowired PlayListRepository playlistRepository;
 	@Autowired IndexManagerService indexManager;
+	@Autowired LevelService levelService;
 	
 	 private ModelAndView prepareModelAndView(PlayList playlist ) {
 	        ModelAndView mv = new ModelAndView("playlistedit");
@@ -39,6 +41,9 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	public ModelAndView playListCreate() {
 	    
 	    SecurityContext.assertUserIsLoggedIn();
+	    
+        levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_PLAYLIST);
+
 	    return prepareModelAndView(new PlayList());
 	}
 	

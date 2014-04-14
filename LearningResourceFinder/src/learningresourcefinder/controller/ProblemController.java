@@ -59,6 +59,7 @@ public class ProblemController extends BaseController<Problem> {
 		p.setDescription(description);
 		p.setResource(resourceRepository.find(idResource));
 		problemRepository.merge(p);
+        levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_PROBLEM);
 		NotificationUtil.addNotificationMessage("Le problème à bien été transmit. Merci de votre contribution !");
 		return "success";
 	}
@@ -70,6 +71,7 @@ public class ProblemController extends BaseController<Problem> {
         Discussion d = new Discussion(message);
         d.setProblem(problem);
         discussionRepository.persist(d);
+        levelService.addActionPoints(SecurityContext.getUser(), Action.DISCUSS_PROBLEM);
         return new ModelAndView("redirect:/problem?id="+ idProblem+"#anchorResponse");  
     }
     

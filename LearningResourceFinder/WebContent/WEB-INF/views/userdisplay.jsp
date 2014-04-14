@@ -20,7 +20,6 @@
 		<div class="btn-group">
 			<lrf:conditionDisplay privilege="MANAGE_USERS">
 				<a class="btn btn-default" href="/user/privilegeedit?id=${user.id}">Privilèges</a>	
-				<a class="btn btn-default" href="/user/usertypeedit?id=${user.id}">Editer le type d'un user</a>	
 				<c:if test="${not(current.user  eq user)}">
 				<a class="btn btn-default" href="/user/delete?id=${user.id}">Supprimer le compte</a>
 				</c:if>
@@ -29,7 +28,7 @@
 				<a class="btn btn-default" href="/user/edit?id=${user.id}">Editer le Profil</a>
 				<a class="btn btn-default" href="/user/changepassword?id=${user.id}">Modifier le mot de passe</a>
 			</c:if>
-			<a class="btn btn-default" href="/playlist/user/${user.userName}">Play-lists</a>
+			<a class="btn btn-default" href="/playlist/user/${user.userName}">Séquences</a>
 			<a href="<c:url value='/rights?username=${user.userName}'/>" class="btn btn-default">Droits</a>
 		</div>
 		
