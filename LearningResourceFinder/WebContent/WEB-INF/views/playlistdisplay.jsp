@@ -15,7 +15,7 @@
  	    	  pk: '${playlist.id}',
 		});
  	    
- 	    $(".noneditplaylist").popoverWithAutoHide("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
+ 	    $(".noneditplaylist").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
  	});
  	
  	

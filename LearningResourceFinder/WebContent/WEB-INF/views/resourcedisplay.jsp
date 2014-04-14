@@ -36,15 +36,16 @@
 		      }
 		});
 
- 	    $('.nonurleditpop').popoverWithAutoHide("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
+ 	   
+ 	    $('.nonurleditpop').popoverWithAutoHideForPrivilege("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
 
- 	    $('.nonCompetenceLinkPop').popoverWithAutoHide("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution.");
+ 	    $('.nonCompetenceLinkPop').popoverWithAutoHideForPrivilege("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution." );
 
- 	    $('.nonimageeditpop').popoverWithAutoHide("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution.");
+ 	    $('.nonimageeditpop').popoverWithAutoHideForPrivilege("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution." );
 
- 	    $(".noAddProblemPop").popoverWithAutoHide("Pour signaler un problème, il faut être connecté.");
+ 	    $(".noAddProblemPop").popoverWithAutoHideForPrivilege("Pour signaler un problème, il faut être connecté.");
  	    
- 	    $(".noneditresource").popoverWithAutoHide("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
+ 	    $(".noneditresource").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution." );
 
 	});
  	

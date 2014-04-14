@@ -46,7 +46,8 @@ $.webshims.polyfill();
 jQuery.fn.extend({
     popoverWithAutoHide: function (popoverText) {
 	 	    	$(this).popover({
-	 	 	    	content : popoverText
+	 	 	    	content : popoverText,
+	 	 	    	html : true
 	 	  	    }).on('shown.bs.popover', function () {
 	 	  	    	  var $this = $(this); // CLosure: http://stackoverflow.com/a/5409858/174831
 	 	  	    	  setTimeout(function() {
@@ -55,6 +56,14 @@ jQuery.fn.extend({
 	 	 	   });
 	 	    }
 }); 
+
+
+jQuery.fn.extend({
+    popoverWithAutoHideForPrivilege: function (popoverText) {
+    	$(this).popoverWithAutoHide(popoverText + "<br/><a href='/rights'>page de droits</a>");
+    }
+}); 
+
 
 
 
