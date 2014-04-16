@@ -60,10 +60,11 @@
 </div>
 </div>
 
-<%---------------------------------- COUNTER ----------------------------------%>
+<%---------------------------------- COUNTER ----------------------------------
 <div class="container" style="padding-top:40px; padding-bottom:40px;">
   <%@include file="/WEB-INF/includes/counter.jsp" %>
 </div>
+--%>
 
 <%------------------------------------ PURPOSES -------------------------------------%>
 <div style="background-color:white;">
