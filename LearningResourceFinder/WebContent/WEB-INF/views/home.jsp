@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <html>
 <head>
@@ -8,7 +9,14 @@
 
 <%---------------------------------- LOGO ----------------------------------%>
 <div class="container" style="padding-top:20px; padding-bottom:20px;">
-   <div class="text-center"><img src="/images/ToujoursPlus-logo-500px.png" alt="ToujoursPlus.be logo" /></div>
+   <div class="text-center">
+       <img src="/images/ToujoursPlus-logo-500px.png" alt="ToujoursPlus.be logo" /><br/>
+       <br/>
+       Ce site est "plus ou moins" fonctionnel.<br/>
+       Il reste des bugs, n‚Äôh√©sitez pas √† les signaler.<br/>
+       La notion de comp√©√©tence est √† revoir parce que les socles officiels semblent imbuvables pour le grand public.<br/>
+       <br/>
+       <span style="font-size:15px;" class="label label-info">beta</span><br/></div>
 </div>
 
 <%------------------------------------ SEARCH ---------------------------------%>
@@ -38,17 +46,17 @@
 	<div class="row">
 	  <div class="col-sm-4 col-sm-offset-2">
 	      <h3>primaire</h3><br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=300'/>">1<sup>Ëre</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>Ëme</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=300'/>">1<sup>√®re</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>√®me</sup></a><br/>
 	      <br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=301'/>">3<sup>Ëme</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>Ëme</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=301'/>">3<sup>√®me</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>√®me</sup></a><br/>
 	      <br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=302'/>">5<sup>Ëme</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>Ëme</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=302'/>">5<sup>√®me</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>√®me</sup></a><br/>
 	  </div>
 	  <div class="col-sm-4 col-sm-offset-2">
 	      <h3>secondaire</h3><br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=304'/>">1<sup>Ëre</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>Ëme</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=304'/>">1<sup>√®re</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>√®me</sup></a><br/>
 	      <br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=305'/>">3<sup>Ëme</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>Ëme</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=305'/>">3<sup>√®me</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>√®me</sup></a><br/>
 	  </div>
 	</div>
 </div>  

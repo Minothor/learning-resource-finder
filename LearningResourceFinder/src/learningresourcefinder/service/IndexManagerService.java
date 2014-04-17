@@ -72,7 +72,7 @@ public class IndexManagerService {
     Class<Searchable>[] searchables = new Class[]{Resource.class, PlayList.class, Competence.class};  // Entities that are included in the index.
    
     String[] searchableCriterias = new String[]{    // Addition of all the fields that should be searchable in the searchable entities.
-            "name", "description"};  
+            "name", "description", "topic"};  
 
     
 	@SuppressWarnings("unchecked")
@@ -164,7 +164,7 @@ public class IndexManagerService {
 
         try {
         	// We  build a query using the parameters;
-            String queryString="(" + keyWords + "~)"; //the "~" enable fuzzy search
+            String queryString="(" + keyWords + ")"; //the "~" enable fuzzy search: String queryString="(" + keyWords + "~)"; 
 
             SimpleFSDirectory sfsd = new SimpleFSDirectory(new File(FileUtil.getLuceneIndexDirectory(currentEnvironment)));
             IndexReader reader = DirectoryReader.open(sfsd);

@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -63,7 +64,14 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     @Enumerated(EnumType.STRING)
     private Topic topic;  // Temporary quick selection when adding a resource, before a contributor has the time to bing the resource with  a competency.
     
-
+    @ManyToOne
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Cycle minCycle;  // Minimum age for which this resource is suitable (younger kids would usually be in trouble)
+    
+    @ManyToOne
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Cycle maxCycle;  // Maximum age for which this resource is suitable (older kids would usually find this too simple or stupid)
+    
 
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)
@@ -289,5 +297,19 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
         this.author = author;
     }
 	
-	
+    public Cycle getMinCycle() {
+        return minCycle;
+    }
+
+    public void setMinCycle(Cycle minCycle) {
+        this.minCycle = minCycle;
+    }
+
+    public Cycle getMaxCycle() {
+        return maxCycle;
+    }
+
+    public void setMaxCycle(Cycle maxCycle) {
+        this.maxCycle = maxCycle;
+    }	
 }

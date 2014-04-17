@@ -228,6 +228,9 @@
 							    <a id="language" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?langue?'":" class='noneditresource'"} data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 				            </div>						
 				   	        <div class="col-md-3">
+                                <%-- !!!!!!!!!!!!!!!!!!! PUT min/max Cycle selection here (Resource.minCycle)  John 2014-04 --%>
+				            </div>						
+				   	        <div class="col-md-3">
 								<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicité?'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 									<c:if test="${resource.advertising == true}">
 		    							pub
@@ -237,11 +240,11 @@
 									</c:if>
 								 </a>
 				            </div>						
+						</div>  <%-- end row --%>
+				   	    <div class="row">
 				   	        <div class="col-md-3">
 							     <a href="/user/${resource.createdBy.userName}" class="addToolTip" title="contributeur">${resource.createdBy.fullName}</a>
 				            </div>						
-						</div>  <%-- end row --%>
-				   	    <div class="row">
 				   	        <div class="col-md-3 col-md-offset-9">
 	     						<a id="author" ${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}> ${resource.author}</a>
 				            </div>						

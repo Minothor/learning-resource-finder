@@ -30,7 +30,7 @@ public class AdminController extends BaseRepository<User> {
         SecurityContext.assertUserHasRole(Role.ADMIN);
     	indexManagerService.removeIndexes();
     	indexManagerService.createIndexes();
-		NotificationUtil.addNotificationMessage("Inexes supprimés puis recréés avec succcès", Status.SUCCESS);
+		NotificationUtil.addNotificationMessage("Indexes supprimés puis recréés avec succcès", Status.SUCCESS);
 		return "admin";  // JSP
     	
     }
