@@ -13,7 +13,7 @@
        <img src="/images/ToujoursPlus-logo-500px.png" alt="ToujoursPlus.be logo" /><br/>
        <br/>
        Ce site est "plus ou moins" fonctionnel.<br/>
-       Il reste des bugs, n’hésitez pas à les signaler.<br/>
+       Il reste des bugs, n’hésitez pas à les <a href="/contact">signaler</a>.<br/>
        <br/>
        <span style="font-size:15px;" class="label label-info">beta</span><br/></div>
 </div>

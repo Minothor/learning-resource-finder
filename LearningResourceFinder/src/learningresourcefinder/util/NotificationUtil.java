@@ -1,5 +1,6 @@
 package learningresourcefinder.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class NotificationUtil {
 	}
 	
 	
-	static public class Notification {
+	static public class Notification implements Serializable {
 		
 		String text;
 		Status status;

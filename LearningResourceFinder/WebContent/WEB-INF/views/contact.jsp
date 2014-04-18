@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <body>
 <div class="container">
 <h1>Contact</h1>
-<p>Contactez-nous pour toute question, suggestion, témoignage, etc.</p>
+<p>Contactez-nous pour toute question, suggestion, tÃ©moignage, etc.</p>
 <br>
 <form role="form" method="POST" action='<%=response.encodeURL("contactsubmit")%>' style="margin-left:15%; width:70%;">
   <div class="form-group">

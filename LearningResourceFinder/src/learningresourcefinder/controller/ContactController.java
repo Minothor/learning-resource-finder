@@ -30,7 +30,6 @@ public class ContactController extends BaseController<User> {
     }
 
     
-    @SuppressWarnings("unused")
     @RequestMapping(value="/contactsubmit")
     public ModelAndView contactSubmit(@RequestParam String sender, @RequestParam String subject, @RequestParam String content){
            if (StringUtils.isBlank(sender)) {

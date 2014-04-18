@@ -60,6 +60,11 @@
 				<div class="col-md-2">
 					<h4>Séquences</h4>
 					<a href="/playlist/all">Toutes les séquences</a>
+					
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<div style="text-align:right;">
+					    <a href="/contact">Contactez-nous</a>
+					</div>
 				</div>
       		</div>
       	</div>
