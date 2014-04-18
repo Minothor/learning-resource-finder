@@ -16,6 +16,11 @@
 			           data-toggle="tooltip" title="retirer cette ressource de la séquence">&times;</button>
 		    </a>
 	   </c:if>
+
+       <a href="<c:url value='${resource.urlResources[0].url}'/>">
+	       <span class="addToolTip glyphicon glyphicon-log-in" style="position:absolute; top:32px; right:4px;"
+		           data-toggle="tooltip" title="lien direct vers ce site"></span>
+	   </a>
   </div>
   
   <c:if test="${resource.numberImage >= 1}">

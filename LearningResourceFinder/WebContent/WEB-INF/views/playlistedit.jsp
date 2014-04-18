@@ -8,7 +8,6 @@
 <head>
 	<!-- Jquery for change input popup addImageUser -->
 	<script type="text/javascript" src="/js/int/addImageUtil.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Edition d'une séquence</title>
 	<script type="text/javascript">
 		function verifForm(form) {

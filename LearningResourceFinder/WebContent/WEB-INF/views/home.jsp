@@ -14,7 +14,6 @@
        <br/>
        Ce site est "plus ou moins" fonctionnel.<br/>
        Il reste des bugs, n’hésitez pas à les signaler.<br/>
-       La notion de compétence est à revoir parce que les socles officiels semblent imbuvables pour le grand public.<br/>
        <br/>
        <span style="font-size:15px;" class="label label-info">beta</span><br/></div>
 </div>

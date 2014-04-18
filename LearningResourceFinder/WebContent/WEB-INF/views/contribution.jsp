@@ -1,8 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -10,7 +10,7 @@
 		<lrftag:breadcrumbelement label="Home" link="home" />
 	</lrftag:breadcrumb>
 	<div class="container">
-		<lrftag:pageheadertitle title="Améliorer des ressources" />
+		<lrftag:pageheadertitle title="Amï¿½liorer des ressources" />
 
 		<c:forEach var="topic" items="${mapProblem}" varStatus="status">
 			<div class="panel panel-default" style="display:inline-block; vertical-align:middle; width:330px; margin-right:20px; margin-bottom:20px;">
@@ -19,13 +19,13 @@
 
 		       		<ul class="list-group" >
 					  	<li class="list-group-item">
-			    			<a href="/problemresourcelist/${topic.key}">${topic.value[0]} problème${topic.value[0] > 1 ? "s" : ""} à corriger.</a>
+			    			<a href="/problemresourcelist/${topic.key}">${topic.value[0]} problï¿½me${topic.value[0] > 1 ? "s" : ""} ï¿½ corriger.</a>
 					  	</li>
 					  	<li class="list-group-item">
-			    			<a href="/fieldsnullresourcelist/${topic.key}">${topic.value[1]} ressource${topic.value[1] > 1 ? "s" : ""} incomplète${topic.value[1] > 1 ? "s" : ""}.</a>
+			    			<a href="/fieldsnullresourcelist/${topic.key}">${topic.value[1]} ressource${topic.value[1] > 1 ? "s" : ""} incomplï¿½te${topic.value[1] > 1 ? "s" : ""}.</a>
 					  	</li>
 					  	<li class="list-group-item">
-			    			<a href="/notcompetencesresourcelist/${topic.key}">${topic.value[2]} ressource${topic.value[2] > 1 ? "s" : ""} liée${topic.value[2] > 1 ? "s" : ""} à aucune compétence.</a>
+			    			<a href="/notcompetencesresourcelist/${topic.key}">${topic.value[2]} ressource${topic.value[2] > 1 ? "s" : ""} liï¿½e${topic.value[2] > 1 ? "s" : ""} ï¿½ aucune compï¿½tence.</a>
 					  	</li>
                    </ul>					  	
 
