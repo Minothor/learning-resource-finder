@@ -306,7 +306,7 @@
 
 
 		<h4>Images &nbsp; &nbsp; &nbsp;
-        <span  class='glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonimageeditpop":""}'	 ${canEditUrl==true ? "onclick='onAddImageClick()'":""}  style="float:none; font-size:15px" title="ajouter une image (typiquement une capture d'�cran)"></span>
+        <span  class='glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonimageeditpop":""}'	 ${canEditUrl==true ? "onclick='onAddImageClick()'":""}  style="float:none; font-size:15px" title="ajouter une image (typiquement une capture d'écran)"></span>
         </h4>
 		<%@ include file="resourceimagegallery.jsp"%>
    

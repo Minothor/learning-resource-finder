@@ -42,10 +42,6 @@ public class ResourceRepository extends BaseRepository<Resource>
 				.getResultList();
 		return result;
 	}
-	public Long counterResource(Resource resource){
-		return (Long)em.createQuery("SELECT  count(r.name) from Resource r WHERE r.name=:resource").getSingleResult();
-		
-	}
 	
 	
 	/** @param idList can be null if we don't want to limit the query to some resources */
@@ -192,6 +188,10 @@ public class ResourceRepository extends BaseRepository<Resource>
                 .setParameter("allCompetences", allCompetences)
                 .getResultList();
         return results;
+    }
+
+    public long countResources() {
+            return (Long)em.createQuery("SELECT  count(r) from Resource r ").getSingleResult();
     }
 	
 	

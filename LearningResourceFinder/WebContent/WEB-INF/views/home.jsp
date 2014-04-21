@@ -12,10 +12,20 @@
    <div class="text-center">
        <img src="/images/ToujoursPlus-logo-500px.png" alt="ToujoursPlus.be logo" /><br/>
        <br/>
-       Ce site est "plus ou moins" fonctionnel.<br/>
-       Il reste des bugs, n’hésitez pas à les <a href="/contact">signaler</a>.<br/>
-       <br/>
-       <span style="font-size:15px;" class="label label-info">beta</span><br/></div>
+   </div>
+   <div class="row">
+     <div class="col-md-2"></div>
+     <div class="col-md-5">
+	       Ce site est "plus ou moins" fonctionnel.<br/>
+	       Il reste des bugs, n’hésitez pas à les <a href="/contact">signaler</a>.<br/>
+	       <br/>
+	       <span style="font-size:15px;" class="label label-info">beta</span><br/>
+     </div>
+     <div class="col-md-3 text-right">
+	       <span style="font-size:20px;" class="label label-info addToolTip" title="${nbResouces} ressources ajoutées depuis le 21 avril 2014">${nbResouces}</span>
+     </div>     
+     <div class="col-md-2"></div>
+   </div>
 </div>
 
 <%------------------------------------ SEARCH ---------------------------------%>
