@@ -61,8 +61,12 @@
 					<h4>Séquences</h4>
 					<a href="/playlist/all">Toutes les séquences</a>
 					
-					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+					<br/><br/><br/><br/><br/><br/><br/><br/>
+					
 					<div style="text-align:right;">
+					    <a href="https://www.facebook.com/be.toujoursplus"><span class="addToolTip glyphicon icon-facebook" style="font-size:21px;" data-toggle="tooltip" title="notre page facebook"></span></a>
+					    <br/><br/><br/>
+					    
 					    <a href="/contact">Contactez-nous</a>
 					</div>
 				</div>

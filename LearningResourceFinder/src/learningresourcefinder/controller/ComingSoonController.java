@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ComingSoonController extends BaseController<ComingSoonMail> {
 
-
-    @RequestMapping("/")
-    public String comingSoonRoot() {
-      return "redirect:/comingsoon";   // If we don't redirect, we have sitemesh troubles (wrong decorator).
-    }
+// Used when comingsoon is the default page.
+//    @RequestMapping("/")
+//    public String comingSoonRoot() {
+//      return "redirect:/comingsoon";   // If we don't redirect, we have sitemesh troubles (wrong decorator).
+//    }
 
     @RequestMapping("/comingsoon")
     public String comingSoon() {
