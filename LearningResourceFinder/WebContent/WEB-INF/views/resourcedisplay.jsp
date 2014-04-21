@@ -316,7 +316,7 @@
         <h4>Problèmes &nbsp; &nbsp; &nbsp;
 	        <a class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "' href='#modalProblemReport' data-toggle='modal'" : " noAddProblemPop'"} 
 			  style="cursor:pointer; text-decoration:initial; line-height:20px; font-size:25px; color:#CCC"
-			  title="Signaler un probl�me pour cette ressource..."></a>
+			  title="Signaler un problème pour cette ressource..."></a>
 		</h4>
 	    <lrftag:problemreport title="${resource.name}"	resourceid="${resource.id}" />
 		<%@ include file="problemlist.jsp" %>
@@ -385,7 +385,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Ajouter une image � la galerie</h4>
+						<h4 class="modal-title">Ajouter une image à la galerie</h4>
 					</div>
 					<form method="post" action="/resource/imageadd"
 						enctype="multipart/form-data"
@@ -410,8 +410,7 @@
 									Depuis un lien
 								</label>
 								<div class="col-lg-8">
-									<input type="hidden" name="strUrl" value="http://..."
-										class="inputSource form-control" id="inputUrl" />
+									<input type="hidden" name="strUrl" value="http://..."	class="inputSource form-control" id="inputUrl" />
 								</div>
 							</div>
 
@@ -420,13 +419,9 @@
 						</div>
 
 						<div class="modal-footer">
-							<input type="hidden" name="idResource" id="idResource"
-								value="${resource.id}" />
-							<button type="button" class="btn btn-default closeModal"
-								data-dismiss="modal">Fermer</button>
-							<button type="submit" name="btnPicture"
-								class="btn btn-primary closeModal btnSubmit">Sauver
-								l'image</button>
+							<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
+							<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
+							<button type="submit" name="btnPicture"	class="btn btn-primary closeModal btnSubmit">Sauver	l'image</button>
 						</div>
 					</form>
 				</div>

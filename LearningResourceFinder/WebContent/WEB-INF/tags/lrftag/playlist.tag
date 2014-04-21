@@ -9,7 +9,7 @@
   </div>
   
   <c:if test="${playlist.picture}">
-    <img src="/gen/playlist/resized/small/${playlist.id}.jpg" alt="${playlist.name}" />
+    <img src="/gen/playlist/resized/large/${playlist.id}.jpg" alt="${playlist.name}" />
   </c:if>
 
   <div class="panel-body" style="margin-bottom:20px;">

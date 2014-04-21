@@ -34,10 +34,10 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<lrftag:playlistimage canEdit="${canEdit}" playlist="${playlist}" random="${random}" />
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-8">
 					<dl class="dl-horizontal">
 						<dt>Nom :</dt>
 					  	<dd><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
