@@ -164,7 +164,7 @@ public class IndexManagerService {
 
         try {
         	// We  build a query using the parameters;
-            String queryString="(" + keyWords + ")"; //the "~" enable fuzzy search: String queryString="(" + keyWords + "~)"; 
+            String queryString="(" + keyWords + "~)";   //the "~" enable fuzzy search: String queryString="(" + keyWords + "~)"; 
 
             SimpleFSDirectory sfsd = new SimpleFSDirectory(new File(FileUtil.getLuceneIndexDirectory(currentEnvironment)));
             IndexReader reader = DirectoryReader.open(sfsd);

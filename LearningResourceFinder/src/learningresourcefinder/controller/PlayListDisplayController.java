@@ -100,18 +100,14 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 
 		BufferedImage image = null;
 		
-		try 
-		{
+		try {
             image = ImageUtil.readImage(url);
-        } 
-		catch (RuntimeException e) 
-		{
+        } catch (RuntimeException e) {
         	NotificationUtil.addNotificationMessage("veuillez indiquer une URL valide");
-            return mv;//useless to try to save image if we don't have it
+            return mv; //useless to try to save image if we don't have it
         }
 		
-        try 
-        {
+        try {
             ByteArrayOutputStream outStream= new ByteArrayOutputStream();
             ImageIO.write(image, "jpg", outStream);
             
@@ -126,9 +122,10 @@ public class PlayListDisplayController extends BaseController<PlayList> {
             		FileUtil.getGenFolderPath(currentEnvironment) + 
             		FileUtil.PLAYLIST_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SMALL_SUB_FOLDER, playlist.getId() + ".jpg", 0.9f);
 
-        } 
-        catch (IOException e) 
-        {
+            playlist.setPicture(true);
+            
+            playlistRepository.merge(playlist);
+        } catch (IOException e)  {
             throw new RuntimeException(e);
         }
 

@@ -185,7 +185,7 @@
 	           <br/><br/>
 	           
      		   <c:if test="${listMyPlayListsWithThisResource != null}">
-					Mes s�quences contenant cette ressource:<br/>
+					Mes séquences contenant cette ressource:<br/>
 					<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
 						<lrftag:playlist playlist="${playlist}"/>
                     </c:forEach>
@@ -195,7 +195,7 @@
 					<a id="addToPlayList" href='#' class='editableField' data-type='select' data-source="${listMyPlayListWithoutThisResource}">Ajouter à une de mes séquences</a><br/> 
 			   </c:if>
 			   <c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
-					S�quences d'autres utilisateurs contenant cette ressource:<br/>
+					Séquences d'autres utilisateurs contenant cette ressource:<br/>
 					<c:forEach items="${listOtherPeoplePlayListsWithThisResource}" var="playlist">
 						<lrftag:playlist playlist="${playlist}"/>
                    	</c:forEach>
