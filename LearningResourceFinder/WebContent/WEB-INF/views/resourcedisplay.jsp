@@ -178,7 +178,7 @@
    	                 </c:otherwise>
    	                </c:choose>
 			           <span  class="glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "nonurleditpop":""}"	 ${canEditUrl==true ? "onclick='onUrlAddClick()'":""}  style="float:none; font-size:15px" 
-			              title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'�nonc� et l'autre pour la solution s'ils sont dans des documents diff�rents; ou bien un lien principal vers la ressource et un lien vers une vid�o montrant l'utilisation de la ressource en classe)"></span>
+			              title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
 	              </div>
 	           </div>
 	           
@@ -192,7 +192,7 @@
                     <br/> 
 			   </c:if>
 			   <c:if test="${listMyPlayListWithoutThisResource != null}">
-					<a id="addToPlayList" href='#' class='editableField' data-type='select' data-source="${listMyPlayListWithoutThisResource}">Ajouter � une de mes s�quences</a><br/> 
+					<a id="addToPlayList" href='#' class='editableField' data-type='select' data-source="${listMyPlayListWithoutThisResource}">Ajouter à une de mes séquences</a><br/> 
 			   </c:if>
 			   <c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
 					S�quences d'autres utilisateurs contenant cette ressource:<br/>
@@ -237,7 +237,7 @@
                                 <%-- !!!!!!!!!!!!!!!!!!! PUT min/max Cycle selection here (Resource.minCycle)  John 2014-04 --%>
 				            </div>						
 				   	        <div class="col-md-3">
-								<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicit�?'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
+								<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicité?'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 									<c:if test="${resource.advertising == true}">
 		    							pub
 									</c:if>
@@ -351,8 +351,8 @@
 								<label class="col-lg-2 control-label">Intitul� (optionnel): </label>
 								<div class="col-lg-10">
 									<input type="text" class="form-control" id="nameField"	name="name" />
-									<span class="help-block">indication de la nature de cette url suppl�mentaire.<br/>
-									   ex: "solutions", "vid�o de cette activit� en classe", "version �ditable", etc.</span>
+									<span class="help-block">indication de la nature de cette url supplémentaire.<br/>
+									   ex: "solutions", "vidéo de cette activité en classe", "version éditable", etc.</span>
 								</div>
 							</div>
 
@@ -450,7 +450,7 @@
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removeurlresource">
-	        <input id="urlResourceHiddenField" type="hidden" name="id" value="" />  <%-- Filled by JavaScript --%>
+	        <input id="urlResourceHiddenField" type="hidden" name="urlresourceid" value="" />  <%-- Filled by JavaScript --%>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 	        <button type="submit" class="btn btn-primary">Supprimer</button>
 	       </form>
@@ -466,7 +466,7 @@
 					<div class="modal-header">
 						<button type="button" class="close closeModal"
 							data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Placer la ressource dans une comp�tence</h4>
+						<h4 class="modal-title">Placer la ressource dans une compétence</h4>
 					</div>
 					<form method="post" action="/competenceaddtoresourcesubmit"  role="form">
 						<div class="modal-body">
@@ -479,8 +479,8 @@
 								  </div>
 								</row>
 								<br/><br/><br/>
-								<div class="help-block">Code de la comp�tence dans laquelle vous d�sirez placer la ressource.<br/>
-								   Astuce: affichez la liste des comp�tences dans un autre onglet de votre navigateur.</div>
+								<div class="help-block">Code de la compétence dans laquelle vous désirez placer la ressource.<br/>
+								   Astuce: affichez la liste des compétences dans un autre onglet de votre navigateur.</div>
 							</div>
 						</div>
 
@@ -507,7 +507,7 @@
 	        <h4 class="modal-title">Confirmation</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>Voulez-vous retirer cette comp�tence de la ressource ?</p>
+	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
 	      </div>
 	      <div class="modal-footer">
 	       <form action="/removecompetencefromresource">
