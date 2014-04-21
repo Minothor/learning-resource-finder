@@ -19,13 +19,13 @@
 
 		       		<ul class="list-group" >
 					  	<li class="list-group-item">
-			    			<a href="/problemresourcelist/${topic.key}">${topic.value[0]} probl�me${topic.value[0] > 1 ? "s" : ""} � corriger.</a>
+			    			<a href="/problemresourcelist/${topic.key}">${topic.value[0]} problème${topic.value[0] > 1 ? "s" : ""} à corriger.</a>
 					  	</li>
 					  	<li class="list-group-item">
-			    			<a href="/fieldsnullresourcelist/${topic.key}">${topic.value[1]} ressource${topic.value[1] > 1 ? "s" : ""} incompl�te${topic.value[1] > 1 ? "s" : ""}.</a>
+			    			<a href="/fieldsnullresourcelist/${topic.key}">${topic.value[1]} ressource${topic.value[1] > 1 ? "s" : ""} incomplète${topic.value[1] > 1 ? "s" : ""}.</a>
 					  	</li>
 					  	<li class="list-group-item">
-			    			<a href="/notcompetencesresourcelist/${topic.key}">${topic.value[2]} ressource${topic.value[2] > 1 ? "s" : ""} li�e${topic.value[2] > 1 ? "s" : ""} � aucune comp�tence.</a>
+			    			<a href="/notcompetencesresourcelist/${topic.key}">${topic.value[2]} ressource${topic.value[2] > 1 ? "s" : ""} liée${topic.value[2] > 1 ? "s" : ""} à aucune compétence.</a>
 					  	</li>
                    </ul>					  	
 
