@@ -50,7 +50,7 @@ public class PlayListDisplayController extends BaseController<PlayList> {
     
     
     @RequestMapping("/playlist/imageadd")
-	public ModelAndView userImageAdd( @RequestParam("idPlayList") long playlistid,@RequestParam("file") MultipartFile multipartFile) throws Exception{
+	public ModelAndView userImageAdd( @RequestParam("idPlayList") long playlistid, @RequestParam("file") MultipartFile multipartFile) throws Exception{
 		
 		User user = SecurityContext.getUser();
 		PlayList playlist = getRequiredEntity(playlistid);

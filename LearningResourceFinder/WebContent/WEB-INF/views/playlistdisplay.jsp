@@ -53,7 +53,7 @@
 		
 		<h3>Ressources incluses</h3>
 			<c:forEach items="${playlist.resources}" var="resource">
-					<c:if test="${current.user != null && playlist.createdBy eq current.user}">
+					<c:if test="${canEdit}">
 						<c:set var="closeUrl" value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>
 					</c:if>	
 					<lrftag:resource resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
@@ -67,9 +67,9 @@
 		      	<div class="modal-content">
 		        	<div class="modal-header">
 		          		<button type="button" class="formUrlPlaylist close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
-		          		<h4 class="modal-title">Ajouter un avatar</h4>
+		          		<h4 class="modal-title">Placer une image</h4>
 		        	</div>		        	
-		     		<form method="post" action="/playlist/imageadd" enctype="multipart/form-data" class="form-horizontal formUrlResource">	
+		     		<form method="post" action="/playlist/imageadd" enctype="multipart/form-data" class="form-horizontal formUrlPlaylist">	
 		     			<div class="modal-body">
 		     			
 		     				<div class="form-group">

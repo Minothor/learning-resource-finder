@@ -2,15 +2,12 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
-<head>
-<title>Insert title here</title>
-</head>
 <body>
 	<lrftag:breadcrumb linkactive="Contribution">
 		<lrftag:breadcrumbelement label="Home" link="home" />
 	</lrftag:breadcrumb>
 	<div class="container">
-		<lrftag:pageheadertitle title="Am�liorer des ressources" />
+		<lrftag:pageheadertitle title="Améliorer des ressources" />
 
 		<c:forEach var="topic" items="${mapProblem}" varStatus="status">
 			<div class="panel panel-default" style="display:inline-block; vertical-align:middle; width:330px; margin-right:20px; margin-bottom:20px;">
