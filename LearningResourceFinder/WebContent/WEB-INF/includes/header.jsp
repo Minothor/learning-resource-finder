@@ -147,7 +147,11 @@
                     	  </c:when>	
                     	</c:choose>			
 					    </ul>
-					 </li> 	 
+					 </li>
+					 
+					 <c:if test="${current.user.role=='ADMIN'}">
+					 	<li><a href="/admin">Admin</a></li> 	 
+	 				 </c:if>					
 				</ul>
 
 
