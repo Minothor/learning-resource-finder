@@ -56,8 +56,7 @@ public class FavoriteController extends BaseController<Favorite> {
 		User user = SecurityContext.getUser();
 		List<Resource> listResource = favoriteRepository.findAllResourceFavoriteForUser(user);
 		mv.addObject("resourceList", listResource);
-	    //mv.addObject("topic", topic);
-		mv.addObject("problemTitle","Liste des favoris");
+		mv.addObject("titleFragment","Ressources favorites");
 		mv.addObject("user", user);
 		
 		return mv;

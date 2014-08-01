@@ -35,6 +35,7 @@ public class ResourceListController extends BaseController<Resource> {
         }
        
         ModelAndView mv = prepareModelAndView(resourceRepository.findAllResourceByUser(user));
+        mv.addObject("titleFragment","Ressources ajoutées");
 
         mv.addObject("user", user);
         
