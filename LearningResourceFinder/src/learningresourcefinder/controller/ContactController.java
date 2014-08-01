@@ -36,9 +36,9 @@ public class ContactController extends BaseController<User> {
                NotificationUtil.addNotificationMessage("Veuillez spécifier une adresse électronique où nous pourions vous répondre.", Status.ERROR);
                return prepareModelAndView(sender, subject, content);
            }
-           content = "sender: "+sender +"<br/>";
+           content = "sender: "+sender +"<br/>" + content;
         
-           content += getFromLoggedInUserString(content);
+           content = getFromLoggedInUserString(content);
            
            mailService.sendMail(mailService.ADMIN_MAIL, sender, subject,content, MailType.IMMEDIATE, MailCategory.CONTACT);
            NotificationUtil.addNotificationMessage("Votre message est bien envoyé");
