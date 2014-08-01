@@ -71,6 +71,15 @@ public class ResourceListController extends BaseController<Resource> {
 		return mv;
 	}
 	
+   @RequestMapping("/lastresourcelist")
+    public ModelAndView lastresourcelist() {
+        ModelAndView mv = prepareModelAndView(resourceRepository.findLastResources(100));
+        
+        mv.addObject("titleFragment","Dernières ressources ajoutées");   
+        
+        return mv;
+    }
+	
 	private ModelAndView prepareModelAndView(List<Resource> listResource) {
 	    ModelAndView mv = new ModelAndView("resourcelist");
 

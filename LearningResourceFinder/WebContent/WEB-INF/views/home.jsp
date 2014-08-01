@@ -22,7 +22,7 @@
 	       <span style="font-size:15px;" class="label label-info">beta</span><br/>
      </div>
      <div class="col-md-3 text-right">
-	       <span style="font-size:20px;" class="label label-info addToolTip" title="${nbResouces} ressources ajoutées depuis le 21 avril 2014">${nbResouces}</span>
+	       <a href="/lastresourcelist"><span style="font-size:20px;" class="label label-info addToolTip" title="${nbResouces} ressources ajoutées depuis le 21 avril 2014">${nbResouces}</span></a>
      </div>     
      <div class="col-md-2"></div>
    </div>

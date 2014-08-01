@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.Query;
 
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.Favorite;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.User;
@@ -21,8 +22,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @SuppressWarnings("unchecked")
-public class ResourceRepository extends BaseRepository<Resource>
-{
+public class ResourceRepository extends BaseRepository<Resource> {
+    
 	public Resource getResourceByName(String name) {
 		return getSingleOrNullResult(em.createQuery("SELECT r FROM Resource r WHERE r.name =:name")
                 .setParameter("name", name));
@@ -186,6 +187,14 @@ public class ResourceRepository extends BaseRepository<Resource>
         
         List<Long> results = em.createQuery("SELECT r.id FROM Resource r join r.competences c WHERE c in (:allCompetences)")
                 .setParameter("allCompetences", allCompetences)
+                .getResultList();
+        return results;
+    }
+    
+
+    public List<Resource> findLastResources(int maxAmount) {
+        List<Resource> results = em.createQuery("SELECT r FROM Resource r  ORDER BY r.createdOn DESC")
+                .setMaxResults(maxAmount)              
                 .getResultList();
         return results;
     }
