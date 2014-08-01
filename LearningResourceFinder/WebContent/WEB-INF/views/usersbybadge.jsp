@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
-<%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag"%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+<%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <ryctag:pageheadertitle title="Utilisateurs ayant la gommette ${badgeType.name}"/>
+    <lrftag:pageheadertitle title="Utilisateurs ayant la gommette ${badgeType.name}"/>
     
-	<div style="display: inline-block; vertical-align: top;"><ryctag:badge badgeType="${badgeType}"/></div>
+	<div style="display: inline-block; vertical-align: top;"><lrftag:badge badgeType="${badgeType}"/></div>
 	<div style="display: inline-block; vertical-align: top;">
 		<span style="font-size:90%; font-style:italic;">${badgeType.description}</span><br/>
 	    ${badges.size()}  
@@ -29,7 +29,7 @@
    		<c:forEach items="${badges}" var="badge">
     	    <c:set var="u" value="<%=i%>"/>
     	    <c:if test="${(u mod 4) == 0}"><tr></c:if>
-   		    <td><ryctag:user user="${badge.user}"></ryctag:user></td>
+   		    <td><lrftag:user user="${badge.user}"></lrftag:user></td>
        	    <c:if test="${(u mod 4) == 3}"></tr></c:if>
    		    <%  i++; %>
 		</c:forEach>
