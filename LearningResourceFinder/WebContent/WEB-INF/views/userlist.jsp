@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib tagdir="/WEB-INF/tags/ryctag/" prefix="ryctag" %>
-	<%@ taglib uri='/WEB-INF/tags/ryc.tld' prefix='ryc'%>
+    <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
+	<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
 <head>
 <!-- you can set variables starting with "p_" in the file named website_content.properties -->
@@ -25,7 +25,7 @@
 <body>
 <div class="container">
 
-<ryctag:pageheadertitle title="Utilisateurs"/>
+<lrftag:pageheadertitle title="Utilisateurs"/>
 <div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Top contributeurs</a></li>
@@ -36,17 +36,17 @@
 			</c:if>
 		</ul>
 		<div id="tabs-1">
-			<ryctag:usersgrid userList="${topUserList}"></ryctag:usersgrid>
+			<lrftag:usersgrid userList="${topUserList}"></lrftag:usersgrid>
 		</div>
 		<div id="tabs-2">
-			<ryctag:usersgrid userList="${lastUsersRegistered}"></ryctag:usersgrid>
+			<lrftag:usersgrid userList="${lastUsersRegistered}"></lrftag:usersgrid>
 		</div>
 		<div id="tabs-3">
 			<form action="/user" method="GET">
 				prénom, nom ou pseudo <input type="text" name="name"/> 
 				<input type="submit" value="rechercher" />
 			</form>
-			<ryctag:usersgrid userList="${usersList}"></ryctag:usersgrid>
+			<lrftag:usersgrid userList="${usersList}"></lrftag:usersgrid>
 		</div>
 		
 		<c:if test="${infoUsersHavingSpecialPrivileges != null}">
