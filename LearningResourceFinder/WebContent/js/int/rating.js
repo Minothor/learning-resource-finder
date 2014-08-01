@@ -6,6 +6,14 @@ $(document).ready(function(){
         $('.popover-link').not(this).popover('hide');
     });
 
+    
+    // Prevents scrolling up when we click on the stars. 
+    $('.popover-link').click(function(e){
+    	e.preventDefault();
+    });
+    
+    
+    
     //
     $('.pop').popover({
         html : true, // Active format HTML.
@@ -19,10 +27,9 @@ $(document).ready(function(){
     $('.novotepop').popover({
     	html :true,
     	content: "Pour voter, il faut être connecté et avoir un niveau 2 de contribution."
-    }
-    		
+    });
+
     
-    );
 
     // On close : replace the content to div ".pop_display".
     $('.pop').on('hidden.bs.popover', function () {
@@ -30,6 +37,7 @@ $(document).ready(function(){
     });
 
     // Close popover active if click somewhere else.
+
     $(':not(#anything)').on('click', function (e) {
         $('.popover-link').each(function () {
             if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.pop').has(e.target).length === 0) {
@@ -38,7 +46,6 @@ $(document).ready(function(){
             }
         });
     });
-    
     // Take rating since star on click.
     // Ajax request
     $('i.glyphicon[data-value]').on('click', function() {
