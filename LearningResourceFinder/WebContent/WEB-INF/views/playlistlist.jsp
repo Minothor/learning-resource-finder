@@ -31,14 +31,14 @@
 <body>
 <c:choose>
  <c:when test="${(user!=null && displaytype!='all')}">
-	<lrftag:breadcrumb linkactive="PlayLists">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+	<lrftag:breadcrumb linkactive="playLists">
+		<lrftag:breadcrumbelement label="home" link="/home" />
 		<lrftag:breadcrumbelement label="${user.firstName}" link="/user/${user.userName}" />
 	</lrftag:breadcrumb>
  </c:when>
  <c:otherwise>
- 	<lrftag:breadcrumb linkactive="Toutes les séquences">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+ 	<lrftag:breadcrumb linkactive="toutes les séquences">
+		<lrftag:breadcrumbelement label="home" link="/home" />
 	</lrftag:breadcrumb>
  </c:otherwise>
 </c:choose>

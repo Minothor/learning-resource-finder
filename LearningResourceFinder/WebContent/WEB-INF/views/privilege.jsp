@@ -7,8 +7,8 @@
 
 <body>
 
-	<lrftag:breadcrumb linkactive="Permission">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+	<lrftag:breadcrumb linkactive="permission">
+		<lrftag:breadcrumbelement label="home" link="/home" />
 		<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="user/${user.userName}" />
 	</lrftag:breadcrumb>	
 	<div class="container">

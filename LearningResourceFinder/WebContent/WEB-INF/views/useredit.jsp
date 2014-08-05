@@ -16,8 +16,8 @@
 	<script src="/js/int/birthday_picker.js" type = "text/javascript"></script>	
 </head>
 <body>
-	<lrftag:breadcrumb linkactive="Edition">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+	<lrftag:breadcrumb linkactive="edition">
+		<lrftag:breadcrumbelement label="home" link="/home" />
 		<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
 	</lrftag:breadcrumb>
 	

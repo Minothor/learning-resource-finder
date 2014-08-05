@@ -97,9 +97,9 @@
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${resource.name}">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+		<lrftag:breadcrumbelement label="home" link="/home" />
 		<c:if test="${user != null}">
-			<lrftag:breadcrumbelement label="Ressource" link="/ressourcelist/${user.userName}" />
+			<lrftag:breadcrumbelement label="ressource" link="/ressourcelist/${user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
 	<div class="container">

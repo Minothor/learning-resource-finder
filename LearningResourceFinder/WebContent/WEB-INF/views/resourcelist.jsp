@@ -8,13 +8,13 @@
 	<c:choose>
 		<c:when test="${topic != null}">
 			<lrftag:breadcrumb linkactive="${topic.description}">
-			<lrftag:breadcrumbelement label="Home" link="/home" />
-			<lrftag:breadcrumbelement label="Contributions" link="/contribution" />
+			<lrftag:breadcrumbelement label="home" link="/home" />
+			<lrftag:breadcrumbelement label="contributions" link="/contribution" />
 			</lrftag:breadcrumb>
 		</c:when>
 		<c:otherwise>
 			<lrftag:breadcrumb linkactive="${titleFragment}">
-			<lrftag:breadcrumbelement label="Home" link="/home" />
+			<lrftag:breadcrumbelement label="home" link="/home" />
 			<lrftag:breadcrumbelement label="${user.fullName}" link="/user/${user.userName}" />
 			</lrftag:breadcrumb>
 		</c:otherwise>

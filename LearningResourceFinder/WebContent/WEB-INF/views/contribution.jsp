@@ -3,8 +3,8 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
 <body>
-	<lrftag:breadcrumb linkactive="Contribution">
-		<lrftag:breadcrumbelement label="Home" link="home" />
+	<lrftag:breadcrumb linkactive="contribution">
+		<lrftag:breadcrumbelement label="home" link="home" />
 	</lrftag:breadcrumb>
 	<div class="container">
 		<lrftag:pageheadertitle title="Améliorer des ressources" />

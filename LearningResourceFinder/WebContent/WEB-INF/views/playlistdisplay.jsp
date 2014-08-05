@@ -23,7 +23,7 @@
 
 <body>
 	<lrftag:breadcrumb linkactive="${playlist.name}">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+		<lrftag:breadcrumbelement label="home" link="/home" />
         <c:if test="${playlist.createdBy eq current.user}">
 		   <lrftag:breadcrumbelement label="mes séquences" link="/playlist/user/${current.user.userName}" />
 		</c:if>

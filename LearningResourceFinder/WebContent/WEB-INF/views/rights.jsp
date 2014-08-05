@@ -6,8 +6,8 @@
 </head>
 <body>
 <div class="container">
-	<lrftag:breadcrumb linkactive="Droits et niveaux">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+	<lrftag:breadcrumb linkactive="droits et niveaux">
+		<lrftag:breadcrumbelement label="home" link="/home" />
         <c:if test="${user != null}">
 		   <lrftag:breadcrumbelement label="${user.fullName}" link="/user/${user.userName}" />
 		</c:if>

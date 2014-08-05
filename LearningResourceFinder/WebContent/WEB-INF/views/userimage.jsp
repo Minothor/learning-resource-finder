@@ -20,7 +20,7 @@
 
 <ryctag:breadcrumb>
 	<ryctag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
-	<ryctag:breadcrumbelement label="Ajouter une image" />
+	<ryctag:breadcrumbelement label="ajouter une image" />
 </ryctag:breadcrumb>
 
 <div class="container">

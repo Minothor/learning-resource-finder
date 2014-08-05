@@ -13,7 +13,7 @@
 </head>
 <body>
 	<lrftag:breadcrumb linkactive="${user.firstName} ${user.lastName}">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+		<lrftag:breadcrumbelement label="home" link="/home" />
 	</lrftag:breadcrumb>
 	<div class="container">
 		<lrftag:pageheadertitle title="${user.fullName}"/>

@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<lrf:breadcrumb linkactive="Liste des cycles">
-		<lrf:breadcrumbelement label="Home" link="home" />
+<lrf:breadcrumb linkactive="liste des cycles">
+		<lrf:breadcrumbelement label="home" link="home" />
 	</lrf:breadcrumb>
 
 <div class="container">

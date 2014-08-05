@@ -8,15 +8,15 @@
 <body>
    <c:choose>
        <c:when test="${cycle.id == null}">
-			<lrftag:breadcrumb linkactive="Création">
-		   		<lrftag:breadcrumbelement label= "Home" link="/home"/>
+			<lrftag:breadcrumb linkactive="création">
+		   		<lrftag:breadcrumbelement label= "home" link="/home"/>
 		   		<lrftag:breadcrumbelement label="cycles" link="/cyclelist"/>
 	   		</lrftag:breadcrumb>
 	  </c:when>
 
 	  <c:otherwise>
-         <lrftag:breadcrumb linkactive="Edition">
-			<lrftag:breadcrumbelement label= "Home" link="/home" />
+         <lrftag:breadcrumb linkactive="édition">
+			<lrftag:breadcrumbelement label= "home" link="/home" />
 			<lrftag:breadcrumbelement label="cycles" link=" /cyclelist "/>
 			<lrftag:breadcrumbelement label="${cycle.name}" link="cycle?id=${cycle.id}" />
 	     </lrftag:breadcrumb>

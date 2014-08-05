@@ -9,8 +9,8 @@
 
 <html>
 <body>
-	<lrftag:breadcrumb linkactive="Changement de mot de passe">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+	<lrftag:breadcrumb linkactive="changement de mot de passe">
+		<lrftag:breadcrumbelement label="home" link="/home" />
 		<lrftag:breadcrumbelement label="${user.firstName} ${user.lastName}" link="/user/${user.userName}" />
 	</lrftag:breadcrumb>
 	<div class="container">

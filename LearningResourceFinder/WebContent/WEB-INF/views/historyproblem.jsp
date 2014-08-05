@@ -6,8 +6,8 @@
 <head>	
 </head>
 <body>
-	<lrftag:breadcrumb linkactive="Historique des problèmes">
-		<lrftag:breadcrumbelement label="Home" link="/home" />
+	<lrftag:breadcrumb linkactive="historique des problèmes">
+		<lrftag:breadcrumbelement label="home" link="/home" />
 	</lrftag:breadcrumb>
 	<div class="container">
 		<table class="table table-condensed">
