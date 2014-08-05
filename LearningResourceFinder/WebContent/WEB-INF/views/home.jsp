@@ -57,7 +57,7 @@
 	      <h3>primaire</h3><br/>
 	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
 	      <br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=301'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>ème</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=303'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>ème</sup></a><br/>
 	      <br/>
 	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
 	  </div>
