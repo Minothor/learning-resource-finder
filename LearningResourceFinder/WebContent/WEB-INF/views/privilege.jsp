@@ -45,7 +45,7 @@
 						<input type="checkbox" name="${triplets.privilege.name()}" value="${triplets.privilege.name}"<c:if test="${triplets.permitted}">checked="checked"</c:if>>
 					</td>
 					</c:if>
-					<td><c:if test="${user.role.isHigherOrEquivalent(triplets.getRole())}">Dérivé du rôle</c:if></td>
+					<c:if test="${user.role.isHigherOrEquivalent(triplets.getRole())}"><td>Dérivé du rôle</td></c:if>
 					<td>${triplets.privilege.name}<br></td>
 				</tr>
 				</c:forEach>
