@@ -56,7 +56,8 @@ public class ResourceRepository extends BaseRepository<Resource> {
 		
 		//// Add Conditions and parameters
 		// Language
-        if (searchOptions.getLanguage().size() < Language.values().length) {  // else we don't filter on that criteria, we take any value
+        if (searchOptions.getLanguage().size() < Language.values().length
+                && searchOptions.getLanguage().size() !=0) {  // else we don't filter on that criteria, we take any value
             // filter for each selected value
             String whereCondition = "";
             for (Language language : searchOptions.getLanguage()) {
@@ -72,7 +73,8 @@ public class ResourceRepository extends BaseRepository<Resource> {
         }
 
 		// Format
-        if (searchOptions.getFormat().size() < Format.values().length) {  // else we don't filter on that criteria, we take any value
+        if (searchOptions.getFormat().size() < Format.values().length
+                && searchOptions.getFormat().size() !=0) {  // else we don't filter on that criteria, we take any value
             // filter for each selected value
             String whereCondition = "";
             for (Format format : searchOptions.getFormat()) {
@@ -85,7 +87,8 @@ public class ResourceRepository extends BaseRepository<Resource> {
         }
 
 		// Platform
-        if (searchOptions.getPlatform().size() < Platform.values().length) {  // else we don't filter on that criteria, we take any value
+        if (searchOptions.getPlatform().size() < Platform.values().length
+                && searchOptions.getPlatform().size() !=0) {  // else we don't filter on that criteria, we take any value
             // filter for each selected value
             String whereCondition = "";
             for (Platform platform : searchOptions.getPlatform()) {
@@ -98,7 +101,8 @@ public class ResourceRepository extends BaseRepository<Resource> {
         }
 
 		// Nature
-        if (searchOptions.getNature().size() < Nature.values().length) {  // else we don't filter on that criteria, we take any value
+        if (searchOptions.getNature().size() < Nature.values().length
+                && searchOptions.getNature().size() !=0) {  // else we don't filter on that criteria, we take any value
             // filter for each selected value
             String whereCondition = "";
             for (Nature nature : searchOptions.getNature()) {
