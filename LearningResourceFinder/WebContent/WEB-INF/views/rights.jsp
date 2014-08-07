@@ -46,8 +46,8 @@
     <c:if test="${user != null}">
       Points de contribution pour ${user.fullName}: <strong>${user.userProgressPoints}</strong> (il en faut ${user.accountLevel.levelProgressPoints} pour arriver au niveau ${user.accountLevel.levelIndex + 1}).
 	  <div class="progress" >
-			<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${100 * current.user.userProgressPoints / current.user.accountLevel.levelProgressPoints}%">
-				<span class="sr-only"> ${100 * current.user.userProgressPoints / current.user.accountLevel.levelProgressPoints}%</span>
+			<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${100 * user.userProgressPoints / user.accountLevel.levelProgressPoints}%">
+				<span class="sr-only"> ${100 * user.userProgressPoints / user.accountLevel.levelProgressPoints}%</span>
 			</div>
 	  </div>
     </c:if>
