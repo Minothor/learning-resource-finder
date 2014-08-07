@@ -1,5 +1,7 @@
 package learningresourcefinder.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import learningresourcefinder.model.PlayList;
@@ -84,6 +86,25 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		}
 		
 		return new ModelAndView("redirect:/playlist/"+playList.getShortId()+"/"+playList.getSlug());
+	}
+	
+
+	@RequestMapping("/delete")
+	public ModelAndView playListDelete (@RequestParam("id")long id) {
+	    PlayList playlist =(PlayList) getRequiredEntity(id, PlayList.class);
+
+	    // if playlist == null ==> redirect to a page with a clear message !
+	    // Necessary to use another method than getRequiredEntity
+
+	    SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
+
+	    if (playlist!= null) {
+	        NotificationUtil.addNotificationMessage("Séquence "+ playlist.getDescription() + " bien supprimée", Status.SUCCESS);
+	        playlistRepository.remove(playlist);
+	    }
+
+	    return new ModelAndView("redirect:/playlist/user/"+ SecurityContext.getUser().getUserName());
+
 	}
 	
 	private ModelAndView otherPlayListError(PlayList playList, PlayList otherPlayList, BindingResult bindingResult) {
