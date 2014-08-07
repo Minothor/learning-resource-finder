@@ -144,9 +144,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		
 		Resource resource = getRequiredEntity(id);
 		SecurityContext.assertCurrentUserMayEditThisResource(resource);
-		List<String> responseErrors = new LinkedList<String>();
-		
-        value = (value == null ? null: value.trim());
+		value = (value == null ? null: value.trim());
         
         switch (fieldName){
             case "title":
