@@ -47,9 +47,24 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public static final String UNIVERSAL_PASSWORD_MD5 = "477bc098b8f2606137c290f9344dcee8";
     public static final String UNIVERSAL_DEV_PASSWORD_MD5 = "e77989ed21758e78331b20e477fc5582";  // "dev" in clear. -> any developer can use "dev" to impersonate anybody when developing. Does not work in production. 
 
-    /*
-     * Ahmed Flag : Add enum level and accountlevel column with getters and setters.     
-     */
+    
+    public enum UserType{
+    	KID("Kid"), ADULT("Adult");
+    	String name;    	
+    	
+    	private UserType(String name) {
+			this.name = name;
+		}
+  
+		public String getName() {
+			return name;
+		}
+	}
+    
+    @Enumerated(EnumType.STRING)
+    private UserType userType = UserType.ADULT ;
+
+    
     
     public enum Level{
     	
@@ -105,7 +120,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
      * LOCKED: Account manually locked by an admin, normally a lock reason
      * should be available.<br />
      * NOTVALIDATED: The account exists but is not yet usable as the email
-     * address as not been validated.<br />
+     * address has not been validated.<br />
      * ACTIVE: Account with valid email address.<br />
      */
     public enum AccountStatus {

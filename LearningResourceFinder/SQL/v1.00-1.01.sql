@@ -1,4 +1,4 @@
--- 2014-08-07
+-- 2014-08-07 Ahmed Zarioh
 
     alter table resource 
         add column validationdate timestamp;
@@ -15,3 +15,10 @@
         references users;
         
      update resource SET validationstatus = 'WAITING';
+     
+--2014-08-07 Alain Georges
+     
+      alter table users 
+        add column usertype varchar(255);
+        
+	update users SET usertype = 'ADULT';
