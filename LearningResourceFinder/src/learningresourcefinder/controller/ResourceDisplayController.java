@@ -1,6 +1,7 @@
 package learningresourcefinder.controller;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +38,11 @@ import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
+import org.apache.http.client.protocol.ResponseContentEncoding;
+import org.apache.http.protocol.ResponseContent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -135,68 +140,88 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
     // FIXME: what happens if the input value is wrong (decimal number when int expected, for example) ?  - John 2014/04
 	@RequestMapping("/ajax/resourceeditfieldsubmit")
-	public @ResponseBody String resourceAddSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
+	public @ResponseBody ResponseEntity<String> resourceEditFieldSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
 		
 		Resource resource = getRequiredEntity(id);
 		SecurityContext.assertCurrentUserMayEditThisResource(resource);
-        value = value.trim();
+		List<String> responseErrors = new LinkedList<String>();
+		
+        value = (value == null ? null: value.trim());
         
-		if (fieldName.equals("title")){
-			resource.setName(value);
-			String slug = Slugify.slugify(resource.getName());
-			resource.setSlug(slug);  
-		}
-		else if(fieldName.equals("description")){
-			resource.setDescription(value);
-		}
-		else if(fieldName.equals("platform")){
-			resource.setPlatform(Platform.values()[Integer.parseInt(value)-1]);
-		
-		}
-		else if(fieldName.equals("format")){
-			resource.setFormat(Format.values()[Integer.parseInt(value)-1]);
-		}
-		else if(fieldName.equals("nature")){
-			resource.setNature(Nature.values()[Integer.parseInt(value)-1]);
-		}
-		else if(fieldName.equals("language")){
-			resource.setLanguage(Language.values()[Integer.parseInt(value)-1]);
-		}
-		else if(fieldName.equals("advertising")){
-			resource.setAdvertising(Boolean.valueOf(value));
-		}
-		else if(fieldName.equals("duration")){
-			resource.setDuration(Integer.parseInt(value));
-		}
-        else if(fieldName.equals("author")){
-            resource.setAuthor(value);
-        }
-		else if(fieldName.equals("topic")){
-			resource.setTopic(Topic.values()[Integer.parseInt(value)-1]);
-		}
-        else if(fieldName.equals("addToPlayList")){
-            PlayList pl = playListRepository.find(Long.parseLong(value));
-            pl.getResources().add(resource);
-            NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " bien ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
-        }
-		
-		resourceRepository.merge(resource);
+        switch (fieldName){
+            case "title":
+                resource.setName(value);
+                String slug = Slugify.slugify(resource.getName());
+                resource.setSlug(slug);
+                break;
+                
+            case "description":
+                resource.setDescription(value);
+                break;
+                
+            case "platform":
+                resource.setPlatform(Platform.values()[Integer.parseInt(value)-1]);
+                break;
+                
+            case "format":
+                resource.setFormat(Format.values()[Integer.parseInt(value)-1]);
+                break;
+                
+            case "nature":
+                resource.setNature(Nature.values()[Integer.parseInt(value)-1]);
+                break;
+                
+            case "language":
+                resource.setLanguage(Language.values()[Integer.parseInt(value)-1]);
+                break;
 
-		indexManager.update(resource);
-		
-		if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
+            case "advertising":
+                resource.setAdvertising(Boolean.valueOf(value));
+                break;
+                
+            case "duration":
+                Integer number=null;
+                try {
+                    number = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    if(value!=null) {
+                        return new ResponseEntity<String>("Nombre invalide.", HttpStatus.BAD_REQUEST);
+                    }
+                }
+                if (number!=null && number < 0 ) {
+                    return new ResponseEntity<String>("La durée doit être un nombre entier et positif de minutes.", HttpStatus.BAD_REQUEST);
+                }
+                resource.setDuration(((number==null||number==0) ? null : number));
+                break;
+                
+            case "author":
+                resource.setAuthor(value);
+                break;
+                
+            case "topic":
+                resource.setTopic(Topic.values()[Integer.parseInt(value)-1]);
+                break;
+                
+            case "addToPlayList":
+                PlayList pl = playListRepository.find(Long.parseLong(value));
+                pl.getResources().add(resource);
+                NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " bien ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
+                break;
+        }
+
+        resourceRepository.merge(resource);
+
+        indexManager.update(resource);
+
+        if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
             levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE);
-		}
-        
+        }
 
 
-		return "success";
+        return new ResponseEntity<String>("success",HttpStatus.OK);
 	}
-
-
-
-	
     
+
     @RequestMapping("/removeurlresource")
     public ModelAndView removeResource(@RequestParam("urlresourceid") long urlresourceid) {
         UrlResource urlResource = (UrlResource)getRequiredEntity(urlresourceid, UrlResource.class); 
@@ -245,6 +270,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
             }
             
         } else {
+            
             NotificationUtil.addNotificationMessage("Erreur sur un des champs. Url non sauvée.", Status.ERROR);
         }
         
