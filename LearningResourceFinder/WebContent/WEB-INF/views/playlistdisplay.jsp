@@ -17,8 +17,7 @@
  	    
  	    $(".noneditplaylist").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
  	});
-</script> 	    
-<title>Séquence</title>
+</script>
 </head>
 
 <body>
@@ -28,7 +27,21 @@
 		   <lrftag:breadcrumbelement label="mes séquences" link="/playlist/user/${current.user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
-	
+	<div class="row">
+		<div class="col-md-11">
+			<lrftag:pageheadertitle title="${playlist.name}" />
+		</div>
+		<div class="col-md-1 text-right">
+
+			<c:if test="${canEdit}">
+				<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>">
+					<button type="button" class="addToolTip close"
+						style="margin-top: 20px" title="supprimer cette séquence">&times;</button>
+				</a>
+			</c:if>
+
+		</div>
+	</div>
 	<div class="container">
 		<lrftag:pageheadertitle title="${playlist.name}"/>
 
