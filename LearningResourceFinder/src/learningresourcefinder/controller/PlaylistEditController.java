@@ -93,9 +93,6 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	public ModelAndView playListDelete (@RequestParam("id")long id) {
 	    PlayList playlist =(PlayList) getRequiredEntity(id, PlayList.class);
 
-	    // if playlist == null ==> redirect to a page with a clear message !
-	    // Necessary to use another method than getRequiredEntity
-
 	    SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
 
 	    if (playlist!= null) {
