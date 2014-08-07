@@ -1,6 +1,7 @@
 package learningresourcefinder.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -33,7 +35,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
-
 @Entity
 @Table(name="resource")
 @SequenceGenerator(name="ResourceSequence", sequenceName="RESOURCE_SEQUENCE")
@@ -48,6 +49,12 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
         public String getDescription(){return description;}
     }
 
+	public enum ValidationStatus {
+		ACCEPT("validated"), REJECT("rejected"), WAITING("not validated");	
+		private String name;	
+		ValidationStatus(String aName) 	{  this.name = aName; }		
+		public String getName() 		{ return name; }
+	} 
     
 	@Id   @GeneratedValue(generator="ResourceSequence") // We want Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
     Long id;
@@ -119,7 +126,16 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	List<Competence> competences = new ArrayList<>();
+		
+	@ManyToOne
+    @JoinColumn(nullable=true) 
+	private User validator;
 	
+	private Date validationDate;
+	
+    @Enumerated(EnumType.STRING)
+	private ValidationStatus validationStatus = ValidationStatus.WAITING;
+	    
 	public Resource() {} // No arg constructor for Hibernate
 	
 	public Resource(String name, String description, User author) {
@@ -312,4 +328,29 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     public void setMaxCycle(Cycle maxCycle) {
         this.maxCycle = maxCycle;
     }	
+    
+    public User getValidator() {
+    	return this.validator;
+    }
+
+    public void setValidator(User validator) {
+    	this.validator = validator;
+    }
+    
+    public Date getValidationDate() {
+    	return this.validationDate;
+    }
+
+    public void setValidationDate(Date validationDate) {
+    	this.validationDate = validationDate;
+    }
+    
+    public ValidationStatus getValidationStatus() {
+    	return this.validationStatus;
+    }
+    
+    public void setValidationStatus(ValidationStatus validationStatus) {
+    	this.validationStatus = validationStatus;
+    }   
+    
 }
