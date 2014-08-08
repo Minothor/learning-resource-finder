@@ -96,7 +96,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 	    SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
 
 	    if (playlist!= null) {
-	        NotificationUtil.addNotificationMessage("Séquence "+ playlist.getDescription() + " bien supprimée", Status.SUCCESS);
+	        NotificationUtil.addNotificationMessage("Séquence "+ playlist.getName() + " bien supprimée", Status.SUCCESS);
 	        playlistRepository.remove(playlist);
 	    }
 
