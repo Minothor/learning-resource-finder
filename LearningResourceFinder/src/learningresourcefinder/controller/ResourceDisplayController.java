@@ -203,7 +203,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
             case "addToPlayList":
                 PlayList pl = playListRepository.find(Long.parseLong(value));
                 pl.getResources().add(resource);
-                NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " bien ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
+                NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
                 break;
         }
 
