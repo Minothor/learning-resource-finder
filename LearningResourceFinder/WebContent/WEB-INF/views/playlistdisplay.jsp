@@ -17,6 +17,14 @@
 		});
  	    
  	    $(".noneditplaylist").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
+ 	    
+ 	    $("[data-toggle='confirmation']").popConfirm({
+ 			title : "Confirmation",
+ 			content : "Voulez-vous vraiment supprimer cette séquence ?",
+ 			placement : "top",
+ 			yesBtn : "oui",
+ 			noBtn : "non"
+ 		});
  	});
 </script>
 </head>
@@ -29,19 +37,19 @@
 		</c:if>
 	</lrftag:breadcrumb>
 	<div class="container">
-		<div class="row">
 			<div class="col-md-11">
 				<lrftag:pageheadertitle title="${playlist.name}" />
 			</div>
-			<div class="col-md-1 text-right">
+			<div class="col-md-1 text-right" style="margin-top: 20px;">
 				<c:if test="${canEdit}">
-					<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>">
+					<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>"
+						data-toggle='confirmation'>
 						<button type="button" class="addToolTip close"
-							style="margin-top: 20px" title="supprimer cette séquence">&times;</button>
+							title="supprimer cette séquence">&times;</button>
 					</a>
 				</c:if>
 			</div>
-		</div>
+	</div>
 
 		<div class="panel panel-default">
 			<div class="panel-body">
