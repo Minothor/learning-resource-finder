@@ -7,15 +7,25 @@
 <head>
 
 <script type="text/javascript">
-$(function ()  
- { $(".mycompetencePopover").popover({
+$(function () {
+     $(".mycompetencePopoverRight").popover({
 	 	html:true,
 	 	trigger:'hover',
-	 	delay: { show: 500, hide: 2000 }
+	 	delay: { show: 500, hide: 200 },
+	 	placement:'right'
 	 });  
+	 
+	 $(".mycompetencePopoverLeft").popover({
+	 	html:true,
+	 	trigger:'hover',
+	 	delay: { show: 500, hide: 200 },
+	 	placement:'left'
+	});
 });  
 
+
 </script>
+
 
 </head>
 <body>
@@ -32,19 +42,22 @@ $(function ()
 
 <h1>${ cycle.name }</h1>
 	<div class="row">
+		<c:set var="valeur" value="0" />
 		<c:forEach items="${listColumns}" var="cycleColumn">
+				<c:set var="valeur" value="${valeur+1}" />
 				<div class="col-xs-6 col-md-4"> 
 					<c:forEach items="${cycleColumn}" var="cycleitems">
+							
 							<h2>${cycleitems.competence.name}</h2>
 							<c:forEach items="${cycleitems.children}" var="subitem">
-								<span  class="mycompetencePopover" data-content="<lrftag:competencedescription competenceNode='${subitem}' mustlistchildren='false'/>" style="font-size:120%">${subitem.competence.code }
-								  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }</span> 
-								  </a>
-								</span>
+									<span  <%-- class="mycompetencePopover${valeur<3?'Right':'Left'}" data-content="<lrftag:competencedescription competenceNode='${subitem}' mustlistchildren='true'/>"--%> style="font-size:120%">${subitem.competence.code }
+									  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }</span> 
+									  </a>
+									</span>
 								</br>
 								<ul>
 									<c:forEach items="${subitem.children}" var="subsubitem">
-										<li class ="mycompetencePopover" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true'/>">
+										<li class="mycompetencePopover${valeur<3?'Right':'Left'}" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true'/>">
 											${subsubitem.competence.code }
 											<a href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
 										</li>

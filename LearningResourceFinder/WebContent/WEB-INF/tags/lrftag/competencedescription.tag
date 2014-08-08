@@ -5,7 +5,7 @@
 <%@ attribute name="mustlistchildren" required="true" type="java.lang.Boolean"%>
 
 
-<p>${competenceNode.competence.description}</p>
+<p>${competenceNode.competence.name}</p>
 
 <c:if test="${mustlistchildren}">
 <div style='min-width:250px;'>

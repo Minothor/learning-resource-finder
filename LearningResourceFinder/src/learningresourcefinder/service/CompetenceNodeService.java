@@ -35,7 +35,7 @@ public class CompetenceNodeService {
 	// Recursive method to run through the Competence tree 
 	private void processNode(Competence currentCompetence, CompetenceNode parentCompetenceNode, int level, List<Competence> competencesFromCycle) {
 	    // Temporary fix to not show the ugly full "socle de compétences" tree: we only show 2 levels.
-	    if (level >= 4) {
+	    if (level >= 6) {
 	        return;
 	    }
 	    
