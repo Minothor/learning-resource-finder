@@ -46,7 +46,7 @@
 				<c:if test="${canEdit}">
 					<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>" data-toggle='confirmation'>
 						<button type="button" class="addToolTip close"
-							style="margin-top: 20px" title="supprimer cette séquence">&times;</button>
+							 title="supprimer cette séquence">&times;</button>
 					</a>
 				</c:if>
 			</div>
