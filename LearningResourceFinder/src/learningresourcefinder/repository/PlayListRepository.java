@@ -36,12 +36,10 @@ public class PlayListRepository extends BaseRepository<PlayList> {
         return results;
     }
     
-    // VT**********************************
     public PlayList getEntityByShortId(String shortId) {
         return getSingleOrNullResult(   
                 em.createQuery("select p from PlayList p where lower(p.shortId) = :shortId")
                 .setParameter("shortId",shortId.toLowerCase())
         );
     }
-    // VT**********************************
 }
