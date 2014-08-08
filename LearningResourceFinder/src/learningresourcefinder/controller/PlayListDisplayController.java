@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.persistence.Query;
 
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.User;
@@ -40,7 +41,11 @@ public class PlayListDisplayController extends BaseController<PlayList> {
         "/playlist/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
     }) 
 	public ModelAndView playListDisplay(@PathVariable String shortId) {
-		PlayList playlist = getRequiredEntityByShortId(shortId);
+        PlayList playlist = playlistRepository.getEntityByShortId(shortId);
+        
+        if (playlist ==null) {
+            return new ModelAndView("playlistnotfound");
+        }
 		
 		ModelAndView mv = new ModelAndView("playlistdisplay", "playlist", playlist);
     	mv.addObject("canEdit", (SecurityContext.canCurrentUserEditPlayList(playlist)));
