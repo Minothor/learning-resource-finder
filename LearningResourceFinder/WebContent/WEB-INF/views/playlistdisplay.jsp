@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
+<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
 <head>
 <!-- Jquery for change input popup addImageUser -->
@@ -55,6 +56,10 @@
 					  	<dd><a id="description"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
 					  	<dt>Auteur :</dt>
 					  	<dd><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
+					  	<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+					  		<dt>Id :</dt>
+					  		<dd>${playlist.shortId}</dd>
+					  	</lrf:conditionDisplay>
 					</dl>
 				</div>			
 			</div>
