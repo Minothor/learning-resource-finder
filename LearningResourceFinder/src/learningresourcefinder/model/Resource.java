@@ -50,10 +50,10 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     }
 
 	public enum ValidationStatus {
-		ACCEPT("validated"), REJECT("rejected"), WAITING("not validated");	
-		private String name;	
-		ValidationStatus(String aName) 	{  this.name = aName; }		
-		public String getName() 		{ return name; }
+		ACCEPT("validée"), REJECT("rejetée");	
+		private String description;	
+		ValidationStatus(String description) 	{  this.description = description;}		
+		public String getDescription() 		{ return description; }
 	} 
     
 	@Id   @GeneratedValue(generator="ResourceSequence") // We want Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
@@ -133,8 +133,9 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	private Date validationDate;
 	
+	@Column(nullable = true)
     @Enumerated(EnumType.STRING)
-	private ValidationStatus validationStatus = ValidationStatus.WAITING;
+	private ValidationStatus validationStatus;
 	    
 	public Resource() {} // No arg constructor for Hibernate
 	

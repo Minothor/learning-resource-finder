@@ -22,3 +22,7 @@
         add column usertype varchar(255);
         
 	update users SET usertype = 'ADULT';
+	
+-- 2014-08-08 Ahmed Zarioh
+        
+     update resource SET validationstatus = NULL WHERE validationstatus = 'WAITING';

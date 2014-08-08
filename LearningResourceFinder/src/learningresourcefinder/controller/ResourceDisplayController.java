@@ -1,12 +1,10 @@
 package learningresourcefinder.controller;
 
+import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Competence;
@@ -14,6 +12,7 @@ import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.CompetenceRepository;
@@ -38,8 +37,6 @@ import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
-import org.apache.http.client.protocol.ResponseContentEncoding;
-import org.apache.http.protocol.ResponseContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,7 +75,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
         User user = SecurityContext.getUser();
         mv.addObject("user",user);
         mv.addObject("canEditUrl", levelService.canDoAction(user, Action.EDIT_RESOURCE_URL, resource));
-    	mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE, resource));
+        mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE, resource));
+        mv.addObject("canValidate", levelService.canDoAction(user, Action.VALIDATE_RESOURCE, resource));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
         mv.addObject("canLinkToCompetence", levelService.canDoAction(user, Action.LINK_RESOURCE_TO_COMPETENCE));
     	    	
@@ -126,6 +124,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	ModelAndViewUtil.addDataEnumToModelAndView(mv, Nature.class);
     	ModelAndViewUtil.addDataEnumToModelAndView(mv, Language.class);
     	ModelAndViewUtil.addDataEnumToModelAndView(mv, Topic.class);
+        ModelAndViewUtil.addDataEnumToModelAndView(mv, ValidationStatus.class);
+        
     	
     	ModelAndViewUtil.addRatingMapToModelAndView(mv, resource);
     	
@@ -204,6 +204,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 PlayList pl = playListRepository.find(Long.parseLong(value));
                 pl.getResources().add(resource);
                 NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
+                break;
+                
+            case "validate":
+                resource.setValidationStatus(ValidationStatus.values()[Integer.parseInt(value)-1]);
+                resource.setValidationDate(new Date());
+                resource.setValidator(SecurityContext.getUser());
                 break;
         }
 

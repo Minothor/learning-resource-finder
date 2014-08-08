@@ -259,6 +259,46 @@
 	     						<a id="author" ${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}> ${resource.author}</a>
 				            </div>						
 						</div>  <%-- end row --%>
+
+					<c:if test="${canValidate==true}">
+						<div class="row">
+							<div class="col-md-3">
+
+								<a id="validate"
+									title='
+									<c:choose>
+									<c:when test="${resource.validationStatus!=null}">
+										<c:if test="${resource.validator!=null}">
+					   	        		  par ${resource.validator.userName}
+								        </c:if>
+										<c:if test="${resource.validationDate!=null}">
+											<lrf:datedisplay date="${resource.validationDate}"	duration="true" withspan="false" />
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										Cette ressource peut-elle être montrée à des enfants?
+									</c:otherwise>
+								    </c:choose>'
+									${canValidate==true ? 
+								"
+									href='#' 
+									class='editableField addToolTip'
+									data-type='select' 
+									data-emptytext='?non validée?' 
+								": " 
+									class='noneditresource addToolTip'
+							"}
+									data-source="${dataEnumValidationStatus}">
+									${resource.validationStatus.description} </a>
+
+
+							</div>
+
+						</div>
+					</c:if>
+					<%-- end row --%>
+						
+						
 					</div> <%-- end panel body --%>
 				</div>  <%-- end panel --%>
             </div>						
