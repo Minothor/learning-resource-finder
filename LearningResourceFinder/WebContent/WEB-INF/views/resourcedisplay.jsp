@@ -89,9 +89,13 @@
 	</script>
 
 <STYLE type="text/css">
-.largerTextArea {
-	width: 500px;
+/* Styles needed to have a larger text-area for the descrioption (placed by X-editable JavaScript).*/
+#descriptionDiv textarea{  /* description text area width */
+    width: 250% !important;
 }
+#descriptionDiv .editable-buttons {     
+	margin-left:70%; /* else, the 2 X-editable buttons (validate and cancel) are in front of the description field */
+} 
 </STYLE>
 <title>${resource.name}</title>
 </head>
@@ -124,7 +128,7 @@
         
         
 		<div class="row">
-   	       <div class="col-md-6">
+   	       <div id="descriptionDiv" class="col-md-6">
  			   <a id="description" ${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}  data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
 		   </div>
    	       <div class="col-md-6">
