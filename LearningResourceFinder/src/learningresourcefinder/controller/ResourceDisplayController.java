@@ -16,6 +16,7 @@ import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.CompetenceRepository;
+import learningresourcefinder.repository.ContributionRepository;
 import learningresourcefinder.repository.FavoriteRepository;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.ProblemRepository;
@@ -62,6 +63,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired CompetenceRepository competenceRepository;
     @Autowired ProblemRepository problemRepository;
     @Autowired FavoriteRepository favoriteRepository;
+    @Autowired ContributionRepository contributionRepository;
     
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -234,20 +236,22 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 resource.setValidator(SecurityContext.getUser());
                 break;
         }
+		
+		
+		resourceRepository.merge(resource);
 
-        resourceRepository.merge(resource);
-
-        indexManager.update(resource);
-
-        if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
+		indexManager.update(resource);
+		
+		if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
             levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE);
-        }
+		}
+        
 
 
-        return new ResponseEntity<String>("success",HttpStatus.OK);
+	    return new ResponseEntity<String>("success",HttpStatus.OK);
 	}
     
-
+	
     @RequestMapping("/removeurlresource")
     public ModelAndView removeResource(@RequestParam("urlresourceid") long urlresourceid) {
         UrlResource urlResource = (UrlResource)getRequiredEntity(urlresourceid, UrlResource.class); 
@@ -296,7 +300,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
             }
             
         } else {
-            
             NotificationUtil.addNotificationMessage("Erreur sur un des champs. Url non sauvée.", Status.ERROR);
         }
         
