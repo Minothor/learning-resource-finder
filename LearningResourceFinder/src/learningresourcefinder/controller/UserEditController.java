@@ -11,6 +11,7 @@ import learningresourcefinder.mail.MailingDelayType;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.model.User.Gender;
+import learningresourcefinder.model.User.UserType;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
@@ -62,6 +63,9 @@ public class UserEditController extends BaseController<User> {
     												/*&& getRequiredEntity(userId).getCertificationDate() == null*/)// in that case, we have to compare the current user with the real one, hence the getRequiredEntity
     										|| SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS));
     	
+    	
+    	mv.addObject("dataEnumUserType", UserType.values());
+    	
     	List<AccountStatus> statusList = new ArrayList<AccountStatus>();
     	
     	// User.Status (ACTIVE, LOCKED, etc.)
@@ -109,6 +113,7 @@ public class UserEditController extends BaseController<User> {
                                        @RequestParam(value="firstName",required=false) String newFirstName,
                                        @RequestParam(value="userName") String newUserName,
                                        @RequestParam(value="gender",required=false) Gender newGender,
+                                       @RequestParam(value="userType",required=false) UserType newUserType,
                                        @RequestParam(value="mail", required=false) String newMail,
                                        @RequestParam(value="birthDay") String day,
                                        @RequestParam(value="birthMonth") String month,
@@ -200,6 +205,7 @@ public class UserEditController extends BaseController<User> {
         user.setBirthDate(dateNaiss);
         user.setMail(newMail);
         user.setGender(newGender);
+        user.setUserType(newUserType);
         user.setNlSubscriber(newNlSubscriber != null ? newNlSubscriber : false);
         user.setTitle(title);
        /* if (SecurityContext.isUserHasPrivilege(Privilege.MANAGE_USERS)) {  // User sees the check box

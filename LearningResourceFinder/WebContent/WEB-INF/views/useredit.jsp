@@ -92,9 +92,19 @@
 		    	<label class="font-ligther"><form:radiobutton   path="gender" value="FEMALE" /> FEMALE</label>
 		    </div>
 		</div>
+		
+		<div class="form-group">
+			<label class="col-lg-2 control-label">Type</label>
+		    <div class="col-lg-5">		    
+		    	<c:forEach items="${dataEnumUserType}" var="userType">
+		    		<label class="font-ligther" style="margin-right:10px;"><form:radiobutton  path="userType" value="${userType}" /> ${userType.description}</label>
+                 </c:forEach>
+		    </div>
+		</div>		
+		
 	     
 	        
-	    <lrftag:input path="mail" label="Mail" type="email" help="Le site vous envoie un e-mail de notification, par exemple lorsqu'un utilisateur commente un de vos arguments, ou lorsque vous recevez une gommette. Ces mails peuvent-être groupés en un mail quotidien ou hebdomadaire."/>
+	    <lrftag:input path="mail" label="Mail" type="email" help="Le site vous envoie un e-mail de notification, par exemple lorsqu'un utilisateur commente un de vos arguments, ou lorsque vous recevez une gommette. Ces mails peuvent être groupés en un mail quotidien ou hebdomadaire."/>
 	   	
 	   	<div class="form-group">
 	   		<label class="col-lg-2"></label>
