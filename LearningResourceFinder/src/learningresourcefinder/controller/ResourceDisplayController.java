@@ -16,7 +16,6 @@ import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.CompetenceRepository;
-import learningresourcefinder.repository.ContributionRepository;
 import learningresourcefinder.repository.FavoriteRepository;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.ProblemRepository;
@@ -28,6 +27,7 @@ import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.ContributionService;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.service.PlayListService;
@@ -63,7 +63,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired CompetenceRepository competenceRepository;
     @Autowired ProblemRepository problemRepository;
     @Autowired FavoriteRepository favoriteRepository;
-    @Autowired ContributionRepository contributionRepository;
+    @Autowired ContributionService contributionService; 
+    
+    
     
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -145,9 +147,10 @@ public class ResourceDisplayController extends BaseController<Resource> {
 	@RequestMapping("/ajax/resourceeditfieldsubmit")
 	public @ResponseBody ResponseEntity<String> resourceEditFieldSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
 		
-		Resource resource = getRequiredEntity(id);
-		SecurityContext.assertCurrentUserMayEditThisResource(resource);
-		value = (value == null ? null: value.trim());
+			Resource resource = getRequiredEntity(id);
+			SecurityContext.assertCurrentUserMayEditThisResource(resource);
+			value = (value == null ? null : value.trim());
+			User user = SecurityContext.getUser();
         
         switch (fieldName){
             case "title":
@@ -157,11 +160,13 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "description":
-                resource.setDescription(value);
+            	contributionService.contribute(user, resource, Action.EDIT_RESOURCE_DESCRIPTION, resource.getDescription(), value);
+            	resource.setDescription(value);
                 break;
                 
             case "platform":
                 resource.setPlatform(Platform.values()[Integer.parseInt(value)-1]);
+                
                 break;
                 
             case "format":
@@ -169,6 +174,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "nature":
+				String nature = (resource.getNature() == null) ? "" : resource.getNature().getDescription();
+				contributionService.contribute(user, resource, Action.EDIT_RESOURCE_NATURE, nature, value);
                 resource.setNature(Nature.values()[Integer.parseInt(value)-1]);
                 break;
                 
@@ -192,11 +199,14 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 if (number!=null && number < 0 ) {
                     return new ResponseEntity<String>("La durée doit être un nombre entier et positif de minutes.", HttpStatus.BAD_REQUEST);
                 }
-                resource.setDuration(((number==null||number==0) ? null : number));
+                String duration=(resource.getDuration()==null)?"":resource.getDuration().toString();
+                contributionService.contribute(user, resource, Action.EDIT_RESOURCE_DURATION, duration, value);
+                resource.setDuration(((number==null||number==0) ? null : number));    
                 break;
                 
             case "author":
                 resource.setAuthor(value);
+                
                 break;
                 
             case "topic":
