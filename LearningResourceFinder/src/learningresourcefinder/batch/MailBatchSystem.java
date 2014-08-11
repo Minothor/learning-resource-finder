@@ -22,7 +22,7 @@ public class MailBatchSystem implements Runnable {
 	@Override
 	public void run() {
 		try {
-			userService.registerUser(false, "ibrahimas","123456", "ibrahim.yock@gmail.com");
+			userService.registerUser(false, "ibrahimas","123456", "ibrahim.yock@gmail.com", false);
 			
 			
 		} catch (UserAlreadyExistsException e1) {

@@ -2,10 +2,8 @@
 package learningresourcefinder.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -49,15 +47,15 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 
     
     public enum UserType{
-    	KID("Kid"), ADULT("Adult");
-    	String name;    	
+    	KID("enfant"), ADULT("adulte");
+    	String description;    	
     	
-    	private UserType(String name) {
-			this.name = name;
+    	private UserType(String description) {
+			this.description = description;
 		}
   
-		public String getName() {
-			return name;
+		public String getDescription() {
+			return description;
 		}
 	}
     
@@ -413,6 +411,14 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public void setPassword(String password) {
         this.password = password != null ? password.toLowerCase() : password;
     }
+    
+    public boolean isKid() {
+		return userType.equals(UserType.KID);
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
 
     public Date getLastAccess() {
         return lastAccess;
@@ -570,6 +576,10 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     public void setFavorite(Resource resource) {
 		this.favorites.add(resource);
 	}
+
+    public UserType getUserType() {
+        return userType;
+    }
    
     
 }

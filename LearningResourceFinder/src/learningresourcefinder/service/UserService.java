@@ -11,6 +11,7 @@ import learningresourcefinder.mail.MailCategory;
 import learningresourcefinder.mail.MailType;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
+import learningresourcefinder.model.User.UserType;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
@@ -56,7 +57,7 @@ public class UserService {
      * @param directValidation : validate an account directly without send a mail
      * @param passwordInClear : null if social register.
      */
-    public User registerUser(boolean directValidation, String username, String passwordInClear, String mail) throws UserAlreadyExistsException {
+    public User registerUser(boolean directValidation, String username, String passwordInClear, String mail, boolean isKid) throws UserAlreadyExistsException {
 
     	if(!HTMLUtil.isHtmlSecure(username)) // I add this Condition for Batch/Test || Ahmed-flag
     	   throw new RuntimeException("Vous avez introduit du code html/javascript");
@@ -73,6 +74,7 @@ public class UserService {
         newUser.setUserName(username);
         newUser.setPassword(passwordInClear == null ? null : SecurityUtils.md5Encode(passwordInClear));
         newUser.setMail(mail);
+       	newUser.setUserType(isKid ? UserType.KID : UserType.ADULT);        	
         
         //// Validation mail.
 
@@ -342,7 +344,7 @@ public class UserService {
        // 2. User instantiation and persist
        User user;
        try {
-            user = registerUser(true, tempUserName, null, mail);
+            user = registerUser(true, tempUserName, null, mail, false);
        } catch (UserAlreadyExistsException e) {  // This exception should never happen here (since we checked the e-mail uniqueness already).
             throw new RuntimeException(e);
        }     

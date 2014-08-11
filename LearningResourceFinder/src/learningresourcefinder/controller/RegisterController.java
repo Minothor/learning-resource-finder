@@ -30,7 +30,8 @@ public class RegisterController extends BaseController<User> {
 	@RequestMapping("/ajax/registersubmit")                         
 	public @ResponseBody String registerSubmit(@RequestParam(value="emailRegister") String email, 			                                                        			
 											   @RequestParam(value="usernameRegister") String username,
-											   @RequestParam(value="passwordRegister") String password) {
+											   @RequestParam(value="passwordRegister") String password,
+											   @RequestParam(value="userTypeRegister") boolean isKid) {
 		                                                         
 		/////// Errors detection
 		if (StringUtils.isNotEmpty(username) && !HTMLUtil.isHtmlSecure(username)) {
@@ -59,7 +60,7 @@ public class RegisterController extends BaseController<User> {
 		//////// Try to register
 		try {
 
-			user = userService.registerUser(false, username, password, email);
+			user = userService.registerUser(false, username, password, email, isKid);
 			NotificationUtil.addNotificationMessage("Un message de confirmation de votre inscription vous a été envoyé sur votre email: "
 					+ email
 					+ ". Merci d'activer votre compte (en cliquant sur le lien de confirmation contenu dans l'e-mail) afin de pouvoir l'utiliser.",Status.SUCCESS);

@@ -24,11 +24,12 @@ function ajaxRegister(e) {
 	var emailRegister = $('#emailRegister').val();
 	var usernameRegister  = $('#usernameRegister').val();
 	var passwordRegister  = $('#passwordRegister').val();
+	var userTypeRegister  = $('#userTypeRegister').val();
 			
 	$.ajax({
 		type : "POST",
 	    url : '/ajax/registersubmit',
-	    data: "emailRegister="+emailRegister+"&usernameRegister="+usernameRegister+"&passwordRegister="+passwordRegister,
+	    data: "emailRegister="+emailRegister+"&usernameRegister="+usernameRegister+"&passwordRegister="+passwordRegister+"&userTypeRegister="+userTypeRegister,
 	    success : function(data) {	
 	    		 location.reload();
 	    },
