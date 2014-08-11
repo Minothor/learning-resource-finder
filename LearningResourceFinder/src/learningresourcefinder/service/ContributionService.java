@@ -9,28 +9,28 @@ import learningresourcefinder.repository.ContributionRepository;
 import learningresourcefinder.util.Action;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class ContributionService
+@Service
+public class ContributionService {
+	
+	@Autowired ContributionRepository contributionRepository;
+	@Autowired LevelService levelService;
+
+	public Contribution contribute(User user, Resource resource, Action action, String oldValue, String NewValue) 
 	{
-@Autowired ContributionRepository contributionRepository;
-		
-		public Contribution contribute(User user, Resource resource, Action action, String oldValue, String NewValue) 
-		{
-			  List<Contribution> userContributions = contributionRepository.findByUserAndRessource(user, resource, action);
-			  
-			  
-			  
-			  if(userContributions.size()>0)
-				  return null;
-		
-			  
-			  
-			  
-			  
-			     
-			
-			
-			return null;
-		}
-		
-	}
+		Contribution contribution = null;
+		List<Contribution> userContributions = contributionRepository.findByUserAndRessource(user, resource, action);
+
+		if (userContributions.size() == 0)
+			{
+				if (oldValue != NewValue)
+					{
+						contribution = new Contribution(user, resource, action.getActionPoints(), action);
+						contributionRepository.persist(contribution);
+						levelService.addActionPoints(user, action);
+					}
+			}
+		return contribution;
+	}		
+}
