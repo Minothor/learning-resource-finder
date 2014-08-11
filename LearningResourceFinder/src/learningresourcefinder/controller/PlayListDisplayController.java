@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.persistence.Query;
 
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.User;
@@ -22,6 +21,8 @@ import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -138,12 +139,22 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 	}
     
     @RequestMapping("/ajax/playlisteditfieldsubmit")
-    public @ResponseBody String playListEditSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
-        
+    public @ResponseBody ResponseEntity<String> playListEditSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
         
         PlayList playlist = getRequiredEntity(id);
-        SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
+        SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);        
+        
+            
+        if (value == null) {
+            return new ResponseEntity<String>("Vous n'avez pas introduit de nom.", HttpStatus.BAD_REQUEST);
+        }
+        
+        PlayList playListHavingTheSameName = playlistRepository.findByNameAndAuthor(value, SecurityContext.getUser());
 
+        if (playListHavingTheSameName != null) {
+            return new ResponseEntity<String>("Cet intitulé existe déjà pour une de vos séquences, veuillez en choisir un autre",HttpStatus.BAD_REQUEST);
+        }
+          
         if (fieldName.equals("name")){
             playlist.setName(value);
             String slug = Slugify.slugify(playlist.getName());
@@ -158,6 +169,6 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 
         indexManager.update(playlist);
 
-        return "success";
+        return new ResponseEntity<String>("sucess",HttpStatus.OK);
     }
 }

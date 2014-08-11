@@ -1,7 +1,5 @@
 package learningresourcefinder.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import learningresourcefinder.model.PlayList;
@@ -62,6 +60,7 @@ public class PlaylistEditController extends BaseController<PlayList>{
 		if (playList.getId() != null) { // Existing playlist (not creating)
 		    SecurityContext.assertCurrentUserMayEditThisPlaylist(playList);
 		}
+		
 		PlayList playListHavingTheSameName = playlistRepository.findByNameAndAuthor(playList.getName(), SecurityContext.getUser());
 
 		// set the slug based on the (maybe changed) title
