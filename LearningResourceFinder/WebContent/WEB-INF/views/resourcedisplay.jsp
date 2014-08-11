@@ -270,7 +270,7 @@
 							<div class="col-md-3">
 
 								<a id="validate"
-									title='
+									title="
 									<c:choose>
 									<c:when test="${resource.validationStatus!=null}">
 										<c:if test="${resource.validator!=null}">
@@ -283,7 +283,7 @@
 									<c:otherwise>
 										Cette ressource peut-elle être montrée à des enfants?
 									</c:otherwise>
-								    </c:choose>'
+								    </c:choose>"
 									${canValidate==true ? 
 								"
 									href='#' 
