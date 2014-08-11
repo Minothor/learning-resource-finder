@@ -26,7 +26,7 @@
 -- 2014-08-08 Ahmed Zarioh
         
      update resource SET validationstatus = NULL WHERE validationstatus = 'WAITING';
-     
+    
 -- 2014-08-11 Pierre
 
 
@@ -67,4 +67,14 @@
         ADD UNIQUE (ressource_id, user_id, elementtype);
 
     alter table contribution 
-        add column action int4 not null;
+        add column action int4 not null;     
+        
+-- 2014-08-11 Ramzi G.
+
+	alter table playlist_resource 
+		add column list_index int4;   
+	
+	update playlist_resource pr set list_index = i-1 
+		from (select playlist_id, resources_id, row_number() over (partition by playlist_id) as i from playlist_resource) s 
+		where s.playlist_id=pr.playlist_id and s.resources_id=pr.resources_id;	
+		

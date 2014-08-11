@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 
 import learningresourcefinder.search.Searchable;
@@ -47,6 +48,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
     String description;
 
     @ManyToMany
+    @OrderColumn(name="LIST_INDEX")
     private List<Resource> resources = new ArrayList<Resource>();
 
     public PlayList() {} // No arg constructor for Hibernate
