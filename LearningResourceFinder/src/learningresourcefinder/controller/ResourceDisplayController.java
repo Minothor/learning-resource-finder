@@ -25,6 +25,7 @@ import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
+import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
@@ -204,6 +205,27 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 PlayList pl = playListRepository.find(Long.parseLong(value));
                 pl.getResources().add(resource);
                 NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
+                break;
+
+            case "addToOtherPlayList":
+                SecurityContext.assertUserHasPrivilege(Privilege.MANAGE_PLAYLIST);
+
+                if (value==null || value.trim().isEmpty()) 
+                    return new ResponseEntity<String>("Merci d'introduire l'id court d'une séquence à modifier.", HttpStatus.BAD_REQUEST);
+
+                PlayList pl2 = playListRepository.getPlayListByShortId(value);
+                if (pl2==null) { 
+                    return new ResponseEntity<String>("L'id court introduit ne correspond pas à une séquence existante.", HttpStatus.BAD_REQUEST); 
+                }
+
+                // Is the resource in the playList arleady ?
+                if (pl2.getResources().contains(resource)) {
+                    return new ResponseEntity<String>("Cette ressource fait déjà partie de la séquence choisie.", HttpStatus.BAD_REQUEST);    
+                }
+
+                // all checks done. We change the data.
+                pl2.getResources().add(resource);
+                NotificationUtil.addNotificationMessage("Ressource "+ resource.getName() + " ajoutée à la séquence "+ pl2.getName(), Status.SUCCESS);
                 break;
                 
             case "validate":

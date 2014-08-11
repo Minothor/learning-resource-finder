@@ -41,7 +41,7 @@ public class PlayListDisplayController extends BaseController<PlayList> {
         "/playlist/{shortId}" // SpringMVC needs us to explicitely specify that the "/" is optional.    
     }) 
 	public ModelAndView playListDisplay(@PathVariable String shortId) {
-        PlayList playlist = playlistRepository.getEntityByShortId(shortId);
+        PlayList playlist = playlistRepository.getPlayListByShortId(shortId);
         
         if (playlist ==null) {
             return new ModelAndView("playlistnotfound");

@@ -36,7 +36,7 @@ public class PlayListRepository extends BaseRepository<PlayList> {
         return results;
     }
     
-    public PlayList getEntityByShortId(String shortId) {
+    public PlayList getPlayListByShortId(String shortId) {
         return getSingleOrNullResult(   
                 em.createQuery("select p from PlayList p where lower(p.shortId) = :shortId")
                 .setParameter("shortId",shortId.toLowerCase())

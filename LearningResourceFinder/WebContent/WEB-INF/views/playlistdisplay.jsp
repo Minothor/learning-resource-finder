@@ -66,7 +66,7 @@
 					  	<dt>Auteur :</dt>
 					  	<dd><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
 					  	<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
-					  		<dt>Id :</dt>
+					  		<dt>Id court :</dt>
 					  		<dd>${playlist.shortId}</dd>
 					  	</lrf:conditionDisplay>
 					</dl>
