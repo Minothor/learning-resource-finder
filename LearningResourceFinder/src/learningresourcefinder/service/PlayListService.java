@@ -83,7 +83,7 @@ public class PlayListService {
         String json = "[";
 
         for(PlayList pl : spl){
-            json = json +"{value:'"+ pl.getId() + "',text:'"+ pl.getName() + "'},";
+            json = json +"{value:'"+ pl.getId() + "',text:'"+ pl.getName().replace("'", "\\'") + "'},";
         }
         if(!json.equals("[")){
             json = json.substring(0, json.length() - 1);
