@@ -87,8 +87,10 @@
 		
 	alter table rating 
 		alter column resource_id set not null;
+		
 	alter table rating 
 		alter column user_id set not null;
+		
 	alter table rating 
 		add unique (resource_id, user_id);	
 		
