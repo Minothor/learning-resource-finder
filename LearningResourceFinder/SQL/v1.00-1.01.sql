@@ -77,4 +77,18 @@
 	update playlist_resource pr set list_index = i-1 
 		from (select playlist_id, resources_id, row_number() over (partition by playlist_id) as i from playlist_resource) s 
 		where s.playlist_id=pr.playlist_id and s.resources_id=pr.resources_id;	
+	
+	delete from rating
+		where id in (select id
+		              from (select row_number() 
+					over (partition by resource_id, user_id order by id) as rownum, id
+		                     FROM rating) t
+		              where t.rownum > 1);
+		
+	alter table rating 
+		alter column resource_id set not null;
+	alter table rating 
+		alter column user_id set not null;
+	alter table rating 
+		add unique (resource_id, user_id);	
 		
