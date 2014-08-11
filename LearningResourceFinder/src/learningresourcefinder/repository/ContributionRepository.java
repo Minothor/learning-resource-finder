@@ -9,6 +9,7 @@ import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.util.Action;
 
+
 @Repository
 @SuppressWarnings("unchecked")
 public class ContributionRepository extends BaseRepository<Contribution>
@@ -20,10 +21,13 @@ public class ContributionRepository extends BaseRepository<Contribution>
 					.getResultList();
 		}
 
-		public List<Contribution> findByUserAndRessource(User user, Resource resource) {
-			return em.createQuery("select c from Contribution c where c.user = :user and c.ressource=:ressource")
+		public List<Contribution> findByUserAndRessource(User user, Resource resource,Action action) {
+			return em.createQuery("select c from Contribution c where c.user = :user and c.ressource=:ressource and c.action=:action")
 					.setParameter("user", user)
 					.setParameter("ressource", resource)
+					.setParameter("action", action)
 					.getResultList();
+			
+			
 		}
 	}
