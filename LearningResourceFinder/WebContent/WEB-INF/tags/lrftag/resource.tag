@@ -5,52 +5,86 @@
 <%@ attribute name="closeUrl" type="java.lang.String" required="false"%>
 <%@ attribute name="prefix" type="java.lang.String" required="false"%>
 
+<div
+	style="display: inline-block; position: relative; vertical-align: top; width: 200px; margin-right: 20px; margin-bottom: 20px;"
+	class="panel panel-default">
 
-<div style="display:inline-block; position:relative; vertical-align:top; width: 200px; margin-right:20px; margin-bottom:20px;"
-     class="panel panel-default">
-  <div class="panel-heading"><span class="lead"><c:if test='${! empty prefix}'>${prefix}. </c:if>
-       <a href="/resource/${resource.shortId}/${resource.slug}" >${resource.name}</a></span>
+	<c:choose>
+		<c:when
+			test="${resource.validationStatus=='ACCEPT' || current.canSeeNotValidatedResource}">
 
-	   <c:if test='${! empty closeUrl}'>
-		    <a href="<c:url value='${closeUrl}'/>">
-			   <button type="button" class="addToolTip close" style="position:absolute; top:2px; right:14px;"
-			           data-toggle="tooltip" title="retirer cette ressource de la séquence">&times;</button>
-		    </a>
-	   </c:if>
+			<div class="panel-heading">
+				<span class="lead"><c:if test='${! empty prefix}'>${prefix}. </c:if>
+					<a href="/resource/${resource.shortId}/${resource.slug}">${resource.name}</a></span>
 
-       <a href="<c:url value='${resource.urlResources[0].url}'/>">
-	       <span class="addToolTip glyphicon glyphicon-log-in" style="position:absolute; top:32px; right:4px;"
-		           data-toggle="tooltip" title="lien direct vers ce site"></span>
-	   </a>
-  </div>
-  
-  <c:if test="${resource.numberImage >= 1}">
-    <div id="yoxview-resource-${resource.id}">
-        <a href="/gen/resource/original/${resource.id}-1.jpg">
-            <img src="/gen/resource/resized/small/${resource.id}-1.jpg" alt="${resource.name}" />
-        </a>
-    </div>        
-    <script type="text/javascript">
-       $(document).ready(function(){
-    	  $("#yoxview-resource-${resource.id}").yoxview({
-    		  lang:"fr",
-    		  <%-- Additional images if any, will be displayed by yoxview if the user clicks arrows to view next --%>
-    	      images: [
-    		  <c:forEach var="i" begin="2" end="${resource.numberImage}" step="1">
-    		      { media: { src: '/gen/resource/original/${resource.id}-${i}.jpg' }}
-    		      <c:if test="${i < resource.numberImage}">,</c:if>
-    		  </c:forEach>
-    		  ]
-    	  }) 
-       });
-    </script>
-  </c:if>
+				<c:if test='${! empty closeUrl}'>
+					<a href="<c:url value='${closeUrl}'/>">
+						<button type="button" class="addToolTip close"
+							style="position: absolute; top: 2px; right: 14px;"
+							data-toggle="tooltip"
+							title="retirer cette ressource de la séquence">&times;</button>
+					</a>
+				</c:if>
 
-  <div class="panel-body" style="margin-bottom:20px;">
-     <p><small>${resource.descriptionCut}</small></p>
-  </div>
-  
-  <div style="position:absolute; bottom:0px; left:15px;">
-	    <lrftag:rating id="${resource.id}" title="${resource.name}" scoreResource="${resource.avgRatingScore}" scoreUser="${mapRating[resource].score}" countRating="${resource.countRating}" canvote="${current.canVote}" />
-  </div>
+				<a href="<c:url value='${resource.urlResources[0].url}'/>"> <span
+					class="addToolTip glyphicon glyphicon-log-in"
+					style="position: absolute; top: 32px; right: 4px;"
+					data-toggle="tooltip" title="lien direct vers ce site"></span>
+				</a>
+			</div>
+
+			<c:if test="${resource.numberImage >= 1}">
+				<div id="yoxview-resource-${resource.id}">
+					<a href="/gen/resource/original/${resource.id}-1.jpg"> <img
+						src="/gen/resource/resized/small/${resource.id}-1.jpg"
+						alt="${resource.name}" />
+					</a>
+				</div>
+				<script type="text/javascript">
+			       $(document).ready(function(){
+			    	  $("#yoxview-resource-${resource.id}").yoxview({
+			    		  lang:"fr",
+			    		  <%-- Additional images if any, will be displayed by yoxview if the user clicks arrows to view next --%>
+			    	      images: [
+			    		  <c:forEach var="i" begin="2" end="${resource.numberImage}" step="1">
+			    		      { media: { src: '/gen/resource/original/${resource.id}-${i}.jpg' }}
+			    		      <c:if test="${i < resource.numberImage}">,</c:if>
+			    		  </c:forEach>
+			    		  ]
+			    	  }) 
+			       });
+    			</script>
+			</c:if>
+
+			<div class="panel-body" style="margin-bottom: 20px;">
+				<p>
+					<small>${resource.descriptionCut}</small>
+				</p>
+			</div>
+
+			<div style="position: absolute; bottom: 0px; left: 15px;">
+				<lrftag:rating id="${resource.id}" title="${resource.name}"
+					scoreResource="${resource.avgRatingScore}"
+					scoreUser="${mapRating[resource].score}"
+					countRating="${resource.countRating}" canvote="${current.canVote}" />
+			</div>
+
+
+		</c:when>
+		<c:otherwise>
+			<div class="panel-heading">
+
+				<a href="/resource/${resource.shortId}" class="lead">${resource.shortId}</a>
+
+			</div>
+			<div class="panel-body"
+				style="font-size: 10px !important; margin-bottom: 20px;">
+				<p>Cette ressource n'est pas encore validée.</p>
+				<p>Entre-temps, par précaution, seul les membres connectés en
+					tant qu'adulte on accès à cette ressource.</p>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </div>
+
+

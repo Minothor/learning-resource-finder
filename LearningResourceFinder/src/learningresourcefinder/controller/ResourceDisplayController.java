@@ -74,7 +74,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
     public ModelAndView displayResourceByShortId(@PathVariable String shortId) {   
         Resource resource = getRequiredEntityByShortId(shortId);
         Map<Long, String> problemDate = new HashMap<Long, String>();
-       
+
+        if(!SecurityContext.canCurrentUserSeeResource(resource)) {
+            return new ModelAndView("resourcedisplayhidden", "resource", resource);
+        }
+        
         ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
  
         User user = SecurityContext.getUser();

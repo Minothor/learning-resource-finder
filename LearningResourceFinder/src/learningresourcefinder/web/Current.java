@@ -26,4 +26,8 @@ public class Current {
     public boolean getCanVote() {
         return SecurityContext.canCurrentDoAction(Action.VOTE);
     }
+    
+    public boolean getCanSeeNotValidatedResource() {
+        return SecurityContext.canCurrentSeeNotValidatedResource();
+    }
 }

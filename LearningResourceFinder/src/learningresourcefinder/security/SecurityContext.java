@@ -4,11 +4,12 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import learningresourcefinder.exception.UnauthorizedAccessException;
-import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
+import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
+import learningresourcefinder.model.User.UserType;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.service.LoginService;
@@ -252,6 +253,14 @@ public  class SecurityContext {
             throw new UnauthorizedAccessException(" cannot do that action: " + action.getDescribe());
         }
     }
+    public static boolean canCurrentUserSeeResource(Resource resource) {
+        return (resource.getValidationStatus()==ValidationStatus.ACCEPT 
+                || canCurrentSeeNotValidatedResource());
+    }
+    
 
+    public static boolean canCurrentSeeNotValidatedResource() {
+        return ((getUser()!=null && getUser().getUserType()!=UserType.KID));
+    }
 
 }
