@@ -47,7 +47,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 
     
     public enum UserType{
-    	KID("enfant"), ADULT("adulte");
+    	KID("Enfant"), ADULT("Adulte");
     	String description;    	
     	
     	private UserType(String description) {
@@ -138,7 +138,18 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 
 
     public enum Gender {
-        FEMALE, MALE;
+        FEMALE("Femme"), MALE("Homme");
+        String description;
+
+        private Gender(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+        
+        
     }
     
     public boolean isFemale(){

@@ -21,7 +21,7 @@ public class UrlResource extends BaseEntity
     Long id;
     
 	@Column(length = 50, nullable=true)
-	@Size(max=50, message="le num d'une ressource ne peut contenir que 50 caractères maximum")
+	@Size(max=50, message="le nom d'une ressource ne peut contenir que 50 caractères maximum")
 	private String name;
 	
 	@NotBlank

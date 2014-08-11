@@ -87,7 +87,7 @@
 					 	%>
 					</li>
 					
-					<li><label>Genre :</label> ${user.gender ne null?user.gender:"?"}</li>
+					<li><label>Genre :</label> ${user.gender ne null?user.gender.description:"?"}</li>
 					<li><label>Type :</label> ${user.userType ne null?user.userType.description:"?"}</li>
 						<li><label>Né le :</label> <c:choose><c:when test="${user.birthDate ne null}">${user.birthDate}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
 					<li><label>Pseudo :</label> ${user.userName}</li>

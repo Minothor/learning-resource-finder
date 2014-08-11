@@ -88,8 +88,8 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Genre</label>
 		    <div class="col-lg-5">
-		    	<label class="font-ligther" style="margin-right:10px;"><form:radiobutton  path="gender" value="MALE" /> MALE</label>
-		    	<label class="font-ligther"><form:radiobutton   path="gender" value="FEMALE" /> FEMALE</label>
+		    	<label class="font-ligther" style="margin-right:10px;"><form:radiobutton  path="gender" value="MALE" /> Homme</label>
+		    	<label class="font-ligther"><form:radiobutton   path="gender" value="FEMALE" /> Femme</label>
 		    </div>
 		</div>
 		
