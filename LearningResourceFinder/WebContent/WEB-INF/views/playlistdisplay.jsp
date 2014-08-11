@@ -76,11 +76,14 @@
 		
 		
 		<h3>Ressources incluses</h3>
+			<c:set var="i"  value='1'/>
 			<c:forEach items="${playlist.resources}" var="resource">
 					<c:if test="${canEdit}">
 						<c:set var="closeUrl" value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>
 					</c:if>	
-					<lrftag:resource resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
+						<c:set var="prefix" value="${i}"/>
+					<lrftag:resource prefix="${prefix}" resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
+					<c:set var="i"  value="${i+1}"/>
 			</c:forEach>
 		
 		    <p>Pour ajouter une ressource à cette séquence, passez par la page détaillant la ressource à ajouter (en étant connecté avec votre compte).</p>

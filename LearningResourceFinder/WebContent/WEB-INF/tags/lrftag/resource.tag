@@ -3,12 +3,13 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <%@ attribute name="resource" type="learningresourcefinder.model.Resource" %>
 <%@ attribute name="closeUrl" type="java.lang.String" required="false"%>
+<%@ attribute name="prefix" type="java.lang.String" required="false"%>
 
 
 <div style="display:inline-block; position:relative; vertical-align:top; width: 200px; margin-right:20px; margin-bottom:20px;"
      class="panel panel-default">
-  <div class="panel-heading">
-       <a href="/resource/${resource.shortId}/${resource.slug}" class="lead">${resource.name}</a>
+  <div class="panel-heading"><span class="lead"><c:if test='${! empty prefix}'>${prefix}. </c:if>
+       <a href="/resource/${resource.shortId}/${resource.slug}" >${resource.name}</a></span>
 
 	   <c:if test='${! empty closeUrl}'>
 		    <a href="<c:url value='${closeUrl}'/>">
