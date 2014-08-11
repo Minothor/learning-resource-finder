@@ -19,13 +19,13 @@
  	    
  	    $(".noneditplaylist").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution.");
  	    
- 	   $("[data-toggle='confirmation']").popConfirm({
-			title : "Confirmation",
-			content : "Voulez-vous vraiment supprimer cette séquence ?",
-			placement : "top",
-			yesBtn : "oui",
-			noBtn : "non"
-		});
+ 	    $("[data-toggle='confirmation']").popConfirm({
+			 title : "Confirmation",
+			 content : "Voulez-vous vraiment supprimer cette séquence ?",
+			 placement : "bottom",
+			 yesBtn : "oui",
+			 noBtn : "non"
+		 });
  	});
 </script>
 </head>
@@ -44,8 +44,8 @@
 			</div>
 			<div class="col-md-1 text-right" style="margin-top: 20px;">
 				<c:if test="${canEdit}">
-					<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>" data-toggle='confirmation'>
-						<button type="button" class="addToolTip close"
+					<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>" class="btn" data-toggle='confirmation'>
+						<button type="button" class="btn addToolTip close"
 							 title="supprimer cette séquence">&times;</button>
 					</a>
 				</c:if>
