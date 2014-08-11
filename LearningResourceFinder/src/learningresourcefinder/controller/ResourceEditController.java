@@ -4,6 +4,7 @@ import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.UrlResource;
+import learningresourcefinder.model.User;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.search.SearchOptions.Format;
@@ -11,6 +12,7 @@ import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.ContributionService;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
@@ -31,6 +33,7 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired   UrlResourceRepository urlResourceRepository;
     @Autowired   IndexManagerService indexManager;
     @Autowired   LevelService levelService;
+    @Autowired 	 ContributionService contributionService; 
     
     
 
@@ -75,15 +78,16 @@ public class ResourceEditController extends BaseController<Resource> {
         urlResource.setResource(resource);
         resource.getUrlResources().add(urlResource);
         
-        //resource.setFormat(searchoptions.getFormat().get(0));
-        
-
+        //resource.setFormat(searchoptions.getFormat().get(0));  
         urlResourceRepository.persist(urlResource);
         resourceRepository.persist(resource);
+
         
         indexManager.add(resource);
         
-        levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_RESOURCE);
+        User user=SecurityContext.getUser();
+        contributionService.contribute(user, resource, Action.ADD_RESOURCE, "", "new_value");
+        //levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_RESOURCE);
         
         return new MessageAndId(resource.getId(),
                 "Ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
@@ -100,6 +104,21 @@ public class ResourceEditController extends BaseController<Resource> {
             throw new InvalidUrlException("Missing resource id.");
         }
         Resource resource=getRequiredEntity(id);
+        
+        
+        
+		User user = SecurityContext.getUser();
+		
+		if((description!="") && (description!=null))
+			contributionService.contribute(user, resource, Action.EDIT_RESOURCE_DESCRIPTION, "", description);
+		if(duration!=null)
+			contributionService.contribute(user, resource, Action.EDIT_RESOURCE_DURATION, "", duration.toString());
+		if(nature!=null)
+			contributionService.contribute(user, resource, Action.EDIT_RESOURCE_NATURE, "", nature.getDescription());
+
+        
+        
+  
         resource.setLanguage(language);
         resource.setDescription(description);
         resource.setAdvertising(advertising);
@@ -107,6 +126,10 @@ public class ResourceEditController extends BaseController<Resource> {
         resource.setNature(nature);
         resourceRepository.merge(resource); 
         indexManager.update(resource);
+        
+	
+			
+        
         
         return "redirect:" + UrlUtil.getRelativeUrlToResourceDisplay(resource);
 //        return new MessageAndId(resource.getId(),
