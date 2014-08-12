@@ -41,7 +41,7 @@
 	
 	<br/>
 	<br/>
-	<p>Votre niveau d'utilisateur augmente automatiquement lorsque votre bar de progression est remplie. les utilisateurs connectés la voient tout en haut de chaque page.</p>
+	<p>Votre niveau d'utilisateur augmente automatiquement: votre barre de progression est visible tout en haut de chaque page (connexion requise!).</p>
 
     <c:if test="${user != null}">
       Points de contribution pour ${user.fullName}: <strong>${user.userProgressPoints}</strong> (il en faut ${user.accountLevel.levelProgressPoints} pour arriver au niveau ${user.accountLevel.levelIndex + 1}).
@@ -52,7 +52,7 @@
 	  </div>
     </c:if>
 
-	<p>Cette barre se remplit avec des points de contribution que vous gagnez en contribuant par les actions suivantes:</p>
+	<p>Cette barre se remplit avec des points de contribution que vous gagnez grâce aux actions suivantes:</p>
 	
 	<c:forEach items="${actions}" var="action">
 	  <c:if test="${action.actionPoints > 0}"> <%-- it's not worth displaying actions that get the user no point here --%>

@@ -20,7 +20,7 @@ function ajaxPostUrlResource(e) {
 			    	return false;
 			    },
 			    error : function(data) {
-			    	alert("Il semble qu'il y ai eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
+			    	alert("Il semble qu'il y aie eu une petite erreur sur notre serveur lorsque vous avez introduit \n " +
 	    			"votre e-mail. Cela montre bien que nous ne sommes pas encore prêts :-( Toutes nos excuses.");
 	        return false;
 			    },

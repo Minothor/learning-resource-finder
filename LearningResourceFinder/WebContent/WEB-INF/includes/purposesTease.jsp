@@ -14,7 +14,7 @@
 <li>Le site est-il basé sur les compétences officielles de la FWB?</li>
 <li>Dans quelle(s) langue(s) sera-t-il?</li>
 <li>Combien ça va encore me coûter?</li>
-<li>Aurais-je mon mot à dire sur le contenu?</li>
+<li>Aurai-je mon mot à dire sur le contenu?</li>
 <li>"ToujoursPlus" de quoi, au fait? </li>
 <li>Le gouvernement est-il au courant?</li>
 </ul>

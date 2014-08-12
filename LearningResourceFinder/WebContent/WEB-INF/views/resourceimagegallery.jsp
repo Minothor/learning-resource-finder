@@ -25,7 +25,7 @@
 		            <a href='/resource/delete?id=${resource.id}&img=${i}'>
 		          </c:when>
 		          <c:otherwise>  
-		            <a class='addPopover' data-content="Pour ajouter/supprimer une image de la ressource, il faut �tre connect� et avoir un niveau 3 de contribution.">
+		            <a class='addPopover' data-content="Pour ajouter/supprimer une image de la ressource, il faut être connecté et avoir un niveau 3 de contribution.">
 		          </c:otherwise>
 		        </c:choose>
     	        Supprimer</a>

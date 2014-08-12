@@ -17,11 +17,11 @@ function sendDonation(e){
 	    	if (data == 'SUCCESS'){
 	    		alert('Merci. Votre message a été envoyé avec succès. Nous vous répondons par e-mail dès que possible.');
 	    	} else {
-	    		alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
+	    		alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous rempli tous les champs du formulaire?");
 	    	}
 	    },
 	    error : function(data) {
-	    	alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous remplis tous les champs du formulaire?");
+	    	alert("Il y a un petit problème technique lors de l'envoi du message. Avez-vous rempli tous les champs du formulaire?");
 	    }
 	}); 
 }
@@ -31,7 +31,7 @@ function sendDonation(e){
 <section id="fbsection5" class="wrapper contact-us">
 <section class="container" style="text-align:center; width:820px;">
 <h1>Comment pouvez-vous nous soutenir?</h1>
-<p>Nous avons besoin de vous pour témoigner, diffuser le concept dans votre école/association, tester le site en version beta, participer à des réunions d’analyse et de feedback, donner des millions de dollars.</p>
+<p>Nous avons besoin de vous pour témoigner, diffuser le concept dans votre école/association, tester le site en version bêta, participer à des réunions d’analyse et de feedback, donner des millions de dollars.</p>
 <br>
 <form id="formContact" role="form" style="margin-left:15%; width:70%;">
   <div class="form-group">

@@ -71,6 +71,16 @@ public class ResourceListController extends BaseController<Resource> {
 		return mv;
 	}
 	
+	@RequestMapping("/nochildrenvalidationresourcelist/{topic}") 
+    public ModelAndView nochildrenvalidationresourcelist(@PathVariable("topic") String topicName) {
+        Topic topic = Resource.Topic.valueOf(topicName);
+        ModelAndView mv = prepareModelAndView(resourceRepository.findAllResourceWhoNoChildrenValidationByTopic(topic));
+
+        mv.addObject("topic", topic);
+        mv.addObject("problemTitle","Liste des ressources en attente de validation.");
+        return mv;
+    }
+	
    @RequestMapping("/lastresourcelist")
     public ModelAndView lastresourcelist() {
         ModelAndView mv = prepareModelAndView(resourceRepository.findLastResources(100));

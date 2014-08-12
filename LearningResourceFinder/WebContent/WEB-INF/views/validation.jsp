@@ -17,7 +17,7 @@
     </c:when>
     <c:when test="${result eq 'INVALID_CODE' }">
         <p>Votre compte n'a <strong>PAS</strong> été validé. Vous avez transmis le code suivant via l'URL: '${code}'</p>
-        <p>Veuillez utiliser le lien fournit dans votre e-mail d'inscription (en cliquant sur le lien ou en le copiant en entier dans la barre d'adresse de votre navigateur).</p>
+        <p>Veuillez utiliser le lien fourni dans votre e-mail d'inscription (en cliquant sur le lien ou en le copiant en entier dans la barre d'adresse de votre navigateur).</p>
     </c:when>
 </c:choose>
 </div>

@@ -24,7 +24,7 @@ public class ContributionController extends BaseController<Problem> {
 		Map<Topic, Long[]> mapProblem = new TreeMap<Topic, Long[]>();
 		
 		for(Topic topic : Resource.Topic.values()) {
-			Long[] results = {problemRepository.countOpenProblemsForTopic(topic), problemRepository.countProblemOfFieldNull(topic), problemRepository.countProblemOfCompetenceNull(topic)};
+			Long[] results = {problemRepository.countOpenProblemsForTopic(topic), problemRepository.countProblemOfFieldNull(topic), problemRepository.countProblemOfCompetenceNull(topic), problemRepository.countProblemOfNoValidation(topic)};
 			mapProblem.put(topic, results);
 		}
 				

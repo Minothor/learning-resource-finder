@@ -11,6 +11,7 @@ import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Favorite;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.User;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Format;
@@ -184,6 +185,14 @@ public class ResourceRepository extends BaseRepository<Resource> {
 				.getResultList();
 		return results;
 	}
+	
+	public List<Resource> findAllResourceWhoNoChildrenValidationByTopic(Topic topic) {
+        List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE (r.validationStatus=null OR  r.validationStatus!=:validationStatus) AND r.topic = :topic")
+                .setParameter("topic", topic)
+                .setParameter("validationStatus", ValidationStatus.ACCEPT)
+                .getResultList();
+        return results;
+    }
 
     public List<Long> findIdsByCompetence(Competence competence) {
         List<Competence> allCompetences = competence.getChildrenAndSubChildren();

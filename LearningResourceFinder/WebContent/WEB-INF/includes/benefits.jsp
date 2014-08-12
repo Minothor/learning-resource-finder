@@ -19,7 +19,7 @@
 	<p><span>Temps de préparation: </span>Préparation facilitée des cours magistraux et différenciés.</p>
 	<p><span>Suivi: </span>Aide à l'identification précise des lacunes des exercices/vidéos pour y remédier.</p>
 	<p><span>Echange: </span>Confection, publication et partage entre collègues de séquences d'apprentissage.</p>
-	<p><span>Motivation: </span>Adaptation plus facile de l'enseignement à la motivation fluctuante des élèves via des ressources de type très varié.</p>
+	<p><span>Motivation: </span>Adaptation plus facile de l'enseignement à la motivation fluctuante des élèves via des ressources de types très variés.</p>
 	<p><span>Perfectionnement: </span>Contact avec les pédagogues les plus appréciés par les internautes via leurs vidéos et autres productions.</p>
 	
 	<br/>
@@ -29,7 +29,7 @@
 	<p><span>Acquis et lacunes: </span>Présentation neutre et claire des lacunes et progrès.</p>
 	<p><span>Mixité: </span>Mise en contact avec des élèves d'autres écoles travaillant sur le même sujet.</p>
 	<p><span>Immersion linguistique: </span>Possibilité de mini-immersion via des ressources dans une autre langue.</p>
-	<p><span>Etudes supérieures: </span>Présentation claire des compétences nécessaires pour chaque type d'étude supérieure et identification des lacunes à combler.</p>
+	<p><span>Etudes supérieures: </span>Présentation claire des compétences nécessaires pour chaque type d'études supérieures et identification des lacunes à combler.</p>
 
     <br/>
     <br/>

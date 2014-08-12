@@ -67,7 +67,7 @@ $(document).ready(function() {
 	          name="Pierre Pirard, Bruxelles"
 	          function="Managing Director de Teach for Belgium"
 	          mainText = "Super initiative qui si elle tient ses promesses nous permettra comme enseignants d’avoir des outils pratiques et pour 
-	       			 nous élèves de progresser à leur rythme. Initiative qui me semble win-win."
+	       			 nos élèves de progresser à leur rythme. Initiative qui me semble win-win."
 	        />
 	    </div>
 

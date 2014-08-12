@@ -22,7 +22,7 @@ public class LogoutController extends BaseController<User> {
     public String logout(WebRequest request) {
   
          loginService.logout();
-         NotificationUtil.addNotificationMessage("Vous ête à present deconnecté de "+UrlUtil.getWebSiteName(),Status.INFO);
+         NotificationUtil.addNotificationMessage("Vous êtes à present deconnecté de "+UrlUtil.getWebSiteName(),Status.INFO);
         return "redirect:/";
     }
     @RequestMapping("/ajax/logout")

@@ -5,6 +5,7 @@ import java.util.List;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.User;
 
 import org.springframework.stereotype.Repository;
@@ -67,6 +68,13 @@ public class ProblemRepository extends BaseRepository<Problem>
 		return result;
 	}
 	
+	public Long countProblemOfNoValidation(Topic topic) {
+        Long result = (long) em.createQuery("SELECT COUNT(r) FROM Resource r  WHERE (r.validationStatus=null OR  r.validationStatus!=:validationStatus) AND r.topic = :topic")
+                .setParameter("topic", topic)
+                .setParameter("validationStatus", ValidationStatus.ACCEPT)
+                .getSingleResult();
+        return result;
+    }	
 	
 	
  

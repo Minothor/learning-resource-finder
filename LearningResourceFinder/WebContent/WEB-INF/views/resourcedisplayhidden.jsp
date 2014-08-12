@@ -43,8 +43,8 @@
 
 						<div class="panel-body">
 							<p>Cette ressource n'est pas encore validée.</p>
-							<p>Entre-temps, par précaution, seul les membres connectés en
-								tant qu'adulte on accès à cette ressource.</p>
+							<p>Entretemps, par précaution, seul les membres connectés en
+								tant qu'adulte ont accès à cette ressource.</p>
 						</div>
 
 					</div>
