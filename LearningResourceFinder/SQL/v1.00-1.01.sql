@@ -94,3 +94,8 @@
 	alter table rating 
 		add unique (resource_id, user_id);	
 		
+	-- 2014-08-12 Pierre G.	
+		alter table contribution drop column elementtype
+		
+		
+		
