@@ -45,7 +45,7 @@ public class ContributionDisplayController extends BaseController<User>
 		
 		@RequestMapping(value="/recomputeContributionPoints", method=RequestMethod.GET)
 		public String recomputeContributionPoints(@RequestParam(value="username",required=false) String userName) {
-	    
+	    //
 			User user =(userName==null)? SecurityContext.getUser(): userRepository.getUserByUserName(userName);
 			levelService.computeContributionPointsForLevelFromContributions(user, contributionRepository.sumByUser(user));
 					
