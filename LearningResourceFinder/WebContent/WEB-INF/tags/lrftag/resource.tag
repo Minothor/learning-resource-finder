@@ -79,9 +79,17 @@
 			</div>
 			<div class="panel-body"
 				style="font-size: 10px !important; margin-bottom: 20px;">
-				<p>Cette ressource n'est pas encore validée.</p>
-				<p>Entre-temps, par précaution, seul les membres connectés en
-					tant qu'adulte on accès à cette ressource.</p>
+				<c:choose>
+								<c:when test='${resource.validationStatus=="REJECT"}'>
+										<p>Un contributeur a estimé que cette ressource est inappropriée pour les enfants.</p>
+										<p>Seuls les membres connectés en tant qu'adulte y ont donc accès.</p>
+								</c:when>
+								<c:otherwise>
+										<p>Cette ressource n'est pas encore validée.</p>
+										<p>Entretemps, par précaution, seuls les membres connectés
+											en tant qu'adulte y ont accès.</p>
+								</c:otherwise>
+							</c:choose>
 			</div>
 		</c:otherwise>
 	</c:choose>
