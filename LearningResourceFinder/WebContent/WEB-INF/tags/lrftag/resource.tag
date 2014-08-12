@@ -9,6 +9,8 @@
 	style="display: inline-block; position: relative; vertical-align: top; width: 200px; margin-right: 20px; margin-bottom: 20px;"
 	class="panel panel-default">
 
+	<span id="${playlist.id}-${resource.id}"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
+	
 	<c:choose>
 		<c:when
 			test="${resource.validationStatus=='ACCEPT' || current.canSeeNotValidatedResource}">

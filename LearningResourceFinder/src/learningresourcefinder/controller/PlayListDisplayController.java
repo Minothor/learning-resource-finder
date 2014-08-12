@@ -4,19 +4,22 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import learningresourcefinder.model.PlayList;
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
+import learningresourcefinder.util.FileUtil.InvalidImageFileException;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.NotificationUtil;
-import learningresourcefinder.util.FileUtil.InvalidImageFileException;
 import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 
@@ -25,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -143,7 +147,6 @@ public class PlayListDisplayController extends BaseController<PlayList> {
         
         PlayList playlist = getRequiredEntity(id);
         SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);        
-        
             
         if (value == null) {
             return new ResponseEntity<String>("Vous n'avez pas introduit de nom.", HttpStatus.BAD_REQUEST);
@@ -171,4 +174,39 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 
         return new ResponseEntity<String>("sucess",HttpStatus.OK);
     }
+
+    @RequestMapping("/sortresources")
+    public @ResponseBody ResponseEntity<String> sortResources(@RequestBody ArrayList<String> order /*example: "15-1452", 15-2555"*/){
+        
+        // First position(s) before character "-" contains playlist id
+        String idPlaylist = ((String) (order.toArray()[0])).split("-")[0];
+        PlayList playlist = getRequiredEntity(Long.parseLong(idPlaylist));        
+
+        SecurityContext.assertCurrentUserMayEditThisPlaylist(playlist);
+
+        // Keep a copy of current resources and clear all resources for current playlist
+        List<Resource> resourcesListCopy = new ArrayList(playlist.getResources());
+        playlist.getResources().clear();  
+        
+        // We refill playlist.getResources() (now empty) with resources in the same order as order array
+        for (String orderItem : order) {
+            if (orderItem.trim().length()>0) { // jQuery drag-drop ajax sends us blanks lines, we don't know why...
+                // Position(s) after character '-' contains resource id
+                Long resId = Long.parseLong(orderItem.substring(orderItem.indexOf("-")+1, orderItem.length()).trim());
+                
+                // Search resource with Id retrieved and add it into list of resources for current playlist
+                for (Resource resourceCopy : resourcesListCopy) {
+                    if (resourceCopy.getId().equals(resId)) {
+                        playlist.getResources().add(resourceCopy);
+                        break;
+                    }
+                }
+            }
+        }
+
+        playlistRepository.merge(playlist);
+        
+        return new ResponseEntity<String>(HttpStatus.OK);  // The Javascript caller will reload the page.
+     }
+
 }

@@ -9,6 +9,7 @@
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
  		$.fn.editable.defaults.mode = 'inline';
  	    $('.editableField').editable({   
  	    	  emptytext: '? ?',
@@ -26,8 +27,38 @@
 			 yesBtn : "oui",
 			 noBtn : "non"
 		 });
+ 	   
+ 	     $('#sortable').sortable({
+           update: function() {
+        	   var order = [];
+ 			   $("#sortable span").each(function() {
+ 			 	  order.push(this.id);
+ 			   });
+		   	   $.ajax({
+  					type:"POST",
+  	    			headers:{
+  	    				'Accept': 'application/json',
+  	    				'Content-type': 'application/json'
+  	    			},
+		  			url: "/sortresources",
+					data : JSON.stringify(order),
+	    			success: function() {
+	    				location.reload();
+	    			} 
+				});
+             }
+           });
+ 	     
+ 	       $("#sortable").disableSelection();
  	});
 </script>
+
+<style type="text/css">
+  #sortable {
+      cursor: move;
+  }
+</style>
+
 </head>
 
 <body>
@@ -62,7 +93,7 @@
 						<dt>Nom :</dt>
 					  	<dd><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
 					  	<dt>Description :</dt>
-					  	<dd style="word-wrap: break-word; overflow-wrap: break-word;"><a id="description"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
+					  	<dd><a id="description"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
 					  	<dt>Auteur :</dt>
 					  	<dd><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
 					  	<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
@@ -76,16 +107,22 @@
 		
 		
 		<h3>Ressources incluses</h3>
-			<c:set var="i"  value='1'/>
+			<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+				<div id="sortable" style="display: flex;">
+			</lrf:conditionDisplay>
+			<c:set var="i" value='1'/>
 			<c:forEach items="${playlist.resources}" var="resource">
 					<c:if test="${canEdit}">
 						<c:set var="closeUrl" value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>
 					</c:if>	
-						<c:set var="prefix" value="${i}"/>
+					<c:set var="prefix" value="${i}"/>
 					<lrftag:resource prefix="${prefix}" resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
 					<c:set var="i"  value="${i+1}"/>
 			</c:forEach>
-		
+			<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+				</div>
+			</lrf:conditionDisplay>
+			
 		    <p>Pour ajouter une ressource à cette séquence, passez par la page détaillant la ressource à ajouter (en étant connecté avec votre compte).</p>
 		
 		<!-- Modal -->
