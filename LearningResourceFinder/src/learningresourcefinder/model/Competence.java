@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -86,10 +87,10 @@ public class Competence extends BaseEntity implements Searchable{
 
 	public Competence(String codeCompetence, String nameCompetence,
 			Competence parent, String descriptionCompetence) {
-			this.code = HTMLUtil.removeHtmlTags(codeCompetence);
-			this.name = HTMLUtil.removeHtmlTags(nameCompetence);
+			this.code = StringEscapeUtils.escapeHtml4(codeCompetence);
+			this.name = StringEscapeUtils.escapeHtml4(nameCompetence);
 			this.parent = parent;
-			this.description = HTMLUtil.removeHtmlTags(descriptionCompetence);
+			this.description = StringEscapeUtils.escapeHtml4(descriptionCompetence);
 			
 	}
 
@@ -142,7 +143,7 @@ public class Competence extends BaseEntity implements Searchable{
 	}
 
 	public void setName(String name) {
-		this.name = HTMLUtil.removeHtmlTags(name);
+		this.name = StringEscapeUtils.escapeHtml4(name);
 	}
 
 	public String getDescription() {
@@ -150,7 +151,7 @@ public class Competence extends BaseEntity implements Searchable{
 	}
 
 	public void setDescription(String description) {
-		this.description = HTMLUtil.removeHtmlTags(description);
+		this.description = StringEscapeUtils.escapeHtml4(description);
 	}
 
 	
@@ -159,7 +160,7 @@ public class Competence extends BaseEntity implements Searchable{
 	}
 
 	public void setCode(String code) {
-		this.code = HTMLUtil.removeHtmlTags(code);
+		this.code = StringEscapeUtils.escapeHtml4(code);
 	}
 
 	

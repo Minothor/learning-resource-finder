@@ -16,6 +16,7 @@ import learningresourcefinder.service.CompetenceService;
 import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.ContextUtil;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotBlank;
@@ -64,7 +65,7 @@ public class Cycle extends BaseEntity  {
 
 
 	public void setName(String name) {
-		this.name = HTMLUtil.removeHtmlTags(name);
+		this.name = StringEscapeUtils.escapeHtml4(name);
 	}
 
     @Override

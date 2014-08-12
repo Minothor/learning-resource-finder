@@ -30,6 +30,7 @@ import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.Slugify;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -140,8 +141,8 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	public Resource() {} // No arg constructor for Hibernate
 	
 	public Resource(String name, String description, User author) {
-		this.name = HTMLUtil.removeHtmlTags(name);
-		this.description = HTMLUtil.removeHtmlTags(description);
+		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.description = StringEscapeUtils.escapeHtml4(description);
 		this.slug = Slugify.slugify(name);
 		this.createdBy = author;  // We are probably executing this constructor with params in a test batch code (=> no logged in user to be the author).
 	}
@@ -183,7 +184,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	}
 
 	public void setName(String name) {
-		this.name = HTMLUtil.removeHtmlTags(name);
+		this.name = StringEscapeUtils.escapeHtml4(name);
 	}
 
 	public String getDescription() {
@@ -203,7 +204,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	    }
 	}
 	public void setDescription(String description) {
-		this.description = HTMLUtil.removeHtmlTags(description);
+		this.description = StringEscapeUtils.escapeHtml4(description);
 	}
 
 	public Set<Problem> getProblems() {

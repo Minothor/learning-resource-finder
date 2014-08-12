@@ -18,6 +18,7 @@ import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.Slugify;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
@@ -54,8 +55,8 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
     public PlayList() {} // No arg constructor for Hibernate
     
     public PlayList(String name, String description) {
-		this.name = HTMLUtil.removeHtmlTags(name);
-		this.description = HTMLUtil.removeHtmlTags(description);
+		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.description = StringEscapeUtils.escapeHtml4(description);
 		this.slug = Slugify.slugify(name);
 	}
 
@@ -64,7 +65,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         return name;
     }
     public void setName(String name) {
-        this.name = HTMLUtil.removeHtmlTags(name);
+        this.name = StringEscapeUtils.escapeHtml4(name);
     }
     public String getDescription() {
         return description;
@@ -79,7 +80,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         }
     }
     public void setDescription(String description) {
-        this.description = HTMLUtil.removeHtmlTags(description);
+        this.description = StringEscapeUtils.escapeHtml4(description);
     }
 
     public List<Resource> getResources() {
@@ -90,7 +91,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         return slug;
     }
     public void setSlug(String slug) {
-        this.slug = HTMLUtil.removeHtmlTags(slug);
+        this.slug = StringEscapeUtils.escapeHtml4(slug);
     }
 
     @Override

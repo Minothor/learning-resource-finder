@@ -11,6 +11,7 @@ import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
 import learningresourcefinder.util.HTMLUtil;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -220,19 +221,19 @@ public class CompetenceController extends BaseController<Competence> {
 			return name;
 		}
 		public void setName(String name) {
-			this.name = HTMLUtil.removeHtmlTags(name);
+			this.name = StringEscapeUtils.escapeHtml4(name);
 		}
 		public String getCode() {
 			return code;
 		}
 		public void setCode(String code) {
-			this.code = HTMLUtil.removeHtmlTags(code);
+			this.code = StringEscapeUtils.escapeHtml4(code);
 		}
 		public String getDescription() {
 			return description;
 		}
 		public void setDescription(String description) {
-			this.description = HTMLUtil.removeHtmlTags(description);
+			this.description = StringEscapeUtils.escapeHtml4(description);
 		}
 	}
 }

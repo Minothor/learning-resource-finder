@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 import learningresourcefinder.util.HTMLUtil;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -33,7 +34,7 @@ public class Discussion extends BaseEntity {
 
     public Discussion(String message) {
         super();
-        this.message = HTMLUtil.removeHtmlTags(message);
+        this.message = StringEscapeUtils.escapeHtml4(message);
         this.message = message.replace("\n", "<br />\n");
     }
 
@@ -47,7 +48,7 @@ public class Discussion extends BaseEntity {
     }
 
     public void setMessage(String message) {
-        this.message = HTMLUtil.removeHtmlTags(message);
+        this.message = StringEscapeUtils.escapeHtml4(message);
     }
 
     public Problem getProblem() {

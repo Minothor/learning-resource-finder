@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 import learningresourcefinder.util.HTMLUtil;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -56,7 +57,7 @@ public class Task extends BaseEntity
     }
 
     public void setDescription(String description) {
-        this.description = HTMLUtil.removeHtmlTags(description);
+        this.description = StringEscapeUtils.escapeHtml4(description);
     }
 
     public User getAssigner() {
@@ -72,7 +73,7 @@ public class Task extends BaseEntity
 	}
 
 	public void setName(String name) {
-		this.name = HTMLUtil.removeHtmlTags(name);
+		this.name = StringEscapeUtils.escapeHtml4(name);
 	}
 
 	public void setAssigner(User assigner) {

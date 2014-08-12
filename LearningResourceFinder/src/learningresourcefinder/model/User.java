@@ -27,6 +27,7 @@ import learningresourcefinder.mail.MailingDelayType;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.util.HTMLUtil;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -347,7 +348,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 	}
 
 	public void setTitle(String title) {
-		this.title = HTMLUtil.removeHtmlTags(title);
+		this.title = StringEscapeUtils.escapeHtml4(title);
 	}
     
     public Role getRole() {
@@ -380,7 +381,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = HTMLUtil.removeHtmlTags(firstName);
+        this.firstName = StringEscapeUtils.escapeHtml4(firstName);
     }
 
     public String getUserName() {
@@ -388,7 +389,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setUserName(String userName) {
-        this.userName = HTMLUtil.removeHtmlTags(userName);
+        this.userName = StringEscapeUtils.escapeHtml4(userName);
     }
 
     public String getLastName() {
@@ -396,7 +397,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setLastName(String lastName) {
-        this.lastName = HTMLUtil.removeHtmlTags(lastName);
+        this.lastName = StringEscapeUtils.escapeHtml4(lastName);
     }
 
     public Date getLastMailSentDate() {
@@ -412,7 +413,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setMail(String mail) {
-        this.mail = mail != null ? HTMLUtil.removeHtmlTags(mail.toLowerCase().trim()) : null;
+        this.mail = mail != null ? StringEscapeUtils.escapeHtml4(mail.toLowerCase().trim()) : null;
     }
 
     public String getPassword() {
@@ -444,7 +445,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setLockReason(String lockReason) {
-        this.lockReason = HTMLUtil.removeHtmlTags(lockReason);
+        this.lockReason = StringEscapeUtils.escapeHtml4(lockReason);
     }
 
     public String getValidationCode() {

@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 
 import learningresourcefinder.util.HTMLUtil;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -34,7 +35,7 @@ public class UrlResource extends BaseEntity
 	public UrlResource() {}
 	
 	public UrlResource(String name, String url, Resource resource) {
-		this.name = HTMLUtil.removeHtmlTags(name);
+		this.name = StringEscapeUtils.escapeHtml4(name);
 		this.url = url;
 		this.resource = resource;
 	}
@@ -44,7 +45,7 @@ public class UrlResource extends BaseEntity
 	}
 
 	public void setName(String name) {
-		this.name = HTMLUtil.removeHtmlTags(name);
+		this.name = StringEscapeUtils.escapeHtml4(name);
 	}
 
 	public String getUrl() {
