@@ -57,6 +57,16 @@
   #sortable {
       cursor: move;
   }
+  dd {
+      word-wrap: break-word; 
+      overflow-wrap: break-word;
+  }
+  #descriptionDiv textarea {  
+	  width: 250% ;
+  }
+  #descriptionDiv .editable-buttons {     
+	  float:left;
+  }   
 </style>
 
 </head>
@@ -93,7 +103,7 @@
 						<dt>Nom :</dt>
 					  	<dd><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
 					  	<dt>Description :</dt>
-					  	<dd><a id="description"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
+					  	<dd id="descriptionDiv"><a id="description"  data-type="textarea" href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
 					  	<dt>Auteur :</dt>
 					  	<dd><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
 					  	<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
