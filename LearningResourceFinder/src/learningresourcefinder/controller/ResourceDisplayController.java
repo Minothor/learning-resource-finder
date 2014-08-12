@@ -2,6 +2,7 @@ package learningresourcefinder.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -124,9 +125,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	        mv.addObject("listOtherPeoplePlayListsWithThisResource", tpl3);
     	    }
     	}
-        
+    	
+    	
     	mv.addObject("problemList", problemList);
     	mv.addObject("problemDate", problemDate);
+    	mv.addObject("platformsForJson", selectedPlatformsToJSON(resource));
+
     	
     	ModelAndViewUtil.addDataEnumToModelAndView(mv, Platform.class);
     	ModelAndViewUtil.addDataEnumToModelAndView(mv, Format.class);
@@ -146,16 +150,49 @@ public class ResourceDisplayController extends BaseController<Resource> {
     	
     	return mv;
 	}
+    
+    public String selectedPlatformsToJSON(Resource resource) {
+        int i = 1, sizeplatform = resource.getPlatforms().size();
+        String dataEnum = "";
+
+        for (Platform platform : resource.getPlatforms()) {
+            dataEnum += platform.ordinal()+1;
+            if (i == sizeplatform) {
+                break;
+            }
+            dataEnum += ",";
+            i++;
+        }
+        return dataEnum;
+    }
+ 
+                           
+    @RequestMapping("/ajax/resourceeditfieldarraysubmit")  // For a list of checkboxes, value is an array (=> resourceDditFieldSubmit cannot get it in its String).
+    public @ResponseBody ResponseEntity<String> resourceeditfieldsubmitarray(@RequestParam("pk") Long id, @RequestParam(value="value[]") int[] valueArray) {
+        Resource resource = getRequiredEntity(id);
+        
+        // valueArray contains something like = [2,3] (if third and forth options have been checked)
+        Set<Platform> platforms=new HashSet<Platform>();
+        for(int platformNumber : valueArray) {        
+            platforms.add(Platform.values()[platformNumber-1]);      
+        }
+        
+        resource.setPlatforms(platforms);       
+        resourceRepository.merge(resource);
+        indexManager.update(resource);
+        return new ResponseEntity<String>("success",HttpStatus.OK);
+    }
+
 
     // FIXME: what happens if the input value is wrong (decimal number when int expected, for example) ?  - John 2014/04
 	@RequestMapping("/ajax/resourceeditfieldsubmit")
-	public @ResponseBody ResponseEntity<String> resourceEditFieldSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
+	public @ResponseBody ResponseEntity<String> resourceEditFieldSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam("name") String fieldName) {
 		
-			Resource resource = getRequiredEntity(id);
-			SecurityContext.assertCurrentUserMayEditThisResource(resource);
-			value = (value == null ? null : value.trim());
-			User user = SecurityContext.getUser();
-        
+	    Resource resource = getRequiredEntity(id);
+	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
+	    value = (value == null ? null : value.trim());
+	    User user = SecurityContext.getUser();
+
         switch (fieldName){
             case "title":
                 resource.setName(value);
@@ -167,12 +204,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
             	contributionService.contribute(user, resource, Action.EDIT_RESOURCE_DESCRIPTION, resource.getDescription(), value);
             	resource.setDescription(value);
                 break;
-                
-            case "platform":
-                resource.setPlatform(Platform.values()[Integer.parseInt(value)-1]);
-                
-                break;
-                
+   
             case "format":
                 resource.setFormat(Format.values()[Integer.parseInt(value)-1]);
                 break;

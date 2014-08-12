@@ -26,7 +26,7 @@
 -- 2014-08-08 Ahmed Zarioh
         
      update resource SET validationstatus = NULL WHERE validationstatus = 'WAITING';
-    
+     
 -- 2014-08-11 Pierre
 
 
@@ -67,7 +67,7 @@
         ADD UNIQUE (ressource_id, user_id, elementtype);
 
     alter table contribution 
-        add column action int4 not null;     
+        add column action int4 not null;
         
 -- 2014-08-11 Ramzi G.
 
@@ -94,8 +94,12 @@
 	alter table rating 
 		add unique (resource_id, user_id);	
 		
-	-- 2014-08-12 Pierre G.	
+-- 2014-08-12 Pierre G.	
 		alter table contribution drop column elementtype
 		
 		
-		
+        
+-- 2014-08-11  Redouane
+
+    alter table resource 
+        add column platformscollonstring varchar(255); 

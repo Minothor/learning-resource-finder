@@ -1,6 +1,7 @@
 package learningresourcefinder.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,8 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import learningresourcefinder.search.SearchOptions.Format;
@@ -55,15 +60,13 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		private String description;	
 		ValidationStatus(String description) 	{  this.description = description;}		
 		public String getDescription() 		{ return description; }
-	}
-
-	public static final int MAX_TITLE_LENGTH = 50; 
+	} 
     
 	@Id   @GeneratedValue(generator="ResourceSequence") // We want Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
     Long id;
         
-    @Column(length = MAX_TITLE_LENGTH, nullable=false)
-    @Size(max=MAX_TITLE_LENGTH, message="Le nom d'une ressource ne peut contenir que "+MAX_TITLE_LENGTH+" caractères maximum")
+    @Column(length = 50, nullable=false)
+    @Size(max=50, message="Le nom d'une ressource ne peut contenir que 50 caractères maximum")
 	private String name;
 	
     @Column(length=50, nullable=false)
@@ -157,6 +160,62 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@OneToMany(mappedBy="resource")
 	List<UrlResource> urlResources = new ArrayList<>();
 	
+	
+	
+	@Transient   // We will store this collection through this.platformsCollOnString
+    Set<Platform> platforms = new HashSet<Platform>();
+    
+    private String platformsCollOnString;   // To store this.platforms
+    
+    
+    public Set<Platform> getPlatforms() {
+        return Collections.unmodifiableSet(platforms);  // We prevent modifying this set  without going through setPlatforms().
+    }
+
+    public void setPlatforms(Set<Platform> platformSet) {
+        this.platforms = platformSet;
+        
+        // changing this.platforms is not enough because it's transient and will not alone triggers dirty checking auto-save.
+        // This string will not be saved in the DB, becaus it will be changed in the prePersistUpdate.
+        platformsCollOnString = "Please save this entity";  
+    }
+    
+    
+    @PrePersist  @PreUpdate  
+    public void prePersistUpdate(){
+        // We set the value of this.platformsOnString from this.platforms collection.
+        StringBuilder sb = new StringBuilder();
+        String delim = "";
+        for (Platform current : platforms) {
+            sb.append(delim).append(current.name());
+            delim = ",";
+        }
+        this.platformsCollOnString=sb.toString();
+    }
+
+    @PostLoad
+    public void postLoad()  {
+        // We populate this.platform set from this.platformsOnString
+        platforms.clear();
+        if (StringUtils.isNotBlank(this.platformsCollOnString)) {
+            String[] values = this.platformsCollOnString.split(",");
+            for (String value : values) {
+                Platform current = getEnumValueFor(value);
+                if (current != null) {
+                    platforms.add(current);
+                }
+            }
+        }
+    }
+
+    private Platform getEnumValueFor(String name) {
+        for (Platform current : Platform.class.getEnumConstants()) {
+            if (current.name().equals(name)) {
+                return (Platform) current;
+            }
+        }
+        return null;
+    }
 	
 	public int addImageOnDB(){
 		return numberImage;

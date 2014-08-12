@@ -53,18 +53,24 @@
 								     </c:forEach>
                             	</div>
 
-								<div class="form-group col-sm-4">
+								<div class="form-group col-sm-4" >
+								
 									<label for="platform">Plate-forme</label>
+									
 									<c:set var="firstIteration" scope="page" value="true"/>
 									<c:forEach var="platform" items="${applicationScope.cache.platform}">
-										<div class="radio addToolTip" title="${platform.description}">
-											<label for="${platform.name}">	
-							                   	<input type="radio" name="platform" value="${platform}" id="${platform.name}" required="required" <c:if test="${firstIteration==true}">checked</c:if> > 
+										<div class="checkbox addToolTip" title="${platform.description}"   >
+											<label for="${platform.name}"  >	
+							                   	<input type="checkbox" name="platform"  value="${platform}" id="${platform.name}"  <c:if test="${firstIteration==true}">checked</c:if> > 
 							                    ${platform.name}
 							                </label>  
 										</div>
 										<c:set var="firstIteration" scope="page" value="false"/>
-									</c:forEach>	                      
+									</c:forEach>
+									<div class="alert alert-danger" role="alert">Veuillez indiquer au moins une plate-forme !</div>
+									
+									
+										                      
                             	</div>
 
 								<div class="form-group col-sm-4">

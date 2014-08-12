@@ -1,5 +1,7 @@
 package learningresourcefinder.controller;
 
+import java.util.Set;
+
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
@@ -66,7 +68,7 @@ public class ResourceEditController extends BaseController<Resource> {
 	public @ResponseBody MessageAndId resourceAddSubmit(@RequestParam(value="url", required=false) String url, 
 	        @RequestParam(value="title",required=false) String title,
 	        @RequestParam(value="format",required=true) Format format, 
-	        @RequestParam(value="platform",required=true) Platform platform, 
+	        @RequestParam(value="platform",required=true) Set<Platform> platforms, 
 	        @RequestParam(value="topic",required=true) Topic topic) {
         SecurityContext.assertUserIsLoggedIn();
    
@@ -76,7 +78,7 @@ public class ResourceEditController extends BaseController<Resource> {
         String slug = Slugify.slugify(resource.getName());
         resource.setSlug(slug);
         resource.setFormat(format);
-        resource.setPlatform(platform);
+        resource.setPlatforms(platforms);
         resource.setTopic(topic);
         
         UrlResource urlResource = new UrlResource();

@@ -1,8 +1,16 @@
  $(document).ready(function() {
-	  $('#addResourceForm1').submit(ajaxResourceAddSubmitModal1);
-//	  $('#addResourceForm2').submit(ajaxResourceAddSubmitModal2);
+	 $('#addResourceForm1').submit(ajaxResourceAddSubmitModal1);
+	 
+	 // The error message may appear to tell the user to select at least one platform.
+	 // As soon as the user checks a platform, that error message should hide.
+	 $(".alert-danger").hide(); // 
+	  $('input[name="platform"]').on('click', function(){
+		    if ( $(this).is(':checked') ) {
+		    	 $(".alert-danger").hide();
+		    } 		    
+		});
+	
  });
-   
    
 // Sends an ajax request for the user who wants to upload an image from an URL (text field).
 function ajaxVerifyUrl() {
@@ -54,6 +62,7 @@ function isValidURL(url) {
 	} else {
 		return false;
 	}
+	
 }
 
 function clearForm() {
@@ -73,15 +82,34 @@ function toggleForm() {
 }
 
 function ajaxResourceAddSubmitModal1(e) {
-	e.preventDefault();
-	$.ajax({
+	    e.preventDefault();
+
+	    // Form validation (is there at least one check box checked?
+	    var validForm = true; // default value is that form is correct, you can chcange it as you wish	    
+	    var n =  $("input[type=checkbox]:checked").size(); // count of checked inputs detected by jQuery
+	    if (n == 0) { validForm=false; } // only if you checked 1 checkbox, form is evaluated as valid	    
+	  
+	    if (!validForm) { // if result of validation is: invalid
+	    	e.preventDefault(); // stop processing form and disable submitting  
+
+	    	$(".alert-danger").css({"margin-right":"25px"});
+	    	$(".alert-danger").css({"padding": "5px"}); 
+	    	$(".alert-danger").show("scale", 500); 
+	    //	$("label[for='platform']").css({"color": "#e81578"});
+	    	
+	    }
+	    else {	    	
+	    	// ok, submit form
+	    	$(".alert-danger").hide();   
+
+	    	$.ajax({
 				type : "POST",
 				url : '/ajax/resourceaddsubmit1',
 				data : $("#addResourceForm1").serialize(),
 				success : function(messageAndId) {
 					$('#addResourceModal1').modal('hide');			
 					$('#addResourceModal2').modal('show');
-
+					
 					showNotificationText(messageAndId.message, "success");
 					// Fill and show modal 2
 					$('#idresource').val(messageAndId.id);
@@ -90,7 +118,9 @@ function ajaxResourceAddSubmitModal1(e) {
 					alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
 							+ data);
 				}
-			});
+			});	
+	    	
+	    }
 }
 
 

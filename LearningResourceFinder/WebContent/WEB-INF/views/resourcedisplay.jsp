@@ -13,7 +13,8 @@
 <script type="text/javascript">
  	$(document).ready(function() {
  		$.fn.editable.defaults.mode = 'inline';
- 	    $('.editableField').editable({   
+ 	   
+ 		$('.editableField').editable({   
  	    	  emptytext: '? ?',
  	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
  	    	  mode: 'popup',
@@ -24,7 +25,7 @@
  				location.reload();
  		      }
 		});
-
+ 	    
  	    $('.editableFieldInline').editable({   
 	    	  emptytext: '? ?',
 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
@@ -37,6 +38,17 @@
 		      }
 		});
 
+ 		$('.editableFieldArray').editable({   
+	    	  emptytext: '? ?',
+	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+	    	  mode: 'popup',
+	    	  type: 'text',
+	    	  url: '/ajax/resourceeditfieldarraysubmit',
+	    	  pk: '${resource.id}',
+	 		  success: function(response) {
+				location.reload();
+		      }
+		});
  	   
  	    $('.nonurleditpop').popoverWithAutoHideForPrivilege("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
 
@@ -232,7 +244,15 @@
 								<a id="topic" ${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?mati�re?'": " class='noneditresource'"} data-source="${dataEnumTopic}">${resource.topic.description}</a>
 				            </div>						
 				   	        <div class="col-md-3">
-								<a id="platform" ${canEdit==true? "href='#' class='editableField' data-type='select'  data-emptytext='?plate-forme?'":" class='noneditresource'"} data-source="${dataEnumPlatform}">${resource.platform.name}</a>
+							
+								<a id="platform" ${canEdit==true? "href='#' class='editableFieldArray'  data-type='checklist'  data-emptytext='?plate-forme?'":" class='noneditresource'"} data-source="${dataEnumPlatform}" data-value="${platformsForJson}"
+								
+								 >
+								 <c:forEach items="${resource.platforms}" var="platform">
+								 	${platform.name}
+								 </c:forEach>
+								 </a>
+						
 				            </div>						
 						</div>  <%-- end row --%>
 				   	    <div class="row">
