@@ -56,7 +56,7 @@ import com.restfb.util.StringUtils;
 public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired ResourceRepository resourceRepository;
     @Autowired UrlResourceRepository urlResourceRepository;
-    @Autowired IndexManagerService indexManager;
+    @Autowired IndexManagerService indexManager; 
     @Autowired LevelService levelService;
     @Autowired PlayListRepository playListRepository;
     @Autowired PlayListService playListService;
