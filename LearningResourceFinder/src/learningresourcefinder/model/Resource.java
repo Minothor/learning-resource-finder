@@ -55,13 +55,15 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		private String description;	
 		ValidationStatus(String description) 	{  this.description = description;}		
 		public String getDescription() 		{ return description; }
-	} 
+	}
+
+	public static final int MAX_TITLE_LENGTH = 50; 
     
 	@Id   @GeneratedValue(generator="ResourceSequence") // We want Resources to have ids as short as possible (=> they get their own numbering and not the global HIBERNATE_SEQUENCE)
     Long id;
         
-    @Column(length = 50, nullable=false)
-    @Size(max=50, message="Le nom d'une ressource ne peut contenir que 50 caractères maximum")
+    @Column(length = MAX_TITLE_LENGTH, nullable=false)
+    @Size(max=MAX_TITLE_LENGTH, message="Le nom d'une ressource ne peut contenir que "+MAX_TITLE_LENGTH+" caractères maximum")
 	private String name;
 	
     @Column(length=50, nullable=false)

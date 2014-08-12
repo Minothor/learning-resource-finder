@@ -13,12 +13,16 @@ import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.ContributionService;
+import learningresourcefinder.service.ImportService;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
+import learningresourcefinder.util.Logger;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
+import org.apache.commons.logging.Log;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,26 +38,29 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired   IndexManagerService indexManager;
     @Autowired   LevelService levelService;
     @Autowired 	 ContributionService contributionService; 
-    
-    
+    @Autowired   ImportService importService; 
+    @Logger Log log;
 
     @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
-    public @ResponseBody String urlSubmit(@RequestParam("url") String url) {
+    public @ResponseBody JSONObject urlSubmit(@RequestParam("url") String url) {
          Resource duplicateResource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
          if (duplicateResource == null) {
              if (UrlUtil.getYoutubeVideoId(url) != null) {
-                 return "video";
+                 return importService.getYoutubeInfos(url);							//return json object
              } else {
-                 return "ok";
+            	 JSONObject obj = new JSONObject();
+            	 obj.put("type", "ok");
+                 return obj;
              }
          } else {
-             return UrlUtil.getRelativeUrlToResourceDisplay(duplicateResource);
+        	 JSONObject obj = new JSONObject();
+        	 obj.put("type", UrlUtil.getRelativeUrlToResourceDisplay(duplicateResource));
+             return obj;
+            
          }
     }
-
-   
     
-    
+  
     @RequestMapping("/ajax/resourceaddsubmit1")
 //	public @ResponseBody String resourceAddSubmit() {
 	public @ResponseBody MessageAndId resourceAddSubmit(@RequestParam(value="url", required=false) String url, 

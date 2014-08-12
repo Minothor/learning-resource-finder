@@ -159,7 +159,7 @@
 					<div class="control-group col-md-7">
 						<label for="duration">Durée</label>
 						<div class="form-inline">
-							<input type="number" class="form-control" name="maxDuration" style="width:80px"> minutes
+							<input type="number" class="form-control" id="addResourceForm2MaxDuration" name="maxDuration" style="width:80px"> minutes
 						</div>
 						<span class="help-block">Temps approximatif que met un élève pour lire le texte, ou exécuter l'exercice ou regarder la vidéo proposée.</span>
 					</div>

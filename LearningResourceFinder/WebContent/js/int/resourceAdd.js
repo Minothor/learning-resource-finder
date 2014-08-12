@@ -12,28 +12,33 @@ function ajaxVerifyUrl() {
 		return;
 	}
 	
+	
 	if (url != '') {
 
 		$.ajax({
-					type : "POST",
-					url : '/ajax/checkUrl',
-					data : "url=" + url,
-					success : function(response) {
-						if (response == "video" || response == "ok") { // No other resource with the same url found in DB.
-							$("#urlErrorMessage").html("");  // empty the error message
-                            toggleForm();
-                            if (response == "video") {  // Pre-select the "vidéo" radio button
-                            	$('input:radio[name="format"]').filter('[value="VIDEOS"]').attr('checked', true);
-                            }
-						} else {
-                        	$("#urlErrorMessage").html("<a href='"+response+"'>Une resource avec une url similaire</a> existe déjà sur le site"); 
-						}
-
-					},
-					error : function(data) {
-						alert("Problème en contactant le serveur - " + response);
+			type : "POST", 
+			dataType: "json",
+			url : '/ajax/checkUrl',
+			data : "url=" + url,
+			success : function(response) {
+				if (response.type == "video" || response.type == "ok") { // No other resource with the same url found in DB.
+					$("#urlErrorMessage").html("");  // empty the error message
+					toggleForm();
+					if (response.type == "video") {  // Pre-select the "vidéo" radio button and pre-fills fields from YouTube
+						$('#addResourceForm1 input:radio[name="format"]').filter('[value="VIDEOS"]').attr('checked', true);
+						$('#addResourceForm1 input:text[name="title"]').val(response.title);
+						$('#addResourceForm2 textarea[name="description"]').val(response.description);
+						$('#addResourceForm2MaxDuration').val(response.duration);
 					}
-				});
+				} else {
+					$("#urlErrorMessage").html("<a href='"+response+"'>Une resource avec une url similaire</a> existe déjà sur le site"); 
+				}
+
+			},
+			error : function(data) {
+				alert("Problème en contactant le serveur - " + response);
+			}
+		});
 	} else {
 		alert('Veuillez entrer une URL valide, commençant par "http://"');
 	}
