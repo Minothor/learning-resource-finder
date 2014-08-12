@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/playlist")
-public class PlayListEditControllerRename extends BaseController<PlayList>{
+public class PlayListEditController extends BaseController<PlayList>{
 	@Autowired PlayListRepository playlistRepository;
 	@Autowired IndexManagerService indexManager;
 	@Autowired LevelService levelService;
