@@ -1,5 +1,8 @@
 package learningresourcefinder.model;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -92,6 +95,5 @@ public class Contribution extends BaseEntity
 			Contribution contribution=((Contribution) other);		
 			return (contribution.getAction()==this.getAction()) && (contribution.getUser()==this.getUser())&&(contribution.getRessource()==this.getRessource());
 		}
-		
 
 	}

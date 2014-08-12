@@ -56,9 +56,8 @@ public class DateDisplayTag extends SimpleTagSupport{
         } else {
             result = DateUtil.formatyyyyMMdd(date);
         }
-
-        if(withspan== null || withspan){
-            result = "<span title='"+DateUtil.formatyyyyMMdd(date)+"'>" + result + "</span>";
+        if (withspan== null || withspan){
+            result = "<span class='addToolTip' title='"+DateUtil.formatyyyyMMdd(date)+"'>" + result + "</span>";
         } 
 
         JspWriter out = this.getJspContext().getOut();
