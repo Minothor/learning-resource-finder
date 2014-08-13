@@ -51,10 +51,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<div>
-				Total général des points de contributions : ${contributionsPoints}</br>
-				Points pour le niveau en cours : ${levelProgress}
-			</div>
+			
 		</div>
 	</div>
 </body>
