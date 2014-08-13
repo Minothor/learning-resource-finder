@@ -205,10 +205,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
             	resource.setDescription(value);
                 break;
    
-            case "format":
-                resource.setFormat(Format.values()[Integer.parseInt(value)-1]);
-                break;
-                
+            case "format":            	
+            	String format = (resource.getFormat() == null) ? "" : resource.getFormat().getDescription();
+				contributionService.contribute(user, resource, Action.EDIT_RESOURCE_FORMAT, format, Format.values()[Integer.parseInt(value) - 1].getDescription());
+				resource.setFormat(Format.values()[Integer.parseInt(value) - 1]);
+				break;
+				
             case "nature":
 				String nature = (resource.getNature() == null) ? "" : resource.getNature().getDescription();
 				contributionService.contribute(user, resource, Action.EDIT_RESOURCE_NATURE, nature, value);
@@ -216,7 +218,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "language":
-                resource.setLanguage(Language.values()[Integer.parseInt(value)-1]);
+            	String language = (resource.getLanguage() == null) ? "" : resource.getLanguage().getDescription();
+				contributionService.contribute(user, resource, Action.EDIT_RESOURCE_LANGUAGE, language, Language.values()[Integer.parseInt(value) - 1].getDescription());
+                resource.setLanguage(Language.values()[Integer.parseInt(value)-1]); //
                 break;
 
             case "advertising":
@@ -288,9 +292,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
 		indexManager.update(resource);
 		
-		if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
-            levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE);
-		}
+//		if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
+//            levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE);
+//		}
         
 
 
