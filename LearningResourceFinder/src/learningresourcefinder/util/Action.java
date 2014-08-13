@@ -19,6 +19,8 @@ public enum Action {
 		EDIT_RESOURCE_ADVERTISING(1, Level.LEVEL_4,"Modifier l'advertising d'une ressource introduite par un autre utilisateur"),
 		EDIT_RESOURCE_DURATION(1, Level.LEVEL_4,"Modifier la durée d'une ressource introduite par un autre utilisateur"),
 		EDIT_RESOURCE_NATURE(1, Level.LEVEL_4,"Modifier la nature d'une ressource introduite par un autre utilisateur"),
+		EDIT_RESOURCE_FORMAT(1, Level.LEVEL_4,"Modifier le format d'une ressource introduite par un autre utilisateur"),
+		
 		
 		
 		LINK_RESOURCE_TO_COMPETENCE(1, Level.LEVEL_4,"Lier une ressouce à une compétence"),
