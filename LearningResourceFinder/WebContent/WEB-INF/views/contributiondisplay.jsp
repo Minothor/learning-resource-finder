@@ -12,20 +12,15 @@
 		<br />
 
 		<div class="table-responsive">
-			<table>
-				<tr>
-					<td>Total général des points de contributions :
+			
+					Total général des points de contributions :
 						${contributionsPoints}</br> Points pour le niveau en cours :
 						${levelProgress}
-					</td>
-					<td><a class="btn btn-primary addToolTip"
+					
+					<a class="btn btn-primary addToolTip pull-right"
 						href="/recomputeContributionPoints"
 						title="Si vous avez un doute sur votre total, ce bouton parcours la base de données afin de recalculer vos points à partir de chaque contribution">recalculer
-							les points</a></td>
-				</tr>	
-			</table>
-
-			<div></div>
+							les points</a></br></br>
 
 			<table class="table table-bordered">
 				<tr>
