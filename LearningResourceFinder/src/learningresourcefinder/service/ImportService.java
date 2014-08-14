@@ -45,7 +45,9 @@ public class ImportService {
     		
     		JSONObject titleJSonObject = (JSONObject) entryJSonObject.get("title");         //      title:{"$t":"Pitbull - Rain Over Me ft. Marc Anthony"} 
     		String title = (String) titleJSonObject.get("$t");
-    		resultJSonObject.put("title", title.substring(0, Resource.MAX_TITLE_LENGTH));				           // output = {title: "Pitbull - Rain Over Me ft. Marc Anthony", ...}
+    			
+    		resultJSonObject.put("title", ( title.length()>Resource.MAX_TITLE_LENGTH)?title.substring(0, Resource.MAX_TITLE_LENGTH-1):title);	// output = {title: "Pitbull - Rain Over Me ft. Marc Anthony", ...}
+
     		
     		JSONObject mediaGroupJSonObject = (JSONObject) entryJSonObject.get("media$group");     // "media$group":{"media$category":[{"$t":"Music","label":"Musique", ....
     		JSONObject mediaDescrJSonObject = (JSONObject) mediaGroupJSonObject.get("media$description");   // "media$description":{"$t":"Music video by Pitbull Featuring ...    
