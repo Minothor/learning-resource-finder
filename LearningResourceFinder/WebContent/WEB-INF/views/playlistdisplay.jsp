@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
@@ -29,7 +29,8 @@
 		 });
  	   
  	     $('#sortable').sortable({
-           update: function() {
+ 	        opacity : 0.6,
+ 	        update: function() {
         	   var order = [];
  			   $("#sortable span").each(function() {
  			 	  order.push(this.id);
@@ -48,25 +49,44 @@
 				});
              }
            });
+ 	    $( "#sortable" ).disableSelection();
  	     
- 	       $("#sortable").disableSelection();
  	});
 </script>
 
 <style type="text/css">
-  #sortable {
-      cursor: move;
-  }
-  dd {
-      word-wrap: break-word; 
-      overflow-wrap: break-word;
-  }
-  #descriptionDiv textarea {  
-	  width: 250% ;
-  }
-  #descriptionDiv .editable-buttons {     
-	  float:left;
-  }   
+#sortable {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#sortable li {
+	margin: 3px 3px 3px 0;
+	padding: 1px;
+	float: left;
+	cursor: move;
+}
+
+dd {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+#descriptionDiv textarea {
+	width: 250%;
+}
+
+#descriptionDiv .editable-buttons {
+	float: left;
+}
+
+.border {
+	border: 2px solid black;
+	background-color: lightgray;
+	box-shadow: 0 0 5px black;
+	color: white;
+}
 </style>
 
 </head>
@@ -74,8 +94,8 @@
 <body>
 	<lrftag:breadcrumb linkactive="${playlist.name}">
 		<lrftag:breadcrumbelement label="home" link="/home" />
-        <c:if test="${playlist.createdBy eq current.user}">
-		   <lrftag:breadcrumbelement label="mes séquences" link="/playlist/user/${current.user.userName}" />
+		<c:if test="${playlist.createdBy eq current.user}">
+			<lrftag:breadcrumbelement label="mes séquences"	link="/playlist/user/${current.user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
 	<div class="container">
@@ -87,7 +107,7 @@
 				<c:if test="${canEdit}">
 					<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>" class="btn" data-toggle='confirmation'>
 						<button type="button" class="btn addToolTip close"
-							 title="supprimer cette séquence">&times;</button>
+							title="supprimer cette séquence">&times;</button>
 					</a>
 				</c:if>
 			</div>
@@ -101,7 +121,7 @@
 				<div class="col-md-8">
 					<dl class="dl-horizontal">
 						<dt>Nom :</dt>
-					  	<dd><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
+						<dd><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
 					  	<dt>Description :</dt>
 					  	<dd id="descriptionDiv"><a id="description"  data-type="textarea" href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
 					  	<dt>Auteur :</dt>
@@ -111,30 +131,32 @@
 					  		<dd>${playlist.shortId}</dd>
 					  	</lrf:conditionDisplay>
 					</dl>
-				</div>			
+				</div>
 			</div>
 		</div>
-		
-		
+
+
 		<h3>Ressources incluses</h3>
-			<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
-				<div id="sortable" style="display: flex;">
-			</lrf:conditionDisplay>
-			<c:set var="i" value='1'/>
-			<c:forEach items="${playlist.resources}" var="resource">
-					<c:if test="${canEdit}">
-						<c:set var="closeUrl" value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}'/>
-					</c:if>	
-					<c:set var="prefix" value="${i}"/>
-					<lrftag:resource prefix="${prefix}" resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource>
-					<c:set var="i"  value="${i+1}"/>
-			</c:forEach>
-			<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
-				</div>
-			</lrf:conditionDisplay>
-			
-		    <p>Pour ajouter une ressource à cette séquence, passez par la page détaillant la ressource à ajouter (en étant connecté avec votre compte).</p>
-		
+		<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+			<ul id="sortable">
+		</lrf:conditionDisplay>
+		<c:set var="i" value='1' />
+		<c:forEach items="${playlist.resources}" var="resource">
+			<c:if test="${canEdit}">
+				<c:set var="closeUrl"
+					value='/playlist/remove?idplaylist=${playlist.id}&idresource=${resource.id}' />
+			</c:if>
+			<c:set var="prefix" value="${i}" />
+			<li style="display: inline-block;"><lrftag:resource prefix="${prefix}" resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource></li>
+			<c:set var="i" value="${i+1}" />
+		</c:forEach>
+		<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+			</ul>
+		</lrf:conditionDisplay>
+		<div style="clear: left;">
+		Pour ajouter une ressource à cette séquence, passez par la page détaillant la ressource à ajouter (en étant connecté avec votre compte).
+		</div>
+
 		<!-- Modal -->
 		<div class="modal fade" id="modalPlaylist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">

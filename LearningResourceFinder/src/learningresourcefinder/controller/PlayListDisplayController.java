@@ -152,6 +152,10 @@ public class PlayListDisplayController extends BaseController<PlayList> {
             return new ResponseEntity<String>("Vous n'avez pas introduit de nom.", HttpStatus.BAD_REQUEST);
         }
         
+        if (value.length()>= 50) {
+            return new ResponseEntity<String>("Le titre de la séquence ne peut pas dépasser 50 caractères.", HttpStatus.BAD_REQUEST);
+        }
+        
         PlayList playListHavingTheSameName = playlistRepository.findByNameAndAuthor(value, SecurityContext.getUser());
 
         if (playListHavingTheSameName != null) {

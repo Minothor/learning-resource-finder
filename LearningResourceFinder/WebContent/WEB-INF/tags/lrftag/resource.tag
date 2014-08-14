@@ -6,7 +6,7 @@
 <%@ attribute name="prefix" type="java.lang.String" required="false"%>
 
 <div
-	style="display: inline-block; position: relative; vertical-align: top; width: 200px; margin-right: 20px; margin-bottom: 20px;"
+	style="display: inline-block; position: relative; vertical-align: top; height:325px; width: 200px; margin-right: 20px; margin-bottom: 20px;"
 	class="panel panel-default">
 
 	<span id="${playlist.id}-${resource.id}"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
@@ -36,7 +36,7 @@
 			</div>
 
 			<c:if test="${resource.numberImage >= 1}">
-				<div id="yoxview-resource-${resource.id}">
+				<div id="yoxview-resource-${resource.id}" style="margin-left: 5px">
 					<a href="/gen/resource/original/${resource.id}-1.jpg"> <img
 						src="/gen/resource/resized/small/${resource.id}-1.jpg"
 						alt="${resource.name}" />
