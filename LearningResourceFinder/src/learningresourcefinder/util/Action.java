@@ -6,8 +6,9 @@ public enum Action {
         ADD_RESOURCE(2, Level.LEVEL_1, "Ajouter une ressource"),  // Maybe later should be level 2.
         COMPLETE_RESOURCE(1, Level.LEVEL_1,"Completer les champs manquants d'une ressouce introduite par un autre utilisateur"),
         ADD_PROBLEM(1, Level.LEVEL_1, "Signaler un problème"),
-        VALIDATE_RESOURCE(1, Level.LEVEL_1, "Valider une ressource comme visible par des enfants"),
         DISCUSS_PROBLEM(0, Level.LEVEL_1, "Discuter sur un problème"),
+
+        VALIDATE_RESOURCE(1, Level.LEVEL_2, "Valider une ressource comme visible par des enfants"),
         VOTE(1,Level.LEVEL_2, "Voter sur les ressources"),
 		EDIT_RESOURCE(1,Level.LEVEL_3,"Editer une ressource introduite par un autre utilisateur"),
         ADD_PLAYLIST(2,Level.LEVEL_3,"Ajouter une séquence"),

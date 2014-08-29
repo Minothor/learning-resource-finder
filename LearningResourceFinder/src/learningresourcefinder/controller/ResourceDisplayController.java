@@ -281,6 +281,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "validate":
+                SecurityContext.canCurrentDoAction(Action.VALIDATE_RESOURCE);
                 resource.setValidationStatus(ValidationStatus.values()[Integer.parseInt(value)-1]);
                 resource.setValidationDate(new Date());
                 resource.setValidator(SecurityContext.getUser());

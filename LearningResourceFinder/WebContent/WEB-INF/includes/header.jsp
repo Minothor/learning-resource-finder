@@ -216,7 +216,7 @@
 										<input class="form-control" style="margin-bottom: 15px;" type="email" placeholder="Email" id="emailRegister" name="emailRegister" required>
 										<input class="form-control" style="margin-bottom: 15px;" type="text" placeholder="Username" id="usernameRegister" name="usernameRegister" required> 
 										<input class="form-control" style="margin-bottom: 15px;" type="password" placeholder="Password" id="passwordRegister" name="passwordRegister" required>
-										<div style="width: 100%; text-align: center; margin: 15px 0;">Je suis un enfant (accès limité aux ressources approuvées) <input type="checkbox" style="margin-bottom: 5px;" id="userTypeRegister" name="userTypeRegister" value="true"/> </div>
+										<div style="width: 100%; text-align: center; margin: 15px 0;"><input type="checkbox" style="margin-bottom: 5px;" id="userTypeRegister" name="userTypeRegister" value="true"/> Je suis un enfant (accès limité aux ressources approuvées)  </div>
 										<input class="btn btn-primary btn-block" type="submit" value="Inscription" >
 									
 										

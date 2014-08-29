@@ -33,8 +33,8 @@ public class ImportService {
 
     		// Ask YouTube
     		URL myURL = new URL(youTubeServiceUrl);
-    		URLConnection myData = myURL.openConnection();
-    		BufferedReader youTubeAnswerReader = new BufferedReader(new InputStreamReader(myData.getInputStream()));                             
+    		URLConnection urlConnection = myURL.openConnection();
+    		BufferedReader youTubeAnswerReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));                             
 
     		// User jsonParser to analyze the JSON String from YouTube
     		JSONParser jsonParser = new JSONParser();           
