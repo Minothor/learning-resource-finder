@@ -103,3 +103,10 @@
 
     alter table resource 
         add column platformscollonstring varchar(255); 
+
+        
+EXECUTED ON SERVER 2014-08-29 ******************
+EXECUTED ON SERVER 2014-08-29 ******************
+EXECUTED ON SERVER 2014-08-29 ******************
+EXECUTED ON SERVER 2014-08-29 ******************
+EXECUTED ON SERVER 2014-08-29 ******************
