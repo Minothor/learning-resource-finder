@@ -32,7 +32,7 @@
  	        opacity : 0.6,
  	        update: function() {
         	   var order = [];
- 			   $("#sortable span").each(function() {
+ 			   $("#sortable .sortableItem").each(function() {
  			 	  order.push(this.id);
  			   });
 		   	   $.ajax({
@@ -137,9 +137,9 @@ dd {
 
 
 		<h3>Ressources incluses</h3>
-		<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+		<c:if test="${canEdit}">
 			<ul id="sortable">
-		</lrf:conditionDisplay>
+		</c:if>
 		<c:set var="i" value='1' />
 		<c:forEach items="${playlist.resources}" var="resource">
 			<c:if test="${canEdit}">
@@ -150,9 +150,9 @@ dd {
 			<li style="display: inline-block;"><lrftag:resource prefix="${prefix}" resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource></li>
 			<c:set var="i" value="${i+1}" />
 		</c:forEach>
-		<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+		<c:if test="${canEdit}">
 			</ul>
-		</lrf:conditionDisplay>
+		</c:if>
 		<div style="clear: left;">
 		Pour ajouter une ressource à cette séquence, passez par la page détaillant la ressource à ajouter (en étant connecté avec votre compte).
 		</div>

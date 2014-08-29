@@ -9,7 +9,7 @@
 	style="display: inline-block; position: relative; vertical-align: top; height:325px; width: 200px; margin-right: 20px; margin-bottom: 20px;"
 	class="panel panel-default">
 
-	<span id="${playlist.id}-${resource.id}"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
+	<span id="${playlist.id}-${resource.id}" class="sortableItem"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
 	
 	<c:choose>
 		<c:when
