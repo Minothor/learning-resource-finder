@@ -17,6 +17,26 @@
 				return false;
 			}
 		}
+		
+		$(document).ready(function() {
+		$('#playlistTitle').on('keyup', function() {
+	        var $this = $(this);
+	        var maxLength = $this.prop('maxlength');
+	        var currentLength = $this.val().length;
+	       
+	        if (currentLength == maxLength) {
+	            $('.editable-error-block').remove();
+				$('.input-control').addClass("has-error");
+	            $('.input-control').append('<div class="editable-error-block help-block" style="display: inline;">Le titre de la séquence ne peut pas dépasser 50 caractères.</div>');
+	           
+	        }
+	        if (currentLength < maxLength) {
+				$('.input-control').removeClass("has-error");
+	            $('.editable-error-block').remove();
+	        }
+		});
+
+		});
 	</script>
 </head>
 <body>
@@ -55,7 +75,9 @@
 				<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playlist" class="form-horizontal" role="form" method="post">
 					<div class="col-md-12">
 						<form:hidden path="id" />
-						<form:input class="form-control" maxlength="50" path="name" label="Titre" placeholder="Titre" required="true" />
+						<span class="input-control">
+						<form:input class="form-control" maxlength="50" id="playlistTitle" path="name" label="Titre" placeholder="Titre" required="true" />
+						</span>
 						<br />
 						<form:textarea class="form-control" rows="5" path="description" label="Description" placeholder="Description" />
 						<br />
