@@ -121,12 +121,11 @@
 	<div class="container">
 		<div class="row">
    	       <div class="col-md-10">
-		      <h1><a id="title"  ${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}>${resource.name}</a>
+		      <a id="title"  ${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}><h1 style="display: inline-block;">${resource.name}</h1></a>
 		      <a href="<c:url value='${resource.urlResources[0].url}'/>">
 	             <span class="addToolTip glyphicon glyphicon-log-in" style="font-size:16px; top:-11px;" 
 		           data-toggle="tooltip" title="lien direct vers ce site"></span>
 	          </a>
-	          </h1>
 		   </div>
    	       <div class="col-md-2 text-right">
 					<lrftag:rating id="${resource.id}" title="${resource.name}"

@@ -195,6 +195,16 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
         switch (fieldName){
             case "title":
+                if (StringUtils.isBlank(value)) {
+                    return new ResponseEntity<String>("Vous n'avez pas introduit de nom.", HttpStatus.BAD_REQUEST);
+                }
+                Resource resourceHavingTheSameName = resourceRepository.getResourceByName(value);
+                if (resourceHavingTheSameName != null) {
+                    return new ResponseEntity<String>("Cet intitulé existe déjà pour une resource, veuillez en choisir un autre",HttpStatus.BAD_REQUEST);
+                }
+                if (value.length() >50) {
+                    return new ResponseEntity<String>("Le titre du resource ne peut pas dépasser 50 caractères.", HttpStatus.BAD_REQUEST);
+                }
                 resource.setName(value);
                 String slug = Slugify.slugify(resource.getName());
                 resource.setSlug(slug);
@@ -281,7 +291,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "validate":
-                SecurityContext.canCurrentDoAction(Action.VALIDATE_RESOURCE);
                 resource.setValidationStatus(ValidationStatus.values()[Integer.parseInt(value)-1]);
                 resource.setValidationDate(new Date());
                 resource.setValidator(SecurityContext.getUser());

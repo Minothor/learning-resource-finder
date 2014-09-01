@@ -8,10 +8,10 @@
 <div class="modal fade" id="addResourceModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	
- 		<form id="addResourceForm1" role="form" method="post" action="resourceaddsubmit">
+ 		<form id="addResourceForm1" role="form" method="post"  <%-- action bound with javascript --%>>
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal"aria-hidden="true" onclick="resetForm()">&times;</button>
 					<h4 class="modal-title">Ajouter une ressource</h4>
 				</div>
 				
@@ -90,7 +90,7 @@
                   </div>
                   	
 				  <div class="modal-footer" style="display: none;" id="bottomButtons">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick='resetForm()'>Annuler</button>
 				    <%--<button type="submit" class="btn" data-toggle="modal" href="#addResourceModal2">Ajouter</button>--%>
 				    <input class="btn btn-primary" type="submit" value="Ajouter" >
 				 </div>
@@ -172,7 +172,7 @@
 				</div>
 				</div>
 				<div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick='resetForm()'>Fermer</button>
           <input class="btn btn-primary" type="submit" value="Enregistrer" >
         </div>
       </div><!-- /.modal-content -->

@@ -31,7 +31,7 @@ function ajaxVerifyUrl() {
 			success : function(response) {
 				if (response.type == "video" || response.type == "ok") { // No other resource with the same url found in DB.
 					$("#urlErrorMessage").html("");  // empty the error message
-					toggleForm();
+					switchToForm2();
 					if (response.type == "video") {  // Pre-select the "vidéo" radio button and pre-fills fields from YouTube
 						$('#addResourceForm1 input:radio[name="format"]').filter('[value="VIDEOS"]').attr('checked', true);
 						$('#addResourceForm1 input:text[name="title"]').val(response.title);
@@ -65,17 +65,20 @@ function isValidURL(url) {
 	
 }
 
-function clearForm() {
-   $(':input','#addResourceForm')
+function resetForm() {  
+   $(':input','#addResourceForm1')
 	 .not(':button, :submit, :reset, :hidden')
 	 .val('')
 	 .removeAttr('checked')
 	 .removeAttr('selected');
+   $("#addResourceFormPart2").toggle('hide');
+   $("#bottomButtons").hide();
+   $("#urlCheckButton").show();
 }
 
 
 
-function toggleForm() {
+function switchToForm2() {  
 	$("#bottomButtons").toggle();
 	$("#addResourceFormPart2").toggle();
 	$("#urlCheckButton").toggle();
