@@ -304,7 +304,7 @@ public class MailSender extends Thread {
             strLog.append("\n");
             strLog.append("============== END MAIL ==============");
 
-            log.debug(strLog.toString());
+           
 
             if (environment.getMailBehavior() == MailBehavior.SENT) { // Really send the mail to SMTP server now.
                 MimeMessagePreparator mimeMessagePreparator = new MimeMessagePreparator() {
@@ -335,7 +335,10 @@ public class MailSender extends Thread {
                     }
                 };
                      
+                log.debug(strLog.toString());  // For debugging in prod.
                 javaMailSender.send(mimeMessagePreparator);
+           } else {
+        	   log.info(strLog.toString());  // for tests on dev's machine.
            }
         } catch(Exception e){//if we can't send the mail, continue
             // if we can't send for any reason, we don't stop the thread, we will just remove this mail from the database and we will continue to send mails.
