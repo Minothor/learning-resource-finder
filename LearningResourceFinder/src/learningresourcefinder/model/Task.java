@@ -57,7 +57,7 @@ public class Task extends BaseEntity
     }
 
     public void setDescription(String description) {
-        this.description = StringEscapeUtils.escapeHtml4(description);
+        this.description = HTMLUtil.removeHtmlTags(description);
     }
 
     public User getAssigner() {
@@ -73,7 +73,7 @@ public class Task extends BaseEntity
 	}
 
 	public void setName(String name) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public void setAssigner(User assigner) {

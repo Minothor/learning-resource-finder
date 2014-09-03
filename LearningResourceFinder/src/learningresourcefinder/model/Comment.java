@@ -38,11 +38,11 @@ public class Comment extends BaseEntity
 	/**************************** Setters *************************************/
 
 	public void setTitle(String title) {
-		this.title = StringEscapeUtils.escapeHtml4(title);
+		this.title = HTMLUtil.removeHtmlTags(title);
 	}
 
 	public void setDescription(String description) {
-		this.description = StringEscapeUtils.escapeHtml4(description);
+		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 	
 	public void setProblem(Problem problem) {

@@ -78,11 +78,11 @@ public class Problem extends BaseEntity
     /**************************** Setters *************************************/
 
 	public void setName(String name) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public void setDescription(String description) {
-		this.description = StringEscapeUtils.escapeHtml4(description);
+		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 	
 	public void setResource(Resource resource) {

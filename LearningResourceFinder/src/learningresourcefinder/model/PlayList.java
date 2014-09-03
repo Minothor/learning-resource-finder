@@ -55,8 +55,8 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
     public PlayList() {} // No arg constructor for Hibernate
     
     public PlayList(String name, String description) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
-		this.description = StringEscapeUtils.escapeHtml4(description);
+		this.name = HTMLUtil.removeHtmlTags(name);
+		this.description = HTMLUtil.removeHtmlTags(description);
 		this.slug = Slugify.slugify(name);
 	}
 
@@ -65,7 +65,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         return name;
     }
     public void setName(String name) {
-        this.name = StringEscapeUtils.escapeHtml4(name);
+        this.name = HTMLUtil.removeHtmlTags(name);
     }
     public String getDescription() {
         return description;
@@ -80,7 +80,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         }
     }
     public void setDescription(String description) {
-        this.description = StringEscapeUtils.escapeHtml4(description);
+        this.description = HTMLUtil.removeHtmlTags(description);
     }
 
     public List<Resource> getResources() {
@@ -91,7 +91,7 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
         return slug;
     }
     public void setSlug(String slug) {
-        this.slug = StringEscapeUtils.escapeHtml4(slug);
+        this.slug = HTMLUtil.removeHtmlTags(slug);
     }
 
     @Override

@@ -221,19 +221,19 @@ public class CompetenceController extends BaseController<Competence> {
 			return name;
 		}
 		public void setName(String name) {
-			this.name = StringEscapeUtils.escapeHtml4(name);
+			this.name = HTMLUtil.removeHtmlTags(name);
 		}
 		public String getCode() {
 			return code;
 		}
 		public void setCode(String code) {
-			this.code = StringEscapeUtils.escapeHtml4(code);
+			this.code = HTMLUtil.removeHtmlTags(code);
 		}
 		public String getDescription() {
 			return description;
 		}
 		public void setDescription(String description) {
-			this.description = StringEscapeUtils.escapeHtml4(description);
+			this.description =  HTMLUtil.removeHtmlTags(description);
 		}
 	}
 }

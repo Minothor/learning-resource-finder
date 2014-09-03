@@ -148,8 +148,8 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	public Resource() {} // No arg constructor for Hibernate
 	
 	public Resource(String name, String description, User author) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
-		this.description = StringEscapeUtils.escapeHtml4(description);
+		this.name = HTMLUtil.removeHtmlTags(name);
+		this.description = HTMLUtil.removeHtmlTags(description);
 		this.slug = Slugify.slugify(name);
 		this.createdBy = author;  // We are probably executing this constructor with params in a test batch code (=> no logged in user to be the author).
 	}
@@ -247,7 +247,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	}
 
 	public void setName(String name) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public String getDescription() {
@@ -267,7 +267,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	    }
 	}
 	public void setDescription(String description) {
-		this.description = StringEscapeUtils.escapeHtml4(description);
+		this.description = HTMLUtil.removeHtmlTags(description);
 	}
 
 	public Set<Problem> getProblems() {

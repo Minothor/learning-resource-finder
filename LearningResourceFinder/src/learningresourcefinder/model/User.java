@@ -348,7 +348,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
 	}
 
 	public void setTitle(String title) {
-		this.title = StringEscapeUtils.escapeHtml4(title);
+		this.title = HTMLUtil.removeHtmlTags(title);
 	}
     
     public Role getRole() {
@@ -381,7 +381,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = StringEscapeUtils.escapeHtml4(firstName);
+        this.firstName = HTMLUtil.removeHtmlTags(firstName);
     }
 
     public String getUserName() {
@@ -389,7 +389,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setUserName(String userName) {
-        this.userName = StringEscapeUtils.escapeHtml4(userName);
+        this.userName = HTMLUtil.removeHtmlTags(userName);
     }
 
     public String getLastName() {
@@ -397,7 +397,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setLastName(String lastName) {
-        this.lastName = StringEscapeUtils.escapeHtml4(lastName);
+        this.lastName = HTMLUtil.removeHtmlTags(lastName);
     }
 
     public Date getLastMailSentDate() {
@@ -413,7 +413,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setMail(String mail) {
-        this.mail = mail != null ? StringEscapeUtils.escapeHtml4(mail.toLowerCase().trim()) : null;
+        this.mail = mail != null ? HTMLUtil.removeHtmlTags(mail.toLowerCase().trim()) : null;
     }
 
     public String getPassword() {
@@ -445,7 +445,7 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     }
 
     public void setLockReason(String lockReason) {
-        this.lockReason = StringEscapeUtils.escapeHtml4(lockReason);
+        this.lockReason = HTMLUtil.removeHtmlTags(lockReason);
     }
 
     public String getValidationCode() {

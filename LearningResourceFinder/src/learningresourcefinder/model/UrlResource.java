@@ -35,7 +35,7 @@ public class UrlResource extends BaseEntity
 	public UrlResource() {}
 	
 	public UrlResource(String name, String url, Resource resource) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.name = HTMLUtil.removeHtmlTags(name);
 		this.url = url;
 		this.resource = resource;
 	}
@@ -45,7 +45,7 @@ public class UrlResource extends BaseEntity
 	}
 
 	public void setName(String name) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
 	public String getUrl() {

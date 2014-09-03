@@ -65,7 +65,7 @@ public class Cycle extends BaseEntity  {
 
 
 	public void setName(String name) {
-		this.name = StringEscapeUtils.escapeHtml4(name);
+		this.name = HTMLUtil.removeHtmlTags(name);
 	}
 
     @Override

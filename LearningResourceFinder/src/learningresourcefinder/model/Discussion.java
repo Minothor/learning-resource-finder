@@ -34,7 +34,7 @@ public class Discussion extends BaseEntity {
 
     public Discussion(String message) {
         super();
-        this.message = StringEscapeUtils.escapeHtml4(message);
+        this.message = HTMLUtil.removeHtmlTags(message);
         this.message = message.replace("\n", "<br />\n");
     }
 
@@ -48,7 +48,7 @@ public class Discussion extends BaseEntity {
     }
 
     public void setMessage(String message) {
-        this.message = StringEscapeUtils.escapeHtml4(message);
+        this.message = HTMLUtil.removeHtmlTags(message);
     }
 
     public Problem getProblem() {
