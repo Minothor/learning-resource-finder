@@ -30,7 +30,14 @@
 					</c:if>
 					   
 				    <p><a href="<c:url value='/contribution'/>" >Améliorer des ressources</a></p>
-		
+				    <br/>
+				    <br/>
+				    <br/>
+				    <br/>
+				    <br/>
+				    <br/>
+				    <br/>
+					<div id="version" style="font-size:xx-small">v ${p_version}</div>
 
 				</div>
 				<div class="col-md-3">
