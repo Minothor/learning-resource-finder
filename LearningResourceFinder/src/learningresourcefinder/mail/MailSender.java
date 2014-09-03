@@ -41,8 +41,9 @@ public class MailSender extends Thread {
     @Logger Log log;
 
    
+    public final static int DELAY_FOR_THE_WEB_THREAD_TO_FINISH = 1500;  // in ms. // A web thread did call "notify" via MailService. => we need to sleep some time to give that thread time to finalize it's persist (detected bug 2014/9 --John)   
     public final static int DELAY_BETWEEN_EACH_MAIL = 50;  // in ms. In case the SMTP server is too slow (cannot accept too many mails too fast). Use this const to temporize between 2 SMTP calls. 
-    public final static int WAKE_UP_DELAY_WHEN_NO_MAIL = 5 * 60 * 1000;  // ms. When there is no mail anymore, how long should this batch sleep before querying the DB again for batch (grouped) mails to be sent ? (note: priority mails wake up this thread without waiting for this delay)
+    public final static int WAKE_UP_DELAY_WHEN_NO_MAIL = 2 * 60 * 1000;  // ms. When there is no mail anymore, how long should this batch sleep before querying the DB again for batch (grouped) mails to be sent ? (note: priority mails wake up this thread without waiting for this delay)
 
     private boolean isShutDown = false;
 
@@ -176,6 +177,8 @@ public class MailSender extends Thread {
             //wait for new mail 
             synchronized (this) {
                 wait(delayMs);
+                // A web thread did call "notify" via MailService. => we need to sleep some time to give that thread time to finalize it's persist (detected bug 2014/9 --John)
+                sleep(DELAY_FOR_THE_WEB_THREAD_TO_FINISH);
             }
         } catch (InterruptedException e) {
             log.info(e);
