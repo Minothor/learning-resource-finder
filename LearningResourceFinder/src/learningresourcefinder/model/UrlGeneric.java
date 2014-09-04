@@ -19,13 +19,14 @@ public class UrlGeneric extends BaseEntity {
     @Column(nullable = false)
     private String url;
 
-    public UrlGeneric() {}
+    public UrlGeneric() {
+    }
 
     public Long getId() {
         return id;
     }
 
-   public String getUrl() {
+    public String getUrl() {
         return url;
     }
 
