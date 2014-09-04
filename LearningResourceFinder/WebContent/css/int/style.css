@@ -237,6 +237,38 @@ padding-left: 27px;
 font-size: 16px;
 }
 
+.col-sm-4 {
+    width: 20%;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+
+#range{
+	 height: 215px;
+	 margin-left:70px;
+	
+}
 
 
 
+#numberslider{
+	
+ 	 width:20px;
+    margin-left:-30px;
+    margin-top:80px;
+	
+	 
+}
+#numberslider li{
+margin-top:30px;
+	
+}
+#slider {
+  width:20px;
+   
+    margin-top:52px;
+}
