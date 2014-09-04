@@ -9,6 +9,8 @@
     <a href="/createindex" class="btn btn-primary btn-lg">re-créer index</a>
     
     <a href="/importfromvraisforum" class="btn btn-primary btn-lg">importer les compétences de http://findecycle.vraiforum.com/</a>
+    <a href="/goToSlideTest" class="btn btn-primary btn-lg">execute batch import excell</a>
+    <!-- <a href="/executeExcellBatch" class="btn btn-primary btn-lg">execute batch import excell</a> -->
 </div>    
 </body>
 </html>
