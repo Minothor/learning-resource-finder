@@ -6,10 +6,13 @@ import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.UrlGeneric;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.ResourceRepository;
+import learningresourcefinder.repository.UrlGenericRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
+import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
@@ -41,11 +44,19 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired   IndexManagerService indexManager;
     @Autowired   LevelService levelService;
     @Autowired 	 ContributionService contributionService; 
-    @Autowired   ImportService importService; 
+    @Autowired   ImportService importService;
+    @Autowired	 UrlGenericRepository urlgenericrepository;
     @Logger Log log;
 
     @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
     public @ResponseBody JSONObject urlSubmit(@RequestParam("url") String url) {
+    	UrlGeneric urlGeneric = urlgenericrepository.findByurl(url.trim()); // trim()
+        if (urlGeneric != null) {
+            JSONObject obj = new JSONObject();
+            obj.put("type", "urlGeneric");
+                return obj;
+        }
+        
          Resource duplicateResource = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
          if (duplicateResource == null) {
              if (UrlUtil.getYoutubeVideoId(url) != null) {
@@ -57,9 +68,9 @@ public class ResourceEditController extends BaseController<Resource> {
              }
          } else {
         	 JSONObject obj = new JSONObject();
-        	 obj.put("type", UrlUtil.getRelativeUrlToResourceDisplay(duplicateResource));
-             return obj;
-            
+             obj.put("type", "duplicateUrl");
+             obj.put("value", UrlUtil.getRelativeUrlToResourceDisplay(duplicateResource));
+                 return obj;       
          }
     }
     

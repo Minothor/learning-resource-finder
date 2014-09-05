@@ -3,9 +3,7 @@
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ page import="learningresourcefinder.util.NotificationUtil.Status" %>
 
-
 <script type="text/javascript" src="/js/int/ajaxLogin.js"></script>
-
 
 <script>
   $(document).ready(function() {
@@ -112,7 +110,8 @@
 					   </ul>
 					</li>
 					
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Compétences <b class="caret"></b></a> 
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Compétences <b class="caret"></b></a> 
 					    <ul class="dropdown-menu"> 
 
                           <li><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> primaire</a></li>
@@ -149,9 +148,14 @@
 					    </ul>
 					 </li>
 					 
-					 <c:if test="${current.user.role=='ADMIN'}">
-					 	<li><a href="/admin">Admin</a></li> 	 
-	 				 </c:if>					
+					 <lrf:conditionDisplay role="ADMIN">
+					 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+					   <ul class="dropdown-menu">	
+					 	  <li><a href="/admin">Admin</a></li>	
+					 	  <li><a href="/urlGeneric">URLs géneriques</a></li>
+					   </ul>
+					 </li>	
+	 				 </lrf:conditionDisplay>					
 				</ul>
 
 

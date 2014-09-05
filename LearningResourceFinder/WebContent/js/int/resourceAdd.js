@@ -39,7 +39,10 @@ function ajaxVerifyUrl() {
 						$('#addResourceForm2MaxDuration').val(response.duration);
 					}
 				} else {
-					$("#urlErrorMessage").html("<a href='"+response+"'>Une resource avec une url similaire</a> existe déjà sur le site"); 
+					if(response.type == "urlGeneric")
+						$("#urlErrorMessage").html("L'Url introduite est trop générique");
+					else		
+						$("#urlErrorMessage").html("<a href='"+response.value+"'>Une ressource avec une url similaire</a> existe déjà sur le site");
 				}
 
 			},
