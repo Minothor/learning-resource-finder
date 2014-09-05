@@ -37,6 +37,8 @@ import javax.imageio.ImageWriter;
 import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
 import javax.imageio.stream.FileImageOutputStream;
 
+import learningresourcefinder.model.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -73,10 +75,21 @@ public class ImageUtil {
 	/** fullUrl must be a full url like "http://www.knowledgeblackbelt.com/img/...", not just like "/img/..."
 	 * Use BlackBeltUriAnalyzer.getFullUrl() if you start from a Resource */
 	public static BufferedImage readImage(String fullUrl) {
+		URL url = null;
 		try {
-    	    URL url = new URL(fullUrl);
-    	    Image img = Toolkit.getDefaultToolkit().createImage(url);  // We don't just do ImageIO.read because of color problems:  http://stackoverflow.com/a/4388542/174831
-    
+			url = new URL(fullUrl);
+		} catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+		}
+		return readImage(Toolkit.getDefaultToolkit().createImage(url));  // We don't just do ImageIO.read because of color problems:  http://stackoverflow.com/a/4388542/174831
+	}
+	
+	public static BufferedImage readImage(byte[] imagedata) {
+		return readImage(Toolkit.getDefaultToolkit().createImage(imagedata));  // We don't just do ImageIO.read because of color problems:  http://stackoverflow.com/a/4388542/174831
+	}
+	
+	public static BufferedImage readImage(Image img) {
+		try {
     	    PixelGrabber pg = new PixelGrabber(img, 0, 0, -1, -1, true);
     	    pg.grabPixels();
     	    int width = pg.getWidth(), height = pg.getHeight();
@@ -85,20 +98,11 @@ public class ImageUtil {
     	    WritableRaster raster = Raster.createPackedRaster(buffer, width, height, width, RGB_MASKS, null);
     	    BufferedImage bImg = new BufferedImage(RGB_OPAQUE, raster, false, null);
     
-    //	    String to = "D:/temp/result.jpg";
-    //	    ImageIO.write(bi, "jpg", new File(to));
     		return bImg;
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 	}
-
-	
-
-
-	
 	
 
 	public static void saveImageToFileAsJPEG(RenderedImage image,
@@ -379,5 +383,51 @@ public class ImageUtil {
           return bais;
 	    
 	}
+	
+	 public static void createOriginalAndScalesImageFileForResource(Resource resource, BufferedImage image, CurrentEnvironment currentEnvironment) {
+		try {
+			// Save original image in jpg
+			String path = FileUtil.getGenFolderPath(currentEnvironment)
+					+ FileUtil.RESOURCE_SUB_FOLDER
+					+ FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
+			String fileName = resource.getId() + "-"
+					+ (resource.getNumberImage() + 1) + ".jpg";
+			FileUtil.ensureFolderExists(path);
+			ImageIO.write(image, "jpg", new File(path, fileName));
+
+			// Save scaled images
+			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+			ImageIO.write(image, "jpg", outStream);
+			scaleAndSaveImage(outStream.toByteArray(), resource,
+					currentEnvironment);
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	  }
+	  
+	  private static void scaleAndSaveImage(byte[] imageInBytes,  Resource resource, CurrentEnvironment currentEnvironment) throws IOException, FileNotFoundException {
+		BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(
+				imageInBytes), 400 * 400, 400, 400);
+		ImageUtil.saveImageToFileAsJPEG(resizedImage,
+				FileUtil.getGenFolderPath(currentEnvironment)
+						+ FileUtil.RESOURCE_SUB_FOLDER
+						+ FileUtil.RESOURCE_RESIZED_SUB_FOLDER
+						+ FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER,
+				resource.getId() + "-" + (resource.getNumberImage() + 1)
+						+ ".jpg", 0.9f);
+
+		BufferedImage resizedSmallImage = ImageUtil.scale(
+				new ByteArrayInputStream(imageInBytes), 200 * 350, 200, 350);
+		ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,
+				FileUtil.getGenFolderPath(currentEnvironment)
+						+ FileUtil.RESOURCE_SUB_FOLDER
+						+ FileUtil.RESOURCE_RESIZED_SUB_FOLDER
+						+ FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER,
+				resource.getId() + "-" + (resource.getNumberImage() + 1)
+						+ ".jpg", 0.9f);
+
+		resource.setNumberImage(resource.getNumberImage() + 1);
+	  }
 
 }
