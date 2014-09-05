@@ -3,52 +3,35 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 
 <script type="text/javascript" src="/js/int/resourceAdd.js"></script>
-
-<script src="js/ext/jquery.nouislider.min.js"></script>
-
-
-<link href="css/ext/jquery.nouislider.css" rel="stylesheet">
-
+<script src="/js/ext/jquery.nouislider.min.js"></script>
+<script src="/js/ext/jquery.nouislider.full.min.js"></script>
+<link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
 
 <script>
-	// On document ready, initialize noUiSlider.
+	// On document ready, initialize Slider (to select min and max cycle).
 	$(function() {
-
-		var range_all_sliders = {
-			'min' : [ 0 ],
-			'1-2' : [ 0, 1 ],
-			'2-3' : [ 2, 3 ],
-			'3-4' : [ 3, 4 ],
-			'4-5' : [ 4, 5 ],
-			'5-6' : [ 5, 6 ],
-			'max' : [ 6 ]
-		};
-
-		$('#range').noUiSlider({
-			range : range_all_sliders,
-			start : [ 1, 6 ],
-			margin : 1,
+		//Slider Documentation can be find here http://refreshless.com/nouislider/ 
+		
+		$('#slider').noUiSlider({
+			start : [ 0, 4 ],			
 			connect : true,
-			values:["1-2","2-3", "3-4", "4-5", "5-5"],
-
+			mode: 'values',	
 			orientation : "vertical",
 			step : 1,
-
 			behaviour : 'tap-drag',
-
 			range : {
-				'min' : 1,
-				'max' : 6
+				'min' : 0,
+				'max' : 4
 			}
 		});
 
-		/*$('#range').noUiSlider_pips({
-			mode : 'steps',
-			density : 0
-		});*/  
-
+	    $('.noUi-connect').css('background', '#84bb04');
+		// Put Slider values in hidden imput
+		$('#slider').Link('lower').to($('#value-min'));
+		$('#slider').Link('upper').to($('#value-max'));
 	});
 </script>
+
 <!-- Modal for adding a resource (invisible until button clicked) -->
 <div class="modal fade" id="addResourceModal1" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -94,7 +77,7 @@
 
 							<div class="row">
 
-								<div class="form-group col-sm-4">
+								<div class="form-group col-sm-3">
 									<label for="Format">Format</label>
 									<c:forEach var="format"
 										items="${applicationScope.cache.format}">
@@ -108,7 +91,7 @@
 									</c:forEach>
 								</div>
 
-								<div class="form-group col-sm-4">
+								<div class="form-group col-sm-3">
 
 									<label for="platform">Plate-forme</label>
 
@@ -133,7 +116,7 @@
 
 								</div>
 
-								<div class="form-group col-sm-4" >
+								<div class="form-group col-sm-3" >
 									<label for="topic">Matière</label>
 									<c:forEach var="topic" items="${applicationScope.cache.topic}">
 										<div class="radio">
@@ -145,24 +128,24 @@
 										</div>
 									</c:forEach>
 								</div>
-								<div class="form-group col-sm-4" id="rowrange">
 								
-									<div id="slider">
-										<div id="range"></div>
-									</div>								
-
-								</div>
-								
-								<div class="form-group col-sm-4" >
+								<div class="form-group col-sm-3" >
+									<label>Cycle (année)</label>
+						
+									<div id="slider"></div> <%-- slider injected here by JavaScript --%>
+									
 									<div id="numberslider">
-										<ul>
-											<li>1-2</li>
-											<li>3-4</li>
-											<li>5-6</li>
-											<li>1-2</li>
-											<li>3-6</li>
+										<ul>								
+											<li><b>-</b> P 1-2</li>
+											<li><b>-</b> P 3-4</li>
+											<li><b>-</b> P 5-6</li>
+											<li><b>-</b> S 1-2</li>
+											<li><b>-</b> S 3-6</li>
 										</ul>
 									</div>
+									<%-- Input filled by the slider automatically. These values will be sent to the controller. --%>
+									<input id="value-min" type="hidden" name="value-min"/>
+									<input id="value-max" type="hidden" name="value-max"/>
 								</div>
 							</div>
 						</div>

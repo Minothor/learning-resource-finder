@@ -231,10 +231,10 @@ figure:hover figcaption {
 
 
 .mainlist li {
-margin: 15px 0;
-background: url(/comingsoon1/arrow.png) no-repeat 0 3px;
-padding-left: 27px;
-font-size: 16px;
+	margin: 15px 0;
+	background: url(/comingsoon1/arrow.png) no-repeat 0 3px;
+	padding-left: 27px;
+	font-size: 16px;
 }
 
 .col-sm-4 {
@@ -246,29 +246,17 @@ font-size: 16px;
     margin-right: 0px;
 }
 
-
-#range{
-	 height: 215px;
-	 margin-left:70px;
-	
+/*#### For Slider in addResourceForm.jsp  #######################################################################*/
+#slider{
+	 height: 186px;
+	 margin-top:20px;
+	 width: 12px;	
 }
-
-
-
 #numberslider{
-	
- 	 width:20px;
-    margin-left:-30px;
-    margin-top:80px;
-	
-	 
+    margin-top:-199px;	 
 }
 #numberslider li{
-margin-top:30px;
-	
+	margin-bottom:28px;	
 }
-#slider {
-  width:20px;
-   
-    margin-top:52px;
-}
+
+

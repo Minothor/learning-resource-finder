@@ -100,8 +100,7 @@ function ajaxResourceAddSubmitModal1(e) {
 	    	$(".alert-danger").show("scale", 500); 
 	    //	$("label[for='platform']").css({"color": "#e81578"});
 	    	
-	    }
-	    else {	    	
+	    } else {	    	
 	    	// ok, submit form
 	    	$(".alert-danger").hide();   
 
@@ -116,6 +115,7 @@ function ajaxResourceAddSubmitModal1(e) {
 					showNotificationText(messageAndId.message, "success");
 					// Fill and show modal 2
 					$('#idresource').val(messageAndId.id);
+
 				},
 				error : function(data) {
 					alert("Suite à un problème du côté serveur, la ressource n'a probablement pas pu être ajoutée. - "
@@ -124,6 +124,7 @@ function ajaxResourceAddSubmitModal1(e) {
 			});	
 	    	
 	    }
+	    
 }
 
 

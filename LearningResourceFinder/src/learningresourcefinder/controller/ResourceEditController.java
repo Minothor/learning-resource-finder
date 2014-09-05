@@ -3,6 +3,7 @@ package learningresourcefinder.controller;
 import java.util.Set;
 
 import learningresourcefinder.exception.InvalidUrlException;
+import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.UrlResource;
@@ -69,17 +70,38 @@ public class ResourceEditController extends BaseController<Resource> {
 	        @RequestParam(value="title",required=false) String title,
 	        @RequestParam(value="format",required=true) Format format, 
 	        @RequestParam(value="platform",required=true) Set<Platform> platforms, 
-	        @RequestParam(value="topic",required=true) Topic topic) {
+	        @RequestParam(value="topic",required=true) Topic topic,
+	        @RequestParam(value="value-min",required=true) String minCycle, /* From hidden field */
+	        @RequestParam(value="value-max",required=true) String maxCycle){  
+    
         SecurityContext.assertUserIsLoggedIn();
    
         Resource resource = new Resource();
+        
+        ////// Find min and max Cycles from slider input
+        // cycles ids in ascending order of cycles names
+        int[] idCyclesInDb = new int[]{300,303,302,304,305};        
        
+        //convert String to int, for Ex: "1.00" to 1 (slider component sends decimal strings...)
+        int tempIntMin=(int)Double.parseDouble(minCycle);
+        int tempIntMax=(int)Double.parseDouble(maxCycle);
+       
+        // Get cycle id from slider position (1 -> 300)
+        int idMinCycle= idCyclesInDb[Integer.valueOf(tempIntMin)];
+        int idMaxCycle= idCyclesInDb[Integer.valueOf(tempIntMax)];
+             
+        Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
+        Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);
+        
         resource.setName(title);
         String slug = Slugify.slugify(resource.getName());
         resource.setSlug(slug);
         resource.setFormat(format);
         resource.setPlatforms(platforms);
-        resource.setTopic(topic);
+        resource.setTopic(topic);       
+        
+        resource.setMinCycle(cycleMin);
+        resource.setMaxCycle(cycleMax);
         
         UrlResource urlResource = new UrlResource();
         // urlResource.setName();  The first (and probably only) URL has no name.
