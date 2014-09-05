@@ -1,11 +1,8 @@
 package learningresourcefinder.service;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -14,25 +11,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.http.protocol.HttpContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import learningresourcefinder.batch.ImportLabsetBatch;
 import learningresourcefinder.controller.ResourceImageController;
 import learningresourcefinder.model.Resource;
-import learningresourcefinder.model.UrlResource;
-import learningresourcefinder.model.User;
 import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.Resource.ValidationStatus;
+import learningresourcefinder.model.UrlResource;
+import learningresourcefinder.model.User;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.repository.UserRepository;
@@ -43,12 +27,16 @@ import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.ExcelSheet;
-import learningresourcefinder.util.FileUtil;
 import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
-import learningresourcefinder.util.NotificationUtil;
-import learningresourcefinder.util.FileUtil.InvalidImageFileException;
 import learningresourcefinder.web.Slugify;
+
+import org.apache.commons.logging.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Transactional
 @Service
@@ -65,16 +53,15 @@ public class ImportLabSetService{
 	@Autowired CurrentEnvironment currentEnvironment;
 
 	private HashMap<Long,String> imageQueue = new HashMap<>();
-    private HttpContext context;
+   // private HttpContext context;
 
-	public void importLabSetResources(HttpContext context) {
-		this.context=context;
-		//context.1
+	public void importLabSetResources() {
+	//	this.context=context;
 		
-//		importFrancais(); //adds resources and adds the id and url of the image to the image list for processing
+		//importFrancais(); //adds resources and adds the id and url of the image to the image list for processing
 		//processImages() runs through the map, then empties it after completion.
 		
-		///importMaths();//adds resources and adds the id and url of the image to the image list for processing
+		//importMaths();//adds resources and adds the id and url of the image to the image list for processing
 		//processImages();// runs through the map, then empties it after completion.
 	}
 
@@ -240,11 +227,6 @@ public class ImportLabSetService{
 				resource.setFormat(Format.INTERACTIVE);
 				log.debug("Interactive");
 			}
-
-
-
-			
-
 
 			resource.setTopic(Topic.MATH);
 

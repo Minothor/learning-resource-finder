@@ -9,6 +9,7 @@ import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.BaseRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.ImportLabSetService;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
@@ -18,6 +19,7 @@ public class AdminController extends BaseRepository<User> {
 	
 	@Autowired IndexManagerService indexManagerService;
 	@Autowired ImportCompetencesFromVraiForumBatch importCompetencesFromVraiForumBatch;
+	@Autowired ImportLabSetService importLabSetService;
    
 	@RequestMapping("/admin")
 	public String admin() {
@@ -41,5 +43,13 @@ public class AdminController extends BaseRepository<User> {
         NotificationUtil.addNotificationMessage("Import réussi");
         return "admin";
     }
+    
+	@RequestMapping("/importLabset")
+	public void executeBatchLabsetImport() {
+		User user = SecurityContext.getUser();
+		importLabSetService.importFrancais(user); 
+		importLabSetService.importMaths(user);
+		importLabSetService.processImages();
+	}
     
 }
