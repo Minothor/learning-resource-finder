@@ -45,11 +45,12 @@ public class AdminController extends BaseRepository<User> {
     }
     
 	@RequestMapping("/importLabset")
-	public void executeBatchLabsetImport() {
+	public String executeBatchLabsetImport() {
 		User user = SecurityContext.getUser();
 		importLabSetService.importFrancais(user); 
 		importLabSetService.importMaths(user);
 		importLabSetService.processImages();
+		return "admin";
 	}
     
 }

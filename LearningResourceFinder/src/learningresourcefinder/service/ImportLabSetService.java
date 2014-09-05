@@ -8,8 +8,10 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Set;
 
 import learningresourcefinder.controller.ResourceImageController;
 import learningresourcefinder.model.Resource;
@@ -96,7 +98,11 @@ public class ImportLabSetService{
 				urlRep.persist(urlRes);
 			}
 			resource.getUrlResources().add(urlRes);
-			resource.setPlatform(Platform.BROWSER);
+			
+			Set<Platform> newSetPlatform=new HashSet<>(resource.getPlatforms()); 
+			newSetPlatform.add(Platform.BROWSER); 
+			resource.setPlatforms(newSetPlatform);
+			
 			resource.setLanguage(Language.FR);
 			resource.setSlug(Slugify.slugify(resource.getName()));
 
@@ -188,7 +194,11 @@ public class ImportLabSetService{
 				urlRep.persist(urlRes);
 			}
 			resource.getUrlResources().add(urlRes);
-			resource.setPlatform(Platform.BROWSER);
+			
+			Set<Platform> newSetPlatform=new HashSet<>(resource.getPlatforms()); 
+			newSetPlatform.add(Platform.BROWSER); 
+			resource.setPlatforms(newSetPlatform);
+			
 			resource.setLanguage(Language.FR);
 			resource.setSlug(Slugify.slugify(resource.getName()));
 			
