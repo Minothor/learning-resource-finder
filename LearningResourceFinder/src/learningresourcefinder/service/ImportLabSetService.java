@@ -68,7 +68,7 @@ public class ImportLabSetService{
 	public void importFrancais(User admin)  {
 
 		//// Find file path
-		log.info("Importing: " + ClassLoader.getSystemClassLoader().getResource("import").getPath());
+		log.info("Importing: " + this.getClass().getClassLoader().getResource("import").getPath());
 		String francaisPath;
 		try {
 			francaisPath = this.getClass().getClassLoader().getResource("import/activite_français_2012description50char.xlsx").toURI().getPath();
@@ -150,6 +150,7 @@ public class ImportLabSetService{
 			
 			if (PERSIST_FOR_REAL) {
 				resRep.persist(resource);
+				resource.setShortId(resource.getShortId());
 			} else {
 				log.info("importing resource: " +resource);
 			}
