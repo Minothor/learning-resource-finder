@@ -19,3 +19,9 @@
         add constraint fk_js17rf45aesvw4vm040dwwjks 
         foreign key (updatedby_id) 
         references users;
+        
+
+  -- 2014-09-05 Ramzi
+       
+	update resource set platformscollonstring = platform where platform is not null;
+	alter table resource drop platform;

@@ -95,10 +95,6 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)
     private Format format;
-	
-    @Column(nullable = true)
-    @Enumerated(EnumType.STRING)
-    private Platform platform;
 
     @Column(nullable = true)
     @Enumerated(EnumType.STRING)
@@ -352,14 +348,6 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 
 	public void setFormat(Format format) {
 		this.format = format;
-	}
-
-	public Platform getPlatform() {
-		return platform;
-	}
-
-	public void setPlatform(Platform platform) {
-		this.platform = platform;
 	}
 
 	public Nature getNature() {
