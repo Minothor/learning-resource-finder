@@ -1,13 +1,28 @@
 package learningresourcefinder.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 
+import javax.servlet.ServletContext;
+
 import org.apache.commons.logging.Log;
+import org.apache.http.protocol.HttpContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import learningresourcefinder.batch.ImportLabsetBatch;
 import learningresourcefinder.controller.ResourceImageController;
@@ -23,35 +38,51 @@ import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
+import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.ExcelSheet;
+import learningresourcefinder.util.FileUtil;
+import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
+import learningresourcefinder.util.NotificationUtil;
+import learningresourcefinder.util.FileUtil.InvalidImageFileException;
 import learningresourcefinder.web.Slugify;
 
 @Transactional
 @Service
-public class ImportLabSetService {
+public class ImportLabSetService{
 
 	@Logger Log log;
 	
-	private static final boolean PERSIST_FOR_REAL = false;   // need false for tests (impossible to import twice).  
+	private static final boolean PERSIST_FOR_REAL = true;   // need false for tests (impossible to import twice).  
 	
     @Autowired ResourceRepository resRep;
     @Autowired UrlResourceRepository urlRep;
     @Autowired UserRepository userRep;
-    
+    @Autowired ResourceImageController imgRes;
+	@Autowired CurrentEnvironment currentEnvironment;
 
-	public void importLabSetResources() {
-		importFrancais();
-		importMaths();
+	private HashMap<Long,String> imageQueue = new HashMap<>();
+    private HttpContext context;
+
+	public void importLabSetResources(HttpContext context) {
+		this.context=context;
+		//context.1
+		
+//		importFrancais(); //adds resources and adds the id and url of the image to the image list for processing
+		//processImages() runs through the map, then empties it after completion.
+		
+		///importMaths();//adds resources and adds the id and url of the image to the image list for processing
+		//processImages();// runs through the map, then empties it after completion.
 	}
 
-	public void importFrancais()  {
+	public void importFrancais(User admin)  {
 
 		//// Find file path
-		log.info("Importing: " + ClassLoader.getSystemClassLoader().getSystemResource("import").getPath());
+		log.info("Importing: " + ClassLoader.getSystemClassLoader().getResource("import").getPath());
 		String francaisPath;
 		try {
-			francaisPath = ClassLoader.getSystemResource("import/activite_français_2012description50char.xlsx").toURI().getPath();
+			francaisPath = this.getClass().getClassLoader().getResource("import/activite_français_2012description50char.xlsx").toURI().getPath();
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
@@ -125,7 +156,7 @@ public class ImportLabSetService {
 			resource.setValidationStatus(ValidationStatus.ACCEPT);
 			resource.setValidationDate(Calendar.getInstance().getTime());
 			
-			User admin = userRep.getUserByUserName("Admin");
+			
 			resource.setValidator(admin);
 			
 			if (PERSIST_FOR_REAL) {
@@ -139,28 +170,31 @@ public class ImportLabSetService {
 	}
 
 	@Transactional
-	public void importMaths() {
+	public void importMaths(User admin) {
 		// this is effectively a copypasta of importFrancais() see the comments above for functionality.
-		String mathsExcel;
+		InputStream mathsExcel = null;
+		String imgURL=null;
+		int imgNum;
 		try {
-			mathsExcel = ClassLoader.getSystemResource("import/liste_finale_id50Max.xlsx").toURI().getPath();
-		} catch (URISyntaxException e) {
-			throw new RuntimeException(e);
+			mathsExcel = this.getClass().getClassLoader().getResource("import/liste_finale_id50Max.xlsx").openStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		ExcelSheet maths = new ExcelSheet(mathsExcel);
 		int resourceCount=0;
 
-		for (int i=1;i<=300;i++){
+		for (int row=1;row<=300;row++){
 			Resource resource = new Resource();
-			String title = maths.getValue("titre", i);
+			String title = maths.getValue("titre", row);
 			if (title.length() > 50) {
 				title = title.substring(0, 49);
 			}
 			resource.setName(title);
-			resource.setAuthor(maths.getValue("auteur", i));
-			resource.setDescription(maths.getValue("description", i));
-			UrlResource urlRes = new UrlResource("", maths.getValue("url", i), resource);
+			resource.setAuthor(maths.getValue("auteur", row));
+			resource.setDescription(maths.getValue("description", row));
+			UrlResource urlRes = new UrlResource("", maths.getValue("url", row), resource);
 			if (PERSIST_FOR_REAL) {
 				urlRep.persist(urlRes);
 			}
@@ -168,11 +202,13 @@ public class ImportLabSetService {
 			resource.setPlatform(Platform.BROWSER);
 			resource.setLanguage(Language.FR);
 			resource.setSlug(Slugify.slugify(resource.getName()));
-
-
+			
+			imgNum = Math.round(Float.valueOf(maths.getValue("id db", row).trim()));
+			imgURL = this.getClass().getClassLoader().getResource("/import/Printscreen_math/Printscreen/"+imgNum+".png").getFile();
+			
 			resource.setNature(Nature.EVALUATIVE_WITHANSWER);
 
-			String durationVal = maths.getValue("temps", i);
+			String durationVal = maths.getValue("temps", row);
 			String timeSegment;
 			String[] stringBits;
 			int durationTime=0;
@@ -206,14 +242,14 @@ public class ImportLabSetService {
 
 
 
-
+			
 
 
 			resource.setTopic(Topic.MATH);
 
 			resource.setValidationStatus(ValidationStatus.ACCEPT);
 			resource.setValidationDate(Calendar.getInstance().getTime());
-			User admin = userRep.getUserByUserName("Admin");
+			
 			resource.setValidator(admin);
 
 			if (resource.getName().length() > 50) {
@@ -221,6 +257,8 @@ public class ImportLabSetService {
 			}
 			if (PERSIST_FOR_REAL) {
 				resRep.persist(resource);
+				resource.setShortId(resource.getShortId());
+				imageQueue.put(resource.getId(), imgURL);
 			} else {
 				log.info("importing resource: " +resource);
 			}
@@ -229,27 +267,68 @@ public class ImportLabSetService {
 		log.info(resourceCount + " resources imported");
 	//	log.debug(resource.getId());
 
-		}
+		
 	}
 
-//  @Transactional
-//	private void processImages() {
-//		String urlPath;
-//		long resForImage;
-//		Iterator resources = imageQueue.keySet().iterator();
-//		while (resources.hasNext()) {
-//			resForImage = (long) resources.next();
-//			urlPath = imageQueue.get(resForImage);
-//			try {
-//				resImg.resourceImageAddUrl(resForImage, urlPath);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		imageQueue.clear();
-//	}
-//}
+  @Transactional
+	public void processImages() {
+		String urlPath;
+		long resID;
+		Iterator<Long> resources = imageQueue.keySet().iterator();
+		while (resources.hasNext()) {
+			resID = (long) resources.next();
+			urlPath = imageQueue.get(resID);
+			File tempFile = new File(urlPath);
+			MultipartFile imageUpload = null;
+			try {
+				imageUpload = new MockMultipartFile(tempFile.getName(),tempFile.getName(),"image/png",new FileInputStream(tempFile));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			try {
+				uploadImage(resID, imageUpload);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		imageQueue.clear();
+	}
+  
+ private void uploadImage(long resourceid,MultipartFile multipartFile) throws Exception{
+	 Resource resource = resRep.find(resourceid);
+		User user = resource.getCreatedBy();
+		SecurityContext.assertCurrentUserMayEditThisUser(user);
+		
+		///// Save original image, scale it and save the resized image.
+		try {
+			
+			FileUtil.uploadFile(multipartFile, FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER, 
+					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, resource.getId() + "-" + (resource.getNumberImage() + 1)));
+			
+			scaleAndSaveImage(multipartFile.getBytes(), resource);
+			
+		} catch (InvalidImageFileException e) {  
+			NotificationUtil.addNotificationMessage(e.getMessageToUser());
+		}
+ }
+  
+  private void scaleAndSaveImage(byte[] imageInBytes,  Resource resource) throws IOException, FileNotFoundException {
+      BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(imageInBytes), 400 * 400, 400, 400);
+      ImageUtil.saveImageToFileAsJPEG(resizedImage,  
+              FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
+      
+      BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(imageInBytes), 200*350, 200, 350);
+      ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
+              FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
+
+      resource.setNumberImage(resource.getNumberImage() + 1);
+      resRep.merge(resource);
+  }
+  
+}
 
 
