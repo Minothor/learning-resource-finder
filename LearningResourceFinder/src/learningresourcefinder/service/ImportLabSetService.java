@@ -2,6 +2,7 @@ package learningresourcefinder.service;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
@@ -178,8 +180,7 @@ public class ImportLabSetService{
 		try {
 			mathsExcel = this.getClass().getClassLoader().getResource("import/liste_finale_id50Max.xlsx").openStream();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 		ExcelSheet maths = new ExcelSheet(mathsExcel);
@@ -283,51 +284,31 @@ public class ImportLabSetService{
 			try {
 				imageUpload = new MockMultipartFile(tempFile.getName(),tempFile.getName(),"image/png",new FileInputStream(tempFile));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				throw new RuntimeException(e1);
 			}
 			
 			try {
 				uploadImage(resID, imageUpload);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 		
 		imageQueue.clear();
 	}
   
- private void uploadImage(long resourceid,MultipartFile multipartFile) throws Exception{
-	 Resource resource = resRep.find(resourceid);
-		User user = resource.getCreatedBy();
-		SecurityContext.assertCurrentUserMayEditThisUser(user);
-		
-		///// Save original image, scale it and save the resized image.
-		try {
-			
-			FileUtil.uploadFile(multipartFile, FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER, 
-					FileUtil.assembleImageFileNameWithCorrectExtention(multipartFile, resource.getId() + "-" + (resource.getNumberImage() + 1)));
-			
-			scaleAndSaveImage(multipartFile.getBytes(), resource);
-			
-		} catch (InvalidImageFileException e) {  
-			NotificationUtil.addNotificationMessage(e.getMessageToUser());
-		}
- }
-  
-  private void scaleAndSaveImage(byte[] imageInBytes,  Resource resource) throws IOException, FileNotFoundException {
-      BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(imageInBytes), 400 * 400, 400, 400);
-      ImageUtil.saveImageToFileAsJPEG(resizedImage,  
-              FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_LARGE_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
-      
-      BufferedImage resizedSmallImage = ImageUtil.scale(new ByteArrayInputStream(imageInBytes), 200*350, 200, 350);
-      ImageUtil.saveImageToFileAsJPEG(resizedSmallImage,  
-              FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER, resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg", 0.9f);
 
-      resource.setNumberImage(resource.getNumberImage() + 1);
-      resRep.merge(resource);
+	
+  private void uploadImage(long resourceid,MultipartFile multipartFile) throws Exception{
+	  Resource resource = resRep.find(resourceid);
+	  User user = resource.getCreatedBy();
+	  SecurityContext.assertCurrentUserMayEditThisUser(user);
+
+	  BufferedImage image = null;
+	  image = ImageUtil.readImage(multipartFile.getBytes());
+	  ImageUtil.createOriginalAndScalesImageFileForResource(resource, image, currentEnvironment);
   }
+  
   
 }
 
