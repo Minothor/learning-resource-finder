@@ -20,7 +20,7 @@ public class AdminController extends BaseRepository<User> {
 	@Autowired IndexManagerService indexManagerService;
 	@Autowired ImportCompetencesFromVraiForumBatch importCompetencesFromVraiForumBatch;
 	@Autowired ImportLabSetService importLabSetService;
-   
+	
 	@RequestMapping("/admin")
 	public String admin() {
 	    SecurityContext.assertUserHasRole(Role.ADMIN);
@@ -39,17 +39,27 @@ public class AdminController extends BaseRepository<User> {
     
     @RequestMapping("/importfromvraisforum")
     public String importFromVraisForum() {
+    	SecurityContext.assertUserHasRole(Role.ADMIN);
         importCompetencesFromVraiForumBatch.run();
         NotificationUtil.addNotificationMessage("Import réussi");
         return "admin";
     }
     
-	@RequestMapping("/importLabset")
-	public String executeBatchLabsetImport() {
-		User user = SecurityContext.getUser();
-		importLabSetService.importFrancais(user); 
-		importLabSetService.importMaths(user);
-		importLabSetService.processImages();
+	@RequestMapping("/importMathLabset")
+	public String executeBatchMathLabsetImport() {
+		SecurityContext.assertUserHasRole(Role.ADMIN);
+		importLabSetService.importMaths(); //adds resources and adds the id and url of the image to the image list for processing
+		importLabSetService.processImages(); // runs through the map, then empties it after completion.
+        NotificationUtil.addNotificationMessage("Import réussi");
+		return "admin";
+	}
+	
+	@RequestMapping("/importFrenchLabset")
+	public String executeBatchFrenchLabsetImport() {
+		SecurityContext.assertUserHasRole(Role.ADMIN);
+		importLabSetService.importFrancais(); 
+	//	importLabSetService.processImages();
+        NotificationUtil.addNotificationMessage("Import réussi");
 		return "admin";
 	}
     

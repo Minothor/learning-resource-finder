@@ -7,9 +7,11 @@
 <body>
 <div class="container">
     <a href="/createindex" class="btn btn-primary btn-lg">re-créer index</a>
-    
     <a href="/importfromvraisforum" class="btn btn-primary btn-lg">importer les compétences de http://findecycle.vraiforum.com/</a>
-    <a href="/importLabset" class="btn btn-primary btn-lg">execute batch import Labset</a>
+    <div>
+    	<a href="/importMathLabset" class="btn btn-primary btn-lg">execute batch import Math Labset</a>
+    	<a href="/importFrenchLabset" class="btn btn-primary btn-lg">execute batch import French Labset</a>
+    </div>
 </div>    
 </body>
 </html>
