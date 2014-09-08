@@ -29,8 +29,8 @@ function ajaxVerifyUrl() {
 			url : '/ajax/checkUrl',
 			data : "url=" + url,
 			success : function(response) {
-				if (response.type == "video" || response.type == "ok") { // No other resource with the same url found in DB.
-					$("#urlErrorMessage").html("");  // empty the error message
+				if (response.type == "video" || response.type == "ok") { // No other resource with the same url found in DB.					
+					$('#urlAddField').attr('readonly', true);
 					switchToForm2();
 					if (response.type == "video") {  // Pre-select the "vidéo" radio button and pre-fills fields from YouTube
 						$('#addResourceForm1 input:radio[name="format"]').filter('[value="VIDEOS"]').attr('checked', true);
@@ -68,25 +68,28 @@ function isValidURL(url) {
 	
 }
 
-function resetForm() {  
-   $(':input','#addResourceForm1')
+function resetForm() {
+   $('#urlAddField').attr('readonly', false);
+   $('#urlAddField').val('');
+   $(':input')
 	 .not(':button, :submit, :reset, :hidden')
 	 .val('')
 	 .removeAttr('checked')
 	 .removeAttr('selected');
-   $("#addResourceFormPart2").toggle('hide');
-   $("#bottomButtons").hide();
-   $("#urlCheckButton").show();
+   $('#urlErrorMessage').html('');	
+   $('#addResourceFormPart2').hide();    
+   $('#bottomButtons').hide();  		
+   $('#urlCheckButton').show();
+   $('#addResourceModal1').modal('hide');
+   $('#addResourceModal2').modal('hide');	
 }
-
-
 
 function switchToForm2() {  
 	$("#bottomButtons").toggle();
 	$("#addResourceFormPart2").toggle();
 	$("#urlCheckButton").toggle();
-}
 
+}
 function ajaxResourceAddSubmitModal1(e) {
 	    e.preventDefault();
 
