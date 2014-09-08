@@ -11,6 +11,7 @@
     <div>
     	<a href="/importMathLabset" class="btn btn-primary btn-lg">execute batch import Math Labset</a>
     	<a href="/importFrenchLabset" class="btn btn-primary btn-lg">execute batch import French Labset</a>
+    	<a href="/crawler/classePrimaire" class="btn btn-primary btn-lg">execute batch Crawler ClassePrimaire.be</a>
     </div>
 </div>    
 </body>

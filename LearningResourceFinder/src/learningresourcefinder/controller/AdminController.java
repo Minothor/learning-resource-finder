@@ -1,18 +1,22 @@
 package learningresourcefinder.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.io.IOException;
 
 import learningresourcefinder.batch.ImportCompetencesFromVraiForumBatch;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.BaseRepository;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.service.CrawlerService;
 import learningresourcefinder.service.ImportLabSetService;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminController extends BaseRepository<User> {
@@ -20,6 +24,7 @@ public class AdminController extends BaseRepository<User> {
 	@Autowired IndexManagerService indexManagerService;
 	@Autowired ImportCompetencesFromVraiForumBatch importCompetencesFromVraiForumBatch;
 	@Autowired ImportLabSetService importLabSetService;
+	@Autowired	CrawlerService crawlerService;
 	
 	@RequestMapping("/admin")
 	public String admin() {
@@ -60,6 +65,21 @@ public class AdminController extends BaseRepository<User> {
 		importLabSetService.importFrancais(); 
 	//	importLabSetService.processImages();
         NotificationUtil.addNotificationMessage("Import réussi");
+		return "admin";
+	}
+	
+	@RequestMapping("/crawler/{pageName}")
+	public String crawler(@PathVariable("pageName") String pageName) 
+	{
+		SecurityContext.assertUserHasRole(Role.ADMIN);    	
+		try
+		{
+			crawlerService.crawlerPage(pageName);
+		} 
+		catch (IOException e) 
+		{
+			throw new RuntimeException(e);
+		}
 		return "admin";
 	}
     
