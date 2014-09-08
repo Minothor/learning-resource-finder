@@ -176,7 +176,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+						aria-hidden="true" onclick="resetForm()">&times;</button>
 					<h4 class="modal-title">Ajout d'une ressource (partie 2,
 						optionnelle)</h4>
 				</div>
