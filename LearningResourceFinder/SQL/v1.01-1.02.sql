@@ -25,3 +25,10 @@
        
 	update resource set platformscollonstring = platform where platform is not null;
 	alter table resource drop platform;
+	
+	
+	EXECUTED ON SERVER 2014-09-08 ******************
+	EXECUTED ON SERVER 2014-09-08 ******************
+	EXECUTED ON SERVER 2014-09-08 ******************
+	EXECUTED ON SERVER 2014-09-08 ******************
+	EXECUTED ON SERVER 2014-09-08 ******************
