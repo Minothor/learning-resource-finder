@@ -9,6 +9,7 @@ import java.util.Set;
 
 import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Problem;
 import learningresourcefinder.model.Resource;
@@ -66,7 +67,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired FavoriteRepository favoriteRepository;
     @Autowired ContributionService contributionService; 
     
-    
+    public final static  int[] ID_CYCLES_IN_DB = new int[]{300,303,302,304,305}; 
     
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -78,11 +79,29 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
         if(!SecurityContext.canCurrentUserSeeResource(resource)) {
             return new ModelAndView("resourcedisplayhidden", "resource", resource);
-        }
-        
-        ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
- 
+        }        
         User user = SecurityContext.getUser();
+        
+        ////// Find min and max Cycles from slider input
+        // cycles ids in ascending order of cycles names
+        int minCycle=0;
+        int maxCycle=4;
+        
+        for (int i = 0; i < ID_CYCLES_IN_DB.length; i++) {
+            if(ID_CYCLES_IN_DB[i]==resource.getMinCycle().getId()){
+                minCycle=i;               
+            }
+            if(ID_CYCLES_IN_DB[i]==resource.getMaxCycle().getId()){                
+                maxCycle=i;               
+            }
+        }    
+ 
+        ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
+        mv.addObject("mincycle",minCycle);
+        mv.addObject("maxcycle",maxCycle);
+        
+
+        
         mv.addObject("user",user);
         mv.addObject("canEditUrl", levelService.canDoAction(user, Action.EDIT_RESOURCE_URL, resource));
         mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE, resource));
@@ -395,8 +414,30 @@ public class ResourceDisplayController extends BaseController<Resource> {
         return new ModelAndView ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     }
     
+    @RequestMapping("/ajax/cycleeditinresourcesubmit")
+    public ModelAndView cycleEditInResourceSubmit(@RequestParam("pk") Long id, @RequestParam(value="mincycle",required=true) String minCycle,@RequestParam(value="maxcycle",required=true) String maxCycle) {
+        Resource resource = getRequiredEntity(id);
+        
+             
+        
+        //convert String to int, for Ex: "1.00" to 1 (slider component sends decimal strings...)
+        int tempIntMin=(int)Double.parseDouble(minCycle);
+        int tempIntMax=(int)Double.parseDouble(maxCycle);
+       
+        // Get cycle id from slider position (1 -> 300)
+        int idMinCycle= ID_CYCLES_IN_DB[Integer.valueOf(tempIntMin)];
+        int idMaxCycle= ID_CYCLES_IN_DB[Integer.valueOf(tempIntMax)];
+             
+        Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
+        Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);
+        System.out.println(cycleMin.getId());
+        System.out.println(cycleMax.getId());
+        resource.setMinCycle(cycleMin);
+        resource.setMaxCycle(cycleMax);        
+        resourceRepository.merge(resource);
 
+        return new ModelAndView ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
+    } 
 
-
-    
+   
 } 
