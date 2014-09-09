@@ -247,10 +247,14 @@ figure:hover figcaption {
 }
 
 /*#### For Slider in addResourceForm.jsp  #######################################################################*/
-#slider{
+.slider{
 	 height: 186px;
 	 margin-top:20px;
 	 width: 12px;	
+}
+#slider{
+	 width: 12px;
+	
 }
 #numberslider{
     margin-top:-199px;	 
