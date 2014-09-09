@@ -10,8 +10,45 @@
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
+
+
+<script src="/js/ext/jquery.nouislider.min.js"></script>
+<script src="/js/ext/jquery.nouislider.full.min.js"></script>
+<link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
+
 <script type="text/javascript">
+
+	function ajaxeditcycle() {
+		
+		
+		var resourceID=$("#resourceHiddenField").val();
+		var mincycle = $("#valuemin").val();
+		var maxcycle = $("#valuemax").val();	
+		
+		$.ajax({	
+			type : "POST", 
+			dataType: "text",
+			url : "/ajax/cycleeditinresourcesubmit",
+			data : "pk="+resourceID+"&mincycle="+mincycle+"&maxcycle="+maxcycle,
+			success : function(data) {
+					location.reload();			
+			},
+			
+			error : function(data) {
+				alert("Problème en contactant le serveur" );
+			}
+		});	
+	}
+
  	$(document).ready(function() {
+ 		//Show cycle editing  pop-ap 
+ 		$("#cycle").click(function(e) {
+ 	 	    e.preventDefault();// prevent the default anchor functionality
+ 	 	    e.stopPropagation();
+ 	 	    $(".modal-dialog").css('width','324px');
+ 	 	    $("#editecycle").modal("show");
+ 		});
+
  		$.fn.editable.defaults.mode = 'inline';
  	   
  		$('.editableField').editable({   
@@ -112,6 +149,8 @@
 <title>${resource.name}</title>
 </head>
 <body>
+
+
 	<lrftag:breadcrumb linkactive="${resource.name}">
 		<lrftag:breadcrumbelement label="home" link="/home" />
 		<c:if test="${user != null}">
@@ -119,6 +158,40 @@
 		</c:if>
 	</lrftag:breadcrumb>
 	<div class="container">
+		
+		<!-- Modal for adding a generic url (invisible until button clicked) -->
+		<div class="modal fade" id="editecycle" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		
+				<form id="cycles" role="form" method="post"<%-- action bound with javascript --%>>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="resetForm()">&times;</button>
+							<h4 class="modal-title">Ajuster la balance selon les cycles approprié</h4>
+						</div>			
+						<div class="modal-body">
+							<div class="form-horizontal container">					
+								<div class="form-group">
+								
+								
+									<lrftag:cycleslider idSlider="resourcedisplayslider" minCycle="${mincycle}" maxCycle="${maxcycle}"/>
+																	
+								<div class="pull-right">
+									<button type="button" class="btn btn-mini btn-primary" onclick="ajaxeditcycle()">Enregistrer</button>
+								</div>
+								</div>
+		
+							</div>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</form>
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+								
 		<div class="row">
    	       <div class="col-md-10">
 		      <a id="title"  ${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}><h1 style="display: inline-block;">${resource.name}</h1></a>
@@ -262,7 +335,15 @@
 							    <a id="language" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?langue?'":" class='noneditresource'"} data-source="${dataEnumLanguage}"> ${resource.language.description}</a>
 				            </div>						
 				   	        <div class="col-md-3">
-                                <%-- !!!!!!!!!!!!!!!!!!! PUT min/max Cycle selection here (Resource.minCycle)  John 2014-04 --%>
+                                <%-- !!!!!!!!!!!!!!!!!!! PUT min/max Cycle selection here (Resource.minCycle)  John 2014-04 --%>                             
+    
+    
+    
+                                <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} > ${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</a>
+                                
+            
+            
+            
 				            </div>						
 				   	        <div class="col-md-3">
 								<a id="advertising" ${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicité?'":" class='noneditresource'"} data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
@@ -583,6 +664,6 @@
 	   </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     
-	
+
 </body>
 </html>

@@ -7,30 +7,6 @@
 <script src="/js/ext/jquery.nouislider.full.min.js"></script>
 <link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
 
-<script>
-	// On document ready, initialize Slider (to select min and max cycle).
-	$(function() {
-		//Slider Documentation can be find here http://refreshless.com/nouislider/ 
-		
-		$('#slider').noUiSlider({
-			start : [ 0, 4 ],			
-			connect : true,
-			mode: 'values',	
-			orientation : "vertical",
-			step : 1,
-			behaviour : 'tap-drag',
-			range : {
-				'min' : 0,
-				'max' : 4
-			}
-		});
-
-	    $('.noUi-connect').css('background', '#84bb04');
-		// Put Slider values in hidden imput
-		$('#slider').Link('lower').to($('#value-min'));
-		$('#slider').Link('upper').to($('#value-max'));
-	});
-</script>
 
 <!-- Modal for adding a resource (invisible until button clicked) -->
 <div class="modal fade" id="addResourceModal1" tabindex="-1"
@@ -130,22 +106,10 @@
 								</div>
 								
 								<div class="form-group col-sm-3" >
-									<label>Cycle (année)</label>
-						
-									<div id="slider"></div> <%-- slider injected here by JavaScript --%>
 									
-									<div id="numberslider">
-										<ul>								
-											<li><b>-</b> P 1-2</li>
-											<li><b>-</b> P 3-4</li>
-											<li><b>-</b> P 5-6</li>
-											<li><b>-</b> S 1-2</li>
-											<li><b>-</b> S 3-6</li>
-										</ul>
-									</div>
-									<%-- Input filled by the slider automatically. These values will be sent to the controller. --%>
-									<input id="value-min" type="hidden" name="value-min"/>
-									<input id="value-max" type="hidden" name="value-max"/>
+										<lrftag:cycleslider idSlider="addresourceslider" minCycle="0" maxCycle="4"/>
+									
+									
 								</div>
 							</div>
 						</div>

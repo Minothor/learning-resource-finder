@@ -98,8 +98,8 @@ public class ResourceEditController extends BaseController<Resource> {
         int tempIntMax=(int)Double.parseDouble(maxCycle);
        
         // Get cycle id from slider position (1 -> 300)
-        int idMinCycle= idCyclesInDb[Integer.valueOf(tempIntMin)];
-        int idMaxCycle= idCyclesInDb[Integer.valueOf(tempIntMax)];
+        int idMinCycle= ResourceDisplayController.ID_CYCLES_IN_DB[Integer.valueOf(tempIntMin)];
+        int idMaxCycle= ResourceDisplayController.ID_CYCLES_IN_DB[Integer.valueOf(tempIntMax)];
              
         Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
         Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);
