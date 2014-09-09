@@ -6,26 +6,22 @@
 <html>
 <head>
 
-<script type="text/javascript">
-$(function () {
-     $(".mycompetencePopoverRight").popover({
-	 	html:true,
-	 	trigger:'hover',
-	 	delay: { show: 500, hide: 200 },
-	 	placement:'right'
-	 });  
-	 
-	 $(".mycompetencePopoverLeft").popover({
-	 	html:true,
-	 	trigger:'hover',
-	 	delay: { show: 500, hide: 200 },
-	 	placement:'left'
-	});
-});  
+<script type="text/javascript">	
+	$(document).ready(function() {
+		$('.poper').each(function() {
+			var $elem = $(this);
+			$elem.popover({
+				placement : 'auto',
+				trigger : 'hover',
+				html : true,
+				container : $elem,
+				animation : false
 
+			});
+		});
+	});
 
 </script>
-
 
 </head>
 <body>
@@ -51,18 +47,26 @@ $(function () {
 							<h2>${cycleitems.competence.name}</h2>
 							<c:forEach items="${cycleitems.children}" var="subitem">
 									<span  <%-- class="mycompetencePopover${valeur<3?'Right':'Left'}" data-content="<lrftag:competencedescription competenceNode='${subitem}' mustlistchildren='true'/>"--%> style="font-size:120%">${subitem.competence.code }
-									  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }</span> 
+									  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }
 									  </a>
-									</span>
+									  </span> 
 								</br>
 								<ul>
-									<c:forEach items="${subitem.children}" var="subsubitem">
-										<li class="mycompetencePopover${valeur<3?'Right':'Left'}" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true'/>">
-											${subsubitem.competence.code }
-											<a href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
+								
+								<!--$$$$$$$$$$$$$$$$$$$$$$ PIERRE $$$$$$$$$$$$$$$$$$$$$$-->
+								<c:forEach items="${subitem.children}" var="subsubitem">
+									<div class="poper" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true'/>">
+										<li>
+											${subsubitem.competence.code } 
+											<a	href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
 										</li>
-									</c:forEach>
-								</ul>
+									</div>
+
+									
+								</c:forEach>
+
+								<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+							</ul>
 							</c:forEach>
 					</c:forEach>
 				</div>
