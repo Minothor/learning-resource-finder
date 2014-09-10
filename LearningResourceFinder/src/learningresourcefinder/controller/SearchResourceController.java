@@ -73,7 +73,8 @@ public class SearchResourceController extends BaseController<Resource> {
 	        HttpSession session,
 	        @RequestParam(value="so", required=false) Long timeStamp) throws UnsupportedEncodingException{ 
 
-	       searchPhrase = new String(searchPhrase.getBytes("ISO-8859-1"), "UTF-8"); // Replacement of wrong characters in the word.
+	    if (searchPhrase != null)
+	        searchPhrase = new String(searchPhrase.getBytes("ISO-8859-1"), "UTF-8"); // Replacement of wrong characters in the word.
 
 	    
         ///// We store the searchOptions in the session (via a map) because the parameters (advertising, languae, etc.) are not given

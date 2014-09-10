@@ -30,7 +30,8 @@ public class SearchSummaryController extends BaseController<Resource> {
 	@RequestMapping("/search")
 	public ModelAndView search(@RequestParam("searchphrase") String searchPhrase) throws UnsupportedEncodingException {
 	    
-	    searchPhrase = new String(searchPhrase.getBytes("ISO-8859-1"), "UTF-8"); // Replacement of wrong characters in the word.
+	    if (searchPhrase != null)
+	        searchPhrase = new String(searchPhrase.getBytes("ISO-8859-1"), "UTF-8"); // Replacement of wrong characters in the word.
 
 		List<SearchResult> listOfResult = searchService.search(searchPhrase);
 		List<Competence> listOfCompetence = (List)searchService.getFirstEntities(listOfResult, 50, Competence.class);
