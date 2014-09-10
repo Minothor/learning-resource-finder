@@ -113,9 +113,9 @@
            {
 	    var filename = $('#imageFileName').val(); 
 	    var resourceid = $('#resourceid').val();
-   	$.ajax({
-   		 url: "/resource/ajax/deleteTempImage",
-   		 data : "imageFileName=" + filename + "&resourceid=" + resourceid,
+        $.ajax({
+   		     url: "/resource/ajax/deleteTempImage",
+   		     data : "imageFileName=" + filename + "&resourceid=" + resourceid,
    		 });
 
            }
@@ -175,40 +175,27 @@
 				jQuery('#imageFromPrintScreenAndCrop').Jcrop({
 	 				onChange : updateCoords,
 	 				onSelect : updateCoords,
-					boxWidth:1280,
-					boxHeight:760
+					boxWidth:800,
+					boxHeight:600
 	 			});
 		});
 		
-		var img = $('#imageFromPrintScreenAndCrop')[0]; // Get my img elem
-	    var orgwidth, orgheight;
-	    $("<img/>") // Make in memory copy of image to avoid css issues
-	        .attr("src", $(img).attr("src"))
-	        .load(function() {
-	            orgwidth = this.width;   // Note: $(this).width() will not
-	            orgheight = this.height; // work for in memory images.
-	        });
-
-    });
-
-	
-	
-	function updateCoords(c) {
+		function updateCoords(c) {
  			$('#x').val(c.x);
  			$('#y').val(c.y);
  			$('#w').val(c.w);
  			$('#h').val(c.h);
- 	};
+ 	    };
 
- 	function checkCoords() {
+ 	    function checkCoords() {
  			if (parseInt($('#w').val())) return true;
  			return false;
- 	};
+ 	    };
 	
- 		
+
+    });
+
 //////  End's of Jcrop functions
-
-
 
 
  	function onUrlAddClick(){
@@ -221,12 +208,6 @@
  		$("#modalUrlResource").modal("show");
  	}
 
- 	function onAddImageClick(){
- 		$("#popoverToImage").popover({
- 	        placement : 'top'
- 	    });
- 	}
- 	
  	
  	function onCompetenceRemoveClick(competenceid, resourceid){
  		$("#competenceHiddenField").attr("value", competenceid);
@@ -631,11 +612,6 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 	<br />
 
 
-
-	<!-- <h4>Images &nbsp; &nbsp; &nbsp;
-        <span id="popoverToImage2" class='glyphicon glyphicon-plus close addToolTip' data-type='dropdown' data-content='Bruno' onclick='onAddImageClick()' style="float:none; font-size:15px" title="Ajouter une image"></span>
-        </h4> -->
-
 	<div title="Ajouter une image" class="dropdown">
 		<h4 style="display: inline-block">Images &nbsp; &nbsp; &nbsp;</h4>
 	
@@ -880,17 +856,19 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 	</div>
 		<!-- Modal : ADD URL -->
 		<div class="modal fade" id="modalPrintScreen" >
-			<div class="modal-dialog" style="width: 70%; height: 100%">
+			<div class="modal-dialog" style="width: 45%; height: 100%">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header" style="padding-bottom: 0px; padding-top: 10px;">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeButton1">&times;</button>
 						<h4 class="modal-title">Votre image</h4>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" style="padding: 10px">
 					
 					<p>Vous pouvez sélectionner une zone dans l'image avec la souris.</p>
+					<div >
+						<img id="imageFromPrintScreenAndCrop" name="img"/>
 					
-					<img id="imageFromPrintScreenAndCrop" name="img"/>
+					</div>
 					
 					<div class="modal-footer" style="padding-top: 0px; padding-bottom: 0px">
 					
