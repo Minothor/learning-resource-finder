@@ -96,8 +96,9 @@ public class ResourceRepository extends BaseRepository<Resource> {
                 if (!whereCondition.equals("")) {
                     whereCondition += " OR ";
                 }
-                whereCondition = whereCondition + " r.platform='" + platform.name() + "' ";
+                whereCondition = whereCondition + " r.platformsCollOnString like '%" + platform.name() + "%' ";
             }
+            System.out.println(whereCondition);
             whereConditions.add(whereCondition);
         }
 
@@ -173,7 +174,7 @@ public class ResourceRepository extends BaseRepository<Resource> {
 	
 	public List<Resource> findAllResourceWhereFieldsNullByTopic(Topic topic) {
 		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE(r.name = null OR r.description = null OR r.language = null OR r.format = null"
-				+ " OR r.platform = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic")
+				+ " OR r.platformsCollOnString = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic")
 				.setParameter("topic", topic)
 				.getResultList();
 		return results;
