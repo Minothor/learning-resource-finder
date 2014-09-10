@@ -84,17 +84,24 @@ public class ResourceDisplayController extends BaseController<Resource> {
         
         ////// Find min and max Cycles from slider input
         // cycles ids in ascending order of cycles names
-        int minCycle=0;
-        int maxCycle=4;
+        System.out.println("***********************************************");
+        //System.out.println(resource.getMinCycle().getId());
+        System.out.println("***********************************************");
+        Long minCycleId = (resource.getMinCycle() != null)?resource.getMinCycle().getId() : ID_CYCLES_IN_DB[0]; //id:300 -> 0  default   min value for slider
+        Long maxCycleId = (resource.getMaxCycle() != null)?resource.getMaxCycle().getId() : ID_CYCLES_IN_DB[ID_CYCLES_IN_DB.length-1];//id:305 -> 4  default   max value for slider
         
-        for (int i = 0; i < ID_CYCLES_IN_DB.length; i++) {
-            if(ID_CYCLES_IN_DB[i]==resource.getMinCycle().getId()){
+
+         int minCycle=0;
+         int maxCycle=4;
+            
+         for (int i = 0; i < ID_CYCLES_IN_DB.length; i++) {
+            if(ID_CYCLES_IN_DB[i] == minCycleId){
                 minCycle=i;               
             }
-            if(ID_CYCLES_IN_DB[i]==resource.getMaxCycle().getId()){                
+            if(ID_CYCLES_IN_DB[i] == maxCycleId){                
                 maxCycle=i;               
             }
-        }    
+        }  
  
         ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
         mv.addObject("mincycle",minCycle);
