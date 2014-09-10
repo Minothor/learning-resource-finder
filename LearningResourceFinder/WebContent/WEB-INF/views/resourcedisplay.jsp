@@ -12,7 +12,7 @@
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
-
+<script type="text/javascript" src="/js/ext/jquery.Jcrop.js"></script>
 
 <script src="/js/ext/jquery.nouislider.min.js"></script>
 <script src="/js/ext/jquery.nouislider.full.min.js"></script>
