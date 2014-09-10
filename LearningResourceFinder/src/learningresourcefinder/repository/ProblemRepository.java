@@ -55,7 +55,7 @@ public class ProblemRepository extends BaseRepository<Problem>
 	
 	public Long countProblemOfFieldNull(Topic topic) {
 		Long result = (long) em.createQuery("SELECT COUNT(r) FROM Resource r where (r.name = null OR r.description = null OR r.language = null OR r.format = null"
-				+ " OR r.platform = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic")
+				+ " OR r.platformsCollOnString = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic")
 				.setParameter("topic", topic)
 				.getSingleResult();
 		return result;
