@@ -53,53 +53,52 @@
  				location.reload();
  		      }
 		});
+ 		
+ 	//  Start JCrop functions
 
- 		 $('.editableFieldInline').editable({   
- 	    	  emptytext: '? ?',
- 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
- 	    	  mode: 'inline',
- 	    	  type: 'text',
- 	    	  url: '/ajax/resourceeditfieldsubmit',
- 	    	  pk: '${resource.id}',
- 	 		  success: function(response) {
- 				location.reload();
- 		      }
- 		});
-
- 		$('.editableFieldArray').editable({   
- 		    	  emptytext: '? ?',
- 		    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
- 		    	  mode: 'popup',
- 		    	  type: 'text',
- 		    	  url: '/ajax/resourceeditfieldarraysubmit',
- 		    	  pk: '${resource.id}',
- 		 		  success: function(response) {
- 					location.reload();
- 			      }
+		$('#modalPrintScreen').on('shown.bs.modal', function() { 
+				jQuery('#imageFromPrintScreenAndCrop').Jcrop({
+	 				onChange : updateCoords,
+	 				onSelect : updateCoords,
+					boxWidth:1280,
+					boxHeight:760
+	 			});
 		});
+		
+		var img = $('#imageFromPrintScreenAndCrop')[0]; // Get my img elem
+	    var orgwidth, orgheight;
+	    $("<img/>") // Make in memory copy of image to avoid css issues
+	        .attr("src", $(img).attr("src"))
+	        .load(function() {
+	            orgwidth = this.width;   // Note: $(this).width() will not
+	            orgheight = this.height; // work for in memory images.
+	        });
 
- 	 		
- 		//Show cycle editing  pop-ap 
- 		$("#cycle").click(function(e) {
- 	 	 	    e.preventDefault();// prevent the default anchor functionality
- 	 	 	    e.stopPropagation();
- 	 	 	    $(".modal-dialog").css('width','324px');
- 	 	 	    $("#editecycle").modal("show");
+	    $(window).resize(function() {
+ 		   $(function () {
+ 			  jQuery('#imageFromPrintScreenAndCrop').Jcrop({
+ 				onChange : updateCoords,
+ 				onSelect : updateCoords
+           });
  		});
+	});
 
- 	 		
- 	    $('.nonurleditpop').popoverWithAutoHideForPrivilege("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
+	
+	function updateCoords(c) {
+ 			$('#x').val(c.x);
+ 			$('#y').val(c.y);
+ 			$('#w').val(c.w);
+ 			$('#h').val(c.h);
+ 	};
 
- 	    $('.nonCompetenceLinkPop').popoverWithAutoHideForPrivilege("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution." );
+ 	function checkCoords() {
+ 			if (parseInt($('#w').val())) return true;
+ 			return false;
+ 	};
+ 		
+//  End's of Jcrop functions
 
- 	    $('.nonimageeditpop').popoverWithAutoHideForPrivilege("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution." );
-
- 	    $(".noAddProblemPop").popoverWithAutoHideForPrivilege("Pour signaler un problème, il faut être connecté.");
- 	 	    
- 	    $(".noneditresource").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution." );
-
- 	    
- 	   	$("#closeButton1, #closeButton2").click( function()
+	$("#closeButton1, #closeButton2").click( function()
            {
 	    var filename = $('#imageFileName').val(); 
 	    var resourceid = $('#resourceid').val();
@@ -152,62 +151,43 @@
  		var resourceid = $('#resourceid').val();
  		window.location.replace("/resource/displayPrintScreenHelpText?resourceid=" + resourceid);
  	 });
+ 	
+	 $('.editableFieldInline').editable({   
+    	  emptytext: '? ?',
+    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+    	  mode: 'inline',
+    	  type: 'text',
+    	  url: '/ajax/resourceeditfieldsubmit',
+    	  pk: '${resource.id}',
+ 		  success: function(response) {
+			location.reload();
+	      }
+	});
 
-
-	});   // End of Document Ready
- 		
-	
-	
- 	///////  Start JCrop functions
- 	$(document).ready(function() {
-
-		$('#modalPrintScreen').on('shown.bs.modal', function() { 
-				jQuery('#imageFromPrintScreenAndCrop').Jcrop({
-	 				onChange : updateCoords,
-	 				onSelect : updateCoords,
-					boxWidth:1280,
-					boxHeight:760
-	 			});
+ 		$('.editableFieldArray').editable({   
+	    	  emptytext: '? ?',
+	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+	    	  mode: 'popup',
+	    	  type: 'text',
+	    	  url: '/ajax/resourceeditfieldarraysubmit',
+	    	  pk: '${resource.id}',
+	 		  success: function(response) {
+				location.reload();
+		      }
 		});
-		
-		var img = $('#imageFromPrintScreenAndCrop')[0]; // Get my img elem
-	    var orgwidth, orgheight;
-	    $("<img/>") // Make in memory copy of image to avoid css issues
-	        .attr("src", $(img).attr("src"))
-	        .load(function() {
-	            orgwidth = this.width;   // Note: $(this).width() will not
-	            orgheight = this.height; // work for in memory images.
-	        });
+ 	   
+ 	    $('.nonurleditpop').popoverWithAutoHideForPrivilege("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
 
-	    $(window).resize(function() {
- 		   $(function () {
- 			  jQuery('#imageFromPrintScreenAndCrop').Jcrop({
- 				onChange : updateCoords,
- 				onSelect : updateCoords
-           });
- 		});
+ 	    $('.nonCompetenceLinkPop').popoverWithAutoHideForPrivilege("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution." );
 
-    });
+ 	    $('.nonimageeditpop').popoverWithAutoHideForPrivilege("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution." );
 
-	
-	
-	function updateCoords(c) {
- 			$('#x').val(c.x);
- 			$('#y').val(c.y);
- 			$('#w').val(c.w);
- 			$('#h').val(c.h);
- 	};
+ 	    $(".noAddProblemPop").popoverWithAutoHideForPrivilege("Pour signaler un problème, il faut être connecté.");
+ 	    
+ 	    $(".noneditresource").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution." );
 
- 	function checkCoords() {
- 			if (parseInt($('#w').val())) return true;
- 			return false;
- 	};
-	
- 		
-//////  End's of Jcrop functions
-
-
-
+	});
+ 	
 
  	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
@@ -222,8 +202,12 @@
  	function onAddImageClick(){
  		$("#popoverToImage").popover({
  	        placement : 'top'
- 	    });
- 	}
+ 	    }); 	}
+ 	
+ 	
+ 	 $(".popover-examples a").popover({
+         placement : 'top'
+     });
  	
  	
  	function onCompetenceRemoveClick(competenceid, resourceid){
@@ -247,8 +231,8 @@
  		$("#modalConfirmDeleteCompetence").modal("show");	
  	}
 
-</script>
-
+	</script>
+ 
 <STYLE type="text/css">
 /* Styles needed to have a larger text-area for the descrioption (placed by X-editable JavaScript).*/
 #descriptionDiv textarea { /* description text area width */
@@ -456,9 +440,9 @@
 						<div class="col-md-3">
 						    
 						    
-			  <%--  <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} >${(cyclevalue == "null") ?   : "resource.minCycle.name '&#8594;' resource.maxCycle.name}"</a>--%>
-						
-						<a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} style="color:#DD1144;" >${resource.minCycle == null ?  "? &#8594; ?" : resource.minCycle.name}</a>
+								  <%--  <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} >${(cyclevalue == "null") ?   : "resource.minCycle.name '&#8594;' resource.maxCycle.name}"</a>--%>
+	
+						  <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} style="color:#DD1144;" >${resource.minCycle == null ?  "? &#8594; ?" : resource.minCycle.name}</a>
 						</div>
 						<div class="col-md-3">
 							<a id="advertising"
@@ -595,22 +579,23 @@ to have a responsive layout - See more at: http: //avexdesigns.com
         <span id="popoverToImage2" class='glyphicon glyphicon-plus close addToolTip' data-type='dropdown' data-content='Bruno' onclick='onAddImageClick()' style="float:none; font-size:15px" title="Ajouter une image"></span>
         </h4> -->
 
-	<div>
-		<h4>Images &nbsp; &nbsp; &nbsp;</h4>
-		<span data-toggle="dropdown" class="glyphicon glyphicon-plus close addToolTip" data-original-title="" title="" style="font-size: 15px"></span>
-	</div>
-	<div title="Ajouter une image" class="dropdown" style="float: left">
-
+	<div title="Ajouter une image" class="dropdown">
+		<h4 style="display: inline-block">Images &nbsp; &nbsp; &nbsp;</h4>
+	
+		<span data-toggle="dropdown" class="glyphicon glyphicon-plus close addToolTip" data-original-title="" title="" style="font-size: 15px; display: inline-block; float: none;"></span>
 		
 		<ul class="dropdown-menu">
 			<li><a href="#" id="imageFromFile">Depuis un fichier sur votre ordinateur</a></li>
-			<li><a href="#" id="imageFromLien">Depuis un lien (url) vers une image</a></li>
+			<li><a href="#" id="imageFromLink">Depuis un lien (url) vers une image</a></li>
 			<li><a href="#" id="idPrintScreen">Depuis une image du presse papier</a></li>
 			<li><a href="#" id="tutorialPrintScreen">Comment faire une capture d'écran ?</a></li>
 		</ul>
-
+		
+		<form method="post" action="/resource/imageadd"	enctype="multipart/form-data" id="formToSubmit">
+			<input type="file" id="inputFile" name="file" style="display: none;"/>
+			<input type="hidden" name="idResource" value="${resource.id}" />
+		</form>
 	</div>
-
 
 	<%@ include file="resourceimagegallery.jsp"%>
 
@@ -689,46 +674,6 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 						<input class="btn btn-primary" type="submit" value="Enregistrer" />
 					</div>
 				</form>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-	
-	<!-- Modal : ADD IMAGE FROM FILE -->
-	<div class="modal fade" id="modalImageGalerieResourceFromFile" tabindex="-1"
-		role="dialog" aria-labelledby="Ajouter une image" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close closeModal" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Ajouter une image à la galerie</h4>
-				</div>
-				
-				
-				<form method="post" action="/resource/imageadd"	enctype="multipart/form-data" class="form-horizontal formUrlGallery">
-					<div class="modal-body">
-						<div class="form-group">
-							<label class="col-lg-4 control-label" style="text-align: left;">
-								<input type="radio" name="rdFrom" value="computer"	class="radioComputer" id="inputComputer" checked="checked" />
-								Depuis l'ordinateur
-							</label>
-							<div class="col-lg-8">
-								<input type="file" name="file" value="Parcourir..."	class="inputSource" id="inputFile" />
-							</div>
-						</div>
-						<p id="response">${response}</p>
-					</div>
-					<div class="modal-footer">
-						<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
-						<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
-						<button type="submit" name="btnPicture"	class="btn btn-primary closeModal btnSubmit">Sauver	l'image</button>
-					</div>
-				</form>
-				
-				
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -877,10 +822,9 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 		<!-- /.modal -->
 	</div>
 		<!-- Modal : ADD URL -->
-<!-- 		<div class="modal fade" id="modalPrintScreen" tabindex="-1"	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
 		<div class="modal fade" id="modalPrintScreen" >
 			<div class="modal-dialog" style="width: 70%; height: 100%">
-				<div class="modal-content" style="width: 100%; height: 100%">
+				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeButton1">&times;</button>
 						<h4 class="modal-title">Votre image</h4>
@@ -900,9 +844,8 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 							<input type="hidden" id="h" name="hCoord" />
 							<input type="hidden" id="imageFileName" value="" name="imageFileName" />
 							<input type="hidden" id="resourceid" name="resourceid" value="${resource.id}" />
-							
-							<button type="submit" class="btn btn-primary" >Sauver l'image</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal" id="closeButton2">Fermer</button>
+							<button type="submit" class="btn btn-primary" >Sauver l'image</button>
 						</form>
 					</div>
 				</div>	
