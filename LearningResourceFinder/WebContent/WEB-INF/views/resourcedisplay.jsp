@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.Jcrop.js"></script>
-
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 <script src="/js/ext/jquery.nouislider.min.js"></script>
 <script src="/js/ext/jquery.nouislider.full.min.js"></script>
 <link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
@@ -322,12 +322,13 @@
 					scoreResource="${resource.avgRatingScore}"
 					scoreUser="${mapRating[resource].score}"
 					countRating="${resource.countRating}" canvote="${current.canVote}" />
-
+				<div style="display: inline-block;">
+				<div class="addthis_sharing_toolbox" style="display: inline-block; margin-right: 26px; vertical-align: super;"></div>
 				<lrftag:favorite isFavorite="${isFavorite}"
 					idResource="${resource.id}" />
+				</div>
 			</div>
 		</div>
-
 
 		<div class="row">
 			<div id="descriptionDiv" class="col-md-6">
