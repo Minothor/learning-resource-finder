@@ -61,7 +61,7 @@
 	 				onChange : updateCoords,
 	 				onSelect : updateCoords,
 					boxWidth:1280,
-					boxHeight:720
+					boxHeight:760
 	 			});
 		});
 		
@@ -74,12 +74,12 @@
 	            orgheight = this.height; // work for in memory images.
 	        });
 
-	$(window).resize(function() {
- 		$(function () {
- 			jQuery('#imageFromPrintScreenAndCrop').Jcrop({
+	    $(window).resize(function() {
+ 		   $(function () {
+ 			  jQuery('#imageFromPrintScreenAndCrop').Jcrop({
  				onChange : updateCoords,
  				onSelect : updateCoords
- 			});
+           });
  		});
 	});
 
@@ -89,18 +89,19 @@
  			$('#y').val(c.y);
  			$('#w').val(c.w);
  			$('#h').val(c.h);
- 		};
+ 	};
 
- 		function checkCoords() {
+ 	function checkCoords() {
  			if (parseInt($('#w').val())) return true;
  			return false;
- 		};
+ 	};
  		
 //  End's of Jcrop functions
-$("#closeButton1, #closeButton2").click( function()
+
+	$("#closeButton1, #closeButton2").click( function()
            {
-    var filename = $('#imageFileName').val(); 
-    var resourceid = $('#resourceid').val();
+	    var filename = $('#imageFileName').val(); 
+	    var resourceid = $('#resourceid').val();
    	$.ajax({
    		 url: "/resource/ajax/deleteTempImage",
    		 data : "imageFileName=" + filename + "&resourceid=" + resourceid,
@@ -130,16 +131,22 @@ $("#closeButton1, #closeButton2").click( function()
             });
  		});
  		
- 	$('#imageFromLien').click(function() { 
+ 	$('#imageFromLink').click(function() { 
 			$("#modalImageGalerieResourceFromUrl").modal("show");
 	});
  	
- 	$('#imageFromFile').click(function() { 
-		$("#modalImageGalerieResourceFromFile").modal("show");
+ 	
+	$("#imageFromFile").on('click', function(e){
+        e.preventDefault();
+        $("#inputFile").trigger('click');
 	});
- 	
- 	
- 	
+	
+	
+	$('#inputFile[type=file]').change(function() {
+		$('#formToSubmit').submit();
+	});
+	
+	
  	$('#tutorialPrintScreen').click(function() { 
  		var resourceid = $('#resourceid').val();
  		window.location.replace("/resource/displayPrintScreenHelpText?resourceid=" + resourceid);
@@ -401,7 +408,7 @@ $("#closeButton1, #closeButton2").click( function()
 						</div>
 						<div class="col-md-3">
 							<a id="topic"
-								${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?mati�re?'": " class='noneditresource'"}
+								${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?matiére?'": " class='noneditresource'"}
 								data-source="${dataEnumTopic}">${resource.topic.description}</a>
 						</div>
 						<div class="col-md-3">
@@ -572,22 +579,23 @@ to have a responsive layout - See more at: http: //avexdesigns.com
         <span id="popoverToImage2" class='glyphicon glyphicon-plus close addToolTip' data-type='dropdown' data-content='Bruno' onclick='onAddImageClick()' style="float:none; font-size:15px" title="Ajouter une image"></span>
         </h4> -->
 
-	<div>
-		<h4>Images &nbsp; &nbsp; &nbsp;</h4>
-		<span data-toggle="dropdown" class="glyphicon glyphicon-plus close addToolTip" data-original-title="" title="" style="font-size: 15px"></span>
-	</div>
-	<div title="Ajouter une image" class="dropdown" style="float: left">
-
+	<div title="Ajouter une image" class="dropdown">
+		<h4 style="display: inline-block">Images &nbsp; &nbsp; &nbsp;</h4>
+	
+		<span data-toggle="dropdown" class="glyphicon glyphicon-plus close addToolTip" data-original-title="" title="" style="font-size: 15px; display: inline-block; float: none;"></span>
 		
 		<ul class="dropdown-menu">
 			<li><a href="#" id="imageFromFile">Depuis un fichier sur votre ordinateur</a></li>
-			<li><a href="#" id="imageFromLien">Depuis un lien (url) vers une image</a></li>
+			<li><a href="#" id="imageFromLink">Depuis un lien (url) vers une image</a></li>
 			<li><a href="#" id="idPrintScreen">Depuis une image du presse papier</a></li>
 			<li><a href="#" id="tutorialPrintScreen">Comment faire une capture d'écran ?</a></li>
 		</ul>
-
+		
+		<form method="post" action="/resource/imageadd"	enctype="multipart/form-data" id="formToSubmit">
+			<input type="file" id="inputFile" name="file" style="display: none;"/>
+			<input type="hidden" name="idResource" value="${resource.id}" />
+		</form>
 	</div>
-
 
 	<%@ include file="resourceimagegallery.jsp"%>
 
@@ -666,46 +674,6 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 						<input class="btn btn-primary" type="submit" value="Enregistrer" />
 					</div>
 				</form>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-	
-	<!-- Modal : ADD IMAGE FROM FILE -->
-	<div class="modal fade" id="modalImageGalerieResourceFromFile" tabindex="-1"
-		role="dialog" aria-labelledby="Ajouter une image" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close closeModal" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Ajouter une image à la galerie</h4>
-				</div>
-				
-				
-				<form method="post" action="/resource/imageadd"	enctype="multipart/form-data" class="form-horizontal formUrlGallery">
-					<div class="modal-body">
-						<div class="form-group">
-							<label class="col-lg-4 control-label" style="text-align: left;">
-								<input type="radio" name="rdFrom" value="computer"	class="radioComputer" id="inputComputer" checked="checked" />
-								Depuis l'ordinateur
-							</label>
-							<div class="col-lg-8">
-								<input type="file" name="file" value="Parcourir..."	class="inputSource" id="inputFile" />
-							</div>
-						</div>
-						<p id="response">${response}</p>
-					</div>
-					<div class="modal-footer">
-						<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
-						<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
-						<button type="submit" name="btnPicture"	class="btn btn-primary closeModal btnSubmit">Sauver	l'image</button>
-					</div>
-				</form>
-				
-				
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -854,10 +822,9 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 		<!-- /.modal -->
 	</div>
 		<!-- Modal : ADD URL -->
-<!-- 		<div class="modal fade" id="modalPrintScreen" tabindex="-1"	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
 		<div class="modal fade" id="modalPrintScreen" >
 			<div class="modal-dialog" style="width: 70%; height: 100%">
-				<div class="modal-content" style="width: 100%; height: 100%">
+				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeButton1">&times;</button>
 						<h4 class="modal-title">Votre image</h4>
@@ -877,9 +844,8 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 							<input type="hidden" id="h" name="hCoord" />
 							<input type="hidden" id="imageFileName" value="" name="imageFileName" />
 							<input type="hidden" id="resourceid" name="resourceid" value="${resource.id}" />
-							
-							<button type="submit" class="btn btn-primary" >Sauver l'image</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal" id="closeButton2">Fermer</button>
+							<button type="submit" class="btn btn-primary" >Sauver l'image</button>
 						</form>
 					</div>
 				</div>	
