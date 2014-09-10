@@ -20,6 +20,7 @@ function ajaxVerifyUrl() {
 		return;
 	}
 	
+	$('#urlErrorMessage').html('');
 	
 	if (url != '') {
 
