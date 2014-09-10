@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
@@ -115,37 +114,7 @@ public class ResourceImageController extends BaseController<User> {
 		 
 	 }
 	 
-//	 @RequestMapping("/imageaddPrintScreen")
-//	    public ModelAndView resourceImageAddPrintScreen(@RequestParam("pk") long id) throws Exception {
-//
-//	        Resource resource = resourceRepository.find(id);
-//	        User user = resource.getCreatedBy();
-//	        SecurityContext.assertCurrentUserMayEditThisUser(user);
-//
-//	        ModelAndView mv = new ModelAndView("redirect:" + UrlUtil.getRelativeUrlToResourceDisplay(resource));
-//
-//	        BufferedImage image = null;
-//
-//	        Transferable transferable = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
-//
-//	        if (transferable != null && transferable.isDataFlavorSupported(DataFlavor.imageFlavor)) {
-//	            try {
-//	                image = (BufferedImage) transferable.getTransferData(DataFlavor.imageFlavor);
-//	            } catch (UnsupportedFlavorException | IOException e) {
-//	                throw new RuntimeException(e);
-//	            }
-//	        } else {
-//	            NotificationUtil.addNotificationMessage("Veuillez effectuer une capture d'écran");
-//	            return mv;// useless to try to save image if we don't have it
-//	        }
-//
-//	        ImageUtil.createOriginalAndScalesImageFileForResource(resource, image, currentEnvironment);
-//	        
-//	        return mv;
-//	    }
-	 
 	@RequestMapping("/ajax/checkClipBoard")
-//  public @ResponseBody String checkClipBoard(@RequestParam(value = "id") long id, HttpServletRequest request) throws Exception {
 	public @ResponseBody String checkClipBoard(@RequestParam(value = "id") long id) throws Exception {
      
         Resource resource = resourceRepository.find(id);
@@ -181,7 +150,6 @@ public class ResourceImageController extends BaseController<User> {
         }
     }
 
-//    @RequestMapping("/ajax/cropImageToSave")
     @RequestMapping("/ajax/imageaddPrintScreen")
     public ModelAndView cropTheImage( 
             @RequestParam(value = "xCoord") String x,
@@ -202,13 +170,13 @@ public class ResourceImageController extends BaseController<User> {
         
         BufferedImage outImage = ImageIO.read(tmpFile);
         BufferedImage cropImage;
-        System.out.println(x + " " + y + " " + w + " " + h);
+
         if (x != null && y != null && w != null && h != null) {
             int cropx = (int) Double.parseDouble(x);
             int cropy = (int) Double.parseDouble(y);
             int cropw = (int) Double.parseDouble(w);
             int croph = (int) Double.parseDouble(h);
-            System.out.println(x + " " + y + " " + w + " " + h);
+
             cropImage = outImage.getSubimage(cropx, cropy, cropw, croph);
         }
         else
