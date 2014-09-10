@@ -98,7 +98,6 @@ public class ResourceRepository extends BaseRepository<Resource> {
                 }
                 whereCondition = whereCondition + " r.platformsCollOnString like '%" + platform.name() + "%' ";
             }
-            System.out.println(whereCondition);
             whereConditions.add(whereCondition);
         }
 
