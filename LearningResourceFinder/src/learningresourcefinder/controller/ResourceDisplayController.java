@@ -81,15 +81,19 @@ public class ResourceDisplayController extends BaseController<Resource> {
             return new ModelAndView("resourcedisplayhidden", "resource", resource);
         }        
         User user = SecurityContext.getUser();
-        
+        ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
         ////// Find min and max Cycles from slider input
         // cycles ids in ascending order of cycles names
-        System.out.println("***********************************************");
-        //System.out.println(resource.getMinCycle().getId());
-        System.out.println("***********************************************");
+
         Long minCycleId = (resource.getMinCycle() != null)?resource.getMinCycle().getId() : ID_CYCLES_IN_DB[0]; //id:300 -> 0  default   min value for slider
         Long maxCycleId = (resource.getMaxCycle() != null)?resource.getMaxCycle().getId() : ID_CYCLES_IN_DB[ID_CYCLES_IN_DB.length-1];//id:305 -> 4  default   max value for slider
         
+        if((resource.getMinCycle() != null) && (resource.getMaxCycle()!=null)){
+            
+            mv.addObject("cyclevalue","null"); // get in jsp " ? -> ? "  to  cycle value
+        }else{
+            mv.addObject("cyclevalue","notnull"); // Get in jsp a real cycle value 
+        }
 
          int minCycle=0;
          int maxCycle=4;
@@ -101,9 +105,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
             if(ID_CYCLES_IN_DB[i] == maxCycleId){                
                 maxCycle=i;               
             }
-        }  
- 
-        ModelAndView mv = new ModelAndView("resourcedisplay", "resource", resource);
+        } 
+        
         mv.addObject("mincycle",minCycle);
         mv.addObject("maxcycle",maxCycle);
         
