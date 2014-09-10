@@ -71,7 +71,7 @@ public class CycleEditController extends BaseController<Cycle> {
 
     private ModelAndView otherCycleError(Cycle cycle, Cycle otherCycle, BindingResult bindingResult) {
         ModelAndView mv = new ModelAndView ("cycleedit", "cycle", cycle);
-        bindingResult.rejectValue("nom", "", "Un autre cycle a déjà ce nom '" + cycle.getName() + "'");
+        bindingResult.rejectValue("name", "", "Un autre cycle a déjà ce nom '" + cycle.getName() + "'");
         System.out.println("Un autre cycle a déjà ce nom '" + cycle.getName() + "'");
         return mv;
     }

@@ -29,10 +29,10 @@
 <h1>Edit Cycle</h1>
 
 <form:form modelAttribute="cycle" method="post" action='<%=response.encodeURL("cycleeditsubmit")%>'>
-
-    <label>Nom</label>       <form:input path="name"/>  <form:errors path="name"/>
+    <label>Nom</label>       <form:input maxlength="15"  path="name"/>
     <input type="hidden" name="id" value="${cycle.id}"/>
-    <input type="submit" value="Sauver"/>
+    <input type="submit" value="Sauver"/><br>
+    <label style="color: red"><form:errors path="name"/></label>
  </form:form>
 </div>
 </body>
