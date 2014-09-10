@@ -322,11 +322,9 @@
 					scoreResource="${resource.avgRatingScore}"
 					scoreUser="${mapRating[resource].score}"
 					countRating="${resource.countRating}" canvote="${current.canVote}" />
-				<div style="display: inline-block;">
 				<div class="addthis_sharing_toolbox" style="display: inline-block; margin-right: 26px; vertical-align: super;"></div>
 				<lrftag:favorite isFavorite="${isFavorite}"
 					idResource="${resource.id}" />
-				</div>
 			</div>
 		</div>
 
