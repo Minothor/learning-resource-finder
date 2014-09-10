@@ -1,5 +1,6 @@
 package learningresourcefinder.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,8 +71,11 @@ public class SearchResourceController extends BaseController<Resource> {
             @RequestParam(value="competenceid", required=false) Long competenceId,
 	        @RequestParam(value="page", required=false) Integer page, 
 	        HttpSession session,
-	        @RequestParam(value="so", required=false) Long timeStamp){ 
+	        @RequestParam(value="so", required=false) Long timeStamp) throws UnsupportedEncodingException{ 
 
+	       searchPhrase = new String(searchPhrase.getBytes("ISO-8859-1"), "UTF-8"); // Replacement of wrong characters in the word.
+
+	    
         ///// We store the searchOptions in the session (via a map) because the parameters (advertising, languae, etc.) are not given
 		///// in case the user clicks a page in the search result => we remember these search criteria from the session.
 		SearchOptions searchOptions = createOrGetSearchOptionsFromSession(session, timeStamp);

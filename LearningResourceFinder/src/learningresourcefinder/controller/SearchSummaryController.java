@@ -1,5 +1,6 @@
 package learningresourcefinder.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import learningresourcefinder.model.Competence;
@@ -27,7 +28,10 @@ public class SearchSummaryController extends BaseController<Resource> {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("/search")
-	public ModelAndView search(@RequestParam("searchphrase") String searchPhrase) {
+	public ModelAndView search(@RequestParam("searchphrase") String searchPhrase) throws UnsupportedEncodingException {
+	    
+	    searchPhrase = new String(searchPhrase.getBytes("ISO-8859-1"), "UTF-8"); // Replacement of wrong characters in the word.
+
 		List<SearchResult> listOfResult = searchService.search(searchPhrase);
 		List<Competence> listOfCompetence = (List)searchService.getFirstEntities(listOfResult, 50, Competence.class);
 		int numberResource = listOfResult.size();
