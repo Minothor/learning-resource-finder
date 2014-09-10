@@ -11,7 +11,12 @@
 <script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
-<script type="text/javascript" src="/js/ext/jquery.Jcrop.js"></script>
+<script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
+
+
+<script src="/js/ext/jquery.nouislider.min.js"></script>
+<script src="/js/ext/jquery.nouislider.full.min.js"></script>
+<link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
 
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript">
@@ -40,6 +45,16 @@
 	}
 
  	$(document).ready(function() {
+ 		
+ 		//Show cycle editing  pop-ap 
+ 		$("#cycle").click(function(e) {
+ 		
+	 	 	    e.preventDefault();// prevent the default anchor functionality
+	 	 	    e.stopPropagation();
+	 	 	    $(".modal-dialog").css('width','324px');
+	 	 	    $("#editecycle").modal("show");
+		});
+ 		
  		$.fn.editable.defaults.mode = 'inline';
 
  		$('.editableField').editable({   
@@ -53,52 +68,48 @@
  				location.reload();
  		      }
 		});
- 		
- 	//  Start JCrop functions
 
-		$('#modalPrintScreen').on('shown.bs.modal', function() { 
-				jQuery('#imageFromPrintScreenAndCrop').Jcrop({
-	 				onChange : updateCoords,
-	 				onSelect : updateCoords,
-					boxWidth:1280,
-					boxHeight:760
-	 			});
-		});
-		
-		var img = $('#imageFromPrintScreenAndCrop')[0]; // Get my img elem
-	    var orgwidth, orgheight;
-	    $("<img/>") // Make in memory copy of image to avoid css issues
-	        .attr("src", $(img).attr("src"))
-	        .load(function() {
-	            orgwidth = this.width;   // Note: $(this).width() will not
-	            orgheight = this.height; // work for in memory images.
-	        });
-
-	    $(window).resize(function() {
- 		   $(function () {
- 			  jQuery('#imageFromPrintScreenAndCrop').Jcrop({
- 				onChange : updateCoords,
- 				onSelect : updateCoords
-           });
+ 		 $('.editableFieldInline').editable({   
+ 	    	  emptytext: '? ?',
+ 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+ 	    	  mode: 'inline',
+ 	    	  type: 'text',
+ 	    	  url: '/ajax/resourceeditfieldsubmit',
+ 	    	  pk: '${resource.id}',
+ 	 		  success: function(response) {
+ 				location.reload();
+ 		      }
  		});
-	});
 
-	
-	function updateCoords(c) {
- 			$('#x').val(c.x);
- 			$('#y').val(c.y);
- 			$('#w').val(c.w);
- 			$('#h').val(c.h);
- 	};
+ 		$('.editableFieldArray').editable({   
+ 		    	  emptytext: '? ?',
+ 		    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+ 		    	  mode: 'popup',
+ 		    	  type: 'text',
+ 		    	  url: '/ajax/resourceeditfieldarraysubmit',
+ 		    	  pk: '${resource.id}',
+ 		 		  success: function(response) {
+ 					location.reload();
+ 			      }
+		});
 
- 	function checkCoords() {
- 			if (parseInt($('#w').val())) return true;
- 			return false;
- 	};
- 		
-//  End's of Jcrop functions
+ 	 		
+ 		//Show cycle editing  pop-ap 
 
-	$("#closeButton1, #closeButton2").click( function()
+
+ 	 		
+ 	    $('.nonurleditpop').popoverWithAutoHideForPrivilege("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
+
+ 	    $('.nonCompetenceLinkPop').popoverWithAutoHideForPrivilege("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution." );
+
+ 	    $('.nonimageeditpop').popoverWithAutoHideForPrivilege("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution." );
+
+ 	    $(".noAddProblemPop").popoverWithAutoHideForPrivilege("Pour signaler un problème, il faut être connecté.");
+ 	 	    
+ 	    $(".noneditresource").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution." );
+
+ 	    
+ 	   	$("#closeButton1, #closeButton2").click( function()
            {
 	    var filename = $('#imageFileName').val(); 
 	    var resourceid = $('#resourceid').val();
@@ -151,43 +162,54 @@
  		var resourceid = $('#resourceid').val();
  		window.location.replace("/resource/displayPrintScreenHelpText?resourceid=" + resourceid);
  	 });
- 	
-	 $('.editableFieldInline').editable({   
-    	  emptytext: '? ?',
-    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
-    	  mode: 'inline',
-    	  type: 'text',
-    	  url: '/ajax/resourceeditfieldsubmit',
-    	  pk: '${resource.id}',
- 		  success: function(response) {
-			location.reload();
-	      }
-	});
 
- 		$('.editableFieldArray').editable({   
-	    	  emptytext: '? ?',
-	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
-	    	  mode: 'popup',
-	    	  type: 'text',
-	    	  url: '/ajax/resourceeditfieldarraysubmit',
-	    	  pk: '${resource.id}',
-	 		  success: function(response) {
-				location.reload();
-		      }
+
+	});   // End of Document Ready
+ 		
+	
+	
+ 	///////  Start JCrop functions
+ 	$(document).ready(function() {
+
+		$('#modalPrintScreen').on('shown.bs.modal', function() { 
+				jQuery('#imageFromPrintScreenAndCrop').Jcrop({
+	 				onChange : updateCoords,
+	 				onSelect : updateCoords,
+					boxWidth:1280,
+					boxHeight:760
+	 			});
 		});
- 	   
- 	    $('.nonurleditpop').popoverWithAutoHideForPrivilege("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
+		
+		var img = $('#imageFromPrintScreenAndCrop')[0]; // Get my img elem
+	    var orgwidth, orgheight;
+	    $("<img/>") // Make in memory copy of image to avoid css issues
+	        .attr("src", $(img).attr("src"))
+	        .load(function() {
+	            orgwidth = this.width;   // Note: $(this).width() will not
+	            orgheight = this.height; // work for in memory images.
+	        });
 
- 	    $('.nonCompetenceLinkPop').popoverWithAutoHideForPrivilege("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution." );
+    });
 
- 	    $('.nonimageeditpop').popoverWithAutoHideForPrivilege("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution." );
+	
+	
+	function updateCoords(c) {
+ 			$('#x').val(c.x);
+ 			$('#y').val(c.y);
+ 			$('#w').val(c.w);
+ 			$('#h').val(c.h);
+ 	};
 
- 	    $(".noAddProblemPop").popoverWithAutoHideForPrivilege("Pour signaler un problème, il faut être connecté.");
- 	    
- 	    $(".noneditresource").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution." );
+ 	function checkCoords() {
+ 			if (parseInt($('#w').val())) return true;
+ 			return false;
+ 	};
+	
+ 		
+//////  End's of Jcrop functions
 
-	});
- 	
+
+
 
  	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
@@ -202,12 +224,8 @@
  	function onAddImageClick(){
  		$("#popoverToImage").popover({
  	        placement : 'top'
- 	    }); 	}
- 	
- 	
- 	 $(".popover-examples a").popover({
-         placement : 'top'
-     });
+ 	    });
+ 	}
  	
  	
  	function onCompetenceRemoveClick(competenceid, resourceid){
@@ -231,8 +249,8 @@
  		$("#modalConfirmDeleteCompetence").modal("show");	
  	}
 
-	</script>
- 
+</script>
+
 <STYLE type="text/css">
 /* Styles needed to have a larger text-area for the descrioption (placed by X-editable JavaScript).*/
 #descriptionDiv textarea { /* description text area width */
@@ -247,6 +265,7 @@
 <title>${resource.name}</title>
 </head>
 <body>
+
 	<lrftag:breadcrumb linkactive="${resource.name}">
 		<lrftag:breadcrumbelement label="home" link="/home" />
 		<c:if test="${user != null}">
@@ -255,6 +274,38 @@
 		</c:if>
 	</lrftag:breadcrumb>
 	<div class="container">
+		<div class="modal fade" id="editecycle" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		
+				<form id="cycles" role="form" method="post"<%-- action bound with javascript --%>>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="resetForm()">&times;</button>
+							<h4 class="modal-title">Ajuster la balance selon les cycles approprié</h4>
+						</div>			
+						<div class="modal-body">
+							<div class="form-horizontal container">					
+								<div class="form-group">
+								
+								
+									<lrftag:cycleslider idSlider="resourcedisplayslider" minCycle="${mincycle}" maxCycle="${maxcycle}"/>
+																	
+								<div class="pull-right">
+									<button type="button" class="btn btn-mini btn-primary" onclick="ajaxeditcycle()">Enregistrer</button>
+								</div>
+								</div>
+		
+							</div>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</form>
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+								
 		<div class="row">
 			<div class="col-md-10">
 				<a id="title"
@@ -439,10 +490,17 @@
 						</div>
 						<div class="col-md-3">
 						    
-						    
-								  <%--  <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} >${(cyclevalue == "null") ?   : "resource.minCycle.name '&#8594;' resource.maxCycle.name}"</a>--%>
-	
-						  <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} style="color:#DD1144;" >${resource.minCycle == null ?  "? &#8594; ?" : resource.minCycle.name}</a>
+   
+			   <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} >
+			   
+			   	 <c:choose>
+   					 <c:when test="${resource.minCycle == null}">? &#8594; ?</c:when>
+    				<c:otherwise>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</c:otherwise>
+				</c:choose>
+			   
+			   </a>
+						
+				
 						</div>
 						<div class="col-md-3">
 							<a id="advertising"
