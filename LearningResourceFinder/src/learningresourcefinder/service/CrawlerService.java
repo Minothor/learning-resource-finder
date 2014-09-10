@@ -27,202 +27,300 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CrawlerService
 {
-	@Autowired  ResourceRepository resourceRepository ;
-	@Autowired  UrlResourceRepository urlResourceRepository ;
+    @Autowired  ResourceRepository resourceRepository ;
+    @Autowired  UrlResourceRepository urlResourceRepository ;
 
-	public void crawlerPage(String pageName) throws IOException {
-		switch (pageName) {
-		case "championMath" :
-			crawlerChampionMath();			
-			break;
-		case "classePrimaire" :
-			crawlerClassePrimaire();
-			break;
+    public void crawlerPage(String pageName) throws IOException {
+        switch (pageName) {
+        case "championMath" :
+            crawlerChampionMath();          
+            break;
+        case "classePrimaire" :
+            crawlerClassePrimaire();
+            break;
 
-		default:
-		}
-	}
+        default:
+        }
+    }
 
-	public void crawlerChampionMath() throws IOException
-	{
-		Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();
-		Elements elements = doc.select("table:nth-child(4)").select("a");
-		for (Element element : elements) 
-		{
-			String lienAnnee = "http://championmath.free.fr/"+element.attr("href");
-			String niveau = element.text();			
-			Document doc2 = Jsoup.connect(lienAnnee).timeout(10000).get();
-			Elements elements2 = doc2.select("div#menu li a");
-			System.out.println(niveau);
-			for (Element element2 : elements2) 
-			{
-				String titre = "Exercice "+element2.text().toLowerCase();
-				String lien = "http://championmath.free.fr/"+element2.attr("href");
-				System.out.println("\t"+titre+" ("+lien+")");
+    public void crawlerChampionMath() throws IOException
+    {
+        Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();
+        Elements elements = doc.select("table:nth-child(4)").select("a");
+        for (Element element : elements) 
+        {
+            String lienAnnee = "http://championmath.free.fr/"+element.attr("href");
+            String niveau = element.text();         
+            Document doc2 = Jsoup.connect(lienAnnee).timeout(10000).get();
+            Elements elements2 = doc2.select("div#menu li a");
+            System.out.println(niveau);
+            for (Element element2 : elements2) 
+            {
+                String titre = "Exercice "+element2.text().toLowerCase();
+                String lien = "http://championmath.free.fr/"+element2.attr("href");
+                System.out.println("\t"+titre+" ("+lien+")");
 
-				Resource r = new Resource(getSubString(titre, 50),"",SecurityContext.getUser());
-				r.setLanguage(Language.FR);
-				r.setTopic(Topic.MATH);
-				r.setFormat(Format.INTERACTIVE);
-				Set<Platform> tempSet = new HashSet<>();
-				tempSet.add(Platform.BROWSER);
-				r.setPlatforms(tempSet);
-				UrlResource url = new UrlResource(titre,lien,r);
+                Resource r = new Resource(getSubString(titre, 50),"",SecurityContext.getUser());
+                r.setLanguage(Language.FR);
+                r.setTopic(Topic.MATH);
+                r.setFormat(Format.INTERACTIVE);
+                Set<Platform> tempSet = new HashSet<>();
+                tempSet.add(Platform.BROWSER);
+                r.setPlatforms(tempSet);
+                UrlResource url = new UrlResource(titre,lien,r);
 
-				resourceRepository.persist(r);
-				urlResourceRepository.persist(url);
-				r.getShortId();
-			}
-			System.out.println("=================================================");
-		}
-	}
-
-
-	public static void main(String[] args) throws IOException 
-	{
-		CrawlerService s = new CrawlerService();
-		s.crawlerClassePrimaire();
-	}
-
-	public  void crawlerClassePrimaire() throws IOException
-	{
-		for(int i=10;i<=70;i=i+10)
-		{
-			Document doc = Jsoup.connect("http://classeprimaire.be/exercices"+i+".html").timeout(10000).get();
-			Elements elements = doc.select("#imContent > div");
-			//on commence a la 4eme div de #imContent. Dans ces div il y a 5 div compliquées: 
-			//	la 3eme div : la catégorie (nom de l’image)
-			//	la 4eme div : le titre
-			//	la 5eme div : le lien
-
-			int y =0;
-			for (Element element : elements) 
-			{
-				if(y>=3 && y<=12)
-				{
-					/*
-					 * Math :
-					 * 		mathematique.png
-					 * Histoire :
-					 * 		histoire.png
-					 * Francais :
-					 * 		grammaire.png
-					 * 		lecture.png
-					 * 		conugaison.png
-					 * 		orthographe.png
-					 * 		savoir-ecouter.png
-					 * 		vocabulaire.png
-					 * Geographie :
-					 * 		geographie_gux7xau1.png
-					 * 
-					 * anciens-ceb.png
-					 * coach-memorisation.png 
-					 */
-					String categorie = element.select("div:nth-child(3) img").attr("src");
-					String titre = element.select("div:nth-child(4)").text();
-					String lien = element.select("div:nth-child(5) a").attr("href");
-					
-					Resource r = new Resource(getSubString(titre,50),"Exercice classeprimaire.be",SecurityContext.getUser());
-					r.setLanguage(Language.FR);
-					
-					Topic topic = getTopicFromString(categorie);
-					topic = (topic!=null)?topic:getTopicFromString(titre);					
-					r.setTopic( topic);
-					
-					r.setFormat(Format.INTERACTIVE);
-					Set<Platform> tempSet = new HashSet<>();
-					tempSet.add(Platform.BROWSER);
-					r.setPlatforms(tempSet);
-					UrlResource url = new UrlResource(getSubString(titre,50),lien,r);
-
-					resourceRepository.persist(r);
-					urlResourceRepository.persist(url);
-					r.getShortId();	
-					
-					
-					System.out.println(titre);
-					System.out.println(categorie);
-					System.out.println(lien);
-					System.out.println("=====================================");
-				}
-				y++;
-			}
-		}
-	}
-
-	private String getSubString(String s,int i)
-	{
-		return (s.length()<=i)?s:s.substring(0, i);
-	}
-	private Topic getTopicFromString(String s)
-	{
-		s = s.toLowerCase();
-		if(s.contains("grammaire") ||
-				s.contains("lecture") ||
-				s.contains("conugaison") ||
-				s.contains("conjugaison") ||
-				s.contains("orthographe") ||
-				s.contains("savoir-ecouter") ||
-				s.contains("vocabulaire"))
-		{
-			return Topic.FRENCH;
-		}
-		else if(s.contains("geographie") || s.contains("géographie") ||
-				s.contains("geographique") || s.contains("géographique"))
-		{
-			return Topic.GEO;
-			
-		}
-		else if(s.contains("math")||
-				s.contains("nombres")||
-				s.contains("opération") )
-		{
-			return Topic.MATH;
-			
-		}
-		else if(s.contains("histoire") || s.contains("historique"))
-		{
-			return Topic.HISTORY;
-			
-		}
-		else if(s.contains("scientifique") || s.contains("science"))
-		{
-			return Topic.SCIENCE;
-			
-		}
-		return null;
-	}
-
-	/*
+                resourceRepository.persist(r);
+                urlResourceRepository.persist(url);
+                r.getShortId();
+            }
+            System.out.println("=================================================");
+        }
+    }
 
 
-	public static void fondationLamapCrawler() throws IOException
-	{
-		String[] urls = {"http://www.fondation-lamap.org/fr/search-activite-classe?filter[keyword]=&filter[num_per_page]=200&filter[sort]=ds_created&filter[order]=asc&op=Rechercher&form_build_id=form-l4jUhWDDLbValkrkGFsiJUfXfsDLVqVYTQu1h23PRvc&form_id=project_search_recherche_activite_class_form",
-		"http://www.fondation-lamap.org/fr/search-activite-classe?page=1&filter[keyword]=&filter[num_per_page]=200&filter[sort]=ds_created&filter[order]=asc&op=Rechercher&form_build_id=form-l4jUhWDDLbValkrkGFsiJUfXfsDLVqVYTQu1h23PRvc&form_id=project_search_recherche_activite_class_form"};
+    public static void main(String[] args) throws IOException 
+    {
+        CrawlerService s = new CrawlerService();
+        s.crawlerClassePrimaire();
+    }
 
-		for (String url : urls) 
-		{
-			Document doc = Jsoup.connect(url).timeout(10000).get();
-			Elements elements = doc.select(".results .result-item");
-			for (Element element : elements) 
-			{
-				Element elem = element.select("div > .right").first();
+    public  void crawlerClassePrimaire() throws IOException
+    {
+        for(int i=10;i<=70;i=i+10)
+        {
+            Document doc = Jsoup.connect("http://classeprimaire.be/exercices"+i+".html").timeout(10000).get();
+            Elements elements = doc.select("#imContent > div");
+            //on commence a la 4eme div de #imContent. Dans ces div il y a 5 div compliquées: 
+            //  la 3eme div : la catégorie (nom de l’image)
+            //  la 4eme div : le titre
+            //  la 5eme div : le lien
 
-				String titre = elem.select(".title > a").text();
-				String lien = "http://www.fondation-lamap.org"+elem.select(".title > a").attr("href");
-				String description = elem.select(".field-doc-resume").text();
-				String categorie = "science";
+            int y =0;
+            for (Element element : elements) 
+            {
+                if(y>=3 && y<=12)
+                {
+                    /*
+                     * Math :
+                     *      mathematique.png
+                     * Histoire :
+                     *      histoire.png
+                     * Francais :
+                     *      grammaire.png
+                     *      lecture.png
+                     *      conugaison.png
+                     *      orthographe.png
+                     *      savoir-ecouter.png
+                     *      vocabulaire.png
+                     * Geographie :
+                     *      geographie_gux7xau1.png
+                     * 
+                     * anciens-ceb.png
+                     * coach-memorisation.png 
+                     */
+                    String categorie = element.select("div:nth-child(3) img").attr("src");
+                    String titre = element.select("div:nth-child(4)").text();
+                    String lien = element.select("div:nth-child(5) a").attr("href");
+                    
+                    Resource r = new Resource(getSubString(titre,50),"Exercice classeprimaire.be",SecurityContext.getUser());
+                    r.setLanguage(Language.FR);
+                    
+                    Topic topic = getTopicFromString(categorie);
+                    topic = (topic!=null)?topic:getTopicFromString(titre);                  
+                    r.setTopic( topic);
+                    
+                    r.setFormat(Format.INTERACTIVE);
+                    Set<Platform> tempSet = new HashSet<>();
+                    tempSet.add(Platform.BROWSER);
+                    r.setPlatforms(tempSet);
+                    UrlResource url = new UrlResource(getSubString(titre,50),lien,r);
 
-				System.out.println(titre+" ("+categorie+")");
-				System.out.println("lien : "+lien);
-				System.out.println("description : "+description);
-				System.out.println("=====================================");
-			}
-		}
-	}
-	 */
+                    resourceRepository.persist(r);
+                    urlResourceRepository.persist(url);
+                    r.getShortId(); 
+                    
+                    
+                    System.out.println(titre);
+                    System.out.println(categorie);
+                    System.out.println(lien);
+                    System.out.println("=====================================");
+                }
+                y++;
+            }
+        }
+    }
+
+    private String getSubString(String s,int i)
+    {
+        return (s.length()<=i)?s:s.substring(0, i);
+    }
+    private Topic getTopicFromString(String s)
+    {
+        s = s.toLowerCase();
+        if(s.contains("grammaire") ||
+                s.contains("lecture") ||
+                s.contains("conugaison") ||
+                s.contains("conjugaison") ||
+                s.contains("orthographe") ||
+                s.contains("savoir-ecouter") ||
+                s.contains("vocabulaire"))
+        {
+            return Topic.FRENCH;
+        }
+        else if(s.contains("geographie") || s.contains("géographie") ||
+                s.contains("geographique") || s.contains("géographique"))
+        {
+            return Topic.GEO;
+            
+        }
+        else if(s.contains("math")||
+                s.contains("nombres")||
+                s.contains("opération") )
+        {
+            return Topic.MATH;
+            
+        }
+        else if(s.contains("histoire") || s.contains("historique"))
+        {
+            return Topic.HISTORY;
+            
+        }
+        else if(s.contains("scientifique") || s.contains("science"))
+        {
+            return Topic.SCIENCE;
+            
+        }
+        return null;
+    }
+
+    /*
+
+
+    public static void fondationLamapCrawler() throws IOException
+    {
+        String[] urls = {"http://www.fondation-lamap.org/fr/search-activite-classe?filter[keyword]=&filter[num_per_page]=200&filter[sort]=ds_created&filter[order]=asc&op=Rechercher&form_build_id=form-l4jUhWDDLbValkrkGFsiJUfXfsDLVqVYTQu1h23PRvc&form_id=project_search_recherche_activite_class_form",
+        "http://www.fondation-lamap.org/fr/search-activite-classe?page=1&filter[keyword]=&filter[num_per_page]=200&filter[sort]=ds_created&filter[order]=asc&op=Rechercher&form_build_id=form-l4jUhWDDLbValkrkGFsiJUfXfsDLVqVYTQu1h23PRvc&form_id=project_search_recherche_activite_class_form"};
+
+        for (String url : urls) 
+        {
+            Document doc = Jsoup.connect(url).timeout(10000).get();
+            Elements elements = doc.select(".results .result-item");
+            for (Element element : elements) 
+            {
+                Element elem = element.select("div > .right").first();
+
+                String titre = elem.select(".title > a").text();
+                String lien = "http://www.fondation-lamap.org"+elem.select(".title > a").attr("href");
+                String description = elem.select(".field-doc-resume").text();
+                String categorie = "science";
+
+                System.out.println(titre+" ("+categorie+")");
+                System.out.println("lien : "+lien);
+                System.out.println("description : "+description);
+                System.out.println("=====================================");
+            }
+        }
+    }
+     */
+
+
+
+    public void profeseurphifixCrawler() throws IOException 
+    {
+        Element tmp = null;
+        Document doc = Jsoup.connect("http://www.professeurphifix.net/").timeout(10000).get();
+        Elements elemCategories = doc.select("nav.primary-navigation > ul > li > a");
+        for (Element elemCategory : elemCategories) 
+        {
+            String categorie = elemCategory.text();
+           // System.out.println(categorie);
+            String lienCategorie = "http://www.professeurphifix.net/" + elemCategory.attr("href");
+            Document doc1 = Jsoup.connect(lienCategorie).timeout(10000).get();
+            Elements subCategories = doc1.select("div.sommaire-fiche > table > tbody > tr > td > p > a");
+
+            for (Element subCategory : subCategories) 
+            {
+                String lienSubCat = subCategory.attr("href");
+                if(lienSubCat=="")
+                    lienSubCat = lienCategorie;
+                else
+                    lienSubCat = ("http://www.professeurphifix.net/"+lienSubCat).replace("../", "");
+               // System.out.println("\t"+lienSubCat);
+                Document doc2 = Jsoup.connect(lienSubCat).timeout(10000).get();                
+                Elements ressources = doc2.select("div.fiche > table.table-fiches > tbody > tr > td  a");
+                int cpt =-1 ;
+                for (Element ressource : ressources) 
+                {
+                    
+                    String lienRessource = ressource.attr("href");  
+                    String titre = ressource.text();
+                    if (titre.matches("1")|| titre.matches("2")|| titre.matches("3")|| titre.matches("4")|| titre.matches("5")|| titre.matches("6")|| titre.matches("7")|| titre.matches("8")|| titre.matches("9") )
+                    {   
+                        if (titre.matches("1")&& !lienRessource.matches("choisir_la_question.htm") && !lienRessource.matches("geographie_relief.pdf")){
+                            cpt ++;
+                             tmp = doc2.select("div.fiche > table.table-fiches > tbody > tr > td > p  span").get(cpt);
+                            
+                        }
+                        if ( lienRessource.matches("choisir_la_question.htm"))
+                        {
+                             tmp = doc2.select("div.fiche > table.table-fiches > tbody > tr > td > p >font > a").first();
+                            titre = tmp.text()+titre;
+                        }
+                        if (lienRessource.matches("geographie_relief.pdf"))
+                        {
+                             break;
+                        }
+                        // titre = lienRessource.replace("%20", " ").replace(".pdf", "").replace(".htm", "").replace(".zip", "").replace(".PDF", "");
+                        titre = tmp.text()+titre;
+                      
+                    }
+                    
+                    String finalLink  =(lienSubCat.substring(0,lienSubCat.lastIndexOf("/")));
+                    finalLink = (finalLink+"/"+lienRessource);
+                   // System.out.println("\t\t"+titre+" ("+finalLink+" )");
+                    if (titre.equals("")){
+                        titre = "titre a remplacer";
+                    }
+                    if (titre.startsWith("Fiche")){
+                        titre = titre.substring(9, titre.length());
+                    }
+                    titre = getSubString(titre, 50);
+                    Resource r = new Resource(titre,"",SecurityContext.getUser());
+                    // TODO replace 
+                    UrlResource url = new UrlResource(titre,finalLink,r);
+
+                    resourceRepository.persist(r);
+                    urlResourceRepository.persist(url);
+                    r.getShortId();
+                }
+                
+                
+                
+                
+            }
+           // System.out.println("============================");
+        }
+        Document docgeo = Jsoup.connect("http://www.professeurphifix.net/eveil/sommaire_geographie.htm").timeout(10000).get();
+        Elements titregeo = docgeo.select("div.fiche > table.table-fiches > tbody > tr > td > p > a");
+        for (Element element : titregeo) {
+            String titre = element.text();
+            if (titre.matches("1")|| titre.matches("2")|| titre.matches("3")|| titre.matches("4")){
+                titre = element.attr("href").replace("_", " ").replace(".pdf", "").replace(".htm", "").replace(".PDF", "");
+            }
+            String finalLink = ("http://www.professeurphifix.net/eveil/"+element.attr("href"));
+            Resource r = new Resource(titre,"",SecurityContext.getUser());
+            // TODO replace 
+            UrlResource url = new UrlResource(titre,finalLink,r);
+
+            resourceRepository.persist(r);
+            urlResourceRepository.persist(url);
+            r.getShortId();
+            //System.out.println(titre+" (http://www.professeurphifix.net/eveil/"+element.attr("href")+" )");
+        }
+        
+    }
 }
+
 
 
 
