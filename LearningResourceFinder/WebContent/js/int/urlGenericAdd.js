@@ -45,7 +45,6 @@ function resetForm() {
 	 .val('')
 	 .removeAttr('checked')
 	 .removeAttr('selected');
-   $("#addResourceFormPart2").toggle('hide');
    $("#bottomButtons").hide();
    $("#urlCheckButton").show();
 }
