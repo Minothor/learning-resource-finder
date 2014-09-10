@@ -7,6 +7,7 @@
 <!-- Jquery for change input popup addImageUser -->
 <script type="text/javascript" src="/js/int/addImageUrlPlaylist.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -100,10 +101,12 @@ dd {
 	</lrftag:breadcrumb>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-11">
+			<div class="col-md-10">
 				<lrftag:pageheadertitle title="${playlist.name}" />
 			</div>
-			<div class="col-md-1 text-right" style="margin-top: 20px;">
+			<div class="col-md-2 text-right" style="margin-top: 20px;">
+				<div class="addthis_sharing_toolbox"></div>
+				<span style="padding-right: 0px">
 				<c:if test="${canEdit}">
 					<a href="<c:url value='/playlist/delete?id=${playlist.id}'/>" class="btn" data-toggle='confirmation'>
 						<button type="button" class="btn addToolTip close"

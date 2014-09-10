@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>ToujoursPlus.be - Home</title>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 </head>
 <body>
 
@@ -19,7 +20,8 @@
 	       Ce site est "plus ou moins" fonctionnel.<br/>
 	       Il reste des bugs, n’hésitez pas à les <a href="/contact">signaler</a>.<br/>
 	       <br/>
-	       <span style="font-size:15px;" class="label label-info">beta</span><br/>
+	       <span style="font-size:14px; float:inherit; margin-right: 15px" class="label label-info">beta</span>
+  	       <div class="addthis_sharing_toolbox"></div>
      </div>
      <div class="col-md-3 text-right">
 	       <a href="/lastresourcelist"><span style="font-size:20px;" class="label label-info addToolTip" title="${nbResouces} ressources ajoutées depuis le 21 avril 2014">${nbResouces}</span></a>
