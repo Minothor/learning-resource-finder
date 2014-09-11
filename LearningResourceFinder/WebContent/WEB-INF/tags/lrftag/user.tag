@@ -4,7 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 
 
-<%@ attribute name="user" type="reformyourcountry.model.User"%>
+<%@ attribute name="user" type="learningresourcefinder.model.User"%>
 <%@tag import="learningresourcefinder.util.FileUtil" %>
 
 <div class="user" id="${user.id}">

@@ -1,7 +1,7 @@
 <%@ tag body-content="empty" isELIgnored="false" %>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
-<%@ attribute name="entity" required="true" type="reformyourcountry.model.BaseEntity"%>
+<%@ attribute name="entity" required="true" type="learningresourcefinder.model.BaseEntity"%>
 <%@ attribute name="action" required="true"%>
 <%@ attribute name="value" required="true"%>
 <%@ attribute name="method" required="false" %>
