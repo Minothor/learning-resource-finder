@@ -58,6 +58,9 @@ label {
      padding-right:30px;
 }
 
+.lead {
+	word-wrap: break-word;
+}
 </style>
 
 <script>
