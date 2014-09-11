@@ -7,9 +7,9 @@ import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.BaseRepository;
 import learningresourcefinder.security.SecurityContext;
-import learningresourcefinder.service.CrawlerService;
 import learningresourcefinder.service.ImportLabSetService;
 import learningresourcefinder.service.IndexManagerService;
+import learningresourcefinder.service.crawler.CrawlerService;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
 
