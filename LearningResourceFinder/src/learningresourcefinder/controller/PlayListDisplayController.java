@@ -105,7 +105,7 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 		
 		SecurityContext.assertCurrentUserMayEditThisUser(user);
 		
-		ModelAndView mv = new ModelAndView("redirect:/playlist/" + playlistid +"/"+playlist.getName());
+		ModelAndView mv = new ModelAndView("redirect:/playlist/" + playlist.getShortId() +"/"+playlist.getName());
 		mv.addObject("random", System.currentTimeMillis());
 
 		BufferedImage image = null;
