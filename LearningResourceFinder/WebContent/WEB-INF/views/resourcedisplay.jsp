@@ -856,7 +856,7 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 	</div>
 		<!-- Modal : ADD URL -->
 		<div class="modal fade" id="modalPrintScreen" >
-			<div class="modal-dialog" style="width: 45%; height: 100%">
+			<div class="modal-dialog" style="width: 845px; height: 550px">
 				<div class="modal-content">
 					<div class="modal-header" style="padding-bottom: 0px; padding-top: 10px;">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeButton1">&times;</button>
