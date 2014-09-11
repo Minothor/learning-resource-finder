@@ -173,8 +173,7 @@ window.onload = addLang;
 	</form:form>
 	</div>
 	
-	<div class="container">
-	<section>
+	<section style="margin: 10px">
 	<c:forEach items="${resourcelist}" var="resource">
 			<lrftag:resource resource="${resource}"/>
 	</c:forEach>
@@ -205,6 +204,5 @@ window.onload = addLang;
 		</c:when>
 	</c:choose>
 	</section>
-	</div>
 </body>
 </html>
