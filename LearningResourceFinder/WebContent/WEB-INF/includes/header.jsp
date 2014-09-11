@@ -40,6 +40,12 @@
 		 	    no='$("#loginDropDown").dropdown("toggle");'/>
 		});
 	 	
+	 	$('#searchForm').submit(function() {
+	 	    if ($.trim($("#search").val()) == "") {
+	 	        return false;
+	 	    }
+	 	});
+	 	
 	});
 	
 	// Refreshes the ajax progress bar from the server
@@ -234,10 +240,10 @@
 				</c:choose>  <%-- Login / Register / Profile --%>
 				
 				<%-- Search --%>
-				<form class="navbar-form navbar-right" role="search" method="get" action="/search">
+				<form class="navbar-form navbar-right" role="search" method="get" action="/search" id="searchForm" >
 				   <div class="form-group">
 					<div class="input-group" style="width:150px;">
-						<input name="searchphrase" id="search" style="min-width:150px; width:150px; max-width:220px;" type="text" class="form-control" placeholder="Recherche" required>
+						<input name="searchphrase" id="search" style="min-width:150px; width:150px; max-width:220px;" type="text" class="form-control" placeholder="Recherche" required="required">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit">Go!</button>
 						</span>
