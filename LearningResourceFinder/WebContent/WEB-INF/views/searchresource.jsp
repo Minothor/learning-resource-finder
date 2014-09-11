@@ -115,7 +115,7 @@ window.onload = addLang;
 		<div class="filterSubBlock">
 			<fieldset>
 				<c:forEach var="platform" items="${platformsEnumAllValues}">
-					<label class="checkbox" style="margin-bottom:3px;"> <form:checkbox path="platform"	value="${platform}" />${platform.description}
+					<label class="checkbox" style="margin-bottom:3px;"> <form:checkbox path="platform"	value="${platform}" />${platform.name}
 					</label>
 				</c:forEach>
 			</fieldset>
