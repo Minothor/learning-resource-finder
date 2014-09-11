@@ -59,18 +59,22 @@
 </script>
 
 <style type="text/css">
-#sortable {
+#sortable, #notSortable {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 }
 
-#sortable li {
+#sortable li, #notSortable li {
 	margin: 3px 3px 3px 0;
 	padding: 1px;
 	float: left;
+}
+
+#sortable li {
 	cursor: move;
 }
+
 
 dd {
 	word-wrap: break-word;
@@ -143,9 +147,16 @@ dd {
 
 
 		<h3>Ressources incluses</h3>
-		<c:if test="${canEdit}">
-			<ul id="sortable">
-		</c:if>
+		
+		<c:choose>
+    	<c:when test="${canEdit}">
+    		<ul id="sortable">
+	    </c:when>
+	    <c:otherwise>
+	    	<ul id="notSortable">
+    	</c:otherwise>
+		</c:choose>
+		
 		<c:set var="i" value='1' />
 		<c:forEach items="${playlist.resources}" var="resource">
 			<c:if test="${canEdit}">
@@ -156,9 +167,9 @@ dd {
 			<li style="display: inline-block;"><lrftag:resource prefix="${prefix}" resource="${resource}" closeUrl="${closeUrl}"></lrftag:resource></li>
 			<c:set var="i" value="${i+1}" />
 		</c:forEach>
-		<c:if test="${canEdit}">
-			</ul>
-		</c:if>
+
+		</ul>
+	
 		<div style="clear: left;">
 		Pour ajouter une ressource à cette séquence, passez par la page détaillant la ressource à ajouter (en étant connecté avec votre compte).
 		</div>
