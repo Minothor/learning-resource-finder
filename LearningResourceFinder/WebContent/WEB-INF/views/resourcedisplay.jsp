@@ -51,7 +51,7 @@
  		
 	 	 	    e.preventDefault();// prevent the default anchor functionality
 	 	 	    e.stopPropagation();
-	 	 	    $(".modal-dialog").css('width','324px');
+	 	 	    $("#adjustBalance").css('width','324px');
 	 	 	    $("#editecycle").modal("show");
 		});
  		
@@ -257,13 +257,13 @@
 	<div class="container">
 		<div class="modal fade" id="editecycle" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" id="adjustBalance">
 		
 				<form id="cycles" role="form" method="post"<%-- action bound with javascript --%>>
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="resetForm()">&times;</button>
-							<h4 class="modal-title">Ajuster la balance selon les cycles approprié</h4>
+							<h4 class="modal-title">Ajuster la balance selon les cycles appropriés</h4>
 						</div>			
 						<div class="modal-body">
 							<div class="form-horizontal container">					
