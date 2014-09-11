@@ -51,7 +51,10 @@
              }
            });
  	    $( "#sortable" ).disableSelection();
- 	     
+ 	    
+  	    $('#submitButton').click(function(){
+  		   $('#modalPlaylist').hide();
+  	    });	     
  	});
 </script>
 
@@ -195,7 +198,7 @@ dd {
 				    	<div class="modal-footer">
 				    		<input type="hidden" name="idPlayList" value="${playlist.id}" />
 			          		<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
-			          		<button type="submit" class="btn btn-primary closeModal">Sauver l'image</button>
+			          		<button type="submit" class="btn btn-primary closeModal" id="submitButton">Sauver l'image</button>
 			        	</div>
 				    </form>
 		      	</div><!-- /.modal-content -->
