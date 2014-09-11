@@ -1,6 +1,9 @@
 package learningresourcefinder.controller;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
+import java.awt.Transparency;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -132,11 +135,11 @@ public class ResourceImageController extends BaseController<User> {
 
                 // Save this image with prefix "tmp-"
                 String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
-                String fileName = "tmp-" + resource.getId() + "-" + (resource.getNumberImage() + 1) + ".jpg";
+                String fileName = "tmp-" + resource.getId() + "-" + (resource.getNumberImage() + 1) + ".png";
                 
                 File imageTemp = new File(path, fileName);
                 FileUtil.ensureFolderExists(path);
-                ImageIO.write(image, "jpg", imageTemp);
+                ImageIO.write(image, "png", imageTemp);
                 
                 return fileName;
                 
@@ -170,6 +173,12 @@ public class ResourceImageController extends BaseController<User> {
         
         BufferedImage outImage = ImageIO.read(tmpFile);
         BufferedImage cropImage;
+        
+        // Check the inputImage to fill the transparent pixels in PNG and replace to white pixels
+        // Without that, usually, in the Mac's computers the image is black or pink. 
+        if( outImage.getColorModel().getTransparency() != Transparency.OPAQUE) {
+            outImage = fillTransparentPixels(outImage, Color.WHITE);
+        }
 
         if (x != null && y != null && w != null && h != null) {
             int cropx = (int) Double.parseDouble(x);
@@ -193,6 +202,19 @@ public class ResourceImageController extends BaseController<User> {
         if (tmpFile.exists()) tmpFile.delete();
 
         return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
+    }
+    
+    
+    public static BufferedImage fillTransparentPixels(BufferedImage image, Color fillColor) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage image2 = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image2.createGraphics();
+        g.setColor(fillColor);
+        g.fillRect(0, 0, w, h);
+        g.drawRenderedImage(image, null);
+        g.dispose();
+        return image2;
     }
     
     @RequestMapping("/ajax/deleteTempImage")
