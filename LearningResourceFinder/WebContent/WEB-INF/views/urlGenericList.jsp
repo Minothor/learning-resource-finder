@@ -3,6 +3,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <%@include  file="/WEB-INF/includes/addurlgenericform.jsp" %>
+<script type="text/javascript" src="/js/int/urlGenericAdd.js"></script>
 
 <script>
 $(document).ready(function() {
@@ -11,8 +12,12 @@ $(document).ready(function() {
  	    e.stopPropagation();
  	    $('#urlGenericErrorMessage').val('');	    
  	    $("#addUrlModal1").modal("show");
-	});
+	}); 
  	
+	$('#addUrlButton').click(function(){
+		resetForm();
+	});
+	
  	$(".deleteUrlLink").click(function(e) {
  		var num = $(this).attr("value");
 		$.ajax({
@@ -35,7 +40,7 @@ $(document).ready(function() {
 
    	<p>Une url générique est une url qu'on ne désire pas référencer car elle pointe vers un site avec plusieurs ressources, plutôt que sur une ressource précise de ce site.</p>
    	         
-   	<a class="btn btn-primary pull-right addUrlGenericLink">Ajouter une url générique</a>
+   	<a class="btn btn-primary pull-right addUrlGenericLink" id="addUrlButton">Ajouter une url générique</a>
 			
 	<br/><br/><br/>
 	<div class="table-responsive">
