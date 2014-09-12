@@ -202,10 +202,8 @@ public class LoginController extends BaseController<User> {
 			@RequestParam(value= "password", required = false) String password,
 			@RequestParam(value= "autoLogin", required = false) boolean autologin) {
 		
-		System.out.println("***1*** userNameOrMail: " +  userNameOrMail + " password: " + password);
 		User user = null;
 		try {
-		    System.out.println("***2*** Call of method login inside loginService");
 			user = loginService.login(userNameOrMail, password, autologin,	null, AccountConnectedType.LOCAL);
 			NotificationUtil.addNotificationMessage("Vous êtes à present connecté sur "	+ UrlUtil.getWebSiteName(),Status.SUCCESS);
 
