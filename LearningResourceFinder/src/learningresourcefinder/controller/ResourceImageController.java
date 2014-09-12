@@ -56,8 +56,7 @@ public class ResourceImageController extends BaseController<User> {
 	public ModelAndView resourceImageAdd(@RequestParam("idResource") long resourceid, @RequestParam("file") MultipartFile multipartFile) throws Exception{
 		
 		Resource resource = resourceRepository.find(resourceid);
-		User user = resource.getCreatedBy();
-		SecurityContext.assertCurrentUserMayEditThisUser(user);
+		SecurityContext.assertCurrentUserMayEditThisResource(resource);
 		
 		BufferedImage image = null;
 		image = ImageUtil.readImage(multipartFile.getBytes());
@@ -74,8 +73,7 @@ public class ResourceImageController extends BaseController<User> {
 	public ModelAndView resourceImageAddUrl(@RequestParam("idResource") long resourceid, @RequestParam("strUrl") String url) throws Exception {
 		
 		Resource resource = resourceRepository.find(resourceid);
-		User user = resource.getCreatedBy();
-		SecurityContext.assertCurrentUserMayEditThisUser(user);
+		SecurityContext.assertCurrentUserMayEditThisResource(resource);
 		
 		ModelAndView mv = new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
 
@@ -112,17 +110,17 @@ public class ResourceImageController extends BaseController<User> {
 	 @RequestMapping("/delete")
 	 public ModelAndView resourceImageDelete(@RequestParam("id") long resrouceid, @RequestParam("img") long imgid){	
 		 Resource resource = resourceRepository.find(resrouceid);
+		 SecurityContext.assertCurrentUserMayEditThisResource(resource);
+		 
 		 resourceService.resourceImageDelete(resource, imgid);
 		 return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
-		 
 	 }
 	 
 	@RequestMapping("/ajax/checkClipBoard")
 	public @ResponseBody String checkClipBoard(@RequestParam(value = "id") long id) throws Exception {
      
         Resource resource = resourceRepository.find(id);
-        User user = resource.getCreatedBy();
-        SecurityContext.assertCurrentUserMayEditThisUser(user);
+        SecurityContext.assertCurrentUserMayEditThisResource(resource);
         
         BufferedImage image = null;
         Transferable transferable = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
@@ -164,8 +162,7 @@ public class ResourceImageController extends BaseController<User> {
             ) throws IOException {
   
         Resource resource = resourceRepository.find(id);
-        User user = resource.getCreatedBy();
-        SecurityContext.assertCurrentUserMayEditThisUser(user);
+        SecurityContext.assertCurrentUserMayEditThisResource(resource);
 
         String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
         
@@ -223,8 +220,7 @@ public class ResourceImageController extends BaseController<User> {
             @RequestParam(value = "resourceid") long id)  {
 
         Resource resource = resourceRepository.find(id);
-        User user = resource.getCreatedBy();
-        SecurityContext.assertCurrentUserMayEditThisUser(user);
+        SecurityContext.assertCurrentUserMayEditThisResource(resource);
 
         String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
         File tmpFile = new File(path, imageFileName);
@@ -239,8 +235,7 @@ public class ResourceImageController extends BaseController<User> {
     public ModelAndView displayPrintScreenHelpText(@RequestParam(value = "resourceid") long id) {
   
         Resource resource = resourceRepository.find(id);
-        User user = resource.getCreatedBy();
-        SecurityContext.assertCurrentUserMayEditThisUser(user);
+        SecurityContext.assertCurrentUserMayEditThisResource(resource);
 
         return new ModelAndView("resourceimageprintscreenhelp", "resource", resource);
     }
