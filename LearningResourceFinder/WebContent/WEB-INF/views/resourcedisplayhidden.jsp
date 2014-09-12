@@ -8,7 +8,6 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="/css/int/resource-image-gallery.css" />
-<script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>

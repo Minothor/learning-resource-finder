@@ -8,7 +8,6 @@
 <link rel="stylesheet" type="text/css" href="/css/int/resource-image-gallery.css" />
 <link rel="stylesheet" type="text/css" href="/css/ext/jquery.Jcrop.css" />
 <link rel="stylesheet" type="text/css" href="/css/ext/demos.css" />
-<script type="text/javascript" src="/js/int/addImageUrlGallery.js"></script>
 <script type="text/javascript" src="/js/int/imageGallery-sortable.js"></script>
 <script type="text/javascript" src="/js/int/problemReport.js"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
@@ -576,9 +575,8 @@
 
 	<c:if test="${empty resource.competences}">aucune compétence liée</c:if>
 	<span
-		class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'
-		" :  "' onclick='onAddCompetenceClick()'
-		"} style="float: none; font-size: 15px" title="Ajouter une compétence"></span>
+		class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'" : "' onclick='onAddCompetenceClick()'"} 
+		style="float: none; font-size: 15px" title="Ajouter une compétence"></span>
 
 	<c:if test="${not empty youtubeVideoId}">
 		<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
@@ -611,23 +609,21 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 	<br />
 	<br />
 
-
 	<div title="Ajouter une image" class="dropdown">
 		<h4 style="display: inline-block">Images &nbsp; &nbsp; &nbsp;</h4>
-	
-		<span data-toggle="dropdown" class="glyphicon glyphicon-plus close addToolTip" data-original-title="" title="" style="font-size: 15px; display: inline-block; float: none;"></span>
 		
-		<ul class="dropdown-menu">
-			<li><a href="#" id="imageFromFile">Depuis un fichier sur votre ordinateur</a></li>
-			<li><a href="#" id="imageFromLink">Depuis un lien (url) vers une image</a></li>
-			<li><a href="#" id="idPrintScreen">Depuis une image du presse papier</a></li>
-			<li><a href="#" id="tutorialPrintScreen">Comment faire une capture d'écran ?</a></li>
-		</ul>
-		
-		<form method="post" action="/resource/imageadd"	enctype="multipart/form-data" id="formToSubmit">
-			<input type="file" id="inputFile" name="file" style="display: none;"/>
-			<input type="hidden" name="idResource" value="${resource.id}" />
-		</form>
+		<span class='glyphicon glyphicon-plus close addToolTip ${canEdit==true ? "' href='#' data-toggle='dropdown'": "nonimageeditpop'"} data-original-title="" title="Ajouter une image" style="font-size: 15px; display: inline-block; float: none;"></span>
+			<ul class="dropdown-menu">
+				<li><a href="#" id="imageFromFile">Depuis un fichier sur votre ordinateur</a></li>
+				<li><a href="#" id="imageFromLink">Depuis un lien (url) vers une image</a></li>
+				<li><a href="#" id="idPrintScreen">Depuis une image du presse papier</a></li>
+				<li><a href="#" id="tutorialPrintScreen">Comment faire une capture d'écran ?</a></li>
+			</ul>
+			
+			<form method="post" action="/resource/imageadd"	enctype="multipart/form-data" id="formToSubmit">
+				<input type="file" id="inputFile" name="file" style="display: none;"/>
+				<input type="hidden" name="idResource" value="${resource.id}" />
+			</form>
 	</div>
 
 	<%@ include file="resourceimagegallery.jsp"%>
@@ -731,7 +727,7 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 						<div class="form-group">
 							<label class="col-lg-4 control-label" style="text-align: left;">Depuis un lien</label>
 							<div class="col-lg-8">
-								<input type="text" name="strUrl" value="http://..."	class="inputSource form-control" id="inputUrl" />
+								<input type="text" name="strUrl" placeholder="http://..."	class="inputSource form-control" id="inputUrl" />
 							</div>
 						</div>
 						<p id="response">${response}</p>

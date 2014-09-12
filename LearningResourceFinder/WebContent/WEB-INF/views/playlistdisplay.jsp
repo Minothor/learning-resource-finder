@@ -201,7 +201,7 @@ dd {
 							    	Depuis un lien
 							    </label>
 							    <div class="col-lg-8">
-							      	<input type="hidden" name="strUrl" value="http://..." class="form-control inputSource" id="inputUrl" />
+							      	<input type="hidden" name="strUrl" placeholder="http://..." class="form-control inputSource" id="inputUrl" />
 								</div>
 							</div>
 				    	</div>
