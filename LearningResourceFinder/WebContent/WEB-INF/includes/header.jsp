@@ -40,12 +40,6 @@
 		 	    no='$("#loginDropDown").dropdown("toggle");'/>
 		});
 	 	
-	 	$('#searchForm').submit(function() {
-	 	    if ($.trim($("#search").val()) == "") {
-	 	        return false;
-	 	    }
-	 	});
-	 	
 	});
 	
 	// Refreshes the ajax progress bar from the server
