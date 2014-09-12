@@ -40,7 +40,7 @@
 			</div>
 
 			<c:if test="${resource.numberImage >= 1}">
-				<div id="yoxview-resource-${resource.id}" style="margin-left: 5px">
+				<div id="yoxview-resource-${resource.id}">
 					<a href="/gen/resource/original/${resource.id}-1.jpg"> <img
 						src="/gen/resource/resized/small/${resource.id}-1.jpg"
 						alt="${resource.name}" />
