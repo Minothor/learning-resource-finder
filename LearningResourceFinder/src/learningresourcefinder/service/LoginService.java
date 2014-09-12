@@ -102,20 +102,24 @@ public class LoginService {
             throw new IllegalArgumentException("Either localId ("+localId+") or identifier ("+identifier+") should not be null");
         }
         
+        System.out.println("***3*** assertNoInvalidDelay(user)");
         assertNoInvalidDelay(user);
         
         Boolean universalPasswordUsed = null;
         
         // Password
         if(md5Password != null && localId == null) {
+            System.out.println("***4*** assertPasswordValid");
         	universalPasswordUsed = assertPasswordValid(user, md5Password);
         	// If we reach this point (no exception), the password is ok.
         }
         
+        System.out.println("***5*** checkAccountStatus");
         checkAccountStatus(user, localId != null);
 
         //////////// Ok, we do the login.
 
+        System.out.println("***6*** " + ContextUtil.isInBatchNonWebMode());
         if (ContextUtil.isInBatchNonWebMode()) {
             throw new IllegalStateException("Bug: Trying to login in batch mode?");
         } else { // normal web case
@@ -126,6 +130,7 @@ public class LoginService {
 
         }
 
+        System.out.println("***7*** It should be connected");
         if (!Boolean.TRUE.equals(universalPasswordUsed)) {
             setLastAccess(user);
         }
