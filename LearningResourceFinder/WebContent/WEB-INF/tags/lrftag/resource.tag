@@ -4,7 +4,11 @@
 <%@ attribute name="resource" type="learningresourcefinder.model.Resource" %>
 <%@ attribute name="closeUrl" type="java.lang.String" required="false"%>
 <%@ attribute name="prefix" type="java.lang.String" required="false"%>
-
+<style>
+.resourceDescription {
+	word-wrap: break-word;
+}
+</style>
 <div
 	style="display: inline-block; position: relative; vertical-align: top; height:415px; width: 200px; margin-right: 20px; margin-bottom: 20px;"
 	class="panel panel-default">
@@ -59,7 +63,7 @@
 			</c:if>
 
 			<div class="panel-body" style="margin-bottom: 20px;">
-				<p>
+				<p class="resourceDescription">
 					<small>${resource.descriptionCut}</small>
 				</p>
 			</div>
