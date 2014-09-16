@@ -127,8 +127,6 @@ public class ResourceImageController extends BaseController<User> {
             cropImage = outImage;
         }
        
-        String newImageName = imageFileName.substring(4);
-
         ImageUtil.createOriginalAndScalesImageFileForResource(resource, cropImage, currentEnvironment);
         
         // Delete temporary file
