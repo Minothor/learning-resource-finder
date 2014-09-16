@@ -25,8 +25,6 @@ public class CrawlerBrainPOP {
     public void crawlerBrainPOP() throws IOException {
 
         Document doc1 = Jsoup.connect("http://www.brainpop.fr/topics/").timeout(10000).get();
-        //Elements categories = doc1.select("tr > td > blockquote > div > a.link_no_underline > b ");
-        //Elements titleLinks = doc1.select("tr > td > blockquote > div > div > div > div >span > a.link_no_underline , tr > td > blockquote > div > div > div > div > span.user-body");
         Elements resources = doc1.select("tr > td > blockquote > div ");
         String categorie = "";
         for(Element resource : resources)
@@ -46,28 +44,7 @@ public class CrawlerBrainPOP {
                 System.out.println("\t\t"+description);
             }
         }
-        /*
-         for (Element category : categories) 
-        {
-             for (Element titleLink : titleLinks) 
-             {
-                     if(titleLink.attr("href").toLowerCase().replace("/fr/","").replaceAll(" ", "").startsWith(category.text().toLowerCase().replaceAll(" ", "")))
-                     {  
-                         String cat = category.text();
-                         String title = titleLink.text();
-                         System.out.println(cat);
-                         System.out.println(title);
-                         if (!titleLink.attr("href").equals(""))
-                         {
-                             String lien = "http://www.brainpop.fr"+titleLink.attr("href");
-                             System.out.println(lien);
-                         }
-                     } 
-                 
-             } 
-            
-        }
-        */
+
     }
 
     public static void main(String[] args) throws IOException {
