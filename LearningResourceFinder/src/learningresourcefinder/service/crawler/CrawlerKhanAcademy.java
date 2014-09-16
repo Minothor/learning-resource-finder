@@ -52,35 +52,34 @@ public class CrawlerKhanAcademy
 
 		public void crawler() throws IOException, ParseException {
 
-			// createYoutubeResource("https://www.youtube.com/watch?v=hBEv6oupMfo");
 
 			/* MATHEMATIQUES */
-			section = "math";
-
-			getUrlSection();
-			geturlSecondSections(urlsection);
-			getRessourcesUrl();
-			getResources(urlResources);
-			System.out.println(section + "FINISH !!!!!!!!!!!");
-
-			urlsection.clear();
-			urlSecondSection.clear();
+			 section = "math";
+			
+			 getUrlSection();
+			 geturlSecondSections(urlsection);
+			 getRessourcesUrl();
+			 getResources(urlResources);
+			 System.out.println(section + "FINISH !!!!!!!!!!!");
+			
+			 urlsection.clear();
+			 urlSecondSection.clear();
 
 			/* SCIENCES */
-			// section = "science";
-			//
-			// urlsection.add(khanAcademy + "/science/biology");
-			// urlsection.add(khanAcademy + "/science/chemistry");
-			// urlsection.add(khanAcademy + "/science/cosmology-and-astronomy");
-			// urlsection.add(khanAcademy + "/science/physics");
-			// urlsection.add(khanAcademy + "/science/organic-chemistry");
-			// urlsection.add(khanAcademy + "/science/health-and-medicine");
-			// geturlSecondSections(urlsection);
-
-			// getResources();
-			// urlsection.clear();
-			// urlSecondSection.clear();
-			// System.out.println(section + "FINISH !!!!!!!!!!!");
+			 section = "science";
+			
+			 urlsection.add(khanAcademy + "/science/biology");
+			 urlsection.add(khanAcademy + "/science/chemistry");
+			 urlsection.add(khanAcademy + "/science/cosmology-and-astronomy");
+			 urlsection.add(khanAcademy + "/science/physics");
+			 urlsection.add(khanAcademy + "/science/organic-chemistry");
+			 urlsection.add(khanAcademy + "/science/health-and-medicine");
+			 geturlSecondSections(urlsection);
+			 getRessourcesUrl();
+			 getResources(urlResources);
+			 urlsection.clear();
+			 urlSecondSection.clear();
+			 System.out.println(section + "FINISH !!!!!!!!!!!");
 
 		}
 
@@ -167,8 +166,6 @@ public class CrawlerKhanAcademy
 
 			for (String url : resources)
 				{
-					// String url =
-					// "https://www.youtube.com/watch?v=SHjVIxPiHU8";
 					Document doc = Jsoup.connect(url).timeout(0).get();
 					boolean youtube = false;
 
