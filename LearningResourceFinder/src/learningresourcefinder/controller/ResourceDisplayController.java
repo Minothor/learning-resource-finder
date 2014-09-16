@@ -440,8 +440,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
              
         Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
         Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);
-        System.out.println(cycleMin.getId());
-        System.out.println(cycleMax.getId());
         resource.setMinCycle(cycleMin);
         resource.setMaxCycle(cycleMax);        
         resourceRepository.merge(resource);
