@@ -247,11 +247,6 @@
  		$("#modalCompetence").modal("show");
  	}
  	
- 	function onCompetenceRemoveClick(competenceid, resourceid){
- 		$("#competenceHiddenField").attr("value", competenceid);
- 		$("#modalConfirmDeleteCompetence").modal("show");	
- 	}
-
 </script>
 
 <STYLE type="text/css">
@@ -930,29 +925,5 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 		<!-- /.modal -->
 	</div>
 		
-		
-		<!-- Modal : COMPETENCE REMOVE CONFIRM  -->
-   <div class="modal fade" id="modalConfirmDeleteCompetence">
-	   <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title">Confirmation</h4>
-	      </div>
-	      <div class="modal-body">
-	        <p>Voulez-vous retirer cette compétence de la ressource ?</p>
-	      </div>
-	      <div class="modal-footer">
-	       <form action="/removecompetencefromresource">
-	        <input id="competenceHiddenField" type="hidden" name="competenceid" />  <%-- Filled by JavaScript --%>
-	        <input id="resourceHiddenField" type="hidden" name="resourceid" value="${resource.id}" />
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-	        <button type="submit" class="btn btn-primary">Retirer</button>
-	       </form>
-	      </div>
-	   </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    
-
 </body>
 </html>
