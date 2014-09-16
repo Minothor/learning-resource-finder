@@ -14,6 +14,7 @@ import java.util.Set;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
+import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.search.SearchOptions.Format;
@@ -185,6 +186,9 @@ public class CrawlerKhanAcademy
 									Resource r = new Resource(title, title, SecurityContext.getUser());
 									r.setFormat(Format.INTERACTIVE);
 									r.setLanguage(Language.FR);
+									Topic topic = CrawlerService.getTopicFromString(section);
+									r.setTopic(topic);
+									
 									Set<Platform> tempSet = new HashSet<>();
 									tempSet.add(Platform.BROWSER);
 									r.setPlatforms(tempSet);
@@ -230,6 +234,8 @@ public class CrawlerKhanAcademy
 					Resource r = new Resource(title, description, user);
 					r.setFormat(Format.VIDEOS);
 					r.setLanguage(Language.FR);
+					Topic topic = CrawlerService.getTopicFromString(section);
+					r.setTopic(topic);
 					Set<Platform> tempSet = new HashSet<>();
 					tempSet.add(Platform.BROWSER);
 					r.setPlatforms(tempSet);
