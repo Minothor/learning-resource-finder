@@ -35,7 +35,6 @@ public class CrawlerExoFiche
 			Set<String> liensPagePrincipale = new HashSet<>();
 			Set<String> liensPagesCycles = new HashSet<>();
 			Set<Resource> ressources = new HashSet<>();
-
 			Elements elements = new Elements();
 
 			// TRAITEMENT PAGE PRINCIPALE

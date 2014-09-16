@@ -13,6 +13,7 @@ import learningresourcefinder.service.crawler.CrawlerService;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
 
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,7 +70,7 @@ public class AdminController extends BaseRepository<User> {
 	}
 	
 	@RequestMapping("/crawler/{pageName}")
-	public String crawler(@PathVariable("pageName") String pageName) 
+	public String crawler(@PathVariable("pageName") String pageName) throws ParseException 
 	{
 		SecurityContext.assertUserHasRole(Role.ADMIN);    	
 		try
