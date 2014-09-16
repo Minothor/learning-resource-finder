@@ -8,11 +8,20 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
@@ -26,6 +35,7 @@ import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.web.UrlUtil;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,7 +78,68 @@ public class ResourceImageController extends BaseController<User> {
 		return mv;
 	}
 
+	@RequestMapping("/ajax/resourceImageClipBoardBeforeCrop")
+	public @ResponseBody String resourceImageClipBoardBeforeCrop(HttpServletRequest request, @RequestParam("resourceid") long resourceid) throws ServletException, IOException {
+	    Resource resource = resourceRepository.find(resourceid);
+	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
 
+        // Save this image with prefix "tmp-". It's a temporary file until the user crops the image and calls resourceImageClipBoardAfterCrop
+        String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
+        String fileName = "tmp-" + resource.getId() + "-" + (resource.getNumberImage() + 1) + ".png";
+
+        // We save the image as PNG (for crop) instead of JPEG because on Mac/Safari, JPEG do not work in the crop page (don't know why) -- Bruno 2014-09-16
+	    ImageUtil.saveImageToFileAsPNG(request.getInputStream(), path, fileName);
+
+	    return fileName;
+	}
+
+
+    @RequestMapping("/ajax/resourceImageClipBoardAfterCrop")
+    public ModelAndView resourceImageClipBoardAfterCrop( 
+            @RequestParam(value = "xCoord") String x,
+            @RequestParam(value = "yCoord") String y,
+            @RequestParam(value = "wCoord") String w,
+            @RequestParam(value = "hCoord") String h,
+            @RequestParam(value = "imageFileName") String imageFileName,
+            @RequestParam(value = "resourceid") long id
+            ) throws IOException {
+  
+        Resource resource = resourceRepository.find(id);
+        SecurityContext.assertCurrentUserMayEditThisResource(resource);
+
+        String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
+        
+        File tmpFile = new File(path, imageFileName);
+        
+        BufferedImage outImage = ImageIO.read(tmpFile);
+        BufferedImage cropImage;
+        
+        outImage = ImageUtil.readImage(outImage);
+
+        if (x != null && y != null && w != null && h != null) {
+            int cropx = (int) Double.parseDouble(x);
+            int cropy = (int) Double.parseDouble(y);
+            int cropw = (int) Double.parseDouble(w);
+            int croph = (int) Double.parseDouble(h);
+
+            cropImage = outImage.getSubimage(cropx, cropy, cropw, croph);
+        } else {
+            cropImage = outImage;
+        }
+       
+        String newImageName = imageFileName.substring(4);
+
+        ImageUtil.createOriginalAndScalesImageFileForResource(resource, cropImage, currentEnvironment);
+        
+        // Delete temporary file
+        if (tmpFile.exists()) {
+            tmpFile.delete();
+        }
+
+        return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
+    }
+    
+    
 	@RequestMapping("/imageaddUrl" )
 	public ModelAndView resourceImageAddUrl(@RequestParam("idResource") long resourceid, @RequestParam("strUrl") String url) throws Exception {
 		
@@ -90,8 +161,6 @@ public class ResourceImageController extends BaseController<User> {
 
         return mv;
 	}
-
-    
     
 	@RequestMapping("/change")
 	public ModelAndView resourceImageChange(@RequestBody ArrayList<String> order){	
@@ -115,104 +184,7 @@ public class ResourceImageController extends BaseController<User> {
 		 resourceService.resourceImageDelete(resource, imgid);
 		 return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
 	 }
-	 
-	@RequestMapping("/ajax/checkClipBoard")
-	public @ResponseBody String checkClipBoard(@RequestParam(value = "id") long id) throws Exception {
-     
-        Resource resource = resourceRepository.find(id);
-        SecurityContext.assertCurrentUserMayEditThisResource(resource);
-        
-        BufferedImage image = null;
-        Transferable transferable = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
 
-        // If clipboard contains an image
-        if (transferable != null && transferable.isDataFlavorSupported(DataFlavor.imageFlavor)) {
-            try {
-                
-                image = (BufferedImage) transferable.getTransferData(DataFlavor.imageFlavor);
-
-                // Save this image with prefix "tmp-"
-                String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
-                String fileName = "tmp-" + resource.getId() + "-" + (resource.getNumberImage() + 1) + ".png";
-                
-                File imageTemp = new File(path, fileName);
-                FileUtil.ensureFolderExists(path);
-                ImageIO.write(image, "png", imageTemp);
-                
-                return fileName;
-                
-            } catch (UnsupportedFlavorException | IOException e) {
-                throw new RuntimeException(e);
-            }
-            
-        } else {
-            NotificationUtil.addNotificationMessage("Veuillez effectuer une capture d'écran");
-            return null;
-        }
-    }
-
-    @RequestMapping("/ajax/imageaddPrintScreen")
-    public ModelAndView cropTheImage( 
-            @RequestParam(value = "xCoord") String x,
-            @RequestParam(value = "yCoord") String y,
-            @RequestParam(value = "wCoord") String w,
-            @RequestParam(value = "hCoord") String h,
-            @RequestParam(value = "imageFileName") String imageFileName,
-            @RequestParam(value = "resourceid") long id
-            ) throws IOException {
-  
-        Resource resource = resourceRepository.find(id);
-        SecurityContext.assertCurrentUserMayEditThisResource(resource);
-
-        String path = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_ORIGINAL_SUB_FOLDER;
-        
-        File tmpFile = new File(path, imageFileName);
-        
-        BufferedImage outImage = ImageIO.read(tmpFile);
-        BufferedImage cropImage;
-        
-        // Check the inputImage to fill the transparent pixels in PNG and replace to white pixels
-        // Without that, usually, in the Mac's computers the image is black or pink. 
-        if( outImage.getColorModel().getTransparency() != Transparency.OPAQUE) {
-            outImage = fillTransparentPixels(outImage, Color.WHITE);
-        }
-
-        if (x != null && y != null && w != null && h != null) {
-            int cropx = (int) Double.parseDouble(x);
-            int cropy = (int) Double.parseDouble(y);
-            int cropw = (int) Double.parseDouble(w);
-            int croph = (int) Double.parseDouble(h);
-
-            cropImage = outImage.getSubimage(cropx, cropy, cropw, croph);
-        }
-        else
-            cropImage = outImage;
-       
-        String newImageName = imageFileName.substring(4);
-        
-        FileUtil.ensureFolderExists(path);
-        ImageIO.write(cropImage, "jpg", new File(path, newImageName));
-        
-        ImageUtil.createOriginalAndScalesImageFileForResource(resource, cropImage, currentEnvironment);
-        
-        // Delete temporary file
-        if (tmpFile.exists()) tmpFile.delete();
-
-        return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
-    }
-    
-    
-    public static BufferedImage fillTransparentPixels(BufferedImage image, Color fillColor) {
-        int w = image.getWidth();
-        int h = image.getHeight();
-        BufferedImage image2 = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = image2.createGraphics();
-        g.setColor(fillColor);
-        g.fillRect(0, 0, w, h);
-        g.drawRenderedImage(image, null);
-        g.dispose();
-        return image2;
-    }
     
     @RequestMapping("/ajax/deleteTempImage")
     public ModelAndView deleteTempImage( 

@@ -43,6 +43,49 @@
 		});	
 	}
 
+	// Clipboard paste image - START 
+	// http://mobiarch.wordpress.com/2013/09/25/upload-image-by-copy-and-paste/
+	document.addEventListener("DOMContentLoaded", function() {
+		var pasteTarget = document.getElementById("pasteTarget");
+		pasteTarget.addEventListener("paste", handlePaste);
+	});
+	
+	function handlePaste(e) {
+		var idresource = $("#resourceHiddenField").val();
+	    for (var i = 0 ; i < e.clipboardData.items.length ; i++) {
+	        var item = e.clipboardData.items[i];
+	        console.log("Item type: " + item.type);
+	        if (item.type.indexOf("image") != -1) {
+	        	uploadFile(item.getAsFile());
+	        } else {
+				$('#printScreenNotFound').html("Veuillez d'abord effectuer une capture d'écran (il n'y a pas d'image dans le presse-papier)."); 
+	        }
+	    }
+	}
+	function uploadFile(file) {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open("POST", "/resource/ajax/resourceImageClipBoardBeforeCrop?resourceid= " + $('#resourceid').val(), false);
+	    xhr.onreadystatechange=function() {
+	        url=xhr.responseText;
+	 		$("#imageFileName").val(xhr.responseText);
+	   		if(url != null && url != ''){
+	    		url = '/gen/resource/original/' + xhr.responseText;  // Url of the temp image (to display for cropping)
+	   			$("#imageFromPrintScreenAndCrop").attr("src", url);
+	   			$("#waitingModalForPrintScreen").modal("hide");
+	   			$("#modalPrintScreen").modal("show");
+   			} else { // Problemo
+              location.reload();
+	   		};
+
+	    }
+	    xhr.setRequestHeader("Content-Type", file.type);
+	    xhr.send(file);
+	}
+	function resetFormPrintScreenNotFound() {
+		$('#printScreenNotFound').html('');
+	};
+	// Clipboard paste image - END
+	
  	$(document).ready(function() {
  		
  		//Show cycle editing  pop-ap 
@@ -119,30 +162,14 @@
 
            }
         );
-
- 		$("#idPrintScreen").click(function(){
-            var idresource = $("#resourceHiddenField").val();
-            
-            $.ajax({
- 		    	url:'/resource/ajax/checkClipBoard',
- 		    	data: 'id='+idresource,
- 		    		success: function(response){
- 		    		url=response;
- 		    		$("#imageFileName").val(response);
- 		    		if(url != null && url != ''){
- 	 		    		url = '/gen/resource/original/'+response;
- 		    			$("#modalPrintScreen").modal("show");
- 		    			$("#imageFromPrintScreenAndCrop").attr("src", url);
- 		    			}
- 		    		else{
-		                location.reload();
- 		    		};
- 		   			},
-            });
- 		});
+ 	   	
+ 	$('#idPrintScreen').click(function() { 
+		$("#waitingModalForPrintScreen").modal("show");
+	});
+ 	   
  		
  	$('#imageFromLink').click(function() { 
-			$("#modalImageGalerieResourceFromUrl").modal("show");
+		$("#modalImageGalerieResourceFromUrl").modal("show");
 	});
  	
  	
@@ -193,20 +220,19 @@
 	
 
     });
-
-//////  End's of Jcrop functions
+	//////  End's of Jcrop functions
 
 
  	function onUrlAddClick(){
  		$("#modalUrlResource").modal("show");
  	}
+	
  	function onUrlEditClick(id, url, name) {
  		$("#urlResourceIdField").attr("value", id);
  		$("#urlField").attr("value", url);
  		$("#nameField").attr("value", name);
  		$("#modalUrlResource").modal("show");
  	}
-
  	
  	function onCompetenceRemoveClick(competenceid, resourceid){
  		$("#competenceHiddenField").attr("value", competenceid);
@@ -217,13 +243,10 @@
  	    $("#modalConfirmDeleteResource").modal("show");	
  	}
  	
- 	
-
  	function onAddCompetenceClick(){
  		$("#modalCompetence").modal("show");
  	}
  	
- 	 	
  	function onCompetenceRemoveClick(competenceid, resourceid){
  		$("#competenceHiddenField").attr("value", competenceid);
  		$("#modalConfirmDeleteCompetence").modal("show");	
@@ -253,7 +276,7 @@
 				link="/ressourcelist/${user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
-	<div class="container">
+	<div class="container" id="pasteTarget">
 		<div class="modal fade" id="editecycle" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" id="adjustBalance">
@@ -868,7 +891,7 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 					
 					<div class="modal-footer" style="padding-top: 0px; padding-bottom: 0px">
 					
-					<form action="/resource/ajax/imageaddPrintScreen" method="get" id="submitCoordsToCrop" onsubmit="return checkCoords();">
+					<form action="/resource/ajax/resourceImageClipBoardAfterCrop" method="get" id="submitCoordsToCrop" onsubmit="return checkCoords();">
 							<input type="hidden" id="x" name="xCoord" />
 							<input type="hidden" id="y"	name="yCoord" />
 							<input type="hidden" id="w" name="wCoord" />
@@ -884,7 +907,28 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 			</div>
 		</div>
 		<!-- /.modal -->
-
+		
+	<!-- Modal : WAITING MODAL FROM PRINTSCREEN  -->
+	<div class="modal fade" id="waitingModalForPrintScreen">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" onclick="resetFormPrintScreenNotFound()">&times;</button>
+					<h4 class="modal-title">Information</h4>
+				</div>
+				<div class="modal-body">
+					<p>Veuillez appuyer sur les touches CTRL + V pour récupérer l'image du presse-papier.</p>
+					<span id="printScreenNotFound" class="text-warning"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default closeModal" data-dismiss="modal" onclick="resetFormPrintScreenNotFound()">Fermer</button>
+				</div>
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+	</div>
 		
 		
 		<!-- Modal : COMPETENCE REMOVE CONFIRM  -->
