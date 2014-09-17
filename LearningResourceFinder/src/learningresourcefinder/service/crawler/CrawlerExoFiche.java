@@ -1,7 +1,9 @@
 package learningresourcefinder.service.crawler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import learningresourcefinder.model.Cycle;
@@ -17,6 +19,7 @@ import learningresourcefinder.security.SecurityContext;
 import org.apache.jasper.tagplugins.jstl.core.Url;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,100 +28,83 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 public class CrawlerExoFiche
-	{
-		   @Autowired  ResourceRepository resourceRepository ;
-		   @Autowired  UrlResourceRepository urlResourceRepository ;
+{
+    @Autowired  ResourceRepository resourceRepository ;
+    @Autowired  UrlResourceRepository urlResourceRepository ;
 
-		// DONE
-		public void crawler() throws IOException {
+    // DONE
+    public void crawler() throws IOException 
+    {        
+        String[] sites = {"http://www.exofiches.net/maternelle-ps-ms-gs.php",
+        "http://www.exofiches.net/elementaire-cycle2-cp-ce1.php",
+        "http://www.exofiches.net/elementaire-cycle3-ce2-cm1-cm2.php"};
+        
+        String[][] cycles = {{"P1-2","P1-2"},
+                                {"P1-2","P1-2"},
+                                {"P3-4","P5-6"}};
+        
+        
+        for (int i=0;i<sites.length;i++)
+        {
+            String mainLink = sites[i];
+            //System.out.println("**********************\n");
+          //  System.out.println(mainLink + " min cycle :" + cycles[i][0] + " max cycle :" + cycles[i][1]);
+          //  System.out.println("**********************\n");
 
-			Set<String> liensPagePrincipale = new HashSet<>();
-			Set<String> liensPagesCycles = new HashSet<>();
-			Set<Resource> ressources = new HashSet<>();
-			Elements elements = new Elements();
+            Document doc = Jsoup.connect(mainLink).timeout(10000).get();
 
-			// TRAITEMENT PAGE PRINCIPALE
-			// %%%%%%%%%%%%%%%%%%%%%%%%%%%
+            Elements elements = doc.select("td td");
+            String catName ="";
+            for(Element element : elements)
+            {
+                if(element.select(".ProduitConfig").size()>0)
+                {
+                    if(!element.select(".ProduitConfig").text().equals(""))
+                    catName = element.select(".ProduitConfig").text();
+                    //System.out.println(catName);
+                }
+                if(element.select("a").size()>0)
+                {
 
-			Document doc = Jsoup.connect("http://www.exofiches.net/").timeout(10000).get();
+                    String url = element.select("a").attr("href");
+                    if ((!url.contains("http")) && (!url.contains("javascript")))
+                    {
+                        //System.out.println("url : "+element.select("a").attr("href"));
+                        doc = Jsoup.connect("http://www.exofiches.net/"+url).timeout(10000).get();
+                        Elements elemRessources = doc.select("td td td");
+                        //System.out.println(doc.select("tr").size());
+                        List<String> titres = new ArrayList<String>();
+                        List<String> urls = new ArrayList<String>();
+                        for(Element ressource : elemRessources)
+                        {
+                            if(ressource.select("a").size()>0)
+                            {
+                                urls.add("http://www.exofiches.net/" +ressource.select("a").attr("href"));
+                            }
+                            if(ressource.select(".ResumePrix").size()>0)
+                            {
+                                titres.add(ressource.text());
+                            }
+                        }
+                        
+                        for(int j=0;j<titres.size();j++)
+                        {
+                            //System.out.println("\t"+titres.get(j)+" "+urls.get(j));
+                            System.out.println(titres.get(j)+"("+urls.get(j)+")\n\t"+catName+" "+cycles[i][0]+"-"+cycles[i][1]);
 
-			elements = doc.select("table table:gt(3)").select("div");
+                            CrawlerService cs = new CrawlerService();
+                            cs.persistRessource(titres.get(j),urls.get(j),catName,"",0,cycles[i][0] ,cycles[i][1]);
+                            
+                        }
+                    }
 
-			for (int i = 1; i < 4; i++)
-				liensPagePrincipale.add(elements.get(i).select("a").attr("href"));
+                }
+            }
+        }
+    }
 
-			// TRAITEMENT PAGES cycles
-			// %%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-			int cpt = 0;
-			int minCycle = 0;
-			int maxCycle = 1;
-
-			for (String mainLink : liensPagePrincipale)
-				{
-
-					System.out.println("**********************\n");
-					System.out.println(mainLink + " min cycle :" + minCycle + " max cycle :" + maxCycle);
-					System.out.println("**********************\n");
-
-					doc = Jsoup.connect(mainLink).timeout(10000).get();
-
-					elements = doc.select("a");
-
-					for (int i = 0; i < elements.size(); i++)
-						{
-							String href = elements.get(i).attr("href");
-
-							if ((!href.contains("http")) && (!href.contains("javascript")))
-								liensPagesCycles.add("http://www.exofiches.net/" + href);
-						}
-					// TRAITEMENT PAGES RESSOURCES
-					// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-					System.out.println("\n");
-					for (String url : liensPagesCycles)
-						{
-							doc = Jsoup.connect(url).timeout(10000).get();
-							System.out.println("connecté a " + url);
-							elements = doc.select("a");
-
-							for (int i = 0; i < elements.size(); i++)
-								{
-
-									String href = elements.get(i).attr("href");
-
-									if ((!href.contains("http")) && (!href.contains("javascript")) && (!href.contains("sommaire")))
-										{
-
-											String titreRessource = href.replace('_', ' ').replace('-', ' ').replace("PDF/", "").replace(".pdf", "");
-											href = "http://www.exofiches.net/" + href;
-											System.out.println(href);
-											
-
-											Resource r = new Resource(CrawlerService.getSubString(titreRessource, 50), titreRessource, SecurityContext.getUser());
-											r.setLanguage(Language.FR);
-											r.setFormat(Format.DOC);
-
-											Set<Platform> tempSet = new HashSet<>();
-											tempSet.add(Platform.BROWSER);
-											r.setPlatforms(tempSet);
-											UrlResource urlResource = new UrlResource(CrawlerService.getSubString(titreRessource, 50), href, r);
-
-											ressources.add(r);
-											
-											resourceRepository.persist(r);
-											urlResourceRepository.persist(urlResource);
-											r.getShortId();
-											
-											
-										}
-								}
-						}
-
-					// %%%%%%%%%%%%%% Passage aux Cycles suivants
-					liensPagesCycles.clear();
-					cpt = cpt + 1;
-					minCycle = minCycle + 1;
-					maxCycle = maxCycle + 1;
-				}
-		}
-	}
+    public static void main(String[] args) throws IOException {
+        CrawlerExoFiche cr = new CrawlerExoFiche();
+        cr.crawler();
+    }
+}

@@ -21,6 +21,31 @@ public class CrawlerLaRecre {
     ResourceRepository resourceRepository;
     @Autowired
     UrlResourceRepository urlResourceRepository;
+    
+    public void crawler() throws IOException{
+        CrawlerLaRecre cr = new CrawlerLaRecre();
+        cr.crawlerFrancais4_7();
+        cr.crawlerFrancais8_10();
+        cr.crawlerFrancais11_13();
+        cr.crawlerGeographie4_7();
+        cr.crawlerGeographie8_10();
+        cr.crawlerGeographie11_13();
+        cr.crawlerHistoire4_7();
+        cr.crawlerHistoire8_10();
+        cr.crawlerHistoire11_13();
+        cr.crawlerLangues8_10();
+        cr.crawlerLangues11_13();
+        cr.crawlerMath4_7();
+        cr.crawlerMath8_10();
+        cr.crawlerMath11_13();
+        cr.crawlerSciences4_7();
+        cr.crawlerSciences8_10();
+        cr.crawlerSciences11_13();
+        cr.crawlerSecuriteRoutiere4_13();
+        cr.crawlerVocabulaire4_7();
+        cr.crawlerVocabulaire8_10();
+        cr.crawlerVocabulaire11_13();
+    }
 
     public void crawlerMath4_7() throws IOException {
 
@@ -40,6 +65,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
     }
@@ -62,6 +90,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
@@ -85,6 +115,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
@@ -108,6 +140,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
@@ -131,6 +166,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
@@ -154,13 +191,15 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
     public void crawlerHistoire4_7() throws IOException {
-
+        
         Document doc1 = Jsoup
                 .connect(
                         "http://www.larecre.net/exercices_reload.php?_=1410527270223&min=4&max=7&exo=1&lessons=1&cat=3")
@@ -177,6 +216,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
@@ -200,6 +242,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
@@ -223,6 +267,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
@@ -246,6 +292,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
@@ -269,6 +318,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
@@ -292,6 +343,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
@@ -315,6 +368,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
@@ -338,6 +394,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
@@ -361,6 +419,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
@@ -384,6 +444,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
@@ -407,6 +470,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
@@ -430,6 +495,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
@@ -453,6 +520,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P5-6");
             }
         }
 
@@ -476,6 +546,8 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
@@ -499,6 +571,9 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
+
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 

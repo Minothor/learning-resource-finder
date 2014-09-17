@@ -14,6 +14,7 @@ import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
 
+import org.apache.log4j.chainsaw.Main;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -83,7 +84,6 @@ public class CrawlerProfesseurPhifix
                     
                     String finalLink  =(lienSubCat.substring(0,lienSubCat.lastIndexOf("/")));
                     finalLink = (finalLink+"/"+lienRessource);
-                   // System.out.println("\t\t"+titre+" ("+finalLink+" )");
                     if (titre.equals("")){
                         titre = "titre a remplacer";
                     }
@@ -91,13 +91,9 @@ public class CrawlerProfesseurPhifix
                         titre = titre.substring(9, titre.length());
                     }
                     titre = CrawlerService.getSubString(titre, 50);
-                    Resource r = new Resource(titre,"",SecurityContext.getUser());
-                    // TODO replace 
-                    UrlResource url = new UrlResource(titre,finalLink,r);
-
-                    resourceRepository.persist(r);
-                    urlResourceRepository.persist(url);
-                    r.getShortId();
+                   // System.out.println("\t\t"+titre+" ("+finalLink+" )"+"  cat:"+categorie);
+                    CrawlerService cs = new CrawlerService();
+                    cs.persistRessource(titre,finalLink,categorie,"",0,"","");
                 }    
             }
            // System.out.println("============================");
@@ -110,15 +106,16 @@ public class CrawlerProfesseurPhifix
                 titre = element.attr("href").replace("_", " ").replace(".pdf", "").replace(".htm", "").replace(".PDF", "");
             }
             String finalLink = ("http://www.professeurphifix.net/eveil/"+element.attr("href"));
-            Resource r = new Resource(titre,"",SecurityContext.getUser());
-            // TODO replace 
-            UrlResource url = new UrlResource(titre,finalLink,r);
-
-            resourceRepository.persist(r);
-            urlResourceRepository.persist(url);
-            r.getShortId();
-            //System.out.println(titre+" (http://www.professeurphifix.net/eveil/"+element.attr("href")+" )");
+            CrawlerService cs = new CrawlerService();
+            cs.persistRessource(titre,finalLink,"Geographie","",0,"","");
+           // System.out.println(titre+" (http://www.professeurphifix.net/eveil/"+element.attr("href")+" )");
         }
         
+        
+        
+    }
+    public static void main(String[] args) throws IOException {
+        CrawlerProfesseurPhifix cp = new CrawlerProfesseurPhifix();
+        cp.crawler();
     }
 }

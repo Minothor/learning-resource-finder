@@ -22,15 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-@Transactional
-@Service
 public class CrawlerChampionMath 
 {
-    @Autowired  ResourceRepository resourceRepository ;
-    @Autowired  UrlResourceRepository urlResourceRepository ;
   //DONE
-    public void crawler() throws IOException
+    public static void crawler() throws IOException
     {
         Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();
         Elements elements = doc.select("table:nth-child(4)").select("a");
@@ -46,21 +41,18 @@ public class CrawlerChampionMath
                 String titre = "Exercice "+element2.text().toLowerCase();
                 String lien = "http://championmath.free.fr/"+element2.attr("href");
                 System.out.println("\t"+titre+" ("+lien+")");
+                String anneeCycle = null;
 
-                Resource r = new Resource(CrawlerService.getSubString(titre, 50),"",SecurityContext.getUser());
-                r.setLanguage(Language.FR);
-                r.setTopic(Topic.MATH);
-                r.setFormat(Format.INTERACTIVE);
-                Set<Platform> tempSet = new HashSet<>();
-                tempSet.add(Platform.BROWSER);
-                r.setPlatforms(tempSet);
-                UrlResource url = new UrlResource(titre,lien,r);
-
-                resourceRepository.persist(r);
-                urlResourceRepository.persist(url);
-                r.getShortId();
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,"Math","",0,anneeCycle,anneeCycle);
             }
             System.out.println("=================================================");
         }
+    }
+    
+
+    public static void main(String[] args) throws IOException {
+        CrawlerChampionMath cr = new CrawlerChampionMath();
+        cr.crawler();
     }
 }

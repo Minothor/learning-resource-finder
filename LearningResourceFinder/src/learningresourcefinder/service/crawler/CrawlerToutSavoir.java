@@ -147,28 +147,9 @@ public class CrawlerToutSavoir
                             System.out.println(category);
                             System.out.println(minCycle);
 
-
-                            
-//                              
-//                        Resource r = new Resource(crawlerService.getSubString(title,50),"Exercice Tout Savoir Hatier",SecurityContext.getUser());
-//                        r.setLanguage(Language.FR);
-//
-//                        Topic topic = CrawlerService.getTopicFromString(category);
-//                        topic = (topic!=null)?topic:crawlerService.getTopicFromString(title);                  
-//                        r.setTopic( topic);           
-//                        r.setFormat(Format.INTERACTIVE);
-//                        Set<Platform> tempSet = new HashSet<>();
-//                        tempSet.add(Platform.BROWSER);
-//                        r.setPlatforms(tempSet);
-//                        UrlResource url = new UrlResource(crawlerService.getSubString(title,50),link,r);
-//
-//                            resourceRepository.persist(r);
-//                            urlResourceRepository.persist(url);
-//                            r.getShortId(); 
-//
-
-
-                             
+                            CrawlerService cs = new CrawlerService();
+                            cs.persistRessource(title,link,category,"",0,minCycle,maxCycle);
+                                                         
 
                         }
                         category = "------------------";

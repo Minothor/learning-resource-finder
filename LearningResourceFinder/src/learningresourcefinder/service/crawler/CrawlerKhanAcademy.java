@@ -14,7 +14,6 @@ import java.util.Set;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
-import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.search.SearchOptions.Format;
@@ -183,20 +182,8 @@ public class CrawlerKhanAcademy
 								createYoutubeResource(doc.select("meta").select("[property*=og:video]").attr("content"));
 							else
 								{
-									Resource r = new Resource(title, title, SecurityContext.getUser());
-									r.setFormat(Format.INTERACTIVE);
-									r.setLanguage(Language.FR);
-									Topic topic = CrawlerService.getTopicFromString(section);
-									r.setTopic(topic);
-									
-									Set<Platform> tempSet = new HashSet<>();
-									tempSet.add(Platform.BROWSER);
-									r.setPlatforms(tempSet);
-									UrlResource urlResource = new UrlResource(CrawlerService.getSubString(title, 50), url, r);
-
-									resourceRepository.persist(r);
-									urlResourceRepository.persist(urlResource);
-									r.getShortId();
+							    CrawlerService cs = new CrawlerService();
+	                            cs.persistRessource(title,url,section,"",0,"" ,"");
 
 								}
 						}
@@ -228,22 +215,10 @@ public class CrawlerKhanAcademy
 
 					JSONObject mediaDescrJSonObject = (JSONObject) mediaGroupJSonObject.get("media$description");
 					String description = (String) mediaDescrJSonObject.get("$t");
+					
+					 CrawlerService cs = new CrawlerService();
+                     cs.persistRessource(title,url,section, description,0,"" ,"");
 
-					User user = SecurityContext.getUser();
-					title = CrawlerService.getSubString(title, 50);
-					Resource r = new Resource(title, description, user);
-					r.setFormat(Format.VIDEOS);
-					r.setLanguage(Language.FR);
-					Topic topic = CrawlerService.getTopicFromString(section);
-					r.setTopic(topic);
-					Set<Platform> tempSet = new HashSet<>();
-					tempSet.add(Platform.BROWSER);
-					r.setPlatforms(tempSet);
-					UrlResource urlResource = new UrlResource(title, url, r);
-
-					resourceRepository.persist(r);
-					urlResourceRepository.persist(urlResource);
-					r.getShortId();
 
 				}
 

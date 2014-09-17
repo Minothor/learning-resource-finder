@@ -1,8 +1,10 @@
 package learningresourcefinder.service.crawler;
 
 import java.io.IOException;
+
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -36,7 +38,9 @@ public class CrawlerSoutien67
                             String lien = ligne.attr("href");
                             if(!lien.startsWith("#"))
                                 System.out.println(titre+" : http://soutien67.free.fr/francais/niv01/"+ligne.attr("href"));
-                            
+                                String link = "http://soutien67.free.fr/francais/niv01/"+ligne.attr("href");
+                            CrawlerService cs = new CrawlerService();
+                            cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2");
                         }
                     }    
                 }
@@ -74,8 +78,12 @@ public class CrawlerSoutien67
                          {
                              String lien = ligne.attr("href");
                              if(!lien.startsWith("#"))
+                             {
                                  System.out.println(titre+" : http://soutien67.free.fr/francais/niv02/"+ligne.attr("href"));
-                             
+                                 String link = "http://soutien67.free.fr/francais/niv02/"+ligne.attr("href");
+                                 CrawlerService cs = new CrawlerService();
+                                 cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2");
+                             }
                          }
                      }    
                  }
@@ -110,8 +118,12 @@ public class CrawlerSoutien67
                               {
                                   String lien = ligne.attr("href");
                                   if(!lien.startsWith("#"))
+                                  {
                                       System.out.println(titre+" : http://soutien67.free.fr/francais/niv03/"+ligne.attr("href"));
-                                  
+                                      String link = "http://soutien67.free.fr/francais/niv03/"+ligne.attr("href");
+                                      CrawlerService cs = new CrawlerService();
+                                      cs.persistRessource(titre,link,"Français","",0,"p3-4","p3-4");
+                                  }
                               }
                           }    
                       }
@@ -146,8 +158,12 @@ public class CrawlerSoutien67
                               {
                                   String lien = ligne.attr("href");
                                   if(!lien.startsWith("#"))
+                                  {
                                       System.out.println(titre+" : http://soutien67.free.fr/francais/niv04/"+ligne.attr("href"));
-                                  
+                                      String link = "http://soutien67.free.fr/francais/niv04/"+ligne.attr("href");
+                                      CrawlerService cs = new CrawlerService();
+                                      cs.persistRessource(titre,link,"Français","",0,"p5-6","p5-6");
+                                  }
                               }
                           }    
                       }
@@ -180,8 +196,12 @@ public void crawlerMath1() throws IOException {
                              {
                                  String lien = ligne.attr("href");
                                  if(!lien.startsWith("#"))
+                                 {
                                      System.out.println(titre+" : http://soutien67.free.fr/math/niv01/"+ligne.attr("href"));
-                                
+                                     String link = "http://soutien67.free.fr/math/niv01/"+ligne.attr("href");
+                                     CrawlerService cs = new CrawlerService();
+                                     cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2");
+                                 }
                              }
                          }    
                      }
@@ -215,8 +235,12 @@ public void crawlerMath2() throws IOException {
                     {
                         String lien = ligne.attr("href");
                         if(!lien.startsWith("#"))
+                        {
                             System.out.println(titre+" : http://soutien67.free.fr/math/niv02/"+ligne.attr("href"));
-                       
+                            String link = "http://soutien67.free.fr/math/niv02/"+ligne.attr("href");
+                            CrawlerService cs = new CrawlerService();
+                            cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2");
+                        }
                     }
                 }    
             }
@@ -250,8 +274,12 @@ public void crawlerMath3() throws IOException {
                     {
                         String lien = ligne.attr("href");
                         if(!lien.startsWith("#"))
+                        {
                             System.out.println(titre+" : http://soutien67.free.fr/math/niv03/"+ligne.attr("href"));
-                        
+                            String link = "http://soutien67.free.fr/math/niv03/"+ligne.attr("href");
+                            CrawlerService cs = new CrawlerService();
+                            cs.persistRessource(titre,link,"Mathematique","",0,"p3-4","p3-4");
+                        }
                     }
                 }    
             }
@@ -285,8 +313,12 @@ public void crawlerMath3() throws IOException {
                              {
                                  String lien = ligne.attr("href");
                                  if(!lien.startsWith("#"))
+                                 {
                                      System.out.println(titre+" : http://soutien67.free.fr/math/niv04/"+ligne.attr("href"));
-                                 
+                                     String link = "http://soutien67.free.fr/math/niv04/"+ligne.attr("href");
+                                     CrawlerService cs = new CrawlerService();
+                                     cs.persistRessource(titre,link,"Mathematique","",0,"p5-6","p5-6");
+                                 }
                              }
                          }    
                      }
@@ -322,8 +354,12 @@ public void crawlerMath3() throws IOException {
                              {
                                  String lien = ligne.attr("href");
                                  if(!lien.startsWith("#"))
+                                 {
                                      System.out.println(titre+" : http://soutien67.free.fr/histoire/"+ligne.attr("href"));
-                                 
+                                     String link = "http://soutien67.free.fr/histoire/"+ligne.attr("href");
+                                     CrawlerService cs = new CrawlerService();
+                                     cs.persistRessource(titre,link,"Histoire","",0,"","");
+                                 }
                              }
                          }    
                      }
@@ -358,8 +394,12 @@ public void crawlerGeographie() throws IOException {
                              {
                                  String lien = ligne.attr("href");
                                  if(!lien.startsWith("#"))
+                                 {
                                      System.out.println(titre+" : http://soutien67.free.fr/geographie/"+ligne.attr("href"));
-                                 
+                                     String link = "http://soutien67.free.fr/geographie/"+ligne.attr("href");
+                                     CrawlerService cs = new CrawlerService();
+                                     cs.persistRessource(titre,link,"Geographie","",0,"","");
+                                 }
                              }
                          }    
                      }
@@ -375,12 +415,31 @@ public void crawlerGeographie() throws IOException {
             titre = titre.replace("...", "");
             if (!titre.equals("")){
             String link = ligne.attr("href");
-            System.out.println(titre + " : http://soutien67.free.fr/svt/"+link);}
+            System.out.println(titre + " : http://soutien67.free.fr/svt/"+link);
+            String links = "http://soutien67.free.fr/svt/"+ligne.attr("href");
+            CrawlerService cs = new CrawlerService();
+            cs.persistRessource(titre,links,"Science","",0,"","");
+            }
         }
+    }
+    
+    public void crawler() throws IOException{
+        CrawlerSoutien67 cs67 = new CrawlerSoutien67();
+        cs67.crawlerFr1();
+        cs67.crawlerFr2();
+        cs67.crawlerFr3();
+        cs67.crawlerFr4();
+        cs67.crawlerMath1();
+        cs67.crawlerMath2();
+        cs67.crawlerMath3();
+        cs67.crawlerMath4();
+        cs67.crawlerGeographie();
+        cs67.crawlerHistoire();
+        cs67.crawlerScience();
     }
              
     public static void main(String[] args) throws IOException {
         CrawlerSoutien67 cs = new CrawlerSoutien67();
-        cs.crawlerScience();
+        cs.crawlerFr1();
     }
 }

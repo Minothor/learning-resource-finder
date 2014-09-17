@@ -13,16 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
-@Service
 public class CrawlerBrainPOP {
-
-    @Autowired
-    ResourceRepository resourceRepository;
-    @Autowired
-    UrlResourceRepository urlResourceRepository;
-
-    public void crawlerBrainPOP() throws IOException {
+    
+    public void crawler() throws IOException {
 
         Document doc1 = Jsoup.connect("http://www.brainpop.fr/topics/").timeout(10000).get();
         Elements resources = doc1.select("tr > td > blockquote > div ");
@@ -32,7 +25,7 @@ public class CrawlerBrainPOP {
             if(resource.select("b").size()>0)
             {
                 categorie = resource.text();
-                System.out.println(categorie);
+                //System.out.println(categorie);
             }
             else
             {
@@ -40,8 +33,10 @@ public class CrawlerBrainPOP {
                 String lien =  "http://www.brainpop.fr"+resource.select("a").get(1).attr("href");
                 String description = resource.select("div > div > span.user_body").get(1).text();
                 String temps = resource.select("div > div > div > span.user_body").get(0).text();
-                System.out.println("\t"+titre+" ("+lien+") "+temps);
-                System.out.println("\t\t"+description);
+                //System.out.println("\t"+titre+" ("+lien+") "+temps);
+                //System.out.println("\t\t"+description);
+                CrawlerService cs = new CrawlerService();
+                cs.persistRessource(titre,lien,categorie,description,Integer.valueOf(temps),"","");
             }
         }
 
@@ -49,6 +44,6 @@ public class CrawlerBrainPOP {
 
     public static void main(String[] args) throws IOException {
         CrawlerBrainPOP cr = new CrawlerBrainPOP();
-        cr.crawlerBrainPOP();
+        cr.crawler();
     }
 }
