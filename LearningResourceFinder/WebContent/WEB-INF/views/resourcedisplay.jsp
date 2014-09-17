@@ -914,6 +914,7 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 				</div>
 				<div class="modal-body">
 					<p>Veuillez appuyer sur les touches CTRL + V pour récupérer l'image du presse-papier.</p>
+					<p>(Pour l'instant, cela ne fonctionne qu'avec le navigateur "Chrome")</p>
 					<span id="printScreenNotFound" class="text-warning"></span>
 				</div>
 				<div class="modal-footer">
