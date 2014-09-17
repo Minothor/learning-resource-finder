@@ -33,11 +33,33 @@ public class CrawlerToutSavoir
     @Autowired CrawlerService crawlerService;
     //DONE
     public void crawler() throws IOException
-    {
+    
+    {  
+        String minCycle = "";
+        String maxCycle = "";
         Document frontPage = Jsoup.connect("http://www.toutsavoir-hatier.com").timeout(10000).get();
         Elements elements = frontPage.select(".lienblancns").select("a");    //Selectionne CP CM... liens de milieu de page
-        for (Element element : elements)  
+       
+        for (Element element : elements) 
         {
+            if (element.text().equals("CP") || element.text().equals("CE1")) {
+                
+                minCycle = "P1-2";
+                maxCycle = "P1-2";
+                }
+            
+            else if (element.text().equals("CE2") || element.text().equals("CM1")) {
+                
+                minCycle = "P3-4";
+                maxCycle = "P3-4";
+                }
+            
+            else if (element.text().equals("CM2")) {
+                
+               minCycle = "P5-6";
+               maxCycle = "P5-6";
+                }
+                    
             System.out.println("=======================================================================");
             System.out.println(element.text());
             System.out.println("=======================================================================");
@@ -53,6 +75,7 @@ public class CrawlerToutSavoir
                 String title = "-----------------------";
                 String link = null;
                 String goToCategory = "http://www.toutsavoir-hatier.com/" + elementByCategory.attr("href");
+               
 
                 if (!goToCategory.contains("ecole")) // Pour éviter les liens CP CM1... de bas de page - garde les liens année/matière
                 {
@@ -122,26 +145,27 @@ public class CrawlerToutSavoir
                             System.out.println(title);
                             System.out.println(link);
                             System.out.println(category);
+                            System.out.println(minCycle);
 
 
                             
-                              
-                        Resource r = new Resource(crawlerService.getSubString(title,50),"Exercice Tout Savoir Hatier",SecurityContext.getUser());
-                        r.setLanguage(Language.FR);
-
-                        Topic topic = CrawlerService.getTopicFromString(category);
-                        topic = (topic!=null)?topic:crawlerService.getTopicFromString(title);                  
-                        r.setTopic( topic);           
-                        r.setFormat(Format.INTERACTIVE);
-                        Set<Platform> tempSet = new HashSet<>();
-                        tempSet.add(Platform.BROWSER);
-                        r.setPlatforms(tempSet);
-                        UrlResource url = new UrlResource(crawlerService.getSubString(title,50),link,r);
-
-                            resourceRepository.persist(r);
-                            urlResourceRepository.persist(url);
-                            r.getShortId(); 
-
+//                              
+//                        Resource r = new Resource(crawlerService.getSubString(title,50),"Exercice Tout Savoir Hatier",SecurityContext.getUser());
+//                        r.setLanguage(Language.FR);
+//
+//                        Topic topic = CrawlerService.getTopicFromString(category);
+//                        topic = (topic!=null)?topic:crawlerService.getTopicFromString(title);                  
+//                        r.setTopic( topic);           
+//                        r.setFormat(Format.INTERACTIVE);
+//                        Set<Platform> tempSet = new HashSet<>();
+//                        tempSet.add(Platform.BROWSER);
+//                        r.setPlatforms(tempSet);
+//                        UrlResource url = new UrlResource(crawlerService.getSubString(title,50),link,r);
+//
+//                            resourceRepository.persist(r);
+//                            urlResourceRepository.persist(url);
+//                            r.getShortId(); 
+//
 
 
                              
