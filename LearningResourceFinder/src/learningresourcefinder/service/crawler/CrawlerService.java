@@ -36,20 +36,20 @@ public class CrawlerService
     
     public void crawlerPage(String pageName) throws IOException 
     {
-      /*  switch (pageName) 
+        switch (pageName) 
         {
-            case "championMath" :
-                CrawlerChampionMath.crawler();			
-                break;
-            case "classePrimaire" :
-                CrawlerClassePrimaire.crawler();
-                break;
-            case "crawlersoutien67" :
-                CrawlerSoutien67.crawlerFr1();
+//            case "championMath" :
+//                CrawlerChampionMath.crawler();			
+//                break;
+//            case "classePrimaire" :
+//                CrawlerClassePrimaire.crawler();
+//                break;
+            case "crawlerLaRecre" :
+                CrawlerLaRecre.crawler();
                 break;
     
             default:
-        }*/
+        }
     }
 
     public static String getSubString(String s,int i)

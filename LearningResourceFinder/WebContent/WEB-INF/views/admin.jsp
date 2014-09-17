@@ -16,6 +16,7 @@
     	<a href="/crawler/championMath" class="btn btn-primary btn-lg">execute Crawler championmath.free.fr</a>
     	<a href="/crawler/classePrimaire" class="btn btn-primary btn-lg">execute Crawler classeprimaire.be</a>
     	<a href="/crawler/profeseurphifix" class="btn btn-primary btn-lg">execute batch Crawler profeseurphifix</a>
+    	<a href="/crawler/crawlerLaRecre" class="btn btn-primary btn-lg">execute batch Crawler LaRecre</a>
     </div>
 </div>    
 </body>
