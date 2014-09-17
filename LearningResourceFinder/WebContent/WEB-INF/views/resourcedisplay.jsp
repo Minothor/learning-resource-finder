@@ -280,7 +280,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="resetForm()">&times;</button>
-							<h4 class="modal-title">Ajuster la balance selon les cycles appropriés</h4>
+							<h4 class="modal-title">Cycles pertinent pour la ressource</h4>
 						</div>			
 						<div class="modal-body">
 							<div class="form-horizontal container">					
