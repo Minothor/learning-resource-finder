@@ -73,7 +73,7 @@
 	   			$("#imageFromPrintScreenAndCrop").attr("src", url);
 	   			$("#waitingModalForPrintScreen").modal("hide");
 	   			$("#modalPrintScreen").modal("show");
-   			} else { // Problemo
+   			} else {
               location.reload();
 	   		};
 
@@ -880,6 +880,9 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 					
 					<p>Vous pouvez sélectionner une zone dans l'image avec la souris.</p>
 					<div >
+						<!-- The attribute src will be populated later when the clipboard image will be inserted 
+						      as a (temporary) file on disk. See JS function uploadFile(), after call of the 
+						      ResourceImageController. See line "$("#imageFromPrintScreenAndCrop").attr("src", url);" -->
 						<img id="imageFromPrintScreenAndCrop" name="img"/>
 					
 					</div>
