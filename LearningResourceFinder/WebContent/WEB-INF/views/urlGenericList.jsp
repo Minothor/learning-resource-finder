@@ -3,36 +3,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <%@include  file="/WEB-INF/includes/addurlgenericform.jsp" %>
-<script type="text/javascript" src="/js/int/urlGenericAdd.js"></script>
-
-<script>
-$(document).ready(function() {
- 	$(".addUrlGenericLink").click(function(e) {
- 	    e.preventDefault();// prevent the default anchor functionality
- 	    e.stopPropagation();
- 	    $('#urlGenericErrorMessage').val('');	    
- 	    $("#addUrlModal1").modal("show");
-	}); 
- 	
-	$('#addUrlButton').click(function(){
-		resetForm();
-	});
-	
- 	$(".deleteUrlLink").click(function(e) {
- 		var num = $(this).attr("value");
-		$.ajax({
-			type : "GET",
-		    url : '/deleteUrlGeneric',
-		    data : "id="+num,
-		    dataType: 'text',
-		    success : function(data) {
-		    	location.reload();
-		    }
-		}); 
- 	}); 	
-});
-</script>
-
+<script type="text/javascript" src="/js/int/urlGeneric.js"></script>
 
 <div class="container">
 

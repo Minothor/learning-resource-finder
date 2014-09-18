@@ -49,3 +49,29 @@ function resetForm() {
    $("#urlCheckButton").show();
 }
 
+$(document).ready(function() {
+ 	$(".addUrlGenericLink").click(function(e) {
+ 	    e.preventDefault();// prevent the default anchor functionality
+ 	    e.stopPropagation();
+ 	    $('#urlGenericErrorMessage').val('');	    
+ 	    $("#addUrlModal1").modal("show");
+	}); 
+ 	
+	$('#addUrlButton').click(function(){
+		resetForm();
+	});
+	
+ 	$(".deleteUrlLink").click(function(e) {
+ 		var num = $(this).attr("value");
+		$.ajax({
+			type : "GET",
+		    url : '/deleteUrlGeneric',
+		    data : "id="+num,
+		    dataType: 'text',
+		    success : function(data) {
+		    	location.reload();
+		    }
+		}); 
+ 	}); 	
+});
+

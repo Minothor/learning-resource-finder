@@ -1,6 +1,6 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
-<script type="text/javascript" src="/js/int/urlGenericAdd.js"></script>
+<script type="text/javascript" src="/js/int/urlGeneric.js"></script>
 
 <!-- Modal for adding a generic url (invisible until button clicked) -->
 <div class="modal fade" id="addUrlModal1" tabindex="-1" role="dialog"
