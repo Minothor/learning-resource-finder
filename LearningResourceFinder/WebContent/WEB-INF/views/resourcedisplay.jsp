@@ -197,13 +197,17 @@
  	///////  Start JCrop functions
  	$(document).ready(function() {
 
-		$('#modalPrintScreen').on('shown.bs.modal', function() { 
-				jQuery('#imageFromPrintScreenAndCrop').Jcrop({
-	 				onChange : updateCoords,
-	 				onSelect : updateCoords,
-					boxWidth:800,
-					boxHeight:600
-	 			});
+ 		$('#modalPrintScreen').on('shown.bs.modal', function() { 
+			jQuery('#imageFromPrintScreenAndCrop').Jcrop({
+ 				onChange : updateCoords,
+ 				onSelect : updateCoords,
+ 				boxWidth:800,
+				boxHeight:600,
+ 		        setSelect: [($('#imageFromPrintScreenAndCrop').width()/20),
+ 		                    ($('#imageFromPrintScreenAndCrop').height()/20),
+ 		                    ($('#imageFromPrintScreenAndCrop').width() - $('#imageFromPrintScreenAndCrop').width()/20),
+ 		                    ($('#imageFromPrintScreenAndCrop').height() - $('#imageFromPrintScreenAndCrop').height()/20)]
+ 			});
 		});
 		
 		function updateCoords(c) {
