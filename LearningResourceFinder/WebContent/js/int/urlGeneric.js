@@ -60,18 +60,5 @@ $(document).ready(function() {
 	$('#addUrlButton').click(function(){
 		resetForm();
 	});
-	
- 	$(".deleteUrlLink").click(function(e) {
- 		var num = $(this).attr("value");
-		$.ajax({
-			type : "GET",
-		    url : '/deleteUrlGeneric',
-		    data : "id="+num,
-		    dataType: 'text',
-		    success : function(data) {
-		    	location.reload();
-		    }
-		}); 
- 	}); 	
 });
 

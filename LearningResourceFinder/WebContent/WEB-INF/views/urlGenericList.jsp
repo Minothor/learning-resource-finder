@@ -25,7 +25,7 @@
 				<tr>
 					<td>${urlGeneric.url}</td>
 					<td>${urlGeneric.createdBy.fullName}</td>
-					<td><a class="deleteUrlLink" value="${urlGeneric.id}">supprimer</a></td>
+					<td><a class="deleteUrlLink" href="/deleteUrlGeneric?id=${urlGeneric.id}">supprimer</a></td>
 			   </tr>
 			</c:forEach>
 		</table>

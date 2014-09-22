@@ -51,10 +51,14 @@ public class UrlGenericController  extends BaseRepository<User> {
 
 
 	@RequestMapping(value="/deleteUrlGeneric")
-	public @ResponseBody String deleteUrlGeneric(@RequestParam("id") Long id) {
+	public ModelAndView deleteUrlGeneric(@RequestParam("id") Long id) {
 		SecurityContext.assertUserHasRole(Role.ADMIN);
-		urlgenericrepository.remove(urlgenericrepository.find(id));
-		return "clear";
+		
+		UrlGeneric urlGenericToRemove = urlgenericrepository.find(id);
+		if(urlGenericToRemove != null){
+		    urlgenericrepository.remove(urlGenericToRemove);
+		}
+        return new ModelAndView("redirect:/urlGeneric");
 	}
 
 
