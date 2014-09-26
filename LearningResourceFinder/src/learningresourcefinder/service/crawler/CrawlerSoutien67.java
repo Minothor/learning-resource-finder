@@ -21,6 +21,7 @@ public class CrawlerSoutien67
     @Autowired  ResourceRepository resourceRepository ;
     @Autowired  UrlResourceRepository urlResourceRepository ;
 
+    // Done 2634
     public static void crawler(CrawlerService cs) throws IOException{
         CrawlerSoutien67 cs67 = new CrawlerSoutien67();
         cs67.crawlerFr1(cs);
