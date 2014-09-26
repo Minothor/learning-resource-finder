@@ -81,7 +81,7 @@ public class CrawlerService
             Set<Platform> tempSet = new HashSet<>();
             tempSet.add(Platform.BROWSER);
             r.setPlatforms(tempSet);
-            UrlResource urlResource = new UrlResource(name,url,r);
+            UrlResource urlResource = new UrlResource(getSubString(name, 50),url,r);
             if(duration!=0)
             {
                 r.setDuration(duration);
