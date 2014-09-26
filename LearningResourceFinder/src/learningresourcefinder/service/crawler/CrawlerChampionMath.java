@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 
 public class CrawlerChampionMath 
 {
-    //DONE
+    //DONE 94 resources
     public static void crawler(CrawlerService cs) throws IOException
     {
         Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();

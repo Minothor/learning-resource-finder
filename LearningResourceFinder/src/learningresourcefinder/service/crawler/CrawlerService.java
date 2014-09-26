@@ -73,6 +73,7 @@ public class CrawlerService
         Resource r = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
         if (r == null)
         {
+            System.out.println("1er passage ");
             r = new Resource(getSubString(name, 50),description,SecurityContext.getUser());
             r.setLanguage(Language.FR);
             r.setTopic(getTopicFromString(topic));
@@ -103,15 +104,18 @@ public class CrawlerService
         else 
         {
             Cycle cycle =  getCycle(maxCycle);
+            System.out.println("2eme passage : "+cycle+" : "+cycle.getName());
             if(cycle!=null)
             {
-                if(getCycleNumber(cycle)>=0 && getCycleNumber(cycle)>getCycleNumber(r.getMaxCycle()))
+                if(r.getMaxCycle()==null ||
+                  (getCycleNumber(cycle)>=0 && getCycleNumber(cycle)>getCycleNumber(r.getMaxCycle())))
                     r.setMaxCycle(cycle);          
             }
             cycle =  getCycle(minCycle);
             if(cycle!=null)
-            {        
-                if(getCycleNumber(cycle)>=0 && getCycleNumber(cycle)<getCycleNumber(r.getMaxCycle()))                     
+            {   
+                if(r.getMinCycle()==null ||     
+                (getCycleNumber(cycle)>=0 && getCycleNumber(cycle)<getCycleNumber(r.getMinCycle())))                     
                     r.setMinCycle(cycle);        
             }                            
         }
@@ -184,6 +188,8 @@ public class CrawlerService
     
     private int getCycleNumber(Cycle cycle) 
     {
+        System.out.println(cycle);
+        System.out.println(cycle.getName());
         String cycleName = cycle.getName().toUpperCase();
         switch(cycleName)
         {
