@@ -27,6 +27,11 @@ public class UrlGenericController  extends BaseRepository<User> {
 	@RequestMapping(value="/checkUrlGeneric")
 	public @ResponseBody String checkUrlGeneric(@RequestParam("url") String url) {
 		SecurityContext.assertUserHasRole(Role.ADMIN);
+		
+		if(url.endsWith("/")){
+    		url = url.substring(0, url.length()-1);
+    	}
+		
 		UrlGeneric urlGenericToAdd = urlgenericrepository.findByUrl(url.trim());	
 		if(urlGenericToAdd==null){
 			urlGenericToAdd = new UrlGeneric();
