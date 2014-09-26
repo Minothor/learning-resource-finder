@@ -1,26 +1,11 @@
 package learningresourcefinder.service.crawler;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-
-import learningresourcefinder.model.Resource;
-import learningresourcefinder.model.UrlResource;
-import learningresourcefinder.model.Resource.Topic;
-import learningresourcefinder.repository.ResourceRepository;
-import learningresourcefinder.repository.UrlResourceRepository;
-import learningresourcefinder.search.SearchOptions.Format;
-import learningresourcefinder.search.SearchOptions.Language;
-import learningresourcefinder.search.SearchOptions.Platform;
-import learningresourcefinder.security.SecurityContext;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 public class CrawlerChampionMath 
 {
@@ -49,7 +34,6 @@ public class CrawlerChampionMath
                 String lien = "http://championmath.free.fr/"+element2.attr("href");
                 System.out.println("\t"+titre+" ("+lien+")");
 
-                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,"Math","",0,cycle,cycle);
             }
             System.out.println("=================================================");

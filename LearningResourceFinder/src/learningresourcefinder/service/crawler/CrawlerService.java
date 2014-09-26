@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.Resource.Topic;
@@ -15,7 +16,9 @@ import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.web.UrlUtil;
 
+import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,28 +30,89 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 public class CrawlerService
-{	@Autowired
+{	
+    @Autowired
     CycleRepository cycleRepository;
     @Autowired
     ResourceRepository resourceRepository;
     @Autowired
     UrlResourceRepository urlResourceRepository;    
-    
+
+
     public void crawlerPage(String pageName) throws IOException 
     {
+        pageName = pageName.toLowerCase();
         switch (pageName) 
         {
-//            case "championMath" :
-//                CrawlerChampionMath.crawler();			
-//                break;
-//            case "classePrimaire" :
-//                CrawlerClassePrimaire.crawler();
-//                break;
-            case "crawlerLaRecre" :
-                CrawlerLaRecre.crawler();
-                break;
+        case "brainpop" :
+            CrawlerBrainPOP.crawler(this);  break;      
+        case "championmath" :
+            CrawlerChampionMath.crawler(this); break; 
+        case "classeprimaire" :
+            CrawlerClassePrimaire.crawler(this); break;
+        case "exofiche" :
+            CrawlerExoFiche.crawler(this); break;
+        case "fondationlamap" :
+            CrawlerFondationLamap.crawler(this); break;
+        case "khanacademy" :
+            CrawlerKhanAcademy.crawler(this); break;   
+        case "crawlerlarecre" :
+            CrawlerLaRecre.crawler(this); break;
+        case "professeurphifix" :
+            CrawlerProfesseurPhifix.crawler(this); break;
+        case "soutien67" :
+            CrawlerSoutien67.crawler(this); break;
+        case "toutsavoir" :
+            CrawlerToutSavoir.crawler(this); break;
+        }
+    }
     
-            default:
+    public void persistRessource(String name, String url, String topic, String description,int duration,String minCycle,String maxCycle ) 
+    {
+        Resource r = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
+        if (r == null)
+        {
+            r = new Resource(getSubString(name, 50),description,SecurityContext.getUser());
+            r.setLanguage(Language.FR);
+            r.setTopic(getTopicFromString(topic));
+            r.setFormat(Format.INTERACTIVE);
+            Set<Platform> tempSet = new HashSet<>();
+            tempSet.add(Platform.BROWSER);
+            r.setPlatforms(tempSet);
+            UrlResource urlResource = new UrlResource(name,url,r);
+            if(duration!=0)
+            {
+                r.setDuration(duration);
+            }
+
+            Cycle cycle =  getCycle(maxCycle);
+            if(cycle!=null)
+            {
+                r.setMaxCycle(cycleRepository.findByName(maxCycle));          
+            }
+            cycle =  getCycle(minCycle);
+            if(cycle!=null)
+            {            
+                r.setMinCycle(cycleRepository.findByName(minCycle));        
+            }
+            resourceRepository.persist(r);
+            urlResourceRepository.persist(urlResource);
+            r.getShortId();    
+        } 
+        else 
+        {
+            Cycle cycle =  getCycle(maxCycle);
+            if(cycle!=null)
+            {
+                if(getCycleNumber(cycle)>=0 && getCycleNumber(cycle)>getCycleNumber(r.getMaxCycle()))
+                    r.setMaxCycle(cycle);          
+            }
+            cycle =  getCycle(minCycle);
+            if(cycle!=null)
+            {        
+                if(getCycleNumber(cycle)>=0 && getCycleNumber(cycle)<getCycleNumber(r.getMaxCycle()))                     
+                    r.setMinCycle(cycle);        
+            }                            
         }
     }
 
@@ -56,108 +120,56 @@ public class CrawlerService
     {
         return (s.length()<=i)?s:s.substring(0, i);
     }
+
     public static Topic getTopicFromString(String s)
     {
         s = s.toLowerCase();
-        if(s.contains("grammaire") ||
-                s.contains("lecture") ||
-                s.contains("conugaison") ||
-                s.contains("conjugaison") ||
-                s.contains("orthographe") ||
-                s.contains("savoir-ecouter") ||
-                s.contains("vocabulaire") ||
-                s.contains("coach-memorisation") )
+        switch(s)
         {
+        case("grammaire") : case("lecture") : case("conugaison") : 
+        case("conjugaison")  : case("orthographe") : case("savoir-ecouter")  :
+        case("vocabulaire")  : case("coach-memorisation") :
             return Topic.FRENCH;
-        }
-        else if(s.contains("geographie") || s.contains("géographie") ||
-                s.contains("geographique") || s.contains("géographique"))
-        {
+        case("geographie")  : case("géographie")  : case("geographique")  : 
+        case("géographique") :
             return Topic.GEO;
-
-        }
-        else if(s.contains("math")||
-                s.contains("nombres")||
-                s.contains("opération") )
-        {
+        case("math")  : case("nombres")  : case("opération") :
             return Topic.MATH;
-
-        }
-        else if(s.contains("histoire") || s.contains("historique"))
-        {
+        case("histoire")  : case("historique"):
             return Topic.HISTORY;
-
-        }
-        else if(s.contains("scientifique") || s.contains("science"))
-        {
+        case("scientifique")  : case("science") :
             return Topic.SCIENCE;
-
+        default : return null;
         }
-        return null;
     }
 
-    public void persistRessource(String name, String url, String topic, String description,int duration,String minCycle,String maxCycle ) 
+    private Cycle getCycle(String cycleName) 
     {
-        Resource r = new Resource(CrawlerService.getSubString(name, 50),description,SecurityContext.getUser());
-        r.setLanguage(Language.FR);
-        r.setTopic(getTopicFromString(topic));
-        //r.setFormat(Format.INTERACTIVE);
-        Set<Platform> tempSet = new HashSet<>();
-        tempSet.add(Platform.BROWSER);
-        //r.setPlatforms(getformatByUrl(url));
-        UrlResource urlResource = new UrlResource(name,url,r);
-        if(duration!=0)
+        cycleName = cycleName.toUpperCase();
+        switch(cycleName)
         {
-            
+        case("CP") : case("CE1") :case("P1-2") : 
+            return cycleRepository.findByName("P1-2"); 
+        case("CE2") : case("CM1") :case("P3-4") : 
+            return cycleRepository.findByName("P3-4"); 
+        case("CM2") : case("6") :case("P5-6") : 
+            return cycleRepository.findByName("P5-6"); 
+        default : return null;        
         }
-        if(maxCycle!="" && maxCycle!=null)
-        {
-            r.setMaxCycle(cycleRepository.findByName(maxCycle));          
-        }
-        if(minCycle!="" && minCycle!=null)
-        {
-            r.setMinCycle(cycleRepository.findByName(minCycle));        
-        }
-        
-        resourceRepository.persist(r);
-        urlResourceRepository.persist(urlResource);
-        r.getShortId();
     }
     
-   
-
-
-    /*
-	public static void fondationLamapCrawler() throws IOException
-	{
-		String[] urls = {"http://www.fondation-lamap.org/fr/search-activite-classe?filter[keyword]=&filter[num_per_page]=200&filter[sort]=ds_created&filter[order]=asc&op=Rechercher&form_build_id=form-BHdeSlYAz_chhuj_gUZ_AAbAW4XrDCay5MXcOGHSt-M&form_id=project_search_recherche_activite_class_form"};
-		Boolean cont = true;
-
-		while(cont)
-		{
-			for (String url : urls) 
-			{
-				Document doc = Jsoup.connect(url).timeout(10000).get();
-				Elements elements = doc.select(".results .result-item");
-				for (Element element : elements) 
-				{
-					Element elem = element.select("div > .right").first();
-
-					String titre = elem.select(".title > a").text();
-					String lien = "http://www.fondation-lamap.org"+elem.select(".title > a").attr("href");
-					String description = elem.select(".field-doc-resume").text();
-					String categorie = "science";
-
-					System.out.println(titre+" ("+categorie+")");
-					System.out.println("lien : "+lien);
-					System.out.println("description : "+description);
-					System.out.println("=====================================");
-				}
-			}
-		}
-	}
-     */ 
+    private int getCycleNumber(Cycle cycle) 
+    {
+        String cycleName = cycle.getName().toUpperCase();
+        switch(cycleName)
+        {
+        case("P1-2") : 
+            return 0; 
+        case("P3-4") : 
+            return 1; 
+        case("P5-6") : 
+            return 2; 
+        default : return -1;        
+        }
+    }
 }
-
-
-
