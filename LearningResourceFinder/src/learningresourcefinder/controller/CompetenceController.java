@@ -141,18 +141,18 @@ public class CompetenceController extends BaseController<Competence> {
         	NotificationUtil.addNotificationMessage("Une catégorie ne peut être déplacée sur elle même",Status.ERROR);
         	return mv;
         }
-        /// Has the new parent (or his parent), a cycle assigned which is different?
-        if (competence.getCycle() != null) {
-        	Competence parent = newParent;
-        	while(parent!=null){
-        		if(parent.getCycle() != null && !competence.getCycle().equals(parent.getCycle())){
-        			NotificationUtil.addNotificationMessage("Le cycle ("+parent.getCycle()+") lié à un des parents ("+parent.getFullName()+") ne peut pas être différent du cycle ("+competence.getCycle()+") de la catégorie que vous déplacez.",Status.ERROR);
-        			return mv;
-        		}
-        		parent = parent.getParent();
-        	}
-        }
-
+// TODO Remove me after completion of TP-36 - No nonsense categories
+//        /// Has the new parent (or his parent), a cycle assigned which is different?
+//        if (competence.getCycle() != null) {
+//        	Competence parent = newParent;
+//        	while(parent!=null){
+//        		if(parent.getCycle() != null && !competence.getCycle().equals(parent.getCycle())){
+//        			NotificationUtil.addNotificationMessage("Le cycle ("+parent.getCycle()+") lié à un des parents ("+parent.getFullName()+") ne peut pas être différent du cycle ("+competence.getCycle()+") de la catégorie que vous déplacez.",Status.ERROR);
+//        			return mv;
+//        		}
+//        		parent = parent.getParent();
+//        	}
+//        }
         
         ////////////// OK, we move the node.
         if (competence.getParent() != null) {
@@ -175,43 +175,44 @@ public class CompetenceController extends BaseController<Competence> {
 		competenceDH.setName(competence.getName());
 		return competenceDH; 
 	} 
+
+// TODO Remove me after completion of TP-36 - No nonsense categories
+//	@RequestMapping(value="/ajax/setcycle")
+//	public @ResponseBody String setCycle(@RequestParam("idcomp") Long idCompetence, @RequestParam("idcycle") String idCycleStr){ 
+//		Competence competence = getRequiredEntity(idCompetence);
+//
+//		SecurityContext.assertCurrentUserMayEditThisCompetence();
+//		
+//		Cycle cycle;
+//		if (idCycleStr==null || "null".equals(idCycleStr)) {
+//		    cycle = null;
+//		    
+//		} else {
+//	        cycle = (Cycle)getRequiredEntity(Long.parseLong(idCycleStr), Cycle.class);
+//	        
+//	        //Verify if children, sub children or parents have a different cycle
+//	        List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
+//	        for(Competence cptChild : childrenAndSubChildren){
+//	            if(cptChild.getCycle() != null  && ! cycle.equals(cptChild.getCycle())){
+//	                return "Une des sous-catégories ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-catégories de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
+//	            }
+//	        }
+//	        
+//	        // Has one of the parent a different cycle ?
+//	        Competence parent = competence.getParent();
+//	        while(parent != null){
+//	            if(parent.getCycle() != null  &&  !cycle.equals(parent.getCycle())){
+//	                return "Une des catégories parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
+//	            }
+//	            parent = parent.getParent();
+//	        }
+//		}
+//		
+//		competence.setCycle(cycle);
+//		em.merge(competence);
+//		return "success";
+//	} 
 	
-	@RequestMapping(value="/ajax/setcycle")
-	public @ResponseBody String setCycle(@RequestParam("idcomp") Long idCompetence, @RequestParam("idcycle") String idCycleStr){ 
-		Competence competence = getRequiredEntity(idCompetence);
-
-		SecurityContext.assertCurrentUserMayEditThisCompetence();
-		
-		Cycle cycle;
-		if (idCycleStr==null || "null".equals(idCycleStr)) {
-		    cycle = null;
-		    
-		} else {
-	        cycle = (Cycle)getRequiredEntity(Long.parseLong(idCycleStr), Cycle.class);
-	        
-	        //Verify if children, sub children or parents have a different cycle
-	        List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
-	        for(Competence cptChild : childrenAndSubChildren){
-	            if(cptChild.getCycle() != null  && ! cycle.equals(cptChild.getCycle())){
-	                return "Une des sous-catégories ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-catégories de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
-	            }
-	        }
-	        
-	        // Has one of the parent a different cycle ?
-	        Competence parent = competence.getParent();
-	        while(parent != null){
-	            if(parent.getCycle() != null  &&  !cycle.equals(parent.getCycle())){
-	                return "Une des catégories parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
-	            }
-	            parent = parent.getParent();
-	        }
-		}
-		
-		competence.setCycle(cycle);
-		em.merge(competence);
-		return "success";
-	} 
-
 	//we use CompetenceDataHolder because spring cannot does not convert our entities to jSON correctly. 	
 	public static class CompetenceDataHolder {
 		private String name;
