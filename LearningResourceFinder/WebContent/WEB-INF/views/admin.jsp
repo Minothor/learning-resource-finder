@@ -17,17 +17,17 @@
     </div>
     <hr>
     <div>    	
+    	<a href="/crawler/brainPop" class="btn btn-primary btn-lg">execute Crawler brainpop.fr</a>
     	<a href="/crawler/championMath" class="btn btn-primary btn-lg">execute Crawler championmath.free.fr</a>
     	<a href="/crawler/classePrimaire" class="btn btn-primary btn-lg">execute Crawler classeprimaire.be</a>
-    	<a href="/crawler/profeseurPhiFix" class="btn btn-primary btn-lg">execute Crawler profeseurphifix</a>
-    	<br><br>
-    	<a href="/crawler/khanAcademy" class="btn btn-primary btn-lg">execute Crawler fr.khanacademy.org</a>
-    	<a href="/crawler/fondationlamap" class="btn btn-primary btn-lg">execute Crawler fondation-lamap.org</a>
-    	<a href="/crawler/soutien67" class="btn btn-primary btn-lg">execute Crawler soutien67.free.fr</a>
-    	<br><br>
-    	<a href="/crawler/crawlerLaRecre" class="btn btn-primary btn-lg">execute Crawler LaRecre</a>
-    	<a href="/crawler/brainPop" class="btn btn-primary btn-lg">execute Crawler brainpop.fr</a>
+    	<br><br>    	
     	<a href="/crawler/exoFiche" class="btn btn-primary btn-lg">execute Crawler exofiches.net</a>
+    	<a href="/crawler/fondationlamap" class="btn btn-primary btn-lg">execute Crawler fondation-lamap.org</a>
+    	<a href="/crawler/khanAcademy" class="btn btn-primary btn-lg">execute Crawler fr.khanacademy.org</a>   	
+    	<br><br>
+    	<a href="/crawler/crawlerLaRecre" class="btn btn-primary btn-lg">execute Crawler LaRecre</a>    	
+    	<a href="/crawler/professeurPhiFix" class="btn btn-primary btn-lg">execute Crawler profeseurphifix</a>
+    	<a href="/crawler/soutien67" class="btn btn-primary btn-lg">execute Crawler soutien67.free.fr</a>
     	<a href="/crawler/toutSavoir" class="btn btn-primary btn-lg">execute Crawler toutsavoir-hatier.com</a>
     </div>
 </div>    

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 public class CrawlerBrainPOP {
-    
+    // DONE 560 ressources
     public static void crawler(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup.connect("http://www.brainpop.fr/topics/").timeout(10000).get();

@@ -104,7 +104,6 @@ public class CrawlerService
         else 
         {
             Cycle cycle =  getCycle(maxCycle);
-            System.out.println("2eme passage : "+cycle+" : "+cycle.getName());
             if(cycle!=null)
             {
                 if(r.getMaxCycle()==null ||

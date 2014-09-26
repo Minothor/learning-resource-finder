@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CrawlerClassePrimaire 
 {
 
-    //Done
+    //Done 70 ressources
     public static void crawler(CrawlerService cs) throws IOException
     {
         for(int i=10;i<=70;i=i+10)

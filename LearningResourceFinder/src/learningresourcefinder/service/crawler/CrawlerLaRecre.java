@@ -22,7 +22,7 @@ public class CrawlerLaRecre {
     @Autowired
     UrlResourceRepository urlResourceRepository;
     
-    
+    // Done 653
     public static void crawler(CrawlerService cs) throws IOException{ 
         CrawlerLaRecre cr = new CrawlerLaRecre();
         cr.crawlerFrancais4_7(cs);

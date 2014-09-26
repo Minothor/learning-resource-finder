@@ -27,7 +27,6 @@ public class CrawlerChampionMath
                 cycle = partsOfTitle[1]; 
             }
             System.out.println(cycle);
-
             for (Element element2 : elements2) 
             {
                 String titre = "Exercice "+element2.text().toLowerCase();
