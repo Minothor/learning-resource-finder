@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 
 public class CrawlerChampionMath 
 {
-  //DONE
+    //DONE
     public static void crawler(CrawlerService cs) throws IOException
     {
         Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();
@@ -34,15 +34,15 @@ public class CrawlerChampionMath
                 String lien = "http://championmath.free.fr/"+element2.attr("href");
                 System.out.println("\t"+titre+" ("+lien+")");
 
-                cs.persistRessource(titre,lien,"Math","",0,cycle,cycle);
+                if(cs!=null)
+                    cs.persistRessource(titre,lien,"Math","",0,cycle,cycle);
             }
             System.out.println("=================================================");
         }
     }
-    
-/*
-    public static void main(String[] args) throws IOException {
-        CrawlerChampionMath cr = new CrawlerChampionMath();
-        cr.crawler();
-    }*/
+
+    public static void main(String[] args) throws IOException 
+    {
+        crawler(null);
+    }
 }

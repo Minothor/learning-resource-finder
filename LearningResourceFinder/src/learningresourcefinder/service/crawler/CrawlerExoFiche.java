@@ -33,7 +33,7 @@ public class CrawlerExoFiche
     @Autowired  UrlResourceRepository urlResourceRepository ;
 
     // DONE
-    public void crawler() throws IOException 
+    public static void crawler(CrawlerService cs) throws IOException 
     {        
         String[] sites = {"http://www.exofiches.net/maternelle-ps-ms-gs.php",
         "http://www.exofiches.net/elementaire-cycle2-cp-ce1.php",
@@ -92,7 +92,6 @@ public class CrawlerExoFiche
                             //System.out.println("\t"+titres.get(j)+" "+urls.get(j));
                             System.out.println(titres.get(j)+"("+urls.get(j)+")\n\t"+catName+" "+cycles[i][0]+"-"+cycles[i][1]);
 
-                            CrawlerService cs = new CrawlerService();
                             cs.persistRessource(titres.get(j),urls.get(j),catName,"",0,cycles[i][0] ,cycles[i][1]);
                             
                         }
@@ -104,7 +103,6 @@ public class CrawlerExoFiche
     }
 
     public static void main(String[] args) throws IOException {
-        CrawlerExoFiche cr = new CrawlerExoFiche();
-        cr.crawler();
+        crawler(null);
     }
 }

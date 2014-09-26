@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 public class CrawlerBrainPOP {
-    
-    public void crawler() throws IOException {
 
+    public static void crawler(CrawlerService cs) throws IOException 
+    {
         Document doc1 = Jsoup.connect("http://www.brainpop.fr/topics/").timeout(10000).get();
         Elements resources = doc1.select("tr > td > blockquote > div ");
         String categorie = "";
@@ -35,15 +35,14 @@ public class CrawlerBrainPOP {
                 String temps = resource.select("div > div > div > span.user_body").get(0).text();
                 //System.out.println("\t"+titre+" ("+lien+") "+temps);
                 //System.out.println("\t\t"+description);
-                CrawlerService cs = new CrawlerService();
-                cs.persistRessource(titre,lien,categorie,description,Integer.valueOf(temps),"","");
+                if(cs!=null)
+                    cs.persistRessource(titre,lien,categorie,description,Integer.valueOf(temps),"","");
             }
         }
-
     }
 
-    public static void main(String[] args) throws IOException {
-        CrawlerBrainPOP cr = new CrawlerBrainPOP();
-        cr.crawler();
+    public static void main(String[] args) throws IOException 
+    {
+        crawler(null);
     }
 }

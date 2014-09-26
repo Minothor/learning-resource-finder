@@ -32,7 +32,7 @@ public class CrawlerProfesseurPhifix
     @Autowired  UrlResourceRepository urlResourceRepository ;
     
     //DONE
-    public void crawler() throws IOException 
+    public static void crawler(CrawlerService cs) throws IOException 
     {
         Element tmp = null;
         Document doc = Jsoup.connect("http://www.professeurphifix.net/").timeout(10000).get();
@@ -92,7 +92,6 @@ public class CrawlerProfesseurPhifix
                     }
                     titre = CrawlerService.getSubString(titre, 50);
                    // System.out.println("\t\t"+titre+" ("+finalLink+" )"+"  cat:"+categorie);
-                    CrawlerService cs = new CrawlerService();
                     cs.persistRessource(titre,finalLink,categorie,"",0,"","");
                 }    
             }
@@ -106,7 +105,6 @@ public class CrawlerProfesseurPhifix
                 titre = element.attr("href").replace("_", " ").replace(".pdf", "").replace(".htm", "").replace(".PDF", "");
             }
             String finalLink = ("http://www.professeurphifix.net/eveil/"+element.attr("href"));
-            CrawlerService cs = new CrawlerService();
             cs.persistRessource(titre,finalLink,"Geographie","",0,"","");
            // System.out.println(titre+" (http://www.professeurphifix.net/eveil/"+element.attr("href")+" )");
         }
@@ -115,7 +113,6 @@ public class CrawlerProfesseurPhifix
         
     }
     public static void main(String[] args) throws IOException {
-        CrawlerProfesseurPhifix cp = new CrawlerProfesseurPhifix();
-        cp.crawler();
+        crawler(null);
     }
 }

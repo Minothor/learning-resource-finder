@@ -50,7 +50,8 @@ public class CrawlerClassePrimaire
                     int endTrim = (topic.indexOf("_")<topic.indexOf(".") && topic.indexOf("_")>0 )? topic.indexOf("_") : topic.indexOf(".");
                     topic = topic.substring(startTrim,endTrim);
 
-                    cs.persistRessource(name,url,topic,"",0,"P5-6","P5-6");
+                    if(cs!=null)
+                        cs.persistRessource(name,url,topic,"",0,"P5-6","P5-6");
                     
                     System.out.println(name);
                     System.out.println(topic);
@@ -64,8 +65,7 @@ public class CrawlerClassePrimaire
     
 
     public static void main(String[] args) throws IOException {
-        CrawlerClassePrimaire cr = new CrawlerClassePrimaire();
-        cr.crawler();
+       crawler(null);
     }
 
 }

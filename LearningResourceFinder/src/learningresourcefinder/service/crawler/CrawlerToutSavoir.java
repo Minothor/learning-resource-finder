@@ -32,7 +32,7 @@ public class CrawlerToutSavoir
     @Autowired  UrlResourceRepository urlResourceRepository ;
     @Autowired CrawlerService crawlerService;
     //DONE
-    public void crawler() throws IOException
+    public static void crawler(CrawlerService cs) throws IOException
     
     {  
         String minCycle = "";
@@ -147,7 +147,6 @@ public class CrawlerToutSavoir
                             System.out.println(category);
                             System.out.println(minCycle);
 
-                            CrawlerService cs = new CrawlerService();
                             cs.persistRessource(title,link,category,"",0,minCycle,maxCycle);
                                                          
 
@@ -166,8 +165,7 @@ public class CrawlerToutSavoir
 
     public static void main(String[] args) throws IOException 
     {
-        CrawlerToutSavoir ts = new CrawlerToutSavoir();
-        ts.crawler();
+        crawler(null);
 
     }
 

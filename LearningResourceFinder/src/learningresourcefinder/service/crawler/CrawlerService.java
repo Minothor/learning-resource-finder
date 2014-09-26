@@ -19,6 +19,7 @@ import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.web.UrlUtil;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -39,7 +40,7 @@ public class CrawlerService
     UrlResourceRepository urlResourceRepository;    
 
 
-    public void crawlerPage(String pageName) throws IOException 
+    public void crawlerPage(String pageName) throws IOException, ParseException 
     {
         pageName = pageName.toLowerCase();
         switch (pageName) 

@@ -21,7 +21,24 @@ public class CrawlerSoutien67
     @Autowired  ResourceRepository resourceRepository ;
     @Autowired  UrlResourceRepository urlResourceRepository ;
 
-    public void crawlerFr1() throws IOException {
+    public static void crawler(CrawlerService cs) throws IOException{
+        CrawlerSoutien67 cs67 = new CrawlerSoutien67();
+        cs67.crawlerFr1(cs);
+        cs67.crawlerFr2(cs);
+        cs67.crawlerFr3(cs);
+        cs67.crawlerFr4(cs);
+        cs67.crawlerMath1(cs);
+        cs67.crawlerMath2(cs);
+        cs67.crawlerMath3(cs);
+        cs67.crawlerMath4(cs);
+        cs67.crawlerGeographie(cs);
+        cs67.crawlerHistoire(cs);
+        cs67.crawlerScience(cs);
+    }
+    
+    
+    
+    public static void crawlerFr1(CrawlerService cs) throws IOException {
          
         Document doc1 = Jsoup.connect("http://soutien67.free.fr/francais/niv01/franniv01.htm#abc").timeout(10000).get();
         Elements ligne1 = doc1.select("table > tbody > tr > td > font, table > tbody > tr > td > a");
@@ -39,7 +56,6 @@ public class CrawlerSoutien67
                             if(!lien.startsWith("#"))
                                 System.out.println(titre+" : http://soutien67.free.fr/francais/niv01/"+ligne.attr("href"));
                                 String link = "http://soutien67.free.fr/francais/niv01/"+ligne.attr("href");
-                            CrawlerService cs = new CrawlerService();
                             cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2");
                         }
                     }    
@@ -52,7 +68,7 @@ public class CrawlerSoutien67
         }
      
     }
-    public void crawlerFr2() throws IOException {
+    public void crawlerFr2(CrawlerService cs) throws IOException {
           
          Document doc1 = Jsoup.connect("http://soutien67.free.fr/francais/niv02/franniv02.htm").timeout(10000).get();
          Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -81,7 +97,7 @@ public class CrawlerSoutien67
                              {
                                  System.out.println(titre+" : http://soutien67.free.fr/francais/niv02/"+ligne.attr("href"));
                                  String link = "http://soutien67.free.fr/francais/niv02/"+ligne.attr("href");
-                                 CrawlerService cs = new CrawlerService();
+
                                  cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2");
                              }
                          }
@@ -92,7 +108,7 @@ public class CrawlerSoutien67
     }
 
          
-         public void crawlerFr3() throws IOException {
+         public void crawlerFr3(CrawlerService cs) throws IOException {
           
               Document doc1 = Jsoup.connect("http://soutien67.free.fr/francais/niv03/franniv03.htm#abc").timeout(10000).get();
               Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -121,7 +137,7 @@ public class CrawlerSoutien67
                                   {
                                       System.out.println(titre+" : http://soutien67.free.fr/francais/niv03/"+ligne.attr("href"));
                                       String link = "http://soutien67.free.fr/francais/niv03/"+ligne.attr("href");
-                                      CrawlerService cs = new CrawlerService();
+
                                       cs.persistRessource(titre,link,"Français","",0,"p3-4","p3-4");
                                   }
                               }
@@ -132,7 +148,7 @@ public class CrawlerSoutien67
          }
          
          
-         public void crawlerFr4() throws IOException {
+         public void crawlerFr4(CrawlerService cs) throws IOException {
         
               Document doc1 = Jsoup.connect("http://soutien67.free.fr/francais/niv04/franniv04.htm").timeout(10000).get();
               Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -161,7 +177,7 @@ public class CrawlerSoutien67
                                   {
                                       System.out.println(titre+" : http://soutien67.free.fr/francais/niv04/"+ligne.attr("href"));
                                       String link = "http://soutien67.free.fr/francais/niv04/"+ligne.attr("href");
-                                      CrawlerService cs = new CrawlerService();
+
                                       cs.persistRessource(titre,link,"Français","",0,"p5-6","p5-6");
                                   }
                               }
@@ -170,7 +186,7 @@ public class CrawlerSoutien67
                   }
               }
          }
-public void crawlerMath1() throws IOException {
+public void crawlerMath1(CrawlerService cs) throws IOException {
              
              Document doc1 = Jsoup.connect("http://soutien67.free.fr/math/niv01/mathematique_exercices_01.htm").timeout(10000).get();
              Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -199,7 +215,6 @@ public void crawlerMath1() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/math/niv01/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/math/niv01/"+ligne.attr("href");
-                                     CrawlerService cs = new CrawlerService();
                                      cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2");
                                  }
                              }
@@ -209,7 +224,7 @@ public void crawlerMath1() throws IOException {
              }
         }
 
-public void crawlerMath2() throws IOException {
+public void crawlerMath2(CrawlerService cs) throws IOException {
     
     Document doc1 = Jsoup.connect("http://soutien67.free.fr/math/niv02/mathematique_exercices_02.htm").timeout(10000).get();
     Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -238,7 +253,6 @@ public void crawlerMath2() throws IOException {
                         {
                             System.out.println(titre+" : http://soutien67.free.fr/math/niv02/"+ligne.attr("href"));
                             String link = "http://soutien67.free.fr/math/niv02/"+ligne.attr("href");
-                            CrawlerService cs = new CrawlerService();
                             cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2");
                         }
                     }
@@ -248,7 +262,7 @@ public void crawlerMath2() throws IOException {
     }
 }
 
-public void crawlerMath3() throws IOException {
+public void crawlerMath3(CrawlerService cs) throws IOException {
     
     Document doc1 = Jsoup.connect("http://soutien67.free.fr/math/niv03/mathematique_exercices_03.htm").timeout(10000).get();
     Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -277,7 +291,6 @@ public void crawlerMath3() throws IOException {
                         {
                             System.out.println(titre+" : http://soutien67.free.fr/math/niv03/"+ligne.attr("href"));
                             String link = "http://soutien67.free.fr/math/niv03/"+ligne.attr("href");
-                            CrawlerService cs = new CrawlerService();
                             cs.persistRessource(titre,link,"Mathematique","",0,"p3-4","p3-4");
                         }
                     }
@@ -287,7 +300,7 @@ public void crawlerMath3() throws IOException {
     }
 }
          
-         public void crawlerMath4() throws IOException {
+         public void crawlerMath4(CrawlerService cs) throws IOException {
              
              Document doc1 = Jsoup.connect("http://soutien67.free.fr/math/niv04/mathematique_exercices_04.htm").timeout(10000).get();
              Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -316,7 +329,6 @@ public void crawlerMath3() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/math/niv04/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/math/niv04/"+ligne.attr("href");
-                                     CrawlerService cs = new CrawlerService();
                                      cs.persistRessource(titre,link,"Mathematique","",0,"p5-6","p5-6");
                                  }
                              }
@@ -328,7 +340,7 @@ public void crawlerMath3() throws IOException {
          
          
          
-         public void crawlerHistoire() throws IOException {
+         public void crawlerHistoire(CrawlerService cs) throws IOException {
              
              Document doc1 = Jsoup.connect("http://soutien67.free.fr/histoire/histoire_fiches_01.htm").timeout(10000).get();
              Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -357,7 +369,6 @@ public void crawlerMath3() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/histoire/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/histoire/"+ligne.attr("href");
-                                     CrawlerService cs = new CrawlerService();
                                      cs.persistRessource(titre,link,"Histoire","",0,"","");
                                  }
                              }
@@ -368,7 +379,7 @@ public void crawlerMath3() throws IOException {
         }
          
         
-public void crawlerGeographie() throws IOException {
+public void crawlerGeographie(CrawlerService cs) throws IOException {
              
              Document doc1 = Jsoup.connect("http://soutien67.free.fr/geographie/geographie_ressources_01.htm").timeout(10000).get();
              Elements ligne1 = doc1.select("table > tbody > tr > td");
@@ -397,7 +408,6 @@ public void crawlerGeographie() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/geographie/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/geographie/"+ligne.attr("href");
-                                     CrawlerService cs = new CrawlerService();
                                      cs.persistRessource(titre,link,"Geographie","",0,"","");
                                  }
                              }
@@ -407,7 +417,7 @@ public void crawlerGeographie() throws IOException {
              }
         }  
 
-    public void crawlerScience ()  throws IOException{
+    public void crawlerScience (CrawlerService cs)  throws IOException{
         Document doc1 = Jsoup.connect("http://soutien67.free.fr/svt/sciences.htm").timeout(10000).get();
         Elements ligne1 = doc1.select("table > tbody > tr > td > p > b > a, table > tbody > tr > td > p > a, table > tbody > tr > td > p > font > b > a");
         for (Element ligne : ligne1) {
@@ -417,29 +427,13 @@ public void crawlerGeographie() throws IOException {
             String link = ligne.attr("href");
             System.out.println(titre + " : http://soutien67.free.fr/svt/"+link);
             String links = "http://soutien67.free.fr/svt/"+ligne.attr("href");
-            CrawlerService cs = new CrawlerService();
             cs.persistRessource(titre,links,"Science","",0,"","");
             }
         }
     }
     
-    public void crawler() throws IOException{
-        CrawlerSoutien67 cs67 = new CrawlerSoutien67();
-        cs67.crawlerFr1();
-        cs67.crawlerFr2();
-        cs67.crawlerFr3();
-        cs67.crawlerFr4();
-        cs67.crawlerMath1();
-        cs67.crawlerMath2();
-        cs67.crawlerMath3();
-        cs67.crawlerMath4();
-        cs67.crawlerGeographie();
-        cs67.crawlerHistoire();
-        cs67.crawlerScience();
-    }
              
     public static void main(String[] args) throws IOException {
-        CrawlerSoutien67 cs = new CrawlerSoutien67();
-        cs.crawlerFr1();
+        crawlerFr1(null);
     }
 }

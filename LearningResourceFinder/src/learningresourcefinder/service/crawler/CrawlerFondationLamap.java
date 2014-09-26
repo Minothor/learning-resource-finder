@@ -19,7 +19,7 @@ public class CrawlerFondationLamap
 {
     @Autowired  ResourceRepository resourceRepository ;
     @Autowired  UrlResourceRepository urlResourceRepository ;
-    public void crawler () throws IOException
+    public static void crawler (CrawlerService cs) throws IOException
     {
         String[] urls = {"http://www.fondation-lamap.org/fr/search-activite-classe?filter[keyword]=&filter[num_per_page]=200&filter[sort]=ds_created&filter[order]=asc&op=Rechercher&form_build_id=form-BHdeSlYAz_chhuj_gUZ_AAbAW4XrDCay5MXcOGHSt-M&form_id=project_search_recherche_activite_class_form",
                  "http://www.fondation-lamap.org/fr/search-activite-classe?page=1&filter[keyword]=&filter[num_per_page]=200&filter[sort]=ds_created&filter[order]=asc&op=Rechercher&form_build_id=form-BHdeSlYAz_chhuj_gUZ_AAbAW4XrDCay5MXcOGHSt-M&form_id=project_search_recherche_activite_class_form"};
@@ -47,7 +47,6 @@ public class CrawlerFondationLamap
         }
     }
     public static void main(String[] args) throws IOException {
-        CrawlerFondationLamap cr = new CrawlerFondationLamap();
-        cr.crawler();
+        crawler(null);
     }
 }
