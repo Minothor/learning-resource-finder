@@ -40,7 +40,7 @@ $(document).ready(function() {
 	}
 	
 	function click_in_tree_editCompetence(){
-	    $("#competenceModalTitle").text("Editer une compétence");
+	    $("#competenceModalTitle").text("Editer une catégorie");
 		var compId = this.id.substring(2);
         $("#hiddenField").attr("name", "id");
         $("#hiddenField").attr("value", compId);
@@ -127,7 +127,7 @@ $(document).ready(function() {
 			    },
 			    error : function(data) {
 			    	showNotificationText("Il semble qu'il y ait eu une erreur sur notre serveur lorsque vous avez essayé \n " +
-	    			"de supprimer une compétence.", "danger");
+	    			"de supprimer une catégorie.", "danger");
 	        return false;
 			    },
 			}); 

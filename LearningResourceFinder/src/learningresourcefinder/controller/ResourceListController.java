@@ -67,7 +67,7 @@ public class ResourceListController extends BaseController<Resource> {
 		Topic topic = Resource.Topic.valueOf(topicName);
 		ModelAndView mv = prepareModelAndView(resourceRepository.findAllResourceWhoNotCompetencesByTopic(topic));
 	    mv.addObject("topic", topic);
-		mv.addObject("problemTitle","Liste des ressources qui ne sont pas liées à une compétence.");
+		mv.addObject("problemTitle","Liste des ressources qui ne sont pas liées à une catégorie.");
 		return mv;
 	}
 	

@@ -22,7 +22,7 @@
 			    			<a href="/fieldsnullresourcelist/${topic.key}">${topic.value[1]} ressource${topic.value[1] > 1 ? "s" : ""} incomplète${topic.value[1] > 1 ? "s" : ""}.</a>
 					  	</li>
 					  	<li class="list-group-item">
-			    			<a href="/notcompetencesresourcelist/${topic.key}">${topic.value[2]} ressource${topic.value[2] > 1 ? "s" : ""} liée${topic.value[2] > 1 ? "s" : ""} à aucune compétence.</a>
+			    			<a href="/notcompetencesresourcelist/${topic.key}">${topic.value[2]} ressource${topic.value[2] > 1 ? "s" : ""} liée${topic.value[2] > 1 ? "s" : ""} à aucune catégorie.</a>
 					  	</li>
 					  	<li class="list-group-item">
 			    			<a href="/nochildrenvalidationresourcelist/${topic.key}">${topic.value[3]} ressource${topic.value[3] > 1 ? "s" : ""} en attente de validation.</a>

@@ -111,7 +111,7 @@
 					</li>
 					
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Compétences <b class="caret"></b></a> 
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catégories <b class="caret"></b></a> 
 					    <ul class="dropdown-menu"> 
 
                           <li><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> primaire</a></li>

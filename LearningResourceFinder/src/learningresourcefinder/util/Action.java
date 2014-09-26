@@ -24,7 +24,7 @@ public enum Action {
 		
 		
 		
-		LINK_RESOURCE_TO_COMPETENCE(1, Level.LEVEL_4,"Lier une ressouce à une compétence"),
+		LINK_RESOURCE_TO_COMPETENCE(1, Level.LEVEL_4,"Lier une ressouce à une catégorie"),
 		CLOSE_PROBLEM(3, Level.LEVEL_5, "Clôturer un problème");
 		
 		int actionPoints;

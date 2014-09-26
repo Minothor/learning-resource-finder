@@ -72,13 +72,13 @@
 							<!-- Playlist end -->
 							
 							
-							<!-- compétence start -->
+							<!-- catégorie start -->
     <section>
-	<h2>Compétences:</h2>
+	<h2>Catégories:</h2>
 
 	<c:choose>
 		<c:when test="${fn:length(competenceList)==0}">
-		     Aucune compétence ne correspond à ce critère de recherche.
+		     Aucune catégorie ne correspond à ce critère de recherche.
 		</c:when>
 		<c:otherwise>
 			<c:forEach items="${competenceList}" var="competence">
@@ -88,7 +88,7 @@
 			</c:forEach>
 		</c:otherwise>
 	</c:choose>
-							<!-- compétence end -->
+							<!-- catégorie end -->
     </section>
 </div>
 </body>

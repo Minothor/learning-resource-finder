@@ -142,7 +142,7 @@
  	 		
  	    $('.nonurleditpop').popoverWithAutoHideForPrivilege("Pour modifier une url, il faut être connecté et avoir un niveau 4 de contribution.");
 
- 	    $('.nonCompetenceLinkPop').popoverWithAutoHideForPrivilege("Pour lier (et délier) une compétence et une ressource, il faut être connecté et avoir un niveau 4 de contribution." );
+ 	    $('.nonCompetenceLinkPop').popoverWithAutoHideForPrivilege("Pour lier (et délier) une catégorie et une ressource, il faut être connecté et avoir un niveau 4 de contribution." );
 
  	    $('.nonimageeditpop').popoverWithAutoHideForPrivilege("Pour ajouter/retirer/modifier une image, il faut être connecté et avoir un niveau 3 de contribution." );
 
@@ -595,10 +595,10 @@
 		<br />
 	</c:forEach>
 
-	<c:if test="${empty resource.competences}">aucune compétence liée</c:if>
+	<c:if test="${empty resource.competences}">aucune catégorie liée</c:if>
 	<span
 		class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'" : "' onclick='onAddCompetenceClick()'"} 
-		style="float: none; font-size: 15px" title="Ajouter une compétence"></span>
+		style="float: none; font-size: 15px" title="Ajouter une catégorie"></span>
 
 	<c:if test="${not empty youtubeVideoId}">
 		<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
@@ -806,7 +806,7 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 					<button type="button" class="close closeModal" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Placer la ressource dans une
-						compétence</h4>
+						catégorie</h4>
 				</div>
 				<form method="post" action="/competenceaddtoresourcesubmit"
 					role="form">
@@ -822,8 +822,8 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 							<br />
 							<br />
 							<div class="help-block">
-								Code de la compétence dans laquelle vous désirez placer la
-								ressource.<br /> Astuce: affichez la liste des compétences dans
+								Code de la catégorie dans laquelle vous désirez placer la
+								ressource.<br /> Astuce: affichez la liste des catégories dans
 								un autre onglet de votre navigateur.
 							</div>
 						</div>
@@ -854,7 +854,7 @@ to have a responsive layout - See more at: http: //avexdesigns.com
 					<h4 class="modal-title">Confirmation</h4>
 				</div>
 				<div class="modal-body">
-					<p>Voulez-vous retirer cette compétence de la ressource ?</p>
+					<p>Voulez-vous retirer cette catégorie de la ressource ?</p>
 				</div>
 				<div class="modal-footer">
 					<form action="/removecompetencefromresource">

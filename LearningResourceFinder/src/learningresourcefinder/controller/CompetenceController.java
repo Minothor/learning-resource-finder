@@ -48,7 +48,7 @@ public class CompetenceController extends BaseController<Competence> {
 
 		//parent
 		if (!competenceRepository.getIfParentExist(parentIdCompetence)) {
-			return "La compétence parente n'existe pas. Faites-vous du URL hacking. Si vous êtes parvenu à ce message sans malice, il s'agit d'un bug. parentIdCompetence = "+ parentIdCompetence; 
+			return "La catégorie parente n'existe pas. Faites-vous du URL hacking. Si vous êtes parvenu à ce message sans malice, il s'agit d'un bug. parentIdCompetence = "+ parentIdCompetence; 
 		}
 		// required code
 		if (codeCompetence.equals("") || codeCompetence == null) {
@@ -56,7 +56,7 @@ public class CompetenceController extends BaseController<Competence> {
 		}
 		// unique code
 		if (competenceRepository.getIfCodeExist(codeCompetence)) {
-			return "Le code '"+codeCompetence+"' existe déjà dans une autre compétence. Chaque compétence doit avoir un code unique.";
+			return "Le code '"+codeCompetence+"' existe déjà dans une autre catégorie. Chaque catégorie doit avoir un code unique.";
 		}
 		
 		Competence parent = getRequiredEntity(parentIdCompetence); 
@@ -67,7 +67,7 @@ public class CompetenceController extends BaseController<Competence> {
 		competence.setDescription(descriptionCompetence);
 		em.persist(competence);
 		indexManager.add(competence);
-		NotificationUtil.addNotificationMessage("Compétence ajoutée.",Status.SUCCESS); 
+		NotificationUtil.addNotificationMessage("Catégorie ajoutée.",Status.SUCCESS); 
 		return "success";
 
 	}
@@ -84,10 +84,10 @@ public class CompetenceController extends BaseController<Competence> {
 		if (competence.getChildrenAndSubChildren().size() == 0){
 			em.remove(competence);
 			indexManager.delete(competence);
-			NotificationUtil.addNotificationMessage("Compétence supprimée.",Status.SUCCESS); 
+			NotificationUtil.addNotificationMessage("Catégorie supprimée.",Status.SUCCESS); 
 			return "success";
 		}else{
-			return "La compétence possède une ou plusieurs compétences, veuillez d'abord les supprimer "; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
+			return "La catégorie possède une ou plusieurs catégories, veuillez d'abord les supprimer "; // We must return something (else the browser thinks it's an error case), but the value is not needed by our javascript code on the browser.
 		}
 	}
 	
@@ -95,7 +95,7 @@ public class CompetenceController extends BaseController<Competence> {
 	public @ResponseBody String competenceEditSubmit( @RequestParam("name") String nameCompetence, @RequestParam("code") String codeCompetence, @RequestParam("description") String descriptionCompetence, @RequestParam("id") Long idCompetence){
 	    codeCompetence = codeCompetence == null ? null : codeCompetence.trim();
 	    if (StringUtils.isBlank(codeCompetence)) {
-	        return "Chaque compétence doit avoir un code";
+	        return "Chaque catégorie doit avoir un code";
 	    }
 		if (competenceRepository.isThereAnotherCompetenceWithThatCode(idCompetence,codeCompetence)) {
 			Competence competence = getRequiredDetachedEntity(idCompetence);
@@ -107,10 +107,10 @@ public class CompetenceController extends BaseController<Competence> {
 			competence.setDescription(descriptionCompetence);
 			em.merge(competence);
 			indexManager.update(competence);
-			NotificationUtil.addNotificationMessage("Compétence éditée.",Status.SUCCESS); 
+			NotificationUtil.addNotificationMessage("Catégorie éditée.",Status.SUCCESS); 
 			return "success";
 		} else {
-			return "Ce code est déjà pris par une autre compétence"; 
+			return "Ce code est déjà pris par une autre catégorie"; 
 		}
  
 	}
@@ -134,11 +134,11 @@ public class CompetenceController extends BaseController<Competence> {
             return mv;
         }
         if (competence.getChildrenAndSubChildren().contains(newParent)){
-        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée dans ses propres sous-compétences",Status.ERROR);
+        	NotificationUtil.addNotificationMessage("Une catégorie ne peut être déplacée dans ses propres sous-catégories",Status.ERROR);
         	return mv;
         }
         if (competence.getId() == newParent.getId()){
-        	NotificationUtil.addNotificationMessage("Une compétence ne peut être déplacée sur elle même",Status.ERROR);
+        	NotificationUtil.addNotificationMessage("Une catégorie ne peut être déplacée sur elle même",Status.ERROR);
         	return mv;
         }
         /// Has the new parent (or his parent), a cycle assigned which is different?
@@ -146,7 +146,7 @@ public class CompetenceController extends BaseController<Competence> {
         	Competence parent = newParent;
         	while(parent!=null){
         		if(parent.getCycle() != null && !competence.getCycle().equals(parent.getCycle())){
-        			NotificationUtil.addNotificationMessage("Le cycle ("+parent.getCycle()+") lié à un des parents ("+parent.getFullName()+") ne peut pas être différent du cycle ("+competence.getCycle()+") de la compétence que vous déplacez.",Status.ERROR);
+        			NotificationUtil.addNotificationMessage("Le cycle ("+parent.getCycle()+") lié à un des parents ("+parent.getFullName()+") ne peut pas être différent du cycle ("+competence.getCycle()+") de la catégorie que vous déplacez.",Status.ERROR);
         			return mv;
         		}
         		parent = parent.getParent();
@@ -161,7 +161,7 @@ public class CompetenceController extends BaseController<Competence> {
         newParent.getChildren().add(competence);
         competence.setParent(newParent); 
         competenceRepository.merge(competence);
-        NotificationUtil.addNotificationMessage("Compétence déplacée.",Status.SUCCESS); 
+        NotificationUtil.addNotificationMessage("Catégorie déplacée.",Status.SUCCESS); 
         return mv; 
     }
 	
@@ -193,7 +193,7 @@ public class CompetenceController extends BaseController<Competence> {
 	        List<Competence> childrenAndSubChildren = competence.getChildrenAndSubChildren();
 	        for(Competence cptChild : childrenAndSubChildren){
 	            if(cptChild.getCycle() != null  && ! cycle.equals(cptChild.getCycle())){
-	                return "Une des sous-compétences ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-compétence de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
+	                return "Une des sous-catégories ("+cptChild.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer les sous-catégories de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
 	            }
 	        }
 	        
@@ -201,7 +201,7 @@ public class CompetenceController extends BaseController<Competence> {
 	        Competence parent = competence.getParent();
 	        while(parent != null){
 	            if(parent.getCycle() != null  &&  !cycle.equals(parent.getCycle())){
-	                return "Une des compétences parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
+	                return "Une des catégories parente ("+parent.getFullName()+") est déjà assignée à un cycle différent, ce qui n'est pas logique. Veuillez d'abord changer le parent de cycle afin que des enfants ne soient pas en contradiction avec leurs parents.";
 	            }
 	            parent = parent.getParent();
 	        }

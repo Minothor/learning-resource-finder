@@ -401,7 +401,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         Competence competence = competenceRepository.findByCode(code) ;
         
         if (competence == null) { 
-            NotificationUtil.addNotificationMessage("Le code '"+code+"' ne correspond à aucune compétence connue.", Status.ERROR);         
+            NotificationUtil.addNotificationMessage("Le code '"+code+"' ne correspond à aucune catégorie connue.", Status.ERROR);         
         } else {  // Edit
             resource.getCompetences().add(competence);
             levelService.addActionPoints(SecurityContext.getUser(), Action.LINK_RESOURCE_TO_COMPETENCE);
@@ -420,7 +420,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         resourceRepository.merge(resource);
         competenceRepository.merge(competence);
         
-        NotificationUtil.addNotificationMessage("Compétence déliée de la ressource avec succès.", Status.SUCCESS);
+        NotificationUtil.addNotificationMessage("Catégorie déliée de la ressource avec succès.", Status.SUCCESS);
         return new ModelAndView ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     }
     

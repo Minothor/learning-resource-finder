@@ -198,7 +198,7 @@ public class InitializeDBBatch implements Runnable {
 	public void insertCompetences() {
 
 		//Main tree node with null parent
-		Competence root = new Competence("root", "Compétences");
+		Competence root = new Competence("root", "Catégories");
 		competenceRepository.persist(root);
 		//===============================
 

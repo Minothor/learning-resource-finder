@@ -41,7 +41,7 @@
 
 				</div>
 				<div class="col-md-3">
-					<h4>Compétences</h4>
+					<h4>Catégories</h4>
 
                      <p><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> primaire</a></p>
                      <p><a href="<c:url value='/cycle?id=303'/>">3<sup>ème</sup> - 4<sup>ème</sup> primaire</a></p>
