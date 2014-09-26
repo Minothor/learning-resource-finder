@@ -22,36 +22,35 @@ public class CrawlerLaRecre {
     @Autowired
     UrlResourceRepository urlResourceRepository;
     
-    public static void crawler() throws IOException{
+    
+    public static void crawler(CrawlerService cs) throws IOException{ 
         CrawlerLaRecre cr = new CrawlerLaRecre();
-        cr.crawlerFrancais4_7();
-        cr.crawlerFrancais8_10();
-        cr.crawlerFrancais11_13();
-        cr.crawlerGeographie4_7();
-        cr.crawlerGeographie8_10();
-        cr.crawlerGeographie11_13();
-        cr.crawlerHistoire4_7();
-        cr.crawlerHistoire8_10();
-        cr.crawlerHistoire11_13();
-        cr.crawlerLangues8_10();
-        cr.crawlerLangues11_13();
-        cr.crawlerMath4_7();
-        cr.crawlerMath8_10();
-        cr.crawlerMath11_13();
-        cr.crawlerSciences4_7();
-        cr.crawlerSciences8_10();
-        cr.crawlerSciences11_13();
-        cr.crawlerSecuriteRoutiere4_13();
-        cr.crawlerVocabulaire4_7();
-        cr.crawlerVocabulaire8_10();
-        cr.crawlerVocabulaire11_13();
+        cr.crawlerFrancais4_7(cs);
+        cr.crawlerFrancais8_10(cs);
+        cr.crawlerFrancais11_13(cs);
+        cr.crawlerGeographie4_7(cs);
+        cr.crawlerGeographie8_10(cs);
+        cr.crawlerGeographie11_13(cs);
+        cr.crawlerHistoire4_7(cs);
+        cr.crawlerHistoire8_10(cs);
+        cr.crawlerHistoire11_13(cs);
+        cr.crawlerLangues8_10(cs);
+        cr.crawlerLangues11_13(cs);
+        cr.crawlerMath4_7(cs);
+        cr.crawlerMath8_10(cs);
+        cr.crawlerMath11_13(cs);
+        cr.crawlerSciences4_7(cs);
+        cr.crawlerSciences8_10(cs);
+        cr.crawlerSciences11_13(cs);
+        cr.crawlerSecuriteRoutiere4_13(cs);
+        cr.crawlerVocabulaire4_7(cs);
+        cr.crawlerVocabulaire8_10(cs);
+        cr.crawlerVocabulaire11_13(cs);
     }
 
-    public void crawlerMath4_7() throws IOException {
+    public void crawlerMath4_7(CrawlerService cs) throws IOException {
 
-        Document doc1 = Jsoup
-                .connect(
-                        "http://www.larecre.net/exercices_reload.php?_=1410524431380&min=4&max=7&exo=1&lessons=1&cat=2")
+        Document doc1 = Jsoup.connect("http://www.larecre.net/exercices_reload.php?_=1410524431380&min=4&max=7&exo=1&lessons=1&cat=2")
                 .timeout(10000).get();
         Element category = doc1.select("h1").first();
         String categorie = category.text();
@@ -66,13 +65,13 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
     }
 
-    public void crawlerMath8_10() throws IOException {
+    public void crawlerMath8_10(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -90,14 +89,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
     }
 
-    public void crawlerMath11_13() throws IOException {
+    public void crawlerMath11_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -115,14 +114,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
-    public void crawlerFrancais4_7() throws IOException {
+    public void crawlerFrancais4_7(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -141,14 +140,14 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
     }
 
-    public void crawlerFrancais8_10() throws IOException {
+    public void crawlerFrancais8_10(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -166,14 +165,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
     }
 
-    public void crawlerFrancais11_13() throws IOException {
+    public void crawlerFrancais11_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -191,14 +190,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
-    public void crawlerHistoire4_7() throws IOException {
+    public void crawlerHistoire4_7(CrawlerService cs) throws IOException {
         
         Document doc1 = Jsoup
                 .connect(
@@ -217,14 +216,14 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
     }
 
-    public void crawlerHistoire8_10() throws IOException {
+    public void crawlerHistoire8_10(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -242,14 +241,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
     }
 
-    public void crawlerHistoire11_13() throws IOException {
+    public void crawlerHistoire11_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -267,14 +266,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
-    public void crawlerVocabulaire4_7() throws IOException {
+    public void crawlerVocabulaire4_7(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -293,14 +292,14 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
     }
 
-    public void crawlerVocabulaire8_10() throws IOException {
+    public void crawlerVocabulaire8_10(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -318,14 +317,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
     }
 
-    public void crawlerVocabulaire11_13() throws IOException {
+    public void crawlerVocabulaire11_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -343,14 +342,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
-    public void crawlerSciences4_7() throws IOException {
+    public void crawlerSciences4_7(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -369,14 +368,14 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
     }
 
-    public void crawlerSciences8_10() throws IOException {
+    public void crawlerSciences8_10(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -394,14 +393,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
     }
 
-    public void crawlerSciences11_13() throws IOException {
+    public void crawlerSciences11_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -419,14 +418,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
-    public void crawlerGeographie4_7() throws IOException {
+    public void crawlerGeographie4_7(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -445,14 +444,14 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
             }
         }
 
     }
 
-    public void crawlerGeographie8_10() throws IOException {
+    public void crawlerGeographie8_10(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -470,14 +469,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
     }
 
-    public void crawlerGeographie11_13() throws IOException {
+    public void crawlerGeographie11_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -495,14 +494,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
-    public void crawlerSecuriteRoutiere4_13() throws IOException {
+    public void crawlerSecuriteRoutiere4_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -521,14 +520,14 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P5-6");
             }
         }
 
     }
 
-    public void crawlerLangues8_10() throws IOException {
+    public void crawlerLangues8_10(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -546,14 +545,14 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
             }
         }
 
     }
 
-    public void crawlerLangues11_13() throws IOException {
+    public void crawlerLangues11_13(CrawlerService cs) throws IOException {
 
         Document doc1 = Jsoup
                 .connect(
@@ -572,15 +571,15 @@ public class CrawlerLaRecre {
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
 
-                CrawlerService cs = new CrawlerService();
+                cs = new CrawlerService();
                 cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
             }
         }
 
     }
 
-    public static void main(String[] args) throws IOException {
-        CrawlerLaRecre cs = new CrawlerLaRecre();
-        cs.crawlerLangues11_13();
-    }
+//    public static void main(String[] args) throws IOException {
+//        CrawlerLaRecre cs = new CrawlerLaRecre();
+//        cs.crawlerLangues11_13(null);
+//    }
 }
