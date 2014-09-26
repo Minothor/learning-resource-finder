@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 public class CrawlerBrainPOP {
+    
+    public static void crawler(CrawlerService cs) throws IOException {
 
-    public static void crawler(CrawlerService cs) throws IOException 
-    {
         Document doc1 = Jsoup.connect("http://www.brainpop.fr/topics/").timeout(10000).get();
         Elements resources = doc1.select("tr > td > blockquote > div ");
         String categorie = "";
@@ -25,7 +25,6 @@ public class CrawlerBrainPOP {
             if(resource.select("b").size()>0)
             {
                 categorie = resource.text();
-                //System.out.println(categorie);
             }
             else
             {
@@ -33,12 +32,27 @@ public class CrawlerBrainPOP {
                 String lien =  "http://www.brainpop.fr"+resource.select("a").get(1).attr("href");
                 String description = resource.select("div > div > span.user_body").get(1).text();
                 String temps = resource.select("div > div > div > span.user_body").get(0).text();
-                //System.out.println("\t"+titre+" ("+lien+") "+temps);
-                //System.out.println("\t\t"+description);
+                String[] time = temps.split("[(:)]");
+                int finalTime = 0;
+                
+                if (time.length != 0) {
+                    
+                    int minutes = Integer.parseInt(time[1]);
+                    int seconds = Integer.parseInt(time[2]);
+                    
+                    if (seconds>0) {
+                        finalTime = minutes + 1;
+                    }else {
+                        finalTime = minutes;
+                    }
+                }
+                
+                
                 if(cs!=null)
                     cs.persistRessource(titre,lien,categorie,description,Integer.valueOf(temps),"","");
             }
         }
+
     }
 
     public static void main(String[] args) throws IOException 
