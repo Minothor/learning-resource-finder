@@ -27,7 +27,7 @@ public class CrawlerClassePrimaire
 {
 
     //Done
-    public static void crawler() throws IOException
+    public static void crawler(CrawlerService cs) throws IOException
     {
         for(int i=10;i<=70;i=i+10)
         {
@@ -46,9 +46,10 @@ public class CrawlerClassePrimaire
                     String name = element.select("div:nth-child(4)").text();
                     String topic = element.select("div:nth-child(3) img").attr("src");
                     String url = element.select("div:nth-child(5) a").attr("href");
+                    int startTrim = topic.indexOf("/")+1;
+                    int endTrim = (topic.indexOf("_")<topic.indexOf(".") && topic.indexOf("_")>0 )? topic.indexOf("_") : topic.indexOf(".");
+                    topic = topic.substring(startTrim,endTrim);
 
-   
-                    CrawlerService cs = new CrawlerService();
                     cs.persistRessource(name,url,topic,"",0,"P5-6","P5-6");
                     
                     System.out.println(name);
