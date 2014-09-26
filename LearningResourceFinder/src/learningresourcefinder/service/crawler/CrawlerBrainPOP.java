@@ -33,23 +33,16 @@ public class CrawlerBrainPOP {
                 String description = resource.select("div > div > span.user_body").get(1).text();
                 String temps = resource.select("div > div > div > span.user_body").get(0).text();
                 String[] time = temps.split("[(:)]");
-                int finalTime = 0;
-                
+                int minutes = 0;
                 if (time.length != 0) {
                     
-                    int minutes = Integer.parseInt(time[1]);
-                    int seconds = Integer.parseInt(time[2]);
-                    
-                    if (seconds>0) {
-                        finalTime = minutes + 1;
-                    }else {
-                        finalTime = minutes;
-                    }
+                    minutes = Integer.parseInt(time[1]);
+                    int seconds = Integer.parseInt(time[2]);                    
+                    minutes += (seconds>0)? 1:0;
                 }
                 
-                
                 if(cs!=null)
-                    cs.persistRessource(titre,lien,categorie,description,Integer.valueOf(temps),"","");
+                    cs.persistRessource(titre,lien,categorie,description,minutes,"","");
             }
         }
 
