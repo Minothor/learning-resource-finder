@@ -115,18 +115,28 @@ public class ResourceImageController extends BaseController<User> {
         BufferedImage cropImage;
         
         outImage = ImageUtil.readImage(outImage);
-
+        
         if (x != null && y != null && w != null && h != null) {
+            
             int cropx = (int) Double.parseDouble(x);
             int cropy = (int) Double.parseDouble(y);
             int cropw = (int) Double.parseDouble(w);
-            int croph = (int) Double.parseDouble(h);
+            int croph = (int) Double.parseDouble(h);            
+            //I check if the crop is not 0 to avoid the exception
+            //I check after the conversion because the crop != "0"  does not work
+            if (cropx != 0 && cropy != 0 && cropw != 0 && croph != 0){
+               
+                cropImage = outImage.getSubimage(cropx, cropy, cropw, croph);
+            } else {
+                
+                cropImage = outImage;
+             
+            }
 
-            cropImage = outImage.getSubimage(cropx, cropy, cropw, croph);
         } else {
-            cropImage = outImage;
+            cropImage = outImage;            
         }
-       
+     
         ImageUtil.createOriginalAndScalesImageFileForResource(resource, cropImage, currentEnvironment);
         
         // Delete temporary file
