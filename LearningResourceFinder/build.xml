@@ -62,9 +62,16 @@
             <!-- because xml and properties aren't already in the build.dir because javac doesn't seem to make this-->
             <fileset dir="${src.dir}">
                 <patternset>
+                    <include name="**/*.properties"/>
+                    <include name="**/*.xml"/>  
+                </patternset>
+            </fileset>
+        </copy>
+        <copy todir="${build.dir}/import" includeEmptyDirs="no">
+            <!-- because xml and properties aren't already in the build.dir because javac doesn't seem to make this-->
+            <fileset dir="${src.dir}/import">
+                <patternset>
                     <include name="**/*"/>
-<!--                    <include name="**/*.properties"/>
-                    <include name="**/*.xml"/>  -->
                 </patternset>
             </fileset>
         </copy>
