@@ -136,7 +136,8 @@ public class CrawlerService
                 s.contains("orthographe") ||
                 s.contains("savoir-ecouter") ||
                 s.contains("vocabulaire") ||
-                s.contains("coach-memorisation") )
+                s.contains("coach-memorisation") ||
+                s.contains("français"))
         {
             return Topic.FRENCH;
         }
@@ -158,11 +159,12 @@ public class CrawlerService
             return Topic.HISTORY;
 
         }
-        else if(s.contains("scientifique") || s.contains("science"))
+        else if(s.contains("scientifique") || s.contains("science") ||
+                s.contains("ingénierie") )
         {
             return Topic.SCIENCE;
         }
-        return null;
+        return Topic.OTHER;
     }
 
     private Cycle getCycle(String cycleName) 
