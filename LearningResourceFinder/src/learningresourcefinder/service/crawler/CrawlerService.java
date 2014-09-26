@@ -121,26 +121,47 @@ public class CrawlerService
         return (s.length()<=i)?s:s.substring(0, i);
     }
 
+    
+    
+    
+    
     public static Topic getTopicFromString(String s)
     {
         s = s.toLowerCase();
-        switch(s)
+        if(s.contains("grammaire") ||
+                s.contains("lecture") ||
+                s.contains("conugaison") ||
+                s.contains("conjugaison") ||
+                s.contains("orthographe") ||
+                s.contains("savoir-ecouter") ||
+                s.contains("vocabulaire") ||
+                s.contains("coach-memorisation") )
         {
-        case("grammaire") : case("lecture") : case("conugaison") : 
-        case("conjugaison")  : case("orthographe") : case("savoir-ecouter")  :
-        case("vocabulaire")  : case("coach-memorisation") :
             return Topic.FRENCH;
-        case("geographie")  : case("géographie")  : case("geographique")  : 
-        case("géographique") :
-            return Topic.GEO;
-        case("math")  : case("nombres")  : case("opération") :
-            return Topic.MATH;
-        case("histoire")  : case("historique"):
-            return Topic.HISTORY;
-        case("scientifique")  : case("science") :
-            return Topic.SCIENCE;
-        default : return null;
         }
+        else if(s.contains("geographie") || s.contains("géographie") ||
+                s.contains("geographique") || s.contains("géographique"))
+        {
+            return Topic.GEO;
+
+        }
+        else if(s.contains("math")||
+                s.contains("nombres")||
+                s.contains("opération") )
+        {
+            return Topic.MATH;
+
+        }
+        else if(s.contains("histoire") || s.contains("historique"))
+        {
+            return Topic.HISTORY;
+
+        }
+        else if(s.contains("scientifique") || s.contains("science"))
+        {
+            return Topic.SCIENCE;
+        }
+        return null;
     }
 
     private Cycle getCycle(String cycleName) 
