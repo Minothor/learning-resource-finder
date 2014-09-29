@@ -25,8 +25,8 @@
 		
 		
 		var resourceID=$("#resourceHiddenField").val();
-		var mincycle = $("#valuemin").val();
-		var maxcycle = $("#valuemax").val();	
+		var mincycle = $("#resourcedisplayslidervaluemin").val();
+		var maxcycle = $("#resourcedisplayslidervaluemax").val();	
 		
 		$.ajax({	
 			type : "POST", 
@@ -289,8 +289,7 @@
 						<div class="modal-body">
 							<div class="form-horizontal container">					
 								<div class="form-group">
-								
-								
+
 									<lrftag:cycleslider idSlider="resourcedisplayslider" minCycle="${mincycle}" maxCycle="${maxcycle}"/>
 																	
 								<div class="pull-right">
