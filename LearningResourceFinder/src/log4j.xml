@@ -24,7 +24,7 @@
 
 
 	<logger name="learningresourcefinder" additivity="false">
-		<level value="debug" />
+		<level value="info" />
 		<appender-ref ref="console"/>
 	</logger>
 	
