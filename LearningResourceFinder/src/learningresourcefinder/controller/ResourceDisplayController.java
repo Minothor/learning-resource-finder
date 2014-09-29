@@ -67,7 +67,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired FavoriteRepository favoriteRepository;
     @Autowired ContributionService contributionService; 
     
-    public final static  int[] ID_CYCLES_IN_DB = new int[]{300,303,302,304,305}; 
+    public final static  int[] ID_CYCLES_IN_DB = new int[]{300,301,302,303,304};
     
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -86,7 +86,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         // cycles ids in ascending order of cycles names
 
         Long minCycleId = (resource.getMinCycle() != null)?resource.getMinCycle().getId() : ID_CYCLES_IN_DB[0]; //id:300 -> 0  default   min value for slider
-        Long maxCycleId = (resource.getMaxCycle() != null)?resource.getMaxCycle().getId() : ID_CYCLES_IN_DB[ID_CYCLES_IN_DB.length-1];//id:305 -> 4  default   max value for slider
+        Long maxCycleId = (resource.getMaxCycle() != null)?resource.getMaxCycle().getId() : ID_CYCLES_IN_DB[ID_CYCLES_IN_DB.length-1];//id:304 -> 4  default   max value for slider
         
         if((resource.getMinCycle() != null) && (resource.getMaxCycle()!=null)){
             
@@ -428,13 +428,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
     public ModelAndView cycleEditInResourceSubmit(@RequestParam("pk") Long id, @RequestParam(value="mincycle",required=true) String minCycle,@RequestParam(value="maxcycle",required=true) String maxCycle) {
         Resource resource = getRequiredEntity(id);
         
-             
-        
         //convert String to int, for Ex: "1.00" to 1 (slider component sends decimal strings...)
         int tempIntMin=(int)Double.parseDouble(minCycle);
         int tempIntMax=(int)Double.parseDouble(maxCycle);
        
-        // Get cycle id from slider position (1 -> 300)
+        // Get cycle id from slider position (1 -> 301)
         int idMinCycle= ID_CYCLES_IN_DB[Integer.valueOf(tempIntMin)];
         int idMaxCycle= ID_CYCLES_IN_DB[Integer.valueOf(tempIntMax)];
              

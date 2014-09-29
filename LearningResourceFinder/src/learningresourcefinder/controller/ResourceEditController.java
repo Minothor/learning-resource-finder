@@ -90,8 +90,6 @@ public class ResourceEditController extends BaseController<Resource> {
         Resource resource = new Resource();
         
         ////// Find min and max Cycles from slider input
-        // cycles ids in ascending order of cycles names
-        int[] idCyclesInDb = new int[]{300,303,302,304,305};        
        
         //convert String to int, for Ex: "1.00" to 1 (slider component sends decimal strings...)
         int tempIntMin=(int)Double.parseDouble(minCycle);
