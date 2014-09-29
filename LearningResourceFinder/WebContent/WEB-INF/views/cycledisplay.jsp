@@ -53,19 +53,17 @@
 								</br>
 								<ul>
 								
-								<!--$$$$$$$$$$$$$$$$$$$$$$ PIERRE $$$$$$$$$$$$$$$$$$$$$$-->
 								<c:forEach items="${subitem.children}" var="subsubitem">
-									<div class="poper" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true'/>">
+
+									<div <c:if test='${subsubitem.children.size() > 0}'> class="poper" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true' />"</c:if>>
 										<li>
 											${subsubitem.competence.code } 
 											<a	href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
 										</li>
 									</div>
-
-									
+								
 								</c:forEach>
 
-								<!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 							</ul>
 							</c:forEach>
 					</c:forEach>
