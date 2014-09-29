@@ -140,7 +140,10 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@Column(nullable = true)
     @Enumerated(EnumType.STRING)
 	private ValidationStatus validationStatus;
-	    
+	
+	@Column()
+	private Long viewcount;
+	  
 	public Resource() {} // No arg constructor for Hibernate
 	
 	public Resource(String name, String description, User author) {
@@ -404,6 +407,15 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     
     public void setValidationStatus(ValidationStatus validationStatus) {
     	this.validationStatus = validationStatus;
-    }   
+    }
+
+	public Long getViewcount() {
+		return viewcount;
+	}
+
+	public void setViewcount(Long viewcount) {
+		this.viewcount = viewcount;
+	}   
+    
     
 }

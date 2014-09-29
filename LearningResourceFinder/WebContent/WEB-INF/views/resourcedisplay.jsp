@@ -250,6 +250,23 @@
  	function onAddCompetenceClick(){
  		$("#modalCompetence").modal("show");
  	}
+
+ 	function displayResourceInNewTab() 
+	{ 
+		$.ajax({	
+			type : "GET", 
+			dataType: "text",
+			url : "/ajax/increment",
+			data : "idResource="+${resource.id},
+			success : function(data) {
+				$('#viewCountDisplay').text(data);
+			},			
+			error : function(data) {
+				alert("Problème en contactant le serveur" );
+			}
+		});
+	} 
+ 	
  	
 </script>
 
@@ -351,7 +368,7 @@
 								<div class="col-md-12">
 							</c:otherwise>
 						</c:choose>
-						<a href="${urlResource.url}" target="_blank" id="urlresource"
+						<a href="${urlResource.url}" onclick="displayResourceInNewTab();" target="_blank"  id="urlresource"
 							data-type="text">${urlResource.url}</a> <span
 							style="float: none; font-size: 15px" title="Modifier cette URL"
 							class="glyphicon glyphicon-pencil close addToolTip
@@ -378,6 +395,7 @@
 							</c:choose>
 							>&times;
 						</button>
+						<span id="viewCountDisplay">${resource.viewcount}</span>
 					</div>
 			</div>
 			<%-- end row --%>

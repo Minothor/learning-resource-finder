@@ -46,3 +46,10 @@ alter table competence
         add constraint fk_jp9dw79j8hfwljeiixqwc6gqf 
         foreign key (cycle_id) 
         references cycle;
+
+        
+-- 2014-09-29 Lionel -- create new field (viewcount) and insert default value (0)
+        
+ALTER TABLE resource
+ADD viewcount bigint NOT NULL
+CONSTRAINT viewcountconstraint DEFAULT 0;

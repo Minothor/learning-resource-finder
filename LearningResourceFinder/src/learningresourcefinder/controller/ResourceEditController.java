@@ -48,6 +48,15 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired	 UrlGenericRepository urlgenericrepository;
     @Logger Log log;
 
+    
+    @RequestMapping(value="/ajax/increment",method=RequestMethod.GET)
+    public @ResponseBody Long incrementResource(@RequestParam("idResource") Long idResource) {
+    	Resource resource = resourceRepository.find(idResource);
+    	resource.setViewcount(resource.getViewcount()+1);
+    	return resource.getViewcount();
+    }
+       
+    
     @RequestMapping(value="/ajax/checkUrl",method=RequestMethod.POST)
     public @ResponseBody JSONObject urlSubmit(@RequestParam("url") String url) {
     	UrlGeneric urlGeneric = urlgenericrepository.findByurl(url.trim()); // trim()
