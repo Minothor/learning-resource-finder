@@ -252,8 +252,8 @@ figure:hover figcaption {
 	 margin-top:20px;
 	 width: 12px;	
 }
-#slider{
-	 width: 12px;
+.slider{
+	 width: 12px !important;
 	
 }
 #numberslider{

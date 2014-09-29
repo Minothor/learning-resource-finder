@@ -107,8 +107,7 @@
 								
 								<div class="form-group col-sm-3" >
 									
-										<lrftag:cycleslider idSlider="addresourceslider" minCycle="0" maxCycle="4"/>
-									
+										<lrftag:cycleslider idSlider="addresourceslider" minCycle="0" maxCycle="4"/>									
 									
 								</div>
 							</div>
