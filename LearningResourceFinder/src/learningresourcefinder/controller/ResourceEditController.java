@@ -82,8 +82,8 @@ public class ResourceEditController extends BaseController<Resource> {
 	        @RequestParam(value="format",required=true) Format format, 
 	        @RequestParam(value="platform",required=true) Set<Platform> platforms, 
 	        @RequestParam(value="topic",required=true) Topic topic,
-	        @RequestParam(value="value-min",required=true) String minCycle, /* From hidden field */
-	        @RequestParam(value="value-max",required=true) String maxCycle){  
+	        @RequestParam(value="mincycle",required=true) String minCycle, /* From hidden field */
+	        @RequestParam(value="maxcycle",required=true) String maxCycle){  
     
         SecurityContext.assertUserIsLoggedIn();
    
