@@ -61,8 +61,6 @@
                     	  <p><a href="<c:url value='/cyclelist'/>">Gestion des Cycles</a> </p>
                     	  <br/> 
                       </lrf:conditionDisplay>
-                      <p><a href="<c:url value='/competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a> </p>
-                      <p><a href="<c:url value='/competencetree?rootCode=term'/>">Terminales (3-6 secondaire)</a> </p>
 				</div>
 				<div class="col-md-2">
 					<h4>Séquences</h4>

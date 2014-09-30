@@ -131,9 +131,6 @@
                           <lrf:conditionDisplay privilege="MANAGE_COMPETENCE">
                         	  <li><a href="<c:url value='/cyclelist'/>">Gestion des Cycles</a> </li> 
                           </lrf:conditionDisplay>
-                          <li><a href="<c:url value='/competencetree?rootCode=socle'/>">Socles (primaire & 1-2 secondaire)</a> </li>
-                          <li><a href="<c:url value='/competencetree?rootCode=term'/>">Terminales (3-6 secondaire)</a> </li>
-                    						
 					    </ul>
 					 </li>
 					 
