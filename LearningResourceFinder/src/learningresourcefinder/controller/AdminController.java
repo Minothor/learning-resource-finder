@@ -73,12 +73,9 @@ public class AdminController extends BaseRepository<User> {
 	public String crawler(@PathVariable("pageName") String pageName) throws ParseException 
 	{
 		SecurityContext.assertUserHasRole(Role.ADMIN);    	
-		try
-		{
+		try	{
 			crawlerService.crawlerPage(pageName);
-		} 
-		catch (IOException e) 
-		{
+		} catch (IOException e)	{
 			throw new RuntimeException(e);
 		}
 		return "admin";
