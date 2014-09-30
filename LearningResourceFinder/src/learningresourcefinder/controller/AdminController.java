@@ -84,7 +84,7 @@ public class AdminController extends BaseRepository<User> {
 		return "admin";
 	}
 	
-	@RequestMapping("/crawler/khanacademy/{num}")
+	@RequestMapping("/crawlerkhanacademy/{num}")
     public String crawlerKhanAcademy(@PathVariable("num") int num) throws ParseException    {
         SecurityContext.assertUserHasRole(Role.ADMIN);      
         try
