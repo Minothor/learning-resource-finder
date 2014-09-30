@@ -49,11 +49,11 @@ public class ResourceEditController extends BaseController<Resource> {
     @Logger Log log;
 
     
-    @RequestMapping(value="/ajax/increment",method=RequestMethod.GET)
+    @RequestMapping(value="/ajax/increment")
     public @ResponseBody Long incrementResource(@RequestParam("idResource") Long idResource) {
     	Resource resource = resourceRepository.find(idResource);
-    	resource.setViewcount(resource.getViewcount()+1);
-    	return resource.getViewcount();
+    	resource.incViewCount();
+    	return resource.getViewCount();
     }
        
     
