@@ -28,7 +28,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Service
 public class CrawlerService
 {	
@@ -39,6 +38,7 @@ public class CrawlerService
     @Autowired
     UrlResourceRepository urlResourceRepository;    
 
+    int cont1 = 0,cont2 = 0;
 
     public void crawlerPage(String pageName) throws IOException, ParseException 
     {
@@ -64,10 +64,11 @@ public class CrawlerService
         case "toutsavoir" :
             CrawlerToutSavoir.crawler(this); break;
         }
+        System.out.println("ajout de "+cont1+" ressources et "+cont2+" 2éme passage");
     }
     
     public void crawlerPageKhanAcademy(int num)throws IOException, ParseException {
-        CrawlerKhanAcademy.crawler(this);
+        CrawlerKhanAcademy.crawler(this,num);
     }
     
     public void persistRessource(String name, String url, String topic, String description,int duration,String minCycle,String maxCycle ) 
@@ -75,7 +76,7 @@ public class CrawlerService
         Resource r = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
         if (r == null)
         {
-            System.out.println("1er passage ");
+            System.out.println("1er passage "+url);
             r = new Resource(getSubString(name, 50),description,SecurityContext.getUser());
             r.setLanguage(Language.FR);
             r.setTopic(getTopicFromString(topic));
@@ -102,9 +103,12 @@ public class CrawlerService
             resourceRepository.persist(r);
             urlResourceRepository.persist(urlResource);
             r.getShortId();    
+            cont1++;
         } 
         else 
         {
+
+            System.out.println("2eme passage "+url);
             Cycle cycle =  getCycle(maxCycle);
             if(cycle!=null)
             {
@@ -118,7 +122,9 @@ public class CrawlerService
                 if(r.getMinCycle()==null ||     
                 (getCycleNumber(cycle)>=0 && getCycleNumber(cycle)<getCycleNumber(r.getMinCycle())))                     
                     r.setMinCycle(cycle);        
-            }                            
+            }  
+            
+            cont2++;
         }
     }
 

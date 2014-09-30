@@ -1,40 +1,23 @@
 package learningresourcefinder.service.crawler;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
-import learningresourcefinder.model.Resource;
-import learningresourcefinder.model.UrlResource;
-import learningresourcefinder.model.User;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
-import learningresourcefinder.search.SearchOptions.Format;
-import learningresourcefinder.search.SearchOptions.Language;
-import learningresourcefinder.search.SearchOptions.Platform;
-import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.ImportService;
 import learningresourcefinder.web.UrlUtil;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
-@Service
 public class CrawlerKhanAcademy
 {
     @Autowired
@@ -42,193 +25,145 @@ public class CrawlerKhanAcademy
     @Autowired
     UrlResourceRepository urlResourceRepository;
 
-    static Elements elements = new Elements();
-    static List<String> urlsection = new ArrayList<>();
+    //static Elements elements = new Elements();
+    /* static List<String> urlsection = new ArrayList<>();
     static List<String> urlSecondSection = new ArrayList<>();
-    static List<String> urlResources = new ArrayList<>();
+    static List<String> urlResources = new ArrayList<>();*/
     static String khanAcademy = "https://fr.khanacademy.org";
 
     static String section;
 
-    public static void crawler(CrawlerService cs) throws IOException, ParseException {
+    public static void crawler(CrawlerService cs,int index) throws IOException, ParseException 
+    {        
 
+        index-=1;
+        if(index<0 || index>13)
+            throw new IllegalArgumentException();
 
-        /* MATHEMATIQUES */
-        section = "math";
+        if(index<8)
+        {
+            section = "math";
+        }
+        else
+        {
+            section = "science";            
+        }            
 
-        getUrlSection();
-        geturlSecondSections(urlsection);
-        getRessourcesUrl();
-        getResources(urlResources,cs);
+        String[] urlsection = {
+               //khanAcademy + "/math/early-math",
+                khanAcademy + "/math/arithmetic",
+                khanAcademy + "/math/pre-algebra" ,
+                khanAcademy + "/math/algebra",
+                khanAcademy + "/math/probability",
+                khanAcademy + "/math/geometry",
+                khanAcademy + "/math/precalculus",
+                khanAcademy + "/math/trigonometry",
+                khanAcademy + "/math/integral-calculus",
+                khanAcademy + "/science/biology",
+                khanAcademy + "/science/chemistry",
+                khanAcademy + "/science/cosmology-and-astronomy",
+                khanAcademy + "/science/physics",
+                khanAcademy + "/science/organic-chemistry",
+                khanAcademy + "/science/health-and-medicine"};       
+
+        //urlsection.addAll(Arrays.asList(a));
+
+        //getUrlSection();   
+
+        geturlSecondSections(urlsection[index],cs);
         System.out.println(section + "FINISH !!!!!!!!!!!");
-
-        urlsection.clear();
-        urlSecondSection.clear();
-
-        /* SCIENCES */
-        section = "science";
-
-        urlsection.add(khanAcademy + "/science/biology");
-        urlsection.add(khanAcademy + "/science/chemistry");
-        urlsection.add(khanAcademy + "/science/cosmology-and-astronomy");
-        urlsection.add(khanAcademy + "/science/physics");
-        urlsection.add(khanAcademy + "/science/organic-chemistry");
-        urlsection.add(khanAcademy + "/science/health-and-medicine");
-        geturlSecondSections(urlsection);
-        getRessourcesUrl();
-        getResources(urlResources,cs);
-        urlsection.clear();
-        urlSecondSection.clear();
-        System.out.println(section + "FINISH !!!!!!!!!!!");
-
     }
 
-    private static void getUrlSection() throws IOException {
-        Document doc = Jsoup.connect(khanAcademy + "/" + section).timeout(0).get();
+    private static void geturlSecondSections(String url, CrawlerService cs) throws IOException 
+    {
+        String matiere = url.replace(khanAcademy + "/" + section + "/", "");
+        Document doc = Jsoup.connect(khanAcademy + "/" + section + "/" + matiere).timeout(0).get();
 
-        elements = doc.select("a");
-        int j = 0;
-
-        for (int i = 0; i < elements.size(); i++)
-        {
-            String href = khanAcademy + elements.get(i).attr("href");
-
-            if ((href.contains("/" + section + "/")) && (!urlsection.contains(href)) && (!href.equals(khanAcademy + "/" + section + "/early-math")))
+        System.out.println("*****************************************");
+        System.out.println(doc.select("h1").first().text());
+        System.out.println("*****************************************\n");
+        
+        Elements elements = doc.select(".topic-list a");
+        System.out.println(elements.size());
+        for (Element element : elements)
+        {            
+            System.out.println(element.select("h4").text());
+            System.out.println("==================================");
+            String href = element.attr("href");
+            if ((href.contains(section + "/" + matiere)) && (!href.trim().equals("/" + section + "/" + matiere)) && (!href.trim().equals("/" + section + "/" + matiere + "/d")))
             {
-                j++;
-                urlsection.add(href);
+                getRessourcesUrl(element.attr("href"),cs);
             }
         }
     }
 
-    private static List<String> geturlSecondSections(List<String> urls) throws IOException {
+    private static void getRessourcesUrl(String url, CrawlerService cs) throws IOException 
+    {
 
-        System.out.println("\n");
-        for (String url : urls)
+        Document doc = Jsoup.connect(khanAcademy + "/" + section + "/" + url).timeout(0).get();
+
+       Elements elements = doc.select(".tutorial-overview-block .progress-item a");
+       for (Element element : elements)
         {
-            String matiere = url.replace(khanAcademy + "/" + section + "/", "");
-            // System.out.println(matiere);
-
-            Document doc = Jsoup.connect(khanAcademy + "/" + section + "/" + matiere).timeout(0).get();
-
-            elements = doc.select("a");
-
-            for (int i = 0; i < elements.size(); i++)
+         
+            String href = element.attr("href");
+            System.out.println("\t"+element.select("span").text());
+            if ((href.contains(url)) && (!href.equals(url)))
             {
-                String href = elements.get(i).attr("href");
-
-                if ((href.contains(section + "/" + matiere)) && (!href.trim().equals("/" + section + "/" + matiere)) && (!href.trim().equals("/" + section + "/" + matiere + "/d")))
-                {
-                    urlSecondSection.add(elements.get(i).attr("href"));
-                    // System.out.println(elements.get(i).attr("href"));
-
-                }
-            }
-
-        }
-        return urlSecondSection;
-    }
-
-    private static void getRessourcesUrl() throws IOException {
-
-        for (String url : urlSecondSection)
-        {
-            String matiere = url.replace("/" + section + "/" + url, "");
-
-            System.out.println("****************************************************");
-            System.out.println("URL :" + khanAcademy + "/" + section + "/" + url);
-            System.out.println("****************************************************");
-            Document doc = Jsoup.connect(khanAcademy + "/" + section + "/" + url).timeout(0).get();
-
-            elements = doc.select("a");
-
-            for (int i = 0; i < elements.size(); i++)
-            {
-                String href = elements.get(i).attr("href");
-
-                if ((href.contains(url)) && (!href.equals(url)))
-                {
-                    String urlresource = khanAcademy + href;
-                    System.out.println(urlresource);
-                    urlResources.add(urlresource);
-
-                }
+                String urlresource = khanAcademy + href;
+                //System.out.println(urlresource);
+                getResources(urlresource,cs);
             }
         }
-
     }
 
-    private static void getResources(List<String> resources,CrawlerService cs) throws IOException, ParseException {
-
-        int cpt = 0;
+    private static void getResources(String url,CrawlerService cs) 
+    {
         String temporyTitle = "";
 
-        for (String url : resources)
-        {
-            Document doc = Jsoup.connect(url).timeout(0).get();
-            boolean youtube = false;
-
+        Document doc;
+        try {
+            doc = Jsoup.connect(url).timeout(0).get();
             String title = CrawlerService.getSubString(doc.title().replace("| Khan Academy", ""), 50);
 
             if (!title.equals(temporyTitle))
             {
-                System.out.println("Create resouce for " + url);
-                cpt++;
-
                 Elements elements = doc.select("meta").select("[content*=youtube]");
 
                 if (elements.size() > 0) // LIEN YOUTUBE
-                    createYoutubeResource(doc.select("meta").select("[property*=og:video]").attr("content"),cs);
+                {
+                   createYoutubeResource(doc.select("meta").select("[property*=og:video]").attr("content"),cs);
+                }
                 else
                 {
                     cs.persistRessource(title,url,section,"",0,"" ,"");
-
+                    System.out.println("\t\tressource créée");
                 }
             }
             temporyTitle = title;
+        } catch (IOException e) {
+            System.out.println("IOException "+url);
+        } catch (ParseException e) {
+            System.out.println("ParseException "+url);
         }
     }
 
-    private static void createYoutubeResource(String url,CrawlerService cs) throws IOException, ParseException {
-
-        System.out.println("Youtube " + url);
-
+    private static void createYoutubeResource(String url,CrawlerService cs) throws IOException, ParseException 
+    {
         if (UrlUtil.getYoutubeVideoId(url) != null)
         {
-            /*String youTubeServiceUrl = "https://gdata.youtube.com/feeds/api/videos/" + UrlUtil.getYoutubeVideoId(url) + "?v=2&alt=json";
-            URL myURL = new URL(youTubeServiceUrl);
-            URLConnection urlConnection = myURL.openConnection();
-            BufferedReader youTubeAnswerReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-            JSONParser jsonParser = new JSONParser();
-            String inputLine = youTubeAnswerReader.readLine();
-            JSONObject rootJsonObject = (JSONObject) jsonParser.parse(inputLine);
-
-            JSONObject entryJSonObject = (JSONObject) rootJsonObject.get("entry");
-            JSONObject titleJSonObject = (JSONObject) entryJSonObject.get("title");
-
-            String title = (String) titleJSonObject.get("$t");
-
-            JSONObject mediaGroupJSonObject = (JSONObject) entryJSonObject.get("media$group");
-
-            JSONObject mediaDescrJSonObject = (JSONObject) mediaGroupJSonObject.get("media$description");
-            String description = (String) mediaDescrJSonObject.get("$t");
-*/
-            
             ImportService is = new ImportService();
             JSONObject jsonObj = is.getYoutubeInfos(url);
             int duration = (int) ((double) jsonObj.get("duration"));
             String title = (String) jsonObj.get("title");
             String description =  (String) jsonObj.get("description");
-            
-
-            System.out.println("\ttitle = "+title+" description = "+description+"duration = "+duration);
             cs.persistRessource(title,url,section, description,duration,"" ,"");
+            System.out.println("\t\tressource youtube créée");
         }
-
     }
-    
-    public static void main(String[] args) throws IOException, ParseException {
-        crawler(null);
+
+    public static void main(String[] args) throws IOException, ParseException 
+    {
+        crawler(null,1);
     }
 }
