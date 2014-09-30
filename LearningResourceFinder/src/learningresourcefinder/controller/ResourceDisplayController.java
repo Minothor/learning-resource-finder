@@ -426,8 +426,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
     
     @RequestMapping("/ajax/cycleeditinresourcesubmit")
     public ModelAndView cycleEditInResourceSubmit(@RequestParam("pk") Long id, @RequestParam(value="mincycle",required=true) String minCycle,@RequestParam(value="maxcycle",required=true) String maxCycle) {
-        Resource resource = getRequiredEntity(id);
         
+
+        
+        Resource resource = getRequiredEntity(id);
+        SecurityContext.assertCurrentUserMayEditThisResource(resource);
         //convert String to int, for Ex: "1.00" to 1 (slider component sends decimal strings...)
         int tempIntMin=(int)Double.parseDouble(minCycle);
         int tempIntMax=(int)Double.parseDouble(maxCycle);
