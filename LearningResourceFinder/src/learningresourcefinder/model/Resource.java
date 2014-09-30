@@ -141,8 +141,8 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     @Enumerated(EnumType.STRING)
 	private ValidationStatus validationStatus;
 	
-	@Column()
-	private Long viewcount;
+	@Column(nullable = false)
+	private Long viewcount = 0L;
 	  
 	public Resource() {} // No arg constructor for Hibernate
 	
