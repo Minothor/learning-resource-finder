@@ -28,12 +28,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CrawlerToutSavoir 
 {
-    @Autowired  ResourceRepository resourceRepository ;
-    @Autowired  UrlResourceRepository urlResourceRepository ;
-    @Autowired CrawlerService crawlerService;
+    @Autowired  CrawlerService cs;
     //DONE 428
-    public static void crawler(CrawlerService cs) throws IOException
-    
+    public void crawler() throws IOException    
     {  
         String minCycle = "";
         String maxCycle = "";
@@ -165,7 +162,8 @@ public class CrawlerToutSavoir
 
     public static void main(String[] args) throws IOException 
     {
-        crawler(null);
+        CrawlerToutSavoir cr = new CrawlerToutSavoir();
+        cr.crawler();
 
     }
 

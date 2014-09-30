@@ -26,8 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class CrawlerClassePrimaire 
 {
 
+    @Autowired CrawlerService cs;
     //Done 70 ressources
-    public static void crawler(CrawlerService cs) throws IOException
+    public void crawler() throws IOException
     {
         for(int i=10;i<=70;i=i+10)
         {
@@ -65,7 +66,9 @@ public class CrawlerClassePrimaire
     
 
     public static void main(String[] args) throws IOException {
-       crawler(null);
+
+        CrawlerClassePrimaire cr = new CrawlerClassePrimaire();
+        cr.crawler();
     }
 
 }

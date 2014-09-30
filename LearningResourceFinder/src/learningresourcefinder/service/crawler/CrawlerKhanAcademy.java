@@ -18,12 +18,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CrawlerKhanAcademy
-{
-    @Autowired
-    ResourceRepository resourceRepository;
-    @Autowired
-    UrlResourceRepository urlResourceRepository;
+public class CrawlerKhanAcademy {
+
+    @Autowired  CrawlerService cs;
+    @Autowired  ResourceRepository resourceRepository;
+    @Autowired  UrlResourceRepository urlResourceRepository;
 
     //static Elements elements = new Elements();
     /* static List<String> urlsection = new ArrayList<>();
@@ -33,7 +32,13 @@ public class CrawlerKhanAcademy
 
     static String section;
 
-    public static void crawler(CrawlerService cs,int index) throws IOException, ParseException 
+    public void superCrawler() throws IOException, ParseException 
+    {        
+        for(int i = 1;i<=14;i++)
+            crawler(i);
+    }
+    
+    public void crawler(int index) throws IOException, ParseException 
     {        
 
         index-=1;
@@ -70,11 +75,11 @@ public class CrawlerKhanAcademy
 
         //getUrlSection();   
 
-        geturlSecondSections(urlsection[index],cs);
+        geturlSecondSections(urlsection[index]);
         System.out.println(section + "FINISH !!!!!!!!!!!");
     }
 
-    private static void geturlSecondSections(String url, CrawlerService cs) throws IOException 
+    private void geturlSecondSections(String url) throws IOException 
     {
         String matiere = url.replace(khanAcademy + "/" + section + "/", "");
         Document doc = Jsoup.connect(khanAcademy + "/" + section + "/" + matiere).timeout(0).get();
@@ -84,7 +89,7 @@ public class CrawlerKhanAcademy
         System.out.println("*****************************************\n");
         
         Elements elements = doc.select(".topic-list a");
-        System.out.println(elements.size());
+        //System.out.println(elements.size());
         for (Element element : elements)
         {            
             System.out.println(element.select("h4").text());
@@ -92,12 +97,12 @@ public class CrawlerKhanAcademy
             String href = element.attr("href");
             if ((href.contains(section + "/" + matiere)) && (!href.trim().equals("/" + section + "/" + matiere)) && (!href.trim().equals("/" + section + "/" + matiere + "/d")))
             {
-                getRessourcesUrl(element.attr("href"),cs);
+                getRessourcesUrl(element.attr("href"));
             }
         }
     }
 
-    private static void getRessourcesUrl(String url, CrawlerService cs) throws IOException 
+    private void getRessourcesUrl(String url) throws IOException 
     {
 
         Document doc = Jsoup.connect(khanAcademy + "/" + section + "/" + url).timeout(0).get();
@@ -108,16 +113,17 @@ public class CrawlerKhanAcademy
          
             String href = element.attr("href");
             System.out.println("\t"+element.select("span").text());
+            System.out.println("\turl : "+url);
             if ((href.contains(url)) && (!href.equals(url)))
             {
                 String urlresource = khanAcademy + href;
                 //System.out.println(urlresource);
-                getResources(urlresource,cs);
+                getResources(urlresource);
             }
         }
     }
 
-    private static void getResources(String url,CrawlerService cs) 
+    private void getResources(String url) 
     {
         String temporyTitle = "";
 
@@ -132,7 +138,15 @@ public class CrawlerKhanAcademy
 
                 if (elements.size() > 0) // LIEN YOUTUBE
                 {
-                   createYoutubeResource(doc.select("meta").select("[property*=og:video]").attr("content"),cs);
+                  /* try
+                   {*/
+                       createYoutubeResource(doc.select("meta").select("[property*=og:video]").attr("content"));
+                   /*}
+                   catch(Exception e)
+                   {
+                       cs.persistRessource(title,url,section,"",0,"" ,"");
+                       System.out.println("\t\tressource créée (sans youtube)");
+                   }*/
                 }
                 else
                 {
@@ -148,7 +162,7 @@ public class CrawlerKhanAcademy
         }
     }
 
-    private static void createYoutubeResource(String url,CrawlerService cs) throws IOException, ParseException 
+    private void createYoutubeResource(String url) throws ParseException 
     {
         if (UrlUtil.getYoutubeVideoId(url) != null)
         {
@@ -164,6 +178,7 @@ public class CrawlerKhanAcademy
 
     public static void main(String[] args) throws IOException, ParseException 
     {
-        crawler(null,1);
+        CrawlerKhanAcademy cr = new CrawlerKhanAcademy();
+        cr.crawler(1);
     }
 }

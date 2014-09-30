@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Resource;
-import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
@@ -16,59 +19,61 @@ import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.security.SecurityContext;
-import learningresourcefinder.web.UrlUtil;
 
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CrawlerService
 {	
-    @Autowired
-    CycleRepository cycleRepository;
-    @Autowired
-    ResourceRepository resourceRepository;
-    @Autowired
-    UrlResourceRepository urlResourceRepository;    
+    @Autowired CycleRepository cycleRepository;
+    @Autowired ResourceRepository resourceRepository;
+    @Autowired UrlResourceRepository urlResourceRepository;    
+    
+    @Autowired CrawlerBrainPOP crawlerBrainPOP;
+    @Autowired CrawlerChampionMath crawlerChampionMath;
+    @Autowired CrawlerClassePrimaire crawlerClassePrimaire;
+    @Autowired CrawlerExoFiche crawlerExoFiche;
+    @Autowired CrawlerLaRecre crawlerLaRecre;
+    @Autowired CrawlerProfesseurPhifix crawlerProfesseurPhifix;
+    @Autowired CrawlerSoutien67 crawlerSoutien67;
+    @Autowired CrawlerToutSavoir crawlerToutSavoir;
+    @Autowired CrawlerKhanAcademy crawlerKhanAcademy;
+
+    @PersistenceContext EntityManager em;
 
     int cont1 = 0,cont2 = 0;
 
-    public void crawlerPage(String pageName) throws IOException, ParseException 
-    {
+    public void crawlerPage(String pageName) throws IOException, ParseException    {
         pageName = pageName.toLowerCase();
         switch (pageName) 
         {
         case "brainpop" :
-            CrawlerBrainPOP.crawler(this);  break;      
+            crawlerBrainPOP.crawler();  break;      
         case "championmath" :
-            CrawlerChampionMath.crawler(this); break; 
+            crawlerChampionMath.crawler(); break; 
         case "classeprimaire" :
-            CrawlerClassePrimaire.crawler(this); break;
+            crawlerClassePrimaire.crawler(); break;
         case "exofiche" :
-            CrawlerExoFiche.crawler(this); break;
-        case "fondationlamap" :
-            CrawlerFondationLamap.crawler(this); break;
+            crawlerExoFiche.crawler(); break;
+        /*case "fondationlamap" :
+            CrawlerFondationLamap.crawler(this); break;*/
         case "crawlerlarecre" :
-            CrawlerLaRecre.crawler(this); break;
+            crawlerLaRecre.crawler(); break;
         case "professeurphifix" :
-            CrawlerProfesseurPhifix.crawler(this); break;
+            crawlerProfesseurPhifix.crawler(); break;
         case "soutien67" :
-            CrawlerSoutien67.crawler(this); break;
+            crawlerSoutien67.crawler(); break;
         case "toutsavoir" :
-            CrawlerToutSavoir.crawler(this); break;
+            crawlerToutSavoir.crawler(); break;
         }
         System.out.println("ajout de "+cont1+" ressources et "+cont2+" 2éme passage");
     }
     
     public void crawlerPageKhanAcademy(int num)throws IOException, ParseException {
-        CrawlerKhanAcademy.crawler(this,num);
+        crawlerKhanAcademy.crawler(num);
+        //CrawlerKhanAcademy.superCrawler(this);
     }
     
     public void persistRessource(String name, String url, String topic, String description,int duration,String minCycle,String maxCycle ) 
@@ -76,7 +81,7 @@ public class CrawlerService
         Resource r = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
         if (r == null)
         {
-            System.out.println("1er passage "+url);
+            //System.out.println("1er passage "+url);
             r = new Resource(getSubString(name, 50),description,SecurityContext.getUser());
             r.setLanguage(Language.FR);
             r.setTopic(getTopicFromString(topic));
@@ -102,13 +107,14 @@ public class CrawlerService
             }
             resourceRepository.persist(r);
             urlResourceRepository.persist(urlResource);
-            r.getShortId();    
+            r.getShortId(); 
+            em.flush();
             cont1++;
         } 
         else 
         {
 
-            System.out.println("2eme passage "+url);
+            //System.out.println("2eme passage "+url);
             Cycle cycle =  getCycle(maxCycle);
             if(cycle!=null)
             {

@@ -32,8 +32,9 @@ public class CrawlerExoFiche
     @Autowired  ResourceRepository resourceRepository ;
     @Autowired  UrlResourceRepository urlResourceRepository ;
 
+    @Autowired CrawlerService cs;
     // DONE 226 ressources
-    public static void crawler(CrawlerService cs) throws IOException 
+    public void crawler() throws IOException 
     {        
         String[] sites = {"http://www.exofiches.net/maternelle-ps-ms-gs.php",
         "http://www.exofiches.net/elementaire-cycle2-cp-ce1.php",
@@ -103,6 +104,7 @@ public class CrawlerExoFiche
     }
 
     public static void main(String[] args) throws IOException {
-        crawler(null);
+        CrawlerExoFiche cr = new CrawlerExoFiche();
+        cr.crawler();
     }
 }

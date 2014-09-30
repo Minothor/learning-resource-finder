@@ -6,11 +6,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CrawlerChampionMath 
 {
+    @Autowired CrawlerService cs;
     //DONE 94 resources
-    public static void crawler(CrawlerService cs) throws IOException
+    public void crawler() throws IOException
     {
         Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();
         Elements elements = doc.select("table:nth-child(4)").select("a");
@@ -42,6 +44,7 @@ public class CrawlerChampionMath
 
     public static void main(String[] args) throws IOException 
     {
-        crawler(null);
+        CrawlerChampionMath cr = new CrawlerChampionMath();
+        cr.crawler();
     }
 }

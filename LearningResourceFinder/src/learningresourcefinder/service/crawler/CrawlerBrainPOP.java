@@ -13,9 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-public class CrawlerBrainPOP {
+@Service
+public class CrawlerBrainPOP 
+{
+    @Autowired CrawlerService cs;
     // DONE 560 ressources
-    public static void crawler(CrawlerService cs) throws IOException {
+    public void crawler() throws IOException 
+    {
 
         Document doc1 = Jsoup.connect("http://www.brainpop.fr/topics/").timeout(10000).get();
         Elements resources = doc1.select("tr > td > blockquote > div ");
@@ -34,7 +38,8 @@ public class CrawlerBrainPOP {
                 String temps = resource.select("div > div > div > span.user_body").get(0).text();
                 String[] time = temps.split("[(:)]");
                 int minutes = 0;
-                if (time.length != 0) {
+                if (time.length != 0) 
+                {
                     
                     minutes = Integer.parseInt(time[1]);
                     int seconds = Integer.parseInt(time[2]);                    
@@ -50,6 +55,7 @@ public class CrawlerBrainPOP {
 
     public static void main(String[] args) throws IOException 
     {
-        crawler(null);
+        CrawlerBrainPOP cr = new CrawlerBrainPOP();
+        cr.crawler();
     }
 }

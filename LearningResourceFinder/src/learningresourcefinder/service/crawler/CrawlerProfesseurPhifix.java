@@ -28,11 +28,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CrawlerProfesseurPhifix 
 {
-    @Autowired  ResourceRepository resourceRepository ;
-    @Autowired  UrlResourceRepository urlResourceRepository ;
+    @Autowired  CrawlerService cs;
     
     //DONE 1854
-    public static void crawler(CrawlerService cs) throws IOException 
+    public void crawler() throws IOException 
     {
         Element tmp = null;
         Document doc = Jsoup.connect("http://www.professeurphifix.net/").timeout(10000).get();
@@ -113,6 +112,7 @@ public class CrawlerProfesseurPhifix
         
     }
     public static void main(String[] args) throws IOException {
-        crawler(null);
+        CrawlerProfesseurPhifix cr = new CrawlerProfesseurPhifix();
+        cr.crawler();
     }
 }
