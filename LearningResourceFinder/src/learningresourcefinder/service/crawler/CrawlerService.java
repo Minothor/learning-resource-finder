@@ -2,6 +2,7 @@ package learningresourcefinder.service.crawler;
 
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.repository.ResourceRepository;
@@ -105,6 +107,9 @@ public class CrawlerService
             {            
                 r.setMinCycle(cycleRepository.findByName(minCycle));        
             }
+            r.setValidationDate(new Date());
+            r.setValidator(SecurityContext.getUser());
+            r.setValidationStatus(ValidationStatus.ACCEPT);
             resourceRepository.persist(r);
             urlResourceRepository.persist(urlResource);
             r.getShortId(); 
