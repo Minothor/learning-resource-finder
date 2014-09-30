@@ -17,9 +17,37 @@
 <script src="/js/ext/jquery.nouislider.full.min.js"></script>
 <link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
 
+<script src="http://www.youtube.com/player_api"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript">
+	
+	 // create youtube player
+	 var player;
+	 function onYouTubePlayerAPIReady() {
+	     player = new YT.Player('videoyoutube', {
+	       height: '315',
+	       width: '420',
+	       videoId: '${youtubeVideoId}',
+	       events: {
+	
+	         'onStateChange': onPlayerStateChange
+	       }
+	     });
+	 }
 
+	 var countHasBeenInc=true;
+	 // when video ends
+	 function onPlayerStateChange(event) {    
+	
+	     if(YT.PlayerState.PLAYING) {  
+	         if(countHasBeenInc==true){
+	        	 //increment value in db whith ajax
+	             displayResourceInNewTab();
+	             countHasBeenInc=false;
+	         }                     
+	       
+	     }
+	 }
 
 	function ajaxeditcycle() {
 		
@@ -45,7 +73,7 @@
 
 	// Clipboard paste image - START 
 	// http://mobiarch.wordpress.com/2013/09/25/upload-image-by-copy-and-paste/
-	document.addEventListener("DOMContentLoaded", function() {
+	document.addEventListener("DOMContentLoaded", function(){
 		var pasteTarget = document.getElementById("pasteTarget");
 		pasteTarget.addEventListener("paste", handlePaste);
 	});
@@ -87,6 +115,7 @@
 	// Clipboard paste image - END
 	
  	$(document).ready(function() {
+		
  		
  		//Show cycle editing  pop-ap 
  		$("#cycle").click(function(e) {
@@ -195,7 +224,7 @@
 	
 	
  	///////  Start JCrop functions
- 	$(document).ready(function() {
+ 	$(document).ready(function() {	
 
  		$('#modalPrintScreen').on('shown.bs.modal', function() { 
 			jQuery('#imageFromPrintScreenAndCrop').Jcrop({
@@ -619,31 +648,34 @@
 
 	<c:if test="${not empty youtubeVideoId}">
 		<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
-		<style type="text/css">
-<%--
-to have a responsive layout - See more at: http: //avexdesigns.com
-	/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> .video-container
-	{
-	position: relative;
-	padding-bottom: 56.25%;
-	padding-top: 30px;
-	height: 0;
-	overflow: hidden;
-}
+	<%-- injected video youtube--%>
 
-.video-container iframe,.video-container object,.video-container embed {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-</style>
-		<div class="video-container">
-			<iframe width="420" height="315"
-				src="//www.youtube.com/embed/${youtubeVideoId}?rel=0"
-				frameborder="0" allowfullscreen></iframe>
+	<style type="text/css">
+		<%--to have a responsive layout - See more at: http: //avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> 
+			#video-container
+			{
+			position: relative;
+			padding-bottom: 56.25%;
+			padding-top: 30px;
+			height: 0;
+			overflow: hidden;
+		}
+		
+		#video-container iframe,#video-container object,#video-container embed {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+	
+	<div id="video-container"><%-- container div for responsive layout  --%>
+		<div id="videoyoutube"> <%-- div transformed to iframe with javascript --%> 
+			
 		</div>
+	</div>
+	
 	</c:if>
 	<br />
 	<br />
