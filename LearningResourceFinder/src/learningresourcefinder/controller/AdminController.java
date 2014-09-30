@@ -83,5 +83,19 @@ public class AdminController extends BaseRepository<User> {
 		}
 		return "admin";
 	}
+	
+	@RequestMapping("/crawler/khanacademy/{num}")
+    public String crawlerKhanAcademy(@PathVariable("num") int num) throws ParseException    {
+        SecurityContext.assertUserHasRole(Role.ADMIN);      
+        try
+        {
+            crawlerService.crawlerPageKhanAcademy(num);
+        } 
+        catch (IOException e) 
+        {
+            throw new RuntimeException(e);
+        }
+        return "admin";
+    }
     
 }

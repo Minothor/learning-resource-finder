@@ -55,8 +55,6 @@ public class CrawlerService
             CrawlerExoFiche.crawler(this); break;
         case "fondationlamap" :
             CrawlerFondationLamap.crawler(this); break;
-        case "khanacademy" :
-            CrawlerKhanAcademy.crawler(this); break;   
         case "crawlerlarecre" :
             CrawlerLaRecre.crawler(this); break;
         case "professeurphifix" :
@@ -66,6 +64,10 @@ public class CrawlerService
         case "toutsavoir" :
             CrawlerToutSavoir.crawler(this); break;
         }
+    }
+    
+    public void crawlerPageKhanAcademy(int num)throws IOException, ParseException {
+        CrawlerKhanAcademy.crawler(this);
     }
     
     public void persistRessource(String name, String url, String topic, String description,int duration,String minCycle,String maxCycle ) 
