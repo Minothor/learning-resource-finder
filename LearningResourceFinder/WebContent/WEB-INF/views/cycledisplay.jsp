@@ -15,8 +15,8 @@
 				trigger : 'hover',
 				html : true,
 				container : $elem,
-				animation : false
-
+				animation : false,
+				delay: {hide: 100}
 			});
 		});
 	});
