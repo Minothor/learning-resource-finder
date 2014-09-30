@@ -53,3 +53,9 @@ alter table competence
 ALTER TABLE resource
 ADD viewcount bigint NOT NULL
 CONSTRAINT viewcountconstraint DEFAULT 0;
+
+
+-- 2014-09-30 create new field (popularity) and insert default value (0)
+ALTER TABLE resource
+ADD popularity double precision NOT NULL
+CONSTRAINT popularityconstraint DEFAULT 0;
