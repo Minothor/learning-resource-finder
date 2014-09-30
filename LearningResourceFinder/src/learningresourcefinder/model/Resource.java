@@ -143,6 +143,9 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	
 	@Column(nullable = false)
 	private Long viewcount = 0L;
+	
+   @Column()
+    private double popularity;
 	  
 	public Resource() {} // No arg constructor for Hibernate
 	
@@ -231,6 +234,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 
 	public void setAvgRatingScore(Double score) {
 		this.avgRatingScore = score;
+		this.updatePopularity();
 	}
 	
 	public Long getCountRating() {
@@ -409,13 +413,20 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     	this.validationStatus = validationStatus;
     }
 
-	public Long getViewcount() {
+	public Long getViewCount() {
 		return viewcount;
 	}
 
-	public void setViewcount(Long viewcount) {
-		this.viewcount = viewcount;
-	}   
+	public void incViewCount() {
+		this.viewcount++;
+		this.updatePopularity();
+	}
+
+    private void updatePopularity() {
+        
+        this.popularity  =(this.viewcount * 0.3) + ((this.countRating==null?0:this.countRating) * (this.avgRatingScore==null?0:this.avgRatingScore) * 0.7);
+        
+    }   
     
     
 }
