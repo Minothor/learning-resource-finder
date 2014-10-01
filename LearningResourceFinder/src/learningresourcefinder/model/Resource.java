@@ -412,17 +412,21 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     public void setValidationStatus(ValidationStatus validationStatus) {
     	this.validationStatus = validationStatus;
     }
-
-	public Long getViewCount() {
-		return viewcount;
-	}
-
+    
 	public void incViewCount() {
 		this.viewcount++;
 		this.updatePopularity();
 	}
 
-    private void updatePopularity() {
+    public Long getViewcount() {
+		return viewcount;
+	}
+
+	public void setViewcount(Long viewcount) {
+		this.viewcount = viewcount;
+	}
+
+	private void updatePopularity() {
         
         this.popularity  =(this.viewcount * 0.3) + ((this.countRating==null?0:this.countRating) * (this.avgRatingScore==null?0:this.avgRatingScore) * 0.7);
         
