@@ -578,16 +578,12 @@
 					</div>							
 				</div>	
 				<div id="video-container">
-			<%-- container div for responsive layout  --%>
-			<div id="videoyoutube">
-				<%-- div transformed to iframe with javascript --%>
-
-			</div>
-		</div>
-				
-				
-				
-							
+					<%-- container div for responsive layout  --%>
+					<div id="videoyoutube">
+						<%-- div transformed to iframe with javascript --%>
+		
+					</div>
+				</div>			
 			</div>
 			<div class="col-md-4">
 				<div id="imageDiv" class="row">			
@@ -655,15 +651,6 @@
 			</div>	
 		</div>		
 		<div class="row">
-			
-		</div>
-		
-		
-	</div>
-	<%-- end row --%>
-
-
-
 	<c:forEach items="${resource.competences}" var="competence">
 		<lrf:competencepath competence="${competence}" />
 		<button type="button" style="float: none;"
@@ -742,6 +729,10 @@
 
 
 
+			
+		</div>
+		
+	</div>
 
 	<%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
 	<%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
