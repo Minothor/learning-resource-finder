@@ -424,7 +424,7 @@
 							</c:choose>
 							>&times;
 						</button>
-						<span id="viewCountDisplay">${resource.viewCount}</span>
+						<span id="viewCountDisplay">${resource.viewcount}</span>
 					</div>
 			</div>
 			<%-- end row --%>
