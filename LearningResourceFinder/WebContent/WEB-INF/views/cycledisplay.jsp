@@ -37,6 +37,7 @@
       </lrf:conditionDisplay>
 
 <h1>${ cycle.name }</h1>
+	<lrftag:resourceband resourceList="${resourceList}"/>
 	<div class="row">
 		<c:set var="valeur" value="0" />
 		<c:forEach items="${listColumns}" var="cycleColumn">
