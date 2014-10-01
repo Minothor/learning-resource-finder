@@ -345,6 +345,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
 	
     @RequestMapping("/removeurlresource")
     public ModelAndView removeResource(@RequestParam("urlresourceid") long urlresourceid) {
+        
+        
         UrlResource urlResource = (UrlResource)getRequiredEntity(urlresourceid, UrlResource.class); 
         Resource resource = urlResource.getResource();
 

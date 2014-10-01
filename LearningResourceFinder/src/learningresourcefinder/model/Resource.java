@@ -142,7 +142,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	private ValidationStatus validationStatus;
 	
 	@Column(nullable = false)
-	private Long viewcount = 0L;
+	private Long viewCount = 0L;
 	
    @Column()
     private double popularity;
@@ -414,21 +414,21 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     }
     
 	public void incViewCount() {
-		this.viewcount++;
+		this.viewCount++;
 		this.updatePopularity();
 	}
 
     public Long getViewCount() {
-		return viewcount;
+		return viewCount;
 	}
 
 	public void setViewcount(Long viewcount) {
-		this.viewcount = viewcount;
+		this.viewCount = viewcount;
 	}
 
 	private void updatePopularity() {
         
-        this.popularity  =(this.viewcount * 0.3) + ((this.countRating==null?0:this.countRating) * (this.avgRatingScore==null?0:this.avgRatingScore) * 0.7);
+        this.popularity  =(this.viewCount * 0.3) + ((this.countRating==null?0:this.countRating) * (this.avgRatingScore==null?0:this.avgRatingScore) * 0.7);
         
     }   
     
