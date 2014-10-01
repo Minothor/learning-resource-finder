@@ -12,13 +12,9 @@
 	
  });
    
-// Sends an ajax request for the user who wants to upload an image from an URL (text field).
+ 
 function ajaxVerifyUrl() {
 	var url = $('#urlAddField').val();
-	if (isValidURL(url) == false) {
-		alert('Veuillez entrer une URL valide, commençant par "http://"');
-		return;
-	}
 	
 	$('#urlErrorMessage').html('');
 	
@@ -42,8 +38,14 @@ function ajaxVerifyUrl() {
 				} else {
 					if(response.type == "urlGeneric")
 						$("#urlErrorMessage").html("L'Url introduite est trop générique");
-					else		
+					else if(response.type == "duplicateUrl")		
 						$("#urlErrorMessage").html("<a href='"+response.value+"'>Une ressource avec une url similaire</a> existe déjà sur le site");
+// 					We decided not to check whether the url is valid or not because the method is not reliable. 
+//					see isUrlValid method in web.UrlUtil for full explanation. 
+//					also the server hosting the resource can be temporarily down when we check, so we prefer not to do it.
+//					else if(response.type == "invalidUrl")
+//						$("#urlErrorMessage").html("Aucun site web ne semble répondre pour l'instant avec cette URL. Est-elle valide?");
+					
 				}
 
 			},
@@ -52,22 +54,11 @@ function ajaxVerifyUrl() {
 			}
 		});
 	} else {
-		alert('Veuillez entrer une URL valide, commençant par "http://"');
+		$("#urlErrorMessage").html("Veuillez entrer une URL valide");
 	}
 
 }
 
-function isValidURL(url) {
-	// I've tried many clever regexp from the web, but all make a valid url fail soon or later. The one below does not accept this: http://www.asblentraide.be/docs%5CFICHE%205.2%20-%20SUITES%20ARITHMETIQUES%20ET%20SUITES%20GEOMETRIQUES.pdf
-	// var result = url.match(/^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/);
-	url = url.toLowerCase();
-	if (url.indexOf("http://") == 0 || url.indexOf("https://")==0 ) { // url starts with "http://" or "https://"
-		return true;
-	} else {
-		return false;
-	}
-	
-}
 
 function resetForm() {
    $('#urlAddField').attr('readonly', false);

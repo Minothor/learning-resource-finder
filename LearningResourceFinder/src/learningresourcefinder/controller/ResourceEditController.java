@@ -70,7 +70,12 @@ public class ResourceEditController extends BaseController<Resource> {
          if (duplicateResource == null) {
              if (UrlUtil.getYoutubeVideoId(url) != null) {
                  return importService.getYoutubeInfos(url);							//return json object
-             } else {
+             } /* We removed this test. see UrlUtil.isUrlValid for more explanation.
+             	 else if (!UrlUtil.isUrlValid(url)) {
+            	 JSONObject obj = new JSONObject();
+            	 obj.put("type", "invalidUrl");
+                 return obj;  } */
+               else {
             	 JSONObject obj = new JSONObject();
             	 obj.put("type", "ok");
                  return obj;
@@ -111,6 +116,10 @@ public class ResourceEditController extends BaseController<Resource> {
         Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
         Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);
         
+        url=url.toLowerCase().trim();
+        if(!url.startsWith("http://") && !url.startsWith("https://")){
+        	url = "http://" + url;
+        }
         resource.setName(title);
         String slug = Slugify.slugify(resource.getName());
         resource.setSlug(slug);

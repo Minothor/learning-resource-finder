@@ -1,6 +1,7 @@
 package learningresourcefinder.web;
 
-import java.net.HttpURLConnection;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -103,23 +104,29 @@ public class UrlUtil {
 		}
     }
 
-    // TODO: test this code (is it a reasonable way to test an URL ?) - John 2012-09-05 
+    
+    // The method InetAddress.getByName().isReachable() doesnt't always return true when the website is reachable,
+    // for example when the http response is a redirect. see post on StackOverflow :
+    // http://stackoverflow.com/questions/9922543/why-does-inetaddress-isreachable-return-false-when-i-can-ping-the-ip-address
     public static boolean isUrlValid(String outUrl) {
-        URL u;
-        try {
-            u = new URL(outUrl);
-            HttpURLConnection huc;
-            huc = ( HttpURLConnection )  u.openConnection();
-            huc.setRequestMethod("GET"); 
-            huc.connect () ;         
-            if(HttpURLConnection.HTTP_OK != huc.getResponseCode()) {
-            	return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
+		if (outUrl.startsWith("http://") || outUrl.startsWith("https://") ) {
+			try {
+				return (InetAddress.getByName(new URL(outUrl).getHost())
+						.isReachable(2000));
+			} catch (IOException e) {
+				return false;
+			}
+
+		} else {
+			try {
+				return (InetAddress.getByName(outUrl).isReachable(2000));
+			} catch (IOException e) {
+				return false;
+			}
+
+		}
+	}
+    
     /** nameParam is something like "Java & OO - Fundamentals". The urlFragment is set to "Java_OO_Fundamentals" */ 
     public static String computeUrlFragmentFromName(String nameParam) {
     	nameParam.trim();
