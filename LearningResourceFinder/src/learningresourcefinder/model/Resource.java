@@ -418,7 +418,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		this.updatePopularity();
 	}
 
-    public Long getViewcount() {
+    public Long getViewCount() {
 		return viewcount;
 	}
 
