@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.Query;
 
 import learningresourcefinder.model.Competence;
+import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Favorite;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
@@ -215,6 +216,44 @@ public class ResourceRepository extends BaseRepository<Resource> {
     public long countResources() {
             return (Long)em.createQuery("SELECT  count(r) from Resource r ").getSingleResult();
     }
-	
+   
+
+    
+  
+    public List<Resource> findTop5ResourcesByCycleAndPopularity(Cycle cycle){    
+        List<Resource> topResources = new ArrayList<>() ;
+        
+        Topic[] topics={Topic.FRENCH,Topic.MATH,Topic.HISTORY,Topic.GEO,Topic.SCIENCE};
+        
+        for (Topic topic : topics) {
+
+            Resource topResource = findTopResourceByTopPopularity(cycle,topic);
+            
+            if(topResource!= null){                
+                topResources.add(topResource);   
+            }
+              
+        }
+        
+        return topResources;
+    }        
+   
+    
+   public Resource findTopResourceByTopPopularity(Cycle cycle,Topic topic){  
+
+       List<Resource> resourceList = (List<Resource>)em.createQuery("select r from Resource r where r.topic = :topic "
+               + "and r.popularity =  (select max(r.popularity) from Resource r where  r.minCycle.id <= :cycle and :cycle <=  r.maxCycle.id  and r.topic = :topic)")      
+               .setParameter("topic",topic)
+               .setParameter("cycle", cycle.getId())
+               .setMaxResults(1)
+               .getResultList();
+       
+       if (resourceList != null && resourceList.size() > 0) {
+           return resourceList.get(0);
+       } else {
+           return null;
+       }
+       
+   }
 	
 }

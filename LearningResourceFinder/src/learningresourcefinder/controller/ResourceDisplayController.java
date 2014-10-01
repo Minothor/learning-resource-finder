@@ -3,6 +3,7 @@ package learningresourcefinder.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +42,7 @@ import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -431,6 +433,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
         
         Resource resource = getRequiredEntity(id);
         SecurityContext.assertCurrentUserMayEditThisResource(resource);
+        
+        
         //convert String to int, for Ex: "1.00" to 1 (slider component sends decimal strings...)
         int tempIntMin=(int)Double.parseDouble(minCycle);
         int tempIntMax=(int)Double.parseDouble(maxCycle);
@@ -441,6 +445,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
              
         Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
         Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);
+
+        
         resource.setMinCycle(cycleMin);
         resource.setMaxCycle(cycleMax);        
         resourceRepository.merge(resource);
