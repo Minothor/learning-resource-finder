@@ -59,3 +59,59 @@ CONSTRAINT viewcountconstraint DEFAULT 0;
 ALTER TABLE resource
 ADD popularity double precision NOT NULL
 CONSTRAINT popularityconstraint DEFAULT 0;
+
+-- 2014-09-30 Vincent -- Remove link between tables competence (table containing all the new categories) and cycle
+
+-- Remove all foreign keys for competence
+alter table competence drop constraint fk_1wk32xsu4uv1t7ifn3kmkgl7q;
+alter table competence drop constraint fk_2e6smrkx5e38he28jmo39okmi;
+alter table competence drop constraint fk_6qfnv43sclpe4kiwpio6483yk;
+alter table competence drop constraint fk_jp9dw79j8hfwljeiixqwc6gqf;
+alter table competence drop constraint uk_qv4oxfirnlcs493nj2scebk2e;
+
+alter table resource_competence drop constraint fk_fsaflsfswkcnlm81cjhhfpc12;
+
+alter table competence drop constraint competence_pkey;
+
+-- Rename competence to keep a backup
+alter table competence rename to competence_backup;
+
+-- Create new table competence (same than previous without fields cycle_id & vraisforumpage) 
+create table competence
+(
+  id bigint not NULL,
+  createdon timestamp without time zone,
+  updatedon timestamp without time zone,
+  code character varying(10) not NULL,
+  description text,
+  name character varying(255),
+  createdby_id bigint,
+  updatedby_id bigint,
+  parent_id bigint,
+  constraint competence_pkey primary key (id),
+  constraint fk_1wk32xsu4uv1t7ifn3kmkgl7q foreign key (createdby_id)
+      references users (id) match SIMPLE
+      on update no action on delete no action,
+  constraint fk_2e6smrkx5e38he28jmo39okmi foreign key (updatedby_id)
+      references users (id) match SIMPLE
+      on update no action on delete no action,
+  constraint fk_6qfnv43sclpe4kiwpio6483yk foreign key (parent_id)
+      references competence (id) match SIMPLE
+      on update no action on delete no action,
+  constraint uk_qv4oxfirnlcs493nj2scebk2e unique (code)
+)
+with (
+  OIDS=FALSE
+);
+
+alter table competence
+  owner to lrfuser;
+
+-- Clear table resource_competence (as table competence is now empty. It will be filled later with new categories) 
+delete from resource_competence;
+
+-- Add again foreign key
+alter table resource_competence 
+        add constraint fk_fsaflsfswkcnlm81cjhhfpc12 
+        foreign key (competences_id) 
+        references competence;

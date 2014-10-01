@@ -21,10 +21,6 @@ $(document).ready(function() {
 		$("span[id^='R-']").attr('data-toggle', 'modal'); 
 		$("span[id^='R-']").attr('href', '#competenceRemoveModal');
 		$("span[id^='R-']").click(click_in_tree_removeCompetence);
-
-// TODO Remove me after completion of TP-36 - No nonsense categories
-//		// setCycle Init
-//		$("a[id^='CY-']").click(click_in_tree_setCycle);
 	});
   
   function click_in_tree_moveCompetence (){
@@ -48,41 +44,6 @@ $(document).ready(function() {
 		$("#competenceForm").submit(ajaxCompetenceEditSubmit);
 		ajaxCompetenceEditLoad(compId);
 	}
-	
-// TODO Remove me after completion of TP-36 - No nonsense categories	
-//	function click_in_tree_removeCompetence(){
-//		var compId = this.id.substring(2);
-//		$("button[id='removesubmit']").attr("onclick","ajaxCompetenceRemoveSubmit(" + compId +")");
-//	}
-//	
-//	function click_in_tree_setCycle(){
-//		var temp = this.id.split('CP-');
-//		var compId =  temp[1];
-//		var cycleId = temp[0].substring(3);
-//		var newvalue = $(this).text();
-//		$.ajax({
-//			type : "GET",
-//		    url : 'ajax/setcycle',
-//		    data: "idcomp=" +compId + "&idcycle=" +cycleId,
-//		    success : function(data) {
-//		    	if (data == "success") {
-//		    		showNotificationText("Assignation du cycle réussie.", "success");
-//		    		$("span[id='CP-" + compId + "']").html(newvalue + "<span class='caret'/>"); //Refresh dropdown text value with new cycle value without refresh all the page
-//		    		$("span[id='CP-" + compId + "']").dropdown('toggle'); //hide dropdown list
-//		    	} else {
-//		    		showNotificationText(data);
-//		    	}
-//		    	return false;
-//		    },
-//		    error : function(data) {
-//		    	showNotificationText("Il semble qu'il y ait eu une petite erreur sur notre serveur lorsque vous avez tenté d'assigner un cycle." + data, "danger");
-//		    	
-//        		return false;
-//		    },
-//		}); 
-//        return false;  // Prevents the link to be followed
-//	}
-
 	
 	function ajaxCompetenceAddSubmit(event) {
 		ajaxCompetenceSubmit(this, event, "ajax/competenceaddsubmit");
@@ -149,5 +110,4 @@ $(document).ready(function() {
 			showNotificationText("Bug (defensive coding): no id received!");
 		} 
 	}
-	
 	

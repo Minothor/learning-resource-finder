@@ -7,6 +7,7 @@ import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.util.CompetenceNode;
+import learningresourcefinder.web.Cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class CompetenceNodeService {
 	/** Returns the root of a CompetenceNode tree, which is a copy of the Competence tree, filtered to include only the elements of the list */
 	public CompetenceNode buildCompetenceNodeTree(Cycle cycle){
 		
-		List<Competence> competencesFromCycle = cycle.getComputedCompetences();   // We only want to include these competences.
+		List<Competence> competencesFromCycle = Cache.getInstance().getComputedCategoriesByCycles(cycle.getId());   // We only want to include these competences.
 		Competence root = competenceRepository.findRoot();
 
 		CompetenceNode rootNode = new CompetenceNode(root, null);
@@ -54,33 +55,28 @@ public class CompetenceNodeService {
 	public List<List<CompetenceNode>> splitCompetenceNodesInColumns(CompetenceNode root) {
 		////// 1. We count how many lines we need display in total.
 		int totalAmountOfLinesToDisplay = 0;
-		for(CompetenceNode competenceNodeFirstLevel : root.getChildren()) {  // These are "socles" and "term" (primary and secondary) nodes that we need to skip.
-			totalAmountOfLinesToDisplay += competenceNodeFirstLevel.getChildren().size();
-		}
 		
-		////// 2. We split the nodes into columns of (hopefully) an equaivalent amount of lined in each. 
+	    totalAmountOfLinesToDisplay = root.getChildren().size();
+		
+		////// 2. We split the nodes into columns of (hopefully) an equivalent amount of lined in each. 
 		int amountOfLinesToDisplayAlreadyCurrentColumn = 0;
 		List<List<CompetenceNode>> columnsList = new ArrayList<>();		  
 		List<CompetenceNode> currentColumn = new ArrayList<>();
 		columnsList.add(currentColumn);
 
-		for(CompetenceNode competenceNodeFirstLevel : root.getChildren()) {  // These are "socles" and "term" (primary and secondary) nodes that we need to skip.
-
-			for(CompetenceNode competenceNodeSecondLevel : competenceNodeFirstLevel.getChildren()){  // These are "Math", "French", etc.
-					currentColumn.add(competenceNodeSecondLevel );
-					amountOfLinesToDisplayAlreadyCurrentColumn += competenceNodeSecondLevel.getChildren().size();
+		for(CompetenceNode competenceNodeSecondLevel : root.getChildren()){  // These are "Math", "French", etc.
+				currentColumn.add(competenceNodeSecondLevel );
+				amountOfLinesToDisplayAlreadyCurrentColumn += competenceNodeSecondLevel.getChildren().size();
 					
-					// Do we need to jump to the next column?
+				// Do we need to jump to the next column?
 					
-					if (amountOfLinesToDisplayAlreadyCurrentColumn > totalAmountOfLinesToDisplay / NB_OF_COLUMNS  
-							&& columnsList.size() < NB_OF_COLUMNS ) { 
+				if (amountOfLinesToDisplayAlreadyCurrentColumn > totalAmountOfLinesToDisplay / NB_OF_COLUMNS  
+						&& columnsList.size() < NB_OF_COLUMNS ) { 
 		
-						currentColumn = new ArrayList<>();
-						columnsList.add(currentColumn);
-						amountOfLinesToDisplayAlreadyCurrentColumn = 0;
-					}
-			}
-			
+					currentColumn = new ArrayList<>();
+					columnsList.add(currentColumn);
+					amountOfLinesToDisplayAlreadyCurrentColumn = 0;
+				}
 		}
 		
 		// Remove the last column if empty

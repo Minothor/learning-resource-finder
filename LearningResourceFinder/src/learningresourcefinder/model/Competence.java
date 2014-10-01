@@ -19,7 +19,6 @@ import javax.validation.constraints.Size;
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -55,22 +54,6 @@ public class Competence extends BaseEntity implements Searchable{
 	@OrderBy("code")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	List<Competence> children = new ArrayList <Competence>();
-
-	@ManyToOne
-	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	Cycle cycle;   // Could be null (typical of non leaf cycles)
-	
-	
-	String vraisForumPage;  // We remember it when we created the competence automatically from that site: http://findecycle.vraiforum.com/index.php
-	                        // Maybe some day we'll be happy to have it.  John 2014-01
-	
-	public Cycle getCycle() {
-		return cycle;
-	}
-
-	public void setCycle(Cycle cycle) {
-		this.cycle = cycle;
-	}
 
 	public Competence() {} // No arg constructor for Hibernate
 
@@ -164,15 +147,6 @@ public class Competence extends BaseEntity implements Searchable{
 	}
 
 	
-	
-	public String getVraisForumPage() {
-        return vraisForumPage;
-    }
-
-    public void setVraisForumPage(String vraisForumPage) {
-        this.vraisForumPage = vraisForumPage;
-    }
-
     @Override
     public Long getId() {
         return id;
