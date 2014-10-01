@@ -115,3 +115,34 @@ alter table resource_competence
         add constraint fk_fsaflsfswkcnlm81cjhhfpc12 
         foreign key (competences_id) 
         references competence;
+        
+ 
+        
+-- 2014-10-01 Alain Faissal create main competences (root, Français...)
+DO $$
+
+DECLARE v_ROOT integer;
+DECLARE v_FR integer;
+DECLARE v_CM integer;
+DECLARE v_ES integer;
+DECLARE v_EG integer;
+DECLARE v_EA integer;
+DECLARE v_EH integer;
+DECLARE curtime timestamp := now();
+
+BEGIN
+select nextval('hibernate_sequence') INTO v_ROOT ; 
+INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_ROOT, curtime, NULL, 'ROOT', NULL, 'Root', NULL, NULL, NULL);
+select nextval('hibernate_sequence') INTO v_FR ;
+INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_FR, curtime, NULL, 'FR', NULL, 'Français', NULL, NULL, v_ROOT);
+select nextval('hibernate_sequence') INTO v_CM ;
+INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_CM, curtime, NULL, 'CM', NULL, 'Calcul et Mathématiques', NULL, NULL, v_ROOT);
+select nextval('hibernate_sequence') INTO v_ES ;
+INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_ES, curtime, NULL, 'ES', NULL, 'Eveil scientifique', NULL, NULL, v_ROOT);
+select nextval('hibernate_sequence') INTO v_EG ;
+INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_EG, curtime, NULL, 'EG', NULL, 'Eveil géographique', NULL, NULL, v_ROOT);
+select nextval('hibernate_sequence') INTO v_EA ;
+INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_EA, curtime, NULL , 'EA', NULL, 'Eveil artistique', NULL, NULL, v_ROOT);
+select nextval('hibernate_sequence') INTO v_EH ;
+INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_EH, curtime, NULL, 'EH', NULL, 'Eveil historique', NULL, NULL, v_ROOT);
+END $$;
