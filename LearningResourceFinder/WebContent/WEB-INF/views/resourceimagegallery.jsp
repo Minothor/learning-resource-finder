@@ -16,7 +16,7 @@
 		<c:forEach var="i" begin="1" end="${resource.numberImage}" step="1">
 			<li>    
 			    <a href="/gen/resource/original/${resource.id}-${i}.jpg">  <%-- Link for yoxview --%>
-		            <img id="${resource.id}-${i}" src="/gen/resource/resized/small/${resource.id}-${i}.jpg" alt="image ${resource.name}"  />
+		            <img class="col-md-12" id="${resource.id}-${i}" src="/gen/resource/resized/large/${resource.id}-${i}.jpg" alt="image ${resource.name}"  />
 		        </a>
 		        <br/>
 		        

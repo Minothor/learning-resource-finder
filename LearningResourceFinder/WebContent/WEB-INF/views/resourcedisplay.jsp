@@ -325,7 +325,6 @@
 		<div class="modal fade" id="editecycle" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" id="adjustBalance">
-		
 				<form id="cycles" role="form" method="post"<%-- action bound with javascript --%>>
 					<div class="modal-content">
 						<div class="modal-header">
@@ -335,14 +334,13 @@
 						<div class="modal-body">
 							<div class="form-horizontal container">					
 								<div class="form-group">
-
-									<lrftag:cycleslider idSlider="resourcedisplayslider" minCycle="${mincycle}" maxCycle="${maxcycle}"/>
-																	
-								<div class="pull-right">
-									<button type="button" class="btn btn-mini btn-primary" onclick="ajaxeditcycle()">Enregistrer</button>
+									<lrftag:cycleslider idSlider="resourcedisplayslider"
+										minCycle="${mincycle}" maxCycle="${maxcycle}" />
+									<div class="pull-right">
+										<button type="button" class="btn btn-mini btn-primary"
+											onclick="ajaxeditcycle()">Enregistrer</button>
+									</div>
 								</div>
-								</div>
-		
 							</div>
 						</div>
 					</div>
@@ -352,9 +350,8 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
-								
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-12">
 				<a id="title"
 					${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}><h1
 						style="display: inline-block;">${resource.name}</h1></a> <a
@@ -364,363 +361,355 @@
 					title="lien direct vers ce site"></span>
 				</a>
 			</div>
-			<div class="col-md-2 text-right">
-				<lrftag:rating id="${resource.id}" title="${resource.name}"
-					scoreResource="${resource.avgRatingScore}"
-					scoreUser="${mapRating[resource].score}"
-					countRating="${resource.countRating}" canvote="${current.canVote}" />
-				<div class="addthis_sharing_toolbox" style="display: inline-block; margin-right: 26px; vertical-align: super;"></div>
-				<lrftag:favorite isFavorite="${isFavorite}"
-					idResource="${resource.id}" />
-			</div>
 		</div>
-
 		<div class="row">
-			<div id="descriptionDiv" class="col-md-6">
-				<a id="description"
-					${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}
-					data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
-			</div>
-			<div class="col-md-6">
-				<c:forEach items="${resource.urlResources}" var="urlResource">
-					<div class="row">
-						<c:choose>
-							<c:when test="${oneUrlHasAName}">
-								<%-- One extra column for the URL's name --%>
-								<div class="col-md-3 text-right">
-									<c:if test="${urlResource.name != null}">${urlResource.name}</c:if>
-								</div>
-								<div class="col-md-9">
-							</c:when>
-							<c:otherwise>
-								<%-- Full width for the URLs --%>
-								<div class="col-md-12">
-							</c:otherwise>
-						</c:choose>
-						<a href="${urlResource.url}" onclick="displayResourceInNewTab();" target="_blank"  id="urlresource"
-							data-type="text">${urlResource.url}</a> <span
-							style="float: none; font-size: 15px" title="Modifier cette URL"
-							class="glyphicon glyphicon-pencil close addToolTip
-							  <c:choose>
-							        <c:when test="${canEditUrl}">
-							          "
-							onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')">
-							</c:when> <c:otherwise>
-							          nonurleditpop">
-							        </c:otherwise> </c:choose>
-						</span>
-
-						<button type="button" style="float: none;"
-							title="Retirer cette URL"
-							class="close addToolTip
-						    <c:choose>
-							        <c:when test="${canEditUrl}">
-							            "
-							style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
-							</c:when>
-							<c:otherwise>
-							            nonurleditpop"  
-							        </c:otherwise>
-							</c:choose>
-							>&times;
-						</button>
-						<span id="viewCountDisplay">${resource.viewCount}</span>
+			<div class="col-md-8">
+				<div id="rateAndShareDiv" class="row">
+					<div class="col-md-6">
+						<lrftag:rating id="${resource.id}" title="${resource.name}"
+							scoreResource="${resource.avgRatingScore}"
+							scoreUser="${mapRating[resource].score}"
+							countRating="${resource.countRating}" canvote="${current.canVote}" />
 					</div>
-			</div>
-			<%-- end row --%>
-			</c:forEach>
-			<div class="row">
-				<c:choose>
-					<c:when test="${oneUrlHasAName}">
-						<%-- One extra column for the URL's name --%>
-						<div class="col-md-3"></div>
-						<div class="col-md-9">
-					</c:when>
-					<c:otherwise>
-						<%-- Full width for the URLs --%>
-						<div class="col-md-12">
-					</c:otherwise>
-				</c:choose>
-				<span
-					class="glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "
-					nonurleditpop":""}"	 ${canEditUrl==true
-					? "onclick='onUrlAddClick()'
-					":""}  style="float: none; font-size: 15px"
-					title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
-			</div>
-		</div>
-
-		<br />
-		<br />
-
-		<c:if test="${listMyPlayListsWithThisResource != null}">
-					Mes séquences contenant cette ressource:<br />
-			<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
-				<lrftag:playlist playlist="${playlist}" />
-			</c:forEach>
-			<br />
-		</c:if>
-		<c:if test="${listMyPlayListWithoutThisResource != null}">
-			<a id="addToPlayList" href='#' class='editableField'
-				data-type='select'
-				data-source="${listMyPlayListWithoutThisResource}">Ajouter à une
-				de mes séquences</a>
-			<br />
-		</c:if>
-
-		<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
-			<a id="addToOtherPlayList" href='#' class='editableField'
-				data-type='text' data-title="Entrez l'id court de la séquence"
-				data-value="">Ajouter à une séquence d'un autre utilisateur</a>
-			<br />
-		</lrf:conditionDisplay>
-
-		<c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
-					Séquences d'autres utilisateurs contenant cette ressource:<br />
-			<c:forEach items="${listOtherPeoplePlayListsWithThisResource}"
-				var="playlist">
-				<lrftag:playlist playlist="${playlist}" />
-			</c:forEach>
-		</c:if>
-		<br /> <br />
-
-	</div>
-	</div>
-	<%-- end row --%>
-
-
-	<div class="row">
-		<div class="col-md-6">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-3">
-							<a id="format"
-								${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?format?'":" class='noneditresource'"}
-								data-source="${dataEnumFormat}">${resource.format.description}</a>
-						</div>
-						<div class="col-md-3">
-							<a id="nature"
-								${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?nature?'": " class='noneditresource'"}
-								data-source="${dataEnumNature}">${resource.nature.description}</a>
-						</div>
-						<div class="col-md-3">
-							<a id="topic"
-								${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?mati�re?'": " class='noneditresource'"}
-								data-source="${dataEnumTopic}">${resource.topic.description}</a>
-						</div>
-						<div class="col-md-3">
-
-							<a id="platform"
-								${canEdit==true? "href='#' class='editableFieldArray'  data-type='checklist'  data-emptytext='?plate-forme?'":" class='noneditresource'"}
-								data-source="${dataEnumPlatform}"
-								data-value="${platformsForJson}"> <c:forEach
-									items="${resource.platforms}" var="platform">
-								 	${platform.name}
-								 </c:forEach>
-							</a>
-
-						</div>
+					<div class="col-md-6">
+						<div class="addthis_sharing_toolbox"
+							style="display: inline-block; margin-right: 26px; vertical-align: super;"></div>
+						<lrftag:favorite isFavorite="${isFavorite}"
+							idResource="${resource.id}" />
 					</div>
-					<%-- end row --%>
-					<div class="row">
-						<div class="col-md-3">
-							<a id="duration"
-								${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}>
-								${resource.duration}</a> minutes
-						</div>
-						<div class="col-md-3">
-							<a id="language"
-								${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?langue?'":" class='noneditresource'"}
-								data-source="${dataEnumLanguage}">
-								${resource.language.description}</a>
-						</div>
-						<div class="col-md-3">
-						    
-   
-			   <a  ${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"} >
-			   
-			   	 <c:choose>
-   					 <c:when test="${resource.minCycle == null}">? &#8594; ?</c:when>
-    				<c:otherwise>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</c:otherwise>
-				</c:choose>
-			   
-			   </a>
-						
-				
-						</div>
-						<div class="col-md-3">
-							<a id="advertising"
-								${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicité?'":" class='noneditresource'"}
-								data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
-								<c:if test="${resource.advertising == true}">
-		    							pub
-									</c:if> <c:if test="${resource.advertising == false}">
-		    							sans pub
-									</c:if>
-							</a>
-						</div>
-					</div>
-					<%-- end row --%>
-					<div class="row">
-						<div class="col-md-3">
-							<a href="/user/${resource.createdBy.userName}" class="addToolTip"
-								title="contributeur">${resource.createdBy.fullName}</a>
-						</div>
-						<div class="col-md-3 col-md-offset-9">
-							<a id="author"
-								${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}>
-								${resource.author}</a>
-						</div>
-					</div>
-					<%-- end row --%>
-
-					<c:if test="${canValidate==true}">
-						<div class="row">
-							<div class="col-md-3">
-
-								<a id="validate"
-									title="
-									<c:choose>
-									<c:when test="${resource.validationStatus!=null}">
-										<c:if test="${resource.validator!=null}">
-					   	        		  par ${resource.validator.userName}
-								        </c:if>
-										<c:if test="${resource.validationDate!=null}">
-											<lrf:datedisplay date="${resource.validationDate}"	duration="true" withspan="false" />
-										</c:if>
-									</c:when>
-									<c:otherwise>
-										Cette ressource peut-elle être montrée à des enfants?
-									</c:otherwise>
-								    </c:choose>"
-									${canValidate==true ? 
-								"
-									href='#' 
-									class='editableField addToolTip'
-									data-type='select' 
-									data-emptytext='?non validée?' 
-								": " 
-									class='noneditresource addToolTip'
-							"}
-									data-source="${dataEnumValidationStatus}">
-									${resource.validationStatus.description} </a>
-
-
-							</div>
-
-						</div>
-					</c:if>
-					<%-- end row --%>
-
-
 				</div>
-				<%-- end panel body --%>
+				<div id="urlsDiv">					
+					<c:forEach items="${resource.urlResources}" var="urlResource">
+						<div class="row">
+							<div class="col-md-12">
+							<c:if test="${oneUrlHasAName && urlResource.name != null}">${urlResource.name} : </c:if>
+							<a href="${urlResource.url}" onclick="displayResourceInNewTab();"
+								target="_blank" id="urlresource" data-type="text">${urlResource.url}</a>
+							<span style="float: none; font-size: 15px"
+								title="Modifier cette URL"
+								class="glyphicon glyphicon-pencil close addToolTip
+								  <c:choose>
+								        <c:when test="${canEditUrl}">
+								          "
+								onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')">
+								</c:when> <c:otherwise>
+								          nonurleditpop">
+								        </c:otherwise> </c:choose>
+							</span>
+	
+							<button type="button" style="float: none;"
+								title="Retirer cette URL"
+								class="close addToolTip
+							    <c:choose>
+								        <c:when test="${canEditUrl}">
+								            "
+								style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
+								</c:when>
+								<c:otherwise>
+								            nonurleditpop"  
+								        </c:otherwise>
+								</c:choose>
+								>&times;
+							</button>
+							<span id="viewCountDisplay">${resource.viewCount}</span>
+							</div>
+						</div>
+						<%-- end row --%>
+					</c:forEach>				
+					<div class="row">
+						<div class="col-md-12">
+							<span
+								class="glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "
+								nonurleditpop":""}"	 ${canEditUrl==true
+								? "onclick='onUrlAddClick()'
+								":""}  style="float: none; font-size: 15px"
+								title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
+						</div>
+					</div>
+				</div>					
+				<div class="row">
+					<div id="descriptionDiv" class="col-md-6">
+						<a id="description"
+							${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}
+							data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
+					</div>				
+					<div id="infoPlusDiv" class="col-md-6">
+						
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-6">
+										<span class="text-muted">format :</span>  
+										<a id="format"
+											${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?format?'":" class='noneditresource'"}
+											data-source="${dataEnumFormat}">${resource.format.description}</a>
+									</div>
+									<div class="col-md-6">
+										<span class="text-muted">nature :</span> 
+										<a id="nature"
+											${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?nature?'": " class='noneditresource'"}
+											data-source="${dataEnumNature}">${resource.nature.description}</a>
+									</div>
+								</div>	
+								<div class="row">
+									<div class="col-md-6">										
+										<span class="text-muted">matière : </span> 
+										<a id="topic"
+											${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?mati�re?'": " class='noneditresource'"}
+											data-source="${dataEnumTopic}">${resource.topic.description}</a>
+									</div>
+									<div class="col-md-6">									
+										<span class="text-muted">plateforme : </span> 
+										<a id="platform"
+											${canEdit==true? "href='#' class='editableFieldArray'  data-type='checklist'  data-emptytext='?plate-forme?'":" class='noneditresource'"}
+											data-source="${dataEnumPlatform}"
+											data-value="${platformsForJson}"> <c:forEach
+												items="${resource.platforms}" var="platform">
+											 	${platform.name}
+											 </c:forEach>
+										</a>			
+									</div>
+								</div>
+								<%-- end row --%>
+								<div class="row">
+									<div class="col-md-6">							
+										<span class="text-muted">durée : </span> 
+										<a id="duration"
+											${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}>
+											${resource.duration}</a> minutes
+									</div>
+									<div class="col-md-6">							
+										<span class="text-muted">langue : </span> 
+										<a id="language"
+											${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?langue?'":" class='noneditresource'"}
+											data-source="${dataEnumLanguage}">
+											${resource.language.description}</a>
+									</div>
+									
+								</div>	
+								<div class="row">
+									<div class="col-md-6">							
+										<span class="text-muted">cycle : </span> 
+										<a
+											${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"}>			
+											<c:choose>
+												<c:when test="${resource.minCycle == null}">? &#8594; ?</c:when>
+												<c:otherwise>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</c:otherwise>
+											</c:choose>			
+										</a>
+									</div>
+									<div class="col-md-6">						
+										<span class="text-muted">publicité : </span> 
+										<a id="advertising"
+											${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicité?'":" class='noneditresource'"}
+											data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
+											<c:if test="${resource.advertising == true}">
+					    							pub
+												</c:if> <c:if test="${resource.advertising == false}">
+					    							sans pub
+												</c:if>
+										</a>
+									</div>
+								</div>
+								<%-- end row --%>
+								<div class="row">
+									<div class="col-md-6">					
+										<span class="text-muted">auteur : </span> 
+										<a href="/user/${resource.createdBy.userName}" class="addToolTip"
+											title="contributeur">${resource.createdBy.fullName}</a>
+									</div>
+									<div class="col-md-6">					
+										<span class="text-muted">editeur : </span> 
+										<a id="author"
+											${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}>
+											${resource.author}</a>
+									</div>
+								</div>
+								<%-- end row --%>
+			
+								<c:if test="${canValidate==true}">
+									<div class="row">
+										<div class="col-md-6">
+			
+											<a id="validate"
+												title="
+												<c:choose>
+												<c:when test="${resource.validationStatus!=null}">
+													<c:if test="${resource.validator!=null}">
+								   	        		  par ${resource.validator.userName}
+											        </c:if>
+													<c:if test="${resource.validationDate!=null}">
+														<lrf:datedisplay date="${resource.validationDate}"	duration="true" withspan="false" />
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													Cette ressource peut-elle être montrée à des enfants?
+												</c:otherwise>
+											    </c:choose>"
+												${canValidate==true ? 
+											"
+												href='#' 
+												class='editableField addToolTip'
+												data-type='select' 
+												data-emptytext='?non validée?' 
+											": " 
+												class='noneditresource addToolTip'
+										"}
+												data-source="${dataEnumValidationStatus}">
+												${resource.validationStatus.description} </a>
+			
+		
+										</div>
+			
+									</div>
+								</c:if>
+								<%-- end row --%>
+			
+			
+							</div>
+							<%-- end panel body --%>
+						</div>
+						<%-- end panel --%>
+					</div>							
+				</div>	
+				<div id="video-container">
+					<%-- container div for responsive layout  --%>
+					<div id="videoyoutube">
+						<%-- div transformed to iframe with javascript --%>
+		
+					</div>
+				</div>	
+				<div id="competencesDiv">		
+						<c:forEach items="${resource.competences}" var="competence">
+							<lrf:competencepath competence="${competence}" />
+							<button type="button" style="float: none;"
+								class="close
+						           <c:choose>
+								        <c:when test="${canLinkToCompetence}">
+								          "
+								onclick="onCompetenceRemoveClick(${competence.id})">
+								</c:when>
+								<c:otherwise>
+								          nonCompetenceLinkPop">
+								        </c:otherwise>
+								</c:choose>
+								&times;
+							</button>
+							<br />
+						</c:forEach>			
+						<c:if test="${empty resource.competences}">aucune catégorie liée</c:if>
+							<span
+								class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'
+								" : "' onclick='onAddCompetenceClick()'
+								"} 
+								style="float: none; font-size: 15px"
+								title="Ajouter une catégorie"></span>
+						
+							<c:if test="${not empty youtubeVideoId}">
+								<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
+								<%-- injected video youtube--%>
+						
+								<style type="text/css">
+						<%--to have a responsive layout - See more at: http: //avexdesigns.com
+							/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> #video-container
+							{
+							position: relative;
+							padding-bottom: 56.25%;
+							padding-top: 30px;
+							height: 0;
+							overflow: hidden;
+						}
+						
+						#video-container iframe,#video-container object,#video-container embed {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+						}
+						</style>			
+						</c:if>		
+				</div>				
+				<div id="problemeDiv">
+						<h4>
+							Problèmes &nbsp; &nbsp; &nbsp; <a
+								class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "'
+								href='#modalProblemReport' data-toggle='modal'
+								" : " noAddProblemPop'"} 
+								  style="cursor: pointer; text-decoration: initial; line-height: 20px; font-size: 25px; color: #CCC"
+								title="Signaler un problème pour cette ressource..."></a>
+						</h4>
+						<lrftag:problemreport title="${resource.name}"
+							resourceid="${resource.id}" />
+						<%@ include file="problemlist.jsp"%>
+				</div>
 			</div>
-			<%-- end panel --%>
-		</div>
-	</div>
-	<%-- end row --%>
-
-
-	<c:forEach items="${resource.competences}" var="competence">
-		<lrf:competencepath competence="${competence}" />
-		<button type="button" style="float: none;"
-			class="close
-	           <c:choose>
-			        <c:when test="${canLinkToCompetence}">
-			          "
-			onclick="onCompetenceRemoveClick(${competence.id})">
-			</c:when>
-			<c:otherwise>
-			          nonCompetenceLinkPop">
-			        </c:otherwise>
-			</c:choose>
-			&times;
-		</button>
-		<br />
-	</c:forEach>
-
-	<c:if test="${empty resource.competences}">aucune catégorie liée</c:if>
-	<span
-		class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'" : "' onclick='onAddCompetenceClick()'"} 
-		style="float: none; font-size: 15px" title="Ajouter une catégorie"></span>
-
-	<c:if test="${not empty youtubeVideoId}">
-		<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
-	<%-- injected video youtube--%>
-
-	<style type="text/css">
-		<%--to have a responsive layout - See more at: http: //avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> 
-			#video-container
-			{
-			position: relative;
-			padding-bottom: 56.25%;
-			padding-top: 30px;
-			height: 0;
-			overflow: hidden;
-		}
+			<div class="col-md-4">
+				<div id="imageDiv" class="row">			
+					<div title="Ajouter une image" class="dropdown">
+						<h4 style="display: inline-block">Images &nbsp; &nbsp; &nbsp;</h4>
+				
+						<span
+							class='glyphicon glyphicon-plus close addToolTip ${canEdit==true ? "'
+							href='#' data-toggle='dropdown'
+							": "nonimageeditpop'"} data-original-title=""
+							title="Ajouter une image"
+							style="font-size: 15px; display: inline-block; float: none;"></span>
+						<ul class="dropdown-menu">
+							<li><a href="#" id="imageFromFile">Depuis un fichier sur
+									votre ordinateur</a></li>
+							<li><a href="#" id="imageFromLink">Depuis un lien (url) vers
+									une image</a></li>
+							<li><a href="#" id="idPrintScreen">Depuis une image du
+									presse papier</a></li>
+							<li><a href="#" id="tutorialPrintScreen">Comment faire une
+									capture d'écran ?</a></li>
+						</ul>
+				
+						<form method="post" action="/resource/imageadd"
+							enctype="multipart/form-data" id="formToSubmit">
+							<input type="file" id="inputFile" name="file" style="display: none;" />
+							<input type="hidden" name="idResource" value="${resource.id}" />
+						</form>
+					</div>				
+					<%@ include file="resourceimagegallery.jsp"%>				
+				</div>
 		
-		#video-container iframe,#video-container object,#video-container embed {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		}
-	</style>
-	
-	<div id="video-container"><%-- container div for responsive layout  --%>
-		<div id="videoyoutube"> <%-- div transformed to iframe with javascript --%> 
+				<div id="sequenceDiv" class="row">
+					<c:if test="${listMyPlayListsWithThisResource != null}">
+								Mes séquences contenant cette ressource:<br />
+						<c:forEach items="${listMyPlayListsWithThisResource}" var="playlist">
+							<lrftag:playlist playlist="${playlist}" />
+						</c:forEach>
+						<br />
+					</c:if>
+					<c:if test="${listMyPlayListWithoutThisResource != null}">
+						<a id="addToPlayList" href='#' class='editableField'
+							data-type='select'
+							data-source="${listMyPlayListWithoutThisResource}">Ajouter à une
+							de mes séquences</a>
+						<br />
+					</c:if>
 			
-		</div>
-	</div>
-	
-	</c:if>
-	<br />
-	<br />
-
-	<div title="Ajouter une image" class="dropdown">
-		<h4 style="display: inline-block">Images &nbsp; &nbsp; &nbsp;</h4>
-		
-		<span class='glyphicon glyphicon-plus close addToolTip ${canEdit==true ? "' href='#' data-toggle='dropdown'": "nonimageeditpop'"} data-original-title="" title="Ajouter une image" style="font-size: 15px; display: inline-block; float: none;"></span>
-			<ul class="dropdown-menu">
-				<li><a href="#" id="imageFromFile">Depuis un fichier sur votre ordinateur</a></li>
-				<li><a href="#" id="imageFromLink">Depuis un lien (url) vers une image</a></li>
-				<li><a href="#" id="idPrintScreen">Depuis une image du presse papier</a></li>
-				<li><a href="#" id="tutorialPrintScreen">Comment faire une capture d'écran ?</a></li>
-			</ul>
+					<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+						<a id="addToOtherPlayList" href='#' class='editableField'
+							data-type='text' data-title="Entrez l'id court de la séquence"
+							data-value="">Ajouter à une séquence d'un autre utilisateur</a>
+						<br />
+					</lrf:conditionDisplay>
 			
-			<form method="post" action="/resource/imageadd"	enctype="multipart/form-data" id="formToSubmit">
-				<input type="file" id="inputFile" name="file" style="display: none;"/>
-				<input type="hidden" name="idResource" value="${resource.id}" />
-			</form>
+					<c:if test="${listOtherPeoplePlayListsWithThisResource != null}">
+								Séquences d'autres utilisateurs contenant cette ressource:<br />
+						<c:forEach items="${listOtherPeoplePlayListsWithThisResource}"
+							var="playlist">
+							<lrftag:playlist playlist="${playlist}" />
+						</c:forEach>
+					</c:if>	
+				</div>	
+				
+			</div>	
+		</div>			
 	</div>
-
-	<%@ include file="resourceimagegallery.jsp"%>
-
-	<br />
-	<br />
-
-
-	<h4>
-		Problèmes &nbsp; &nbsp; &nbsp; <a
-			class='glyphicon glyphicon-exclamation-sign addToolTip ${canAddProblem ? "'
-			href='#modalProblemReport' data-toggle='modal'
-			" : " noAddProblemPop'"} 
-			  style="cursor: pointer; text-decoration: initial; line-height: 20px; font-size: 25px; color: #CCC"
-			title="Signaler un problème pour cette ressource..."></a>
-	</h4>
-	<lrftag:problemreport title="${resource.name}"
-		resourceid="${resource.id}" />
-	<%@ include file="problemlist.jsp"%>
-
-	<br />
-	<br />
-
-
-
-
 	<%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
 	<%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
 	<%-- MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS   MODALS  --%>
@@ -782,8 +771,9 @@
 	<!-- /.modal -->
 
 	<!-- Modal : ADD IMAGE FROM URL -->
-	<div class="modal fade" id="modalImageGalerieResourceFromUrl" tabindex="-1"
-		role="dialog" aria-labelledby="Ajouter une image" aria-hidden="true">
+	<div class="modal fade" id="modalImageGalerieResourceFromUrl"
+		tabindex="-1" role="dialog" aria-labelledby="Ajouter une image"
+		aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -791,26 +781,34 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Ajouter une image à la galerie</h4>
 				</div>
-				
-				
-				<form method="post" action="/resource/imageaddUrl"	enctype="multipart/form-data" class="form-horizontal formUrlGallery">
+
+
+				<form method="post" action="/resource/imageaddUrl"
+					enctype="multipart/form-data"
+					class="form-horizontal formUrlGallery">
 					<div class="modal-body">
 						<div class="form-group">
-							<label class="col-lg-4 control-label" style="text-align: left;">Depuis un lien</label>
+							<label class="col-lg-4 control-label" style="text-align: left;">Depuis
+								un lien</label>
 							<div class="col-lg-8">
-								<input type="text" name="strUrl" placeholder="http://..."	class="inputSource form-control" id="inputUrl" />
+								<input type="text" name="strUrl" placeholder="http://..."
+									class="inputSource form-control" id="inputUrl" />
 							</div>
 						</div>
 						<p id="response">${response}</p>
 					</div>
 					<div class="modal-footer">
-						<input type="hidden" name="idResource" id="idResource" value="${resource.id}" />
-						<button type="button" class="btn btn-default closeModal" data-dismiss="modal">Fermer</button>
-						<button type="submit" name="btnPicture"	class="btn btn-primary closeModal btnSubmit">Sauver	l'image</button>
+						<input type="hidden" name="idResource" id="idResource"
+							value="${resource.id}" />
+						<button type="button" class="btn btn-default closeModal"
+							data-dismiss="modal">Fermer</button>
+						<button type="submit" name="btnPicture"
+							class="btn btn-primary closeModal btnSubmit">Sauver
+							l'image</button>
 					</div>
 				</form>
-				
-				
+
+
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -854,8 +852,7 @@
 				<div class="modal-header">
 					<button type="button" class="close closeModal" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Placer la ressource dans une
-						catégorie</h4>
+					<h4 class="modal-title">Placer la ressource dans une catégorie</h4>
 				</div>
 				<form method="post" action="/competenceaddtoresourcesubmit"
 					role="form">
@@ -867,9 +864,7 @@
 									class="form-control" id="codeField" name="code" />
 							</div>
 							</row>
-							<br />
-							<br />
-							<br />
+							<br /> <br /> <br />
 							<div class="help-block">
 								Code de la catégorie dans laquelle vous désirez placer la
 								ressource.<br /> Astuce: affichez la liste des catégories dans
@@ -921,44 +916,52 @@
 		</div>
 		<!-- /.modal -->
 	</div>
-		<!-- Modal : ADD URL -->
-		<div class="modal fade" id="modalPrintScreen" >
-			<div class="modal-dialog" style="width: 845px; height: 550px">
-				<div class="modal-content">
-					<div class="modal-header" style="padding-bottom: 0px; padding-top: 10px;">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeButton1">&times;</button>
-						<h4 class="modal-title">Votre image</h4>
-					</div>
-					<div class="modal-body" style="padding: 10px">
-					
-					<p>Vous pouvez sélectionner une zone dans l'image avec la souris.</p>
-					<div >
+	<!-- Modal : ADD URL -->
+	<div class="modal fade" id="modalPrintScreen">
+		<div class="modal-dialog" style="width: 845px; height: 550px">
+			<div class="modal-content">
+				<div class="modal-header"
+					style="padding-bottom: 0px; padding-top: 10px;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" id="closeButton1">&times;</button>
+					<h4 class="modal-title">Votre image</h4>
+				</div>
+				<div class="modal-body" style="padding: 10px">
+
+					<p>Vous pouvez sélectionner une zone dans l'image avec la
+						souris.</p>
+					<div>
 						<!-- The attribute src will be populated later when the clipboard image will be inserted 
 						      as a (temporary) file on disk. See JS function uploadFile(), after call of the 
 						      ResourceImageController. See line "$("#imageFromPrintScreenAndCrop").attr("src", url);" -->
-						<img id="imageFromPrintScreenAndCrop" name="img"/>
-					
+						<img id="imageFromPrintScreenAndCrop" name="img" />
+
 					</div>
-					
-					<div class="modal-footer" style="padding-top: 0px; padding-bottom: 0px">
-					
-					<form action="/resource/ajax/resourceImageClipBoardAfterCrop" method="get" id="submitCoordsToCrop" onsubmit="return checkCoords();">
-							<input type="hidden" id="x" name="xCoord" />
-							<input type="hidden" id="y"	name="yCoord" />
-							<input type="hidden" id="w" name="wCoord" />
-							<input type="hidden" id="h" name="hCoord" />
-							<input type="hidden" id="imageFileName" value="" name="imageFileName" />
-							<input type="hidden" id="resourceid" name="resourceid" value="${resource.id}" />
-							<button type="button" class="btn btn-default" data-dismiss="modal" id="closeButton2">Fermer</button>
-							<button type="submit" class="btn btn-primary" >Sauver l'image</button>
+
+					<div class="modal-footer"
+						style="padding-top: 0px; padding-bottom: 0px">
+
+						<form action="/resource/ajax/resourceImageClipBoardAfterCrop"
+							method="get" id="submitCoordsToCrop"
+							onsubmit="return checkCoords();">
+							<input type="hidden" id="x" name="xCoord" /> <input
+								type="hidden" id="y" name="yCoord" /> <input type="hidden"
+								id="w" name="wCoord" /> <input type="hidden" id="h"
+								name="hCoord" /> <input type="hidden" id="imageFileName"
+								value="" name="imageFileName" /> <input type="hidden"
+								id="resourceid" name="resourceid" value="${resource.id}" />
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="closeButton2">Fermer</button>
+							<button type="submit" class="btn btn-primary">Sauver
+								l'image</button>
 						</form>
 					</div>
-				</div>	
 				</div>
 			</div>
 		</div>
-		<!-- /.modal -->
-		
+	</div>
+	<!-- /.modal -->
+
 	<!-- Modal : WAITING MODAL FROM PRINTSCREEN  -->
 	<div class="modal fade" id="waitingModalForPrintScreen">
 		<div class="modal-dialog">
@@ -969,18 +972,21 @@
 					<h4 class="modal-title">Information</h4>
 				</div>
 				<div class="modal-body">
-					<p>Veuillez appuyer sur les touches CTRL + V pour récupérer l'image du presse-papier.</p>
-					<p>(Pour l'instant, cela ne fonctionne qu'avec le navigateur "Chrome")</p>
+					<p>Veuillez appuyer sur les touches CTRL + V pour récupérer
+						l'image du presse-papier.</p>
+					<p>(Pour l'instant, cela ne fonctionne qu'avec le navigateur
+						"Chrome")</p>
 					<span id="printScreenNotFound" class="text-warning"></span>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default closeModal" data-dismiss="modal" onclick="resetFormPrintScreenNotFound()">Fermer</button>
+					<button type="button" class="btn btn-default closeModal"
+						data-dismiss="modal" onclick="resetFormPrintScreenNotFound()">Fermer</button>
 				</div>
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- /.modal -->
 	</div>
-		
+
 </body>
 </html>
