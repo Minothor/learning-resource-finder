@@ -6,6 +6,7 @@ import learningresourcefinder.exception.InvalidUrlException;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
+import learningresourcefinder.model.Resource.ValidationStatus;
 import learningresourcefinder.model.UrlGeneric;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
@@ -42,7 +43,7 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired   ResourceRepository resourceRepository;
     @Autowired   UrlResourceRepository urlResourceRepository;
     @Autowired   IndexManagerService indexManager;
-    @Autowired   LevelService levelService;
+    @Autowired   LevelService levelService ;
     @Autowired 	 ContributionService contributionService; 
     @Autowired   ImportService importService;
     @Autowired	 UrlGenericRepository urlgenericrepository;
@@ -144,9 +145,16 @@ public class ResourceEditController extends BaseController<Resource> {
         indexManager.add(resource);
         
         User user=SecurityContext.getUser();
+        
+        LevelService levelService = new LevelService();
+        
+        if (levelService.canDoAction(user, Action.ADD_RESOURCE)) {  // If the user adding the resource is trusted for validating other resource, then we can directly trust him for this new resource...
+        	resource.setValidationStatus(ValidationStatus.ACCEPT);
+        }
+       
         contributionService.contribute(user, resource, Action.ADD_RESOURCE, "", "new_value");
         //levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_RESOURCE);
-        
+               
         return new MessageAndId(resource.getId(),
                 "Ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
     }
