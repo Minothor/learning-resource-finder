@@ -54,13 +54,7 @@ public class ResourceImageController extends BaseController<User> {
 	@Autowired UserService userService;
 	@Autowired CurrentEnvironment currentEnvironment;
 	
-	@RequestMapping("/image")  // FIXME Is this method still used? John 2013-12
-	public ModelAndView resourceImage(@RequestParam("id") long userid){
-		User user = getRequiredEntity(userid);
-		ModelAndView mv= new ModelAndView("resourceimage", "user", user);
-		
-		return mv;
-	}
+
 
 	@RequestMapping("/imageadd")
 	public ModelAndView resourceImageAdd(@RequestParam("idResource") long resourceid, @RequestParam("file") MultipartFile multipartFile) throws Exception{

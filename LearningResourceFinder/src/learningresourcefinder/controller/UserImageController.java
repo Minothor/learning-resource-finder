@@ -34,19 +34,12 @@ public class UserImageController extends BaseController<User> {
 	@Autowired UserService userService;
 	@Autowired CurrentEnvironment currentEnvironment;
 	
-	@RequestMapping("/image")
-	public ModelAndView userImage(@RequestParam("id") long userid){
-		User user = getRequiredEntity(userid);
-		ModelAndView mv= new ModelAndView("userimage", "user", user);
-		
-		return mv;
-	}
+
 
 	@RequestMapping("/imageadd")
 	public ModelAndView userImageAdd(@RequestParam("id") long userid, @RequestParam("file") MultipartFile multipartFile) throws Exception{
 		
 		User user = getRequiredEntity(userid);
-
 		SecurityContext.assertCurrentUserMayEditThisUser(user);
 		
 		///// Save original image, scale it and save the resized image.
@@ -60,8 +53,7 @@ public class UserImageController extends BaseController<User> {
 			        	
 	        userService.addOrUpdateUserImage(user, originalImage, false);
 			
-			
-		} catch (InvalidImageFileException e) {  //Tell the user that its image is invalid.
+		} catch (InvalidImageFileException e) {  //Tell the user that his image is invalid.
 			NotificationUtil.addNotificationMessage(e.getMessageToUser());
 		}
 		
