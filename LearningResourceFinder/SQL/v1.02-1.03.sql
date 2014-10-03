@@ -146,3 +146,56 @@ INSERT INTO competence (id, createdon, updatedon, code, description, name, creat
 select nextval('hibernate_sequence') INTO v_EH ;
 INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_EH, curtime, NULL, 'EH', NULL, 'Eveil historique', NULL, NULL, v_ROOT);
 END $$;
+        
+-- 2014-10-01 Ramzi
+DROP TABLE task;
+drop table users_resource ;      
+
+-- 2014-10-03 Ramzi
+alter table urlresource 
+drop constraint fk_46tgpros9mvmhgsq16r5kl1pb,
+add CONSTRAINT fk_46tgpros9mvmhgsq16r5kl1pb FOREIGN KEY (resource_id)
+      REFERENCES resource (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
+
+alter table contribution 
+drop constraint fk_s5uik2st9kii1mdy1mevm5bom,
+add CONSTRAINT fk_s5uik2st9kii1mdy1mevm5bom FOREIGN KEY (ressource_id)
+      REFERENCES resource (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
+
+alter table rating
+drop constraint fk_4qubpqyyepfhty50lwce7wa82,
+add CONSTRAINT fk_4qubpqyyepfhty50lwce7wa82 FOREIGN KEY (resource_id)
+      REFERENCES resource (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
+
+alter table favorite
+drop constraint fk_f5di74fb4qlxwgmvhgwimuaim,
+add CONSTRAINT fk_f5di74fb4qlxwgmvhgwimuaim FOREIGN KEY (resource_id)
+      REFERENCES resource (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
+
+alter table playlist_resource
+drop constraint fk_i42f3fdaj4urawyot4yfbjdam,
+add CONSTRAINT fk_i42f3fdaj4urawyot4yfbjdam FOREIGN KEY (resources_id)
+      REFERENCES resource (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
+
+alter table resource_competence
+drop constraint fk_79qwnp8edqv0wb8jspfbt5cwn,
+add CONSTRAINT fk_79qwnp8edqv0wb8jspfbt5cwn FOREIGN KEY (resource_id)
+      REFERENCES resource (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
+
+alter table problem
+drop constraint fk_kroba1edmwvbl1yuqoaqgly6w,
+add CONSTRAINT fk_kroba1edmwvbl1yuqoaqgly6w FOREIGN KEY (resource_id)
+      REFERENCES resource (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
+
+alter table discussion
+drop constraint fk_6ynxjag4dmgajl7tygossaiw,
+add CONSTRAINT fk_6ynxjag4dmgajl7tygossaiw FOREIGN KEY (problem_id)
+      REFERENCES problem (id) MATCH SIMPLE
+      ON UPDATE NO ACTION on delete cascade;
