@@ -29,17 +29,6 @@ public class Batch2PGM implements Runnable {
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
-        
-        List<Cycle> listOfCycle = repCycle.findAllCycles();
-        for(Cycle cycle : listOfCycle){
-            competenceService.computeAllCompetencesRelatedToCycle(cycle);
-        
-               for(Competence p : cycle.getComputedCompetences()){
-                   System.out.println("|| " + p.getName() + "-->" + p.getCode());
-               }
-            System.out.println("|| \n\n");
-        }
-        
+
     }
 }
