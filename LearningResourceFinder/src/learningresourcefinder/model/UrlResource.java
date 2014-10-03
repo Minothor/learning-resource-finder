@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 
 import learningresourcefinder.util.HTMLUtil;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity

@@ -4,8 +4,8 @@ import java.util.Date;
 
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.util.DateUtil;
+
 import org.apache.log4j.Logger;
 import org.hibernate.proxy.HibernateProxyHelper;
 
@@ -25,11 +26,12 @@ public abstract class BaseEntity  {
 	@Transient
     private Logger logger = Logger.getLogger(this.getClass());
       
-    @OneToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(nullable=true) //when we are not in a thread web request, no user will be associated to entity creation/update (no logged in user)
     User createdBy;
     Date createdOn;
-    @OneToOne(fetch=FetchType.LAZY)  
+    
+    @ManyToOne(fetch=FetchType.LAZY)  
     @JoinColumn(nullable=true) //when we are not in a thread web request, no user will be associated to entity creation/update (no logged in user)
     User updatedBy;
     Date updatedOn;

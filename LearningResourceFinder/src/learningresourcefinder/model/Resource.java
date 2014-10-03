@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,7 +36,6 @@ import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.Slugify;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -123,11 +123,11 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 	@Type(type = "org.hibernate.type.StringClobType")
 	private String description;
 	
-	@OneToMany(mappedBy="resource")
+	@OneToMany(mappedBy="resource",cascade=CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<Problem> problems = new HashSet<>();
     
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	List<Competence> competences = new ArrayList<>();
 		
@@ -161,7 +161,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		return name;
 	}
 	
-	@OneToMany(mappedBy="resource")
+	@OneToMany(mappedBy="resource",cascade=CascadeType.REMOVE)
 	List<UrlResource> urlResources = new ArrayList<>();
 	
 	

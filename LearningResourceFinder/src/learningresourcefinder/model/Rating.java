@@ -5,7 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Rating extends BaseEntity{
@@ -15,11 +18,12 @@ public class Rating extends BaseEntity{
 	 
 	 private Double score;
 		 
-     @OneToOne
+     @ManyToOne
+     @OnDelete(action = OnDeleteAction.CASCADE)
 	 @JoinColumn	
 	 private  Resource resource;
     
-     @OneToOne
+     @ManyToOne
 	 @JoinColumn	
 	 private User user;
 	

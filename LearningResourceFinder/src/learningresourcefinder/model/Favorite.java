@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class Favorite extends BaseEntity {
@@ -13,10 +16,11 @@ public class Favorite extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 	
-	@OneToOne
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Resource resource;
 
-	@OneToOne
+	@ManyToOne
 	private User user;
 	
 	@Override

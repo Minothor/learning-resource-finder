@@ -4,12 +4,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 import learningresourcefinder.util.HTMLUtil;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -30,7 +36,7 @@ public class Problem extends BaseEntity
 	@ManyToOne
 	private Resource resource;
 	
-	@OneToMany(mappedBy="problem")
+	@OneToMany(mappedBy="problem",cascade=CascadeType.REMOVE)
 	private Set<Comment> comments;
 	
     @OneToMany(mappedBy="problem")

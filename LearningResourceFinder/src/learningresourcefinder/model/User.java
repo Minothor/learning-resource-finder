@@ -27,7 +27,6 @@ import learningresourcefinder.mail.MailingDelayType;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.util.HTMLUtil;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -328,9 +327,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
     Set <PlayList> playListList = new HashSet<>();
     
     
-    @OneToMany
-    private Set<Resource> favorites = new HashSet<>();
-    
     
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
     /////////////////////////////////////////: GETTERS & SETTERS //////////////////////////
@@ -581,14 +577,6 @@ public class User extends BaseEntity implements Cloneable, Comparable<User>, Ser
         return id;
     }
     
-    /*public Set<Favorite> getFavorite() {
-		return favorites;
-	}*/
-    
-    public void setFavorite(Resource resource) {
-		this.favorites.add(resource);
-	}
-
     public UserType getUserType() {
         return userType;
     }
