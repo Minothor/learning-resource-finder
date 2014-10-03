@@ -64,7 +64,7 @@
 
 			<div class="panel-body" style="margin-bottom: 20px;">
 				<p class="resourceDescription">
-					<small>${resource.descriptionCut}</small>
+					<small>${resource.description }</small>
 				</p>
 			</div>
 
