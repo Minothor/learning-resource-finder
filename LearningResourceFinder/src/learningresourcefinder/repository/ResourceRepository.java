@@ -255,5 +255,14 @@ public class ResourceRepository extends BaseRepository<Resource> {
        }
        
    }
+   
+   public List<Resource> findResourceByCycleAndPopularity (Long id , String sortCriteria) {
+       List<Resource> resourceListByCycle = (List<Resource>)em.createQuery("select r from Resource r where r.minCycle.id <= :id and :id <= r.maxCycle.id "
+               + "order by r." + ("popularity".equals(sortCriteria) ? "popularity" : "createdOn"))
+               .setParameter("id", id)
+               .getResultList();
+       return resourceListByCycle;
+   }
 	
+  
 }
