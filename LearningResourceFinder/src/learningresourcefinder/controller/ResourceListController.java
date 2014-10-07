@@ -3,9 +3,11 @@ package learningresourcefinder.controller;
 import java.util.List;
 
 import learningresourcefinder.exception.InvalidUrlException;
+import learningresourcefinder.model.Cycle;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.model.User;
+import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.repository.RatingRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UserRepository;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,6 +28,7 @@ public class ResourceListController extends BaseController<Resource> {
 	@Autowired UserRepository userRepository; //
 	@Autowired RatingRepository ratingRepository; //
 	@Autowired LevelService levelService;
+	@Autowired CycleRepository cycleRepository ;
 
 	@RequestMapping("/ressourcelist/{userName}")
 	public ModelAndView resourceList(@PathVariable("userName") String userName) {
@@ -81,15 +85,34 @@ public class ResourceListController extends BaseController<Resource> {
         return mv;
     }
 	
-   @RequestMapping("/lastresourcelist")
-    public ModelAndView lastresourcelist() {
-        ModelAndView mv = prepareModelAndView(resourceRepository.findLastResources(100));
-        
-        mv.addObject("titleFragment","Dernières ressources ajoutées");   
-        
-        return mv;
-    }
 	
+   @RequestMapping("/resourcelist")
+   public ModelAndView resourceListByCycle(@RequestParam(value="cycleid" , required = false) Long cycleid ,@RequestParam(value="sort", required=false) String sort) {
+       Cycle cycle = null ;
+       List<Resource> resourceList = null;
+       String titre = "";
+       
+       if (cycleid == null){
+           int maxResourcesNb = 100;
+           resourceList = resourceRepository.findLastResources(maxResourcesNb);
+           titre = "les "+maxResourcesNb+" dernières resources";
+           
+       } else if (sort!=null) {
+           cycle = (Cycle)getRequiredEntity(cycleid, Cycle.class);
+           resourceList = resourceRepository.findResourceByCycleAndPopularity(cycleid,sort);
+           if (sort.equals("popularity")) {
+               titre = "Resources les plus populaires";
+           } else {
+               titre = "Resources classées par date";
+           }
+           titre +=  "pour le cycle  "+cycle.getName();
+       } 
+       
+       ModelAndView mv = prepareModelAndView(resourceList);
+       mv.addObject("titleFragment",titre);
+       return mv;
+   }
+   
 	private ModelAndView prepareModelAndView(List<Resource> listResource) {
 	    ModelAndView mv = new ModelAndView("resourcelist");
 
