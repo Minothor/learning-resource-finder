@@ -61,10 +61,11 @@ public class ImportLabSetService{
 
 		//// Find file path
 		log.info("Importing: " + this.getClass().getClassLoader().getResource("import").getPath());
-		String francaisPath;
+		InputStream francaisPath = null;
+	
 		try {
-			francaisPath = this.getClass().getClassLoader().getResource("import/activite_français_2012description50char.xlsx").toURI().getPath();
-		} catch (URISyntaxException e) {
+			francaisPath = this.getClass().getClassLoader().getResource("import/activite_français_2012description50char.xlsx").openStream();
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 
