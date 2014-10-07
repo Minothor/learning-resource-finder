@@ -14,6 +14,7 @@ import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.Resource.Topic;
 import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.CycleRepository;
+import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchOptions.Format;
 import learningresourcefinder.search.SearchOptions.Language;
@@ -28,9 +29,12 @@ public class Cache implements ServletContextListener {
 
     List <Cycle> cycles;  // We need to display cycles in the header (menu bar) on each page.
     
-    Map<Long, List<Competence>> computedCategoriesByCycles = new HashMap<>();
+    Map<Long, List<Competence>> computedCategoriesByCycle = new HashMap<>();
     
-    Date computedCompetencesDate;
+    Map<Long, List <Resource>> computedTopResourcesByCycle = new HashMap<>();
+    
+    Date computedCacheDate;
+    boolean cacheShouldBeUpdated = true;  // Is the cache valid ?
 
     Format[] format = SearchOptions.Format.values();  // We need them in the addResourceform includes in the header (via an included jsp) => we have no controller.
     Platform[] platform= SearchOptions.Platform.values();
@@ -66,12 +70,6 @@ public class Cache implements ServletContextListener {
         fillCacheFromDB(); 
 
         sce.getServletContext().setAttribute("cache", this); 
-    }
-
-    public void fillCacheFromDB(){
-        CycleRepository cycleRepository = ContextUtil.getSpringBean(CycleRepository.class);
-        cycles = cycleRepository.findAllCycles();
-
     }
 
     public static Cache getInstance(){
@@ -110,30 +108,73 @@ public class Cache implements ServletContextListener {
     }
 
     public synchronized List<Competence> getComputedCategoriesByCycles(Long id) {
-        List<Competence> result = null;
-        
+        updateCacheIfTooOld();
+        return computedCategoriesByCycle.get(id);
+    }
+    
+    public synchronized void updateCacheIfTooOld() {
         // Calculate time difference since last call to this method.
-        int timeLaps = (int) ((computedCompetencesDate != null) ? (new Date().getTime() - computedCompetencesDate.getTime()) / (60*60*1000) : 0);
+        int timeLaps = (int) ((computedCacheDate != null) ? (new Date().getTime() - computedCacheDate.getTime()) / (60*60*1000) : 0);
         
-        result = computedCategoriesByCycles.get(id);
-
         // If map does not contain competences for this cycle Id or Date is NULL or last access done more than 1 hour ago
-        if ((result == null || (computedCompetencesDate == null) || (timeLaps >= 1))) {
-            // (Re)initialize with current date/time
-            computedCompetencesDate = new Date(); 
-            
+        if (cycles == null || cacheShouldBeUpdated || timeLaps >= 1) {
+            fillCacheFromDB();
+        }
+    }
+    
+    
+
+    public synchronized void fillCacheFromDB() {
+        CycleRepository cycleRepository = ContextUtil.getSpringBean(CycleRepository.class);
+        cycles = cycleRepository.findAllCycles();
+        
+        for(Cycle cycle : cycles) {
+
+            /////// 1. computedCategoriesByCycle
             // Get all categories attached to resources part of current cycle
             CompetenceRepository competenceRepository = ContextUtil.getSpringBean(CompetenceRepository.class);
-            List<Competence> finalCompetences = competenceRepository.getCompetencesByCycle(id);
-            
+            List<Competence> finalCompetences = competenceRepository.getCompetencesByCycle(cycle.getId());
+
             // Add parents to this list of categories
             CompetenceService competenceService = ContextUtil.getSpringBean(CompetenceService.class);
-            result = competenceService.computeAllCompetencesRelatedToCycle(id, finalCompetences);
-            
+            List<Competence>computedCategories = competenceService.computeAllCompetencesRelatedToCycle(cycle.getId(), finalCompetences);
+
             // Save the cycle Id and the list of categories into our "cache" variable
-            computedCategoriesByCycles.put(id, result);
+            computedCategoriesByCycle.put(cycle.getId(), computedCategories);
+            
+            
+            ////// 2. topResourcesByCycle
+            //get top resource by cycle
+            ResourceRepository resourceRepository = ContextUtil.getSpringBean(ResourceRepository.class);
+            List <Resource> computedTopResources = resourceRepository.findTop5ResourcesByCycleAndPopularity(cycle);   
+            // Save the cycle Id and the list of top rated resources for each cycle into our "cache" variable
+            computedTopResourcesByCycle.put(cycle.getId(), computedTopResources);
         }
-        return result;
+
+        // (Re)initialize with current date/time
+        computedCacheDate = new Date(); 
+        cacheShouldBeUpdated = false;
     }
 
+    public synchronized List<Resource> getComputedTopResourcesByCycle(Long id) {
+        updateCacheIfTooOld();
+        
+        return computedTopResourcesByCycle.get(id);
+    }
+
+    
+    public synchronized void resourceChanged(Resource r) {
+        if (cycles == null) {   // Cache never filled from DB yet.
+            return;
+        }
+        // If that resource is in the cache, then update the whole cache.
+        for (Cycle cycle : cycles){ 
+            List <Resource> computedTopResources = computedTopResourcesByCycle.get(cycle.getId());
+            if (computedTopResources != null && computedTopResources.contains(r)) {
+                cacheShouldBeUpdated = true;
+                return;
+            }
+
+        }
+    }
 }
