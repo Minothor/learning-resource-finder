@@ -23,13 +23,11 @@ public class CycleDisplayController extends BaseController<Cycle> {
     @RequestMapping("/cycle")
     public ModelAndView displayCycle(@RequestParam("id") long id) {
     	ModelAndView mv = new ModelAndView("cycledisplay");
-    	List<Resource> resourceList = resourceRepository.findLastResources(5);  // TODO: use Redouane fn (top resources)
         Cycle cycle=(Cycle)getRequiredEntity(id, Cycle.class);
         CompetenceNode root = competenceNodeService.buildCompetenceNodeTree(cycle);
         List<List<CompetenceNode>> listToShow =  competenceNodeService.splitCompetenceNodesInColumns(root);
         mv.addObject("listColumns",listToShow);
-        mv.addObject("cycle",cycle);
-        mv.addObject("resourceList",resourceList);
+        mv.addObject("cycle",cycle);   
         return mv;
     }
 }
