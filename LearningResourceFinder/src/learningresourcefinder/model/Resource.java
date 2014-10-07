@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,6 +22,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
+import javax.persistence.PostUpdate;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
@@ -34,6 +36,7 @@ import learningresourcefinder.search.SearchOptions.Nature;
 import learningresourcefinder.search.SearchOptions.Platform;
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
+import learningresourcefinder.web.ContextUtil;
 import learningresourcefinder.web.Slugify;
 
 import org.apache.commons.lang3.StringUtils;
@@ -161,7 +164,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
 		return name;
 	}
 	
-	@OneToMany(mappedBy="resource",cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="resource" , fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
 	List<UrlResource> urlResources = new ArrayList<>();
 	
 	
@@ -211,7 +214,12 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
             }
         }
     }
-
+    
+    @PostUpdate
+    public void postUpdate(){
+       learningresourcefinder.web.Cache.getInstance().resourceChanged(this); 
+    };
+    
     private Platform getEnumValueFor(String name) {
         for (Platform current : Platform.class.getEnumConstants()) {
             if (current.name().equals(name)) {
@@ -421,8 +429,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
     public Long getViewCount() {
 		return viewCount;
 	}
-
-	public void setViewcount(Long viewcount) {
+	public void setViewCount(Long viewcount) {
 		this.viewCount = viewcount;
 	}
 
