@@ -264,5 +264,8 @@ public class ResourceRepository extends BaseRepository<Resource> {
        return resourceListByCycle;
    }
 	
+   public List<String> findAllResourceName() {
+	   return em.createQuery("select r.name from Resource r order by r.name").getResultList();
+   }           
   
 }
