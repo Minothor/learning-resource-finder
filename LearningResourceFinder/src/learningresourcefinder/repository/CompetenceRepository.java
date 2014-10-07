@@ -91,5 +91,9 @@ public class CompetenceRepository extends BaseRepository<Competence> {
         return listCompetence;
    }
 
+   public List<String> getAllcategoryName() {
+	   		List<String> allCategoryName = em.createQuery("select c.name from Competence c").getResultList();
+	   return allCategoryName;
+   } 
 
 }
