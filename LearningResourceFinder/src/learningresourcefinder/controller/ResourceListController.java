@@ -101,9 +101,9 @@ public class ResourceListController extends BaseController<Resource> {
            cycle = (Cycle)getRequiredEntity(cycleid, Cycle.class);
            resourceList = resourceRepository.findResourceByCycleAndPopularity(cycleid,sort);
            if (sort.equals("popularity")) {
-               titre = "Resources les plus populaires";
+               titre = "Ressources les plus populaires ";
            } else {
-               titre = "Resources classées par date";
+               titre = "Ressources classées par date ";
            }
            titre +=  "pour le cycle  "+cycle.getName();
        } 

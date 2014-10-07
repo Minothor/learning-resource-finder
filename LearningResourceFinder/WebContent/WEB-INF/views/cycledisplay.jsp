@@ -38,8 +38,8 @@
 
 <h1>${ cycle.name }</h1>
 	<lrftag:resourceband resourceList="${cache.getComputedTopResourcesByCycle(cycle.id)}"/>
-	<a href="<c:url value='/resourcelist?cycleid=${cycle.id}&amp;sort=popularity'/>" >Afficher toute les resources par popularité pour le cycle ${cycle.name}</a></br>
-	<a href="<c:url value='/resourcelist?cycleid=${cycle.id}&amp;sort=createdOn'/>" >Afficher les 100 dernières resources pour le cycle ${cycle.name}</a>
+	<a href="<c:url value='/resourcelist?cycleid=${cycle.id}&amp;sort=popularity'/>" >Afficher toutes les ressources par popularité pour le cycle ${cycle.name}</a></br>
+	<a href="<c:url value='/resourcelist?cycleid=${cycle.id}&amp;sort=createdOn'/>" >Afficher les 100 dernières ressources pour le cycle ${cycle.name}</a>
 	<div class="row">
 		<c:set var="valeur" value="0" />
 		<c:forEach items="${listColumns}" var="cycleColumn">
