@@ -2,27 +2,24 @@ package learningresourcefinder.batch;
 
 import java.util.Date;
 
-
 import learningresourcefinder.model.Comment;
+import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Problem;
-import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Rating;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.School;
-import learningresourcefinder.model.Task;
 import learningresourcefinder.model.UrlResource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.model.User.AccountStatus;
 import learningresourcefinder.model.User.Role;
 import learningresourcefinder.repository.CommentRepository;
+import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.repository.ProblemRepository;
-import learningresourcefinder.repository.CompetenceRepository;
 import learningresourcefinder.repository.RatingRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.SchoolRepository;
-import learningresourcefinder.repository.TaskRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.util.SecurityUtils;
@@ -41,7 +38,7 @@ public class InitializeDBBatch implements Runnable {
 	@Autowired	ResourceRepository resourceRepository;
 	@Autowired	SchoolRepository schoolRepository;
 	@Autowired	CompetenceRepository competenceRepository;
-	@Autowired	TaskRepository taskRepository;
+//	@Autowired	TaskRepository taskRepository;
 	@Autowired	PlayListRepository playListRepository;
 	@Autowired	UrlResourceRepository urlResourceRepository;
 	@Autowired	RatingRepository ratingRepository;
@@ -69,7 +66,6 @@ public class InitializeDBBatch implements Runnable {
 		insertResource();
 		insertProblem();
 		insertCompetences();
-		insertTask();
 		insertPlayList();
 		insertUrlResource();
 		insertRating();
@@ -731,16 +727,6 @@ public class InitializeDBBatch implements Runnable {
 		mathGob.getCompetences().add(math);
 
 		System.out.println("Competences done!");
-	}
-
-	public void insertTask() {
-		Task t = new Task();
-		User u = userRepository.getUserByUserName("deli");
-		t.setAssigner(u);
-		t.setName("Tâche 1");
-		t.setUser(u);
-		taskRepository.persist(t);
-		System.out.println("Task Done !");
 	}
 
 	public void insertPlayList() {

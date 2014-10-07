@@ -39,7 +39,6 @@ public class FavoriteController extends BaseController<Favorite> {
 				Favorite favorite = new Favorite();
 				favorite.setUser(user);
 				favorite.setResource(resource);
-				user.setFavorite(resource);
 				favoriteRepository.persist(favorite);
 			}
 			mv.addObject("isFavorite", favoriteRepository.isFavorite(resource, user));

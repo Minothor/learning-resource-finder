@@ -9,8 +9,8 @@
 
     <a href="/createindex" class="btn btn-primary btn-lg">re-créer index</a>
     <hr>
-    <a href="/importfromvraisforum" class="btn btn-primary btn-lg">importer les compétences de http://findecycle.vraiforum.com/</a>
-    <hr>
+<!--     <a href="/importfromvraisforum" class="btn btn-primary btn-lg">importer les compétences de http://findecycle.vraiforum.com/</a>
+    <hr> -->
     <div>
     	<a href="/importMathLabset" class="btn btn-primary btn-lg">execute batch import Math Labset</a>
     	<a href="/importFrenchLabset" class="btn btn-primary btn-lg">execute batch import French Labset</a>

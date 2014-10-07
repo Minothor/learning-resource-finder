@@ -43,13 +43,13 @@ public class AdminController extends BaseRepository<User> {
     	
     }
     
-    @RequestMapping("/importfromvraisforum")
-    public String importFromVraisForum() {
-    	SecurityContext.assertUserHasRole(Role.ADMIN);
-        importCompetencesFromVraiForumBatch.run();
-        NotificationUtil.addNotificationMessage("Import réussi");
-        return "admin";
-    }
+//    @RequestMapping("/importfromvraisforum")
+//    public String importFromVraisForum() {
+//    	SecurityContext.assertUserHasRole(Role.ADMIN);
+//        importCompetencesFromVraiForumBatch.run();
+//        NotificationUtil.addNotificationMessage("Import réussi");
+//        return "admin";
+//    }
     
 	@RequestMapping("/importMathLabset")
 	public String executeBatchMathLabsetImport() {
