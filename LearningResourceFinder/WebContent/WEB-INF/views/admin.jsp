@@ -9,13 +9,13 @@
 
     <a href="/createindex" class="btn btn-primary btn-lg">re-créer index</a>
     <hr>
-<!--     <a href="/importfromvraisforum" class="btn btn-primary btn-lg">importer les compétences de http://findecycle.vraiforum.com/</a>
-    <hr> -->
+<!--    <a href="/importfromvraisforum" class="btn btn-primary btn-lg">importer les compétences de http://findecycle.vraiforum.com/</a>
+    <hr> 
     <div>
     	<a href="/importMathLabset" class="btn btn-primary btn-lg">execute batch import Math Labset</a>
     	<a href="/importFrenchLabset" class="btn btn-primary btn-lg">execute batch import French Labset</a>
     </div>
-    <hr>
+    <hr> -->
     <div>    	
     	<h3>Execute Crawlers</h3> <br>
     	<a href="/crawler/brainPop" class="btn btn-primary btn-lg">Crawler brainpop.fr</a>
@@ -27,7 +27,7 @@
     	<a href="/crawler/professeurPhiFix" class="btn btn-primary btn-lg">Crawler profeseurphifix</a>
     	<a href="/crawler/soutien67" class="btn btn-primary btn-lg">Crawler soutien67.free.fr</a><br><br>
     	<a href="/crawler/toutSavoir" class="btn btn-primary btn-lg">Crawler toutsavoir-hatier.com</a>
-    	<br><br>
+    	<br><br><hr> 
     	<h3>Execute Crawler khanacademy</h3> <br>
     	<p><b>Math</b></p>
     	<a href="/crawlerkhanacademy/1" class="btn btn-primary btn-lg">#1 Arithmetic</a>

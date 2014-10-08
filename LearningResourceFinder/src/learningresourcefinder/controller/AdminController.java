@@ -51,23 +51,23 @@ public class AdminController extends BaseRepository<User> {
 //        return "admin";
 //    }
     
-	@RequestMapping("/importMathLabset")
-	public String executeBatchMathLabsetImport() {
-		SecurityContext.assertUserHasRole(Role.ADMIN);
-		importLabSetService.importMaths(); //adds resources and adds the id and url of the image to the image list for processing
-		importLabSetService.processImages(); // runs through the map, then empties it after completion.
-        NotificationUtil.addNotificationMessage("Import réussi");
-		return "admin";
-	}
-	
-	@RequestMapping("/importFrenchLabset")
-	public String executeBatchFrenchLabsetImport() {
-		SecurityContext.assertUserHasRole(Role.ADMIN);
-		importLabSetService.importFrancais(); 
-	//	importLabSetService.processImages();
-        NotificationUtil.addNotificationMessage("Import réussi");
-		return "admin";
-	}
+//	@RequestMapping("/importMathLabset")
+//	public String executeBatchMathLabsetImport() {
+//		SecurityContext.assertUserHasRole(Role.ADMIN);
+//		importLabSetService.importMaths(); //adds resources and adds the id and url of the image to the image list for processing
+//		importLabSetService.processImages(); // runs through the map, then empties it after completion.
+//      NotificationUtil.addNotificationMessage("Import réussi");
+//		return "admin";
+//	}
+//	
+//	@RequestMapping("/importFrenchLabset")
+//	public String executeBatchFrenchLabsetImport() {
+//		SecurityContext.assertUserHasRole(Role.ADMIN);
+//		importLabSetService.importFrancais(); 
+//	//	importLabSetService.processImages();
+//      NotificationUtil.addNotificationMessage("Import réussi");
+//		return "admin";
+//	}
 	
 	@RequestMapping("/crawler/{pageName}")
 	public String crawler(@PathVariable("pageName") String pageName) throws ParseException 
