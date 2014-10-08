@@ -312,13 +312,18 @@
 
 <STYLE type="text/css">
 /* Styles needed to have a larger text-area for the descrioption (placed by X-editable JavaScript).*/
-#descriptionDiv textarea { /* description text area width */
-	width: 250% !important;
+#descriptionDiv span.editable-inline,
+#descriptionDiv span.editable-inline form .form-group,
+#descriptionDiv span.editable-inline form .form-group .editable-input,
+#descriptionDiv span.editable-inline form .form-group .editable-input textarea
+{ /* description text area width */
+	width: 100% !important;
 }
 
-#descriptionDiv .editable-buttons {
-	margin-left: 70%;
-	/* else, the 2 X-editable buttons (validate and cancel) are in front of the description field */
+
+#descriptionDiv span.editable-inline form .form-group div
+{
+	display: block !important;	
 }
 </STYLE>
 <title>${resource.name}</title>
@@ -588,14 +593,34 @@
 						</div>
 						<%-- end panel --%>
 					</div>							
-				</div>	
-				<div id="video-container">
-					<%-- container div for responsive layout  --%>
-					<div id="videoyoutube">
-						<%-- div transformed to iframe with javascript --%>
-		
-					</div>
-				</div>	
+				</div>			
+				<c:if test="${not empty youtubeVideoId}">
+					<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
+					<%-- injected video youtube--%>
+					<style type="text/css">
+						<%--to have a responsive layout - See more at: http: //avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> 
+							#video-container
+							{
+							position: relative;
+							padding-bottom: 56.25%;
+							padding-top: 30px;
+							height: 0;
+							overflow: hidden;
+						}
+						
+						#video-container iframe,#video-container object,#video-container embed {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+						}
+					</style>	
+					<div id="video-container"><%-- container div for responsive layout  --%>
+						<div id="videoyoutube"> <%-- div transformed to iframe with javascript --%> 							
+						</div>
+					</div>	
+				</c:if>
 				<div id="competencesDiv">		
 						<c:forEach items="${resource.competences}" var="competence">
 							<lrf:competencepath competence="${competence}" />
