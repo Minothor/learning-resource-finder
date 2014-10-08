@@ -5,6 +5,7 @@ import java.util.List;
 import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
+import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
 
@@ -13,9 +14,11 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
     private String htmlResult = "";
 
     CycleRepository cycleRepository;
+    ResourceRepository resourceRepository;
     
-    public CompetencesTreeVisitorImpl(CycleRepository aCycleRepository) {
+    public CompetencesTreeVisitorImpl(CycleRepository aCycleRepository, ResourceRepository aResourceRepository) {
     	this.cycleRepository = aCycleRepository;
+    	this.resourceRepository = aResourceRepository;
     }
 
 	@Override
@@ -44,12 +47,18 @@ public class CompetencesTreeVisitorImpl implements CompetencesTreeVisitor {
         	    if (competence.getChildren().size() == 0) {
         	        htmlResult += " <span class='clickable' href=\"#\" " + "id='R-" + id + "'>" + "Supprimer" + "</span>";
         	    }
-        	} 
-
+        	}
+        	
+        	// TODO Temporary coding to display cycle(s) where either no resource(s) associated to category or resource without cycle ! 
+        	for (Cycle cycle : lc) {
+        	    if (resourceRepository.countResourcesByCompetenceAndCycle(competence.getId(), cycle.getId()) == 0) {
+        	        htmlResult += " " + cycle.getName();
+        	    }
+            }
         	htmlResult += "</small>";
 
         }
-	}
+	} 
 
 	@Override
 	public void endCompetence(Competence competence) {

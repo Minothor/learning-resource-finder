@@ -217,8 +217,12 @@ public class ResourceRepository extends BaseRepository<Resource> {
             return (Long)em.createQuery("SELECT  count(r) from Resource r ").getSingleResult();
     }
    
-
-    
+    public long countResourcesByCompetenceAndCycle(Long competenceId, Long cycleId) {
+        return (Long)em.createQuery("SELECT count(r) from Resource r join r.competences c WHERE c.id = :competenceId AND r.minCycle.id <= :cycleId and :cycleId <=  r.maxCycle.id")
+                .setParameter("competenceId", competenceId)
+                .setParameter("cycleId", cycleId)
+                .getSingleResult();
+    }
   
     public List<Resource> findTop5ResourcesByCycleAndPopularity(Cycle cycle){    
         List<Resource> topResources = new ArrayList<>() ;
