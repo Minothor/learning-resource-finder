@@ -348,7 +348,7 @@
 							<h4 class="modal-title">Cycles pertinent pour la ressource</h4>
 						</div>			
 						<div class="modal-body">
-							<div class="form-horizontal container">					
+							<div class="form-horizontal">					
 								<div class="form-group">
 									<lrftag:cycleslider idSlider="resourcedisplayslider"
 										minCycle="${mincycle}" maxCycle="${maxcycle}" />
