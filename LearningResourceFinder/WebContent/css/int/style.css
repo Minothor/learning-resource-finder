@@ -214,11 +214,11 @@ figure:hover figcaption {
 /*#### RESOURCE DISPLAY ######################################################################*/
 .iconFavorite {
 	color: #e81578;
-	font-size: 30px;
+	font-size: 25px;
 }
 .iconNotFavorite {
 	color: #ccc;
-	font-size: 30px;	
+	font-size: 25px;	
 }
 .centered{
     float: none;
