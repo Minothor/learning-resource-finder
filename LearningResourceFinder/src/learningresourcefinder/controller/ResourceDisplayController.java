@@ -412,7 +412,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         } else {  // Edit
             resource.getCompetences().add(competence);
             levelService.addActionPoints(SecurityContext.getUser(), Action.LINK_RESOURCE_TO_COMPETENCE);
-            NotificationUtil.addNotificationMessage("Competence liée avec succès", Status.SUCCESS);         
+            NotificationUtil.addNotificationMessage("Catégorie liée avec succès", Status.SUCCESS);         
         }
         
         return ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
