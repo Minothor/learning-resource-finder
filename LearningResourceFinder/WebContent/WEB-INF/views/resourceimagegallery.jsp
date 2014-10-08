@@ -22,7 +22,7 @@
 		        
 		        <c:choose>
 		          <c:when test="${canEdit}">
-		            <a href='/resource/delete?id=${resource.id}&img=${i}'>
+		            <a href='/resource/imagedelete?id=${resource.id}&img=${i}'>
 		          </c:when>
 		          <c:otherwise>  
 		            <a class='addPopover' data-content="Pour ajouter/supprimer une image de la ressource, il faut être connecté et avoir un niveau 3 de contribution.">

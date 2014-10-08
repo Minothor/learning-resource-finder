@@ -12,7 +12,7 @@ $(document).ready( function() {
     				'Accept': 'application/json',
     				'Content-type': 'application/json'
     			},
-    			'url': '/resource/change',
+    			'url': '/resource/imagechange',
     			'data': JSON.stringify(ids),
     			'success': function(e) {
     				location.reload();

@@ -164,7 +164,7 @@ public class ResourceImageController extends BaseController<User> {
         return mv;
 	}
     
-	@RequestMapping("/change")
+	@RequestMapping("/imagechange") 
 	public ModelAndView resourceImageChange(@RequestBody ArrayList<String> order){	
 
 		String idResource = ((String) (order.toArray()[0])).split("-")[0];
@@ -178,7 +178,7 @@ public class ResourceImageController extends BaseController<User> {
 		return new ModelAndView("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
 	 }
 	
-	 @RequestMapping("/delete")
+	 @RequestMapping("/imagedelete")  
 	 public ModelAndView resourceImageDelete(@RequestParam("id") long resrouceid, @RequestParam("img") long imgid){	
 		 Resource resource = resourceRepository.find(resrouceid);
 		 SecurityContext.assertCurrentUserMayEditThisResource(resource);

@@ -3,7 +3,6 @@ package learningresourcefinder.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,7 +41,6 @@ import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -344,11 +342,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
     
 	
     @RequestMapping("/removeurlresource")
-    public ModelAndView removeResource(@RequestParam("urlresourceid") long urlresourceid) {
+    public ModelAndView removeUrlResource(@RequestParam("urlresourceid") long urlresourceid) {
         
         
         UrlResource urlResource = (UrlResource)getRequiredEntity(urlresourceid, UrlResource.class); 
         Resource resource = urlResource.getResource();
+	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
 
         resource.getUrlResources().remove(urlResource);
         urlResource.setResource(null);
@@ -364,37 +363,31 @@ public class ResourceDisplayController extends BaseController<Resource> {
     {
         // TODO: voir si url est valide (sinon ajouter une erreur sur result)
         
-        Resource resource = resourceRepository.find(resourceId);
-        if (true) {   // No errors
-            UrlResource urlResource;
-            if (urlResourceId != null) {
-                urlResource = urlResourceRepository.find(urlResourceId);
-            } else {
-                urlResource = new UrlResource();
-                if (resource == null) {
-                    throw new InvalidUrlException("Invalid resource id " + resourceId);
-                }
-                urlResource.setResource(resource);
-            }
-            
-            urlResource.setName(name);
-            urlResource.setUrl(url);
-            
-            if (urlResource.getId() == null) {  // Create
-                urlResourceRepository.persist(urlResource);
-                NotificationUtil.addNotificationMessage("Url ajoutée avec succès", Status.SUCCESS);         
-            } else {  // Edit
-                urlResourceRepository.merge(urlResource);
-                NotificationUtil.addNotificationMessage("Url modifiée avec succès", Status.SUCCESS);         
-            }
-            
-            if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
-                levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE_URL);
-            }
-            
-        } else {
-            NotificationUtil.addNotificationMessage("Erreur sur un des champs. Url non sauvée.", Status.ERROR);
-        }
+        Resource resource = getRequiredEntity(resourceId);
+	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
+
+	    UrlResource urlResource;
+	    if (urlResourceId != null) {
+	    	urlResource = urlResourceRepository.find(urlResourceId);
+	    } else {
+	    	urlResource = new UrlResource();
+	    	urlResource.setResource(resource);
+	    }
+
+	    urlResource.setName(name);
+	    urlResource.setUrl(url);
+
+	    if (urlResource.getId() == null) {  // Create
+	    	urlResourceRepository.persist(urlResource);
+	    	NotificationUtil.addNotificationMessage("Url ajoutée avec succès", Status.SUCCESS);         
+	    } else {  // Edit
+	    	urlResourceRepository.merge(urlResource);
+	    	NotificationUtil.addNotificationMessage("Url modifiée avec succès", Status.SUCCESS);         
+	    }
+
+	    if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
+	    	levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE_URL);
+	    }
         
         return ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     }
@@ -456,5 +449,16 @@ public class ResourceDisplayController extends BaseController<Resource> {
         return new ModelAndView ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     } 
 
-   
+	@RequestMapping("/resource/delete")
+	public String resourceDelete(
+			@RequestParam(value = "idresource", required = false) Long id) {
+		if (id == null) {
+			throw new InvalidUrlException("Missing resource id.");
+		}
+		Resource resource = getRequiredEntity(id);
+		SecurityContext.assertCurrentUserMayEditThisResource(resource);
+		resourceRepository.remove(resource);
+		NotificationUtil.addNotificationMessage("Ressource supprimée", Status.SUCCESS);
+		return "redirect:/home";
+	}
 } 

@@ -19,8 +19,19 @@
 
 <script src="http://www.youtube.com/player_api"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
+<script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
 <script type="text/javascript">
-	
+
+	$(document).ready(function() {
+
+ 	    $("[data-toggle='confirmation']").popConfirm({
+			 title : "Confirmation",
+			 content : "Voulez-vous vraiment supprimer cette ressource ?",
+			 placement : "bottom",
+			 yesBtn : "oui",
+			 noBtn : "non"
+		 });
+	});
 	 // create youtube player
 	 var player;
 	 function onYouTubePlayerAPIReady() {
@@ -360,6 +371,12 @@
 					style="font-size: 16px; top: -11px;" data-toggle="tooltip"
 					title="lien direct vers ce site"></span>
 				</a>
+			    <lrf:conditionDisplay privilege="MANAGE_RESOURCE">
+          		    <a href="<c:url value='/resource/delete?idresource=${resource.id}'/>" class="btn" data-toggle='confirmation'>
+						<button type="button" class="btn addToolTip close"
+							title="supprimer cette ressource">&times;</button>
+				    </a>
+      		    </lrf:conditionDisplay>
 			</div>
 		</div>
 		<div class="row">
