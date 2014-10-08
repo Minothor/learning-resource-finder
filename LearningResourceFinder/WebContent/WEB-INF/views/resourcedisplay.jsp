@@ -725,14 +725,15 @@
 						</c:forEach>
 						<br />
 					</c:if>
-					<c:if test="${listMyPlayListWithoutThisResource != null}">
-						<a id="addToPlayList" href='#' class='editableField'
-							data-type='select'
-							data-source="${listMyPlayListWithoutThisResource}">Ajouter à une
-							de mes séquences</a>
-						<br />
+					<c:if test="canAddPlaylist">
+						<c:if test="${listMyPlayListWithoutThisResource != null}">
+							<a id="addToPlayList" href='#' class='editableField'
+								data-type='select'
+								data-source="${listMyPlayListWithoutThisResource}">Ajouter à une
+								de mes séquences</a>
+							<br />
+						</c:if>
 					</c:if>
-			
 					<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
 						<a id="addToOtherPlayList" href='#' class='editableField'
 							data-type='text' data-title="Entrez l'id court de la séquence"

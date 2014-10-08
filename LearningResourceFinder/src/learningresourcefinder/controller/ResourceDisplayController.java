@@ -116,6 +116,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         mv.addObject("canEditUrl", levelService.canDoAction(user, Action.EDIT_RESOURCE_URL, resource));
         mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE, resource));
         mv.addObject("canValidate", levelService.canDoAction(user, Action.VALIDATE_RESOURCE, resource));
+        mv.addObject("canAddPlaylist", levelService.canDoAction(user, Action.ADD_PLAYLIST, resource));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
         mv.addObject("canLinkToCompetence", levelService.canDoAction(user, Action.LINK_RESOURCE_TO_COMPETENCE));
     	    	
@@ -218,12 +219,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
 	public @ResponseBody ResponseEntity<String> resourceEditFieldSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam("name") String fieldName) {
 		
 	    Resource resource = getRequiredEntity(id);
-	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
 	    value = (value == null ? null : value.trim());
 	    User user = SecurityContext.getUser();
 
         switch (fieldName){
             case "title":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
                 if (StringUtils.isBlank(value)) {
                     return new ResponseEntity<String>("Vous n'avez pas introduit de nom.", HttpStatus.BAD_REQUEST);
                 }
@@ -240,33 +241,39 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "description":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
             	contributionService.contribute(user, resource, Action.EDIT_RESOURCE_DESCRIPTION, resource.getDescription(), value);
             	resource.setDescription(value);
                 break;
    
             case "format":            	
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
             	String format = (resource.getFormat() == null) ? "" : resource.getFormat().getDescription();
 				contributionService.contribute(user, resource, Action.EDIT_RESOURCE_FORMAT, format, Format.values()[Integer.parseInt(value) - 1].getDescription());
 				resource.setFormat(Format.values()[Integer.parseInt(value) - 1]);
 				break;
 				
             case "nature":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
 				String nature = (resource.getNature() == null) ? "" : resource.getNature().getDescription();
 				contributionService.contribute(user, resource, Action.EDIT_RESOURCE_NATURE, nature, value);
                 resource.setNature(Nature.values()[Integer.parseInt(value)-1]);
                 break;
                 
             case "language":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
             	String language = (resource.getLanguage() == null) ? "" : resource.getLanguage().getDescription();
 				contributionService.contribute(user, resource, Action.EDIT_RESOURCE_LANGUAGE, language, Language.values()[Integer.parseInt(value) - 1].getDescription());
                 resource.setLanguage(Language.values()[Integer.parseInt(value)-1]); //
                 break;
 
             case "advertising":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
                 resource.setAdvertising(Boolean.valueOf(value));
                 break;
                 
             case "duration":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
                 Integer number=null;
                 try {
                     number = Integer.parseInt(value);
@@ -284,15 +291,17 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "author":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
                 resource.setAuthor(value);
-                
                 break;
                 
             case "topic":
+        	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
                 resource.setTopic(Topic.values()[Integer.parseInt(value)-1]);
                 break;
                 
             case "addToPlayList":
+            	SecurityContext.assertCanCurrentDoAction(Action.ADD_PLAYLIST);
                 PlayList pl = playListRepository.find(Long.parseLong(value));
                 pl.getResources().add(resource);
                 NotificationUtil.addNotificationMessage("Resource "+resource.getName() + " ajoutée à la séquence "+ pl.getName(), Status.SUCCESS);
@@ -320,6 +329,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
                 break;
                 
             case "validate":
+            	SecurityContext.assertCanCurrentDoAction(Action.VALIDATE_RESOURCE);
                 resource.setValidationStatus(ValidationStatus.values()[Integer.parseInt(value)-1]);
                 resource.setValidationDate(new Date());
                 resource.setValidator(SecurityContext.getUser());
