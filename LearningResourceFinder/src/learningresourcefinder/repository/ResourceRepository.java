@@ -147,7 +147,7 @@ public class ResourceRepository extends BaseRepository<Resource> {
 		
 		
 		
-		String queryString = "SELECT r FROM Resource r WHERE " + whereClause + " ORDER BY r.avgRatingScore desc NULLS LAST";
+		String queryString = "SELECT r FROM Resource r WHERE " + whereClause + " ORDER BY r.popularity DESC NULLS LAST";
 		
 	
 		
@@ -199,7 +199,7 @@ public class ResourceRepository extends BaseRepository<Resource> {
         List<Competence> allCompetences = competence.getChildrenAndSubChildren();
         allCompetences.add(competence);
         
-        List<Long> results = em.createQuery("SELECT r.id FROM Resource r join r.competences c WHERE c in (:allCompetences)")
+        List<Long> results = em.createQuery("SELECT r.id FROM Resource r join r.competences c WHERE c in (:allCompetences) ORDER BY r.popularity DESC")
                 .setParameter("allCompetences", allCompetences)
                 .getResultList();
         return results;
