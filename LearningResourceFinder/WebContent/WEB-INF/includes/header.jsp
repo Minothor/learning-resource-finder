@@ -131,7 +131,7 @@
                           <lrf:conditionDisplay privilege="MANAGE_COMPETENCE">
                         	  <li><a href="<c:url value='/cyclelist'/>">Gestion des Cycles</a> </li> 
                           </lrf:conditionDisplay>
-                          <li><a href="<c:url value='/competencetree?rootCode=root'/>">Liste des catégories</a> </li>
+                          <li><a href="<c:url value='/competencetree'/>">Liste des catégories</a> </li>
 					    </ul>
 					 </li>
 					 
