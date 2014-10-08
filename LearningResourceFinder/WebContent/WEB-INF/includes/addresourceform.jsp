@@ -22,7 +22,7 @@
 				</div>
 
 				<div class="modal-body">
-					<div class="form-horizontal container">
+					<div class="form-horizontal">
 						<div class="form-group">
 							<label for="url">site</label> <input type="text"
 								class="form-control" id="urlAddField" name="url"
