@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,12 +58,12 @@ public class ImportLabSetService{
 
 	public void importFrancais()  {
 
-		//// Find file path
-		log.info("Importing: " + this.getClass().getClassLoader().getResource("import").getPath());
+		// Find file path
+		log.info("Importing: " + this.getClass().getClassLoader().getResource("import/activite_francais_2012description50char.xlsx").getPath());
 		InputStream francaisPath = null;
 	
 		try {
-			francaisPath = this.getClass().getClassLoader().getResource("import/activite_français_2012description50char.xlsx").openStream();
+			francaisPath = this.getClass().getClassLoader().getResource("import/activite_francais_2012description50char.xlsx").openStream();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -164,8 +163,6 @@ public class ImportLabSetService{
 	public void importMaths() {
 		// this is effectively a copypasta of importFrancais() see the comments above for functionality.
 		InputStream mathsExcel = null;
-		String imgURL=null;
-		int imgNum;
 		try {
 			mathsExcel = this.getClass().getClassLoader().getResource("import/liste_finale_id50Max.xlsx").openStream();
 		} catch (IOException e) {
