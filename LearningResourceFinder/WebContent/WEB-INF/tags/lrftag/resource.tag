@@ -4,9 +4,10 @@
 <%@ attribute name="resource" type="learningresourcefinder.model.Resource" %>
 <%@ attribute name="closeUrl" type="java.lang.String" required="false"%>
 <%@ attribute name="prefix" type="java.lang.String" required="false"%>
-<script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
-
+<head>
+<!--  "Remove" script for social network's buttons -->
+<!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script> -->
+</head>
 <style>
 .resourceDescription {
 	word-wrap: break-word;
@@ -79,7 +80,7 @@
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
 						scoreResource="${resource.avgRatingScore}"
 						scoreUser="${mapRating[resource].score}"
-						countRating="${resource.countRating}" canvote="${current.canVote}" />
+						countRating="${resource.countRating}" canvote="${current.canVote}" enablevote="false"/>
 				</div>				
 				<div class="col-xs-2" style="text-align: right; padding: 0px">
 <%-- 					<a href="/resource/${resource.shortId}/${resource.slug}" ><img alt="" src="/link_url.png" width="60%" height="60%"></a> --%>

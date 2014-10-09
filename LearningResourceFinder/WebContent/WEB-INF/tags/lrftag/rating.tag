@@ -7,11 +7,11 @@
 <%@ attribute name="countRating"  required="true" type="java.lang.Integer" %>
 <%@ attribute name="title"  required="true" type="java.lang.String" %>
 <%@ attribute name="canvote"  required="true" type="java.lang.Boolean" %>
+<%@ attribute name="enablevote"  required="false" type="java.lang.Boolean" %>
 
-<div data-id="${id}">
-	
-	
-	<a href="#" id="${id}" class="btn popover-link ${canvote == true ? 'pop' : 'novotepop' }" rel="popover" data-original-title="Voter pour : ${title}" style="outline:none;box-shadow:none;padding:0;">
+<c:set var="enablevote" value="${(empty enablevote) ? true:enablevote}" />
+<div data-id="${id}">	
+	<a href="#" id="${id}" class="btn ${enablevote==true?'popover-link ':''} ${enablevote==true?(canvote == true ? 'pop' : 'novotepop'):'' }" rel="popover" data-original-title="Voter pour : ${title}" style="outline:none;box-shadow:none;padding:0;">
 		<ul class="score" style='color:${countRating > 0 ? " #F28F10" : "#DBDBDB"};'>	
 			<c:forEach var="i" begin="0" end="4" step="1" varStatus ="status">
 				<c:choose>
