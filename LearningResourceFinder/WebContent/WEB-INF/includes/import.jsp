@@ -12,6 +12,9 @@
 <link rel="stylesheet" media="screen,projection" href="/css/ext/ui.totop.css" />  <%-- bottom right corner button to move to the top of the page --%>
 <link rel="stylesheet" href="/plugins/yoxview/yoxview.css">   <%--http://yoxigen.com/yoxview --%>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> <%--for autocomplete --%>
+<link rel="stylesheet" href="/css/int/resourceStyle.css" type="text/css"/> <%--resource style--%>
+
+
 
 
 <!-- ***************************** JAVASCRIPT **************************** -->   
@@ -28,5 +31,7 @@
 <script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ -->
 <script src="/plugins/yoxview/jquery.yoxview-2.21.min-modified.js"></script>  <%--http://yoxigen.com/yoxview --%>
 <script src="/js/int/allPages.js"></script>
+<script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script> <%-- show big version of resource and vice versa --%>
+
 <script src="/js/int/addResourceFavorite.js"></script>
 <!-- ***************************** END JAVASCRIPT **************************** -->   

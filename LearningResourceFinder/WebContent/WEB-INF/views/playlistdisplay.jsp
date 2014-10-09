@@ -6,7 +6,6 @@
 <head>
 <!-- Jquery for change input popup addImageUser -->
 <script type="text/javascript" src="/js/int/addImageUrlPlaylist.js"></script>
-<script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 <script type="text/javascript">
@@ -99,36 +98,6 @@ dd {
 	background-color: lightgray;
 	box-shadow: 0 0 5px black;
 	color: white;
-}
-.resource-content-big{
-	display: inline-block;
- 	width: 380px; 
- 	min-height: 250px; 
-	background: white;
-	z-index: 10;
-	position: absolute;
-}
-
-.resource-content{
-	z-index: 10;
-	height:100%;
-}
-
-.resource-content img {
-	max-width: 100%;
-}
-
-.resource-content-hidden {
-	display: none;
-}
-
-.resource-content-big .resource-content-hidden {
-	display: block;
-}
-
-.resource-content .imgDiv ,
-.resource-content .descriptionDiv {
-	width:100% !important;
 }
 </style>
 

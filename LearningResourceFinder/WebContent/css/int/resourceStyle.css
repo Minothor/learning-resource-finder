@@ -1,0 +1,30 @@
+.resource-content-big {
+	display: inline-block;
+ 	width: 380px; 
+ 	min-height: 250px; 
+	background: white;
+	z-index: 10;
+	position: absolute;
+}
+
+.resource-content {
+	z-index: 10;
+	height:100%;
+}
+
+.resource-content img {
+	max-width: 100%;
+}
+
+.resource-content-hidden {
+	display: none;
+}
+
+.resource-content-big .resource-content-hidden {
+	display: block;
+}
+
+.resource-content .imgDiv ,
+.resource-content .descriptionDiv {
+	width:100% !important;
+}
