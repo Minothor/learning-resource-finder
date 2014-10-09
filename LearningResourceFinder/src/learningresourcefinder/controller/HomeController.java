@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 @Controller
 public class HomeController {
     @Autowired CycleRepository cycleRepository;
@@ -21,4 +22,5 @@ public class HomeController {
         return new ModelAndView("home", "nbResouces", resourceRepository.countResources());
     }
     
+  
 }

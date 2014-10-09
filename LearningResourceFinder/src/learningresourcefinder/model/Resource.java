@@ -439,11 +439,5 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
         
     }   
     
-    public List<String> getTopicList() {
-    	List<String> topicList = new ArrayList<>();	
-    	for (Topic topic : Topic.values()){
-			topicList.add(topic.getDescription());
-		}
-    	return topicList;
-    }
+
 }

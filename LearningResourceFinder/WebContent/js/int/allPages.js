@@ -72,3 +72,29 @@ $(document).ready(function(event) {
 	$(".addPopover").popoverWithAutoHide();  /* Content taken from attribute data-content (see bootstrap doc) */
 	
 });
+
+
+// Search autocomplete.
+$(document).ready(function() {
+	$( ".searchinput" ).each(function() {
+		var thisElement = $(this);
+		
+		thisElement.autocomplete({     
+	        source : function(request, response) {
+               $.ajax({
+	                url : "/ajax/autocomplete",
+	                type : "GET",
+	                data : {
+	                	prefix : thisElement.val()
+	                },
+	                dataType : "json",
+	                success : function(data) {
+	                  	response (data);
+	                }
+               });
+			}
+		});
+	});
+       
+});
+

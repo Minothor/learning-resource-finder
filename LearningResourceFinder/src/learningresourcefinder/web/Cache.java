@@ -1,5 +1,6 @@
 package learningresourcefinder.web;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,8 @@ public class Cache implements ServletContextListener {
     Map<Long, List<Competence>> computedCategoriesByCycle = new HashMap<>();
     
     Map<Long, List <Resource>> computedTopResourcesByCycle = new HashMap<>();
+    
+    List <String> searchAutocompleteMasterStrings = new ArrayList<String>();
     
     Date computedCacheDate;
     boolean cacheShouldBeUpdated = true;  // Is the cache valid ?
@@ -127,12 +130,12 @@ public class Cache implements ServletContextListener {
     public synchronized void fillCacheFromDB() {
         CycleRepository cycleRepository = ContextUtil.getSpringBean(CycleRepository.class);
         cycles = cycleRepository.findAllCycles();
-        
+        ResourceRepository resourceRepository = ContextUtil.getSpringBean(ResourceRepository.class);
+        CompetenceRepository competenceRepository = ContextUtil.getSpringBean(CompetenceRepository.class);
         for(Cycle cycle : cycles) {
-
+           
             /////// 1. computedCategoriesByCycle
             // Get all categories attached to resources part of current cycle
-            CompetenceRepository competenceRepository = ContextUtil.getSpringBean(CompetenceRepository.class);
             List<Competence> finalCompetences = competenceRepository.getCompetencesByCycle(cycle.getId());
 
             // Add parents to this list of categories
@@ -142,15 +145,22 @@ public class Cache implements ServletContextListener {
             // Save the cycle Id and the list of categories into our "cache" variable
             computedCategoriesByCycle.put(cycle.getId(), computedCategories);
             
-            
             ////// 2. topResourcesByCycle
             //get top resource by cycle
-            ResourceRepository resourceRepository = ContextUtil.getSpringBean(ResourceRepository.class);
+            
             List <Resource> computedTopResources = resourceRepository.findTop5ResourcesByCycleAndPopularity(cycle);   
             // Save the cycle Id and the list of top rated resources for each cycle into our "cache" variable
-            computedTopResourcesByCycle.put(cycle.getId(), computedTopResources);
+            computedTopResourcesByCycle.put(cycle.getId(), computedTopResources);   
+            
         }
-
+        
+        /////// 3. Autocomplete
+        for (Topic topic : Topic.values()){
+            searchAutocompleteMasterStrings.add(topic.getDescription());
+        }
+        searchAutocompleteMasterStrings.addAll(competenceRepository.getAllcategoryName());
+        searchAutocompleteMasterStrings.addAll(resourceRepository.findAllResourceName());
+        
         // (Re)initialize with current date/time
         computedCacheDate = new Date(); 
         cacheShouldBeUpdated = false;
@@ -176,5 +186,22 @@ public class Cache implements ServletContextListener {
             }
 
         }
+    }
+    
+    public synchronized List<String> getAutocompleteSuggestions(String prefix) {
+        updateCacheIfTooOld();
+        List <String> autocompleteSuggestionsList = new ArrayList<>();
+        for (String searchAutocompleteMasterString : searchAutocompleteMasterStrings) {
+            if (searchAutocompleteMasterString.toLowerCase().startsWith(prefix.toLowerCase())){
+                   if(!autocompleteSuggestionsList.contains(searchAutocompleteMasterString)){
+                       autocompleteSuggestionsList.add(searchAutocompleteMasterString);
+                }
+            }
+            if ( autocompleteSuggestionsList.size() >= 5){
+                break;
+            }
+        }
+        
+        return autocompleteSuggestionsList;
     }
 }

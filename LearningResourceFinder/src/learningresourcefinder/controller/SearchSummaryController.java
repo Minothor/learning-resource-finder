@@ -10,11 +10,14 @@ import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchResult;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.SearchService;
+import learningresourcefinder.web.Cache;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -44,5 +47,18 @@ public class SearchSummaryController extends BaseController<Resource> {
 		mv.addObject("numberResource", numberResource);
 		return mv;
 	}
+	
+	  @RequestMapping(value="/ajax/autocomplete")
+	    public @ResponseBody JSONObject firstmatch ( @RequestParam("prefix") String prefix){
+	        JSONObject jSonResponse = new JSONObject();
+
+	        int i = 0;
+	        List<String> autocompleteList = Cache.getInstance().getAutocompleteSuggestions(prefix);
+	        for (String autocompleteString : autocompleteList) {
+	            jSonResponse.put(i++, autocompleteString);      
+	        }     
+	        return jSonResponse;
+	        
+	    }
 	
 }
