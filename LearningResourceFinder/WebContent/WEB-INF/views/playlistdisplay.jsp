@@ -11,6 +11,29 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
+		var temp;
+		$(document).ready(function() {
+
+			$(".resource-content .panel-heading").click(function() 
+			{		
+				if(temp!=null)
+				{
+					temp.css("z-index","1");
+					parent.switchClass("resource-content-big", "resource-content", 0);
+				}
+				/*$(".resource-content-big").switchClass("resource-content-big", "resource-content", 0);
+				$(".resource-content").css("z-index","1");*/
+				
+				parent = $(this).parent();
+				if (!parent.hasClass("resource-content-big"))
+				{
+					parent.css("z-index","10");
+					parent.switchClass("resource-content", "resource-content-big", 0);
+				}
+				temp = parent;
+			});
+		});
+		
  		$.fn.editable.defaults.mode = 'inline';
  	    $('.editableField').editable({   
  	    	  emptytext: '? ?',
@@ -75,6 +98,10 @@
 	cursor: move;
 }
 
+#sortable li a {
+	cursor: auto;
+}
+
 
 dd {
 	word-wrap: break-word;
@@ -94,6 +121,36 @@ dd {
 	background-color: lightgray;
 	box-shadow: 0 0 5px black;
 	color: white;
+}
+.resource-content-big{
+	display: inline-block;
+ 	width: 380px; 
+ 	min-height: 250px; 
+	background: white;
+	z-index: 10;
+	position: absolute;
+}
+
+.resource-content{
+	z-index: 10;
+	height:100%;
+}
+
+.resource-content img {
+	max-width: 100%;
+}
+
+.resource-content-hidden {
+	display: none;
+}
+
+.resource-content-big .resource-content-hidden {
+	display: block;
+}
+
+.resource-content .imgDiv ,
+.resource-content .descriptionDiv {
+	width:100% !important;
 }
 </style>
 
