@@ -6,33 +6,11 @@
 <head>
 <!-- Jquery for change input popup addImageUser -->
 <script type="text/javascript" src="/js/int/addImageUrlPlaylist.js"></script>
+<script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
-		var temp;
-		$(document).ready(function() {
-
-			$(".resource-content .panel-heading").click(function() 
-			{		
-				if(temp!=null)
-				{
-					temp.css("z-index","1");
-					parent.switchClass("resource-content-big", "resource-content", 0);
-				}
-				/*$(".resource-content-big").switchClass("resource-content-big", "resource-content", 0);
-				$(".resource-content").css("z-index","1");*/
-				
-				parent = $(this).parent();
-				if (!parent.hasClass("resource-content-big"))
-				{
-					parent.css("z-index","10");
-					parent.switchClass("resource-content", "resource-content-big", 0);
-				}
-				temp = parent;
-			});
-		});
 		
  		$.fn.editable.defaults.mode = 'inline';
  	    $('.editableField').editable({   
@@ -99,7 +77,7 @@
 }
 
 #sortable li a {
-	cursor: auto;
+	cursor: default;
 }
 
 

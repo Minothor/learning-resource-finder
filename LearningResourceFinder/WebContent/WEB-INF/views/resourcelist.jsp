@@ -2,6 +2,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
 <head>
+<script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script>
 <title>Catalog</title>
 <style>
 .resource-content-big {
@@ -35,30 +36,7 @@
 	width:100% !important;
 }
 </style>
-<script>
-var temp;
-$(document).ready(function() {
 
-	$(".resource-content .panel-heading").click(function() 
-	{		
-		if(temp!=null)
-		{
-			temp.css("z-index","1");
-			parent.switchClass("resource-content-big", "resource-content", 0);
-		}
-		/*$(".resource-content-big").switchClass("resource-content-big", "resource-content", 0);
-		$(".resource-content").css("z-index","1");*/
-		
-		parent = $(this).parent();
-		if (!parent.hasClass("resource-content-big"))
-		{
-			parent.css("z-index","10");
-			parent.switchClass("resource-content", "resource-content-big", 0);
-		}
-		temp = parent;
-	});
-});
-</script>
 </head>
 <body>
 	<c:choose>
