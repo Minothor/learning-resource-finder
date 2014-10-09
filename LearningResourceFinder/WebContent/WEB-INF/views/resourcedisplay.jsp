@@ -725,7 +725,7 @@
 						</c:forEach>
 						<br />
 					</c:if>
-					<c:if test="canAddPlaylist">
+					<c:if test="${canaddplaylist}">
 						<c:if test="${listMyPlayListWithoutThisResource != null}">
 							<a id="addToPlayList" href='#' class='editableField'
 								data-type='select'
