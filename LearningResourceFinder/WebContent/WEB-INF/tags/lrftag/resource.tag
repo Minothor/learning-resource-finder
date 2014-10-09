@@ -63,7 +63,7 @@
 				</c:if>				
 				<div  class="descriptionDiv col-xs-6 ${resource.numberImage>=1?"resource-content-hidden":""}">
 					<div class="resource-content-hidden" style="float:right; padding:0px;">	
-						<a href="/resource/${resource.shortId}/${resource.slug}"> <span
+						<a href="<c:url value='${resource.urlResources[0].url}'/>"> <span
 						class="addToolTip glyphicon glyphicon-circle-arrow-right"
 						style="font-size: 35px; padding: 0px"
 						data-toggle="tooltip" title="lien direct vers ce site"></span>
@@ -112,6 +112,11 @@
 							<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}"/>
 						</div>
 					</div>
+					<a href="/resource/${resource.shortId}/${resource.slug}"> <span
+						class="addToolTip"
+						style="font-size: 12px; padding: 0px"
+						data-toggle="tooltip" title="lien vers la ressource">Détails</span>
+						</a>
 				</div>
 			</div>
 		</c:when>
