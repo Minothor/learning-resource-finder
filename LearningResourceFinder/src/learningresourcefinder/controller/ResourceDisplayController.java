@@ -116,7 +116,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
         mv.addObject("canEditUrl", levelService.canDoAction(user, Action.EDIT_RESOURCE_URL, resource));
         mv.addObject("canEdit", levelService.canDoAction(user, Action.EDIT_RESOURCE, resource));
         mv.addObject("canValidate", levelService.canDoAction(user, Action.VALIDATE_RESOURCE, resource));
-        mv.addObject("canAddPlaylist", levelService.canDoAction(user, Action.ADD_PLAYLIST, resource));
+        mv.addObject("canaddplaylist",levelService.canDoAction(user,Action.ADD_PLAYLIST));
     	mv.addObject("canAddProblem", levelService.canDoAction(user, Action.ADD_PROBLEM));
         mv.addObject("canLinkToCompetence", levelService.canDoAction(user, Action.LINK_RESOURCE_TO_COMPETENCE));
     	    	
@@ -371,7 +371,6 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @RequestMapping("/urlresourceeditsubmit")
     public String urlSubmit(@RequestParam(value="urlresourceid", required=false) Long urlResourceId, @RequestParam("resourceid") long resourceId, @RequestParam("name") String name, @RequestParam("url") String url) 
     {
-        // TODO: voir si url est valide (sinon ajouter une erreur sur result)
         
         Resource resource = getRequiredEntity(resourceId);
 	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
