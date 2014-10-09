@@ -28,4 +28,5 @@
 <script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ -->
 <script src="/plugins/yoxview/jquery.yoxview-2.21.min-modified.js"></script>  <%--http://yoxigen.com/yoxview --%>
 <script src="/js/int/allPages.js"></script>
+<script src="/js/int/addResourceFavorite.js"></script>
 <!-- ***************************** END JAVASCRIPT **************************** -->   
