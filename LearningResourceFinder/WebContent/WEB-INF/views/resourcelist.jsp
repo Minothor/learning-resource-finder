@@ -2,7 +2,6 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
 <head>
-<script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script>
 <title>Catalog</title>
 </head>
 <body>
