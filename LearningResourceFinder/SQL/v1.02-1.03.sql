@@ -1361,3 +1361,11 @@ INSERT INTO competence (id, createdon, updatedon, code, description, name, creat
 select nextval('hibernate_sequence') INTO v_EH20 ;
 INSERT INTO competence (id, createdon, updatedon, code, description, name, createdby_id, updatedby_id, parent_id) VALUES (v_EH20, curtime, NULL, 'EH20', NULL, 'Personnages historiques', NULL, NULL, v_EH);
 END $$;
+
+
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-07 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-07 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-07 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-07 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-07 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-07 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
