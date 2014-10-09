@@ -385,6 +385,12 @@ public class ResourceDisplayController extends BaseController<Resource> {
 	    }
 
 	    urlResource.setName(name);
+	    
+	    url=url.toLowerCase().trim();
+        if(!url.startsWith("http://") && !url.startsWith("https://")){
+        	url = "http://" + url;
+        }
+        
 	    urlResource.setUrl(url);
 
 	    if (urlResource.getId() == null) {  // Create
