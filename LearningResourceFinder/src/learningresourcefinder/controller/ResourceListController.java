@@ -95,7 +95,7 @@ public class ResourceListController extends BaseController<Resource> {
        if (cycleid == null){
            int maxResourcesNb = 100;
            resourceList = resourceRepository.findLastResources(maxResourcesNb);
-           titre = "les "+maxResourcesNb+" dernières resources";
+           titre = "les "+maxResourcesNb+" dernières ressources";
            
        } else if (sort!=null) {
            cycle = (Cycle)getRequiredEntity(cycleid, Cycle.class);
