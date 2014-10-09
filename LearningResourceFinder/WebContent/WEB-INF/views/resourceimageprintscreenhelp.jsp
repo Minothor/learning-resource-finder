@@ -29,7 +29,8 @@
 		<p>Pour information, de nombreux programmes utilitaires gratuits existent sur internet pour prendre des captures d’écran et vous permettent de directement capturer l’écran en entier, la fenêtre active 
 		ou même directement une zone précise. <a href="http://www.techsmith.com/jing.html" target="_blank">Jing</a> est l’un d’entre eux.</p>
 
-	
+		<iframe width="560" height="315" src="//www.youtube.com/embed/I1nD6qHYtT0" frameborder="0" allowfullscreen=""></iframe>
+		
 		<p><a href="/resource/${resource.shortId}/${resource.slug}">Retour vers la ressource : ${resource.name}</a></p>
 	</div>
 </body>
