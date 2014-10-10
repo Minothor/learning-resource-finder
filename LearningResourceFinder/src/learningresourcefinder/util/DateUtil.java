@@ -230,7 +230,8 @@ public class DateUtil {
 			}
 			
 			if (months > 0) {
-				result += " " + months + " mois" + ((months > 1) ? "s" : "");
+				//result += " " + months + " mois" + ((months > 1) ? "s" : "");
+				result += " " + months + " mois";
 				return result.trim();
 			}
 			if (days > 0) {
@@ -256,7 +257,8 @@ public class DateUtil {
 				result += " " + years + " an" + ((years > 1) ? "s" : "");
 			}
 			if (months > 0) {
-				result += " " + months + " mois" + ((months > 1) ? "s" : "");
+				//result += " " + months + " mois" + ((months > 1) ? "s" : "");
+				result += " " + months + " mois";
 			}
 			if (years == 0 && days > 0) {
 				result += " " + days + " jour" + ((days > 1) ? "s" : "");
