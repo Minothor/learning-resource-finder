@@ -3,12 +3,11 @@
  	width: 380px; 
  	min-height: 250px; 
 	background: white;
-	z-index: 10;
+
 	position: absolute;
 }
 
 .resource-content {
-	z-index: 10;
 	height:100%;
 }
 

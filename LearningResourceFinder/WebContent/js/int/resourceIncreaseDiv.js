@@ -1,9 +1,13 @@
+var toFrontZIndex = 2;
+
 $(document).ready(function() {
 	$(".resource-content > .panel-heading").click(function() {
-      $(this).parent().switchClass("resource-content", "resource-content-big", 100);
-      $(this).parent().css("z-index", "2000");
-      	if ($(this).parent().hasClass("resource-content-big")) {
-      		$(this).parent().switchClass("resource-content-big", "resource-content", 10);
+      	if ($(this).parent().hasClass("resource-content-big")) { // If is small
+      		$(this).parent().switchClass("resource-content-big", "resource-content", 10);  // Big will be small
+      		$(this).parent().css("z-index", "1");
+      	} else {
+            $(this).parent().switchClass("resource-content", "resource-content-big", 100); // Small will be big
+            $(this).parent().css("z-index", toFrontZIndex++);  // to front (we make it more and more to front in case user opens multiple boxes that overlap
       	}
 	});
 });
