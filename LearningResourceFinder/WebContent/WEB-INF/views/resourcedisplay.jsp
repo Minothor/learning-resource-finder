@@ -536,12 +536,12 @@
 								<%-- end row --%>
 								<div class="row">
 									<div class="col-md-6">					
-										<span class="text-muted">auteur : </span> 
+										<span class="text-muted">contributeur: </span> 
 										<a href="/user/${resource.createdBy.userName}" class="addToolTip"
 											title="contributeur">${resource.createdBy.fullName}</a>
 									</div>
 									<div class="col-md-6">					
-										<span class="text-muted">editeur : </span> 
+										<span class="text-muted">éditeur: </span> 
 										<a id="author"
 											${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}>
 											${resource.author}</a>
