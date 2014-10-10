@@ -83,7 +83,7 @@ public class CompetenceRepository extends BaseRepository<Competence> {
     public List<Competence> getCompetencesByCycle(Long cycleId) {  
         // As link between cycle and competence has been broken, we must now retrieve resources by cycle and then categories attached to these resources  
         List<Competence> listCompetence = em.createNativeQuery(
-                        "select * from Competence where id in (select distinct competences_id from resource_competence where resource_id in " +
+                        "select * from competence where id in (select distinct competences_id from resource_competence where resource_id in " +
                         "(select id from resource where mincycle_id <= ? and maxcycle_id >= ?))", Competence.class)
                         .setParameter(1, cycleId)
                         .setParameter(2, cycleId)
