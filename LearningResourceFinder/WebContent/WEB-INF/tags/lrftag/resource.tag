@@ -91,20 +91,6 @@
 <!-- 					data-toggle="tooltip" title="lien direct vers ce site"></span> -->
 <!-- 				</a> -->
 				</div>
-				<script type="text/javascript">
-			       $(document).ready(function(){
-			    	  $("#yoxview-resource-${resource.id}").yoxview({
-			    		  lang:"fr",
-			    		  <%-- Additional images if any, will be displayed by yoxview if the user clicks arrows to view next --%>
-			    	      images: [
-			    		  <c:forEach var="i" begin="2" end="${resource.numberImage}" step="1">
-			    		      { media: { src: '/gen/resource/original/${resource.id}-${i}.jpg' }}
-			    		      <c:if test="${i < resource.numberImage}">,</c:if>
-			    		  </c:forEach>
-			    		  ]
-			    	  }) 
-			       });
-    			</script>
 				<div class="resource-content-hidden col-xs-6" style="margin-left: 0px; margin-right: 0px;">
 					<div class="row">
 						<div class="col-xs-6 addthis_sharing_toolbox" style="display: inline-block;">					
