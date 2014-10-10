@@ -56,7 +56,7 @@
 <%------------------------------------ YEARS ---------------------------------%>
 <div class="container" style="padding-top:20px; padding-bottom:40px;">
 	<div class="row">
-	  <div class="col-sm-4 col-sm-offset-2">
+	  <div class="col-sm-6" style="text-align: center;">
 	      <h3>primaire</h3><br/>
 	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
 	      <br/>
@@ -64,7 +64,7 @@
 	      <br/>
 	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
 	  </div>
-	  <div class="col-sm-4 col-sm-offset-2">
+	  <div class="col-sm-6 " style="text-align: center;">
 	      <h3>secondaire</h3><br/>
 	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=303'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
 	      <br/>
