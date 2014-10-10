@@ -71,7 +71,7 @@
 	float: left;
 }
 
-#sortable li {
+#sortable li .panel-heading{
 	cursor: move;
 }
 
