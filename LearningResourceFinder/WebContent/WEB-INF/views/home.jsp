@@ -30,6 +30,7 @@
    </div>
 </div>
 
+
 <%------------------------------------ SEARCH ---------------------------------%>
 <div style="background-color:#17A7D6;">
 <div class="container" style="padding:20px 20px;">
