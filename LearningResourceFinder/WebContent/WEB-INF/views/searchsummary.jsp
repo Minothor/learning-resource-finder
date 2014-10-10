@@ -23,7 +23,7 @@
 	
 							<!-- Resource start -->
 	<section>
-	<h2>Resources:</h2>
+	<h2>Ressources:</h2>
 
 	<c:choose>
 		<c:when test="${numberResource==0}">
