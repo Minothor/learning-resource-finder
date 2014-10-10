@@ -22,8 +22,8 @@
     	<a href="/crawler/championMath" class="btn btn-primary btn-lg">Crawler championmath.free.fr</a>
     	<a href="/crawler/classePrimaire" class="btn btn-primary btn-lg">Crawler classeprimaire.be</a>   	
     	<a href="/crawler/exoFiche" class="btn btn-primary btn-lg">Crawler exofiches.net</a><br><br> 
-    	<a href="/crawler/fondationlamap" class="btn btn-primary btn-lg">Crawler fondation-lamap.org</a>   	
-    	<a href="/crawler/crawlerLaRecre" class="btn btn-primary btn-lg">Crawler LaRecre</a>   	
+    	<!--  no persist  <a href="/crawler/fondationlamap" class="btn btn-primary btn-lg">Crawler fondation-lamap.org</a>     -->	  	
+    	<!--  executed without error  <a href="/crawler/crawlerLaRecre" class="btn btn-primary btn-lg">Crawler LaRecre</a>    -->	 
     	<a href="/crawler/professeurPhiFix" class="btn btn-primary btn-lg">Crawler profeseurphifix</a>
     	<a href="/crawler/soutien67" class="btn btn-primary btn-lg">Crawler soutien67.free.fr</a><br><br>
     	<a href="/crawler/toutSavoir" class="btn btn-primary btn-lg">Crawler toutsavoir-hatier.com</a>
