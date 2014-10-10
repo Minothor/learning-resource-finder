@@ -103,8 +103,10 @@
 						class="addToolTip"
 						style="font-size: 12px; padding: 0px"
 						data-toggle="tooltip" title="lien vers la ressource">Détails</span>
-					</a><br>
-					<span>Nombre de vues:  ${resource.viewCount}</span>
+					</a>
+					<span class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px"
+						data-toggle="tooltip" title="Nombre de vues"></span> ${resource.viewCount}
+					 
 				</div>
 			</div>
 		</c:when>
