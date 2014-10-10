@@ -53,7 +53,7 @@
 	     if(YT.PlayerState.PLAYING) {  
 	         if(countHasBeenInc==true){
 	        	 //increment value in db whith ajax
-	             displayResourceInNewTab();
+	             updateViewcountAndPpularity();
 	             countHasBeenInc=false;
 	         }                     
 	       
@@ -291,7 +291,7 @@
  		$("#modalCompetence").modal("show");
  	}
 
- 	function displayResourceInNewTab() 
+ 	function updateViewcountAndPpularity() 
 	{ 
 		$.ajax({	
 			type : "GET", 
@@ -405,7 +405,7 @@
 						<div class="row">
 							<div class="col-md-12">
 							<c:if test="${oneUrlHasAName && urlResource.name != null}">${urlResource.name} : </c:if>
-							<a href="${urlResource.url}" onclick="displayResourceInNewTab();"
+							<a href="${urlResource.url}" onclick="updateViewcountAndPpularity();"
 								target="_blank" id="urlresource" data-type="text">${urlResource.url}</a>
 							<span style="float: none; font-size: 15px"
 								title="Modifier cette URL"

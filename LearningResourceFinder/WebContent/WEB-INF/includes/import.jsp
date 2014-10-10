@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/css/ext/bootstrap-editable.css">  <%-- In place editor --%>
 <link rel="stylesheet" media="screen,projection" href="/css/ext/ui.totop.css" />  <%-- bottom right corner button to move to the top of the page --%>
 <link rel="stylesheet" href="/plugins/yoxview/yoxview.css">   <%--http://yoxigen.com/yoxview --%>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css"> <%--for autocomplete --%>
+<link rel="stylesheet" href="/css/ext/jquery-ui-1.11.css"> <%--for autocomplete --%>
 <link rel="stylesheet" href="/css/int/resourceStyle.css" type="text/css"/> <%--resource style--%>
 
 
