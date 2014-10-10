@@ -80,7 +80,7 @@
 					<lrftag:rating id="${resource.id}" title="${resource.name}"
 						scoreResource="${resource.avgRatingScore}"
 						scoreUser="${mapRating[resource].score}"
-						countRating="${resource.countRating}" canvote="${current.canVote}" enablevote="false"/>
+						countRating="${resource.countRating}" canvote="${current.canVote}"/>
 				</div>				
 				<div class="col-xs-2" style="text-align: right; padding: 0px">
 <%-- 					<a href="/resource/${resource.shortId}/${resource.slug}" ><img alt="" src="/link_url.png" width="60%" height="60%"></a> --%>

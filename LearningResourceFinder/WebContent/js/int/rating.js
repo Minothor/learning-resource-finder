@@ -36,16 +36,16 @@ $(document).ready(function(){
         $('.pop_content[data-container='+currentID+']').appendTo('.pop_display[data-container='+currentID+']');
     });
 
-    // Close popover active if click somewhere else.
-
-    $('body').on('click', ':not(#anything)', function (e) {
-        $('.popover-link').each(function () {
-            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.pop').has(e.target).length === 0) {
-                $(this).popover('hide');
-                return;
-            }
-        });
-    });
+    // Close popover active if click somewhere else. !!!! COMMENTED (else, on large pages, it causes performance problems when expanding a resource within a list)
+//    $('body').on('click', ':not(#anything)', function (e) {
+//        $('.popover-link').each(function () {
+//            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.pop').has(e.target).length === 0) {
+//                $(this).popover('hide');
+//                return;
+//            }
+//        });
+//    });
+    
     // Take rating since star on click.
     // Ajax request
     $('i.glyphicon[data-value]').on('click', function() {

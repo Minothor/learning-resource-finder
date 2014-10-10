@@ -28,7 +28,7 @@
 <script src="/js/ext/jquery.ui.totop.js"></script>
 <script src="/js/ext/jquery.easing.1.3.js" type="text/javascript"></script>
 <script src="/js/ext/modernizr.custom.08676.js"></script>
-<script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ -->
+<script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ --> 
 <script src="/plugins/yoxview/jquery.yoxview-2.21.min-modified.js"></script>  <%--http://yoxigen.com/yoxview --%>
 <script src="/js/int/allPages.js"></script>
 <script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script> <%-- show big version of resource and vice versa --%>
