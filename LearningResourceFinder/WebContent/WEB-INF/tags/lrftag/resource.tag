@@ -62,8 +62,8 @@
 				       });
 	    			</script>
 				</c:if>				
-				<div  class="descriptionDiv col-xs-6 ${resource.numberImage>=1?"resource-content-hidden":""}">
-					<div class="resource-content-hidden" style="float:right; padding:0px;">	
+				<div  class="descriptionDiv col-xs-6 ${resource.numberImage>=1?"resource-content-hidden":""}" style="padding-right: 5px;">
+					<div class="resource-content-hidden" style="float:right; padding:0px; margin-top: 5px">	
 						<a href="<c:url value='${resource.urlResources[0].url}' />" target="_blank"> <span
 						class="addToolTip glyphicon glyphicon-circle-arrow-right"
 						style="font-size: 35px; padding: 0px"
