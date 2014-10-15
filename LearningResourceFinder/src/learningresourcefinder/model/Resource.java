@@ -314,6 +314,7 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
         criterias.put("name",StringUtils.defaultIfEmpty(name,""));
         criterias.put("description",StringUtils.defaultIfEmpty(description,""));
         criterias.put("topic", topic==null ? "" : topic.getDescription() );
+        criterias.put("author", author==null ? "" : author );
         return criterias;
     }
     

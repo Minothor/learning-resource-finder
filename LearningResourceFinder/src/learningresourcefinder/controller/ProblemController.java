@@ -60,7 +60,7 @@ public class ProblemController extends BaseController<Problem> {
 		p.setResource(resourceRepository.find(idResource));
 		problemRepository.merge(p);
         levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_PROBLEM);
-		NotificationUtil.addNotificationMessage("Le problème à bien été transmit. Merci de votre contribution !");
+		NotificationUtil.addNotificationMessage("Le problème a bien été transmis. Merci de votre contribution !");
 		return "success";
 	}
 	
