@@ -142,7 +142,7 @@ public class CrawlerToutSavoir
                             System.out.println(category);
                             System.out.println(minCycle);
 
-                            cs.persistRessource(title,link,category,"",0,minCycle,maxCycle);
+                            cs.persistRessource(title,link,category,"",0,minCycle,maxCycle, 0, "Editions Hatier");
                                                          
 
                         }

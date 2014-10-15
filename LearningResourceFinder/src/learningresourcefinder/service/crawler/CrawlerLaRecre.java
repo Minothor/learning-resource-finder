@@ -61,7 +61,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2", 0, "");
             }
         }
     }
@@ -84,7 +84,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4", 0,"");
             }
         }
 
@@ -108,7 +108,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6", 0, "");
             }
         }
 
@@ -132,7 +132,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2", 0, "");
             }
         }
 
@@ -156,7 +156,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4", 0,"");
             }
         }
 
@@ -180,7 +180,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6", 0,"");
             }
         }
 
@@ -204,7 +204,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2", 0, "");
             }
         }
 
@@ -228,7 +228,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4", 0, "");
             }
         }
 
@@ -252,7 +252,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6", 0, "");
             }
         }
 
@@ -276,7 +276,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2", 0, "");
             }
         }
 
@@ -300,7 +300,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4", 0, "");
             }
         }
 
@@ -324,7 +324,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6", 0, "");
             }
         }
 
@@ -348,7 +348,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2", 0, "");
             }
         }
 
@@ -372,7 +372,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4", 0, "");
             }
         }
 
@@ -396,7 +396,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6", 0, "");
             }
         }
 
@@ -420,7 +420,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2");
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P1-2", 0, "");
             }
         }
 
@@ -444,7 +444,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4", 0, "");
             }
         }
 
@@ -468,7 +468,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6", 0, "");
             }
         }
 
@@ -492,7 +492,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P1-2","P5-6", 0, "");
             }
         }
 
@@ -516,7 +516,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4");
+                cs.persistRessource(titre,lien,categorie,"",0,"P3-4","P3-4", 0, "");
             }
         }
 
@@ -540,7 +540,7 @@ public class CrawlerLaRecre {
                 String titre = ligne.text();
                 String lien = ligne.attr("href");
                 System.out.println(titre + " : " + lien);
-                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6");
+                cs.persistRessource(titre,lien,categorie,"",0,"P5-6","P5-6", 0, "");
             }
         }
 

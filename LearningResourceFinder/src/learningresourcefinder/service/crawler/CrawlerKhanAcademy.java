@@ -152,7 +152,7 @@ public class CrawlerKhanAcademy {
                 }
                 else
                 {
-                    cs.persistRessource(title,url,section,"",0,"" ,"");
+                    cs.persistRessource(title,url,section,"",0,"" ,"", 0, "Khan Academy");
                     System.out.println("\t\tressource créée");
                 }
             }
@@ -173,7 +173,7 @@ public class CrawlerKhanAcademy {
             int duration = (int) ((double) jsonObj.get("duration"));
             String title = (String) jsonObj.get("title");
             String description =  (String) jsonObj.get("description");
-            cs.persistRessource(title,url,section, description,duration,"" ,"");
+            cs.persistRessource(title,url,section, description,duration,"" ,"", 0, "Khan Academy");
             System.out.println("\t\tressource youtube créée");
         }
     }

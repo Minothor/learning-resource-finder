@@ -78,7 +78,7 @@ public class CrawlerService
         //CrawlerKhanAcademy.superCrawler(this);
     }
     
-    public void persistRessource(String name, String url, String topic, String description,int duration,String minCycle,String maxCycle ) 
+    public void persistRessource(String name, String url, String topic, String description, int duration, String minCycle, String maxCycle, int adv, String author) 
     {
         Resource r = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
         if (r == null)
@@ -101,6 +101,20 @@ public class CrawlerService
             if(cycle!=null)
             {
                 r.setMaxCycle(cycleRepository.findByName(maxCycle));          
+            }
+            
+            if(author!= null)
+            {
+                r.setAuthor(author);          
+            }
+            if(adv>=0)
+            {
+            	/*
+            	 * -1 = unknown
+            	 * 0 = false
+            	 * 1 = true
+            	 */
+                r.setAdvertising(adv==1);          
             }
             cycle =  getCycle(minCycle);
             if(cycle!=null)

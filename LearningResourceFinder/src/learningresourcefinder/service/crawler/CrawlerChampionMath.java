@@ -38,7 +38,7 @@ public class CrawlerChampionMath
                 System.out.println("\t"+titre+" ("+lien+")");
 
                 if(cs!=null)
-                    cs.persistRessource(titre,lien,"Math","",0,cycle,cycle);
+                    cs.persistRessource(titre,lien,"Math","",0,cycle,cycle, 0, "ChampionMath");
             }
             System.out.println("=================================================");
         }

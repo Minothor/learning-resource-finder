@@ -49,7 +49,8 @@
 							
 							<h2>${cycleitems.competence.name}</h2>
 							<c:forEach items="${cycleitems.children}" var="subitem">
-									<span  <%-- class="mycompetencePopover${valeur<3?'Right':'Left'}" data-content="<lrftag:competencedescription competenceNode='${subitem}' mustlistchildren='true'/>"--%> style="font-size:120%">${subitem.competence.code }
+								<span style="font-size: 80% ; color:#808080"> ${subitem.competence.code } </span>
+									<span  <%-- class="mycompetencePopover${valeur<3?'Right':'Left'}" data-content="<lrftag:competencedescription competenceNode='${subitem}' mustlistchildren='true'/>"--%> style="font-size: 120%">
 									  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }
 									  </a>
 									  </span> 

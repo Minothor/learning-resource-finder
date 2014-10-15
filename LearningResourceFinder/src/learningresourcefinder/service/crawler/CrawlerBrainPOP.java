@@ -45,9 +45,10 @@ public class CrawlerBrainPOP
                     int seconds = Integer.parseInt(time[2]);                    
                     minutes += (seconds>0)? 1:0;
                 }
-                
+
+            
                 if(cs!=null)
-                    cs.persistRessource(titre,lien,categorie,description,minutes,"","");
+                    cs.persistRessource(titre,lien,categorie,description,minutes,"","", 0, "BrainPop");
             }
         }
 

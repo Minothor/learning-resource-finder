@@ -53,7 +53,7 @@ public class CrawlerClassePrimaire
                     topic = topic.substring(startTrim,endTrim);
 
                     if(cs!=null)
-                        cs.persistRessource(name,url,topic,"",0,"P5-6","P5-6");
+                        cs.persistRessource(name,url,topic,"",0,"P5-6","P5-6", 0, "G. Demeulenaere");
                     
                     System.out.println(name);
                     System.out.println(topic);
