@@ -345,7 +345,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="resetForm()">&times;</button>
-							<h4 class="modal-title">Cycles pertinent pour la ressource</h4>
+							<h4 class="modal-title">Cycles pertinents pour la ressource</h4>
 						</div>			
 						<div class="modal-body">
 							<div class="form-horizontal">					
@@ -419,7 +419,7 @@
 								        </c:otherwise> </c:choose>
 							</span>
 	
-							<button type="button" style="float: none;"
+							<button type="button" style="float: none;" 
 								title="Retirer cette URL"
 								class="close addToolTip
 							    <c:choose>
@@ -433,7 +433,7 @@
 								</c:choose>
 								>&times;
 							</button>
-							<span id="viewCountDisplay">${resource.viewCount}</span>
+							<span id="viewCountDisplay" <span class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"></span> >${resource.viewCount}</span>
 							</div>
 						</div>
 						<%-- end row --%>

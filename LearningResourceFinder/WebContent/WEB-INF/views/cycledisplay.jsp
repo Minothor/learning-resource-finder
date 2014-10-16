@@ -61,7 +61,7 @@
 
 									<div <c:if test='${subsubitem.children.size() > 0}'> class="poper" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true' />"</c:if>>
 										<li>
-											${subsubitem.competence.code } 
+											<span style="font-size: 80% ; color:#808080">${subsubitem.competence.code } </span>
 											<a	href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
 										</li>
 									</div>
