@@ -1,4 +1,4 @@
-<%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
+  <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
 <head>
   <script  src="js/int/competenceTree.js"></script>
