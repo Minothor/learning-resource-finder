@@ -117,7 +117,7 @@ public class ResourceEditController extends BaseController<Resource> {
         Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
         Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);
         
-        url=url.toLowerCase().trim();
+        url=url.trim();
         if(!url.startsWith("http://") && !url.startsWith("https://")){
         	url = "http://" + url;
         }
