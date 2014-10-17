@@ -14,7 +14,7 @@
 }
 </style>
 
-<div style="display: inline-block; position: relative; vertical-align: top; height:250px; width: 200px; margin-right: 20px; margin-bottom: 20px;">
+<div style="display: inline-block; position: relative; vertical-align: top; height:208px; width: 200px; margin-right: 20px; margin-bottom: 20px;">
  <div class="resource-content panel panel-default">
 	<span id="${playlist.id}-${resource.id}" class="sortableItem"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
 	
