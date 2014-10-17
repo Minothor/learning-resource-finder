@@ -9,7 +9,6 @@
 <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script> -->
 <script type="text/javascript">
 function updateViewcountAndPpularity(){ 
-	 alert('hi');
  		$.ajax({	
  			type : "GET", 
  			dataType: "text",
@@ -17,8 +16,7 @@ function updateViewcountAndPpularity(){
  			data : "idResource="+${resource.id},
  			success : function(data) {
  				alert(data);
- 				$('#viewCounter').empty();
-//  				$('#viewCounter').text(data);
+ 				$('#viewCounter').text(data);
  			},			
  			error : function(data) {
  				alert("Problème en contactant le serveur" );
@@ -115,16 +113,14 @@ function updateViewcountAndPpularity(){
 						data-toggle="tooltip" title="lien vers la ressource">Détails</span>
 					</a>
 					<span id="viewCounter" class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px"
-						data-toggle="tooltip" title="Nombre de vues">>${resource.viewCount}</span> <br>
-					  <span>Platform: <c:forEach items="${resource.platforms}" var="platform">${platform.name}</c:forEach></span><br>
-					  <span>Durée: ${resource.duration}m</span><br>
-					  <span>Cycle: <c:choose>
-					  					<c:when test="${resource.minCycle == null}">? &#8594; ?</c:when>
-											<c:otherwise>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</c:otherwise>
-									</c:choose>	
-					  </span>
-					  
-					  
+						data-toggle="tooltip" title="Nombre de vues"> ${resource.viewCount}</span> <br>
+					  <span><b>Platform:</b> <c:forEach items="${resource.platforms}" var="platform">${platform.name} </c:forEach></span><br>
+					  <c:choose>
+					  		<c:when test="${resource.duration != null}"><span><b>Durée:</b> ${resource.duration}m</span><br> </c:when>
+					  </c:choose>
+					  <c:choose>
+					  	<c:when test="${resource.minCycle != null}"><span><b>Cycle:</b>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</span></c:when>
+					  </c:choose>
 				</div>
 			</div>
 		</c:when>
