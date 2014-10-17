@@ -7,6 +7,25 @@
 <head>
 <!--  "Remove" script for social network's buttons -->
 <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script> -->
+<script type="text/javascript">
+function updateViewcountAndPpularity(){ 
+	 alert('hi');
+ 		$.ajax({	
+ 			type : "GET", 
+ 			dataType: "text",
+ 			url : "/ajax/increment",
+ 			data : "idResource="+${resource.id},
+ 			success : function(data) {
+ 				alert(data);
+ 				$('#viewCounter').empty();
+//  				$('#viewCounter').text(data);
+ 			},			
+ 			error : function(data) {
+ 				alert("Problème en contactant le serveur" );
+ 			}
+ 		});
+ 	} 
+</script>
 </head>
 <style>
 .resourceDescription {
@@ -64,7 +83,7 @@
 				</c:if>				
 				<div  class="descriptionDiv col-xs-6 ${resource.numberImage>=1?"resource-content-hidden":""}" style="padding-right: 5px;">
 					<div class="resource-content-hidden" style="float:right; padding:0px; margin-top: 5px">	
-						<a href="<c:url value='${resource.urlResources[0].url}' />" target="_blank"> <span
+						<a href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank" onclick="updateViewcountAndPpularity();" > <span
 						class="addToolTip glyphicon glyphicon-circle-arrow-right"
 						style="font-size: 35px; padding: 0px"
 						data-toggle="tooltip" title="lien direct vers ce site"></span>
@@ -95,9 +114,17 @@
 						style="font-size: 12px; padding: 0px"
 						data-toggle="tooltip" title="lien vers la ressource">Détails</span>
 					</a>
-					<span class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px"
-						data-toggle="tooltip" title="Nombre de vues"></span> ${resource.viewCount}
-					 
+					<span id="viewCounter" class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px"
+						data-toggle="tooltip" title="Nombre de vues">>${resource.viewCount}</span> <br>
+					  <span>Platform: <c:forEach items="${resource.platforms}" var="platform">${platform.name}</c:forEach></span><br>
+					  <span>Durée: ${resource.duration}m</span><br>
+					  <span>Cycle: <c:choose>
+					  					<c:when test="${resource.minCycle == null}">? &#8594; ?</c:when>
+											<c:otherwise>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</c:otherwise>
+									</c:choose>	
+					  </span>
+					  
+					  
 				</div>
 			</div>
 		</c:when>
