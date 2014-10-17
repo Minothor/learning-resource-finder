@@ -91,22 +91,24 @@ public class ResourceListController extends BaseController<Resource> {
        Cycle cycle = null ;
        List<Resource> resourceList = null;
        String titre = "";
-       
+       int maxResourcesNb = 100;
        if (cycleid == null){
-           int maxResourcesNb = 100;
+           
            resourceList = resourceRepository.findLastResources(maxResourcesNb);
            titre = "les "+maxResourcesNb+" dernières ressources";
            
        } else if (sort!=null) {
            cycle = (Cycle)getRequiredEntity(cycleid, Cycle.class);
-           resourceList = resourceRepository.findResourceByCycleAndPopularity(cycleid,sort);
+           
            if (sort.equals("popularity")) {
+               resourceList = resourceRepository.findResourceByCycleAndPopularity(cycleid,sort);
                titre = "Ressources les plus populaires ";
            } else {
-               titre = "Ressources classées par date ";
+               resourceList = resourceRepository.findLastResourceByCycle(cycleid,maxResourcesNb);
+               titre = "Les 100 dernières ressources ";
            }
-           titre +=  "pour le cycle  "+cycle.getName();
-       } 
+           titre +=  " pour le cycle  "+cycle.getName();
+       }
        
        ModelAndView mv = prepareModelAndView(resourceList);
        mv.addObject("titleFragment",titre);

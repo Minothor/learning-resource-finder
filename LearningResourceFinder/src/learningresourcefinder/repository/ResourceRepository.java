@@ -267,7 +267,14 @@ public class ResourceRepository extends BaseRepository<Resource> {
                .getResultList();
        return resourceListByCycle;
    }
-	
+
+   public List<Resource> findLastResourceByCycle (Long id , int maxAmount){
+       List<Resource> lastResourceListByCycle = (List<Resource>)em.createQuery("select r from Resource r where r.minCycle.id <= :id and :id <= r.maxCycle.id ORDER BY r.createdOn DESC")
+               .setParameter("id", id)
+               .setMaxResults(maxAmount)              
+               .getResultList();
+       return lastResourceListByCycle;
+   }
    public List<String> findAllResourceName() {
 	   return em.createQuery("select r.name from Resource r order by r.popularity desc").getResultList();
    }           
