@@ -52,8 +52,9 @@
 	
 	     if(YT.PlayerState.PLAYING) {  
 	         if(countHasBeenInc==true){
+	     		var idresource = $("#resourceHiddenField").val();
 	        	 //increment value in db whith ajax
-	             updateViewcountAndPpularity();
+	             updateViewcountAndPpularity(idresource);
 	             countHasBeenInc=false;
 	         }                     
 	       
@@ -291,23 +292,6 @@
  		$("#modalCompetence").modal("show");
  	}
 
- 	function updateViewcountAndPpularity() 
-	{ 
-		$.ajax({	
-			type : "GET", 
-			dataType: "text",
-			url : "/ajax/increment",
-			data : "idResource="+${resource.id},
-			success : function(data) {
-				$('#viewCountDisplay').text(data);
-			},			
-			error : function(data) {
-				alert("Problème en contactant le serveur" );
-			}
-		});
-	} 
- 	
- 	
 </script>
 
 <STYLE type="text/css">
@@ -396,8 +380,7 @@
 					<div class="col-md-6">
 						<div class="addthis_sharing_toolbox"
 							style="display: inline-block; margin-right: 26px; vertical-align: super;"></div>
-						<lrftag:favorite isFavorite="${isFavorite}"
-							idResource="${resource.id}" />
+						<lrftag:favorite isFavorite="${isFavorite}"	idResource="${resource.id}" />
 					</div>
 				</div>
 				<div id="urlsDiv">					
@@ -405,7 +388,7 @@
 						<div class="row">
 							<div class="col-md-12">
 							<c:if test="${oneUrlHasAName && urlResource.name != null}">${urlResource.name} : </c:if>
-							<a href="${urlResource.url}" onclick="updateViewcountAndPpularity();"
+							<a href="${urlResource.url}" onclick="updateViewcountAndPpularity(${resource.id});"
 								target="_blank" id="urlresource" data-type="text">${urlResource.url}</a>
 							<span style="float: none; font-size: 15px"
 								title="Modifier cette URL"
@@ -433,7 +416,7 @@
 								</c:choose>
 								>&times;
 							</button>
-							<span id="viewCountDisplay" <span class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"></span> >${resource.viewCount}</span>
+							<span id="viewCounter${resource.id}" class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"> ${resource.viewCount}</span>
 							</div>
 						</div>
 						<%-- end row --%>

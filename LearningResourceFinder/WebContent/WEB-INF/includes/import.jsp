@@ -32,6 +32,7 @@
 <script src="/plugins/yoxview/jquery.yoxview-2.21.min-modified.js"></script>  <%--http://yoxigen.com/yoxview --%>
 <script src="/js/int/allPages.js"></script>
 <script src="/js/int/mobileHyperlinkDelay.js"></script>
+<script src="/js/int/resourceViewsCounter.js"></script> <%-- To allows the updateViewcountAndPpularity() in all screens that display the resources --%>
 
 <script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script> <%-- show big version of resource and vice versa --%>
 
