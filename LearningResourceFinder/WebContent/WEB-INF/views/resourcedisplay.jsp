@@ -893,7 +893,7 @@
 							<br /> <br /> <br />
 							<div class="help-block">
 								Code de la catégorie dans laquelle vous désirez placer la
-								ressource.<br /> Astuce: affichez la liste des catégories dans
+								ressource.<br /> Astuce: affichez la <a href="/competencetree" target="_blank">liste des catégories</a> dans
 								un autre onglet de votre navigateur.
 							</div>
 						</div>
