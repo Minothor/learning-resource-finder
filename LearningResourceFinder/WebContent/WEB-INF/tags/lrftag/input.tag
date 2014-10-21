@@ -23,7 +23,7 @@ see http://stackoverflow.com/questions/439861/spring-mvc-tag-interaction-with-cu
 </c:if>     
 
 <spring:bind path="${path}">  <%-- gives us access to the status and error JSP variables --%>   
-    <div class="form-group${status.error ? 'has-error' : '' }">  <%-- div from Bootstrap --%>
+    <div class="form-group ${status.error ? 'has-error' : '' }">  <%-- div from Bootstrap --%>
         <label class="col-lg-2 control-label" for="${path}">${label}<c:if test="${required}"><span class="required">*</span></c:if></label>
         <div class="col-lg-5">
             <form:input path="${path}" required="${required}" for="${path}" cssClass="${empty cssClass ? 'form-control' : cssClass}" type="${type}"/>
