@@ -30,6 +30,8 @@ public class Cache implements ServletContextListener {
 
     List <Cycle> cycles;  // We need to display cycles in the header (menu bar) on each page.
     
+    List<Long> idCyclesInDb = new ArrayList<>(); // We use this for the slider
+    
     Map<Long, List<Competence>> computedCategoriesByCycle = new HashMap<>();
     
     Map<Long, List <Resource>> computedTopResourcesByCycle = new HashMap<>();
@@ -132,7 +134,12 @@ public class Cache implements ServletContextListener {
         cycles = cycleRepository.findAllCycles();
         ResourceRepository resourceRepository = ContextUtil.getSpringBean(ResourceRepository.class);
         CompetenceRepository competenceRepository = ContextUtil.getSpringBean(CompetenceRepository.class);
+        
+        idCyclesInDb.clear();
+        
         for(Cycle cycle : cycles) {
+            
+            idCyclesInDb.add(cycle.getId());
            
             /////// 1. computedCategoriesByCycle
             // Get all categories attached to resources part of current cycle
@@ -164,6 +171,10 @@ public class Cache implements ServletContextListener {
         // (Re)initialize with current date/time
         computedCacheDate = new Date(); 
         cacheShouldBeUpdated = false;
+    }
+
+    public List<Long> getIdCyclesInDb() {
+        return idCyclesInDb;
     }
 
     public synchronized List<Resource> getComputedTopResourcesByCycle(Long id) {

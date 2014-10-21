@@ -41,22 +41,16 @@
 
 				</div>
 				<div class="col-md-3">
-					<h4>Catégories</h4>
-
-                     <p><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> primaire</a></p>
-                     <p><a href="<c:url value='/cycle?id=301'/>">3<sup>ème</sup> - 4<sup>ème</sup> primaire</a></p>
-                     <p><a href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> - 6<sup>ème</sup> primaire</a></p>
-                     <br/>
-                     <p><a href="<c:url value='/cycle?id=303'/>">1<sup>ère</sup> - 2<sup>ème</sup> secondaire</a></p>
-                     <p><a href="<c:url value='/cycle?id=304'/>">3<sup>ère</sup> - 6<sup>ème</sup> secondaire</a></p>
-                     <br/>
-<%-- We hardcode links to have nicer names and sorting					    
-						  <c:forEach items="${applicationScope.cache.cycles}" var="cycle">
-                             <li><a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
-                          </c:forEach>
- --%>
-                           
-                      
+					 <h4>Catégories</h4>
+				    
+					  <c:forEach items="${applicationScope.cache.cycles}" var="cycle" varStatus="cycleStatus">
+					      <c:if test="${cycleStatus.count == 4}">
+					      	<br/>
+					      </c:if>
+						  <p><a href="<c:url value='/cycle/${cycle.id}/${cycle.slug}'/>">${cycle.description}</a> </p>
+					  </c:forEach>
+                      <br/>
+                       
                       <lrf:conditionDisplay privilege="MANAGE_COMPETENCE">
                     	  <p><a href="<c:url value='/cyclelist'/>">Gestion des Cycles</a> </p>
                     	  <br/> 

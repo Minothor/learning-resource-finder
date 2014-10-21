@@ -25,6 +25,7 @@ import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
 import learningresourcefinder.util.Logger;
+import learningresourcefinder.web.Cache;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
 
@@ -111,8 +112,8 @@ public class ResourceEditController extends BaseController<Resource> {
         int tempIntMax=(int)Double.parseDouble(maxCycle);
        
         // Get cycle id from slider position (1 -> 300)
-        int idMinCycle= ResourceDisplayController.ID_CYCLES_IN_DB[Integer.valueOf(tempIntMin)];
-        int idMaxCycle= ResourceDisplayController.ID_CYCLES_IN_DB[Integer.valueOf(tempIntMax)];
+        long idMinCycle= Cache.getInstance().getIdCyclesInDb().get(tempIntMin);
+        long idMaxCycle= Cache.getInstance().getIdCyclesInDb().get(tempIntMax);
              
         Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
         Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);

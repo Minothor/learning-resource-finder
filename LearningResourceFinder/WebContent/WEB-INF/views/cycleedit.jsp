@@ -26,14 +26,42 @@
     
      
 <div class="container">
-<h1>Edit Cycle</h1>
+	<c:choose>
+		<c:when test="${cycle.id==null}">
+			<lrftag:pageheadertitle title="Création d'un cycle"/>
+		</c:when>
+		<c:otherwise>
+			<lrftag:pageheadertitle title="Edition : ${cycle.name}"/>
+		</c:otherwise>
+	</c:choose>
 
-<form:form modelAttribute="cycle" method="post" action='<%=response.encodeURL("cycleeditsubmit")%>'>
-    <label>Nom</label>       <form:input maxlength="15"  path="name"/>
-    <input type="hidden" name="id" value="${cycle.id}"/>
-    <input type="submit" value="Sauver"/><br>
-    <label style="color: red"><form:errors path="name"/></label>
- </form:form>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<br />
+			<form:form modelAttribute="cycle" method="post" action='<%=response.encodeURL("cycleeditsubmit")%>'>
+				<div class="col-md-12">
+					<input type="hidden" name="id" value="${cycle.id}"/>
+					<span class="input-control">
+				    <form:input class="form-control" label="Nom" placeholder="Nom" style="width:150px" maxlength="15" path="name"/>
+				    <label style="color: red"><form:errors path="name"/></label>
+				    </span>
+				    <br/>
+				    <form:input class="form-control" label="Description" placeholder="Description" style="width:500px" maxlength="50" path="description"/>
+				    <label style="color: red"><form:errors path="description"/></label>
+				    <br/>
+				    
+				</div>
+				<div class="form-group">
+					<label class="col-lg-0"></label>
+				   	<ul class="col-lg-0" >
+				    <li style="display:inline;">
+					    <input type="submit" class="btn btn-primary" value="Sauver"/><br>
+					</li>
+					</ul>
+				</div>
+			 </form:form>
+		</div>
+	</div>	
 </div>
 </body>
 </html>

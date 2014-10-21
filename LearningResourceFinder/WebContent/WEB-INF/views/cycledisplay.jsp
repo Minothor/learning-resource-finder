@@ -32,7 +32,7 @@
 
 <div class="container">
       <lrf:conditionDisplay privilege="MANAGE_COMPETENCE">
-          <li><a href="<c:url value='/cycleedit?id=${cycle.id}'/>">Edit Cycle</a></li> 
+          <li><a href="<c:url value='/cycleedit?id=${cycle.id}'/>">Editer cycle</a></li> 
          
       </lrf:conditionDisplay>
 
@@ -47,11 +47,11 @@
 				<div class="col-xs-6 col-md-4"> 
 					<c:forEach items="${cycleColumn}" var="cycleitems">
 							
-							<h2>${cycleitems.competence.name}</h2>
+							<h2><a href="/searchresource?competenceid=${cycleitems.competence.getId()}">${cycleitems.competence.name}</h2>
 							<c:forEach items="${cycleitems.children}" var="subitem">
 								<span style="font-size: 80% ; color:#808080"> ${subitem.competence.code } </span>
 									<span  <%-- class="mycompetencePopover${valeur<3?'Right':'Left'}" data-content="<lrftag:competencedescription competenceNode='${subitem}' mustlistchildren='true'/>"--%> style="font-size: 120%">
-									  <a href="searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }
+									  <a href="/searchresource?competenceid=${subitem.competence.getId()}">${subitem.competence.name }
 									  </a>
 									  </span> 
 								</br>
@@ -62,7 +62,7 @@
 									<div <c:if test='${subsubitem.children.size() > 0}'> class="poper" data-content="<lrftag:competencedescription competenceNode='${subsubitem}' mustlistchildren='true' />"</c:if>>
 										<li>
 											<span style="font-size: 80% ; color:#808080">${subsubitem.competence.code } </span>
-											<a	href="searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
+											<a	href="/searchresource?competenceid=${subsubitem.competence.getId()}">${subsubitem.competence.name}</a></br>
 										</li>
 									</div>
 								

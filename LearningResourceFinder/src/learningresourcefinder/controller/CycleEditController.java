@@ -1,10 +1,14 @@
 package learningresourcefinder.controller;
 
+import javax.validation.Valid;
+
 import learningresourcefinder.model.Cycle;
 import learningresourcefinder.repository.CycleRepository;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
+import learningresourcefinder.util.HTMLUtil;
 import learningresourcefinder.web.Cache;
+import learningresourcefinder.web.Slugify;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +43,7 @@ public class CycleEditController extends BaseController<Cycle> {
     }
  
     @RequestMapping("/cycleeditsubmit")
-    public ModelAndView cycleEditSubmit( @ModelAttribute Cycle cycle, BindingResult bindingResult){
+    public ModelAndView cycleEditSubmit(@Valid @ModelAttribute Cycle cycle, BindingResult bindingResult){
         SecurityContext.assertUserHasPrivilege(Privilege.MANAGE_COMPETENCE);
 
         if (bindingResult.hasErrors()) { // If spring has detected validation errors, we redisplay the form.
@@ -48,6 +52,11 @@ public class CycleEditController extends BaseController<Cycle> {
         }
 
         Cycle cycleHavingThatName=(Cycle) cycleRepository.findByName(cycle.getName());
+        
+        // Set the slug based on the (maybe changed) title
+        String slug = Slugify.slugify(HTMLUtil.removeHtmlTags(cycle.getDescription()));
+        cycle.setSlug(slug);
+
         if(cycle.getId()==null){
             if(cycleHavingThatName!=null){
                 return otherCycleError(cycle, cycleHavingThatName, bindingResult);
@@ -66,7 +75,7 @@ public class CycleEditController extends BaseController<Cycle> {
 
         }
         Cache.getInstance().fillCacheFromDB();
-        return new ModelAndView("redirect:/cycle?id="+cycle.getId());
+        return new ModelAndView("redirect:/cycle/"+cycle.getId()+"/"+cycle.getSlug());
     }
 
     private ModelAndView otherCycleError(Cycle cycle, Cycle otherCycle, BindingResult bindingResult) {
@@ -75,7 +84,6 @@ public class CycleEditController extends BaseController<Cycle> {
         System.out.println("Un autre cycle a déjà ce nom '" + cycle.getName() + "'");
         return mv;
     }
-
 
     @ModelAttribute
     public Cycle findCycle(@RequestParam(value="id", required=false)Long id){

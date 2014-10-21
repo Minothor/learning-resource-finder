@@ -114,18 +114,12 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catégories <b class="caret"></b></a> 
 					    <ul class="dropdown-menu"> 
 
-                          <li><a href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> - 2<sup>ème</sup> primaire</a></li>
-                          <li><a href="<c:url value='/cycle?id=301'/>">3<sup>ème</sup> - 4<sup>ème</sup> primaire</a></li>
-                          <li><a href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> - 6<sup>ème</sup> primaire</a></li>
-                          <li role="presentation" class="divider"></li>
-                          <li><a href="<c:url value='/cycle?id=303'/>">1<sup>ère</sup> - 2<sup>ème</sup> secondaire</a></li>
-                          <li><a href="<c:url value='/cycle?id=304'/>">3<sup>ère</sup> - 6<sup>ème</sup> secondaire</a></li>
-
-<%-- We hardcode links to have nicer names and sorting					    
-						  <c:forEach items="${applicationScope.cache.cycles}" var="cycle">
-                             <li><a href="<c:url value='/cycle?id=${cycle.id}'/>">${cycle.name}</a> </li>
+						  <c:forEach items="${applicationScope.cache.cycles}" var="cycle" varStatus="cycleStatus">
+						  	<c:if test="${cycleStatus.count == 4}">
+   								<li role="presentation" class="divider"></li>
+							</c:if>
+                          	<li><a href="<c:url value='/cycle/${cycle.id}/${cycle.slug}'/>">${cycle.description}</a> </li>
                           </c:forEach>
- --%>
                            
                           <li role="presentation" class="divider"></li>
                           <lrf:conditionDisplay privilege="MANAGE_COMPETENCE">

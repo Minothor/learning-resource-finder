@@ -37,6 +37,7 @@ import learningresourcefinder.util.Action;
 import learningresourcefinder.util.DateUtil;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
+import learningresourcefinder.web.Cache;
 import learningresourcefinder.web.ModelAndViewUtil;
 import learningresourcefinder.web.Slugify;
 import learningresourcefinder.web.UrlUtil;
@@ -67,7 +68,7 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @Autowired FavoriteRepository favoriteRepository;
     @Autowired ContributionService contributionService; 
     
-    public final static  int[] ID_CYCLES_IN_DB = new int[]{300,301,302,303,304};
+    //public final static  int[] ID_CYCLES_IN_DB = new int[]{300,301,302,303,304};
     
     @RequestMapping({"/resource/{shortId}/{slug}",
         "/resource/{shortId}/", // SpringMVC needs us to explicitely specify that the {slug} is optional.   
@@ -85,8 +86,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
         ////// Find min and max Cycles from slider input
         // cycles ids in ascending order of cycles names
 
-        Long minCycleId = (resource.getMinCycle() != null)?resource.getMinCycle().getId() : ID_CYCLES_IN_DB[0]; //id:300 -> 0  default   min value for slider
-        Long maxCycleId = (resource.getMaxCycle() != null)?resource.getMaxCycle().getId() : ID_CYCLES_IN_DB[ID_CYCLES_IN_DB.length-1];//id:304 -> 4  default   max value for slider
+        int cycleListLength = Cache.getInstance().getIdCyclesInDb().size(); 
+        long minCycleId = (resource.getMinCycle() != null)?resource.getMinCycle().getId() : Cache.getInstance().getIdCyclesInDb().get(0); //id:300 -> 0  default   min value for slider
+        long maxCycleId = (resource.getMaxCycle() != null)?resource.getMaxCycle().getId() : Cache.getInstance().getIdCyclesInDb().get(cycleListLength-1);//id:304 -> 4  default   max value for slider
         
         if((resource.getMinCycle() != null) && (resource.getMaxCycle()!=null)){
             
@@ -97,12 +99,13 @@ public class ResourceDisplayController extends BaseController<Resource> {
 
          int minCycle=0;
          int maxCycle=4;
-            
-         for (int i = 0; i < ID_CYCLES_IN_DB.length; i++) {
-            if(ID_CYCLES_IN_DB[i] == minCycleId){
+
+         int numberOfCycles = Cache.getInstance().getIdCyclesInDb().size();
+         for (int i = 0; i < numberOfCycles; i++) {
+            if(Cache.getInstance().getIdCyclesInDb().get(i) == minCycleId){
                 minCycle=i;               
             }
-            if(ID_CYCLES_IN_DB[i] == maxCycleId){                
+            if(Cache.getInstance().getIdCyclesInDb().get(i) == maxCycleId){                
                 maxCycle=i;               
             }
         } 
@@ -450,8 +453,8 @@ public class ResourceDisplayController extends BaseController<Resource> {
         int tempIntMax=(int)Double.parseDouble(maxCycle);
        
         // Get cycle id from slider position (1 -> 301)
-        int idMinCycle= ID_CYCLES_IN_DB[Integer.valueOf(tempIntMin)];
-        int idMaxCycle= ID_CYCLES_IN_DB[Integer.valueOf(tempIntMax)];
+        long idMinCycle= Cache.getInstance().getIdCyclesInDb().get(tempIntMin);
+        long idMaxCycle= Cache.getInstance().getIdCyclesInDb().get(tempIntMax);
              
         Cycle cycleMin = (Cycle) getRequiredEntity(idMinCycle, Cycle.class);
         Cycle cycleMax = (Cycle) getRequiredEntity(idMaxCycle, Cycle.class);

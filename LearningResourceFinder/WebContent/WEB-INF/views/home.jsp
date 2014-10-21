@@ -58,17 +58,17 @@
 	<div class="row">
 	  <div class="col-sm-6" style="text-align: center;">
 	      <h3>primaire</h3><br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=300'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle/${applicationScope.cache.cycles[0].id}/${applicationScope.cache.cycles[0].slug}'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
 	      <br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=301'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>ème</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle/${applicationScope.cache.cycles[1].id}/${applicationScope.cache.cycles[1].slug}'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 4<sup>ème</sup></a><br/>
 	      <br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=302'/>">5<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle/${applicationScope.cache.cycles[2].id}/${applicationScope.cache.cycles[2].slug}'/>">5<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
 	  </div>
 	  <div class="col-sm-6 " style="text-align: center;">
 	      <h3>secondaire</h3><br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=303'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle/${applicationScope.cache.cycles[3].id}/${applicationScope.cache.cycles[3].slug}'/>">1<sup>ère</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 2<sup>ème</sup></a><br/>
 	      <br/>
-	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle?id=304'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
+	      <a style="width:170px;" class="btn btn-primary btn-lg" href="<c:url value='/cycle/${applicationScope.cache.cycles[4].id}/${applicationScope.cache.cycles[4].slug}'/>">3<sup>ème</sup> &nbsp;&nbsp;-&nbsp;&nbsp; 6<sup>ème</sup></a><br/>
 	  </div>
 	</div>
 </div>  
