@@ -3,6 +3,9 @@
 <html>
 <head>
 	<title>ToujoursPlus.be - Home</title>
+	<meta name="title" content="ToujoursPlus.be - Vidéos, jeux et exercices pour l'école" />
+	<meta name="description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />
+	<meta name="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos" />
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 </head>
 <body>
@@ -11,7 +14,7 @@
 <%---------------------------------- LOGO ----------------------------------%>
 <div class="container" style="padding-top:20px; padding-bottom:20px;">
    <div class="text-center">
-       <img src="/images/ToujoursPlus-logo-500px.png" class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" /><br/>
+       <img src="/images/ToujoursPlus-logo-500px.png" alt="Logo ToujoursPlus" class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" /><br/>
        <br/>
    </div>
    <div class="row">
