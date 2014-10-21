@@ -72,11 +72,12 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<br />
-				<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playlist" class="form-horizontal" role="form" method="post">
+				<form:form action='<%=response.encodeURL("/playlist/editsubmit")%>' modelAttribute="playList" class="form-horizontal" role="form" method="post">
 					<div class="col-md-12">
 						<form:hidden path="id" />
 						<span class="input-control">
-						<form:input class="form-control" maxlength="50" id="playlistTitle" path="name" label="Titre" placeholder="Titre" required="true" />
+						<form:input class="form-control" maxlength="50" id="playlistTitle" path="name" label="Titre" placeholder="Titre"/>
+						<label style="color: red"><form:errors path="name"/></label>
 						</span>
 						<br />
 						<form:textarea class="form-control" rows="5" path="description" label="Description" placeholder="Description" />
@@ -97,11 +98,6 @@
 				</form:form>
 			</div>
 		</div>
-		
-		
-
-
-	
 	</div>
 </body>
 </html>

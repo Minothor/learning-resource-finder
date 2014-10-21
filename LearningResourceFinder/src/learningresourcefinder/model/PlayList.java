@@ -13,6 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.util.HTMLUtil;
@@ -21,6 +22,7 @@ import learningresourcefinder.web.Slugify;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @SequenceGenerator(name="PlayListSequence", sequenceName="PLAYLIST_SEQUENCE")
@@ -29,6 +31,8 @@ public class PlayList extends BaseEntityWithShortId implements Searchable {
     @Id  @GeneratedValue(generator="PlayListSequence") 
     Long id;
     
+    @NotBlank(message="Entrez le nom de la séquence")
+    @Size(max=50, message="Le nom de la séquence ne peut contenir que 50 caractères maximum")
     @Column(length=50,nullable=false )
     private String name;
 

@@ -54,7 +54,7 @@ public class PlayListEditController extends BaseController<PlayList>{
 	@RequestMapping("/editsubmit")
 	public ModelAndView playListEditSubmit(@Valid @ModelAttribute PlayList playList, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
-			return new ModelAndView("playlistedit","playlist",playList);
+			return new ModelAndView("playlistedit","playList",playList);
 		}
 		
 		if (playList.getId() != null) { // Existing playlist (not creating)
