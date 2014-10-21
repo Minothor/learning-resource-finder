@@ -56,7 +56,16 @@ public class CompetenceNodeService {
 		////// 1. We count how many lines we need display in total.
 		int totalAmountOfLinesToDisplay = 0;
 		
+		// Get the number of main topics (Math, French ...)
 	    totalAmountOfLinesToDisplay = root.getChildren().size();
+	    
+	    // Add number of lines for the 2 next levels of each topic
+	    for(CompetenceNode competenceNodeLevel1 : root.getChildren()){
+	        totalAmountOfLinesToDisplay += competenceNodeLevel1.getChildren().size();
+	        for(CompetenceNode competenceNodeLevel2 : root.getChildren()){
+	            totalAmountOfLinesToDisplay += competenceNodeLevel2.getChildren().size();
+	        }
+	    }
 		
 		////// 2. We split the nodes into columns of (hopefully) an equivalent amount of lined in each. 
 		int amountOfLinesToDisplayAlreadyCurrentColumn = 0;
@@ -66,12 +75,18 @@ public class CompetenceNodeService {
 
 		for(CompetenceNode competenceNodeSecondLevel : root.getChildren()){  // These are "Math", "French", etc.
 				currentColumn.add(competenceNodeSecondLevel );
+				
+				// Count total number of lines for current Topic (3 levels)
 				amountOfLinesToDisplayAlreadyCurrentColumn += competenceNodeSecondLevel.getChildren().size();
+				for(CompetenceNode competenceNodeThirdLevel : root.getChildren()){
+				    amountOfLinesToDisplayAlreadyCurrentColumn += competenceNodeThirdLevel.getChildren().size();
+				}
 					
 				// Do we need to jump to the next column?
 					
-				if (amountOfLinesToDisplayAlreadyCurrentColumn > totalAmountOfLinesToDisplay / NB_OF_COLUMNS  
-						&& columnsList.size() < NB_OF_COLUMNS ) { 
+				// If just 3 topics, ensure they are displayed automatically into 3 columns
+				if ((amountOfLinesToDisplayAlreadyCurrentColumn) > totalAmountOfLinesToDisplay / NB_OF_COLUMNS   
+						&& columnsList.size() < NB_OF_COLUMNS  || (root.getChildren().size() == 3)) { 
 		
 					currentColumn = new ArrayList<>();
 					columnsList.add(currentColumn);
