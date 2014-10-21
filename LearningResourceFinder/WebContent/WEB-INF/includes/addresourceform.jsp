@@ -1,4 +1,5 @@
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 
@@ -27,11 +28,11 @@
 							<label for="url">site</label> <input type="text"
 								class="form-control" id="urlAddField" name="url"
 								placeholder="http://..." >
-							<span class="help-block">URL vers le site que vous désirez
+							<span class="help-block">URL vers le site que vous dÃ©sirez
 								ajouter.</span>
 							<div class="pull-right">
 								<button type="button" class="btn btn-mini btn-primary"
-									id="urlCheckButton" onclick="ajaxVerifyUrl()">Vérifier</button>
+									id="urlCheckButton" onclick="ajaxVerifyUrl()">VÃ©rifier</button>
 							</div>
 							<span id="urlErrorMessage" class="text-warning"></span>
 							<%-- Place holder filled by JavaScript after ajax response --%>
@@ -42,8 +43,8 @@
 							<%-- will not be displayed until the url is valid --%>
 
 							<div class="form-group">
-								<label for="titre">Intitulé</label> <input type="text"
-									class="form-control" name="title" placeholder="intitulé"
+								<label for="titre">IntitulÃ©</label> <input type="text"
+									class="form-control" name="title" placeholder="intitulÃ©"
 									required="required" maxlength="50">
 								<div class="pull-right"></div>
 							</div>
@@ -92,7 +93,7 @@
 								</div>
 
 								<div class="form-group col-sm-3" >
-									<label for="topic">Matière</label>
+									<label for="topic">MatiÃ¨re</label>
 									<c:forEach var="topic" items="${applicationScope.cache.topic}">
 										<div class="radio">
 											<label for="${topic.description}"> <input
@@ -154,7 +155,7 @@
 					</div>
 
 					<div class="form-inline">
-						Présence de publicité:
+						PrÃ©sence de publicitÃ©:
 						<div class="radio">
 							<label> <input type="radio" value="true"
 								name="advertising" /> Oui
@@ -195,15 +196,15 @@
 						</div>
 
 						<div class="control-group col-md-7">
-							<label for="duration">Durée</label>
+							<label for="duration">DurÃ©e</label>
 							<div class="form-inline">
 								<input type="number" class="form-control"
 									id="addResourceForm2MaxDuration" name="maxDuration"
 									style="width: 80px"> minutes
 							</div>
 							<span class="help-block">Temps approximatif que met un
-								élève pour lire le texte, ou exécuter l'exercice ou regarder la
-								vidéo proposée.</span>
+								Ã©lÃ¨ve pour lire le texte, ou exÃ©cuter l'exercice ou regarder la
+								vidÃ©o proposÃ©e.</span>
 						</div>
 
 					</div>
