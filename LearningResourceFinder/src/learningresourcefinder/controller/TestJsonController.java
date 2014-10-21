@@ -10,9 +10,11 @@ import learningresourcefinder.util.Logger;
 import org.apache.commons.logging.Log;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class TestJsonController {
     @Logger Log log;
     
