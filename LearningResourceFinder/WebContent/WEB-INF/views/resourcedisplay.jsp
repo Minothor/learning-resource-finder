@@ -892,8 +892,7 @@
 							</row>
 							<br /> <br /> <br />
 							<div class="help-block">
-								Code de la catégorie dans laquelle vous désirez placer la
-								ressource.<br /> Astuce: affichez la <a href="/competencetree" target="_blank">liste des catégories</a> dans
+								Code de la catégorie dans laquelle vous désirez placer la ressource.<br /> Astuce: affichez la <a href="http://toujoursplus.be/competencetree"  TARGET="_blank"> liste des catégories</a> dans
 								un autre onglet de votre navigateur.
 							</div>
 						</div>

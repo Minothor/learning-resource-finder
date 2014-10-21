@@ -55,9 +55,9 @@ public class SearchOptions {
 	}
 
 	public enum Platform {
-		BROWSER("Navigateur", "Fonctionne dans la plupart des navigateurs tel que chrome, firefox ou internet exploreur. N\\'est pas lié à une plate-forme particulière (Android, Linux, Windows, etc.)"),
-		ANDROID("Android", "Application nécessitant une tablette ou un smartphone avec Android"), 
-		IPAD("iPad/iPhone", "Application nécessitant une tablette ou un smartphone avec iOs"), 
+		BROWSER("Web", "Page web visible avec Chrome, Firefox, Safari, IE..."),
+		ANDROID("Android", "Application nécessitant une tablette ou un smartphone Android"), 
+		IPAD("iPad/iPhone", "Application nécessitant une tablette ou un smartphone iOS"), 
 	    WIN("Windows", "Application à installer sous Windows"), 
 		MAC("Mac", "Application à installer sous Mac OS"),
 		LINUX("Linux", "Application à installer sous Linux");
