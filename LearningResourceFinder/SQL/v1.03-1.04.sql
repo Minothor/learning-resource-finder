@@ -10,3 +10,9 @@ UPDATE cycle SET description = '3<sup>ème</sup> - 6<sup>ème</sup> secondaire',
 
 ALTER TABLE cycle ALTER COLUMN description SET NOT NULL;
 ALTER TABLE cycle ALTER COLUMN slug SET NOT NULL;
+
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-21 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-21 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-21 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-21 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!DEPLOYED ON 2014-10-21 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
