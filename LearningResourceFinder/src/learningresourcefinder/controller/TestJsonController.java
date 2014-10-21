@@ -27,7 +27,7 @@ public class TestJsonController {
             // Ask YouTube
             URL myURL = new URL("https://gdata.youtube.com/feeds/api/videos/5zwMcizMB7w?v=2&alt=json");
             URLConnection urlConnection = myURL.openConnection();
-            BufferedReader youTubeAnswerReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            BufferedReader youTubeAnswerReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
             
             JSONParser jsonParser = new JSONParser();           
             String inputLine  = youTubeAnswerReader.readLine();
