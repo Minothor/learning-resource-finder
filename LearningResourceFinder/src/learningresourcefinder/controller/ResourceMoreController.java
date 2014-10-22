@@ -20,7 +20,7 @@ public class ResourceMoreController {
     public ModelAndView getMoreResources(@RequestParam("tokenlistofresources") String tokenListOfResources) {
         List<Resource> listOfMoreResources = resourceListPager.getMoreResources(tokenListOfResources);
         
-        // Set token to "0" when last resources to display 
+        // Set token to blank" when last resources to display 
         if (!resourceListPager.checkIfMoreResources(tokenListOfResources)) {
             tokenListOfResources = "";
         }
