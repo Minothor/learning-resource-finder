@@ -277,6 +277,13 @@ public class ResourceRepository extends BaseRepository<Resource> {
    }
    public List<String> findAllResourceName() {
 	   return em.createQuery("select r.name from Resource r order by r.popularity desc").getResultList();
-   }           
+   }
+   
+   public List<Resource> findResourcebyIdList (List<Long> idList) {
+       List<Resource> resourceList = (List<Resource>) em.createQuery("SELECT r FROM Resource r WHERE r.id in :idList")
+               .setParameter("idList", idList)
+               .getResultList();
+       return resourceList;
+   }
   
 }

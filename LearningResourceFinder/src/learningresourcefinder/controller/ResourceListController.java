@@ -12,6 +12,7 @@ import learningresourcefinder.repository.RatingRepository;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UserRepository;
 import learningresourcefinder.service.LevelService;
+import learningresourcefinder.service.ResourceListPager;
 import learningresourcefinder.web.ModelAndViewUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class ResourceListController extends BaseController<Resource> {
 	@Autowired UserRepository userRepository; //
 	@Autowired RatingRepository ratingRepository; //
 	@Autowired LevelService levelService;
-	@Autowired CycleRepository cycleRepository ;
-
+	@Autowired CycleRepository cycleRepository;
+	@Autowired ResourceListPager resourceListPager;
+	
 	@RequestMapping("/ressourcelist/{userName}")
 	public ModelAndView resourceList(@PathVariable("userName") String userName) {
 		
@@ -118,6 +120,25 @@ public class ResourceListController extends BaseController<Resource> {
 	private ModelAndView prepareModelAndView(List<Resource> listResource) {
 	    ModelAndView mv = new ModelAndView("resourcelist");
 
+	    // Special processing if more than xxx resources retrieved as we want to display a specific
+	    // maximum number of resources !
+	    if (listResource.size() > ResourceListPager.NUMBER_OF_ROWS_TO_RETURN) {
+	        // Save complete list of resources (Ids) in a session's map and return key identifier 
+	        String KeyIdentifierListOfResources = resourceListPager.addListOfResources(listResource);
+
+	        // Keep only xxx first resources
+	        listResource = listResource.subList(0, 
+	                ResourceListPager.NUMBER_OF_ROWS_TO_RETURN > listResource.size() ? 
+	                        listResource.size() : ResourceListPager.NUMBER_OF_ROWS_TO_RETURN);
+	        
+	        // Pass unique key identifier to JSP; it will be used to retrieve more resources when scrolling !
+	        mv.addObject("tokenListOfResources", KeyIdentifierListOfResources);	        
+	    }
+	    else {
+	        mv.addObject("tokenListOfResources", 0);
+	    }
+	        
+	    
 	    mv.addObject("resourceList", listResource);
 
 	    ModelAndViewUtil.addRatingMapToModelAndView(mv, listResource);
