@@ -18,7 +18,13 @@ public class ResourceMoreController {
     
     @RequestMapping("/ajax/getmoreresources")
     public ModelAndView getMoreResources(@RequestParam("tokenlistofresources") String tokenListOfResources) {
-        List<Resource> listResources = resourceListPager.getMoreResources(tokenListOfResources);
-        return new ModelAndView("moreresources").addObject("moreResourceList", listResources).addObject("tokenListOfResources", tokenListOfResources);
+        List<Resource> listOfMoreResources = resourceListPager.getMoreResources(tokenListOfResources);
+        
+        // Set token to "0" when no last resources to display 
+        if (!resourceListPager.checkIfMoreResources(tokenListOfResources)) {
+            tokenListOfResources = "0";
+        }
+        
+        return new ModelAndView("moreresources").addObject("moreResourceList", listOfMoreResources).addObject("tokenListOfResources", tokenListOfResources);
     }
 }
