@@ -69,6 +69,9 @@ public class ResourceListPager {
         
         List<Long> listOfResourcesId = resourceListAndPointer.getListOfResourceIds();
         
+        // If no more resources to display ...
+        if (startIndex >= listOfResourcesId.size()) return null;
+        
         // Extract next range of resources Id
         if (endIndex > listOfResourcesId.size()) endIndex = listOfResourcesId.size(); 
         final List<Long> finalListOfResourcesId = listOfResourcesId.subList(startIndex, endIndex);

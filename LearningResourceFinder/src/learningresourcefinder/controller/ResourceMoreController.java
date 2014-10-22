@@ -1,5 +1,8 @@
 package learningresourcefinder.controller;
 
+import java.util.List;
+
+import learningresourcefinder.model.Resource;
 import learningresourcefinder.service.ResourceListPager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,8 @@ public class ResourceMoreController {
     @Autowired ResourceListPager resourceListPager;
     
     @RequestMapping("/ajax/getmoreresources")
-    public ModelAndView getMoreResources(@RequestParam("tokenListOfResources") String tokenListOfResources) {
-        return new ModelAndView("moreResources").addObject("resourceList", resourceListPager.getMoreResources(tokenListOfResources)).addObject("tokenListOfResources", tokenListOfResources);
+    public ModelAndView getMoreResources(@RequestParam("tokenlistofresources") String tokenListOfResources) {
+        List<Resource> listResources = resourceListPager.getMoreResources(tokenListOfResources);
+        return new ModelAndView("moreresources").addObject("moreResourceList", listResources).addObject("tokenListOfResources", tokenListOfResources);
     }
 }
