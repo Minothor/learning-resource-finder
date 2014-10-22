@@ -2,7 +2,7 @@
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <html>
 <head>
-	<title>ToujoursPlus.be - Home</title>
+	<title>ToujoursPlus.be - Vidéos, jeux et exercices pour l'école</title>
 	<meta name="title" content="ToujoursPlus.be - Vidéos, jeux et exercices pour l'école" />
 	<meta name="description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />
 	<meta name="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos" />
@@ -14,14 +14,14 @@
 <%---------------------------------- LOGO ----------------------------------%>
 <div class="container" style="padding-top:20px; padding-bottom:20px;">
    <div class="text-center">
-       <img src="/images/ToujoursPlus-logo-500px.png" alt="Logo ToujoursPlus" class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" /><br/>
+       <img src="/images/ToujoursPlus-logo-500px.png" alt="logo ToujoursPlus créateur de curiosité" class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" /><br/>
        <br/>
    </div>
    <div class="row">
      <div class="col-md-2"></div>
      <div class="col-md-5">
-	       Ce site est "plus ou moins" fonctionnel.<br/>
-	       Il reste des bugs, n’hésitez pas à les <a href="/contact">signaler</a>.<br/>
+     		Moteur de recherche collaboratif pour élèves, parents et enseignants.<br/> 
+     		Trouvez facilement des vidéos, exercices et jeux éducatifs gratuits.<br/>
 	       <br/>
 	       <span style="font-size:14px; float:inherit; margin-right: 15px" class="label label-info">beta</span>
   	       <div class="addthis_sharing_toolbox"></div>

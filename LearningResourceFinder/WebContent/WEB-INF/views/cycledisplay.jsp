@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html;"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<c:set var="cycleDescription" value="${cycle.description}"/>
+<c:set var="cycleDescriptionPartialEscape" value="${fn:replace(cycleDescription,'<sup>', '')}" />
+<c:set var="cycleDescriptionEscaped" value="${fn:replace(cycleDescriptionPartialEscape,'</sup>', '')}" />
+<title>${cycleDescriptionEscaped}</title>
+<meta name="title" content="${cycle.name} - ${cycleDescriptionEscaped}" />
+<meta name="description" content="Liste des ressources, séquences et compétences pour le cycle de ${cycleDescriptionEscaped}" />
+<meta name="keywords" content="cylce, classe, primaire, secondaire, ressources, séquences, compétences, catégories, savoir-faire" />
 
 <script type="text/javascript">	
 	$(document).ready(function() {

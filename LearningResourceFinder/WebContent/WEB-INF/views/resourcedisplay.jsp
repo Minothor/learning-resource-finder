@@ -311,6 +311,9 @@
 }
 </STYLE>
 <title>${resource.name}</title>
+<meta name="title" content="${resource.name}" />
+<meta name="description" content="<c:choose><c:when test="${empty resource.description}"><c:out value="${resource.name}"/></c:when><c:otherwise><c:out value="${resource.description}"/></c:otherwise></c:choose>"/>
+<meta name="keywords" content="${resource.name}, ressource, éducatif, vidéo, exercice en ligne, aide aux devoirs, leçon éducative" />
 </head>
 <body>
 

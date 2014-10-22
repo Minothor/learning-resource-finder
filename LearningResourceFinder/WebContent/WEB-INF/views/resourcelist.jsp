@@ -2,7 +2,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <html>
 <head>
-<title>Catalog</title>
+<title>Catalogue</title>
 </head>
 <body>
 	<c:choose>
