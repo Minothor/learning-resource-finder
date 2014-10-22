@@ -80,7 +80,7 @@ public class ResourceListPager {
         resourceListAndPointer.setNumberofRowsAlreadyReturned(endIndex);
         
         // Get Resources from list of resource Ids
-        List<Resource> resourceList = resourceRepository.findResourcebyIdList(listOfResourcesId);
+        List<Resource> resourceList = resourceRepository.findResourcebyIdList(finalListOfResourcesId);
         
         // TODO extract this part of coding in a new method into ResourceService (same for coding into SearchService (2 different places) !!!)
         // We need to sort the list of resources to match the order of the Id list (the first is supposed to be more relevant) instead of the random order from the DB.
