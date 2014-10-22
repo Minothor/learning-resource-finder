@@ -22,7 +22,7 @@ public class ResourceMoreController {
         
         // Set token to "0" when last resources to display 
         if (!resourceListPager.checkIfMoreResources(tokenListOfResources)) {
-            tokenListOfResources = "0";
+            tokenListOfResources = "";
         }
         
         return new ModelAndView("moreresources").addObject("moreResourceList", listOfMoreResources).addObject("tokenListOfResources", tokenListOfResources);
