@@ -135,7 +135,7 @@ public class ResourceListController extends BaseController<Resource> {
 	        mv.addObject("tokenListOfResources", KeyIdentifierListOfResources);	        
 	    }
 	    else {
-	        mv.addObject("tokenListOfResources", "");
+	        mv.addObject("tokenListOfResources", "0");
 	    }
 	        
 	    
