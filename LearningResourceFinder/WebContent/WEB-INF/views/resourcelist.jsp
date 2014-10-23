@@ -3,8 +3,45 @@
 <html>
 <head>
 <title>Catalogue de ressources</title>
+
+<script>
+$(document).ready(function() {
+	
+	
+	$('#spinner').hide();
+	$(window).scroll(	
+	
+		function() {
+			if ($(window).scrollTop() == $(document).height()- $(window).height()) {
+				var tokenListOfResources=$("#tokenListOfResources").val();
+				if(tokenListOfResources != "0"){
+				
+					$('#spinner').show();
+					$.ajax({
+						url : "/ajax/getmoreresources",
+						dataType: "html",
+						type : 'POST',
+						data : "tokenlistofresources="+tokenListOfResources,
+						success : function(data) {
+								$("#resourcelist").append(data);
+								$('#spinner').hide();
+
+						},
+						error : function(data) {
+							alert("Problème en contactant le serveur" );
+						}
+					});
+					
+				}			
+
+			}
+		});
+});
+
+</script>
 </head>
 <body>
+<input type="hidden" value="${tokenListOfResources}" id="tokenListOfResources"/>
 	<c:choose>
 		<c:when test="${topic != null}">
 			<lrftag:breadcrumb linkactive="${topic.description}">
@@ -34,6 +71,9 @@
 								<lrftag:resource resource="${resource}"/>
 						</c:forEach>
 	    </section>
+		 <div id="spinner">
+	     	<img style="margin-left: 35%;" src="/images/spinner.gif" />
+	  	 </div>
 	</div>
 </body>
 </html>
