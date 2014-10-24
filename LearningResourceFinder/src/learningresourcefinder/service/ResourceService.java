@@ -7,7 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
+import learningresourcefinder.model.BaseEntity;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.util.CurrentEnvironment;
@@ -105,6 +109,14 @@ public class ResourceService {
 		renumberImageFiles(directory+"/", resource.getId()+"-", listImages);
 	}
 	
-
-
+	public List<Resource> keepCorrectResourceOrder(List<Resource> resources, final List<Long> resourceIds) {
+	    // We need to sort the list of resources to match the order of the Id list (the Id list is supposed to be more relevant) instead of the random order from the DB
+        Collections.sort(resources, new Comparator<BaseEntity>() {
+            @Override   public int compare(BaseEntity arg0, BaseEntity arg1) {
+                return (new Integer((resourceIds.indexOf(arg0.getId())))).compareTo( new Integer(resourceIds.indexOf(arg1.getId())));
+            }
+        });
+	    
+        return resources;
+	}
 }

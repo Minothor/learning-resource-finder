@@ -30,6 +30,7 @@ public class SearchService {
 	
 	@Autowired private IndexManagerService indexManagerService;
 	@Autowired private ResourceRepository resourceRepository;
+	@Autowired private ResourceService resourceService;
 	
 	@PersistenceContext
 	EntityManager em;
@@ -73,34 +74,34 @@ public class SearchService {
 		return entities;
 	}
 	
-
-	//*********************Ressource pagination
-	public List<BaseEntity> getTotalEntities(List<SearchResult> searchResults, Class<? extends BaseEntity> clazz) {
-		final List<Long> entityIds = new ArrayList<>();
-		
-		
-		//List<Resource> resources =(List) searchService.getFirstEntities(searchService.search(searchResource), 5, Resource.class);
-		
-		for(SearchResult searchResult : searchResults) {
-			if (searchResult.isForClass(clazz)) {
-				entityIds.add(searchResult.getId());
-			}
-//			if (entityIds.size() >= maxResult) {
-//				break;
-//			}	
-		}
-
-		List<BaseEntity> entities = findEntitiesByIdList(entityIds, clazz);
-
-		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
-		Collections.sort(entities, new Comparator<BaseEntity>() {
-			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
-				return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
-			}
-		});
-
-		return entities;
-	}
+// This method seems to be unused ...
+//	//*********************Ressource pagination
+//	public List<BaseEntity> getTotalEntities(List<SearchResult> searchResults, Class<? extends BaseEntity> clazz) {
+//		final List<Long> entityIds = new ArrayList<>();
+//		
+//		
+//		//List<Resource> resources =(List) searchService.getFirstEntities(searchService.search(searchResource), 5, Resource.class);
+//		
+//		for(SearchResult searchResult : searchResults) {
+//			if (searchResult.isForClass(clazz)) {
+//				entityIds.add(searchResult.getId());
+//			}
+////			if (entityIds.size() >= maxResult) {
+////				break;
+////			}	
+//		}
+//
+//		List<BaseEntity> entities = findEntitiesByIdList(entityIds, clazz);
+//
+//		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
+//		Collections.sort(entities, new Comparator<BaseEntity>() {
+//			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
+//				return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
+//			}
+//		});
+//
+//		return entities;
+//	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<BaseEntity> findEntitiesByIdList(List<Long> idList, Class clazz){
@@ -132,14 +133,9 @@ public class SearchService {
 
 		entities = removeResourcesNotInCompetence(searchOptions, entities);
 		
-		
-		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
-		Collections.sort(entities, new Comparator<BaseEntity>() {
-			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
-				return (new Integer((resourceIds.indexOf(arg0.getId())))).compareTo( new Integer(resourceIds.indexOf(arg1.getId())));
-			}
-		});
-		
+		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random order from the DB.		
+		entities = resourceService.keepCorrectResourceOrder(entities, resourceIds);
+	
 		return entities;
 	}
 	

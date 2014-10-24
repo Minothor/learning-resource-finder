@@ -28,7 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Scope("singleton")
 public class ResourceListPagerService {
 
-    @Autowired ResourceRepository resourceRepository; 
+    @Autowired ResourceRepository resourceRepository;
+    @Autowired ResourceService resourceService; 
     
     public static final int NUMBER_OF_ROWS_TO_RETURN = 150;
     
@@ -101,13 +102,8 @@ public class ResourceListPagerService {
         // Get Resources from list of resource Ids
         List<Resource> resourceList = resourceRepository.findResourcebyIdList(finalListOfResourcesId);
         
-        // TODO extract this part of coding in a new method into ResourceService (same for coding into SearchService (2 different places) !!!)
-        // We need to sort the list of resources to match the order of the Id list (the first is supposed to be more relevant) instead of the random order from the DB.
-        Collections.sort(resourceList, new Comparator<BaseEntity>() {
-            @Override   public int compare(BaseEntity arg0, BaseEntity arg1) {
-                return (new Integer((finalListOfResourcesId.indexOf(arg0.getId())))).compareTo( new Integer(finalListOfResourcesId.indexOf(arg1.getId())));
-            }
-        });
+        // We need to sort the list of resources to match the order of the Id list (the Id list is supposed to be more relevant) instead of the random order from the DB
+        resourceList = resourceService.keepCorrectResourceOrder(resourceList, finalListOfResourcesId);
         
         return resourceList;
     }
