@@ -102,7 +102,7 @@
 					  		<c:when test="${resource.duration != null}"><span><b>Durée:</b> ${resource.duration}m</span><br> </c:when>
 					  </c:choose>
 					  <c:choose>
-					  	<c:when test="${resource.minCycle != null}"><span><b>Cycle:</b>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</span></c:when>
+					  	<c:when test="${resource.minCycle != null}"><span><b>Cycle: </b>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</span></c:when>
 					  </c:choose>
 				</div>
 			</div>
