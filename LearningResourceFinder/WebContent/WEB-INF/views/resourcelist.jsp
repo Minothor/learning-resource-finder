@@ -31,8 +31,15 @@ $(document).ready(function() {
 						type : 'POST',
 						data : "tokenlistofresources="+tokenListOfResources,
 						success : function(data) {
-								$("#resourcelist").append(data);
-								$('#spinner').hide();
+							    if(data.length!=0){
+									$("#resourcelist").append(data);
+									$('#spinner').hide();
+							    }
+							    else {
+							    	$('#spinner').hide();
+							    	alert("Désolé, votre session a expiré. La page va être rechargée ...");
+							    	location.reload();
+							    }
 
 						},
 						error : function(data) {
