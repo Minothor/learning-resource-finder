@@ -4,7 +4,8 @@
 	<c:if test="${current.user != null}">
 	  <div class="addToolTip" data-toggle="tooltip" data-placement="bottom"
 	       title="Vous êtes niveau ${current.user.accountLevel.levelIndex} et vous avez ${current.user.userProgressPoints} points de contribution (sur ${current.user.accountLevel.levelProgressPoints} pour arriver au niveau ${current.user.accountLevel.levelIndex+1}).">
-		<a href="/contributionlistdisplay">
+		<a href="/rights">
+<!-- 		<a href="/contributionlistdisplay"> -->
 			<div style="font-size:10px; position:absolute; top:37px; right:16px" >
 			        ${current.user.userProgressPoints} / ${current.user.accountLevel.levelProgressPoints}
 			</div>

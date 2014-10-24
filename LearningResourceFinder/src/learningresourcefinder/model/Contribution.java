@@ -84,7 +84,6 @@ public class Contribution extends BaseEntity
 			this.action = action;
 		}
 		
-	
 		@Override
 		public boolean equals(Object other) {
 			Contribution contribution=((Contribution) other);		

@@ -148,6 +148,18 @@ public abstract class BaseEntity  {
         }
             return "pas de date communiquée";
     }
+    public String getCreatedOnSince(){
+        if (createdOn != null){
+            return DateUtil.formatIntervalFromToNowFR(createdOn);
+        }
+        return "--";
+    }
+    
+    
+    
+    
+    
+    
     public User getUpdatedBy() {
         return updatedBy;
     }

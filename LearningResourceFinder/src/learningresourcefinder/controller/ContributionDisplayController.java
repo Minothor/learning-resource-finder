@@ -27,13 +27,14 @@ public class ContributionDisplayController extends BaseController<User>
 		
 		
 
-		
-		@RequestMapping(value="/contributionlistdisplay", method=RequestMethod.GET)
+		 @RequestMapping(value="/contributionlistdisplay", method=RequestMethod.GET)
+		//@RequestMapping(value="/rights", method=RequestMethod.GET)
 	    public ModelAndView displayContributions(@RequestParam(value="username",required=false) String userName) {
 	    	
 	    	User user =(userName==null)? SecurityContext.getUser(): userRepository.getUserByUserName(userName);
 	    	    	
-	        ModelAndView mv= new ModelAndView ("contributiondisplay");
+	      // ModelAndView mv= new ModelAndView ("rights");
+	       ModelAndView mv= new ModelAndView ("contributiondisplay");
 	        mv.addObject("contributions", contributionRepository.findAllByUser(user));
 	        mv.addObject("user", user );
 	        mv.addObject("contributionsPoints",contributionRepository.sumByUser(user));
@@ -49,7 +50,8 @@ public class ContributionDisplayController extends BaseController<User>
 			User user =(userName==null)? SecurityContext.getUser(): userRepository.getUserByUserName(userName);
 			levelService.computeContributionPointsForLevelFromContributions(user, contributionRepository.sumByUser(user));
 					
-			return "redirect:contributionlistdisplay?username=" + user.getUserName();
+//			return "redirect:contributionlistdisplay?username=" + user.getUserName();
+			return "redirect:rights";
 			
 		}
 	}
