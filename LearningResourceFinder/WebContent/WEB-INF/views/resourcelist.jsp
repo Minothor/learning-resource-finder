@@ -15,7 +15,13 @@ $(document).ready(function() {
 			if ($(window).scrollTop() == $(document).height()- $(window).height()) {
 				var tokenListOfResources=$("#tokenListOfResources").val();
 				var tokenMoreResources=$("#tokenMoreResources").val();
-
+				
+				// tokenListOfResources (part of resourcelist.jsp) is loaded at first request. 
+				// If it's "0", it means there are less than xxx resources to display, no reload necessary.
+				// If it contains a value (timestamp converted to String), this value will be used to retrieve 
+				// batch of resources from session when scrolling.
+				// tokenMoreResources (part of moreresources.jsp) is set to "0" by resourcemorecontroller 
+				// when last batch of resources to display provided to jsp to inform no more reload necessary.
 				if(tokenListOfResources != "0" && tokenMoreResources != "0"){
 				
 					$('#spinner').show();
