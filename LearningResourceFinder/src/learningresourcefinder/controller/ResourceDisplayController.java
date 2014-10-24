@@ -413,14 +413,19 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @RequestMapping("/competenceaddtoresourcesubmit")
     public String competenceAddToResourceSubmit(@RequestParam(value="resourceid",required=false) long resourceId, @RequestParam("code") String code) {
         Resource resource = getRequiredEntity(resourceId);
-        Competence competence = competenceRepository.findByCode(code) ;
-        
-        if (competence == null) { 
-            NotificationUtil.addNotificationMessage("Le code '"+code+"' ne correspond à aucune catégorie connue.", Status.ERROR);         
-        } else {  // Edit
-            resource.getCompetences().add(competence);
-            levelService.addActionPoints(SecurityContext.getUser(), Action.LINK_RESOURCE_TO_COMPETENCE);
-            NotificationUtil.addNotificationMessage("Catégorie liée avec succès", Status.SUCCESS);         
+        if (code == null) {
+            NotificationUtil.addNotificationMessage("Veuillez introduire un code correspondant à une catégorie.", Status.ERROR);
+        }
+        else {
+            Competence competence = competenceRepository.findByCode(code) ;
+            
+            if (competence == null) { 
+                NotificationUtil.addNotificationMessage("Le code '"+code+"' ne correspond à aucune catégorie connue.", Status.ERROR);         
+            } else {  // Edit
+                resource.getCompetences().add(competence);
+                levelService.addActionPoints(SecurityContext.getUser(), Action.LINK_RESOURCE_TO_COMPETENCE);
+                NotificationUtil.addNotificationMessage("Catégorie liée avec succès", Status.SUCCESS);         
+            }
         }
         
         return ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));

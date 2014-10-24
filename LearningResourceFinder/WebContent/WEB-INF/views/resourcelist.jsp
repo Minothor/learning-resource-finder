@@ -35,9 +35,9 @@ $(document).ready(function() {
 									$("#resourcelist").append(data);
 									$('#spinner').hide();
 							    }
+							    // Session has expired. Reload the page.
 							    else {
 							    	$('#spinner').hide();
-							    	alert("Désolé, votre session a expiré. La page va être rechargée ...");
 							    	location.reload();
 							    }
 
