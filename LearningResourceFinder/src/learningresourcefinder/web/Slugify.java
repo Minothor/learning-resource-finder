@@ -39,6 +39,7 @@ public class Slugify {
 		}
 
 		ret = ret.replace("ß", "ss");
+		ret = StringUtils.stripAccents(ret);
 		return Normalizer.normalize(ret, Normalizer.Form.NFD)
 				.replaceAll("[^\\p{ASCII}]", "")
 				.replaceAll("[^a-zA-Z0-9 ]", "");
