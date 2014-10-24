@@ -27,3 +27,7 @@
 .resource-content .descriptionDiv {
 	width:100% !important;
 }
+
+.resource-content .lead {
+	cursor : pointer;
+}
