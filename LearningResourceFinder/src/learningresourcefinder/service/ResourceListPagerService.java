@@ -23,6 +23,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
+/** Map hold into the HttpSession to enable infinite scroll
+ *  it remembers the result of the query (the ids of resources to be shown)
+ *  => when we need to display more (ajax call), we just get the next ids of resources to be displayed from here.
+ *  
+ * @author Vincent Tallier
+ * @author Laurent Demey
+ *
+ */
 @Transactional
 @Service(value="resourceListPager")
 @Scope("singleton")
@@ -31,7 +40,7 @@ public class ResourceListPagerService {
     @Autowired ResourceRepository resourceRepository;
     @Autowired ResourceService resourceService; 
     
-    public static final int NUMBER_OF_ROWS_TO_RETURN = 150;
+    public static final int NUMBER_OF_ROWS_TO_RETURN = 150;  // For each AJAX call, we send that amount of resources.
     
     public String addListOfResources(List<Resource> resourceList) {
         HttpSession httpSession = ContextUtil.getHttpSession();
@@ -88,8 +97,9 @@ public class ResourceListPagerService {
         // Update number of rows currently returned
         resourceListAndToken.setNumberofRowsAlreadyReturned(endIndex);
         
-        // This is the last bucket of resources that we return
-        if (endIndex == listOfResourcesId.size()) {
+        
+        if (endIndex == listOfResourcesId.size()) {  // This is the last bucket of resources that we return
+            // We cleanup (remove the map from the session)
             HttpSession httpSession = ContextUtil.getHttpSession();
             
             @SuppressWarnings("unchecked")
@@ -108,6 +118,7 @@ public class ResourceListPagerService {
         return resourceList;
     }
 
+    
     private ResourceListAndToken getResourceListAndToken(String tokenListOfResources) {
         HttpSession httpSession = ContextUtil.getHttpSession();
         
@@ -125,7 +136,7 @@ public class ResourceListPagerService {
         return resourceListAndPointer;
     }
     
-    // Inner class
+    // Inner class, stored as value in the map
     public class ResourceListAndToken {
         List<Long> listOfResourceIds;
         int numberofRowsAlreadyReturned;
