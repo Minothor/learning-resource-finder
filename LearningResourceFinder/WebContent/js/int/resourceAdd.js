@@ -3,10 +3,10 @@
 	 
 	 // The error message may appear to tell the user to select at least one platform.
 	 // As soon as the user checks a platform, that error message should hide.
-	 $(".alert-danger").hide(); // 
+	 $("#addResourceFormPart2 .alert-danger").hide(); // 
 	  $('input[name="platform"]').on('click', function(){
 		    if ( $(this).is(':checked') ) {
-		    	 $(".alert-danger").hide();
+		    	 $("#addResourceFormPart2 .alert-danger").hide();
 		    } 		    
 		});
 	
@@ -61,6 +61,7 @@ function ajaxVerifyUrl() {
 
 
 function resetForm() {
+   $("#addResourceFormPart2 .alert-danger").hide();
    $('#urlAddField').attr('readonly', false);
    $('#urlAddField').val('');
    $(':input')
@@ -93,14 +94,14 @@ function ajaxResourceAddSubmitModal1(e) {
 	    if (!validForm) { // if result of validation is: invalid
 	    	e.preventDefault(); // stop processing form and disable submitting  
 
-	    	$(".alert-danger").css({"margin-right":"25px"});
-	    	$(".alert-danger").css({"padding": "5px"}); 
-	    	$(".alert-danger").show("scale", 500); 
+	    	$("#addResourceFormPart2 .alert-danger").css({"margin-right":"25px"});
+	    	$("#addResourceFormPart2 .alert-danger").css({"padding": "5px"}); 
+	    	$("#addResourceFormPart2 .alert-danger").show("scale", 500); 
 	    //	$("label[for='platform']").css({"color": "#e81578"});
 	    	
 	    } else {	    	
 	    	// ok, submit form
-	    	$(".alert-danger").hide();   
+	    	$("#addResourceFormPart2 .alert-danger").hide();   
 
 	    	$.ajax({
 				type : "POST",
