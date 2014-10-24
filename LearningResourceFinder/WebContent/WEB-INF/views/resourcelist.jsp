@@ -14,7 +14,9 @@ $(document).ready(function() {
 		function() {
 			if ($(window).scrollTop() == $(document).height()- $(window).height()) {
 				var tokenListOfResources=$("#tokenListOfResources").val();
-				if(tokenListOfResources != "0"){
+				var tokenMoreResources=$("#tokenMoreResources").val();
+
+				if(tokenListOfResources != "0" && tokenMoreResources != "0"){
 				
 					$('#spinner').show();
 					$.ajax({

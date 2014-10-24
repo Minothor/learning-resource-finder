@@ -24,7 +24,6 @@ public class ResourceMoreController {
         if (!resourceListPager.checkIfMoreResources(tokenListOfResources)) {
             tokenListOfResources = "0";
         }
-        
-        return new ModelAndView("moreresources").addObject("moreResourceList", listOfMoreResources).addObject("tokenListOfResources", tokenListOfResources);
+        return new ModelAndView("moreresources").addObject("moreResourceList", listOfMoreResources).addObject("tokenMoreResources", tokenListOfResources);
     }
 }

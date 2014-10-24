@@ -3,4 +3,8 @@
 
 <c:forEach items="${moreResourceList}" var="resource">
 		<lrftag:resource resource="${resource}"/>
-</c:forEach> 
+</c:forEach>
+
+<c:if test="${tokenMoreResources=='0'}">
+	<input type="hidden" value="${tokenMoreResources}" id="tokenMoreResources"/>
+</c:if>
