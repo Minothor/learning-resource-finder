@@ -10,7 +10,7 @@
 				    <br/>
 				    <br/>
 				    <br/>
-					<a href="/"><img src="/images/ToujoursPlus-logo-footer.png"></a>
+					<a href="/"><img alt="logo ToujoursPlus" src="/images/ToujoursPlus-logo-footer.png"></a>
 				    <br/>
 				    <br/>
 					<p>ToujoursPlus.be permet aux élèves et professeurs de trouver
