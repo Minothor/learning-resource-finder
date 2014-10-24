@@ -201,7 +201,11 @@ public class ResourceDisplayController extends BaseController<Resource> {
  
                            
     @RequestMapping("/ajax/resourceeditfieldarraysubmit")  // For a list of checkboxes, value is an array (=> resourceDditFieldSubmit cannot get it in its String).
-    public @ResponseBody ResponseEntity<String> resourceeditfieldsubmitarray(@RequestParam("pk") Long id, @RequestParam(value="value[]") int[] valueArray) {
+    public @ResponseBody ResponseEntity<String> resourceeditfieldsubmitarray(@RequestParam("pk") Long id, @RequestParam(value="value[]", required=false) int[] valueArray) {
+        if (valueArray == null) {
+            return new ResponseEntity<String>("Veuillez indiquer au moins une plate-forme.", HttpStatus.BAD_REQUEST);
+        }
+        
         Resource resource = getRequiredEntity(id);
         
         // valueArray contains something like = [2,3] (if third and forth options have been checked)
