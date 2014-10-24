@@ -3,7 +3,7 @@ package learningresourcefinder.controller;
 import java.util.List;
 
 import learningresourcefinder.model.Resource;
-import learningresourcefinder.service.ResourceListPager;
+import learningresourcefinder.service.ResourceListPagerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ResourceMoreController {
 
-    @Autowired ResourceListPager resourceListPager;
+    @Autowired ResourceListPagerService resourceListPager;
     
     @RequestMapping("/ajax/getmoreresources")
     public ModelAndView getMoreResources(@RequestParam("tokenlistofresources") String tokenListOfResources) {

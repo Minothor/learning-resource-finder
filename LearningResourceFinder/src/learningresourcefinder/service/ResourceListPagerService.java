@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Transactional
 @Service(value="resourceListPager")
 @Scope("singleton")
-public class ResourceListPager {
+public class ResourceListPagerService {
 
     @Autowired ResourceRepository resourceRepository; 
     
