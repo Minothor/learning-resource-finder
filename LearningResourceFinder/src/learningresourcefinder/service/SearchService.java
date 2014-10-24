@@ -63,13 +63,9 @@ public class SearchService {
 		}
 
 		List<BaseEntity> entities = findEntitiesByIdList(entityIds, clazz);
-		
-		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
-		Collections.sort(entities, new Comparator<BaseEntity>() {
-			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
-				return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
-			}
-		});
+
+		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random order from the DB.
+		entities = (List<BaseEntity>) resourceService.keepCorrectListOrder(entities, entityIds);
 		
 		return entities;
 	}
@@ -134,7 +130,7 @@ public class SearchService {
 		entities = removeResourcesNotInCompetence(searchOptions, entities);
 		
 		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random order from the DB.		
-		entities = resourceService.keepCorrectResourceOrder(entities, resourceIds);
+		entities = (List<Resource>) resourceService.keepCorrectListOrder(entities, resourceIds);
 	
 		return entities;
 	}

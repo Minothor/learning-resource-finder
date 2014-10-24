@@ -103,7 +103,7 @@ public class ResourceListPagerService {
         List<Resource> resourceList = resourceRepository.findResourcebyIdList(finalListOfResourcesId);
         
         // We need to sort the list of resources to match the order of the Id list (the Id list is supposed to be more relevant) instead of the random order from the DB
-        resourceList = resourceService.keepCorrectResourceOrder(resourceList, finalListOfResourcesId);
+        resourceList = (List<Resource>) resourceService.keepCorrectListOrder(resourceList, finalListOfResourcesId);
         
         return resourceList;
     }

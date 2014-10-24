@@ -100,23 +100,20 @@ public class ResourceService {
 		changeOneGalleryOrder(largeDirectory, listImages, resource);
 		String smallDirectory = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.RESOURCE_SUB_FOLDER + FileUtil.RESOURCE_RESIZED_SUB_FOLDER +  FileUtil.RESOURCE_RESIZED_SMALL_SUB_FOLDER;
 		changeOneGalleryOrder(smallDirectory, listImages, resource);
-		
-	
-		
 	}
 	
 	public void changeOneGalleryOrder(String directory, ArrayList<String> listImages, Resource resource) {
 		renumberImageFiles(directory+"/", resource.getId()+"-", listImages);
 	}
 	
-	public List<Resource> keepCorrectResourceOrder(List<Resource> resources, final List<Long> resourceIds) {
-	    // We need to sort the list of resources to match the order of the Id list (the Id list is supposed to be more relevant) instead of the random order from the DB
-        Collections.sort(resources, new Comparator<BaseEntity>() {
+	public List<? extends BaseEntity> keepCorrectListOrder(List<? extends BaseEntity> entities, final List<Long> entityIds) {
+	    // We need to sort the list of entities to match the order of the Id list (the Id list is supposed to be more relevant) instead of the random order from the DB
+        Collections.sort(entities, new Comparator<BaseEntity>() {
             @Override   public int compare(BaseEntity arg0, BaseEntity arg1) {
-                return (new Integer((resourceIds.indexOf(arg0.getId())))).compareTo( new Integer(resourceIds.indexOf(arg1.getId())));
+                return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
             }
         });
 	    
-        return resources;
+        return entities;
 	}
 }
