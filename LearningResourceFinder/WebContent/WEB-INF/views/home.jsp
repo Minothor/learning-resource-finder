@@ -9,7 +9,7 @@
 	<meta property="og:url" content="http://toujoursplus.be" />
 	<meta property="og:title" content="ToujoursPlus" /> 
 	<meta property="og:description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />  
-	<meta property="og:image" content="http://toujoursplus.be/images/ToujoursPlus-logo-footer.png" /> 
+	<meta property="og:image" content="http://toujoursplus.be/images/ToujoursPlus-montage-facebook.png" /> 
 	
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 	
@@ -48,7 +48,7 @@
   		<form role="search" method="get" action="/search">
   				   <div class="form-group">
 					<div class="input-group" >
-						<input name="searchphrase"  type="text" class="form-control input-lg searchinput" placeholder="mot(s) clef(s)  ex: fraction, Bonaparte, abeille,..." required>
+						<input name="searchphrase"  type="text" class="form-control input-lg searchinput" placeholder="mot(s) clef(s)  ex: fraction, Christophe Colomb, subjonctif,..." required>
 						<span class="input-group-btn">
 							<button class="btn btn-default btn-lg" type="submit">Rechercher</button>
 						</span>
