@@ -32,7 +32,7 @@ public class ResourceRepository extends BaseRepository<Resource> {
 	}
 	
 	public List<Resource> findAllResourceByUser(User createdBy) {
-		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.createdBy = :createdBy")
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.createdBy = :createdBy ORDER BY r.createdOn DESC")
 				.setParameter("createdBy", createdBy)
 				.getResultList();
 		
@@ -48,7 +48,6 @@ public class ResourceRepository extends BaseRepository<Resource> {
 	
 	
 	/** @param idList can be null if we don't want to limit the query to some resources */
-//	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions, int posOfFirstElementPaging, int amountOfElementsPaging){
 	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions){
 	    if (idList != null && idList.isEmpty()) { // Defensive coding. An empty list would break the query
 			return new ArrayList<>();
