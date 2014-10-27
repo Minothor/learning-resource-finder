@@ -481,7 +481,7 @@
 											data-source="${dataEnumNature}">${resource.nature.description}</a>
 										<!-- Begin Micro-data -->	
 										<c:choose>
-										    <c:when test="${resource.nature.description == 'Formatif (jeu/exploration)'}"><c:set var="educationalUse2" value="Interactive"/><c:set var="learningResourceType2" value="Handout"/></c:when>
+										    <c:when test="${resource.nature.description == 'Formatif (jeu/exploration)'}"><c:set var="educationalUse2" value="Interactive"/><c:set var="learningResourceType2" value="Game"/></c:when>
 										    <c:when test="${resource.nature.description == 'Formatif (théorie)'}"><c:set var="educationalUse2" value="Theory"/><c:set var="learningResourceType2" value="Handout"/></c:when>
 										    <c:when test="${resource.nature.description == 'Evaluatif sans correction'}"><c:set var="educationalUse2" value="Test"/><c:set var="educationalUse3" value="Homework"/>
 										    <c:set var="learningResourceType2" value="Test"/></c:when>
