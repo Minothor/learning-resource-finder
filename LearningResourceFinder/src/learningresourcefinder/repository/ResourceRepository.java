@@ -164,7 +164,7 @@ public class ResourceRepository extends BaseRepository<Resource> {
 	
 	
 	public List<Resource> findAllResourceWhereProblemByTopic(Topic topic) {
-		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.topic = :topic AND SIZE(r.problems) > 0")
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE r.topic = :topic AND SIZE(r.problems) > 0 ORDER BY r.popularity DESC")
 				.setParameter("topic", topic)
 				.getResultList();
 		return results;
@@ -172,21 +172,21 @@ public class ResourceRepository extends BaseRepository<Resource> {
 	
 	public List<Resource> findAllResourceWhereFieldsNullByTopic(Topic topic) {
 		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE(r.name = null OR r.description = null OR r.language = null OR r.format = null"
-				+ " OR r.platformsCollOnString = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic")
+				+ " OR r.platformsCollOnString = null OR r.nature = null OR r.numberImage = null) AND r.topic = :topic ORDER BY r.popularity DESC")
 				.setParameter("topic", topic)
 				.getResultList();
 		return results;
 	}
 	
 	public List<Resource> findAllResourceWhoNotCompetencesByTopic(Topic topic) {
-		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE SIZE(r.competences) = 0 AND r.topic = :topic")
+		List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE SIZE(r.competences) = 0 AND r.topic = :topic ORDER BY r.popularity DESC")
 				.setParameter("topic", topic)
 				.getResultList();
 		return results;
 	}
 	
 	public List<Resource> findAllResourceWhoNoChildrenValidationByTopic(Topic topic) {
-        List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE (r.validationStatus=null OR  r.validationStatus!=:validationStatus) AND r.topic = :topic")
+        List<Resource> results = em.createQuery("SELECT r FROM Resource r WHERE (r.validationStatus=null OR  r.validationStatus!=:validationStatus) AND r.topic = :topic ORDER BY r.popularity DESC")
                 .setParameter("topic", topic)
                 .setParameter("validationStatus", ValidationStatus.ACCEPT)
                 .getResultList();
