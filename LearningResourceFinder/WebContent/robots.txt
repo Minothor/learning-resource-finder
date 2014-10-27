@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /users/
+Disallow: /ajax/
 Disallow: /nochildrenvalidationresourcelist/
 Sitemap: http://toujoursplus.be/sitemap
