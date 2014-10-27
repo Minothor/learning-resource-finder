@@ -99,7 +99,7 @@ public class SiteMapService {
 		Element tempElem;
 		Float urlDepth = .0F;
 		tempElem = rootElement.addElement("url");
-		tempElem.addElement("loc").setText(getUrlRoot()+urls[0]);
+		tempElem.addElement("loc").setText("http://"+getUrlRoot()+urls[0]);
 		populateBasicAttributes(tempElem, urlDepth);
 
 
@@ -109,7 +109,7 @@ public class SiteMapService {
 
 		for (Cycle child_node : cycles) {
 			tempElem = rootElement.addElement("url");
-			tempElem.addElement("loc").setText(getUrlRoot()+"/cycle/"+child_node.getId()+"/"+child_node.getSlug());
+			tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/cycle/"+child_node.getId()+"/"+child_node.getSlug());
 			populateBasicAttributes(tempElem, urlDepth);
 		}
 
@@ -117,7 +117,7 @@ public class SiteMapService {
 
 		for(int i=1;i<urls.length;i++){
 			tempElem = rootElement.addElement("url");
-			tempElem.addElement("loc").setText(getUrlRoot()+urls[i]);
+			tempElem.addElement("loc").setText("http://"+getUrlRoot()+urls[i]);
 			populateBasicAttributes(tempElem, urlDepth);
 		}
 
@@ -147,7 +147,7 @@ public class SiteMapService {
 
 		for (Resource resource : result) {
 			tempElem = rootElement.addElement("url");
-			tempElem.addElement("loc").setText(getUrlRoot()+"/resource/"+resource.getShortId()+"/"+resource.getSlug());
+			tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/resource/"+resource.getShortId()+"/"+resource.getSlug());
 			populateBasicAttributes(tempElem, urlDepth);
 		}
 
@@ -168,13 +168,13 @@ public class SiteMapService {
 		for (SiteMap map : SiteMap.values()) {
 			if(map!=SiteMap.INDEX && map!=SiteMap.RESOURCES){
 				tempElem = rootElement.addElement("sitemap");
-				tempElem.addElement("loc").setText(getUrlRoot()+"/sitemap/"+map.name().toLowerCase(Locale.US));
+				tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/sitemap/"+map.name().toLowerCase(Locale.US));
 				populateBasicAttributes(tempElem, map.getDepth());
 			}
 			if(map==SiteMap.RESOURCES){
 				for (int i=0; i<=getNumResourceMaps();i++){
 					tempElem = rootElement.addElement("sitemap");
-					tempElem.addElement("loc").setText(getUrlRoot()+"/sitemap/"+map.name().toLowerCase(Locale.US)+"/"+i);
+					tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/sitemap/"+map.name().toLowerCase(Locale.US)+"/"+i);
 					populateBasicAttributes(tempElem, map.getDepth());
 				}
 			}
@@ -198,7 +198,7 @@ public class SiteMapService {
 
 		for (Cycle child_node : cycles) {
 			tempElem = rootElement.addElement("url");
-			tempElem.addElement("loc").setText(getUrlRoot()+"/cycle/"+child_node.getId()+"/"+child_node.getSlug());
+			tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/cycle/"+child_node.getId()+"/"+child_node.getSlug());
 			populateBasicAttributes(tempElem, urlDepth);
 
 			//*****Start of code borrowed from Cache.java*****//
@@ -229,7 +229,7 @@ public class SiteMapService {
 		Float urlDepth = .0F;
 
 		tempElem = rootElement.addElement("url");
-		tempElem.addElement("loc").setText(getUrlRoot()+"/competencetree");
+		tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/competencetree");
 		populateBasicAttributes(tempElem, urlDepth);
 
 		urlDepth = .1F;
@@ -262,7 +262,7 @@ public class SiteMapService {
 	 */
 	private void populateChildren(Competence child_node, Element rootElement, Float urlDepth) {
 		Element tempElem = rootElement.addElement("url");
-		tempElem.addElement("loc").setText(getUrlRoot()+"/searchresource?competenceid="+child_node.getId());
+		tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/searchresource?competenceid="+child_node.getId());
 		populateBasicAttributes(tempElem, urlDepth);
 		if(!child_node.getChildren().isEmpty())
 		{
