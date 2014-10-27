@@ -14,7 +14,7 @@
   <ul style='padding-left:0px'>
 	  <c:forEach items="${competenceNode.children}" var="child">  		
 			<li style='padding-bottom:10px;'>
-				${child.competence.code} - <a href='searchresource?competenceid=${child.competence.id}'>${child.competence.name}</a>
+				${child.competence.code} - <a href='/searchresource?competenceid=${child.competence.id}'>${child.competence.name}</a>
 			</li>
 	 </c:forEach>
   </ul>
