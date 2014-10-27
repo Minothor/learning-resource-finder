@@ -23,8 +23,8 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-
- 	    $("[data-toggle='confirmation']").popConfirm({
+		
+		$("[data-toggle='confirmation']").popConfirm({
 			 title : "Confirmation",
 			 content : "Voulez-vous vraiment supprimer cette ressource ?",
 			 placement : "bottom",
@@ -128,53 +128,84 @@
 	
  	$(document).ready(function() {
 		
- 		
- 		//Show cycle editing  pop-ap 
- 		$("#cycle").click(function(e) {
- 		
-	 	 	    e.preventDefault();// prevent the default anchor functionality
-	 	 	    e.stopPropagation();
-	 	 	    $("#adjustBalance").css('width','324px');
-	 	 	    $("#editecycle").modal("show");
+ 		// "Turn on/off" editable fields
+			
+		$('#turnInfoPlusEditableField').click(function(){
+			$('#turnInfoPlusEditableField').hide();
+			$('#editingSpan').show();
+			$('#closeInfoPlusEditableField').show();
+			$('#infoPlusDiv .noteditableField').each(function(){
+				$(this).wrap("<a href='#'></a>");
+				$(this).removeClass('noteditableField').addClass('editableField');
+				$(this).editable({  
+			    	  emptytext: '? ?',
+			    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+			    	  mode: 'popup',
+			    	  type: 'text',
+			    	  url: '/ajax/resourceeditfieldsubmit',
+			    	  pk: '${resource.id}',
+			 		  success: function(response) {
+				      }
+				});
+	 			$(this).effect("highlight", 2000);
+			});
+			$('#infoPlusDiv .noteditableFieldArray').each(function(){
+				$(this).wrap("<a href='#'></a>");
+				$(this).removeClass('noteditableFieldArray').addClass('editableFieldArray');
+				$(this).editable({   
+	 		    	  emptytext: '? ?',
+	 		    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+	 		    	  mode: 'popup',
+	 		    	  type: 'text',
+	 		    	  url: '/ajax/resourceeditfieldarraysubmit',
+	 		    	  pk: '${resource.id}',
+	 		 		  success: function(response) {
+	 			      }
+				});
+	 			$(this).effect("highlight", 2000);
+			});
+			
+			// To make the text green as the other elements
+			$("#cycle").wrap("<a href='#'></a>"); 
+			$("#idContributor").wrap("<a href='/user/${resource.createdBy.userName}' target='_blank'></a>");
+			
+
+			
+			//Show cycle editing  pop-ap 
+	 		$("#cycle").click(function(e) {
+		 	 	    e.preventDefault();// prevent the default anchor functionality
+		 	 	    e.stopPropagation();
+		 	 	    $("#adjustBalance").css('width','324px');
+		 	 	    $("#editecycle").modal("show");
+			});
 		});
+		
+		$('#turnTitleAndDescriptionEditableField').click(function(){
+			$('#closeTitleAndDescriptionEditableField').show();
+			$('#turnTitleAndDescriptionEditableField').hide();
+			$('.noteditableFieldInline').each(function(){
+				$(this).wrap("<a href='#'></a>");
+				$(this).removeClass('noteditableFieldInline').addClass('editableFieldInline');
+				$(this).editable({   
+		 	    	  emptytext: '? ?',
+		 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+		 	    	  mode: 'inline',
+		 	    	  type: 'text',
+		 	    	  url: '/ajax/resourceeditfieldsubmit',
+		 	    	  pk: '${resource.id}',
+		 	 		  success: function(response) {
+		 		      }
+		 		});
+				$(this).effect("highlight", 2000);
+			});
+		});
+		
  		
  		$.fn.editable.defaults.mode = 'inline';
+ 		
+ 		
+		// end "turn on/off" editable fields
 
- 		$('.editableField').editable({   
- 	    	  emptytext: '? ?',
- 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
- 	    	  mode: 'popup',
- 	    	  type: 'text',
- 	    	  url: '/ajax/resourceeditfieldsubmit',
- 	    	  pk: '${resource.id}',
- 	 		  success: function(response) {
- 				location.reload();
- 		      }
-		});
-
- 		 $('.editableFieldInline').editable({   
- 	    	  emptytext: '? ?',
- 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
- 	    	  mode: 'inline',
- 	    	  type: 'text',
- 	    	  url: '/ajax/resourceeditfieldsubmit',
- 	    	  pk: '${resource.id}',
- 	 		  success: function(response) {
- 				location.reload();
- 		      }
- 		});
-
- 		$('.editableFieldArray').editable({   
- 		    	  emptytext: '? ?',
- 		    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
- 		    	  mode: 'popup',
- 		    	  type: 'text',
- 		    	  url: '/ajax/resourceeditfieldarraysubmit',
- 		    	  pk: '${resource.id}',
- 		 		  success: function(response) {
- 					location.reload();
- 			      }
-		});
 
  	 		
  		//Show cycle editing  pop-ap 
@@ -291,7 +322,7 @@
  	function onAddCompetenceClick(){
  		$("#modalCompetence").modal("show");
  	}
-
+ 	
 </script>
 
 <STYLE type="text/css">
@@ -360,22 +391,23 @@
 		</div>
 		<!-- /.modal -->
 		<div class="row">
-			<div class="col-md-12">
-				<a id="title"
-					${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}><h1 
-		itemprop="name"	style="display: inline-block;">${resource.name}</h1></a> <a
-					href="<c:url value='${resource.urlResources[0].url}'/>"> <span
+			<div id="titleDivForMakeEditable" class="col-md-7" style="padding-left: 0px">
+				<span id="title" class='noteditableFieldInline'}><h1
+				itemprop="name"	style="display: inline-block;">${resource.name}</h1></a> <a
+					href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank"> <span
 					class="addToolTip glyphicon glyphicon-log-in"
 					style="font-size: 16px; top: -11px;" data-toggle="tooltip"
 					title="lien direct vers ce site"></span>
-				</a>
+				</span>
 			    <lrf:conditionDisplay privilege="MANAGE_RESOURCE">
           		    <a href="<c:url value='/resource/delete?idresource=${resource.id}'/>" class="btn" data-toggle='confirmation'>
-						<button type="button" class="btn addToolTip close"
-							title="supprimer cette ressource">&times;</button>
+						<button type="button" class="btn addToolTip close" title="supprimer cette ressource">&times;</button>
 				    </a>
+				    <span id="turnTitleAndDescriptionEditableField" ${canEdit==true? "class='glyphicon glyphicon-pencil addToolTip close' ":" class='noneditresource'"} style="float: none; font-size: 15px" title="Modifier le titre ou la description"></span>
+				    <span id="closeTitleAndDescriptionEditableField" class="glyphicon glyphicon-remove addToolTip close" style="display:none; float: none; font-size: 15px" title="Accepter les changements du titre et de la description" onclick="location.reload()"></span>
       		    </lrf:conditionDisplay>
 			</div>
+			<div class="col-md-5">
 		</div>
 		<div class="row">
 			<div class="col-md-8">
@@ -423,7 +455,7 @@
 								            nonurleditpop"  
 								        </c:otherwise>
 								</c:choose>
-								>&times;
+								&times;
 							</button>
 							<span id="viewCounter${resource.id}" class="addToolTip glyphicon glyphicon-eye-open" itemprop="interactionCount" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"> ${resource.viewCount}</span>
 							</div>
@@ -443,20 +475,31 @@
 				</div>					
 				<div class="row">
 					<div itemprop="description" id="descriptionDiv" class="col-md-6">
-						<a id="description"
-							${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}
-							data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
-					</div>				
+						<span id="description" class='noteditableFieldInline'}
+							data-type="textarea" data-inputclass="largerTextArea">${resource.description}</span>
+					</div>			
+					
 					<div id="infoPlusDiv" class="col-md-6">
 						
 						<div class="panel panel-default">
 							<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+									<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
+										<span id="editingSpan" class="close" style="display:none; float: left; font-size: 15px"><i>édition...</i></span>
+										<span id="turnInfoPlusEditableField" ${canEdit==true? "class='glyphicon glyphicon-pencil addToolTip close' ":" class='noneditresource'"}
+										style="float: right; font-size: 15px" title="Modifier l'info"></span>
+										<span id="closeInfoPlusEditableField" class="glyphicon glyphicon-remove close" style="display:none; float: right; font-size: 15px" title="Fermer l'édition" onclick="location.reload()"></span>
+								</lrf:conditionDisplay>
+								</div>
+							</div>
 								<div class="row">
 									<div class="col-md-6">
-										<span class="text-muted">format :</span>  
-										<a id="format"
-											${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?format?'":" class='noneditresource'"}
-											data-source="${dataEnumFormat}">${resource.format.description}</a>
+										<span class="text-muted">format :</span>
+<!-- 										<a id="format" -->
+<%-- 											${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?format?'":" class='noneditresource'"} --%>
+<%-- 											data-source="${dataEnumFormat}">${resource.format.description}</a> --%>
+										<span id="format" class='noteditableField' data-type='select' data-emptytext='?format?'	data-source="${dataEnumFormat}">${resource.format.description}</span>
 											<!-- Begin Micro-data -->
 											<c:choose>
 											    <c:when test="${resource.format.description == 'Interactif'}"><c:set var="formatCode" value="active"/><c:set var="educationalUse1" value="Interactive"/></c:when>
@@ -475,10 +518,8 @@
 											<!--  End Micro-data -->
 									</div>
 									<div class="col-md-6">
-										<span class="text-muted">nature :</span> 
-										<a id="nature"
-											${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?nature?'": " class='noneditresource'"}
-											data-source="${dataEnumNature}">${resource.nature.description}</a>
+										<span class="text-muted">nature :</span>
+										<span id="nature" class='noteditableField' data-type='select' data-emptytext='?nature?'	data-source="${dataEnumNature}">${resource.nature.description}</span>
 										<!-- Begin Micro-data -->	
 										<c:choose>
 										    <c:when test="${resource.nature.description == 'Formatif (jeu/exploration)'}"><c:set var="educationalUse2" value="Interactive"/><c:set var="learningResourceType2" value="Game"/></c:when>
@@ -503,38 +544,31 @@
 								</div>	
 								<div class="row">
 									<div class="col-md-6">										
-										<span class="text-muted">matière : </span> 
-										<a id="topic"
-											${canEdit==true ? " href='#' class='editableField' data-type='select' data-emptytext='?mati�re?'": " class='noneditresource'"}
-											data-source="${dataEnumTopic}">${resource.topic.description}</a>
+										<span class="text-muted">matière : </span>
+										<span id="topic" class='noteditableField' data-type='select' data-emptytext='?matière?' data-source="${dataEnumTopic}">${resource.topic.description}</span>
 									</div>
 									<div class="col-md-6">									
 										<span class="text-muted">plateforme : </span> 
-										<a id="platform"
-											${canEdit==true? "href='#' class='editableFieldArray'  data-type='checklist'  data-emptytext='?plate-forme?'":" class='noneditresource'"}
-											data-source="${dataEnumPlatform}"
+										<span id="platform" class='noteditableFieldArray'  data-type='checklist'  data-emptytext='?plate-forme?' data-source="${dataEnumPlatform}"
 											data-value="${platformsForJson}"> <c:forEach
-												items="${resource.platforms}" var="platform">
+ 												items="${resource.platforms}" var="platform">
 											 	${platform.name}
-											 </c:forEach>
-										</a>			
+ 											 </c:forEach>
+										</span>			
 									</div>
 								</div>
 								<%-- end row --%>
 								<div class="row">
 									<div class="col-md-6">							
-										<span class="text-muted">durée : </span> 
-										<a id="duration"
-											${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}>
-											${resource.duration}</a> minutes
+										<span class="text-muted">durée : </span>
+										<span id="duration" class='noteditableField' data-type='text'>
+											${resource.duration}</span> minutes
 											<meta itemprop="timeRequired" content="PT${resource.duration}M" />
 									</div>
 									<div class="col-md-6">							
 										<span class="text-muted">langue : </span> 
-										<a id="language"
-											${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?langue?'":" class='noneditresource'"}
-											data-source="${dataEnumLanguage}">
-											${resource.language.description}</a>
+										<span id="language" class='noteditableField' data-type='select' data-emptytext='?langue?' data-source="${dataEnumLanguage}">
+											${resource.language.description}</span>
 											<!--  Begin Micro-data -->
 											<c:choose>
 											    <c:when test="${resource.language.description == 'Français'}"><c:set var="languageCode" value="fr"/></c:when>
@@ -552,13 +586,12 @@
 								<div class="row">
 									<div class="col-md-6">							
 										<span class="text-muted">cycle : </span> 
-										<a
-											${canEdit==true? "href='#' id='cycle'":" class='noneditresource'"}>			
+										<span id='cycle'>			
 											<c:choose>
 												<c:when test="${resource.minCycle == null}">? &#8594; ?</c:when>
 												<c:otherwise>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</c:otherwise>
 											</c:choose>			
-										</a>
+										</span>
 										<!--  Begin Micro-data -->
 										<c:choose>
 										    <c:when test="${resource.minCycle.name == 'P1-2'}"><c:set var="ageMin" value="6"/></c:when>
@@ -581,30 +614,27 @@
 									</div>
 									<div class="col-md-6">						
 										<span class="text-muted">publicité : </span> 
-										<a id="advertising"
-											${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?publicité?'":" class='noneditresource'"}
-											data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
+										<span id="advertising" class='noteditableField' data-type='select' data-emptytext='?publicité?'	data-source="[{value:'false',text:'Non'},{value:'true',text:'Oui'}]">
 											<c:if test="${resource.advertising == true}">
 					    							pub
 												</c:if> <c:if test="${resource.advertising == false}">
 					    							sans pub
 												</c:if>
-										</a>
+										</span>
 									</div>
 								</div>
 								<%-- end row --%>
 								<div class="row">
 									<div class="col-md-6">					
 										<span class="text-muted">contributeur: </span> 
-										<a href="/user/${resource.createdBy.userName}" class="addToolTip"
-											title="contributeur">${resource.createdBy.fullName}</a>
+										<span id="idContributor" class="addToolTip"
+											title="contributeur">${resource.createdBy.fullName}</span>
 										<meta itemprop="contributor" content="${resource.createdBy.fullName}"/>	
 									</div>
 									<div class="col-md-6">					
 										<span class="text-muted">éditeur: </span> 
-										<a id="author"
-											${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}>
-											${resource.author}</a>
+										<span id="author" class='noteditableField' data-emptytext='?auteur?'>
+											${resource.author}</span>
 										<meta itemprop="author" content="${resource.author}"/>		
 									</div>
 								</div>
@@ -613,9 +643,8 @@
 								<c:if test="${canValidate==true}">
 									<div class="row">
 										<div class="col-md-6">
-			
-											<a id="validate"
-												title="
+										<span class="text-muted">Validée: </span> 
+											<span id="validate"	title="
 												<c:choose>
 												<c:when test="${resource.validationStatus!=null}">
 													<c:if test="${resource.validator!=null}">
@@ -628,23 +657,11 @@
 												<c:otherwise>
 													Cette ressource peut-elle être montrée à des enfants?
 												</c:otherwise>
-											    </c:choose>"
-												${canValidate==true ? 
-											"
-												href='#' 
-												class='editableField addToolTip'
-												data-type='select' 
-												data-emptytext='?non validée?' 
-											": " 
-												class='noneditresource addToolTip'
-										"}
-												data-source="${dataEnumValidationStatus}">
-												${resource.validationStatus.description} </a>
-			
-		
+											    </c:choose>"${canValidate==true ? "href='#' class='noteditableField addToolTip'	data-type='select' data-emptytext='?non validée?' 
+											": "class='noneditresource addToolTip'"} data-source="${dataEnumValidationStatus}">${resource.validationStatus.description} </span>
+												
 										</div>
-			
-									</div>
+										</div>
 								</c:if>
 								<%-- end row --%>
 			
