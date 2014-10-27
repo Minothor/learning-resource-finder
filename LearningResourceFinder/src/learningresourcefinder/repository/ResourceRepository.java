@@ -243,9 +243,10 @@ public class ResourceRepository extends BaseRepository<Resource> {
    
     
    public Resource findTopResourceByTopPopularity(Cycle cycle,Topic topic){  
-
-       List<Resource> resourceList = (List<Resource>)em.createQuery("select r from Resource r where r.topic = :topic "
-               + "and r.popularity =  (select max(r.popularity) from Resource r where  r.minCycle.id <= :cycle and :cycle <=  r.maxCycle.id  and r.topic = :topic)")      
+       String whereClause = "r.minCycle.id <= :cycle and :cycle <=  r.maxCycle.id and r.topic = :topic";
+       
+       List<Resource> resourceList = (List<Resource>)em.createQuery("select r from Resource r where " + whereClause +
+                " and r.popularity = (select max(r.popularity) from Resource r where " + whereClause + ")")      
                .setParameter("topic",topic)
                .setParameter("cycle", cycle.getId())
                .setMaxResults(1)
