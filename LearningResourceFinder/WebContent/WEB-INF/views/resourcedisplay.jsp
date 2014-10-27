@@ -658,7 +658,12 @@
 													Cette ressource peut-elle être montrée à des enfants?
 												</c:otherwise>
 											    </c:choose>"${canValidate==true ? "href='#' class='noteditableField addToolTip'	data-type='select' data-emptytext='?non validée?' 
-											": "class='noneditresource addToolTip'"} data-source="${dataEnumValidationStatus}">${resource.validationStatus.description} </span>
+											": "class='noneditresource addToolTip'"} data-source="${dataEnumValidationStatus}">
+											<c:if test="${resource.validator==null}">
+								   	        		 non validée 
+											</c:if>
+											
+											${resource.validationStatus.description} </span>
 												
 										</div>
 										</div>
