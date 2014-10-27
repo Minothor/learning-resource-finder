@@ -13,6 +13,7 @@ import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.search.SearchOptions;
 import learningresourcefinder.search.SearchResult;
+import learningresourcefinder.service.ResourceListPagerService;
 import learningresourcefinder.service.SearchService;
 
 import org.apache.commons.lang3.StringUtils;
@@ -32,7 +33,7 @@ public class SearchResourceController extends BaseController<Resource> {
     
 	@Autowired private SearchService searchService;
 	@Autowired private ResourceRepository resourceRepository;
-
+	@Autowired private ResourceListPagerService resourceListPager;
 
    @RequestMapping("/searchresourceform")  // Used when the user clicks the form button on searchresource.jsp
    public ModelAndView searchResource(
@@ -60,7 +61,7 @@ public class SearchResourceController extends BaseController<Resource> {
            searchOptions.setCompetence((Competence)getRequiredEntity(competenceId, Competence.class));
        }
 
-       return prepareModelAndView(timeStamp, searchOptions, 1);
+       return prepareModelAndView(timeStamp, searchOptions);
    }
 
    
@@ -69,7 +70,6 @@ public class SearchResourceController extends BaseController<Resource> {
 	public ModelAndView searchResource(Model model, 
 	        @RequestParam(value="searchphrase", required=false) String searchPhrase, 
             @RequestParam(value="competenceid", required=false) Long competenceId,
-	        @RequestParam(value="page", required=false) Integer page, 
 	        HttpSession session,
 	        @RequestParam(value="so", required=false) Long timeStamp) throws UnsupportedEncodingException{ 
 
@@ -90,30 +90,46 @@ public class SearchResourceController extends BaseController<Resource> {
             searchOptions.setCompetence((Competence)getRequiredEntity(competenceId, Competence.class));
         }
 
-        if (page == null) {
-            page=1;
-        }
-        
         // C. Prepare for the view
-        return prepareModelAndView(timeStamp, searchOptions, page);
+        return prepareModelAndView(timeStamp, searchOptions);
 	}
 
-    private ModelAndView prepareModelAndView(Long timeStamp, SearchOptions searchOptions, int page) {
+    private ModelAndView prepareModelAndView(Long timeStamp, SearchOptions searchOptions) {
         List<Resource> resourceList;
         if (StringUtils.isNotBlank(searchOptions.getSearchPhrase())) {
             List<SearchResult> searchResults = searchService.search(searchOptions.getSearchPhrase());
-            resourceList = searchService.getFilteredResources1(searchResults, page, searchOptions);
+            resourceList = searchService.getFilteredResources1(searchResults, searchOptions);
         } else {  // User searches on a competence or on a rare filter combinations (i.e. "all the Arabic interactive resources")
             if (searchOptions.getCompetence() != null) { // No phrase but a competence => we first query for resources on the competence (we don't use Lucene)
                 List<Long> resourceIdsForCompetence = resourceRepository.findIdsByCompetence(searchOptions.getCompetence());
-                resourceList = searchService.getFilteredResources2(resourceIdsForCompetence, page, searchOptions);
+                resourceList = searchService.getFilteredResources2(resourceIdsForCompetence, searchOptions);
             } else {  // Probably a rare option combination
                 // TODO get all resources with that filter option
-                resourceList = searchService.getFilteredResources3(page, searchOptions);
+                resourceList = searchService.getFilteredResources3(searchOptions);
             }
         }
         
+        
         ModelAndView mv = new ModelAndView("searchresource");
+        
+        // Special processing if more than xxx resources retrieved as we want to display a specific
+        // maximum number of resources !
+        if (resourceList.size() > ResourceListPagerService.NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN) {
+            // Save complete list of resources (Ids) in a session's map and return key identifier 
+            String KeyIdentifierListOfResources = resourceListPager.addListOfResources(resourceList, true);
+
+            // Keep only xxx first resources
+            resourceList = resourceList.subList(0, 
+                    ResourceListPagerService.NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN > resourceList.size() ? 
+                            resourceList.size() : ResourceListPagerService.NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN);
+            
+            // Pass unique key identifier to JSP; it will be used to retrieve more resources when scrolling !
+            mv.addObject("tokenListOfResources", KeyIdentifierListOfResources);         
+        }
+        else {
+            mv.addObject("tokenListOfResources", "0");
+        }
+        
         mv.addObject("searchOptions", searchOptions);
         mv.addObject("natureEnumAllValues", SearchOptions.Nature.values());
         mv.addObject("platformsEnumAllValues", SearchOptions.Platform.values());
@@ -123,8 +139,6 @@ public class SearchResourceController extends BaseController<Resource> {
         
         mv.addObject("resourcelist", resourceList);
 
-        int numberOfResourceFound = resourceList.size();
-        mv.addObject("numberResource", numberOfResourceFound); // tried to use fn:length in EL, but it did not work -- Thomas S 2013/09
         return mv;
     }
 

@@ -6,9 +6,9 @@
 
 <html>
 <head>
-
+<script type="text/javascript" src="/js/int/moreResources.js"></script>
 <!-- To delete competence field -->
-<script type="text/javascript"> 
+<script type="text/javascript">
 $(document).ready(function reinitialize(){
   $("button").click(function(){
     $("#competenceIdHiddenField").val("");
@@ -176,36 +176,17 @@ window.onload = addLang;
 	</form:form>
 	</div>
 	
-	<section style="margin: 10px">
-	<c:forEach items="${resourcelist}" var="resource">
-			<lrftag:resource resource="${resource}"/>
-	</c:forEach>
-
-	<c:choose>
-		<c:when test="${empty param.page}">
-			<c:set var="page" value="1"></c:set>
-		</c:when>
-		<c:otherwise>
-			<c:set var="page" value="${param.page}">
-			</c:set>
-		</c:otherwise>
-	</c:choose>
-
-	<c:choose>
-		<c:when test="${numberResource>0}">
-			<ul class="pagination">
-				<c:if test="${page>1}">
-					<li><a href="searchresource?page=${page-1}&so=${timeStamp}">&laquo;</a></li>
-				</c:if>
-				<c:forEach begin="1" end="${numberResource / 100}" varStatus="loop">
-					<li><a href="searchresource?page=${loop.index}&so=${timeStamp}">${loop.index}</a></li>
-				</c:forEach>
-				<c:if test="${page*100 < numberResource}">
-				    <li><a href="searchresource?page=${page+1}&so=${timeStamp}">&raquo;</a></li>
-				</c:if>
-			</ul>
-		</c:when>
-	</c:choose>
+	<input type="hidden" value="${tokenListOfResources}" id="tokenListOfResources"/>
+	<input type="hidden" value="true" id="searchresourcescreen"/>
+	
+	<section style="margin: 10px" id="resourcelist">
+		<c:forEach items="${resourcelist}" var="resource">
+				<lrftag:resource resource="${resource}"/>
+		</c:forEach>
 	</section>
+	
+	<div id="spinner">
+	   	<img style="margin-left: 35%;" src="/images/spinner.gif" />
+	</div>
 </body>
 </html>

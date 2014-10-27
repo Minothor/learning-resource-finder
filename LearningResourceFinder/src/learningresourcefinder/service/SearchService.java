@@ -70,35 +70,6 @@ public class SearchService {
 		return entities;
 	}
 	
-// This method seems to be unused ...
-//	//*********************Ressource pagination
-//	public List<BaseEntity> getTotalEntities(List<SearchResult> searchResults, Class<? extends BaseEntity> clazz) {
-//		final List<Long> entityIds = new ArrayList<>();
-//		
-//		
-//		//List<Resource> resources =(List) searchService.getFirstEntities(searchService.search(searchResource), 5, Resource.class);
-//		
-//		for(SearchResult searchResult : searchResults) {
-//			if (searchResult.isForClass(clazz)) {
-//				entityIds.add(searchResult.getId());
-//			}
-////			if (entityIds.size() >= maxResult) {
-////				break;
-////			}	
-//		}
-//
-//		List<BaseEntity> entities = findEntitiesByIdList(entityIds, clazz);
-//
-//		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random ordrer from the DB.
-//		Collections.sort(entities, new Comparator<BaseEntity>() {
-//			@Override	public int compare(BaseEntity arg0, BaseEntity arg1) {
-//				return (new Integer((entityIds.indexOf(arg0.getId())))).compareTo( new Integer(entityIds.indexOf(arg1.getId())));
-//			}
-//		});
-//
-//		return entities;
-//	}
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<BaseEntity> findEntitiesByIdList(List<Long> idList, Class clazz){
 		if(idList.size() == 0){  // If we give an empty list, postGreSQL does not like the query... (Exception).
@@ -111,21 +82,19 @@ public class SearchService {
 		return result;
 	}
 	
-	public List<Resource> getFilteredResources1(List<SearchResult> searchResults, int page, SearchOptions searchOptions) {
+	public List<Resource> getFilteredResources1(List<SearchResult> searchResults, SearchOptions searchOptions) {
 		final List<Long> resourceIds = new ArrayList<>();
 
 		for(SearchResult resource: searchResults){
 		    resourceIds.add(resource.getId());
 		}
-		return getFilteredResources2(resourceIds, page, searchOptions);
+
+		return getFilteredResources2(resourceIds, searchOptions);
 	}
 	
-    public List<Resource> getFilteredResources2(final List<Long> resourceIds, int page, SearchOptions searchOptions) {
+    public List<Resource> getFilteredResources2(final List<Long> resourceIds, SearchOptions searchOptions) {
         // TODO Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
-        int posOfFirstElementPaging = Math.min(resourceIds.size()-1, (page-1) * RESOURCES_PER_SEARCH_PAGE);
-        int amountOfElementsPaging = RESOURCES_PER_SEARCH_PAGE;
-
-        List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions, posOfFirstElementPaging, amountOfElementsPaging);
+        List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions);
 
 		entities = removeResourcesNotInCompetence(searchOptions, entities);
 		
@@ -136,12 +105,9 @@ public class SearchService {
 	}
 	
 
-    public List<Resource> getFilteredResources3(int page, SearchOptions searchOptions) {
+    public List<Resource> getFilteredResources3(SearchOptions searchOptions) {
         // TODO Pages : foireux (il faut faire cela après le filtre sur les options....) --- John 2013-09-26
-        int posOfFirstElementPaging = (page-1) * RESOURCES_PER_SEARCH_PAGE;
-        int amountOfElementsPaging = RESOURCES_PER_SEARCH_PAGE;
-
-        List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(null, searchOptions, posOfFirstElementPaging, amountOfElementsPaging);
+        List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(null, searchOptions);
 
         entities = removeResourcesNotInCompetence(searchOptions, entities);
         

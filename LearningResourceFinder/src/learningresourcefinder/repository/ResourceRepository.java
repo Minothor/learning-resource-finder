@@ -48,7 +48,8 @@ public class ResourceRepository extends BaseRepository<Resource> {
 	
 	
 	/** @param idList can be null if we don't want to limit the query to some resources */
-	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions, int posOfFirstElementPaging, int amountOfElementsPaging){
+//	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions, int posOfFirstElementPaging, int amountOfElementsPaging){
+	public List<Resource> findFilteredResourcesByIdList(List<Long> idList, SearchOptions searchOptions){
 	    if (idList != null && idList.isEmpty()) { // Defensive coding. An empty list would break the query
 			return new ArrayList<>();
 		}
@@ -157,8 +158,6 @@ public class ResourceRepository extends BaseRepository<Resource> {
         }
         
 		List<Resource> result = query
-				.setFirstResult(posOfFirstElementPaging)
-				.setMaxResults(amountOfElementsPaging)
 				.getResultList();
 		return result;
 	}

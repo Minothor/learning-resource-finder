@@ -19,8 +19,8 @@ public class ResourceMoreController {
     
     /** Used by the resourcelist.jsp when we are at the bottom of the page to dynamically load more resource (infinite scroll) */
     @RequestMapping("/ajax/getmoreresources")
-    public ModelAndView getMoreResources(@RequestParam("tokenlistofresources") String tokenListOfResources) {
-        List<Resource> listOfMoreResources = resourceListPager.getMoreResources(tokenListOfResources);
+    public ModelAndView getMoreResources(@RequestParam("tokenlistofresources") String tokenListOfResources, @RequestParam("searchscreen") boolean searchScreen) {
+        List<Resource> listOfMoreResources = resourceListPager.getMoreResources(tokenListOfResources, searchScreen);
         
         // Set token to 0 when last resources to display 
         if (!resourceListPager.checkIfMoreResources(tokenListOfResources)) {
