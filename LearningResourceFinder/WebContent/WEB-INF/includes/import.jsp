@@ -14,10 +14,6 @@
 <link rel="stylesheet" href="/css/ext/jquery-ui-1.11.1.min.css"> <%--for autocomplete --%>
 <link rel="stylesheet" href="/css/int/resourceStyle.css" type="text/css"/> <%--resource style--%>
 <!-- ***************************** END CSS **************************** -->
-   
-<!-- ***************************** SEO **************************** -->
-<link rel="canonical" href="http://toujoursplus.be" />
-<!-- ***************************** END SEO **************************** -->   
 
 <!-- ***************************** JAVASCRIPT **************************** -->   
 <script src="/js/ext/jquery-1.11.1.js"></script>
