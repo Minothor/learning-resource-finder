@@ -24,18 +24,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SearchService {
-
-	final int RESOURCES_PER_SEARCH_PAGE = 5*20;
-
 	
 	@Autowired private IndexManagerService indexManagerService;
 	@Autowired private ResourceRepository resourceRepository;
-	@Autowired private ResourceService resourceService;
-	
+	@Autowired private ResourceService resourceService;	
 	@PersistenceContext
 	EntityManager em;
-
-	
 
 	public List<SearchResult> search(String keyWord) {
 		List<SearchResult> searchResultList = new ArrayList<SearchResult>();
@@ -82,21 +76,21 @@ public class SearchService {
 		return result;
 	}
 	
-	public List<Resource> getFilteredResources1(List<SearchResult> searchResults, SearchOptions searchOptions) {
+	public List<Resource> getFilteredResources1FromSearchResults(List<SearchResult> searchResults, SearchOptions searchOptions) {
+	    // 1. We transform the SearchResults into resource ids
 		final List<Long> resourceIds = new ArrayList<>();
-
 		for(SearchResult resource: searchResults){
 		    resourceIds.add(resource.getId());
 		}
 
-		return getFilteredResources2(resourceIds, searchOptions);
+		// 2. We call the method that can handle resource ids.
+		return getFilteredResources2FromResourceIds(resourceIds, searchOptions);
 	}
 	
-    public List<Resource> getFilteredResources2(final List<Long> resourceIds, SearchOptions searchOptions) {
-        // TODO Pages : foireux (il faut faire cela après le filtre sur les otpions....) --- John 2013-09-26
+    public List<Resource> getFilteredResources2FromResourceIds(final List<Long> resourceIds, SearchOptions searchOptions) {
         List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(resourceIds, searchOptions);
 
-		entities = removeResourcesNotInCompetence(searchOptions, entities);
+		// entities = removeResourcesNotInCompetence(searchOptions, entities); // John 2014-10-27 Why calling this?
 		
 		// We need to sort the entities to match the order of the searchResults (the first is supposed to be more relevant) instead of the random order from the DB.		
 		entities = (List<Resource>) resourceService.keepCorrectListOrder(entities, resourceIds);
@@ -105,15 +99,15 @@ public class SearchService {
 	}
 	
 
-    public List<Resource> getFilteredResources3(SearchOptions searchOptions) {
-        // TODO Pages : foireux (il faut faire cela après le filtre sur les options....) --- John 2013-09-26
+    public List<Resource> getFilteredResources3FromNothing(SearchOptions searchOptions) {
         List<Resource> entities = resourceRepository.findFilteredResourcesByIdList(null, searchOptions);
 
-        entities = removeResourcesNotInCompetence(searchOptions, entities);
+        //entities = removeResourcesNotInCompetence(searchOptions, entities);  // John 2014-10-27 Why calling this?
         
         return entities;
     }
-
+    
+    // FIXME Why does this method exist ?   -- John 2014-10-27
     private List<Resource> removeResourcesNotInCompetence(SearchOptions searchOptions, List<Resource> entities) {
         // We remove the resources not within the specified competence.
         if (searchOptions.getCompetence() != null) {
