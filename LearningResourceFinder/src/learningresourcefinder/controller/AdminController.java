@@ -9,6 +9,7 @@ import learningresourcefinder.repository.BaseRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.ImportLabSetService;
 import learningresourcefinder.service.IndexManagerService;
+import learningresourcefinder.service.ReSlugifyService;
 import learningresourcefinder.service.crawler.CrawlerService;
 import learningresourcefinder.util.NotificationUtil;
 import learningresourcefinder.util.NotificationUtil.Status;
@@ -25,6 +26,7 @@ public class AdminController extends BaseRepository<User> {
 	@Autowired IndexManagerService indexManagerService;
 	@Autowired ImportCompetencesFromVraiForumBatch importCompetencesFromVraiForumBatch;
 	@Autowired ImportLabSetService importLabSetService;
+	@Autowired ReSlugifyService reslugService;
 	@Autowired	CrawlerService crawlerService;
 	
 	@RequestMapping("/admin")
@@ -69,6 +71,16 @@ public class AdminController extends BaseRepository<User> {
 //		return "admin";
 //	}
 	
+    @RequestMapping("/reslugify")
+    public String reslugify(){
+    	SecurityContext.assertUserHasRole(Role.ADMIN);
+    	reslugService.reslugResources();
+    	reslugService.reslugCycles();
+    	reslugService.reslugPlaylists();
+    	NotificationUtil.addNotificationMessage("Regeneration des Slugs réussi");
+    	return "admin";
+    }
+    
 	@RequestMapping("/crawler/{pageName}")
 	public String crawler(@PathVariable("pageName") String pageName) throws ParseException 
 	{

@@ -14,8 +14,9 @@
     <div>
     	<a href="/importMathLabset" class="btn btn-primary btn-lg">execute batch import Math Labset</a>
     	<a href="/importFrenchLabset" class="btn btn-primary btn-lg">execute batch import French Labset</a>
-    </div>
-    <hr> -->
+    </div>-->
+        <a href="/reslugify" class="btn btn-primary btn-lg">Reslugify URLs</a>
+    <hr>
     <div>    	
     	<h3>Execute Crawlers</h3> <br>
 <!--     	<a href="/crawler/brainPop" class="btn btn-primary btn-lg">Crawler brainpop.fr</a>  -->

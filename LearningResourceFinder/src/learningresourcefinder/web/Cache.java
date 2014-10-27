@@ -51,6 +51,7 @@ public class Cache implements ServletContextListener {
 	Language[] language=SearchOptions.Language.values(); 
 
 	public Nature[] getNature() {
+		updateCacheIfTooOld();
 		return nature;
 	}
 
@@ -62,6 +63,7 @@ public class Cache implements ServletContextListener {
 
 
 	public Topic[] getTopic() {
+		updateCacheIfTooOld();
 		return topic;
 	}
 
@@ -89,11 +91,12 @@ public class Cache implements ServletContextListener {
 		return instance;
 	}
 	public List<Cycle> getCycles() {
-	    updateCacheIfTooOld();
+		updateCacheIfTooOld();
 		return cycles;
 	}
 
 	public Format[] getFormat() {
+		updateCacheIfTooOld();
 		return format;
 	}
 
@@ -102,6 +105,7 @@ public class Cache implements ServletContextListener {
 	}
 
 	public Platform[] getPlatform() {
+		updateCacheIfTooOld();
 		return platform;
 	}
 
@@ -125,6 +129,7 @@ public class Cache implements ServletContextListener {
 	}
 
 	public Language[] getLanguage() {
+		updateCacheIfTooOld();
 		return language;
 	}
 

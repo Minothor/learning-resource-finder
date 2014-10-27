@@ -18,6 +18,7 @@ package learningresourcefinder.web;
 import java.text.Normalizer;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
 
 public class Slugify {
 	public static String slugify(String input) {
@@ -25,10 +26,11 @@ public class Slugify {
 		if (StringUtils.isBlank(input)) {
 			return "";
 		}
-
+		ret = Jsoup.parse(ret).text();  // In case the string contains some html, such as <em>.
 		ret = normalize(ret);
 		ret = removeSmallWords(ret);
 		ret = removeDuplicateWhiteSpaces(ret);
+		ret = StringUtils.stripAccents(ret);  // It seems to be bad practice to have accents in slugs: ê --> e
 		return ret.replace(" ", "-").toLowerCase();
 	}
 
@@ -37,12 +39,11 @@ public class Slugify {
 		if (StringUtils.isBlank(ret)) {
 			return "";
 		}
-
 		ret = ret.replace("ß", "ss");
-		ret = StringUtils.stripAccents(ret);
-		return Normalizer.normalize(ret, Normalizer.Form.NFD)
+		ret = Normalizer.normalize(ret, Normalizer.Form.NFD)
 				.replaceAll("[^\\p{ASCII}]", "")
 				.replaceAll("[^a-zA-Z0-9 ]", "");
+		return ret;
 	}
 
 	private static String removeDuplicateWhiteSpaces(String input) {
