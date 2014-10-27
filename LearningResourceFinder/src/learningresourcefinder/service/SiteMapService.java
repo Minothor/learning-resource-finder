@@ -169,13 +169,13 @@ public class SiteMapService {
 			if(map!=SiteMap.INDEX && map!=SiteMap.RESOURCES){
 				tempElem = rootElement.addElement("sitemap");
 				tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/sitemap/"+map.name().toLowerCase(Locale.US));
-				populateBasicAttributes(tempElem, map.getDepth());
+				tempElem.addElement("lastmod").setText(DateUtil.formatyyyyMMdd(new Date()));
 			}
 			if(map==SiteMap.RESOURCES){
 				for (int i=0; i<=getNumResourceMaps();i++){
 					tempElem = rootElement.addElement("sitemap");
 					tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/sitemap/"+map.name().toLowerCase(Locale.US)+"/"+i);
-					populateBasicAttributes(tempElem, map.getDepth());
+					tempElem.addElement("lastmod").setText(DateUtil.formatyyyyMMdd(new Date()));
 				}
 			}
 		}
