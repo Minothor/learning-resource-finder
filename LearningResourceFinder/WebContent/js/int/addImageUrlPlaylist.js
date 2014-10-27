@@ -23,4 +23,11 @@ jQuery(function($) {
 		  document.getElementById('inputFile').type='file';
 		  $('form.formUrlPlaylist').attr('action', '/playlist/imageadd');
 	  });
+	  
+	  $('.radioDefaut').on('change', function() {
+		  document.getElementById('inputUrl').type='hidden';
+		  document.getElementById('inputFile').type='hidden';
+		  $('form.formUrlPlaylist').attr('action', '/playlist/imagedelete');
+	  });
+	  
 });

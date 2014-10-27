@@ -9,7 +9,8 @@ import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.model.User;
 import learningresourcefinder.repository.PlayListRepository;
-import learningresourcefinder.util.EnumUtil;
+import learningresourcefinder.util.CurrentEnvironment;
+import learningresourcefinder.util.FileUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PlayListService {
 
     @Autowired PlayListRepository playListRepository;
+    @Autowired   private CurrentEnvironment currentEnvironment;
 
     public Set<PlayList> getAllUserPlayListsDontContainAResource(User user, Resource resource){
 
@@ -95,6 +97,18 @@ public class PlayListService {
         //[{value:'false',text:'Non'},{value:'true',text:'Oui'}]
     }
         
+	public void playlistImageDelete(PlayList playlist) {
+		String originalDirectory = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.PLAYLIST_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SUB_FOLDER 
+        		+  FileUtil.PLAYLIST_RESIZED_LARGE_SUB_FOLDER;
+		FileUtil.deleteFilesWithPattern(originalDirectory, playlist.getId()+".jpg");
+		
+		String resizedDirectory = FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.PLAYLIST_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SUB_FOLDER 
+        		+ FileUtil.PLAYLIST_RESIZED_SMALL_SUB_FOLDER;
+		FileUtil.deleteFilesWithPattern(resizedDirectory, playlist.getId()+".jpg");
+		
+		playlist.setPicture(false);
+		
+	}
 
     static class PlayListNameComparator implements Comparator<PlayList> {
         @Override  public int compare(PlayList pl1, PlayList pl2) {

@@ -16,7 +16,7 @@
 		<c:choose>
 			<c:when test="${playlist.picture}">
 				<%-- Random, to force the reload of the image in case it changes (but its name does not change) --%>
-				<img
+				<img itemprop="image"
 					src="/gen/playlist/resized/large/${playlist.id}.jpg<c:if test="${random!=null}">?${random}</c:if>"
 					alt="" />
 			</c:when>
@@ -32,8 +32,4 @@
 			</figcaption>
 		</c:if>
 	</figure>
-
-	<c:if test="${canEdit}">
-		</a>
-	</c:if>
 </div>

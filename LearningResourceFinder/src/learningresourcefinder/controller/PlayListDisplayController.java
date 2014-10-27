@@ -15,6 +15,7 @@ import learningresourcefinder.model.User;
 import learningresourcefinder.repository.PlayListRepository;
 import learningresourcefinder.security.SecurityContext;
 import learningresourcefinder.service.IndexManagerService;
+import learningresourcefinder.service.PlayListService;
 import learningresourcefinder.util.CurrentEnvironment;
 import learningresourcefinder.util.FileUtil;
 import learningresourcefinder.util.FileUtil.InvalidImageFileException;
@@ -39,6 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PlayListDisplayController extends BaseController<PlayList> {
 	@Autowired CurrentEnvironment currentEnvironment;
 	@Autowired PlayListRepository playlistRepository;
+	@Autowired PlayListService playlistService;
 	@Autowired IndexManagerService indexManager;
 	
     @RequestMapping({"/playlist/{shortId}/{slug}",
@@ -124,13 +126,15 @@ public class PlayListDisplayController extends BaseController<PlayList> {
             image = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),120 * 200, 200, 200);
             
             ImageUtil.saveImageToFileAsJPEG(image, 
-            		FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.PLAYLIST_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SUB_FOLDER +  FileUtil.PLAYLIST_RESIZED_LARGE_SUB_FOLDER, playlist.getId() + ".jpg", 0.9f);           
+            		FileUtil.getGenFolderPath(currentEnvironment) + FileUtil.PLAYLIST_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SUB_FOLDER 
+            		+  FileUtil.PLAYLIST_RESIZED_LARGE_SUB_FOLDER, playlist.getId() + ".jpg", 0.9f);           
             
             BufferedImage resizedImage = ImageUtil.scale(new ByteArrayInputStream(outStream.toByteArray()),40 * 40, 60, 60);
 
             ImageUtil.saveImageToFileAsJPEG(resizedImage,  
             		FileUtil.getGenFolderPath(currentEnvironment) + 
-            		FileUtil.PLAYLIST_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SMALL_SUB_FOLDER, playlist.getId() + ".jpg", 0.9f);
+            		FileUtil.PLAYLIST_SUB_FOLDER + FileUtil.PLAYLIST_RESIZED_SUB_FOLDER 
+            		+ FileUtil.PLAYLIST_RESIZED_SMALL_SUB_FOLDER, playlist.getId() + ".jpg", 0.9f);
 
             playlist.setPicture(true);
             
@@ -141,7 +145,16 @@ public class PlayListDisplayController extends BaseController<PlayList> {
 
         return mv;
 	}
-    
+     //Controller name may be misleading but modifying it to /playlist/imagedelete/ create troubles because of the form in playlistdisplay.jsp (line 189) that contains the radio buttons, it is linked to /playlist/imageadd/ whether we add or delete an image
+	 @RequestMapping("/playlist/imagedelete")  
+	 public ModelAndView playlistImageDelete(@RequestParam("idPlayList") long playlistid){	
+		 User user = SecurityContext.getUser();
+		 PlayList playlist = getRequiredEntity(playlistid);
+		 SecurityContext.assertCurrentUserMayEditThisUser(user);
+		 playlistService.playlistImageDelete(playlist);
+		 return new ModelAndView("redirect:/playlist/" + playlist.getShortId() +"/"+playlist.getName());
+	 }
+
     @RequestMapping("/ajax/playlisteditfieldsubmit")
     public @ResponseBody ResponseEntity<String> playListEditSubmit(@RequestParam("pk") Long id, @RequestParam("value") String value, @RequestParam ("name") String fieldName) {
         

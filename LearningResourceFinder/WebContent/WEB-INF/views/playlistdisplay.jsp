@@ -110,7 +110,7 @@ dd {
 			<lrftag:breadcrumbelement label="mes séquences"	link="/playlist/user/${current.user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
-	<div class="container">
+	<div class="container" itemscope itemtype="http://schema.org/WebPage">
 		<div class="row">
 			<div class="col-md-10">
 				<lrftag:pageheadertitle title="${playlist.name}" />
@@ -135,11 +135,11 @@ dd {
 				<div class="col-md-8">
 					<dl class="dl-horizontal">
 						<dt>Nom :</dt>
-						<dd><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
-					  	<dt>Description :</dt>
+						<dd itemprop="name"><a id="name"  href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.name}</a></dd>
+					  	<dt itemprop="description">Description :</dt>
 					  	<dd id="descriptionDiv"><a id="description"  data-type="textarea" href="#" ${canEdit==true ? " href='#' class='editableField'" : " class='noneditplaylist'"}>${playlist.description}</a></dd>
 					  	<dt>Auteur :</dt>
-					  	<dd><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
+					  	<dd itemprop="author"><a href="/user/${playlist.createdBy.userName}">${playlist.createdBy.fullName}</a></dd>
 					  	<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
 					  		<dt>Id court :</dt>
 					  		<dd>${playlist.shortId}</dd>
@@ -207,6 +207,12 @@ dd {
 							    <div class="col-lg-8">
 							      	<input type="hidden" name="strUrl" placeholder="http://..." class="form-control inputSource" id="inputUrl" />
 								</div>
+							</div>
+							<div class="form-group">
+							    <label class="col-lg-4 control-label" style="text-align:left;">
+							    	<input type="radio"  name="rdFrom" value="defaut" class="radioDefaut" /> 
+							    	Image par défaut
+							    </label>
 							</div>
 				    	</div>
 				    	
