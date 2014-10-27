@@ -10,8 +10,8 @@
 <script src="js/ext/jquery.nouislider.min.js"></script>
 <script src="js/ext/optional.pips.js"></script>
 
-<link href="css/ext/jquery.nouislider.css" rel="stylesheet">
-<link href="css/ext/jquery.nouislider.pips.css" rel="stylesheet">
+<link href="css/ext/jquery.nouislider.css" rel="stylesheet" />
+<link href="css/ext/jquery.nouislider.pips.css" rel="stylesheet" />
 
 
 

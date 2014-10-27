@@ -6,7 +6,7 @@
 <script type="text/javascript" src="/js/int/resourceAdd.js"></script>
 <script src="/js/ext/jquery.nouislider.min.js"></script>
 <script src="/js/ext/jquery.nouislider.full.min.js"></script>
-<link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
+<link href="/css/ext/jquery.nouislider.css" rel="stylesheet" />
 
 
 <!-- Modal for adding a resource (invisible until button clicked) -->

@@ -15,7 +15,7 @@
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 <script src="/js/ext/jquery.nouislider.min.js"></script>
 <script src="/js/ext/jquery.nouislider.full.min.js"></script>
-<link href="/css/ext/jquery.nouislider.css" rel="stylesheet">
+<link href="/css/ext/jquery.nouislider.css" rel="stylesheet" />
 
 <script src="http://www.youtube.com/player_api"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>

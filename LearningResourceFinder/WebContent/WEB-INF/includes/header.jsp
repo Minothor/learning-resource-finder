@@ -99,7 +99,7 @@
 				<ul class="nav navbar-nav">
 					
 					<li class="dropdown">
-					   <a href="#" class="dropdown-toggle"data-toggle="dropdown">Contribuer <b class="caret"></b></a>
+					   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contribuer <b class="caret"></b></a>
 					   <ul class="dropdown-menu">
 					   <li><a class="addResourceLink">Ajouter une ressource </a></li>
 						<li><a href="<c:url value='/contribution'/>" >Améliorer des ressources</a></li>
@@ -173,8 +173,8 @@
 
 					<c:otherwise>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle"data-toggle="dropdown">Connexion <b class="caret"></b></a>
-							  <div class="dropdown-menu"style="padding: 15px; padding-bottom: 0px;">
+							<li class="dropdown"><a id="loginDropDown" href="#" class="dropdown-toggle" data-toggle="dropdown">Connexion <b class="caret"></b></a>
+							  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
 							    <p><small>ToujoursPlus.be est libre d'accès. Cependant, pour contribuer ou enregistrer vos progrès, vous devez vous connecter.</small></p>
 								<button data-icon="&#xe005;" type="button" class="btn btn-google btn-block connectionGoogle">
 									Connexion avec Google
@@ -184,7 +184,7 @@
 								</button>
 								<form action="javascript:ajaxlogin()" method="post"  style="width: 200px;">
 									<div style="width: 100%; text-align: center; margin: 15px 0;">OU</div>
-									<input class="form-control" style="margin-bottom: 15px;"type="text" onKeyPress="submitenter(this,event)" placeholder="Username" id="userNameOrMail"name="userNameOrMail"> 
+									<input class="form-control" style="margin-bottom: 15px;" type="text" onKeyPress="submitenter(this,event)" placeholder="Username" id="userNameOrMail" name="userNameOrMail"> 
 									<input class="form-control"style="margin-bottom: 15px;" type="password" onKeyPress="submitenter(this,event)" placeholder="Password" id="password" name="password">
 									<label class="string optional" for="remember_me"> 
 									   <input style="float: left; margin-right: 10px;" type="checkbox"name="remember-me" id="remember-me" value="1"> Se souvenir de moi

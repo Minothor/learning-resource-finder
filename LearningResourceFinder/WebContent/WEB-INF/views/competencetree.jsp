@@ -1,8 +1,7 @@
   <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <html>
-<head>
-<meta name="title" content="ToujoursPlus.be - Liste des compétences" />
-<title>Liste des catégories</title>
+<head itemscope itemtype="http://schema.org/WebPage">
+<title itemprop="name">ToujoursPlus.be - Liste des catégories</title>
   <script  src="js/int/competenceTree.js"></script>
   
   <style>
