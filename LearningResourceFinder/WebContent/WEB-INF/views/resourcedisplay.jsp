@@ -324,7 +324,13 @@
 				link="/ressourcelist/${user.userName}" />
 		</c:if>
 	</lrftag:breadcrumb>
-	<div class="container" id="pasteTarget">
+	<div class="container" id="pasteTarget" itemscope itemtype="http://schema.org/CreativeWork">
+	<meta itemprop="isFamilyFriendly" content="true" />
+	<span itemprop="audience" itemscope itemtype="http://schema.org/EducationalAudience">
+		<meta itemprop="educationalRole" content="student" />
+		<meta itemprop="educationalRole" content="parent" />
+		<meta itemprop="educationalRole" content="teacher" />
+	</span>
 		<div class="modal fade" id="editecycle" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" id="adjustBalance">
@@ -356,8 +362,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<a id="title"
-					${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}><h1
-						style="display: inline-block;">${resource.name}</h1></a> <a
+					${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}><h1 
+		itemprop="name"	style="display: inline-block;">${resource.name}</h1></a> <a
 					href="<c:url value='${resource.urlResources[0].url}'/>"> <span
 					class="addToolTip glyphicon glyphicon-log-in"
 					style="font-size: 16px; top: -11px;" data-toggle="tooltip"
@@ -391,7 +397,7 @@
 						<div class="row">
 							<div class="col-md-12">
 							<c:if test="${oneUrlHasAName && urlResource.name != null}">${urlResource.name} : </c:if>
-							<a href="${urlResource.url}" onclick="updateViewcountAndPpularity(${resource.id});"
+							<a itemprop="url" href="${urlResource.url}" onclick="updateViewcountAndPpularity(${resource.id});"
 								target="_blank" id="urlresource" data-type="text">${urlResource.url}</a>
 							<span style="float: none; font-size: 15px"
 								title="Modifier cette URL"
@@ -419,7 +425,7 @@
 								</c:choose>
 								>&times;
 							</button>
-							<span id="viewCounter${resource.id}" class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"> ${resource.viewCount}</span>
+							<span id="viewCounter${resource.id}" class="addToolTip glyphicon glyphicon-eye-open" itemprop="interactionCount" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"> ${resource.viewCount}</span>
 							</div>
 						</div>
 						<%-- end row --%>
@@ -436,7 +442,7 @@
 					</div>
 				</div>					
 				<div class="row">
-					<div id="descriptionDiv" class="col-md-6">
+					<div itemprop="description" id="descriptionDiv" class="col-md-6">
 						<a id="description"
 							${canEdit==true ? " href='#' class='editableFieldInline'" : " class='noneditresource'"}
 							data-type="textarea" data-inputclass="largerTextArea">${resource.description}</a>
@@ -451,12 +457,48 @@
 										<a id="format"
 											${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?format?'":" class='noneditresource'"}
 											data-source="${dataEnumFormat}">${resource.format.description}</a>
+											<!-- Begin Micro-data -->
+											<c:choose>
+											    <c:when test="${resource.format.description == 'Interactif'}"><c:set var="formatCode" value="active"/><c:set var="educationalUse1" value="Interactive"/></c:when>
+											    <c:when test="${resource.format.description == 'Vidéo'}"><c:set var="formatCode" value="expositive"/><c:set var="learningResourceType1" value="Handout"/>
+											    <c:set var="genreCode" value="Video"/></c:when>
+											    <c:when test="${resource.format.description == 'Audio'}"><c:set var="formatCode" value="expositive"/><c:set var="learningResourceType1" value="Handout"/>
+											    <c:set var="genreCode" value="Audio"/></c:when>
+											    <c:when test="${resource.format.description == 'Document'}"><c:set var="formatCode" value="mixed"/>
+											    <c:set var="genreCode" value="Text"/></c:when>
+											    <c:otherwise><c:set var="formatCode" value="mixed"/></c:otherwise>
+											</c:choose>
+											<meta itemprop="interactivityType" content="${formatCode}" />	
+											<c:if test="${not empty educationalUse1}"><meta itemprop="educationalUse" content="${educationalUse1}" /></c:if>
+											<c:if test="${not empty learningResourceType1}"><meta itemprop="learningResourceType" content="${learningResourceType1}" /></c:if>
+											<c:if test="${not empty genreCode}"><meta itemprop="genre" content="${genreCode}" /></c:if>
+											<!--  End Micro-data -->
 									</div>
 									<div class="col-md-6">
 										<span class="text-muted">nature :</span> 
 										<a id="nature"
 											${canEdit==true? "href='#' class='editableField' data-type='select' data-emptytext='?nature?'": " class='noneditresource'"}
 											data-source="${dataEnumNature}">${resource.nature.description}</a>
+										<!-- Begin Micro-data -->	
+										<c:choose>
+										    <c:when test="${resource.nature.description == 'Formatif (jeu/exploration)'}"><c:set var="educationalUse2" value="Interactive"/><c:set var="learningResourceType2" value="Handout"/></c:when>
+										    <c:when test="${resource.nature.description == 'Formatif (théorie)'}"><c:set var="educationalUse2" value="Theory"/><c:set var="learningResourceType2" value="Handout"/></c:when>
+										    <c:when test="${resource.nature.description == 'Evaluatif sans correction'}"><c:set var="educationalUse2" value="Test"/><c:set var="educationalUse3" value="Homework"/>
+										    <c:set var="learningResourceType2" value="Test"/></c:when>
+										    <c:when test="${resource.nature.description == 'Evaluatif avec correction'}"><c:set var="educationalUse2" value="Assessment"/><c:set var="learningResourceType2" value="Test"/></c:when>
+										    <c:when test="${resource.nature.description == 'Formatif et évaluatif sans correction'}"><c:set var="educationalUse2" value="Interactive"/><c:set var="educationalUse3" value="Test"/>
+										    <c:set var="educationalUse4" value="Homework"/><c:set var="learningResourceType2" value="Test"/></c:when>
+										    <c:when test="${resource.nature.description == 'Formatif et évaluatif avec correction'}"><c:set var="educationalUse2" value="Interactive"/>
+										    <c:set var="educationalUse3" value="Assessment"/><c:set var="learningResourceType2" value="Test"/></c:when>
+										    <c:otherwise><c:set var="educationalUse2" value="Interactive"/><c:set var="learningResourceType2" value="Test"/><c:set var="learningResourceType3" value="Handout"/></c:otherwise>
+										</c:choose>
+										<c:if test="${not empty educationalUse2 && educationalUse2 != educationalUse1}"><meta itemprop="educationalUse" content="${educationalUse2}" /></c:if>
+										<c:if test="${not empty educationalUse3}"><meta itemprop="educationalUse" content="${educationalUse3}" /></c:if>
+										<c:if test="${not empty educationalUse4}"><meta itemprop="educationalUse" content="${educationalUse4}" /></c:if>
+										<c:if test="${not empty learningResourceType1}"><meta itemprop="learningResourceType" content="${learningResourceType1}" /></c:if>
+										<c:if test="${not empty learningResourceType2}"><meta itemprop="learningResourceType" content="${learningResourceType2}" /></c:if>
+										<c:if test="${not empty learningResourceType3}"><meta itemprop="learningResourceType" content="${learningResourceType3}" /></c:if>
+									    <!--  End Micro-data -->
 									</div>
 								</div>	
 								<div class="row">
@@ -485,6 +527,7 @@
 										<a id="duration"
 											${canEdit==true? "href='#' class='editableField' data-type='text'":" class='noneditresource'"}>
 											${resource.duration}</a> minutes
+											<meta itemprop="timeRequired" content="PT${resource.duration}M" />
 									</div>
 									<div class="col-md-6">							
 										<span class="text-muted">langue : </span> 
@@ -492,6 +535,17 @@
 											${canEdit==true ? "href='#' class='editableField' data-type='select' data-emptytext='?langue?'":" class='noneditresource'"}
 											data-source="${dataEnumLanguage}">
 											${resource.language.description}</a>
+											<!--  Begin Micro-data -->
+											<c:choose>
+											    <c:when test="${resource.language.description == 'Français'}"><c:set var="languageCode" value="fr"/></c:when>
+											    <c:when test="${resource.language.description == 'Néerlandais'}"><c:set var="languageCode" value="nl"/></c:when>
+											    <c:when test="${resource.language.description == 'Allemand'}"><c:set var="languageCode" value="de"/></c:when>
+											    <c:when test="${resource.language.description == 'Anglais'}"><c:set var="languageCode" value="en"/></c:when>
+											    <c:when test="${resource.language.description == 'Russe'}"><c:set var="languageCode" value="ru"/></c:when>
+											    <c:otherwise><c:set var="languageCode" value="fr"/></c:otherwise>
+											</c:choose>
+											<meta itemprop="inLanguage" content="${languageCode}" />
+											<!--  End Micro-data -->
 									</div>
 									
 								</div>	
@@ -505,6 +559,25 @@
 												<c:otherwise>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</c:otherwise>
 											</c:choose>			
 										</a>
+										<!--  Begin Micro-data -->
+										<c:choose>
+										    <c:when test="${resource.minCycle.name == 'P1-2'}"><c:set var="ageMin" value="6"/></c:when>
+										    <c:when test="${resource.minCycle.name == 'P3-4'}"><c:set var="ageMin" value="8"/></c:when>
+										    <c:when test="${resource.minCycle.name == 'P5-6'}"><c:set var="ageMin" value="10"/></c:when>
+										    <c:when test="${resource.minCycle.name == 'S1-2'}"><c:set var="ageMin" value="12"/></c:when>
+										    <c:when test="${resource.minCycle.name == 'S3-6'}"><c:set var="ageMin" value="15"/></c:when>
+										    <c:otherwise><c:set var="ageMin" value="6"/></c:otherwise>
+										</c:choose>
+										<c:choose>
+										    <c:when test="${resource.maxCycle.name == 'P1-2'}"><c:set var="ageMax" value="9"/></c:when>
+										    <c:when test="${resource.maxCycle.name == 'P3-4'}"><c:set var="ageMax" value="11"/></c:when>
+										    <c:when test="${resource.maxCycle.name == 'P5-6'}"><c:set var="ageMax" value="13"/></c:when>
+										    <c:when test="${resource.maxCycle.name == 'S1-2'}"><c:set var="ageMax" value="16"/></c:when>
+										    <c:when test="${resource.maxCycle.name == 'S3-6'}"><c:set var="ageMax" value="19"/></c:when>
+										    <c:otherwise>Min" value="6"/><c:set var="ageMax" value="18"/></c:otherwise>
+										</c:choose>
+										<meta itemprop="typicalAgeRange" content="${ageMin}-${ageMax}" />
+										<!--  End Micro-data -->
 									</div>
 									<div class="col-md-6">						
 										<span class="text-muted">publicité : </span> 
@@ -525,12 +598,14 @@
 										<span class="text-muted">contributeur: </span> 
 										<a href="/user/${resource.createdBy.userName}" class="addToolTip"
 											title="contributeur">${resource.createdBy.fullName}</a>
+										<meta itemprop="contributor" content="${resource.createdBy.fullName}"/>	
 									</div>
 									<div class="col-md-6">					
 										<span class="text-muted">éditeur: </span> 
 										<a id="author"
 											${canEdit==true ? "href='#' class='editableField' data-emptytext='?auteur?'":" class='noneditresource'"}>
 											${resource.author}</a>
+										<meta itemprop="author" content="${resource.author}"/>		
 									</div>
 								</div>
 								<%-- end row --%>
@@ -607,7 +682,10 @@
 						</div>
 					</div>	
 				</c:if>
-				<div id="competencesDiv">		
+				<div id="competencesDiv" itemprop="educationalAlignment" itemscope itemtype="http://schema.org/AlignmentObject">	
+						<meta itemprop="alignmentType" content="teaches"/>
+						<meta itemprop="alignmentType" content="assesses"/>		
+						<meta itemprop="alignmentType" content="educationalSubject"/>	
 						<c:forEach items="${resource.competences}" var="competence">
 							<lrf:competencepath competence="${competence}" />
 							<button type="button" style="float: none;"

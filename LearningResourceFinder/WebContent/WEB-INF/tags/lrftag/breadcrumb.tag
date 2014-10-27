@@ -4,7 +4,7 @@
 <%@ attribute name="linkactive" type="java.lang.String"%>
 
 <div class="container">
-	<ol class="breadcrumb" style="text-align:right;">
+	<ol itemprop="breadcrumb" class="breadcrumb" style="text-align:right;">
   		<jsp:doBody/>
  		 <li class="active">${linkactive}</li>
 	</ol>

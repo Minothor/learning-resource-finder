@@ -25,7 +25,7 @@ public class CompetencePathTag extends SimpleTagSupport {
 	public void doTag() throws IOException {
 		while (competence != null) { 
 			if (result == null) {  // First competence
-				result =  "<strong>" + competence.getFullName() + "</strong>";
+				result =  "<strong itemprop=\"targetName\">" + competence.getFullName() + "</strong>";
 			} else {
 			    if (competence.getParent() != null) { // we don't display the root (space consuming)
 				    result =  competence.getFullName() + " / " + result;
