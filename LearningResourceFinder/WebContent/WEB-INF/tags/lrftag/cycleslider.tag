@@ -42,7 +42,7 @@ $(document).ready(function() {
 <div id="${idSlider}">
 	<label for="cycleslider">Cycles (année)</label> 
 	       
-	<div class="slider" > <%--    slider injected here by JavaScript --%>	
+	<div id ="cycleslider" class="slider" > <%--    slider injected here by JavaScript --%>	
 	
 		<%-- Input filled by the slider automatically. These values will be sent to the controller. --%>
 		<input id="${idSlider}valuemin" type="hidden" name="mincycle" value="${minCycle}" />

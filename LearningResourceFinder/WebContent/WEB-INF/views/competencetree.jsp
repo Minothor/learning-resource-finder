@@ -68,15 +68,15 @@
             <input type="hidden" id="hiddenField" />  <!-- name and value will be filled via javascript -->
 			<div class="form-group">
 			<div class="form-group">
-			  <label for="code" class="control-label">Code</label>
+			  <label for="codeedit" class="control-label">Code</label>
 			  <input type="text" class="form-control" id="codeedit" name="code" placeholder="Code"  maxlength="8" style="width:100px;" required>
 			   <span class="help-inline help-block" id="codeedithelp"><%-- room for an error message added by JavaScript --%></span> 
 			</div>
-			  <label for="name">Intitulé</label>
+			  <label for="nameedit">Intitulé</label>
 			  <input type="text" class="form-control" id="nameedit" name="name" placeholder="Intitulé" maxlength="255" required> 
 			</div>
 			<div class="form-group">
-			  <label for="description">Description</label>
+			  <label for="descriptionedit">Description</label>
 			  <textarea class="form-control" rows="3" id="descriptionedit" name="description" placeholder="Description"></textarea>
 			</div>
         <div class="modal-footer">

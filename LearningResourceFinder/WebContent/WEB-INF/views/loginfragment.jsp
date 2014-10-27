@@ -16,17 +16,17 @@
 		de passe</label><br />
 	<c:choose>
 		<c:when test="<%=!ContextUtil.devMode%>">
-			<input type="password" name="password" required="required" />
+			<input type="password" id="password" name="password" required="required" />
 		</c:when>
 		<c:otherwise>
-			<input type="password" name="password" value=""	required="required" />
+			<input type="password" id="password" name="password" value=""	required="required" />
 			<br />
-			    Your are in dev mode: password is not verified (type any).<br />
+			    You are in dev mode: password is not verified (type any).<br />
 		</c:otherwise>
 	</c:choose>
 
 
-    <input type="checkbox" name="autoLogin"  <c:if test='${autoLogin}'>checked="checked"</c:if> />
+    <input type="checkbox" id="keepLoggedIn" name="autoLogin"  <c:if test='${autoLogin}'>checked="checked"</c:if> />
 	
 	<label for="keepLoggedIn"><span
 		title="Si vous cochez cette case, lors de votre prochaine visite vous serez connectés automatiquement">Je
