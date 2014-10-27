@@ -574,7 +574,7 @@
 										    <c:when test="${resource.maxCycle.name == 'P5-6'}"><c:set var="ageMax" value="13"/></c:when>
 										    <c:when test="${resource.maxCycle.name == 'S1-2'}"><c:set var="ageMax" value="16"/></c:when>
 										    <c:when test="${resource.maxCycle.name == 'S3-6'}"><c:set var="ageMax" value="19"/></c:when>
-										    <c:otherwise>Min" value="6"/><c:set var="ageMax" value="18"/></c:otherwise>
+										    <c:otherwise><c:set var="ageMax" value="18"/></c:otherwise>
 										</c:choose>
 										<meta itemprop="typicalAgeRange" content="${ageMin}-${ageMax}" />
 										<!--  End Micro-data -->
