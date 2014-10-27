@@ -1,5 +1,6 @@
 package learningresourcefinder.controller;
 
+import java.util.Date;
 import java.util.Set;
 
 import learningresourcefinder.exception.InvalidUrlException;
@@ -142,15 +143,19 @@ public class ResourceEditController extends BaseController<Resource> {
         urlResourceRepository.persist(urlResource);
         resourceRepository.persist(resource);
 
-        
+
         indexManager.add(resource);
         
         User user=SecurityContext.getUser();
         
         LevelService levelService = new LevelService();
         
-        if (levelService.canDoAction(user, Action.ADD_RESOURCE)) {  // If the user adding the resource is trusted for validating other resource, then we can directly trust him for this new resource...
+        // If the user adding the resource is trusted for validating other resource or if Url starts with an Url generic,
+        // then we can directly trust him for this new resource... ==> resource automatically validated
+        if (levelService.canDoAction(user, Action.ADD_RESOURCE) || urlgenericrepository.checkIfUrlStartsWithGenericUrl(url)) {
         	resource.setValidationStatus(ValidationStatus.ACCEPT);
+        	resource.setValidationDate(new Date());
+        	resource.setValidator(user);
         }
        
         contributionService.contribute(user, resource, Action.ADD_RESOURCE, "", "new_value");

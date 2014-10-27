@@ -23,5 +23,15 @@ public class UrlGenericRepository extends BaseRepository<UrlGeneric> {
     	}
         return getSingleOrNullResult(em.createQuery("select u from UrlGeneric u where u.url =:url").setParameter("url", url));
     }
+    
+    public boolean checkIfUrlStartsWithGenericUrl(String url) {
+        long result = (long) em.createQuery("SELECT COUNT(u) FROM UrlGeneric u WHERE u.url = SUBSTR(:url, 1, LENGTH(url))")
+                .setParameter("url", url)
+                .getSingleResult();
 
+        if(result > 0)
+            return true;
+        else
+            return false;
+    }
 }
