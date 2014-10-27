@@ -89,6 +89,7 @@ public class Cache implements ServletContextListener {
 		return instance;
 	}
 	public List<Cycle> getCycles() {
+	    updateCacheIfTooOld();
 		return cycles;
 	}
 
