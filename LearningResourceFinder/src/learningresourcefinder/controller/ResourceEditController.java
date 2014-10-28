@@ -154,7 +154,7 @@ public class ResourceEditController extends BaseController<Resource> {
         // then we can directly trust him for this new resource... ==> resource automatically validated
         if (levelService.canDoAction(user, Action.ADD_RESOURCE) || urlgenericrepository.checkIfUrlStartsWithGenericUrl(url)) {
         	resource.setValidationStatus(ValidationStatus.ACCEPT);
-        	resource.setValidationDate(new Date());
+        	resource.setValidationDate(resource.getCreatedOn());
         	resource.setValidator(user);
         }
        
