@@ -50,8 +50,7 @@ public class ResourceListPagerService {
             String KeyIdentifierListOfResources = addListOfResources(listResource);
 
             // Keep only xxx first resources
-            listResource = listResource.subList(0, NUMBER_OF_ROWS_TO_RETURN > listResource.size() ? 
-                    listResource.size() : NUMBER_OF_ROWS_TO_RETURN);
+            listResource = listResource.subList(0, NUMBER_OF_ROWS_TO_RETURN);
             
             // Pass unique key identifier to JSP; it will be used to retrieve more resources when scrolling !
             mv.addObject("tokenListOfResources", KeyIdentifierListOfResources);         
