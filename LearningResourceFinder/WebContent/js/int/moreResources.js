@@ -5,10 +5,6 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height()- $(window).height()) {  // We are near the bottom
 
-			// Retrieve value from hidden field which indicates if we are (=true) or not (=false) in the search resource screen. 
-			// We use it to know if the number of rows to return should be either a multiplier of 5 (resourcelist.jsp) or 8 (searchresource.jsp). 
-			var searchresourcescreen=$("#searchresourcescreen").val();
-
 			// tokenListOfResources (part of resourcelist.jsp) is loaded at first request. 
 			// If it's "0", it means there are less than xxx resources to display, no reload necessary.
 			// If it contains a value (timestamp converted to String), this value will be used to retrieve 
@@ -25,7 +21,7 @@ $(document).ready(function() {
 					url : "/ajax/getmoreresources",
 					dataType: "html",
 					type : 'POST',
-					data : "tokenlistofresources="+tokenListOfResources+"&searchscreen="+searchresourcescreen,
+					data : "tokenlistofresources="+tokenListOfResources,
 					success : function(data) {
 						if(data.length!=0){
 							$("#resourcelist").append(data);

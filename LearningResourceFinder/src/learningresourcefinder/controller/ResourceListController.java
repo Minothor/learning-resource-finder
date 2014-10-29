@@ -124,7 +124,7 @@ public class ResourceListController extends BaseController<Resource> {
 	    // maximum number of resources !
 	    if (listResource.size() > ResourceListPagerService.NUMBER_OF_ROWS_TO_RETURN) {
 	        // Save complete list of resources (Ids) in a session's map and return key identifier 
-	        String KeyIdentifierListOfResources = resourceListPager.addListOfResources(listResource, false);
+	        String KeyIdentifierListOfResources = resourceListPager.addListOfResources(listResource);
 
 	        // Keep only xxx first resources
 	        listResource = listResource.subList(0, 

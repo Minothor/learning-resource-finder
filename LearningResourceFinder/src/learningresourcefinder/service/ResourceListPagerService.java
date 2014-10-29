@@ -42,10 +42,7 @@ public class ResourceListPagerService {
     
     public static final int NUMBER_OF_ROWS_TO_RETURN = 150;  // For each AJAX call, we send that amount of resources.
     
-    // Second constant as for the search, there are 8 resources by lines. So, we must ensure the complete line is filled !
-    public static final int NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN = 152;  // For each AJAX call (search), we send that amount of resources.
-    
-    public String addListOfResources(List<Resource> resourceList, boolean searchScreen) {
+    public String addListOfResources(List<Resource> resourceList) {
         HttpSession httpSession = ContextUtil.getHttpSession();
         
         @SuppressWarnings("unchecked")
@@ -58,15 +55,8 @@ public class ResourceListPagerService {
         // Generate an unique code which will be used as key field of the map
         String tokenListOfResources = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Timestamp(System.currentTimeMillis()));
 
-        int numberOfRows;
-        
-        // It depends if we are in the search resource screen or resource list screen
-        if (searchScreen) {
-            numberOfRows = NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN;
-        }
-        else {
-            numberOfRows = NUMBER_OF_ROWS_TO_RETURN;
-        }
+        int numberOfRows = NUMBER_OF_ROWS_TO_RETURN;
+
         // Add to our map a list of resources Id with the number of rows already returned at first access
         listOfResources.put(tokenListOfResources, new ResourceListAndToken(numberOfRows, resourceList));
         
@@ -90,7 +80,7 @@ public class ResourceListPagerService {
         return true;
     }
     
-    public List<Resource> getMoreResources(String tokenListOfResources, boolean searchScreen) {
+    public List<Resource> getMoreResources(String tokenListOfResources) {
         // Get the full list of Ids + number of rows already returned from map using token
         ResourceListAndToken resourceListAndToken = getResourceListAndToken(tokenListOfResources);
         
@@ -98,15 +88,7 @@ public class ResourceListPagerService {
         if (resourceListAndToken == null) return null;
         
         int startIndex = resourceListAndToken.getNumberofRowsAlreadyReturned();
-        
-        int endIndex;
-        // It depends if we are in the search resource screen or resource list screen
-        if (searchScreen) {
-            endIndex = startIndex + NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN;
-        }
-        else {
-            endIndex = startIndex + NUMBER_OF_ROWS_TO_RETURN;            
-        }
+        int endIndex = startIndex + NUMBER_OF_ROWS_TO_RETURN;            
         
         List<Long> listOfResourcesId = resourceListAndToken.getListOfResourceIds();
         

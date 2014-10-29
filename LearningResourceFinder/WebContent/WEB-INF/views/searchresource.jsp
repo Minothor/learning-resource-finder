@@ -169,7 +169,6 @@ window.onload = addLang;
 	</div>
 	
 	<input type="hidden" value="${tokenListOfResources}" id="tokenListOfResources"/>
-	<input type="hidden" value="true" id="searchresourcescreen"/>
 	
 	<section style="margin: 10px" id="resourcelist">
 		<c:forEach items="${resourcelist}" var="resource">

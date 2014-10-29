@@ -7,7 +7,6 @@
 </head>
 <body>
     <input type="hidden" value="${tokenListOfResources}" id="tokenListOfResources"/>
-    <input type="hidden" value="false" id="searchresourcescreen"/>
     
 	<c:choose>
 		<c:when test="${topic != null}">

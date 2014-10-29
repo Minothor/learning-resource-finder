@@ -114,14 +114,14 @@ public class SearchResourceController extends BaseController<Resource> {
         
         // Special processing if more than xxx resources retrieved as we want to display a specific
         // maximum number of resources !
-        if (resourceList.size() > ResourceListPagerService.NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN) {
+        if (resourceList.size() > ResourceListPagerService.NUMBER_OF_ROWS_TO_RETURN) {
             // Save complete list of resources (Ids) in a session's map and return key identifier 
-            String KeyIdentifierListOfResources = resourceListPager.addListOfResources(resourceList, true);
+            String KeyIdentifierListOfResources = resourceListPager.addListOfResources(resourceList);
 
             // Keep only xxx first resources
             resourceList = resourceList.subList(0, 
-                    ResourceListPagerService.NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN > resourceList.size() ? 
-                            resourceList.size() : ResourceListPagerService.NUMBER_OF_ROWS_FOR_SEARCH_TO_RETURN);
+                    ResourceListPagerService.NUMBER_OF_ROWS_TO_RETURN > resourceList.size() ? 
+                            resourceList.size() : ResourceListPagerService.NUMBER_OF_ROWS_TO_RETURN);
             
             // Pass unique key identifier to JSP; it will be used to retrieve more resources when scrolling !
             mv.addObject("tokenListOfResources", KeyIdentifierListOfResources);         
