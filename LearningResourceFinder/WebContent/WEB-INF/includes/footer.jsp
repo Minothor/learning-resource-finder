@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <footer>
-	<section id="footer-main">
+	<section id="footer-main" itemscope itemtype ="http://schema.org/WPFooter">
 		<div class="container">
-			<div class="row">
+			<div class="row" itemscope itemtype ="http://schema.org/SiteNavigationElement">
 				<div class="col-md-3">
 				    <br/>
 				    <br/>
@@ -13,7 +13,7 @@
 					<a href="/"><img alt="logo ToujoursPlus" src="/images/ToujoursPlus-logo-footer.png"></a>
 				    <br/>
 				    <br/>
-					<p>ToujoursPlus.be permet aux élèves et professeurs de trouver
+					<p itemprop="description">ToujoursPlus.be permet aux élèves et professeurs de trouver
 						facilement les meilleures cours, jeux éducatifs et vidéos sur
 						internet. Il facilite la pédagogie différenciée et le rattrapage
 						scolaire.</p>
@@ -47,7 +47,7 @@
 					      <c:if test="${cycleStatus.count == 4}">
 					      	<br/>
 					      </c:if>
-						  <p><a href="<c:url value='/cycle/${cycle.id}/${cycle.slug}'/>">${cycle.description}</a> </p>
+						  <p><a href="<c:url value='/cycle/${cycle.id}/${cycle.slug}'/>" rel='nofollow'>${cycle.description}</a> </p>
 					  </c:forEach>
                       <br/>
                        

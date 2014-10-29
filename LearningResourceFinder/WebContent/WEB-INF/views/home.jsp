@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <html>
-<head>
+<head itemscope itemtype="http://schema.org/WPHeader">
 	<title>ToujoursPlus.be - Vidéos, jeux et exercices pour l'école</title>
+	<meta itemprop="keywords" name="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos, jeu,education, apprentissage, eveille, français, mathematique, maths, scientifique, leçons, exercices, interactif, apprendre, découvrir, savoir" />
 	<meta property="og:url" content="http://toujoursplus.be" />
-	<meta property="og:title" content="ToujoursPlus" /> 
-	<meta property="og:description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />  
-	<meta property="og:image" content="http://toujoursplus.be/images/ToujoursPlus-montage-Facebook.png" /> 
+	<meta itemprop="title" property="og:title" content="ToujoursPlus" /> 
+	<meta itemprop="description" property="og:description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />  
+	<meta itemprop="image" property="og:image" content="http://toujoursplus.be/images/ToujoursPlus-montage-Facebook.png" /> 
 	
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 	
@@ -17,7 +18,7 @@
 <%---------------------------------- LOGO ----------------------------------%>
 <div class="container" style="padding-top:20px; padding-bottom:20px;">
    <div class="text-center">
-       <img src="/images/ToujoursPlus-logo-500px.png" alt="logo ToujoursPlus créateur de curiosité" class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" itemprop="image" /><br/>
+       <img src="/images/ToujoursPlus-logo-500px.png" alt="logo ToujoursPlus créateur de curiosité" class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" /><br/>
        <br/>
    </div>
    <div class="row">
@@ -45,7 +46,7 @@
   		<form role="search" method="get" action="/search">
   				   <div class="form-group">
 					<div class="input-group" >
-						<input name="searchphrase"  type="text" class="form-control input-lg searchinput" placeholder="mot(s) clef(s)  ex: multiplication, corps humain, subjonctif..." required>
+						<input name="searchphrase"  type="text" class="form-control input-lg searchinput" placeholder="mot(s) clef(s)  ex: fraction, Bonaparte, abeille,..." required>
 						<span class="input-group-btn">
 							<button class="btn btn-default btn-lg" type="submit">Rechercher</button>
 						</span>

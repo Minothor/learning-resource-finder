@@ -75,7 +75,7 @@
 
 
 <!-- Main Menu / Start ================================================== -->
-<header>  <%-- Bootstrap style --%>
+<header itemscope itemtype="http://schema.org/WPHeader">  <%-- Bootstrap style --%>
 	<nav class="navbar navbar-default" role="navigation">
 
 		<div class="container" style="position:relative;">
@@ -89,13 +89,13 @@
 					<span class="icon-bar"></span>
 				</button>
 				<div>
-				   <a href="/"><img src="/images/ToujoursPlus-logo-header.png" alt="logo ToujoursPlus" style="margin-top:3px;"></a> &nbsp;&nbsp;&nbsp;
+				   <a href="/"><img itemprop="image" src="/images/ToujoursPlus-logo-header.png" alt="logo ToujoursPlus" style="margin-top:3px;"></a> &nbsp;&nbsp;&nbsp;
 				   <span style="font-size:9px;" class="label label-info">beta</span>
 				</div>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<div class="collapse navbar-collapse navbar-ex1-collapse" itemscope itemtype ="http://schema.org/SiteNavigationElement">
 				<ul class="nav navbar-nav">
 					
 					<li class="dropdown">
@@ -119,7 +119,7 @@
 						  	<c:if test="${cycleStatus.count == 4}">
    								<li role="presentation" class="divider"></li>
 							</c:if>
-                          	<li><a href="<c:url value='/cycle/${cycle.id}/${cycle.slug}'/>">${cycle.description}</a> </li>
+                          	<li><a href="<c:url value='/cycle/${cycle.id}/${cycle.slug}'/>" rel='nofollow'>${cycle.description}</a> </li>
                           </c:forEach>
                            
                           <li role="presentation" class="divider"></li>
