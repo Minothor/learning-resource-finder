@@ -78,10 +78,8 @@ public class ResourceListPagerService {
         // Generate an unique code which will be used as key field of the map
         String tokenListOfResources = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Timestamp(System.currentTimeMillis()));
 
-        int numberOfRows = NUMBER_OF_ROWS_TO_RETURN;
-
         // Add to our map a list of resources Id with the number of rows already returned at first access
-        listOfResources.put(tokenListOfResources, new ResourceListAndToken(numberOfRows, resourceList));
+        listOfResources.put(tokenListOfResources, new ResourceListAndToken(NUMBER_OF_ROWS_TO_RETURN, resourceList));
         
         httpSession.setAttribute("listOfResources", listOfResources);
         
