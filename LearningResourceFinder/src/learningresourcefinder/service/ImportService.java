@@ -10,6 +10,7 @@ import learningresourcefinder.util.Logger;
 import learningresourcefinder.web.UrlUtil;
 
 import org.apache.commons.logging.Log;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,12 @@ public class ImportService {
     		resultJSonObject.put("duration", Math.ceil(nbSec/60.));
     		
     		resultJSonObject.put("type", "video");
-
+    		
+    		JSONArray mediaThumbJSonArray = (JSONArray)mediaGroupJSonObject.get("media$thumbnail");
+    		if(mediaThumbJSonArray.size()>=3){
+        		JSONObject mediaThumbJSonObject = (JSONObject) mediaThumbJSonArray.get(2);
+        		resultJSonObject.put("thumbnails", mediaThumbJSonObject.get("url") );
+    		}
     		youTubeAnswerReader.close();             
     		return resultJSonObject;
 

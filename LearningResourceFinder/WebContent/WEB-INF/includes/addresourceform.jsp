@@ -50,9 +50,9 @@
 							</div>
 
 							<br />
-
+							
 							<div class="row">
-
+								
 								<div class="form-group col-sm-3">
 									<label for="Format">Format</label>
 									<c:forEach var="format"
@@ -110,6 +110,7 @@
 										<lrftag:cycleslider idSlider="addresourceslider" minCycle="0" maxCycle="4"/>									
 									
 								</div>
+								<input type="hidden" id="thumbnails" name="thumbnails" />
 							</div>
 						</div>
 					</div>

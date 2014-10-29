@@ -34,6 +34,7 @@ function ajaxVerifyUrl() {
 						$('#addResourceForm1 input:text[name="title"]').val(response.title);
 						$('#addResourceForm2 textarea[name="description"]').val(response.description);
 						$('#addResourceForm2MaxDuration').val(response.duration);
+						$('#thumbnails').val(response.thumbnails);
 					}
 				} else {
 					if(response.type == "urlGeneric")
