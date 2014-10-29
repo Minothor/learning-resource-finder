@@ -84,7 +84,7 @@ window.onload = addLang;
 	
 	<lrftag:pageheadertitle title="Recherche ${searchOptions.searchPhrase}"/>
 	
-	<form:form modelAttribute="searchOptions" action="searchresourceform" method="POST">
+	<form:form modelAttribute="searchOptions" action="searchresourceform" method="POST" class="container" style="padding-left: 20px;">
 			  <div class="filterSubBlock">
  				  	 <c:if test="${searchOptions.competence != null}">
 								<lrf:competencepath competence="${searchOptions.competence}"/>
@@ -170,7 +170,7 @@ window.onload = addLang;
 	
 	<input type="hidden" value="${tokenListOfResources}" id="tokenListOfResources"/>
 	
-	<section style="margin: 10px" id="resourcelist">
+	<section class="container" id="resourcelist">
 		<c:forEach items="${resourcelist}" var="resource">
 				<lrftag:resource resource="${resource}"/>
 		</c:forEach>
