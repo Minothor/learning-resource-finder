@@ -122,8 +122,6 @@ public class SearchResourceController extends BaseController<Resource> {
         mv.addObject("languagesEnumAllValues", SearchOptions.Language.values());
         mv.addObject("timeStamp", timeStamp);
         
-        //mv.addObject("resourcelist", resourceList);
-
         return mv;
     }
 
