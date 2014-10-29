@@ -39,7 +39,7 @@ public class SearchResourceController extends BaseController<Resource> {
    public ModelAndView searchResource(
 	            @ModelAttribute SearchOptions searchOptions,
 	            @RequestParam(value="noadvertizing", required=false) Boolean noAdvertising,  // Cannot be injected through the ModelAttribute (because Boolean vs boolean?)
-	            @RequestParam(value="competenceid", required=false) Long competenceId,
+	            @RequestParam(value="competenceId", required=false) Long competenceId,
 	            HttpSession session,
 	            @RequestParam(value="so", required=false) Long timeStamp
 	            ) {

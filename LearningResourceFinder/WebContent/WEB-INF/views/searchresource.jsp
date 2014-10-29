@@ -7,14 +7,6 @@
 <html>
 <head>
 <script type="text/javascript" src="/js/int/moreResources.js"></script>
-<!-- To delete competence field -->
-<script type="text/javascript">
-$(document).ready(function reinitialize(){
-  $("button").click(function(){
-    $("#competenceIdHiddenField").val("");
-  });
-});
-</script>
 
 <style>
 label {
@@ -97,7 +89,7 @@ window.onload = addLang;
  				  	 <c:if test="${searchOptions.competence != null}">
 								<lrf:competencepath competence="${searchOptions.competence}"/>
 								<input id="competenceIdHiddenField" name="competenceId" value="${searchOptions.competence.id }" type="hidden"/>
-				            	<button type="button" class="close" style="margin-top:-18px; margin-left:10px;" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="cliquer pour fermer">&times;</button> 
+				            	<button type="button" class="close" style="margin-top:-18px; margin-left:10px;" data-dismiss="alert" onclick="reinitialize()" rel="tooltip" title="Enlever la catégorie du filtre">&times;</button> 
 				      </c:if>
 				</div>
 			
