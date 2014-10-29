@@ -171,7 +171,7 @@ window.onload = addLang;
 	<input type="hidden" value="${tokenListOfResources}" id="tokenListOfResources"/>
 	
 	<section class="container" id="resourcelist">
-		<c:forEach items="${resourcelist}" var="resource">
+		<c:forEach items="${resourceList}" var="resource">
 				<lrftag:resource resource="${resource}"/>
 		</c:forEach>
 	</section>

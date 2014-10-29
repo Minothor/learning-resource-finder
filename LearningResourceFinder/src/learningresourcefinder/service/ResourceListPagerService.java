@@ -42,6 +42,29 @@ public class ResourceListPagerService {
     
     public static final int NUMBER_OF_ROWS_TO_RETURN = 150;  // For each AJAX call, we send that amount of resources.
     
+    public ModelAndView setTokenListOfResources(ModelAndView mv, List<Resource> listResource) {
+        // Special processing if more than xxx resources retrieved as we want to display a specific
+        // maximum number of resources !
+        if (listResource.size() > NUMBER_OF_ROWS_TO_RETURN) {
+            // Save complete list of resources (Ids) in a session's map and return key identifier 
+            String KeyIdentifierListOfResources = addListOfResources(listResource);
+
+            // Keep only xxx first resources
+            listResource = listResource.subList(0, NUMBER_OF_ROWS_TO_RETURN > listResource.size() ? 
+                    listResource.size() : NUMBER_OF_ROWS_TO_RETURN);
+            
+            // Pass unique key identifier to JSP; it will be used to retrieve more resources when scrolling !
+            mv.addObject("tokenListOfResources", KeyIdentifierListOfResources);         
+        }
+        else {
+            mv.addObject("tokenListOfResources", "0");
+        }
+        
+        mv.addObject("resourceList", listResource);
+
+        return mv;
+    }
+    
     public String addListOfResources(List<Resource> resourceList) {
         HttpSession httpSession = ContextUtil.getHttpSession();
         

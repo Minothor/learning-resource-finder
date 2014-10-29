@@ -109,26 +109,11 @@ public class SearchResourceController extends BaseController<Resource> {
             }
         }
         
-        
         ModelAndView mv = new ModelAndView("searchresource");
         
-        // Special processing if more than xxx resources retrieved as we want to display a specific
-        // maximum number of resources !
-        if (resourceList.size() > ResourceListPagerService.NUMBER_OF_ROWS_TO_RETURN) {
-            // Save complete list of resources (Ids) in a session's map and return key identifier 
-            String KeyIdentifierListOfResources = resourceListPager.addListOfResources(resourceList);
-
-            // Keep only xxx first resources
-            resourceList = resourceList.subList(0, 
-                    ResourceListPagerService.NUMBER_OF_ROWS_TO_RETURN > resourceList.size() ? 
-                            resourceList.size() : ResourceListPagerService.NUMBER_OF_ROWS_TO_RETURN);
-            
-            // Pass unique key identifier to JSP; it will be used to retrieve more resources when scrolling !
-            mv.addObject("tokenListOfResources", KeyIdentifierListOfResources);         
-        }
-        else {
-            mv.addObject("tokenListOfResources", "0");
-        }
+        // Specific processing for loading only a limited specific number of resources.
+        // This processing saves complete list of resources (Ids) in a session's map and return key identifier (into mv) 
+        resourceListPager.setTokenListOfResources(mv, resourceList);
         
         mv.addObject("searchOptions", searchOptions);
         mv.addObject("natureEnumAllValues", SearchOptions.Nature.values());
@@ -137,7 +122,7 @@ public class SearchResourceController extends BaseController<Resource> {
         mv.addObject("languagesEnumAllValues", SearchOptions.Language.values());
         mv.addObject("timeStamp", timeStamp);
         
-        mv.addObject("resourcelist", resourceList);
+        //mv.addObject("resourcelist", resourceList);
 
         return mv;
     }
