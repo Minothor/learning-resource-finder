@@ -378,38 +378,44 @@ public class ResourceDisplayController extends BaseController<Resource> {
     @RequestMapping("/urlresourceeditsubmit")
     public String urlSubmit(@RequestParam(value="urlresourceid", required=false) Long urlResourceId, @RequestParam("resourceid") long resourceId, @RequestParam("name") String name, @RequestParam("url") String url) 
     {
-        
         Resource resource = getRequiredEntity(resourceId);
-	    SecurityContext.assertCurrentUserMayEditThisResource(resource);
+        SecurityContext.assertCurrentUserMayEditThisResource(resource);
 
-	    UrlResource urlResource;
-	    if (urlResourceId != null) {
-	    	urlResource = urlResourceRepository.find(urlResourceId);
-	    } else {
-	    	urlResource = new UrlResource();
-	    	urlResource.setResource(resource);
-	    }
-
-	    urlResource.setName(name);
-	    
-	    url=url.trim();
-        if(!url.startsWith("http://") && !url.startsWith("https://")){
-        	url = "http://" + url;
+        if (url == null || url.length() == 0) {
+            NotificationUtil.addNotificationMessage("Veuillez entrer une URL valide.", Status.ERROR);
         }
-        
-	    urlResource.setUrl(url);
+        else {
 
-	    if (urlResource.getId() == null) {  // Create
-	    	urlResourceRepository.persist(urlResource);
-	    	NotificationUtil.addNotificationMessage("Url ajoutée avec succès", Status.SUCCESS);         
-	    } else {  // Edit
-	    	urlResourceRepository.merge(urlResource);
-	    	NotificationUtil.addNotificationMessage("Url modifiée avec succès", Status.SUCCESS);         
-	    }
+            UrlResource urlResource;
+            if (urlResourceId != null) {
+                urlResource = urlResourceRepository.find(urlResourceId);
+            } else {
+                urlResource = new UrlResource();
+                urlResource.setResource(resource);
+            }
 
-	    if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
-	    	levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE_URL);
-	    }
+            urlResource.setName(name);
+            
+            url=url.trim();
+            if(!url.startsWith("http://") && !url.startsWith("https://")){
+                url = "http://" + url;
+            }
+            
+            urlResource.setUrl(url);
+
+            if (urlResource.getId() == null) {  // Create
+                urlResourceRepository.persist(urlResource);
+                NotificationUtil.addNotificationMessage("Url ajoutée avec succès", Status.SUCCESS);         
+            } else {  // Edit
+                urlResourceRepository.merge(urlResource);
+                NotificationUtil.addNotificationMessage("Url modifiée avec succès", Status.SUCCESS);         
+            }
+
+            if (! resource.getCreatedBy().equals(SecurityContext.getUser())) {
+                levelService.addActionPoints(SecurityContext.getUser(), Action.EDIT_RESOURCE_URL);
+            }
+            
+        }
         
         return ("redirect:"+UrlUtil.getRelativeUrlToResourceDisplay(resource));
     }
