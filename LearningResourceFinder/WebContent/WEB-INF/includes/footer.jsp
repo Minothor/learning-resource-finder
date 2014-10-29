@@ -6,13 +6,7 @@
 		<div class="container">
 			<div class="row" itemscope itemtype ="http://schema.org/SiteNavigationElement">
 				<div class="col-md-3">
-				    <br/>
-				    <br/>
-				    <br/>
-				    <br/>
-					<a href="/"><img alt="logo ToujoursPlus" src="/images/ToujoursPlus-logo-footer.png"></a>
-				    <br/>
-				    <br/>
+				    <a href="/"><img id ="footerLogo" alt="logo ToujoursPlus" src="/images/ToujoursPlus-logo-footer.png"></a>
 					<p itemprop="description">ToujoursPlus.be permet aux élèves et professeurs de trouver
 						facilement les meilleures cours, jeux éducatifs et vidéos sur
 						internet. Il facilite la pédagogie différenciée et le rattrapage
@@ -30,14 +24,7 @@
 					</c:if>
 					   
 				  
-				    <br/>
-				    <br/>
-				    <br/>
-				    <br/>
-				    <br/>
-				    <br/>
-				    <br/>
-					<div id="version" style="font-size:xx-small">v ${p_version}</div>
+				   <div id="version" style="font-size:xx-small">v ${p_version}</div>
 
 				</div>
 				<div class="col-md-3">
@@ -59,10 +46,7 @@
 				<div class="col-md-2">
 					<h4>Séquences</h4>
 					<a href="/playlist/all">Toutes les séquences</a>
-					
-					<br/><br/><br/><br/><br/><br/><br/><br/>
-					
-					<div style="text-align:right;">
+					<div id="FBbox" style="text-align:right;">
 					    <a href="https://www.facebook.com/be.toujoursplus"><span class="addToolTip glyphicon icon-facebook" style="font-size:21px;" data-toggle="tooltip" title="notre page facebook"></span></a>
 					    <br/><br/><br/>
 					    

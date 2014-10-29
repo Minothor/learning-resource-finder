@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/plugins/yoxview/yoxview.css">   <%--http://yoxigen.com/yoxview --%>
 <link rel="stylesheet" href="/css/ext/jquery-ui-1.11.1.min.css"> <%--for autocomplete --%>
 <link rel="stylesheet" href="/css/int/resourceStyle.css" type="text/css"/> <%--resource style--%>
+<link rel="stylesheet" href="/css/int/footer.css" type="text/css"/> <%--footer positioning--%>
 <!-- ***************************** END CSS **************************** -->
 
 <!-- ***************************** JAVASCRIPT **************************** -->   
