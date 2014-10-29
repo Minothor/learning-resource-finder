@@ -10,7 +10,7 @@
 <div id="divPhoto">
 	<c:if test="${canEdit}">
 		<a data-toggle="modal" href="#modalPlaylist">
-	</c:if>
+	</c:if>	
 
 	<figure>
 		<c:choose>
@@ -32,4 +32,7 @@
 			</figcaption>
 		</c:if>
 	</figure>
+	<c:if test="${canEdit}">
+		</a>
+	</c:if>
 </div>
