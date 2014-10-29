@@ -1,5 +1,6 @@
 package learningresourcefinder.controller;
 
+import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.util.Set;
 
@@ -25,6 +26,8 @@ import learningresourcefinder.service.ImportService;
 import learningresourcefinder.service.IndexManagerService;
 import learningresourcefinder.service.LevelService;
 import learningresourcefinder.util.Action;
+import learningresourcefinder.util.CurrentEnvironment;
+import learningresourcefinder.util.ImageUtil;
 import learningresourcefinder.util.Logger;
 import learningresourcefinder.web.Cache;
 import learningresourcefinder.web.Slugify;
@@ -49,6 +52,7 @@ public class ResourceEditController extends BaseController<Resource> {
     @Autowired 	 ContributionService contributionService; 
     @Autowired   ImportService importService;
     @Autowired	 UrlGenericRepository urlgenericrepository;
+    @Autowired   CurrentEnvironment currentEnvironment;
     @Logger Log log;
 
     
@@ -100,7 +104,8 @@ public class ResourceEditController extends BaseController<Resource> {
 	        @RequestParam(value="platform",required=true) Set<Platform> platforms, 
 	        @RequestParam(value="topic",required=true) Topic topic,
 	        @RequestParam(value="mincycle",required=true) String minCycle, /* From hidden field */
-	        @RequestParam(value="maxcycle",required=true) String maxCycle){  
+	        @RequestParam(value="maxcycle",required=true) String maxCycle,
+	        @RequestParam(value="thumbnails",required=true) String urlImage){  
     
         SecurityContext.assertUserIsLoggedIn();
    
@@ -160,6 +165,17 @@ public class ResourceEditController extends BaseController<Resource> {
        
         contributionService.contribute(user, resource, Action.ADD_RESOURCE, "", "new_value");
         //levelService.addActionPoints(SecurityContext.getUser(), Action.ADD_RESOURCE);
+        
+        BufferedImage image = null;
+        
+        try {
+            image = ImageUtil.readImage(urlImage);
+        } catch (RuntimeException e) {
+            //error when reading url image from the youtube api , no image will be save for the resource just persisted
+        }
+        if (image != null){
+            ImageUtil.createOriginalAndScalesImageFileForResource(resource, image, currentEnvironment); 
+        }
                
         return new MessageAndId(resource.getId(),
                 "Ressource ajoutée - <a href="+UrlUtil.getRelativeUrlToResourceDisplay(resource)+">Afficher</a>");
