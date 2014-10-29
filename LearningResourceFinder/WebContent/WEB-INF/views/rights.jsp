@@ -44,7 +44,7 @@ Plus votre niveau est élevé, plus vous avez de possibilités d'action. Vous tr
 						
 					${strongStart}	
 					  <div class="col-xs-2 ${greenClass} text-right">niveau ${action.level.levelIndex}</div>
-					  <div class="col-xs-10 ${greenClass}">${action.describe}</div>
+					  <div class="col-xs-10 ${greenClass}">${action.describeDoable}</div>
 					${strongEnd}
                     <c:set var="greenClass" value=""/>
 				    <c:set var="strongStart" value=""/>			    
@@ -71,7 +71,7 @@ Plus votre niveau est élevé, plus vous avez de possibilités d'action. Vous tr
 	  <c:if test="${action.actionPoints > 0}"> <%-- it's not worth displaying actions that get the user no point here --%>
 		<div class="row">
 					<div class="col-xs-2 ${style} text-right">${action.actionPoints} point${action.actionPoints >1 ? "s" : "" }</div>
-					<div class="col-xs-10 ${style}">${action.describe}</div>
+					<div class="col-xs-10 ${style}">${action.describeDoable}</div>
                     <c:set var="style" value=""/>
 		</div>
 	  </c:if>

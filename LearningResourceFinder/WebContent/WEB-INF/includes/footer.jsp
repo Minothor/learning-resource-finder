@@ -22,14 +22,14 @@
 					<h4>Contribuer</h4>
 
 					<p><a class="addResourceLink">Ajouter une ressource </a></p>
-
+					  <p><a href="<c:url value='/contribution'/>" >Améliorer des ressources</a></p>
 					<p><a href="<c:url value='/rights'/>" class="">Droits</a></p>
 					
 				    <c:if test="${current.user != null}">
 				        <p><a href="<c:url value='/ressourcelist/${current.user.userName}'/>" >Mes ressources</a></p>
 					</c:if>
 					   
-				    <p><a href="<c:url value='/contribution'/>" >Améliorer des ressources</a></p>
+				  
 				    <br/>
 				    <br/>
 				    <br/>

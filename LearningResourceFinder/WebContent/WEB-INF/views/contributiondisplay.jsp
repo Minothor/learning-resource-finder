@@ -41,7 +41,7 @@
 						</div>
 						<div>
 							 <h4 class="list-group-item-heading"> <a href="<c:url value='resource/${contribution.ressource.shortId}/${contribution.ressource.name}'/>">  ${contribution.ressource.name}</a> </h4>
-							 <p class="list-group-item-text"> <small>${contribution.action.describe}  </small></p>
+							 <p class="list-group-item-text"> <small>${contribution.action.describeDone}  </small></p>
 						 </div>
  					</div> 
 				</c:forEach>

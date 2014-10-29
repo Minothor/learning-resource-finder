@@ -56,6 +56,17 @@
 
 </script>
 
+<%-- ********** FACEBOOK ************** --%>
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+ 		 var js, fjs = d.getElementsByTagName(s)[0];
+ 		 if (d.getElementById(id)) return;
+  		js = d.createElement(s); js.id = id;
+ 		 js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+ 		 fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+
 <%-- ********** NOTIFICATIONS ************** --%>
 	<div id="notificationArea" 
 		 class="${sessionScope.notifications[0].status.name}"
@@ -90,10 +101,10 @@
 				</button>
 				<div>
 				   <a href="/"><img itemprop="image" src="/images/ToujoursPlus-logo-header.png" alt="logo ToujoursPlus" style="margin-top:3px;"></a> &nbsp;&nbsp;&nbsp;
-				   <span style="font-size:9px;" class="label label-info">beta</span>
-				</div>
+			  		 <div class="fb-like" data-href="http://www.toujoursplus.be" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div> 
+				</div>			
 			</div>
-
+					 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse" itemscope itemtype ="http://schema.org/SiteNavigationElement">
 				<ul class="nav navbar-nav">
@@ -140,7 +151,7 @@
                     	</c:choose>			
 					    </ul>
 					 </li>
-					 
+					 				 
 					 <lrf:conditionDisplay role="ADMIN">
 					 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
 					   <ul class="dropdown-menu">	
@@ -148,7 +159,7 @@
 					 	  <li><a href="/urlGeneric">URLs géneriques</a></li>
 					   </ul>
 					 </li>	
-	 				 </lrf:conditionDisplay>					
+	 				 </lrf:conditionDisplay>	 								
 				</ul>
 
 

@@ -26,14 +26,12 @@
      <div class="col-md-5">
      		Moteur de recherche collaboratif pour élèves, parents et enseignants.<br/> 
      		Trouvez facilement des vidéos, exercices et jeux éducatifs gratuits.<br/>
-	       <br/>
-	       <span style="font-size:14px; float:inherit; margin-right: 15px" class="label label-info">beta</span>
-  	       <div class="addthis_sharing_toolbox"></div>
+	       <br/>	      			
      </div>
-     <div class="col-md-3 text-right">
-	       <a href="/resourcelist"><span style="font-size:20px;" class="label label-info addToolTip" title="${nbResouces} ressources ajoutées depuis le 21 avril 2014">${nbResouces}</span></a>
-     </div>     
-     <div class="col-md-2"></div>
+	<div class="fb-like" data-href="http://www.toujoursplus.be" data-width="400" data-layout="button" data-action="like" data-show-faces="true" data-share="true"  style="margin-top:0.6em; position: relative; float: left;"></div>
+		<div class="col-md-3 text-right">
+	      	 <a href="/resourcelist"><span style="font-size:20px; margin-top: 0.2em; position: relative; float:left; " class="label label-info addToolTip" title="${nbResouces} ressources ajoutées depuis le 21 avril 2014">${nbResouces}</span></a>
+    	 <div class="col-md-2"></div>     
    </div>
 </div>
 

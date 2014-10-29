@@ -34,8 +34,7 @@
 	<section class="container" style="text-align: center;">
 		<h1>Comment pouvez-vous nous soutenir?</h1>
 		<p>Nous avons besoin de vous pour témoigner, diffuser le concept
-			dans votre école/association, tester le site en version bêta,
-			participer à des réunions d’analyse et de feedback, donner des
+			dans votre école/association, participer à des réunions d’analyse et de feedback, donner des
 			millions de dollars.</p>
 		<br>
 
