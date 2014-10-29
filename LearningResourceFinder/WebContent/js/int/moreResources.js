@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	
+	
 	$('#spinner').hide();  // Hourglass at the end of the page
 	
 	$(window).scroll(function() {
@@ -22,9 +24,10 @@ $(document).ready(function() {
 					dataType: "html",
 					type : 'POST',
 					data : "tokenlistofresources="+tokenListOfResources,
-					success : function(data) {
-						if(data.length!=0){
+					success : function(data) 
+					{if(data.length!=0){
 							$("#resourcelist").append(data);
+							resourceIncrease();
 							$('#spinner').hide();
 						} else { // Session has expired. Reload the page.
 							$('#spinner').hide();
@@ -34,7 +37,7 @@ $(document).ready(function() {
 					error : function(data) {
 						alert("Problème en contactant le serveur" );
 					}
-				});
+				});			
 			}			
 		}
 	});
