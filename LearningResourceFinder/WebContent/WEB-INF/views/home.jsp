@@ -44,7 +44,7 @@
   		<form role="search" method="get" action="/search">
   				   <div class="form-group">
 					<div class="input-group" >
-						<input name="searchphrase"  type="text" class="form-control input-lg searchinput" placeholder="mot(s) clef(s)  ex: fraction, Bonaparte, abeille,..." required>
+						<input name="searchphrase"  type="text" class="form-control input-lg searchinput" placeholder="mot(s) clef(s)  ex: multiplication, corps humain, subjonctif..." required>
 						<span class="input-group-btn">
 							<button class="btn btn-default btn-lg" type="submit">Rechercher</button>
 						</span>
