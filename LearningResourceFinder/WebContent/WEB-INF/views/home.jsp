@@ -3,9 +3,6 @@
 <html>
 <head>
 	<title>ToujoursPlus.be - Vidéos, jeux et exercices pour l'école</title>
-	<meta name="title" content="ToujoursPlus.be - Vidéos, jeux et exercices pour l'école" />
-	<meta name="description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />
-	<meta name="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos" />
 	<meta property="og:url" content="http://toujoursplus.be" />
 	<meta property="og:title" content="ToujoursPlus" /> 
 	<meta property="og:description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />  
