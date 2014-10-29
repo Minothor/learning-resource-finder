@@ -90,7 +90,7 @@ public class CrawlerProfesseurPhifix
                     }
                     titre = CrawlerService.getSubString(titre, 50);
                    // System.out.println("\t\t"+titre+" ("+finalLink+" )"+"  cat:"+categorie);
-                    cs.persistRessource(titre,finalLink,categorie,"",0,"","", 0, "Pr. Phiphix");
+                    cs.persistRessource(titre,finalLink,categorie,"",0,"","", 0, "Pr. Phiphix",null);
                 }    
             }
            // System.out.println("============================");
@@ -103,7 +103,7 @@ public class CrawlerProfesseurPhifix
                 titre = element.attr("href").replace("_", " ").replace(".pdf", "").replace(".htm", "").replace(".PDF", "");
             }
             String finalLink = ("http://www.professeurphifix.net/eveil/"+element.attr("href"));
-            cs.persistRessource(titre,finalLink,"Geographie","",0,"","", 0, "Pr. Phiphix");
+            cs.persistRessource(titre,finalLink,"Geographie","",0,"","", 0, "Pr. Phiphix",null);
            // System.out.println(titre+" (http://www.professeurphifix.net/eveil/"+element.attr("href")+" )");
         }
         

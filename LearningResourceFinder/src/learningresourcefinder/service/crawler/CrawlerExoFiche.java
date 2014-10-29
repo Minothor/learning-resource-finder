@@ -92,7 +92,7 @@ public class CrawlerExoFiche
                             //System.out.println("\t"+titres.get(j)+" "+urls.get(j));
                             System.out.println(titres.get(j)+"("+urls.get(j)+")\n\t"+catName+" "+cycles[i][0]+"-"+cycles[i][1]);
 
-                            cs.persistRessource(titres.get(j),urls.get(j),catName,"",0,cycles[i][0] ,cycles[i][1], 0, "Génération 5");
+                            cs.persistRessource(titres.get(j),urls.get(j),catName,"",0,cycles[i][0] ,cycles[i][1], 0, "Génération 5",Format.DOC);
                             
                         }
                     }

@@ -2,6 +2,8 @@ package learningresourcefinder.service.crawler;
 
 import java.io.IOException;
 
+import learningresourcefinder.search.SearchOptions.Format;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,7 +40,7 @@ public class CrawlerChampionMath
                 System.out.println("\t"+titre+" ("+lien+")");
 
                 if(cs!=null)
-                    cs.persistRessource(titre,lien,"Math","",0,cycle,cycle, 0, "ChampionMath");
+                    cs.persistRessource(titre,lien,"Math","",0,cycle,cycle, 0, "ChampionMath",Format.INTERACTIVE);
             }
             System.out.println("=================================================");
         }

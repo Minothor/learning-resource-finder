@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import learningresourcefinder.repository.ResourceRepository;
 import learningresourcefinder.repository.UrlResourceRepository;
+import learningresourcefinder.search.SearchOptions.Format;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -48,7 +49,7 @@ public class CrawlerBrainPOP
 
             
                 if(cs!=null)
-                    cs.persistRessource(titre,lien,categorie,description,minutes,"","", 0, "BrainPop");
+                    cs.persistRessource(titre,lien,categorie,description,minutes,"","", 0, "BrainPop",Format.VIDEOS);
             }
         }
 

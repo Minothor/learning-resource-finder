@@ -78,7 +78,7 @@ public class CrawlerService
         //CrawlerKhanAcademy.superCrawler(this);
     }
     
-    public void persistRessource(String name, String url, String topic, String description, int duration, String minCycle, String maxCycle, int adv, String author) 
+    public void persistRessource(String name, String url, String topic, String description, int duration, String minCycle, String maxCycle, int adv, String author,Format format) 
     {
         Resource r = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
         if (r == null)
@@ -87,7 +87,14 @@ public class CrawlerService
             r = new Resource(getSubString(name, 50),description,SecurityContext.getUser());
             r.setLanguage(Language.FR);
             r.setTopic(getTopicFromString(topic));
-            r.setFormat(Format.INTERACTIVE);
+            if(format!= null)
+            {
+                r.setFormat(format);
+            }
+            else
+            {
+                r.setFormat(Format.INTERACTIVE);
+            }
             Set<Platform> tempSet = new HashSet<>();
             tempSet.add(Platform.BROWSER);
             r.setPlatforms(tempSet);
@@ -121,9 +128,11 @@ public class CrawlerService
             {            
                 r.setMinCycle(cycleRepository.findByName(minCycle));        
             }
+            
             r.setValidationDate(new Date());
             r.setValidator(SecurityContext.getUser());
             r.setValidationStatus(ValidationStatus.ACCEPT);
+            
             resourceRepository.persist(r);
             urlResourceRepository.persist(urlResource);
             r.getShortId(); 
@@ -132,7 +141,19 @@ public class CrawlerService
         } 
         else 
         {
-
+            //TODO regroup 2 code in a method
+            r.setTopic(getTopicFromString(topic));
+            
+            if(format!= null)
+            {
+                r.setFormat(format);
+            }
+            
+            if(duration!=0)
+            {
+                r.setDuration(duration);
+            }
+            
             //System.out.println("2eme passage "+url);
             Cycle cycle =  getCycle(maxCycle);
             if(cycle!=null)
@@ -148,6 +169,15 @@ public class CrawlerService
                 (getCycleNumber(cycle)>=0 && getCycleNumber(cycle)<getCycleNumber(r.getMinCycle())))                     
                     r.setMinCycle(cycle);        
             }  
+            
+            if(author!= null)
+            {
+                r.setAuthor(author);          
+            }
+            if(adv>=0)
+            {
+                r.setAdvertising(adv==1);          
+            }   
             
             cont2++;
         }

@@ -55,7 +55,7 @@ public class CrawlerSoutien67
                             if(!lien.startsWith("#"))
                                 System.out.println(titre+" : http://soutien67.free.fr/francais/niv01/"+ligne.attr("href"));
                                 String link = "http://soutien67.free.fr/francais/niv01/"+ligne.attr("href");
-                            cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2", 0, "Ludovic Mercier");
+                            cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2", 0, "Ludovic Mercier",null);
                         }
                     }    
                 }
@@ -97,7 +97,7 @@ public class CrawlerSoutien67
                                  System.out.println(titre+" : http://soutien67.free.fr/francais/niv02/"+ligne.attr("href"));
                                  String link = "http://soutien67.free.fr/francais/niv02/"+ligne.attr("href");
 
-                                 cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2", 0, "Ludovic Mercier");
+                                 cs.persistRessource(titre,link,"Français","",0,"p1-2","p1-2", 0, "Ludovic Mercier",null);
                              }
                          }
                      }    
@@ -137,7 +137,7 @@ public class CrawlerSoutien67
                                       System.out.println(titre+" : http://soutien67.free.fr/francais/niv03/"+ligne.attr("href"));
                                       String link = "http://soutien67.free.fr/francais/niv03/"+ligne.attr("href");
 
-                                      cs.persistRessource(titre,link,"Français","",0,"p3-4","p3-4", 0, "Ludovic Mercier");
+                                      cs.persistRessource(titre,link,"Français","",0,"p3-4","p3-4", 0, "Ludovic Mercier",null);
                                   }
                               }
                           }    
@@ -177,7 +177,7 @@ public class CrawlerSoutien67
                                       System.out.println(titre+" : http://soutien67.free.fr/francais/niv04/"+ligne.attr("href"));
                                       String link = "http://soutien67.free.fr/francais/niv04/"+ligne.attr("href");
 
-                                      cs.persistRessource(titre,link,"Français","",0,"p5-6","p5-6", 0, "Ludovic Mercier");
+                                      cs.persistRessource(titre,link,"Français","",0,"p5-6","p5-6", 0, "Ludovic Mercier",null);
                                   }
                               }
                           }    
@@ -214,7 +214,7 @@ public void crawlerMath1() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/math/niv01/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/math/niv01/"+ligne.attr("href");
-                                     cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2", 0, "Ludovic Mercier");
+                                     cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2", 0, "Ludovic Mercier",null);
                                  }
                              }
                          }    
@@ -252,7 +252,7 @@ public void crawlerMath2() throws IOException {
                         {
                             System.out.println(titre+" : http://soutien67.free.fr/math/niv02/"+ligne.attr("href"));
                             String link = "http://soutien67.free.fr/math/niv02/"+ligne.attr("href");
-                            cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2", 0, "Ludovic Mercier");
+                            cs.persistRessource(titre,link,"Mathematique","",0,"p1-2","p1-2", 0, "Ludovic Mercier",null);
                         }
                     }
                 }    
@@ -290,7 +290,7 @@ public void crawlerMath3() throws IOException {
                         {
                             System.out.println(titre+" : http://soutien67.free.fr/math/niv03/"+ligne.attr("href"));
                             String link = "http://soutien67.free.fr/math/niv03/"+ligne.attr("href");
-                            cs.persistRessource(titre,link,"Mathematique","",0,"p3-4","p3-4", 0, "Ludovic Mercier");
+                            cs.persistRessource(titre,link,"Mathematique","",0,"p3-4","p3-4", 0, "Ludovic Mercier",null);
                         }
                     }
                 }    
@@ -328,7 +328,7 @@ public void crawlerMath3() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/math/niv04/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/math/niv04/"+ligne.attr("href");
-                                     cs.persistRessource(titre,link,"Mathematique","",0,"p5-6","p5-6", 0, "Ludovic Mercier");
+                                     cs.persistRessource(titre,link,"Mathematique","",0,"p5-6","p5-6", 0, "Ludovic Mercier",null);
                                  }
                              }
                          }    
@@ -368,7 +368,7 @@ public void crawlerMath3() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/histoire/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/histoire/"+ligne.attr("href");
-                                     cs.persistRessource(titre,link,"Histoire","",0,"","", 0, "Ludovic Mercier");
+                                     cs.persistRessource(titre,link,"Histoire","",0,"","", 0, "Ludovic Mercier",null);
                                  }
                              }
                          }    
@@ -407,7 +407,7 @@ public void crawlerGeographie() throws IOException {
                                  {
                                      System.out.println(titre+" : http://soutien67.free.fr/geographie/"+ligne.attr("href"));
                                      String link = "http://soutien67.free.fr/geographie/"+ligne.attr("href");
-                                     cs.persistRessource(titre,link,"Geographie","",0,"","", 0, "Ludovic Mercier");
+                                     cs.persistRessource(titre,link,"Geographie","",0,"","", 0, "Ludovic Mercier",null);
                                  }
                              }
                          }    
@@ -426,7 +426,7 @@ public void crawlerGeographie() throws IOException {
             String link = ligne.attr("href");
             System.out.println(titre + " : http://soutien67.free.fr/svt/"+link);
             String links = "http://soutien67.free.fr/svt/"+ligne.attr("href");
-            cs.persistRessource(titre,links,"Science","",0,"","", 0, "Ludovic Mercier");
+            cs.persistRessource(titre,links,"Science","",0,"","", 0, "Ludovic Mercier",null);
             }
         }
     }
