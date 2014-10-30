@@ -15,7 +15,7 @@
 </style>
 
 <div style="display: inline-block; position: relative; vertical-align: top; height:208px; width: 200px; margin-right: 20px; margin-bottom: 20px;">
- <div class="resource-content panel panel-default">
+ <div itemscope itemtype="http://schema.org/CreativeWork" class="resource-content panel panel-default">
 	<span id="${playlist.id}-${resource.id}" class="sortableItem"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
 	
 	<c:choose>
@@ -23,8 +23,7 @@
 
 			<div class="panel-heading">
 					<span class="lead" style="font-size: 16px"><c:if test='${! empty prefix}'>${prefix}. </c:if>
-						<a>${resource.name}</a>
-						
+						<a itemprop="name">${resource.name}</a>
 <%-- 						<a href="/resource/${resource.shortId}/${resource.slug}" >${resource.name}</a> --%>
 						
 					</span>
@@ -42,7 +41,8 @@
 			<div class="row" style="margin-left: 0px; margin-right: 0px;">
 				<c:if test="${resource.numberImage >= 1}">
 					<div class="imgDiv col-xs-6" id="yoxview-resource-${resource.id}" style="padding:0px;">
-						<a href="/gen/resource/original/${resource.id}-1.jpg"> <img
+						<a href="/gen/resource/original/${resource.id}-1.jpg"> <img 
+						itemprop="image"
 							src="/gen/resource/resized/small/${resource.id}-1.jpg"
 							alt="${resource.name}" />
 						</a>
@@ -71,7 +71,7 @@
 						</a>
 					</div>
 					<p class="resourceDescription">
-						<small>${resource.descriptionCut}</small>
+						<small itemprop="description">${resource.descriptionCut}</small>
 					</p>
 				</div>
 			</div>
@@ -90,7 +90,7 @@
 							<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}"/>
 						</div>
 					</div>
-					<a href="/resource/${resource.shortId}/${resource.slug}"> <span
+					<a itemprop="url" href="/resource/${resource.shortId}/${resource.slug}"> <span
 						class="addToolTip"
 						style="font-size: 12px; padding: 0px"
 						data-toggle="tooltip" title="lien vers la ressource">Détails</span>
