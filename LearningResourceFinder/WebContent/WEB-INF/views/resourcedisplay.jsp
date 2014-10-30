@@ -17,7 +17,6 @@
 <script src="/js/ext/jquery.nouislider.full.min.js"></script>
 <link href="/css/ext/jquery.nouislider.css" rel="stylesheet" />
 
-<script src="http://www.youtube.com/player_api"></script>
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
 <script type="text/javascript">
@@ -324,6 +323,7 @@
  	}
  	
 </script>
+<script src="http://www.youtube.com/player_api"></script>
 
 <STYLE type="text/css">
 /* Styles needed to have a larger text-area for the descrioption (placed by X-editable JavaScript).*/
