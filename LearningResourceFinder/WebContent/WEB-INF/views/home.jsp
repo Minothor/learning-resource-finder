@@ -3,13 +3,11 @@
 <html>
 <head itemscope itemtype="http://schema.org/WPHeader">
 	<title>ToujoursPlus.be - Vidéos, jeux et exercices pour l'école</title>
-	<meta name="title" content="ToujoursPlus.be - Vidéos, jeux et exercices pour l'école" />
-    <meta name="description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />
+    <meta itemprop="title" name="title" property="og:title" content="ToujoursPlus.be - Vidéos, jeux et exercices pour l'école" /> 
+	<meta itemprop="description" name="description"  property="og:description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />  
 	<meta itemprop="keywords" name="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos, jeu,education, apprentissage, eveille, français, mathematique, maths, scientifique, leçons, exercices, interactif, apprendre, découvrir, savoir" />
-	<meta property="og:url" content="http://toujoursplus.be" />
-	<meta itemprop="title" property="og:title" content="ToujoursPlus" /> 
-	<meta itemprop="description" property="og:description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />  
 	<meta itemprop="image" property="og:image" content="http://toujoursplus.be/images/ToujoursPlus-montage-Facebook.png" /> 
+	<meta itemprop="url" property="og:url" content="http://toujoursplus.be" />
 	
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 	
@@ -33,6 +31,7 @@
 	<div class="fb-like" data-href="http://www.toujoursplus.be" data-width="400" data-layout="button" data-action="like" data-show-faces="true" data-share="true"  style="margin-top:0.6em; position: relative; float: left;"></div>
 		<div class="col-md-3 text-right">
 	      	 <a href="/resourcelist"><span style="font-size:20px; margin-top: 0.2em; position: relative; float:left; " class="label label-info addToolTip" title="${nbResouces} ressources ajoutées depuis le 21 avril 2014">${nbResouces}</span></a>
+    	</div> 
     	 <div class="col-md-2"></div>     
    </div>
 </div>
