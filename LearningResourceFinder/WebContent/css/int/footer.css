@@ -1,4 +1,4 @@
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 992px) {
 
     .col-md-3 #footerLogo{
         margin-top: 0.5em;
@@ -15,7 +15,7 @@
        margin-top: 0.5em;
     }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 993px) {
 
     .col-md-3 #footerLogo{
         margin-top: 0.5em;
