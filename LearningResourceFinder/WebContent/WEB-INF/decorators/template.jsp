@@ -9,9 +9,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />  <%-- force IE to doesn't use is compataibility mode--%>
   <meta name="viewport" content="width=device-width" />  <%--Define the base-width as the screen width --%>
-  <meta name="title" content="ToujoursPlus.be - Vidéos, jeux et exercices pour l'école" />
-  <meta name="description" content="Moteur de recherche collaboratif pour qu'élèves et enseignants trouvent facilement des vidéos, exercices et jeux éducatifs gratuits." />
-  <meta name="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos" />
+  <meta name="keywords" itemprop="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos" />
   
   <%@ include file="/WEB-INF/includes/import.jsp"%>
   
