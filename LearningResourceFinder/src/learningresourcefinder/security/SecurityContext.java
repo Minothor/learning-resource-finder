@@ -250,7 +250,7 @@ public  class SecurityContext {
     
     public static void assertCanCurrentDoAction(Action action) {
         if (!canCurrentDoAction(action)) {
-            throw new UnauthorizedAccessException(" cannot do that action: " + action.getDescribe());
+            throw new UnauthorizedAccessException(" cannot do that action: " + action.getDescribeDoable());
         }
     }
     public static boolean canCurrentUserSeeResource(Resource resource) {
