@@ -490,6 +490,9 @@ public class ResourceDisplayController extends BaseController<Resource> {
 		}
 		Resource resource = getRequiredEntity(id);
 		SecurityContext.assertCurrentUserMayEditThisResource(resource);
+		// We first need to unbind with the competences (else we have a stacktrace).  --Ramzi 2014-10-30
+		resource.getCompetences().clear();
+		resourceRepository.merge(resource);
 		resourceRepository.remove(resource);
 		NotificationUtil.addNotificationMessage("Ressource supprimée", Status.SUCCESS);
 		return "redirect:/home";
