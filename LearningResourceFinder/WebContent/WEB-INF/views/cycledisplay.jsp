@@ -34,8 +34,8 @@
 </head>
 <body>
 <lrftag:breadcrumb linkactive="${cycle.name}">
-		<lrftag:breadcrumbelement label="home" link="home" />
-		<lrftag:breadcrumbelement label="cycles" link="cyclelist" />
+		<lrftag:breadcrumbelement label="home" link="/home" />
+		<lrftag:breadcrumbelement label="cycles" link="/cyclelist" />
 </lrftag:breadcrumb>
 
 <div class="container">
