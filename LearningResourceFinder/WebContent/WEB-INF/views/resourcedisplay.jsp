@@ -449,10 +449,10 @@
 							    <c:choose>
 								        <c:when test="${canEditUrl}">
 								            "
-								style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
-								</c:when>
-								<c:otherwise>
-								            nonurleditpop"  
+										style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
+										</c:when>
+										<c:otherwise>
+								            nonurleditpop"> 
 								        </c:otherwise>
 								</c:choose>
 								&times;
