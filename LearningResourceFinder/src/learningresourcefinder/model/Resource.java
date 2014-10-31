@@ -440,5 +440,24 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
         
     }   
     
-
+	public String getCycleRange()
+	{
+	    String cycleRange = "? - ?";
+	    if(minCycle!=null && minCycle!=null)
+	    {
+            String minName = minCycle.getDescription();
+            String maxName = maxCycle.getDescription();
+            
+            String minSection = minName.substring(minName.lastIndexOf("</sup>")+6, minName.length()).trim();
+            String maxSection = maxName.substring(maxName.lastIndexOf("</sup>")+6, maxName.length()).trim();
+            
+            String minCycleString = minName.substring(0, minName.indexOf("-")).trim();
+            String maxCycleString = maxName.substring(maxName.indexOf("-")+1, maxName.lastIndexOf("</sup>")+6).trim();            
+            maxCycleString += " " + maxSection;
+            minCycleString += (!minSection.equals(maxSection))?" "+minSection:"";
+            
+            cycleRange = minCycleString+" - "+maxCycleString;
+	    }
+        return cycleRange;
+	}
 }
