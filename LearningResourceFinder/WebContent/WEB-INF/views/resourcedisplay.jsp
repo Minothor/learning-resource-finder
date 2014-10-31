@@ -13,24 +13,11 @@
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.Jcrop.js"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
-<script src="/js/ext/jquery.nouislider.min.js"></script>
-<script src="/js/ext/jquery.nouislider.full.min.js"></script>
-<link href="/css/ext/jquery.nouislider.css" rel="stylesheet" />
 
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function() {
-		
-		$("[data-toggle='confirmation']").popConfirm({
-			 title : "Confirmation",
-			 content : "Voulez-vous vraiment supprimer cette ressource ?",
-			 placement : "bottom",
-			 yesBtn : "oui",
-			 noBtn : "non"
-		 });
-	});
 	 // create youtube player
 	 var player;
 	 function onYouTubePlayerAPIReady() {
@@ -267,7 +254,15 @@
 	
  	///////  Start JCrop functions
  	$(document).ready(function() {	
-
+ 		
+		$("[data-toggle='confirmation']").popConfirm({
+			 title : "Confirmation",
+			 content : "Voulez-vous vraiment supprimer cette ressource ?",
+			 placement : "bottom",
+			 yesBtn : "oui",
+			 noBtn : "non"
+		 });
+		
  		$('#modalPrintScreen').on('shown.bs.modal', function() { 
 			jQuery('#imageFromPrintScreenAndCrop').Jcrop({
  				onChange : updateCoords,
