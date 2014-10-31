@@ -31,3 +31,11 @@
 .resource-content .lead {
 	cursor : pointer;
 }
+
+#urlresource{
+	display:block;
+	white-space: nowrap; 
+    width: 56ex; 
+	overflow: hidden;
+    text-overflow: ellipsis; 
+}
