@@ -113,7 +113,22 @@
 	// Clipboard paste image - END
 	
  	$(document).ready(function() {
-		
+ 		
+ 		//Why do you erase thes lines?
+ 		//Show cycle editing  pop-ap 
+ 		$('.editableField').editable({   
+ 	    	  emptytext: '? ?',
+ 	    	  send: 'always',  // http://stackoverflow.com/a/20661423/174831
+ 	    	  mode: 'popup',
+ 	    	  type: 'text',
+ 	    	  url: '/ajax/resourceeditfieldsubmit',
+ 	    	  pk: '${resource.id}',
+ 	 		  success: function(response) {
+ 				location.reload();
+ 		      }
+		});
+ 		//Why do you erase thes lines? :: end
+ 		
  		// "Turn on/off" editable fields
 			
 		$('#turnInfoPlusEditableField').click(function(){
