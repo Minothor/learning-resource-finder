@@ -345,6 +345,9 @@
 <meta name="title" content="${resource.name}" />
 <meta name="description" content="<c:choose><c:when test="${empty resource.description}"><c:out value="${resource.name}"/></c:when><c:otherwise><c:out value="${resource.description}"/></c:otherwise></c:choose>"/>
 <meta name="keywords" content="${resource.name}, ressource, éducatif, vidéo, exercice en ligne, aide aux devoirs, leçon éducative" />
+<c:if test="${resource.numberImage >= 1}">
+<meta name="thumbnail" content="/gen/resource/resized/small/${resource.id}-1.jpg" />
+</c:if>
 </head>
 <body>
 
@@ -412,11 +415,13 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div id="rateAndShareDiv" class="row">
-					<div class="col-md-6">
+					<div class="col-md-6" itemProp="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
 						<lrftag:rating id="${resource.id}" title="${resource.name}"
 							scoreResource="${resource.avgRatingScore}"
 							scoreUser="${mapRating[resource].score}"
 							countRating="${resource.countRating}" canvote="${current.canVote}" />
+							<meta itemprop="ratingValue" content="${resource.avgRatingScore}" />
+                            <meta itemprop="ratingCount" content="${resource.countRating}" />
 					</div>
 					<div class="col-md-6">
 						<div class="addthis_sharing_toolbox"
@@ -699,8 +704,10 @@
 							height: 100%;
 						}
 					</style>	
-					<div id="video-container"><%-- container div for responsive layout  --%>
-						<div id="videoyoutube"> <%-- div transformed to iframe with javascript --%> 							
+					<div id="video-container" itemprop="video" itemscope="" itemtype="http://schema.org/VideoObject"><%-- container div for responsive layout  --%>
+						<meta itemprop="name" content="${resource.name}"/>
+						<meta itemprop="duration" content="PT${resource.duration}M"/>
+						<div id="videoyoutube""> <%-- div transformed to iframe with javascript --%> 							
 						</div>
 					</div>	
 				</c:if>
