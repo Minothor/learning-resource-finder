@@ -32,10 +32,12 @@
 	cursor : pointer;
 }
 
-#urlresource{
-	display:block;
-	white-space: nowrap; 
-    width: 56ex; 
-	overflow: hidden;
-    text-overflow: ellipsis; 
+@media only screen and (max-width: 992px) {
+    #urlresource{
+    	display:block;
+    	white-space: nowrap; 
+        width: 40ex; 
+    	overflow: hidden;
+        text-overflow: ellipsis; 
+    }
 }
