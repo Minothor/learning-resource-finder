@@ -36,7 +36,7 @@
     #urlresource{
     	display:block;
     	white-space: nowrap; 
-        width: 40ex; 
+        max-width: 40ex; 
     	overflow: hidden;
         text-overflow: ellipsis; 
     }
