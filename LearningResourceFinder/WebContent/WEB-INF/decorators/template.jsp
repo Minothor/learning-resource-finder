@@ -4,8 +4,9 @@
 <%@ taglib uri='/WEB-INF/tags/lrf.tld' prefix='lrf'%>
 <%@ taglib tagdir="/WEB-INF/tags/lrftag/" prefix="lrftag"%>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" itemscope itemtype="http://schema.org/WebPage" >
 <head>
+  <meta name="locale" itemprop="inLanguage" content="fr" /><%-- defines page language for searching --%>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />  <%-- force IE to doesn't use is compataibility mode--%>
   <meta name="viewport" content="width=device-width" />  <%--Define the base-width as the screen width --%>
@@ -18,7 +19,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />  <%-- for IE --%>
   <link rel="icon" type="image/png" href="/favicon.png">  <%-- for Chrome, Safari and Firefox --%>
 
-  <title><decorator:title /></title>
+  <title itemprop="name"><decorator:title /></title>
 </head>
 <body>
 
