@@ -501,7 +501,7 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-12">
-									<c:choose>
+										<c:choose>
 										    <c:when test="${canEdit}">
 												<span id="editingSpan" class="close" style="display:none; float: left; font-size: 15px"><i>édition...</i></span>
 												<span id="turnInfoPlusEditableField" class='glyphicon glyphicon-pencil addToolTip close' style="float: right; font-size: 15px" title="Modifier l'info"></span>
