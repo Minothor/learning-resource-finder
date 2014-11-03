@@ -46,12 +46,17 @@
 				<div class="col-md-2">
 					<h4>Séquences</h4>
 					<a href="/playlist/all">Toutes les séquences</a>
-					<div id="FBbox" style="text-align:right;">
-					    <a href="https://www.facebook.com/be.toujoursplus"><span class="addToolTip glyphicon icon-facebook" style="font-size:21px; color:#3B5999" data-toggle="tooltip" title="notre page facebook"></span></a>
-					    <br/><br/><br/>
-					    
+					 <br/><br/><br/>
+					 
 					    <a href="/contact">Contactez-nous</a>
-					</div>
+					     <br/>
+					    
+					<div id="FBbox" style="text-align:left;">
+					    <a href="https://www.facebook.com/be.toujoursplus"><span class="addToolTip glyphicon icon-facebook" style="font-size:21px; color:#3B5999" data-toggle="tooltip" title="notre page facebook"></span></a><br/>
+					     <small>ToujoursPlus a été testé sur Google Chrome.</small><br/>
+					 </div>   
+				
+					
 				</div>
       		</div>
       	</div>
