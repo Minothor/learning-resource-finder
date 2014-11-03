@@ -1,6 +1,7 @@
 package learningresourcefinder.service.crawler;
 
 import java.io.IOException;
+import java.net.URL;
 
 import learningresourcefinder.search.SearchOptions.Format;
 
@@ -18,14 +19,24 @@ public class CrawlerChampionMath
     //DONE 94 resources
     public void crawler() throws IOException
     {
-        Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();
+        String url = "http://championmath.free.fr/";
+
+
+        Document doc = Jsoup.parse(new URL(url).openStream(), "ISO-8859-1", url);
+        //Document doc = Jsoup.connect("http://championmath.free.fr/").timeout(10000).get();
         Elements elements = doc.select("table:nth-child(4)").select("a");
         for (Element element : elements) 
         {
             String lienAnnee = "http://championmath.free.fr/"+element.attr("href");
             String niveau = element.text(); 
             String cycle = null;
-            Document doc2 = Jsoup.connect(lienAnnee).timeout(10000).get();
+            
+            //File input2 = new File("/tmp/input.html");
+           // Document doc2 = Jsoup.parse(input2, "UTF-8", lienAnnee);
+
+            Document doc2 = Jsoup.parse(new URL(lienAnnee).openStream(), "ISO-8859-1", lienAnnee);
+            
+            //Document doc2 = Jsoup.connect(lienAnnee).timeout(10000).get();
             Elements elements2 = doc2.select("div#menu li a");
             System.out.println(niveau);
             String[] partsOfTitle = niveau.split(" ");

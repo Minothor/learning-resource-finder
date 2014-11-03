@@ -1,6 +1,7 @@
 package learningresourcefinder.service.crawler;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,9 +31,12 @@ public class CrawlerToutSavoir
     //DONE 428
     public void crawler() throws IOException    
     {  
+        String charsetName = "ISO-8859-1";//"UTF-8";
         String minCycle = "";
         String maxCycle = "";
-        Document frontPage = Jsoup.connect("http://www.toutsavoir-hatier.com").timeout(10000).get();
+        String mainUrl = "http://www.toutsavoir-hatier.com";
+        Document frontPage = Jsoup.parse(new URL(mainUrl).openStream(), charsetName, mainUrl);
+        //Document frontPage = Jsoup.connect("http://www.toutsavoir-hatier.com").timeout(10000).get();
         Elements elements = frontPage.select(".lienblancns").select("a");    //Selectionne CP CM... liens de milieu de page
        
         for (Element element : elements) 
@@ -60,7 +64,8 @@ public class CrawlerToutSavoir
             System.out.println("=======================================================================");
             String mainLink = "http://www.toutsavoir-hatier.com/" + element.attr("href");
 
-            Document categoryDoc = Jsoup.connect(mainLink).timeout(10000).get();
+           // Document categoryDoc = Jsoup.connect(mainLink).timeout(10000).get();
+            Document categoryDoc = Jsoup.parse(new URL(mainLink).openStream(), charsetName, mainLink);
             Elements elementsByCategory = categoryDoc.select(".lienblancns").select("a");  // Selectionne Francais Maths... + CP CM1 en bas de page
 
             for (Element elementByCategory : elementsByCategory)  
@@ -75,7 +80,16 @@ public class CrawlerToutSavoir
                 if (!goToCategory.contains("ecole")) // Pour éviter les liens CP CM1... de bas de page - garde les liens année/matière
                 {
 
-                    Document sommaireExosByCategory = Jsoup.connect(goToCategory).timeout(10000).get();  
+                    Document sommaireExosByCategory ; 
+                   // Document sommaireExosByCategory = Jsoup.connect(goToCategory).timeout(10000).get(); 
+                    if(goToCategory.equals("http://www.toutsavoir-hatier.com/liste_podcasts.php?matiere=anglais&id_classe=cm2"))
+                    {
+                        sommaireExosByCategory = Jsoup.parse(new URL(goToCategory).openStream(), "UTF-8", goToCategory); 
+                    }
+                    else
+                    {
+                        sommaireExosByCategory = Jsoup.parse(new URL(goToCategory).openStream(), charsetName, goToCategory);                         
+                    }
                     Elements exosList= sommaireExosByCategory.select("a");
 
                     for (Element linkFinal : exosList) 
@@ -83,7 +97,8 @@ public class CrawlerToutSavoir
                         if (linkFinal.attr("href").contains("exo_entrainement")) {  // exo_entrainement: nomenclature commune math francais
 
                             String goToFinalLinkMathFrench = "http://www.toutsavoir-hatier.com/" + linkFinal.attr("href");
-                            Document mathFrenchDoc = Jsoup.connect(goToFinalLinkMathFrench).timeout(10000).get();
+                            //Document mathFrenchDoc = Jsoup.connect(goToFinalLinkMathFrench).timeout(10000).get();
+                            Document mathFrenchDoc = Jsoup.parse(new URL(goToFinalLinkMathFrench).openStream(), charsetName, goToFinalLinkMathFrench); 
                             Elements mathFrenchExos = mathFrenchDoc.select(".enonce");
                             for ( Element mathFrenchExo : mathFrenchExos) {
 
@@ -103,7 +118,8 @@ public class CrawlerToutSavoir
                         else if (linkFinal.attr("href").contains("fiche_dictee")) {  
 
                             String goToFinalLinkDictees = "http://www.toutsavoir-hatier.com/" + linkFinal.attr("href");
-                            Document dicteesDoc = Jsoup.connect(goToFinalLinkDictees).timeout(10000).get();
+                            //Document dicteesDoc = Jsoup.connect(goToFinalLinkDictees).timeout(10000).get();
+                            Document dicteesDoc = Jsoup.parse(new URL(goToFinalLinkDictees).openStream(), "ISO-8859-1", goToFinalLinkDictees); 
                             Elements dicteesExos = dicteesDoc.select(".notion");
                             for ( Element dicteesExo : dicteesExos) {
 
