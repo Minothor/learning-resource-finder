@@ -20,14 +20,14 @@
     <div>    	
     	<h3>Execute Crawlers</h3> <br>
 		<!--  <a href="/crawler/brainPop" class="btn btn-primary btn-lg">Crawler brainpop.fr</a>  -->
-    	<a href="/crawler/championMath" class="btn btn-primary btn-lg">Crawler championmath.free.fr ></a>
-    	<a href="/crawler/classePrimaire" class="btn btn-primary btn-lg">Crawler classeprimaire.be</a>   	
-    	<a href="/crawler/exoFiche" class="btn btn-primary btn-lg">Crawler exofiches.net</a><br><br> 
+    	<!--  executed without error  <a href="/crawler/championMath" class="btn btn-primary btn-lg">Crawler championmath.free.fr ></a> -->
+    	<!--  executed without error  <a href="/crawler/classePrimaire" class="btn btn-primary btn-lg">Crawler classeprimaire.be</a>   --> 	
+    	<!--  executed without error  <a href="/crawler/exoFiche" class="btn btn-primary btn-lg">Crawler exofiches.net</a><br><br>  -->
     	<!--  no persist  <a href="/crawler/fondationlamap" class="btn btn-primary btn-lg">Crawler fondation-lamap.org</a>     -->	  	
     	<!--  executed without error  <a href="/crawler/crawlerLaRecre" class="btn btn-primary btn-lg">Crawler LaRecre</a>    -->	 
     	<!--  executed without error  <a href="/crawler/professeurPhiFix" class="btn btn-primary btn-lg">Crawler profeseurphifix</a> -->
     	<a href="/crawler/soutien67" class="btn btn-primary btn-lg">Crawler soutien67.free.fr</a>
-    	<a href="/crawler/toutSavoir" class="btn btn-primary btn-lg">Crawler toutsavoir-hatier.com</a>
+    	<!--  executed without error  <a href="/crawler/toutSavoir" class="btn btn-primary btn-lg">Crawler toutsavoir-hatier.com</a> -->
     	<br><br><hr> 
     	<h3>Execute Crawler khanacademy</h3> <br>
     	<p><b>Math</b></p>
