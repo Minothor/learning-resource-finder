@@ -90,7 +90,8 @@ public class AdminController extends BaseRepository<User> {
 		} catch (IOException e)	{
 			throw new RuntimeException(e);
 		}
-		return "admin";
+        NotificationUtil.addNotificationMessage("Crawler "+pageName+" réussi");
+		return createIndex();
 	}
 	
 	@RequestMapping("/crawlerkhanacademy/{num}")
@@ -104,7 +105,8 @@ public class AdminController extends BaseRepository<User> {
         {
             throw new RuntimeException(e);
         }
-        return "admin";
+        NotificationUtil.addNotificationMessage("Crawler Khan Academy("+num+") réussi");
+        return createIndex();
     }
     
 }
