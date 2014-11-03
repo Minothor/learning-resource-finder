@@ -157,7 +157,7 @@ public class ResourceEditController extends BaseController<Resource> {
         
         // If the user adding the resource is trusted for validating other resource or if Url starts with an Url generic,
         // then we can directly trust him for this new resource... ==> resource automatically validated
-        if (levelService.canDoAction(user, Action.ADD_RESOURCE) || urlgenericrepository.checkIfUrlStartsWithGenericUrl(url)) {
+        if (levelService.canDoAction(user, Action.VALIDATE_RESOURCE) || urlgenericrepository.checkIfUrlStartsWithGenericUrl(url)) {
         	resource.setValidationStatus(ValidationStatus.ACCEPT);
         	resource.setValidationDate(resource.getCreatedOn());
         	resource.setValidator(user);
