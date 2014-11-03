@@ -674,11 +674,14 @@
 												</c:otherwise>
 											    </c:choose>"${canValidate==true ? "href='#' class='noteditableField addToolTip'	data-type='select' data-emptytext='?non validée?' 
 											": "class='noneditresource addToolTip'"} data-source="${dataEnumValidationStatus}">
-											<c:if test="${resource.validator==null}">
+											<c:choose>
+											<c:when test="${resource.validator==null}">
 								   	        		 non validée 
-											</c:if>
-											
-											${resource.validationStatus.description} </span>
+											</c:when>
+											<c:otherwise>
+											${resource.validationStatus.description} 
+											</c:otherwise>
+											</c:choose></span>
 												
 										</div>
 										</div>
