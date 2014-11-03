@@ -25,9 +25,41 @@ public class LandingPageController {
        return prepareModelAndView("exercice neerlandais", "introexerciceneerlandais.jsp");
    }
    
+   @RequestMapping(value = "/corps-humain")
+   public ModelAndView exerciceDucorpshumain() {
+       return prepareModelAndView("corps humain", "introtextcorpshumian.jsp");
+   }
+   
+   
    @RequestMapping(value = "/exercices-de-math")
    public ModelAndView exerciceDeMath() {
        return prepareModelAndView("exercice math", "introexercicemath.jsp");
+   }
+   
+   
+   @RequestMapping(value = "/anglais-facile")
+   public ModelAndView exerciceDanglais() {
+       return prepareModelAndView("exercice anglais", "introtextanglaisfacile.jsp");
+   }
+   
+   @RequestMapping(value = "/conjugaison")
+   public ModelAndView exerciceDeconjugaisons() {
+       return prepareModelAndView("exercice conjugaison", "introtextconjugaison.jsp");
+   }
+   
+   @RequestMapping(value = "/ecole-virtuelle")
+   public ModelAndView exerciceDecolevirtuelle() {
+       return prepareModelAndView("exercice ecole virtuelle", "introtextecolevirtuelle.jsp");
+   }
+   
+   @RequestMapping(value = "/orthographe")
+   public ModelAndView exerciceDorthographe() {
+       return prepareModelAndView("exercice d'orthographe", "introtextortographe.jsp");
+   }
+   
+   @RequestMapping(value = "/nederlands")
+   public ModelAndView exerciceNederlands() {
+       return prepareModelAndView("nederlands", "introtextortographe.jsp");
    }
 
    private ModelAndView prepareModelAndView(String searchPhrase, String introJspName) {
@@ -39,57 +71,7 @@ public class LandingPageController {
        mv.addObject("introtextjsp", introJspName);
        return mv;
    }
-
+}
    
-//   @RequestMapping(value = "introtextexercices-de-math")
-//   public ModelAndView exerciceDeMath() {
-//       resourcelist = search("introtextexercice-de-math");
-//        ModelAndView mv = new ModelAndView("landingpage");
-//        mv.addObject("introtextjsp", "introexercicemath.jsp");
-//        return mv;
-//   }
-   
-//   @RequestMapping(value = "/introtextconjugaison")
-//   public ModelAndView exerciceDeconjugaison() {
-//       resourcelist = search("introtextconjugaison");
-//       ResourceListPagerService.preparedMV(mv);
-//       
-//        ModelAndView mv = new ModelAndView("landingpage");
-//        mv.addObject("introtextjsp", "/WEB-INF/include/conjugaison.jsp");
-//        return mv;
-//   }
-//   
-//   @RequestMapping(value = "/introtextorthographe")
-//   public ModelAndView exerciceDorthographe() {
-//       resourcelist = search("introtextorthographe");
-//        ModelAndView mv = new ModelAndView("landingpage");
-//        mv.addObject("introtextjsp", "introtextorthographe.jsp");
-//        return mv;
-//   }
-//   
-//   @RequestMapping(value = "/introtextanglais-facile")
-//   public ModelAndView exerciceDanglaisfacile() {
-//       resourcelist = search("introtextanglais-facile");
-//        ModelAndView mv = new ModelAndView("landingpage");
-//        mv.addObject("introtextjsp", "/WEB-INF/include/introtextanglaisfacile.jsp");
-//        return mv;
-//   }
-//   
-//   @RequestMapping(value = "/introtextecole-virtuel")
-//   public ModelAndView exerciceDecolevirtuel() {
-//       resourcelist = search("introtextecole-virtuel");
-//        ModelAndView mv = new ModelAndView("landingpage");
-//        mv.addObject("introtextjsp", "/WEB-INF/include/introtextecolevirtuelle.jsp");
-//        return mv;
-//   }
-//   
-//   @RequestMapping(value = "/introtextcorps-humain")
-//   public ModelAndView exerciceDecorpshumain() {
-//       resourcelist = search("introtextcorps-humain");
-//        ModelAndView mv = new ModelAndView("landingpage");
-//        mv.addObject("introtextjsp", "/WEB-INF/include/introtextcorpshumain.jsp");
-//        return mv;
-//   }
- }
 
 
