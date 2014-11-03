@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	
+	var executing = false;//for executing ajax once a time
 	
 	$('#spinner').hide();  // Hourglass at the end of the page
 	
@@ -15,8 +15,8 @@ $(document).ready(function() {
 			// when last batch of resources to display provided to jsp to inform no more reload necessary.
 			var tokenListOfResources=$("#tokenListOfResources").val();
 			var tokenMoreResources=$("#tokenMoreResources").val();  // Did the server told is that there are more resources to be loaded?
-			if (tokenListOfResources != "0" && tokenMoreResources != "0") {  // Let's load more resources
-
+			if (executing==false && tokenListOfResources != "0" && tokenMoreResources != "0") {  // Let's load more resources
+				executing = true;
 				$('#spinner').show();
 
 				$.ajax({
@@ -33,6 +33,7 @@ $(document).ready(function() {
 							$('#spinner').hide();
 							location.reload();
 						}
+						executing = false;
 					},
 					error : function(data) {
 						alert("Problème en contactant le serveur" );

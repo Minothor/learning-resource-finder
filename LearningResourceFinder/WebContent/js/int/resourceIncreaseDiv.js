@@ -1,6 +1,6 @@
 var toFrontZIndex = 2;
 function resourceIncrease(){
-	$(".resource-content > .panel-heading:not(.clickAvailable").click(function() 
+	$(".resource-content > .panel-heading").not(".clickAvailable").click(function() 
 	{
       	if ($(this).parent().hasClass("resource-content-big")) { // If is small
       		$(this).parent().switchClass("resource-content-big", "resource-content", 0);  // Big will be small
@@ -12,6 +12,7 @@ function resourceIncrease(){
 	});
 	$(".resource-content > .panel-heading").addClass("clickAvailable");
 }
+
 $(document).ready(function() {
 	resourceIncrease();
 });
