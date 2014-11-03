@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HelloWorldController extends BaseController<User> {
 
-
+   
     @RequestMapping(value="/helloworld")
     public String helloWorld() {
         return "helloworld";
