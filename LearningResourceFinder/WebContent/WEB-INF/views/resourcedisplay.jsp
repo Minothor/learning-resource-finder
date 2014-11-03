@@ -223,6 +223,7 @@
  	 	    
  	    $(".noneditresource").popoverWithAutoHideForPrivilege("Pour modifier ce champ, il faut être connecté et avoir un niveau 3 de contribution." );
 
+ 	    $(".noneditresources").popoverWithAutoHideForPrivilege("Pour modifier ces champs, il faut être connecté et avoir un niveau 3 de contribution." );
  	    
  	   	$("#closeButton1, #closeButton2").click( function()
            {
@@ -498,16 +499,20 @@
 						
 						<div class="panel panel-default">
 							<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12">
-									<lrf:conditionDisplay privilege="MANAGE_PLAYLIST">
-										<span id="editingSpan" class="close" style="display:none; float: left; font-size: 15px"><i>édition...</i></span>
-										<span id="turnInfoPlusEditableField" ${canEdit==true? "class='glyphicon glyphicon-pencil addToolTip close' ":" class='noneditresource'"}
-										style="float: right; font-size: 15px" title="Modifier l'info"></span>
-										<span id="closeInfoPlusEditableField" class="glyphicon glyphicon-remove close" style="display:none; float: right; font-size: 15px" title="Fermer l'édition" onclick="location.reload()"></span>
-								</lrf:conditionDisplay>
+								<div class="row">
+									<div class="col-md-12">
+									<c:choose>
+										    <c:when test="${canEdit}">
+												<span id="editingSpan" class="close" style="display:none; float: left; font-size: 15px"><i>édition...</i></span>
+												<span id="turnInfoPlusEditableField" class='glyphicon glyphicon-pencil addToolTip close' style="float: right; font-size: 15px" title="Modifier l'info"></span>
+												<span id="closeInfoPlusEditableField" class="glyphicon glyphicon-remove close" style="display:none; float: right; font-size: 15px" title="Fermer l'édition" onclick="location.reload()"></span>
+											</c:when> 
+											<c:otherwise>
+												<span class='glyphicon glyphicon-pencil addToolTip close noneditresources' style="float: right; font-size: 15px" title="Modifier l'info"></span>
+								    	    </c:otherwise> 
+										</c:choose>
+									</div>
 								</div>
-							</div>
 								<div class="row">
 									<div class="col-md-6">
 										<span class="text-muted">format :</span>
