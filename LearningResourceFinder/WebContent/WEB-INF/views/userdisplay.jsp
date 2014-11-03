@@ -89,7 +89,7 @@
 					
 					<li><label>Genre :</label> ${user.gender ne null?user.gender.description:"?"}</li>
 					<li><label>Type :</label> ${user.userType ne null?user.userType.description:"?"}</li>
-						<li><label>Né le :</label> <c:choose><c:when test="${user.birthDate ne null}">${user.birthDate}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
+						<li><label>Né le :</label> <c:choose><c:when test="${user.birthDate ne null}"><lrf:datedisplay date="${user.birthDate}" /></c:when><c:otherwise>?</c:otherwise></c:choose></li>
 					<li><label>Pseudo :</label> ${user.userName}</li>
 					<li><label>Email :</label> <c:choose><c:when test="${user.mail ne null}">${user.mail}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
 					<li><label>Titre :</label> <c:choose><c:when test="${user.title ne null}">${user.title}</c:when><c:otherwise>?</c:otherwise></c:choose></li>
