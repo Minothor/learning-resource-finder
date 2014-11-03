@@ -7,6 +7,7 @@
 <head>
 <!--  "Remove" script for social network's buttons -->
 <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script> -->
+
 </head>
 <style>
 .resourceDescription {
@@ -14,31 +15,34 @@
 }
 </style>
 
-<div style="display: inline-block; position: relative; vertical-align: top; height:208px; width: 200px; margin-right: 20px; margin-bottom: 20px;">
- <div itemscope itemtype="http://schema.org/CreativeWork" class="resource-content panel panel-default">
-	<span id="${playlist.id}-${resource.id}" class="sortableItem"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
+<div class="resourcecontainer" style="display: inline-block; position: relative; vertical-align: top; height:208px; width: 200px; margin-right: 20px; margin-bottom: 20px;">
+ <div itemscope itemtype="http://schema.org/CreativeWork" class="resource-content-small panel panel-default">
+
+    <c:if test="${playlist != null}">
+	   <span id="${playlist.id}-${resource.id}" class="sortableItem"></span> <%-- Used by sorting JavaScript code to know the id of this resource (for drag-drop sorting) --%>
+	</c:if>
 	
 	<c:choose>
 		<c:when test="${resource.validationStatus=='ACCEPT' || current.canSeeNotValidatedResource}">
 
-			<div class="panel-heading">
-					<span class="lead" style="font-size: 16px"><c:if test='${! empty prefix}'>${prefix}. </c:if>
-						<a itemprop="name">${resource.name}</a>
-<%-- 						<a href="/resource/${resource.shortId}/${resource.slug}" >${resource.name}</a> --%>
-						
-					</span>
-					
+				<div class="panel-heading">
+					<span class="lead" style="font-size: 16px"><c:if
+							test='${! empty prefix}'>${prefix}. </c:if> <a itemprop="name">${resource.name}</a>
+						<%-- 						<a href="/resource/${resource.shortId}/${resource.slug}" >${resource.name}</a> --%>
+						<input type="hidden" value="${resource.id}">
+					 </span>
 
-				<c:if test='${! empty closeUrl}'>
-					<a href="<c:url value='${closeUrl}'/>">
-						<button type="button" class="addToolTip close"
-							style="position: absolute; top: 2px; right: 14px;"
-							data-toggle="tooltip"
-							title="retirer cette ressource de la séquence">&times;</button>
-					</a>
-				</c:if>
-			</div>
-			<div class="row" style="margin-left: 0px; margin-right: 0px;">
+
+					<c:if test='${! empty closeUrl}'>
+						<a href="<c:url value='${closeUrl}'/>">
+							<button type="button" class="addToolTip close"
+								style="position: absolute; top: 2px; right: 14px;"
+								data-toggle="tooltip"
+								title="retirer cette ressource de la séquence">&times;</button>
+						</a>
+					</c:if>
+				</div>
+				<div class="row" style="margin-left: 0px; margin-right: 0px;">
 				<c:if test="${resource.numberImage >= 1}">
 					<div class="imgDiv col-xs-6" id="yoxview-resource-${resource.id}" style="padding:0px;">
 						<a href="/gen/resource/original/${resource.id}-1.jpg"> <img 
@@ -61,54 +65,13 @@
 				    	  }) 
 				       });
 	    			</script>
-				</c:if>				
-				<div  class="descriptionDiv col-xs-6 ${resource.numberImage>=1?"resource-content-hidden":""}" style="padding-right: 5px;">
-					<div class="resource-content-hidden" style="float:right; padding:0px; margin-top: 5px">	
-						<a href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank" onclick="updateViewcountAndPpularity(${resource.id});" > <span
-						class="addToolTip glyphicon glyphicon-circle-arrow-right"
-						style="font-size: 35px; padding: 0px"
-						data-toggle="tooltip" title="lien direct vers ce site"></span>
-						</a>
-					</div>
-					<p class="resourceDescription">
-						<small itemprop="description">${resource.descriptionCut}</small>
-					</p>
-				</div>
-			</div>
-			<div class="resource-content-hidden row" style="margin-left: 0px; margin-right: 0px;padding-top: 5px;">
-				<div class="col-xs-6" style="padding-left: 3px; padding-right: 0px;">
-					<lrftag:rating id="${resource.id}" title="${resource.name}"
-						scoreResource="${resource.avgRatingScore}"
-						scoreUser="${mapRating[resource].score}"
-						countRating="${resource.countRating}" canvote="${current.canVote}"/>
-				</div>				
-				<div class="resource-content-hidden col-xs-6" style="margin-left: 0px; margin-right: 0px;">
-					<div class="row">
-						<div class="col-xs-6 addthis_sharing_toolbox" style="display: inline-block;">					
-						</div>
-						<div class="col-xs-6" style="display: inline-block; font-size: 20px">	
-							<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}"/>
-						</div>
-					</div>
-					<a itemprop="url" href="/resource/${resource.shortId}/${resource.slug}"> <span
-						class="addToolTip"
-						style="font-size: 12px; padding: 0px"
-						data-toggle="tooltip" title="lien vers la ressource">Détails</span>
-					</a>
-					<span class="addToolTip glyphicon glyphicon-eye-open" style="font-size: 12px; padding: 0px; margin-left: 5px"
-						data-toggle="tooltip" title="Nombre de vues"><span id="viewCounter${resource.id}">  ${resource.viewCount}</span></span><br>
-					  <span><b>Platform:</b> <c:forEach items="${resource.platforms}" var="platform">${platform.name} </c:forEach></span><br>
-					  <c:choose>
-					  		<c:when test="${resource.duration != null}"><span><b>Durée:</b> ${resource.duration}m</span><br> </c:when>
-					  </c:choose>
-					  <c:choose>
-					  	<c:when test="${resource.minCycle != null}"><span><b>Cycle: </b>${resource.minCycle.name} &#8594; ${resource.maxCycle.name}</span></c:when>
-					  </c:choose>
-				</div>
+				</c:if>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="panel-heading">
+				<input type="hidden" value="${resource.id}">
+			
 
 				<a href="/resource/${resource.shortId}" class="lead">${resource.shortId}</a>
 
@@ -129,7 +92,10 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-</div>
-</div>
+  </div>
+  
+  <%-- div resource-content-exp will be injected here by Ajax. --%>
+  
+</div>  <%-- end of container --%>
 
 

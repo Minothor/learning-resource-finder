@@ -4,6 +4,8 @@
 <head>
 <title>Catalogue de ressources</title>
 <script type="text/javascript" src="/js/int/moreResources.js"></script>
+<script type="text/javascript" src="/js/int/resourceExpend.js"></script>
+
 </head>
 <body>
     <input type="hidden" value="${tokenListOfResources}" id="tokenListOfResources"/>
