@@ -1,3 +1,4 @@
+
 function resourceExpandOnClick()
 {
 	$('.resource-content-small .panel-heading').not(".clickAvailable").click(function(){
@@ -20,7 +21,7 @@ function resourceExpandOnClick()
 					    showResourceContainerSmall(resourcecontainer);
 					});
 					// TODO re-execute JavaScripts that could impact added elements.
-					
+					yoxviewOnLatestResource();
 				}
 			});		
 		} else {

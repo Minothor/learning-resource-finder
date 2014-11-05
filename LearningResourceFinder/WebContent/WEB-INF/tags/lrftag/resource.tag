@@ -45,7 +45,7 @@
 				<div class="row panel-body" style="margin-left: 0px; margin-right: 0px;">
 				<c:choose>
 				<c:when test="${resource.numberImage >= 1}">
-					<div class="imgDiv col-xs-6" id="yoxview-resource-${resource.id}" style="padding:0px;">
+					<div class="imgDiv col-xs-6" style="padding:0px;">
 						<a href="/gen/resource/original/${resource.id}-1.jpg"> <img 
 						itemprop="image"
 							src="/gen/resource/resized/small/${resource.id}-1.jpg"

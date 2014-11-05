@@ -25,7 +25,8 @@
 						</a>
 					</div>
 					<script type="text/javascript">
-				       $(document).ready(function(){
+				       //$(document).ready(function(){
+				       function yoxviewOnLatestResource(){	   
 				    	  $("#yoxview-resource-${resource.id}").yoxview({
 				    		  lang:"fr",
 				    		  <%-- Additional images if any, will be displayed by yoxview if the user clicks arrows to view next --%>
@@ -35,8 +36,8 @@
 				    		      <c:if test="${i < resource.numberImage}">,</c:if>
 				    		  </c:forEach>
 				    		  ]
-				    	  }) 
-				       });
+				    	  }) ;
+				       }
 	    			</script>
   				 </c:when>  
         		 <c:otherwise>  
