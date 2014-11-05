@@ -16,6 +16,7 @@
 
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
+<script type="text/javascript" src="/js/int/bootstrapTourCustom.js"></script>
 <script type="text/javascript">
 
 	 // create youtube player
@@ -333,6 +334,8 @@
  		$("#modalCompetence").modal("show");
  	}
  	
+	
+ 	
 </script>
 <script src="http://www.youtube.com/player_api"></script>
 
@@ -427,10 +430,12 @@
 			<div class="col-md-8">
 				<div id="rateAndShareDiv" class="row">
 					<div class="col-md-6" itemProp="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+						<div class="col-md-4" id="tourStepVote">
 						<lrftag:rating id="${resource.id}" title="${resource.name}"
 							scoreResource="${resource.avgRatingScore}"
 							scoreUser="${mapRating[resource].score}"
 							countRating="${resource.countRating}" canvote="${current.canVote}" />
+						</div>
 							<meta itemprop="ratingValue" content="${resource.avgRatingScore}" />
                             <meta itemprop="ratingCount" content="${resource.countRating}" />
 					</div>

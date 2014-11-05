@@ -12,7 +12,9 @@
 <link rel="stylesheet" media="screen,projection" href="/css/ext/ui.totop.css" />  <%-- bottom right corner button to move to the top of the page --%>
 <link rel="stylesheet" href="/plugins/yoxview/yoxview.css">   <%--http://yoxigen.com/yoxview --%>
 <link rel="stylesheet" href="/css/ext/jquery-ui-1.11.1.min.css"> <%--for autocomplete --%>
+<link rel="stylesheet" href="/css/ext/bootstrap-tour.min.css">
 <link rel="stylesheet" href="/css/int/resourceStyle.css" type="text/css"/> <%--resource style--%>
+
 <link rel="stylesheet" href="/css/int/footer.css" type="text/css"/> <%--footer positioning--%>
 <!-- ***************************** END CSS **************************** -->
 
@@ -27,7 +29,8 @@
 <script src="/js/ext/jquery.ui.totop.js"></script>
 <script src="/js/ext/jquery.easing.1.3.js" type="text/javascript"></script>
 <script src="/js/ext/modernizr.custom.08676.js"></script>
-<script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ --> 
+<script src="/js/ext/webshims-stable/minified/polyfiller.js"></script>  <!-- http://afarkas.github.io/webshim/demos/ -->
+<script src="/js/ext/bootstrap-tour.min.js"></script>
 <script src="/plugins/yoxview/jquery.yoxview-2.21.min-modified.js"></script>  <%--http://yoxigen.com/yoxview --%>
 <script src="/js/int/allPages.js"></script>
 <script src="/js/int/mobileHyperlinkDelay.js"></script>
