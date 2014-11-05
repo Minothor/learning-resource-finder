@@ -18,7 +18,7 @@
 <%---------------------------------- LOGO ----------------------------------%>
 <div class="container" style="padding-top:20px; padding-bottom:20px;">
    <div class="text-center">
-       <img src="/images/ToujoursPlus-logo-500px.png" alt="logo ToujoursPlus créateur de curiosité" class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" /><br/>
+       <img src="/images/ToujoursPlus-logo-500px.png" alt="logo ToujoursPlus créateur de curiosité" id="mainLogo " class="img-responsive" style="margin: 0 auto;" alt="ToujoursPlus.be logo" /><br/>
        <br/>
    </div>
    <div class="row">
