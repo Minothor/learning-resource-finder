@@ -3,7 +3,7 @@
 
 <%-- Fragment returned by an AJAX call to expend resource info --%>
 
-<div class="resource-content-exp">
+<div class="resource-content-exp panel panel-default">
 
 	<div class="panel-heading">
 		<span class="lead" style="font-size: 16px">
