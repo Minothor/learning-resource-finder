@@ -15,7 +15,7 @@
 }
 </style>
 
-<div class="resourcecontainer" style="display: inline-block; position: relative; vertical-align: top; height:208px; width: 200px; margin-right: 20px; margin-bottom: 20px;">
+<div class="resourcecontainer" style="display: inline-block; position: relative; vertical-align: top; height: 232px; width: 200px; margin-right: 20px; margin-bottom: 20px;">
  <div itemscope itemtype="http://schema.org/CreativeWork" class="resource-content-small panel panel-default">
 
     <c:if test="${playlist != null}">
@@ -27,7 +27,7 @@
 
 				<div class="panel-heading">
 					<span class="lead" style="font-size: 16px"><c:if
-							test='${! empty prefix}'>${prefix}. </c:if> <a itemprop="name">${resource.name}</a>
+							test='${! empty prefix}'>${prefix}. </c:if> <a itemprop="name"><h4>${resource.name}</h4></a>
 						<%-- 						<a href="/resource/${resource.shortId}/${resource.slug}" >${resource.name}</a> --%>
 						<input type="hidden" value="${resource.id}">
 					 </span>
@@ -42,8 +42,9 @@
 						</a>
 					</c:if>
 				</div>
-				<div class="row" style="margin-left: 0px; margin-right: 0px;">
-				<c:if test="${resource.numberImage >= 1}">
+				<div class="row panel-body" style="margin-left: 0px; margin-right: 0px;">
+				<c:choose>
+				<c:when test="${resource.numberImage >= 1}">
 					<div class="imgDiv col-xs-6" id="yoxview-resource-${resource.id}" style="padding:0px;">
 						<a href="/gen/resource/original/${resource.id}-1.jpg"> <img 
 						itemprop="image"
@@ -65,18 +66,26 @@
 				    	  }) 
 				       });
 	    			</script>
-				</c:if>
+				</c:when>
+				<c:otherwise>
+				
+				<p class="resourceDescription">
+					<small itemprop="description">${resource.descriptionCut}</small>
+				</p>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="panel-heading">
 				<input type="hidden" value="${resource.id}">
-			
+			<span class="lead">
 				<a href="/resource/${resource.shortId}" class="lead">${resource.shortId}</a>
+			
+			</span>
 
 			</div>
-			<div class="panel-body"
-				style="font-size: 10px !important; margin-bottom: 20px;">
+			<div class="panel-body" style="font-size: 10px !important; margin-bottom: 20px;">
 				<c:choose>
 								<c:when test='${resource.validationStatus=="REJECT"}'>
 										<p>Un contributeur a estimé que cette ressource est inappropriée pour les enfants.</p>
