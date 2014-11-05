@@ -93,7 +93,7 @@ public class SiteMapService {
 	 */
 	private void generateMainMap(Document doc) {
 		String[] urls =  {"/","/playlist/all","/resourcelist","/competencetree"};
-		String[] landingPageurls = {"/conjugaison", "/orthographe", "/ecole-virtuelle", "/nederlands", "/chien-et-chat", "/subjonctif", "/ligne-du-temps", "/botanique",  "/corps-humain", "/exercices-de-math", "/neerlandais" }; 
+		String[] landingPageurls = {"/corps-humain", "/exercices-de-math", "/neerlandais", "/anglais-facile", "/conjugaison", "/orthographe", "/ecole-virtuelle", "/nederlands", "/subjonctif", "/ligne-du-temps", "/botanique"}; 
 
 		Element rootElement = generateRootElement(doc);
 
