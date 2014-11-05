@@ -27,7 +27,7 @@ $(document).ready(function() {
 					success : function(data) 
 					{if(data.length!=0){
 							$("#resourcelist").append(data);
-							resourceIncrease();
+							resourceExpandOnClick();
 							$('#spinner').hide();
 						} else { // Session has expired. Reload the page.
 							$('#spinner').hide();

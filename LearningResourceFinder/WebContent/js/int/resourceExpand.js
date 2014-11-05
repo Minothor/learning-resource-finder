@@ -1,14 +1,13 @@
-$(document).ready(function() {
-	
-	// Expand small to big (what happens when we click on small
-	$('.resource-content-small .panel-heading').click(function(){
+function resourceExpandOnClick()
+{
+	$('.resource-content-small .panel-heading').not(".clickAvailable").click(function(){
 		var resourcecontainer = $(this).parents(".resourcecontainer");
 		var resourcecontentexp =  resourcecontainer.find(".resource-content-exp");
 		if (resourcecontentexp.length == 0) { // Not yet loaded through ajax (first time we click on it)
 			var resourceinput = $(this).find('input');
 			resourceid = resourceinput.val();
 			$.ajax({
-				url : "/ajax/expendresourceinfo",
+				url : "/ajax/expandresourceinfo",
 				dataType: "html",
 				type : 'POST',
 				data : "resourceid="+resourceid,
@@ -24,10 +23,16 @@ $(document).ready(function() {
 			});		
 		} else {
 			showResourceContainerExp(resourcecontainer);
-		}
+		}		
 	});
-});
 
+	$(".resource-content-small .panel-heading").addClass("clickAvailable");
+}
+
+$(document).ready(function() {
+	// Expand small to big (what happens when we click on small
+	resourceExpandOnClick();	
+});
 
 var toFrontZIndex = 2;
 

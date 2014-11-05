@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ResourceExpendController {
+public class ResourceExpandController {
 
     @Autowired ResourceRepository resourcerepository ; 
     
-    @RequestMapping("/ajax/expendresourceinfo")
+    @RequestMapping("/ajax/expandresourceinfo")
     public ModelAndView getResourceExpandInfo(@RequestParam("resourceid") long resourceId) {
         Resource resource = resourcerepository.find(resourceId);
-        return new ModelAndView("resourceexpend").addObject("resource",resource);
+        return new ModelAndView("resourceexpand").addObject("resource",resource);
 
     }
 }
