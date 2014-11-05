@@ -6,6 +6,10 @@
 
 	position: absolute;
 }
+.score{
+	
+	margin-left: -20px;
+}
 
 .resource-content-small {
 	height:100%;

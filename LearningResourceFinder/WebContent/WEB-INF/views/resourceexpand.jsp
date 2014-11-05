@@ -47,7 +47,7 @@
                    	<div class="imgDiv col-xs-6 resource-content-hidden">
                    		
 						 <img itemprop="image" style="width:214px;height:130px;padding: 7px;"
-							src="images/defaultimage.png"
+							src="images/imagedefault.jpg"
 							alt="${resource.name}" />
 						
 					</div>
@@ -101,7 +101,7 @@
 								countRating="${resource.countRating}" canvote="${current.canVote}"/>
 						</div>
 					
-						<div class="col-md-4">	
+						<div class="col-md-4" style="margin-left:-6px;">	
 							<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}"/>
 						</div>					
 						<div class=" addthis_sharing_toolbox" style="display: inline-block;">	
