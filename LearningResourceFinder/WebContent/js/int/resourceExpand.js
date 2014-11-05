@@ -35,14 +35,20 @@ $(document).ready(function() {
 });
 
 var toFrontZIndex = 2;
-
+var options = {};
 function showResourceContainerExp(resourcecontainer){
-
+	
+	options = { percent: 100 };
     // Hide small
     resourcecontainer.find(".resource-content-small").hide();
         
     // Show expanded
-    resourcecontainer.find(".resource-content-exp").show();
+    resourcecontainer.find(".resource-content-exp").css()
+    	
+    	resourcecontainer.find(".resource-content-exp").show();
+
+    
+    
     
     resourcecontainer.css("z-index", toFrontZIndex++);  // to front (we make it more and more to front in case user opens multiple boxes that overlap
 

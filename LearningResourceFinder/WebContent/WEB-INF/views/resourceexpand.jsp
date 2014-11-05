@@ -5,10 +5,13 @@
 
 <div class="resource-content-exp panel panel-default" >
 
-	<div class="panel-heading">
+	<div class="panel-heading" >
 		<span class="lead" style="font-size: 16px">
-		    <a itemprop="name"><h3>${resource.name}</h3></a>
+			<a><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-128.png" style="width:20px;float:right;"/></a>
+		    <a itemprop="name"><h3>${resource.name}</h3> </a>
+		  
 		</span>
+		
 	</div>
 
 		<div class="row" >
@@ -50,7 +53,7 @@
 					
 				<div  class="descriptionDiv col-xs-6 ${resource.numberImage>=1?"resource-content-hidden":""}" >
 					
-					<p class="resourceDescription" style="margin: 10px;font-family: museo700;font-size: 100%;">
+					<p class="resourceDescription" style="margin: 10px;">
 						<small itemprop="description">${resource.descriptionCut}</small>
 					</p>
 				</div>
@@ -76,7 +79,7 @@
 					<div class="col-md-12">
 						<a itemprop="url" href="/resource/${resource.shortId}/${resource.slug}"> <span
 							class="addToolTip"
-							style="font-size: 12px; padding: 0px"
+							style="font-size: 14px; padding: 0px"
 							data-toggle="tooltip" title="lien vers la ressource">Détails</span>
 						</a>
 						<div class="resource-content-hidden" style="float:right; padding:0px; margin-top: 5px">	
