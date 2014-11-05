@@ -26,6 +26,12 @@
 		   <p>ToujoursPlus.be référence des exercices, jeux éducatifs ou vidéos de néerlandais. Essayez une recherche précise dans la bande bleue de recherche, comme par exemple: le verbe “nemen”, animaux-dieren... </p>
 	     </c:when>
 	     
+	     <c:when test="${urlPath == '/neerlandais'}">
+	        <head><title>Néerlandais</title></head>
+	       <h1>Néerlandais</h1>
+		   <p>ToujoursPlus.be référence des exercices, jeux éducatifs ou vidéos de néerlandais. Essayez une recherche précise dans la bande bleue de recherche, comme par exemple: le verbe “nemen”, animaux-dieren... </p>
+	     </c:when>
+	     
 	      <c:when test="${urlPath == '/anglais-facile'}">
 	        <head><title>Anglais facile</title></head>
 	       <h1>Anglais Facile</h1>
@@ -53,7 +59,7 @@
 	     
 	     <c:when test="${urlPath == '/subjonctif'}">
 	        <head><title>Subjonctif</title></head>
-	       <h1>Conjugaison</h1>
+	       <h1>Subjonctif</h1>
            <p>ToujoursPlus.be référence de très nombreux exercices, jeux éducatifs ou vidéos sur le subjonctif et la conjugaison. Essayez une recherche précise dans la bande bleue de recherche, comme par exemple: imparfait du subjonctif, verbes irréguliers, accord du participe passé, l’impératif, indicatif présent, participe présent, passé composé, passé simple...</p>
 	     </c:when>
 	  
@@ -63,7 +69,7 @@
            <p>ToujoursPlus.be référence de très nombreux exercices, jeux éducatifs ou vidéos sur la botanique. Essayez une recherche précise dans la bande bleue de recherche, comme par exemple: identification des plantes, arbres, feuilles, reproduction des végétaux, fruits et légumes…</p>
 	     </c:when>
 	     
-	     <c:when test="${urlPath == '/lignedutemps'}">
+	     <c:when test="${urlPath == '/ligne-du-temps'}">
 	        <head><title>Ligne du temps</title></head>
 	       <h1>Ligne du temps</h1>
            <p>ToujoursPlus.be référence de très nombreux exercices, jeux éducatifs ou vidéos sur la ligne du temps. Essayez une recherche précise dans la bande bleue de recherche, comme par exemple: la période gallo-romaine, les croisades, la Grèce Antique, Waterloo, le paléolithique... </p>
