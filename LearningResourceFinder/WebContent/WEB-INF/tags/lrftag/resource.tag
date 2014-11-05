@@ -46,11 +46,11 @@
 				<c:choose>
 				<c:when test="${resource.numberImage >= 1}">
 					<div class="imgDiv col-xs-6" style="padding:0px;">
-						<a href="/gen/resource/original/${resource.id}-1.jpg"> <img 
+						 <img 
 						itemprop="image"
 							src="/gen/resource/resized/small/${resource.id}-1.jpg"
 							alt="${resource.name}" />
-						</a>
+						
 					</div>
 					<script type="text/javascript">
 				       $(document).ready(function(){

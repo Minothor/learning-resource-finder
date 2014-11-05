@@ -1,7 +1,7 @@
 
 function resourceExpandOnClick()
 {
-	$('.resource-content-small .panel-heading').not(".clickAvailable").click(function(){
+	$('.resource-content-small').not(".clickAvailable").click(function(){
 		var resourcecontainer = $(this).parents(".resourcecontainer");
 		var resourcecontentexp =  resourcecontainer.find(".resource-content-exp");
 		if (resourcecontentexp.length == 0) { // Not yet loaded through ajax (first time we click on it)
@@ -29,7 +29,7 @@ function resourceExpandOnClick()
 		}		
 	});
 
-	$(".resource-content-small .panel-heading").addClass("clickAvailable");
+	$(".resource-content-small").addClass("clickAvailable");
 }
 
 $(document).ready(function() {
