@@ -63,11 +63,6 @@ public class LandingPageController {
         return prepareModelAndView("neerlandais", request);
     }
 
-    @RequestMapping(value = "/chien-et-chat")
-    public ModelAndView chienEtChat(HttpServletRequest request) {
-        return prepareModelAndView("chien chat", request);
-    }
-
     @RequestMapping(value = "/subjonctif")
     public ModelAndView subjonctif(HttpServletRequest request) {
         return prepareModelAndView("subjonctif", request);
