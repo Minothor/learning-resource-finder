@@ -16,7 +16,6 @@ public class ResourceExpendController {
     
     @RequestMapping("/ajax/expendresourceinfo")
     public ModelAndView getResourceExpandInfo(@RequestParam("resourceid") long resourceId) {
-        System.out.println(resourceId);
         Resource resource = resourcerepository.find(resourceId);
         return new ModelAndView("resourceexpend").addObject("resource",resource);
 

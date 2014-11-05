@@ -72,7 +72,6 @@
 			<div class="panel-heading">
 				<input type="hidden" value="${resource.id}">
 			
-
 				<a href="/resource/${resource.shortId}" class="lead">${resource.shortId}</a>
 
 			</div>
