@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var tour = new Tour({
 	  steps: [
 	  {
-	    element: "#title",
+	    element: "#tourStepLink",
 	    title: "Bienvenue sur ToujoursPlus",
 	    content: "La ressource est disponible sur un autre site (en cliquant là)."
 	  },

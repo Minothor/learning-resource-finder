@@ -412,6 +412,7 @@
 				<span id="title" class='noteditableFieldInline'}><h1
 				itemprop="name"	style="display: inline-block;">${resource.name}</h1></a> <a
 					href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank"> <span
+					id="tourStepLink"
 					class="addToolTip glyphicon glyphicon-log-in"
 					style="font-size: 16px; top: -11px;" data-toggle="tooltip"
 					title="lien direct vers ce site"></span>
