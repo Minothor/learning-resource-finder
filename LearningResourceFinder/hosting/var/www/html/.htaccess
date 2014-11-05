@@ -1,0 +1,3 @@
+RewriteEngine On
+    RewriteCond %{HTTP_HOST} ^[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}
+    RewriteRule (.*) http://toujoursplus.be/$1 [R=301,L]
