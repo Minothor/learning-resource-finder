@@ -7,7 +7,9 @@
 
 	<div class="panel-heading" >
 		<span class="lead" style="font-size: 16px">
-			<a><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-128.png" style="width:20px;float:right;"/></a>
+	
+			<button type="button" class="btn addToolTip close" title="" data-original-title="fermer cette ressource">×</button>
+			
 		    <a itemprop="name"><h3>${resource.name}</h3> </a>
 		  
 		</span>
@@ -65,7 +67,7 @@
 	<div class="row"style="margin-left: 0px; margin-right: 0px; padding-top: 5px;">
 					<div class="col-md-6" >				
 					<div style="background:#FCFCFD;margin-right: -33px;margin-left: -7px;padding: 11px;margin-bottom: 7px;font-size:13px;font-weight: bold;">
-						<span class="addToolTip glyphicon " style=" padding: 0px;"
+						<span class="addToolTip" style=" padding: 0px;"
 							data-toggle="tooltip" title="Nombre de vues"><span id="viewCounter${resource.id}"> <b> ${resource.viewCount}</b></span> </span>&nbsp;vues<br>
 						  <span><c:forEach items="${resource.platforms}" var="platform">${platform.name} </c:forEach></span><br>
 						  <c:choose>
