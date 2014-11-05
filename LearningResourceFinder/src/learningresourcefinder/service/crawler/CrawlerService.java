@@ -75,7 +75,7 @@ public class CrawlerService
     
     public void crawlerPageKhanAcademy(int num)throws IOException, ParseException {
         crawlerKhanAcademy.crawler(num);
-        //CrawlerKhanAcademy.superCrawler(this);
+        //crawlerKhanAcademy.superCrawler();
     }
     
     public void persistRessource(String name, String url, String topic, String description, int duration, String minCycle, String maxCycle, int adv, String author,Format format) 
@@ -263,5 +263,10 @@ public class CrawlerService
             return 2; 
         default : return -1;        
         }
+    }
+
+    public void crawler67(int num) throws IOException {
+       crawlerSoutien67.crawler(num);
+        
     }
 }

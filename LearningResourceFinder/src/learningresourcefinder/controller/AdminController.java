@@ -80,19 +80,35 @@ public class AdminController extends BaseRepository<User> {
     	NotificationUtil.addNotificationMessage("Regeneration des Slugs réussi");
     	return "admin";
     }
-    
-	@RequestMapping("/crawler/{pageName}")
-	public String crawler(@PathVariable("pageName") String pageName) throws ParseException 
-	{
-		SecurityContext.assertUserHasRole(Role.ADMIN);    	
-		try	{
-			crawlerService.crawlerPage(pageName);
-		} catch (IOException e)	{
-			throw new RuntimeException(e);
-		}
+
+    @RequestMapping("/crawler/{pageName}")
+    public String crawler(@PathVariable("pageName") String pageName) throws ParseException 
+    {
+        SecurityContext.assertUserHasRole(Role.ADMIN);      
+        try {
+            crawlerService.crawlerPage(pageName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         NotificationUtil.addNotificationMessage("Crawler "+pageName+" réussi");
-		return createIndex();
-	}
+        return createIndex();
+    }
+    
+    @RequestMapping("/crawler67/{num}")
+    public String crawler67(@PathVariable("num") int num) throws ParseException 
+    {
+        SecurityContext.assertUserHasRole(Role.ADMIN);      
+        try
+        {
+            crawlerService.crawler67(num);
+        } 
+        catch (IOException e) 
+        {
+            throw new RuntimeException(e);
+        }
+        NotificationUtil.addNotificationMessage("Crawler Soutien 67("+num+") réussi");
+        return createIndex();
+    }
 	
 	@RequestMapping("/crawlerkhanacademy/{num}")
     public String crawlerKhanAcademy(@PathVariable("num") int num) throws ParseException    {

@@ -21,6 +21,23 @@ public class CrawlerSoutien67
     @Autowired  CrawlerService cs;
 
     // Done 2634
+    public void crawler(int i) throws IOException
+    {
+        switch(i)
+        {
+        case(1) : crawlerFr1(); break;
+        case(2) : crawlerFr2(); break;
+        case(3) : crawlerFr3(); break;
+        case(4) : crawlerFr4(); break;
+        case(5) : crawlerMath1();break;
+        case(6) : crawlerMath2();break;
+        case(7) : crawlerMath3(); break;
+        case(8) : crawlerMath4(); break;
+        case(9) : crawlerGeographie(); break;
+        case(10) : crawlerHistoire(); break;
+        case(11) : crawlerScience(); break;
+        }
+    }
     public void crawler() throws IOException{
         crawlerFr1();
         crawlerFr2();
