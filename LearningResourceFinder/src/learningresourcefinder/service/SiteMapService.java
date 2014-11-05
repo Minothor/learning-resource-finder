@@ -93,6 +93,7 @@ public class SiteMapService {
 	 */
 	private void generateMainMap(Document doc) {
 		String[] urls =  {"/","/playlist/all","/resourcelist","/competencetree"};
+		String[] landingPageurls = {"/conjugaison", "/orthographe", "/ecole-virtuelle", "/nederlands", "/chien-et-chat", "/subjonctif", "/ligne-du-temps", "/botanique",  "/corps-humain", "/exercices-de-math", "/neerlandais" }; 
 
 		Element rootElement = generateRootElement(doc);
 
@@ -101,17 +102,7 @@ public class SiteMapService {
 		tempElem = rootElement.addElement("url");
 		tempElem.addElement("loc").setText("http://"+getUrlRoot()+urls[0]);
 		populateBasicAttributes(tempElem, urlDepth);
-
-
-		urlDepth = .2F;
-
-		List<Cycle> cycles =  cycleRepository.findAllCycles();
-
-		for (Cycle child_node : cycles) {
-			tempElem = rootElement.addElement("url");
-			tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/cycle/"+child_node.getId()+"/"+child_node.getSlug());
-			populateBasicAttributes(tempElem, urlDepth);
-		}
+		
 
 		urlDepth=.1F;
 
@@ -119,6 +110,31 @@ public class SiteMapService {
 			tempElem = rootElement.addElement("url");
 			tempElem.addElement("loc").setText("http://"+getUrlRoot()+urls[i]);
 			populateBasicAttributes(tempElem, urlDepth);
+			
+			if(urls[i].equalsIgnoreCase("/resourcelist")){
+				//fill out landing pages under resources
+				urlDepth = .2F;
+				for (String landingURL : landingPageurls) {
+					tempElem = rootElement.addElement("url");
+					tempElem.addElement("loc").setText("http://"+getUrlRoot()+landingURL);
+					populateBasicAttributes(tempElem, urlDepth);
+				}
+				urlDepth=.1F;
+			}
+			
+			if(urls[i].equalsIgnoreCase("/competencetree")){
+				//fill out cycles under categories
+				urlDepth = .2F;
+
+				List<Cycle> cycles =  cycleRepository.findAllCycles();
+
+				for (Cycle child_node : cycles) {
+					tempElem = rootElement.addElement("url");
+					tempElem.addElement("loc").setText("http://"+getUrlRoot()+"/cycle/"+child_node.getId()+"/"+child_node.getSlug());
+					populateBasicAttributes(tempElem, urlDepth);
+				}
+				urlDepth = .1F;
+			}
 		}
 
 	}
