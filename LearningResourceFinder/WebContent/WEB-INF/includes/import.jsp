@@ -32,7 +32,7 @@
 <script src="/js/int/allPages.js"></script>
 <script src="/js/int/mobileHyperlinkDelay.js"></script>
 <script src="/js/int/resourceViewsCounter.js"></script> <%-- To allows the updateViewcountAndPpularity() in all screens that display the resources --%>
-
+<script type="text/javascript" src="/js/int/resourceExpend.js"></script>
 <script type="text/javascript" src="/js/int/resourceIncreaseDiv.js"></script> <%-- show big version of resource and vice versa --%>
 
 <script src="/js/int/addResourceFavorite.js"></script>
