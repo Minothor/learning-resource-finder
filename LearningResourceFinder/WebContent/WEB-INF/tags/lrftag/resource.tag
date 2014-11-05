@@ -69,7 +69,7 @@
 				</c:when>
 				<c:otherwise>
 				
-				<p class="resourceDescription">
+				<p class="resourceDescription" style="margin: 10px;">
 					<small itemprop="description">${resource.descriptionCut}</small>
 				</p>
 				</c:otherwise>
@@ -85,7 +85,7 @@
 			</span>
 
 			</div>
-			<div class="panel-body" style="font-size: 10px !important; margin-bottom: 20px;">
+			<div class="panel-body" style="font-size: 10px !important; margin: 10px;">
 				<c:choose>
 								<c:when test='${resource.validationStatus=="REJECT"}'>
 										<p>Un contributeur a estimé que cette ressource est inappropriée pour les enfants.</p>

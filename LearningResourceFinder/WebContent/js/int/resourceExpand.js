@@ -43,7 +43,7 @@ function showResourceContainerExp(resourcecontainer){
     resourcecontainer.find(".resource-content-small").hide();
         
     // Show expanded
-    resourcecontainer.find(".resource-content-exp").css()
+
     	
     	resourcecontainer.find(".resource-content-exp").show();
 
