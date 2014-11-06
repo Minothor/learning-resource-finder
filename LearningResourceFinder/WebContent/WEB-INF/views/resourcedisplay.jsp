@@ -16,7 +16,9 @@
 
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
-<script type="text/javascript" src="/js/int/bootstrapTourResource.js"></script>
+<c:if test="${user == null}">  <%-- Test to prevent conflict with other tour on progress bar --%>
+   <script type="text/javascript" src="/js/int/bootstrapTourResource.js"></script>
+</c:if>   
 <script type="text/javascript">
 
 	 // create youtube player
