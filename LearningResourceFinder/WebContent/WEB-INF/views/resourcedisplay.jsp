@@ -472,7 +472,7 @@
 					href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank"> <span
 					id="tourStepLink"
 					class="addToolTip glyphicon glyphicon-circle-arrow-right"
-					style="font-size: 40px; top: 10px;" data-toggle="tooltip"
+					style="font-size: 40px; top: 10px;margin-left:15px;" data-toggle="tooltip"
 					title="lien direct vers ce site"></span>
 				</span>
 			    <lrf:conditionDisplay privilege="MANAGE_RESOURCE">
@@ -487,13 +487,18 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<div id="rateAndShareDiv" class="row">
-					<div class="col-md-6">
-						
-					</div>
-					<div class="col-md-6" itemProp="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-						<div class="col-md-5" id="tourStepVote">
-						<lrftag:rating id="${resource.id}" title="${resource.name}"
+					
+				<div class="row">
+					<div itemprop="description" id="descriptionDiv" class="col-md-6">
+						<span id="description" class='noteditableFieldInline'}
+							data-type="textarea" data-inputclass="largerTextArea">${resource.description}</span>
+					</div>			
+					
+					<div  class="col-md-6">
+
+					  <div id="rateAndShareDiv" itemProp="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+						<div id="tourStepVote" style="width:128px; display: inline-block;">
+						   <lrftag:rating id="${resource.id}" title="${resource.name}"
 							scoreResource="${resource.avgRatingScore}"
 							scoreUser="${mapRating[resource].score}"
 							countRating="${resource.countRating}" canvote="${current.canVote}" />
@@ -507,20 +512,11 @@
 						<div class="addthis_sharing_toolbox "
 							style="display: inline-block; margin-left: 26px; vertical-align: super;"></div>
 						
-					</div>
-			
-				</div>
-					
-				<div class="row">
-					<div itemprop="description" id="descriptionDiv" class="col-md-6">
-						<span id="description" class='noteditableFieldInline'}
-							data-type="textarea" data-inputclass="largerTextArea">${resource.description}</span>
-					</div>			
-					
-					<div id="infoPlusDiv" class="col-md-6">
-						
-						<div class="panel panel-default">
-							<div class="panel-body">
+			  		  </div>
+
+				
+						<div id="infoPlusDiv" class="panel panel-default">
+							<div class="panel-body" style="margin:10px;">
 								<div class="row">
 									<div class="col-md-12">
 										<c:choose>
@@ -693,9 +689,7 @@
 						<%-- end panel --%>
 						
 						</div>	
-						
-					</div>
-					<div>  <%-- Additional div for validation  --%>
+							<div>  <%-- Additional div for validation  --%>
 						
 										<span  class="text-muted">Validée: </span> 
 											<span id="validate"	title="
@@ -724,6 +718,8 @@
 										   </span>
 						
     				</div>
+					</div>
+
 				
 				</div>	
 									<div id="urlsDiv">					
