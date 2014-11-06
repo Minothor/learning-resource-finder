@@ -62,17 +62,17 @@
 <!--     	<a href="/crawlerkhanacademy/13" class="btn btn-primary btn-lg">#13 Organic Chemistry</a><br><br>  	 -->
 <!--     	<a href="/crawlerkhanacademy/14" class="btn btn-primary btn-lg">#14 Health and Medicine</a> -->
     	
-    	<h3>Execute Crawler Pepit</h3> <br>
-    	<a href="/crawlerPepit/1" class="btn btn-primary btn-lg">#1 Niveau 1</a>
-    	<a href="/crawlerPepit/2" class="btn btn-primary btn-lg">#2 Niveau 2</a>
-    	<a href="/crawlerPepit/3" class="btn btn-primary btn-lg">#3 Niveau 3</a>
-    	<a href="/crawlerPepit/4" class="btn btn-primary btn-lg">#4 Niveau 4</a>
-    	<a href="/crawlerPepit/5" class="btn btn-primary btn-lg">#5 Niveau 5</a>
-    	<a href="/crawlerPepit/6" class="btn btn-primary btn-lg">#6 Niveau 6</a>
-    	<a href="/crawlerPepit/7" class="btn btn-primary btn-lg">#7 Conjugaison</a>
-    	<a href="/crawlerPepit/8" class="btn btn-primary btn-lg">#8 Tables Multiplication</a>
-    	<a href="/crawlerPepit/9" class="btn btn-primary btn-lg">#9 Ens. Spécial</a>
-    	<a href="/crawlerPepit/10" class="btn btn-primary btn-lg">#10 Pour tous</a>  	
+<!--     	<h3>Execute Crawler Pepit</h3> <br> -->
+<!--     	<a href="/crawlerPepit/1" class="btn btn-primary btn-lg">#1 Niveau 1</a> -->
+<!--     	<a href="/crawlerPepit/2" class="btn btn-primary btn-lg">#2 Niveau 2</a> -->
+<!--     	<a href="/crawlerPepit/3" class="btn btn-primary btn-lg">#3 Niveau 3</a> -->
+<!--     	<a href="/crawlerPepit/4" class="btn btn-primary btn-lg">#4 Niveau 4</a> -->
+<!--     	<a href="/crawlerPepit/5" class="btn btn-primary btn-lg">#5 Niveau 5</a> -->
+<!--     	<a href="/crawlerPepit/6" class="btn btn-primary btn-lg">#6 Niveau 6</a> -->
+<!--     	<a href="/crawlerPepit/7" class="btn btn-primary btn-lg">#7 Conjugaison</a> -->
+<!--     	<a href="/crawlerPepit/8" class="btn btn-primary btn-lg">#8 Tables Multiplication</a> -->
+<!--     	<a href="/crawlerPepit/9" class="btn btn-primary btn-lg">#9 Ens. Spécial</a> -->
+<!--     	<a href="/crawlerPepit/10" class="btn btn-primary btn-lg">#10 Pour tous</a>  	 -->
     </div>
 </div>    
 </body>
