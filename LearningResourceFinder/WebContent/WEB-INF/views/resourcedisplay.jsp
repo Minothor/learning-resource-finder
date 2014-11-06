@@ -125,7 +125,7 @@
  	    	  url: '/ajax/resourceeditfieldsubmit',
  	    	  pk: '${resource.id}',
  	 		  success: function(response) {
- 				location.reload();
+ 				// Not worth reloading all the page. location.reload();
  		      }
 		});
  		//Why do you erase thes lines? :: end
@@ -685,7 +685,7 @@
 					<div>  <%-- Additional div for validation  --%>
 						
 										<span  class="text-muted">Validée: </span> 
-											<span id="validate"	title="
+										<span id="validate"	title="
 											  <c:choose>
 												<c:when test="${resource.validationStatus!=null}">
 													<c:if test="${resource.validator!=null}">
