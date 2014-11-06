@@ -449,7 +449,10 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
             String maxName = maxCycle.getDescription();
             
             String minSection = minName.substring(minName.lastIndexOf("</sup>")+6, minName.length()).trim();
+            minSection = (minSection.equals("primaire"))?minSection.substring(0, 4):minSection.substring(0, 3);
+                     
             String maxSection = maxName.substring(maxName.lastIndexOf("</sup>")+6, maxName.length()).trim();
+            maxSection = (maxSection.equals("primaire"))?maxSection.substring(0, 4):maxSection.substring(0, 3);
             
             String minCycleString = minName.substring(0, minName.indexOf("-")).trim();
             String maxCycleString = maxName.substring(maxName.indexOf("-")+1, maxName.lastIndexOf("</sup>")+6).trim();            
