@@ -266,4 +266,6 @@ figure:hover figcaption {
 .mainLogoFallback {
     height: 164px;
     width: 500px;
+    margin-left:auto;
+    margin-right:auto;
               }
