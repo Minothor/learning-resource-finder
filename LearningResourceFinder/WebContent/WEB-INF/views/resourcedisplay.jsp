@@ -439,6 +439,8 @@
 						</div>
 							<meta itemprop="ratingValue" content="${resource.avgRatingScore}" />
                             <meta itemprop="ratingCount" content="${resource.countRating}" />
+                            <meta itemprop="bestRating" content="5" />
+                            <meta itemprop="worstRating" content="1" />
 					</div>
 					<div class="col-md-6">
 						<div class="addthis_sharing_toolbox"
