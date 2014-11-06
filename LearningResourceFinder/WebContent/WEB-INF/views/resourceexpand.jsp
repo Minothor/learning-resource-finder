@@ -94,14 +94,14 @@
 						</div>
 					</div>
 					<div class="col-md-12" style="padding-left: 3px; padding-right: 0px;">
-						<div class="col-md-8">
+						<div class="col-md-10">
 							<lrftag:rating id="${resource.id}" title="${resource.name}"
 								scoreResource="${resource.avgRatingScore}"
 								scoreUser="${mapRating[resource].score}"
 								countRating="${resource.countRating}" canvote="${current.canVote}"/>
 						</div>
 					
-						<div class="col-md-4" style="margin-left:-6px;">	
+						<div class="col-md-2" style="margin-left:-6px;">	
 							<lrftag:favorite isFavorite="${isFavorite}" idResource="${resource.id}"/>
 						</div>					
 						<div class=" addthis_sharing_toolbox" style="display: inline-block;">	
