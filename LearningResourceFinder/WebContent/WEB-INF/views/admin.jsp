@@ -30,37 +30,49 @@
     	<!--  executed without error  <a href="/crawler/toutSavoir" class="btn btn-primary btn-lg">Crawler toutsavoir-hatier.com</a> -->
     	<!--  <br><br><hr> --> 
     	
-    	<h3>Execute Crawler Soutien67</h3> <br>
-    	<a href="/crawler67/1" class="btn btn-primary btn-lg">#1 Français 1</a>
-    	<a href="/crawler67/2" class="btn btn-primary btn-lg">#2 Français 2</a>
-    	<a href="/crawler67/3" class="btn btn-primary btn-lg">#3 Français 3</a>
-    	<a href="/crawler67/4" class="btn btn-primary btn-lg">#4 Français 4</a>
-    	<a href="/crawler67/5" class="btn btn-primary btn-lg">#5 Mathématique 1</a>
-    	<a href="/crawler67/6" class="btn btn-primary btn-lg">#6 Mathématique 2</a>
-    	<a href="/crawler67/7" class="btn btn-primary btn-lg">#7 Mathématique 3</a>
-    	<a href="/crawler67/8" class="btn btn-primary btn-lg">#8 Mathématique 4</a>
-    	<a href="/crawler67/9" class="btn btn-primary btn-lg">#9 Géographie</a>
-    	<a href="/crawler67/10" class="btn btn-primary btn-lg">#10 Histoire</a>
-    	<a href="/crawler67/11" class="btn btn-primary btn-lg">#11 Science</a>
+<!--     	<h3>Execute Crawler Soutien67</h3> <br> -->
+<!--     	<a href="/crawler67/1" class="btn btn-primary btn-lg">#1 Français 1</a> -->
+<!--     	<a href="/crawler67/2" class="btn btn-primary btn-lg">#2 Français 2</a> -->
+<!--     	<a href="/crawler67/3" class="btn btn-primary btn-lg">#3 Français 3</a> -->
+<!--     	<a href="/crawler67/4" class="btn btn-primary btn-lg">#4 Français 4</a> -->
+<!--     	<a href="/crawler67/5" class="btn btn-primary btn-lg">#5 Mathématique 1</a> -->
+<!--     	<a href="/crawler67/6" class="btn btn-primary btn-lg">#6 Mathématique 2</a> -->
+<!--     	<a href="/crawler67/7" class="btn btn-primary btn-lg">#7 Mathématique 3</a> -->
+<!--     	<a href="/crawler67/8" class="btn btn-primary btn-lg">#8 Mathématique 4</a> -->
+<!--     	<a href="/crawler67/9" class="btn btn-primary btn-lg">#9 Géographie</a> -->
+<!--     	<a href="/crawler67/10" class="btn btn-primary btn-lg">#10 Histoire</a> -->
+<!--     	<a href="/crawler67/11" class="btn btn-primary btn-lg">#11 Science</a> -->
     	
-    	<h3>Execute Crawler khanacademy</h3> <br>
-    	<p><b>Math</b></p>
-    	<a href="/crawlerkhanacademy/1" class="btn btn-primary btn-lg">#1 Arithmetic</a>
-    	<a href="/crawlerkhanacademy/2" class="btn btn-primary btn-lg">#2 Pre Algebra</a>   	
-    	<a href="/crawlerkhanacademy/3" class="btn btn-primary btn-lg">#3 Algebra</a>   	
-    	<a href="/crawlerkhanacademy/4" class="btn btn-primary btn-lg">#4 Probability</a>   	
-    	<a href="/crawlerkhanacademy/5" class="btn btn-primary btn-lg">#5 Geometry</a>   	
-    	<a href="/crawlerkhanacademy/6" class="btn btn-primary btn-lg">#6 Precalculus</a>   	
-    	<a href="/crawlerkhanacademy/7" class="btn btn-primary btn-lg">#7 Trigonometry</a><br><br>   	
-    	<a href="/crawlerkhanacademy/8" class="btn btn-primary btn-lg">#8 Integral Calculus</a>
-    	<br>
-    	<p><b>Science</b></p>
-    	<a href="/crawlerkhanacademy/9" class="btn btn-primary btn-lg">#9 Biology</a>   	
-    	<a href="/crawlerkhanacademy/10" class="btn btn-primary btn-lg">#10 Chemistry</a>   	
-    	<a href="/crawlerkhanacademy/11" class="btn btn-primary btn-lg">#11 Cosmology and Astronomy</a>   	
-    	<a href="/crawlerkhanacademy/12" class="btn btn-primary btn-lg">#12 Physics</a>   	
-    	<a href="/crawlerkhanacademy/13" class="btn btn-primary btn-lg">#13 Organic Chemistry</a><br><br>  	
-    	<a href="/crawlerkhanacademy/14" class="btn btn-primary btn-lg">#14 Health and Medicine</a>  	
+<!--     	<h3>Execute Crawler khanacademy</h3> <br> -->
+<!--     	<p><b>Math</b></p> -->
+<!--     	<a href="/crawlerkhanacademy/1" class="btn btn-primary btn-lg">#1 Arithmetic</a> -->
+<!--     	<a href="/crawlerkhanacademy/2" class="btn btn-primary btn-lg">#2 Pre Algebra</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/3" class="btn btn-primary btn-lg">#3 Algebra</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/4" class="btn btn-primary btn-lg">#4 Probability</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/5" class="btn btn-primary btn-lg">#5 Geometry</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/6" class="btn btn-primary btn-lg">#6 Precalculus</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/7" class="btn btn-primary btn-lg">#7 Trigonometry</a><br><br>   	 -->
+<!--     	<a href="/crawlerkhanacademy/8" class="btn btn-primary btn-lg">#8 Integral Calculus</a> -->
+<!--     	<br> -->
+<!--     	<p><b>Science</b></p> -->
+<!--     	<a href="/crawlerkhanacademy/9" class="btn btn-primary btn-lg">#9 Biology</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/10" class="btn btn-primary btn-lg">#10 Chemistry</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/11" class="btn btn-primary btn-lg">#11 Cosmology and Astronomy</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/12" class="btn btn-primary btn-lg">#12 Physics</a>   	 -->
+<!--     	<a href="/crawlerkhanacademy/13" class="btn btn-primary btn-lg">#13 Organic Chemistry</a><br><br>  	 -->
+<!--     	<a href="/crawlerkhanacademy/14" class="btn btn-primary btn-lg">#14 Health and Medicine</a> -->
+    	
+    	<h3>Execute Crawler Pepit</h3> <br>
+    	<a href="/crawlerPepit/1" class="btn btn-primary btn-lg">#1 Niveau 1</a>
+    	<a href="/crawlerPepit/2" class="btn btn-primary btn-lg">#2 Niveau 2</a>
+    	<a href="/crawlerPepit/3" class="btn btn-primary btn-lg">#3 Niveau 3</a>
+    	<a href="/crawlerPepit/4" class="btn btn-primary btn-lg">#4 Niveau 4</a>
+    	<a href="/crawlerPepit/5" class="btn btn-primary btn-lg">#5 Niveau 5</a>
+    	<a href="/crawlerPepit/6" class="btn btn-primary btn-lg">#6 Niveau 6</a>
+    	<a href="/crawlerPepit/7" class="btn btn-primary btn-lg">#7 Conjugaison</a>
+    	<a href="/crawlerPepit/8" class="btn btn-primary btn-lg">#8 Tables Multiplication</a>
+    	<a href="/crawlerPepit/9" class="btn btn-primary btn-lg">#9 Ens. Spécial</a>
+    	<a href="/crawlerPepit/10" class="btn btn-primary btn-lg">#10 Pour tous</a>  	
     </div>
 </div>    
 </body>
