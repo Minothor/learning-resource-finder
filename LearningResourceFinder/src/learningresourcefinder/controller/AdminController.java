@@ -110,6 +110,22 @@ public class AdminController extends BaseRepository<User> {
         return createIndex();
     }
 	
+    @RequestMapping("/crawlerPepit/{num}")
+    public String crawlerPepit(@PathVariable("num") int num) throws ParseException 
+    {
+        SecurityContext.assertUserHasRole(Role.ADMIN);      
+        try
+        {
+            crawlerService.crawlerPepit(num);
+        } 
+        catch (IOException e) 
+        {
+            throw new RuntimeException(e);
+        }
+        NotificationUtil.addNotificationMessage("Crawler Pepit("+num+") réussi");
+        return createIndex();
+    }
+    
 	@RequestMapping("/crawlerkhanacademy/{num}")
     public String crawlerKhanAcademy(@PathVariable("num") int num) throws ParseException    {
         SecurityContext.assertUserHasRole(Role.ADMIN);      
