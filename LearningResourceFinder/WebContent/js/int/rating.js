@@ -1,4 +1,5 @@
-$(document).ready(function(){
+//$(document).ready(function()
+		function ratingVote (){
     var currentID = null;
 
     // Close all popover except current.
@@ -63,4 +64,5 @@ $(document).ready(function(){
     	});
     	
     });
-});
+		};
+//});

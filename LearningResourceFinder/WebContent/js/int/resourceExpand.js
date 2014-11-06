@@ -22,6 +22,7 @@ function resourceExpandOnClick()
 					});
 					// TODO re-execute JavaScripts that could impact added elements.
 					yoxviewOnLatestResource();
+					ratingVote();
 				}
 			});		
 		} else {
