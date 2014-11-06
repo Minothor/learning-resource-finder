@@ -470,7 +470,7 @@
 					href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank"> <span
 					id="tourStepLink"
 					class="addToolTip glyphicon glyphicon-circle-arrow-right"
-					style="font-size: 16px; top: -11px;" data-toggle="tooltip"
+					style="font-size: 40px; top: 10px;" data-toggle="tooltip"
 					title="lien direct vers ce site"></span>
 				</span>
 			    <lrf:conditionDisplay privilege="MANAGE_RESOURCE">
@@ -503,7 +503,7 @@
                             <meta itemprop="worstRating" content="1" />
 				
 						<div class="addthis_sharing_toolbox "
-							style="display: inline-block; margin-left: 45px; vertical-align: super;"></div>
+							style="display: inline-block; margin-left: 26px; vertical-align: super;"></div>
 						
 					</div>
 			
