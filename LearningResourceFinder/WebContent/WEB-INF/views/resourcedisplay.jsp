@@ -16,7 +16,7 @@
 
 <script type="text/javascript" src="/js/int/addResourceFavorite.js"></script>
 <script type="text/javascript" src="/js/ext/jquery.popconfirm.js"></script>
-<script type="text/javascript" src="/js/int/bootstrapTourCustom.js"></script>
+<script src="/js/int/bootstrapTourCustom.js"></script>
 <script type="text/javascript">
 
 	 // create youtube player
