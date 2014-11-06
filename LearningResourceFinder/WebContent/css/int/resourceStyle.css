@@ -29,13 +29,16 @@
 } 
 .glyphicon-star-empty{
 	margin-top: 20px;
+
 	
 }
 .glyphicon-heart{
 	margin-top: 20px;
+	margin-left: -27px;
 }
 .glyphicon-heart-empty{
 	margin-top: 20px;
+	margin-left: -27px;
 	
 }
 .resource-content-small .imgDiv ,
