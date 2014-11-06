@@ -7,3 +7,5 @@
 @end
 	    
 @*/
+
+//http://msdn.microsoft.com/en-us/library/ie/8ka90k2e(v=vs.94).aspx
