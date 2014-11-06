@@ -469,7 +469,7 @@
 				itemprop="name"	style="display: inline-block;">${resource.name}</h1></a> <a
 					href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank"> <span
 					id="tourStepLink"
-					class="addToolTip glyphicon glyphicon-log-in"
+					class="addToolTip glyphicon glyphicon-circle-arrow-right"
 					style="font-size: 16px; top: -11px;" data-toggle="tooltip"
 					title="lien direct vers ce site"></span>
 				</span>
@@ -769,20 +769,14 @@
 								        </c:otherwise> </c:choose>
 							</span>
 	
-							<button type="button" style="float: none;" 
-								title="Retirer cette URL"
-								class="close addToolTip
-							    <c:choose>
-								        <c:when test="${canEditUrl}">
-								            "
-										style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
-										</c:when>
-										<c:otherwise>
-								            nonurleditpop"> 
-								        </c:otherwise>
-								</c:choose>
-								&times;
-							</button>
+							<c:if test="${canEditUrl}">
+								<button type="button" style="float: none;" 
+									title="Retirer cette URL"
+									class="close addToolTip "
+									style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
+									&times;
+								</button>
+							</c:if>
 							<span id="viewCounter${resource.id}" class="addToolTip glyphicon glyphicon-eye-open" itemprop="interactionCount" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"> ${resource.viewCount}</span>
 							</div>
 						</div>
