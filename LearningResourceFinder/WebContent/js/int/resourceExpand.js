@@ -21,8 +21,10 @@ function resourceExpandOnClick()
 					    showResourceContainerSmall(resourcecontainer);
 					});
 					// TODO re-execute JavaScripts that could impact added elements.
-					yoxviewOnLatestResource();
-					ratingVote();
+					ratingVote(); //ratingVote();
+					if (typeof yoxviewOnLatestResource === "function") { // The fn is defined in the JSP fragment only if there is some image to be displayed for that resource
+						yoxviewOnLatestResource();
+					}
 				}
 			});		
 		} else {

@@ -52,6 +52,6 @@ public class RatingController extends BaseController<Rating> {
             return "error";
         }
         
-		return "success";
+		return "Vote pris en compte, merci !<br/>Nouveau score: " + resource.getAvgRatingScore();
 	}
 }
