@@ -4,7 +4,6 @@ import learningresourcefinder.model.User.Level;
 
 public enum Action {
         ADD_RESOURCE(2, Level.LEVEL_1, "Ajouter une ressource", "Ressource ajoutée"),  // Maybe later should be level 2.
-        COMPLETE_RESOURCE(1, Level.LEVEL_1,"Completer les champs manquants d'une ressouce introduite par un autre utilisateur", "Champs manquants complétés"),
         ADD_PROBLEM(1, Level.LEVEL_1, "Signaler un problème", "Un problème signalé"),
         DISCUSS_PROBLEM(0, Level.LEVEL_1, "Discuter sur un problème", "Discussion d'un problème"),
 

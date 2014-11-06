@@ -33,7 +33,7 @@ public class LevelService {
         }
 
         if (resource != null && resource.getCreatedBy().equals(user)
-                && (action == Action.EDIT_RESOURCE || action == Action.EDIT_RESOURCE_URL || action == Action.COMPLETE_RESOURCE )) {
+                && (action == Action.EDIT_RESOURCE || action == Action.EDIT_RESOURCE_URL  )) {
             return true; // A user who created a resource should be authorized to modify it.
         }
         
