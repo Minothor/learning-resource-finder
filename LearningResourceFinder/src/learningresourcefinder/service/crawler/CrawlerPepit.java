@@ -135,28 +135,6 @@ public class CrawlerPepit
         }
     }
 
-//    public void crawler2ndPage(String topic, String urlLink, String titre, String minCycle, String maxCycle) throws IOException {
-//        Document doc1 = Jsoup.connect(urlLink).timeout(10000).get();
-//        Elements ligne1 = doc1.select("table a");
-//
-//        int position = urlLink.indexOf("page.html");
-//        if (position != -1) {
-//            for (Element ligne : ligne1) {
-//                if(ligne.tagName().equals("a") && ligne.attr("href").endsWith(".html"))
-//                {     
-//                    String lien = ligne.attr("href");
-//                    urlLink = urlLink.substring(0, position) + lien;
-//                    //cs.persistRessource(titre, urlLink, topic,"",0, minCycle, maxCycle, 0, "Ludovic Mercier",null);
-//                }
-//            }
-//        }
-//        else {
-//            System.out.println("!!!!!!!!!!!!!! Problem with " + urlLink);
-//        }
-//
-//        System.out.println(minCycle + " " + maxCycle + " : " + titre + " : " + urlLink);
-//    }
-
     public static void main(String[] args) throws IOException {
         CrawlerPepit cr = new CrawlerPepit();
         System.out.println("**************** Niveau 1 ********************");
