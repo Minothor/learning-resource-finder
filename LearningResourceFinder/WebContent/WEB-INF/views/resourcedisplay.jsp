@@ -409,6 +409,61 @@
 		</div>
 		<!-- /.modal -->
 		<div class="row">
+										
+				<div id="competencesDiv" itemprop="educationalAlignment" itemscope itemtype="http://schema.org/AlignmentObject">	
+						<meta itemprop="alignmentType" content="teaches"/>
+						<meta itemprop="alignmentType" content="assesses"/>		
+						<meta itemprop="alignmentType" content="educationalSubject"/>	
+						<c:forEach items="${resource.competences}" var="competence">
+							<lrf:competencepath competence="${competence}" />
+							<button type="button" style="float: none;"
+								class="close
+						           <c:choose>
+								        <c:when test="${canLinkToCompetence}">
+								          "
+								onclick="onCompetenceRemoveClick(${competence.id})">
+								</c:when>
+								<c:otherwise>
+								          nonCompetenceLinkPop">
+								        </c:otherwise>
+								</c:choose>
+								&times;
+							</button>
+							<br />
+						</c:forEach>			
+						<c:if test="${empty resource.competences}">aucune catégorie liée</c:if>
+							<span
+								class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'
+								" : "' onclick='onAddCompetenceClick()'
+								"} 
+								style="float: none; font-size: 15px"
+								title="Ajouter une catégorie"></span>
+						
+							<c:if test="${not empty youtubeVideoId}">
+								<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
+								<%-- injected video youtube--%>
+						
+								<style type="text/css">
+						<%--to have a responsive layout - See more at: http: //avexdesigns.com
+							/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> #video-container
+							{
+							position: relative;
+							padding-bottom: 56.25%;
+							padding-top: 30px;
+							height: 0;
+							overflow: hidden;
+						}
+						
+						#video-container iframe,#video-container object,#video-container embed {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+						}
+						</style>			
+						</c:if>		
+				</div>	
 			<div id="titleDivForMakeEditable" class="col-md-7" style="padding-left: 0px">
 				<span id="title" class='noteditableFieldInline'}><h1
 				itemprop="name"	style="display: inline-block;">${resource.name}</h1></a> <a
@@ -449,55 +504,7 @@
 						<lrftag:favorite isFavorite="${isFavorite}"	idResource="${resource.id}" />
 					</div>
 				</div>
-				<div id="urlsDiv">					
-					<c:forEach items="${resource.urlResources}" var="urlResource">
-						<div class="row">
-							<div class="col-md-12">
-							<c:if test="${oneUrlHasAName && urlResource.name != null}">${urlResource.name} : </c:if>
-							<a itemprop="url" href="${urlResource.url}" onclick="updateViewcountAndPpularity(${resource.id});"
-								target="_blank" id="urlresource" data-type="text">${urlResource.url}</a>
-							<span style="float: none; font-size: 15px"
-								title="Modifier cette URL"
-								class="glyphicon glyphicon-pencil close addToolTip
-								  <c:choose>
-								        <c:when test="${canEditUrl}">
-								          "
-								onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')">
-								</c:when> <c:otherwise>
-								          nonurleditpop">
-								        </c:otherwise> </c:choose>
-							</span>
-	
-							<button type="button" style="float: none;" 
-								title="Retirer cette URL"
-								class="close addToolTip
-							    <c:choose>
-								        <c:when test="${canEditUrl}">
-								            "
-										style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
-										</c:when>
-										<c:otherwise>
-								            nonurleditpop"> 
-								        </c:otherwise>
-								</c:choose>
-								&times;
-							</button>
-							<span id="viewCounter${resource.id}" class="addToolTip glyphicon glyphicon-eye-open" itemprop="interactionCount" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"> ${resource.viewCount}</span>
-							</div>
-						</div>
-						<%-- end row --%>
-					</c:forEach>				
-					<div class="row">
-						<div class="col-md-12">
-							<span
-								class="glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "
-								nonurleditpop":""}"	 ${canEditUrl==true
-								? "onclick='onUrlAddClick()'
-								":""}  style="float: none; font-size: 15px"
-								title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
-						</div>
-					</div>
-				</div>					
+					
 				<div class="row">
 					<div itemprop="description" id="descriptionDiv" class="col-md-6">
 						<span id="description" class='noteditableFieldInline'}
@@ -685,7 +692,7 @@
 					<div>  <%-- Additional div for validation  --%>
 						
 										<span  class="text-muted">Validée: </span> 
-										<span id="validate"	title="
+											<span id="validate"	title="
 											  <c:choose>
 												<c:when test="${resource.validationStatus!=null}">
 													<c:if test="${resource.validator!=null}">
@@ -743,62 +750,56 @@
 						</div>
 					</div>	
 				</c:if>
-				
-								
-				<div id="competencesDiv" itemprop="educationalAlignment" itemscope itemtype="http://schema.org/AlignmentObject">	
-						<meta itemprop="alignmentType" content="teaches"/>
-						<meta itemprop="alignmentType" content="assesses"/>		
-						<meta itemprop="alignmentType" content="educationalSubject"/>	
-						<c:forEach items="${resource.competences}" var="competence">
-							<lrf:competencepath competence="${competence}" />
-							<button type="button" style="float: none;"
-								class="close
-						           <c:choose>
-								        <c:when test="${canLinkToCompetence}">
+								<div id="urlsDiv">					
+					<c:forEach items="${resource.urlResources}" var="urlResource">
+						<div class="row">
+							<div class="col-md-12">
+							<c:if test="${oneUrlHasAName && urlResource.name != null}">${urlResource.name} : </c:if>
+							<a itemprop="url" href="${urlResource.url}" onclick="updateViewcountAndPpularity(${resource.id});"
+								target="_blank" id="urlresource" data-type="text">${urlResource.url}</a>
+							<span style="float: none; font-size: 15px"
+								title="Modifier cette URL"
+								class="glyphicon glyphicon-pencil close addToolTip
+								  <c:choose>
+								        <c:when test="${canEditUrl}">
 								          "
-								onclick="onCompetenceRemoveClick(${competence.id})">
-								</c:when>
-								<c:otherwise>
-								          nonCompetenceLinkPop">
+								onclick="onUrlEditClick(${urlResource.id},'${urlResource.url}','${urlResource.name}')">
+								</c:when> <c:otherwise>
+								          nonurleditpop">
+								        </c:otherwise> </c:choose>
+							</span>
+	
+							<button type="button" style="float: none;" 
+								title="Retirer cette URL"
+								class="close addToolTip
+							    <c:choose>
+								        <c:when test="${canEditUrl}">
+								            "
+										style="float:none;" onclick="onUrlRemoveClick(${urlResource.id})">
+										</c:when>
+										<c:otherwise>
+								            nonurleditpop"> 
 								        </c:otherwise>
 								</c:choose>
 								&times;
 							</button>
-							<br />
-						</c:forEach>			
-						<c:if test="${empty resource.competences}">aucune catégorie liée</c:if>
+							<span id="viewCounter${resource.id}" class="addToolTip glyphicon glyphicon-eye-open" itemprop="interactionCount" style="font-size: 12px; padding: 0px; margin-left: 5px" data-toggle="tooltip" title="" data-original-title="Nombre de vues"> ${resource.viewCount}</span>
+							</div>
+						</div>
+						<%-- end row --%>
+					</c:forEach>				
+					<div class="row">
+						<div class="col-md-12">
 							<span
-								class='glyphicon glyphicon-plus close addToolTip  ${canLinkToCompetence==false ? "nonCompetenceLinkPop'
-								" : "' onclick='onAddCompetenceClick()'
-								"} 
-								style="float: none; font-size: 15px"
-								title="Ajouter une catégorie"></span>
-						
-							<c:if test="${not empty youtubeVideoId}">
-								<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
-								<%-- injected video youtube--%>
-						
-								<style type="text/css">
-						<%--to have a responsive layout - See more at: http: //avexdesigns.com
-							/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> #video-container
-							{
-							position: relative;
-							padding-bottom: 56.25%;
-							padding-top: 30px;
-							height: 0;
-							overflow: hidden;
-						}
-						
-						#video-container iframe,#video-container object,#video-container embed {
-							position: absolute;
-							top: 0;
-							left: 0;
-							width: 100%;
-							height: 100%;
-						}
-						</style>			
-						</c:if>		
-				</div>				
+								class="glyphicon glyphicon-plus close addToolTip ${canEditUrl==false ? "
+								nonurleditpop":""}"	 ${canEditUrl==true
+								? "onclick='onUrlAddClick()'
+								":""}  style="float: none; font-size: 15px"
+								title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
+						</div>
+					</div>
+				</div>
+			
 				<div id="problemeDiv">
 						<h4>
 							Problèmes &nbsp; &nbsp; &nbsp; <a
