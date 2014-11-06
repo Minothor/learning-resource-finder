@@ -47,7 +47,7 @@
                    	<div class="imgDiv col-xs-6 resource-content-hidden">
                    		
 						 <img itemprop="image" style="width:214px;height:130px;padding: 7px;"
-							src="images/imagedefault.jpg"
+							src="images/noimage.jpg"
 							alt="${resource.name}" />
 						
 					</div>
