@@ -182,6 +182,7 @@
 			});
 		});
 		
+
 		$('#turnTitleAndDescriptionEditableField').click(function(){
 			$('#closeTitleAndDescriptionEditableField').show();
 			$('#turnTitleAndDescriptionEditableField').hide();
@@ -511,7 +512,7 @@
 									<div class="col-md-12">
 										<c:choose>
 										    <c:when test="${canEdit}">
-												<span id="editingSpan" class="close" style="display:none; float: left; font-size: 15px"><i>édition...</i></span>
+												<span id="editingSpan" class="close" style="display:none; float: left; font-size: 15px"><i>...MODIFICATION...</i></span>
 												<span id="turnInfoPlusEditableField" class='glyphicon glyphicon-pencil addToolTip close' style="float: right; font-size: 15px" title="Modifier l'info"></span>
 												<span id="closeInfoPlusEditableField" class="glyphicon glyphicon-remove close" style="display:none; float: right; font-size: 15px" title="Fermer l'édition" onclick="location.reload()"></span>
 											</c:when> 
@@ -668,12 +669,24 @@
 								</div>
 								<%-- end row --%>
 			
-								<c:if test="${canValidate==true}">
-									<div class="row">
-										<div class="col-md-6">
-										<span class="text-muted">Validée: </span> 
+							</div>
+								
+								<%-- end row --%>
+							<%-- end panel body --%>
+							<div>
+					
+						
+						</div>
+						<%-- end panel --%>
+						
+						</div>	
+						
+					</div>
+					<div>  <%-- Additional div for validation  --%>
+						
+										<span  class="text-muted">Validée: </span> 
 											<span id="validate"	title="
-												<c:choose>
+											  <c:choose>
 												<c:when test="${resource.validationStatus!=null}">
 													<c:if test="${resource.validator!=null}">
 								   	        		  par ${resource.validator.userName}
@@ -685,29 +698,22 @@
 												<c:otherwise>
 													Cette ressource peut-elle être montrée à des enfants?
 												</c:otherwise>
-											    </c:choose>"${canValidate==true ? "href='#' class='noteditableField addToolTip'	data-type='select' data-emptytext='?non validée?' 
+											  </c:choose>"${canValidate==true ? "href='#' class='editableField addToolTip'	data-type='select' data-emptytext='?non validée?' 
 											": "class='noneditresource addToolTip'"} data-source="${dataEnumValidationStatus}">
-											<c:choose>
-											<c:when test="${resource.validator==null}">
+											  <c:choose>
+											    <c:when test="${resource.validator==null}">
 								   	        		 non validée 
-											</c:when>
-											<c:otherwise>
-											${resource.validationStatus.description} 
-											</c:otherwise>
-											</c:choose></span>
-												
-										</div>
-										</div>
-								</c:if>
-								<%-- end row --%>
-			
-			
-							</div>
-							<%-- end panel body --%>
-						</div>
-						<%-- end panel --%>
-					</div>							
-				</div>			
+											    </c:when>
+											    <c:otherwise>
+											       ${resource.validationStatus.description} 
+											    </c:otherwise>
+											  </c:choose>
+										   </span>
+						
+    				</div>
+				
+				</div>	
+						
 				<c:if test="${not empty youtubeVideoId}">
 					<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
 					<%-- injected video youtube--%>
@@ -737,6 +743,8 @@
 						</div>
 					</div>	
 				</c:if>
+				
+								
 				<div id="competencesDiv" itemprop="educationalAlignment" itemscope itemtype="http://schema.org/AlignmentObject">	
 						<meta itemprop="alignmentType" content="teaches"/>
 						<meta itemprop="alignmentType" content="assesses"/>		
