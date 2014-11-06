@@ -486,23 +486,27 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div id="rateAndShareDiv" class="row">
+					<div class="col-md-6">
+						
+					</div>
 					<div class="col-md-6" itemProp="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-						<div class="col-md-4" id="tourStepVote">
+						<div class="col-md-5" id="tourStepVote">
 						<lrftag:rating id="${resource.id}" title="${resource.name}"
 							scoreResource="${resource.avgRatingScore}"
 							scoreUser="${mapRating[resource].score}"
 							countRating="${resource.countRating}" canvote="${current.canVote}" />
 						</div>
+						<lrftag:favorite isFavorite="${isFavorite}"	idResource="${resource.id}" />
 							<meta itemprop="ratingValue" content="${resource.avgRatingScore}" />
                             <meta itemprop="ratingCount" content="${resource.countRating}" />
                             <meta itemprop="bestRating" content="5" />
                             <meta itemprop="worstRating" content="1" />
-					</div>
-					<div class="col-md-6">
+				
 						<div class="addthis_sharing_toolbox"
 							style="display: inline-block; margin-right: 26px; vertical-align: super;"></div>
-						<lrftag:favorite isFavorite="${isFavorite}"	idResource="${resource.id}" />
+						
 					</div>
+			
 				</div>
 					
 				<div class="row">
@@ -720,37 +724,7 @@
     				</div>
 				
 				</div>	
-						
-				<c:if test="${not empty youtubeVideoId}">
-					<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
-					<%-- injected video youtube--%>
-					<style type="text/css">
-						<%--to have a responsive layout - See more at: http: //avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> 
-							#video-container
-							{
-							position: relative;
-							padding-bottom: 56.25%;
-							padding-top: 30px;
-							height: 0;
-							overflow: hidden;
-						}
-						
-						#video-container iframe,#video-container object,#video-container embed {
-							position: absolute;
-							top: 0;
-							left: 0;
-							width: 100%;
-							height: 100%;
-						}
-					</style>	
-					<div id="video-container" itemprop="video" itemscope="" itemtype="http://schema.org/VideoObject"><%-- container div for responsive layout  --%>
-						<meta itemprop="name" content="${resource.name}"/>
-						<meta itemprop="duration" content="PT${resource.duration}M"/>
-						<div id="videoyoutube""> <%-- div transformed to iframe with javascript --%> 							
-						</div>
-					</div>	
-				</c:if>
-								<div id="urlsDiv">					
+									<div id="urlsDiv">					
 					<c:forEach items="${resource.urlResources}" var="urlResource">
 						<div class="row">
 							<div class="col-md-12">
@@ -792,7 +766,37 @@
 								title="ajouter une url (certaines ressources ont plusieurs liens, par exemple l'un pour l'énoncé et l'autre pour la solution s'ils sont dans des documents différents; ou bien un lien principal vers la ressource et un lien vers une vidéo montrant l'utilisation de la ressource en classe)"></span>
 						</div>
 					</div>
-				</div>
+				</div>	
+				<c:if test="${not empty youtubeVideoId}">
+					<%-- This resource's first URL has been detected as being a youtube url => we embed the video in the page (it's better for SEO to not have people systematically leave our site) --%>
+					<%-- injected video youtube--%>
+					<style type="text/css">
+						<%--to have a responsive layout - See more at: http: //avexdesigns.com/responsive-youtube-embed/#sthash.fkIODW9M.dpuf   --%> 
+							#video-container
+							{
+							position: relative;
+							padding-bottom: 56.25%;
+							padding-top: 30px;
+							height: 0;
+							overflow: hidden;
+						}
+						
+						#video-container iframe,#video-container object,#video-container embed {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 100%;
+							height: 100%;
+						}
+					</style>	
+					<div id="video-container" itemprop="video" itemscope="" itemtype="http://schema.org/VideoObject"><%-- container div for responsive layout  --%>
+						<meta itemprop="name" content="${resource.name}"/>
+						<meta itemprop="duration" content="PT${resource.duration}M"/>
+						<div id="videoyoutube""> <%-- div transformed to iframe with javascript --%> 							
+						</div>
+					</div>	
+				</c:if>
+
 			
 				<div id="problemeDiv">
 						<h4>
