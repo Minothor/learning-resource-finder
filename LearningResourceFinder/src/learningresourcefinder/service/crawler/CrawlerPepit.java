@@ -28,20 +28,20 @@ public class CrawlerPepit
     {
         switch(i)
         {
-        case(1) : crawlerLevels("P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau1.html"); break;
-        case(2) : crawlerLevels("P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau2.html"); break;
-        case(3) : crawlerLevels("P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau3.html"); break;
-        case(4) : crawlerLevels("P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau4.html"); break;
-        case(5) : crawlerLevels("P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau5.html"); break;
-        case(6) : crawlerLevels("P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau6.html"); break;
-        case(7) : crawlerLevels("P1-2", "P5-6", "http://www.pepit.be/niveaux/conjugaison.html"); break;
-        case(8) : crawlerLevels("P1-2", "P5-6", "http://www.pepit.be/niveaux/tablesmultiplication.html"); break;
-        case(9) : crawlerLevels(null, null, "http://www.pepit.be/niveaux/special.html"); break;
-        case(10) : crawlerLevels(null, null, "http://www.pepit.be/niveaux/pourtous.html"); break;
+        case(1) : crawlerLevels(1, "P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau1.html"); break;
+        case(2) : crawlerLevels(2, "P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau2.html"); break;
+        case(3) : crawlerLevels(3, "P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau3.html"); break;
+        case(4) : crawlerLevels(4, "P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau4.html"); break;
+        case(5) : crawlerLevels(5, "P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau5.html"); break;
+        case(6) : crawlerLevels(6, "P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau6.html"); break;
+        case(7) : crawlerLevels(7, "P1-2", "P5-6", "http://www.pepit.be/niveaux/conjugaison.html"); break;
+        case(8) : crawlerLevels(8, "P1-2", "P5-6", "http://www.pepit.be/niveaux/tablesmultiplication.html"); break;
+        case(9) : crawlerLevels(9, null, null, "http://www.pepit.be/niveaux/special.html"); break;
+        case(10) : crawlerLevels(10, null, null, "http://www.pepit.be/niveaux/pourtous.html"); break;
         }
     }
 
-    public void crawlerLevels(String minCcycle, String maxCcycle, String url) throws IOException {
+    public void crawlerLevels(int num, String minCcycle, String maxCcycle, String url) throws IOException {
         Document doc1 = Jsoup.connect(url).timeout(10000).get();
         Elements ligne1 = doc1.select("table h2, table a");
         String topic = null;
@@ -51,6 +51,14 @@ public class CrawlerPepit
             }
             if(ligne.tagName().equals("a"))
             {     
+                if (topic == null) {
+                    if (num == 8) {
+                        topic = "math";
+                    }
+                    else {
+                        topic = "divers";
+                    }
+                }
                 String lien = ligne.attr("href");
                 lien = lien.substring(2, lien.length());
                 String link = "http://www.pepit.be"+lien;
@@ -108,11 +116,17 @@ public class CrawlerPepit
                                 image = ImageUtil.readImage(imageUrl);
                             }
                             catch  (RuntimeException ex2)  {
-                                System.out.println("Image import problem for " + url);    
+                                try {
+                                    imageUrl = urlLink.substring(0, position) + "images/Image%202.png";
+                                    image = ImageUtil.readImage(imageUrl);
+                                }
+                                catch  (RuntimeException ex3)  {
+                                    System.out.println("Image import problem for " + url);    
+                                }
                             }
-    
                         }
                     }
+
                     if (image != null){
                         ImageUtil.createOriginalAndScalesImageFileForResource(resource, image, currentEnvironment); 
                     }
@@ -146,29 +160,29 @@ public class CrawlerPepit
     public static void main(String[] args) throws IOException {
         CrawlerPepit cr = new CrawlerPepit();
         System.out.println("**************** Niveau 1 ********************");
-        cr.crawlerLevels("P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau1.html");
+        cr.crawlerLevels(1, "P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau1.html");
         System.out.println("**************** Niveau 2 ********************");
-        cr.crawlerLevels("P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau2.html");
+        cr.crawlerLevels(2, "P1-2", "P1-2", "http://www.pepit.be/niveaux/niveau2.html");
         System.out.println("**************** Niveau 3 ********************");
-        cr.crawlerLevels("P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau3.html");
+        cr.crawlerLevels(3, "P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau3.html");
         System.out.println("**************** Niveau 4 ********************");
-        cr.crawlerLevels("P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau4.html");
+        cr.crawlerLevels(4, "P3-4", "P3-4", "http://www.pepit.be/niveaux/niveau4.html");
         System.out.println("**************** Niveau 5 ********************");
-        cr.crawlerLevels("P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau5.html");
+        cr.crawlerLevels(5, "P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau5.html");
         System.out.println("**************** Niveau 6 ********************");
-        cr.crawlerLevels("P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau6.html");
+        cr.crawlerLevels(6, "P5-6", "P5-6", "http://www.pepit.be/niveaux/niveau6.html");
         
         System.out.println("**************** Conjugaison ********************");
-        cr.crawlerLevels("P1-2", "P5-6", "http://www.pepit.be/niveaux/conjugaison.html");
+        cr.crawlerLevels(7, "P1-2", "P5-6", "http://www.pepit.be/niveaux/conjugaison.html");
         
         System.out.println("**************** Tables de multiplication ********************");
-        cr.crawlerLevels("P1-2", "P5-6", "http://www.pepit.be/niveaux/tablesmultiplication.html");
+        cr.crawlerLevels(8, "P1-2", "P5-6", "http://www.pepit.be/niveaux/tablesmultiplication.html");
 
         System.out.println("**************** Enseignement spécial ********************");
-        cr.crawlerLevels(null, null, "http://www.pepit.be/niveaux/special.html");
+        cr.crawlerLevels(9, null, null, "http://www.pepit.be/niveaux/special.html");
 
         System.out.println("**************** Pour tous ********************");
-        cr.crawlerLevels(null, null, "http://www.pepit.be/niveaux/pourtous.html");
+        cr.crawlerLevels(10, null, null, "http://www.pepit.be/niveaux/pourtous.html");
         
         System.out.println("Number of created resources : " + count);
 

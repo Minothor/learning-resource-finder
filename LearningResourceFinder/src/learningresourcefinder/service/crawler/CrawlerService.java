@@ -238,17 +238,20 @@ public class CrawlerService
 
     private Cycle getCycle(String cycleName) 
     {
-        cycleName = cycleName.toUpperCase();
-        switch(cycleName)
-        {
-        case("CP") : case("CE1") :case("P1-2") : 
-            return cycleRepository.findByName("P1-2"); 
-        case("CE2") : case("CM1") :case("P3-4") : 
-            return cycleRepository.findByName("P3-4"); 
-        case("CM2") : case("6") :case("P5-6") : 
-            return cycleRepository.findByName("P5-6"); 
-        default : return null;        
+        if (cycleName != null) {
+            cycleName = cycleName.toUpperCase();
+            switch(cycleName)
+            {
+            case("CP") : case("CE1") :case("P1-2") : 
+                return cycleRepository.findByName("P1-2"); 
+            case("CE2") : case("CM1") :case("P3-4") : 
+                return cycleRepository.findByName("P3-4"); 
+            case("CM2") : case("6") :case("P5-6") : 
+                return cycleRepository.findByName("P5-6"); 
+            default : return null;        
+            }
         }
+        return null;
     }
     
     private int getCycleNumber(Cycle cycle) 
