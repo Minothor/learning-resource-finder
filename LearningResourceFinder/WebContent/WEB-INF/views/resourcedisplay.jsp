@@ -503,7 +503,7 @@
                             <meta itemprop="worstRating" content="1" />
 				
 						<div class="addthis_sharing_toolbox "
-							style="display: inline-block; margin-right: 26px; vertical-align: super;"></div>
+							style="display: inline-block; margin-left: 45px; vertical-align: super;"></div>
 						
 					</div>
 			
