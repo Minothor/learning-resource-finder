@@ -42,7 +42,8 @@ public class CrawlerService
     @Autowired CrawlerSoutien67 crawlerSoutien67;
     @Autowired CrawlerToutSavoir crawlerToutSavoir;
     @Autowired CrawlerKhanAcademy crawlerKhanAcademy;
-
+    @Autowired CrawlerPepit crawlerPepit;
+    
     @PersistenceContext EntityManager em;
 
     int cont1 = 0,cont2 = 0;
@@ -78,7 +79,7 @@ public class CrawlerService
         //crawlerKhanAcademy.superCrawler();
     }
     
-    public void persistRessource(String name, String url, String topic, String description, int duration, String minCycle, String maxCycle, int adv, String author,Format format) 
+    public Resource persistRessource(String name, String url, String topic, String description, int duration, String minCycle, String maxCycle, int adv, String author,Format format) 
     {
         Resource r = urlResourceRepository.getFirstResourceWithSimilarUrl(url);
         if (r == null)
@@ -181,6 +182,8 @@ public class CrawlerService
             
             cont2++;
         }
+        
+        return r;
     }
 
     public static String getSubString(String s,int i)
@@ -250,8 +253,8 @@ public class CrawlerService
     
     private int getCycleNumber(Cycle cycle) 
     {
-        System.out.println(cycle);
-        System.out.println(cycle.getName());
+        //System.out.println(cycle);
+        //System.out.println(cycle.getName());
         String cycleName = cycle.getName().toUpperCase();
         switch(cycleName)
         {
@@ -267,6 +270,9 @@ public class CrawlerService
 
     public void crawler67(int num) throws IOException {
        crawlerSoutien67.crawler(num);
-        
     }
+    
+    public void crawlerPepit(int num) throws IOException {
+        crawlerPepit.crawler(num);
+     }
 }
