@@ -8,7 +8,7 @@
 	<meta itemprop="keywords" name="keywords" content="soutien scolaire gratuit, cours particuliers, cours à domicile, vidéos, exercices en ligne, aide aux devoirs, leçons interactives, éveil, vidéos, jeu,education, apprentissage, eveille, français, mathematique, maths, scientifique, leçons, exercices, interactif, apprendre, découvrir, savoir" />
 	<meta itemprop="image" property="og:image" content="http://toujoursplus.be/images/ToujoursPlus-montage-Facebook.png" /> 
 	<meta itemprop="url" property="og:url" content="http://toujoursplus.be" />
-	
+	<script type="text/javascript" src="/js/int/IEfallback.js"></script>
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-509a829c59a66215"></script>
 	
 </head>

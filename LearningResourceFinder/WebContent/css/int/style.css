@@ -263,4 +263,7 @@ figure:hover figcaption {
 	margin-bottom:28px;	
 }
 
-
+.mainLogoFallback {
+    height: 164px;
+    width: 500px;
+              }

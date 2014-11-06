@@ -30,13 +30,7 @@
 
     .col-md-2 #FBbox{
 	   margin-top: 3.8em;
+	   float:right;
+	   margin-right:50px;
     }
-}
-
-/*#### Horribly Hacky invalid CSS to catch error in IE<=10 using error in their CSS Parser. ###*/
-@media screen\0 {
-    #mainLogo {
-                height: 164px;
-                width: 500px;
-              }
 }
