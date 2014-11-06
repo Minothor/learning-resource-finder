@@ -46,8 +46,8 @@
         			 
                    	<div class="imgDiv col-xs-6 resource-content-hidden">
                    		
-						 <img itemprop="image" style="width:214px;height:130px;padding: 7px;"
-							src="images/noimage.jpg"
+						 <img itemprop="image" style="margin: 7px;"
+							src="images/no-image-200px.png"
 							alt="${resource.name}" />
 						
 					</div>
@@ -56,7 +56,7 @@
 					
 				<div  class="descriptionDiv col-xs-6 ${resource.numberImage>=1?"resource-content-hidden":""}" >
 					
-					<p class="resourceDescription" style="margin: 10px;">
+					<p class="resourceDescription" style="margin: 10px;margin-left: 15px;">
 						<small itemprop="description">${resource.descriptionCut}</small>
 					</p>
 				</div>
