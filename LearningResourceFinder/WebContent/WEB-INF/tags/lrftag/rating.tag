@@ -13,10 +13,10 @@
 			<c:forEach var="i" begin="0" end="4" step="1" varStatus ="status">
 				<c:choose>
 					<c:when test="${i < scoreResource}">
-					   <li><span class="glyphicon glyphicon-star"></span></li>		
+					   <li><span class="glyphicon glyphicon-star" style="left: 14px;"></span></li>		
 					</c:when> 
 					<c:otherwise>
-					   <li><span class="glyphicon glyphicon-star-empty"></span></li>
+					   <li><span class="glyphicon glyphicon-star-empty" style="left: 14px;"></span></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>

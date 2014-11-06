@@ -2499,8 +2499,8 @@ tbody.collapse.in {
 }
 .glyphicon {
   position: relative;
-  top: -12px;
-  left: 14px;
+ // top: -12px;
+  //left: 14px;
   display: inline-block;
   font-family: 'Glyphicons Halflings';
   font-style: normal;

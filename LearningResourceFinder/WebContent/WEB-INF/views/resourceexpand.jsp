@@ -64,9 +64,9 @@
 			
 
 
-	<div class="row"style="margin-left: 0px; margin-right: 0px; padding-top: 5px;">
+	<div class="row"style="margin-left: 0px; margin-right: 0px;">
 					<div class="col-md-6" >				
-					<div style="background:#FCFCFD;margin-right: -33px;margin-left: -7px;padding: 11px;margin-bottom: 7px;font-size:13px;font-weight: bold;">
+					<div style="background:#FCFCFD;margin-right: -33px;margin-left: -7px;padding: 11px;margin-bottom: 7px;font-size:13px;font-weight: bold;height:94px;">
 						<span class="addToolTip" style=" padding: 0px;"
 							data-toggle="tooltip" title="Nombre de vues"><span id="viewCounter${resource.id}"> <b> ${resource.viewCount}</b></span> </span>&nbsp;vues<br>
 						  <span><c:forEach items="${resource.platforms}" var="platform">${platform.name} </c:forEach></span><br>
@@ -82,18 +82,18 @@
 					<div class="col-md-12">
 						<a itemprop="url" href="/resource/${resource.shortId}/${resource.slug}"> <span
 							class="addToolTip"
-							style="font-size: 14px; padding: 0px"
+							style="font-size: 14px; padding: 0px;font-weight: bold;"
 							data-toggle="tooltip" title="lien vers la ressource">Détails</span>
 						</a>
 						<div class="resource-content-hidden" style="float:right; padding:0px; margin-top: 5px">	
 							<a href="<c:url value='${resource.urlResources[0].url}'/>" target="_blank" onclick="updateViewcountAndPpularity(${resource.id});" > <span
 							class="addToolTip glyphicon glyphicon-circle-arrow-right"
-							style="font-size: 35px; padding: 0px"
+							style="font-size: 35px; padding: 0px;top: -12px;left: 14px;"
 							data-toggle="tooltip" title="lien direct vers ce site"></span>
 							</a>
 						</div>
 					</div>
-					<div class="col-md-12" style="padding-left: 3px; padding-right: 0px;">
+					<div class="col-md-12" style="padding-left: 3px; padding-right: 0px;margin-bottom: -15px;">
 						<div class="col-md-10">
 							<lrftag:rating id="${resource.id}" title="${resource.name}"
 								scoreResource="${resource.avgRatingScore}"

@@ -27,20 +27,20 @@
 	display: block;
 	background-color: #F0F0F5;
 } 
-.glyphicon-star-empty{
+.glyphicon-star-empty,.glyphicon-star{
 	margin-top: 20px;
+	
 
 	
 }
-.glyphicon-heart{
+
+
+.glyphicon-heart,.glyphicon-heart-empty{
+	left: 14px;
 	margin-top: 20px;
 	margin-left: -27px;
 }
-.glyphicon-heart-empty{
-	margin-top: 20px;
-	margin-left: -27px;
-	
-}
+
 .resource-content-small .imgDiv ,
 .resource-content-small .descriptionDiv {
 	width:100% !important;
