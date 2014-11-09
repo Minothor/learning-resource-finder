@@ -15,7 +15,6 @@ import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.UserRepository;
-import learningresourcefinder.search.MyAnalyzer;
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
@@ -79,8 +78,8 @@ public class IndexManagerService {
 	@SuppressWarnings("unchecked")
     public void createIndexes() {
 		try(SimpleFSDirectory sfsd = new SimpleFSDirectory(new File(FileUtil.getLuceneIndexDirectory(currentEnvironment)))){
-			//We switched from StandardAnalyzer to custom made analyzer in order to be able to tokenize URLs
-		    MyAnalyzer analyzer = new MyAnalyzer();
+			
+			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_40);
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_40, analyzer);
 
 			try(IndexWriter writer = new IndexWriter(sfsd, iwc)){// Make an writer to create the index (with try-with-resources block)
