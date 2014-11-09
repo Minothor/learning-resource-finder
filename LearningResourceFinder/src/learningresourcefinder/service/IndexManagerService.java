@@ -15,6 +15,7 @@ import learningresourcefinder.model.Competence;
 import learningresourcefinder.model.PlayList;
 import learningresourcefinder.model.Resource;
 import learningresourcefinder.repository.UserRepository;
+import learningresourcefinder.search.MyAnalyzer;
 import learningresourcefinder.search.Searchable;
 import learningresourcefinder.security.Privilege;
 import learningresourcefinder.security.SecurityContext;
@@ -72,14 +73,14 @@ public class IndexManagerService {
     Class<Searchable>[] searchables = new Class[]{Resource.class, PlayList.class, Competence.class};  // Entities that are included in the index.
    
     String[] searchableCriterias = new String[]{    // Addition of all the fields that should be searchable in the searchable entities.
-            "name", "description", "topic"};  
+            "name", "description", "topic", "author", "url"};  
 
     
 	@SuppressWarnings("unchecked")
     public void createIndexes() {
 		try(SimpleFSDirectory sfsd = new SimpleFSDirectory(new File(FileUtil.getLuceneIndexDirectory(currentEnvironment)))){
-			
-			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_40);
+			//We switched from StandardAnalyzer to custom made analyzer in order to be able to tokenize URLs
+		    MyAnalyzer analyzer = new MyAnalyzer();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_40, analyzer);
 
 			try(IndexWriter writer = new IndexWriter(sfsd, iwc)){// Make an writer to create the index (with try-with-resources block)
@@ -164,7 +165,7 @@ public class IndexManagerService {
 
         try {
         	// We  build a query using the parameters;
-            String queryString="(" + keyWords + "~)";   //the "~" enable fuzzy search: String queryString="(" + keyWords + "~)"; 
+            String queryString="(" + keyWords + ")";   //the "~" enable fuzzy search: String queryString="(" + keyWords + "~)"; 
 
             SimpleFSDirectory sfsd = new SimpleFSDirectory(new File(FileUtil.getLuceneIndexDirectory(currentEnvironment)));
             IndexReader reader = DirectoryReader.open(sfsd);

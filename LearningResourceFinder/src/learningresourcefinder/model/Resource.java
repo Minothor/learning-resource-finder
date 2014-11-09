@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -315,6 +316,14 @@ public class Resource extends BaseEntityWithShortId implements Searchable {
         criterias.put("description",StringUtils.defaultIfEmpty(description,""));
         criterias.put("topic", topic==null ? "" : topic.getDescription() );
         criterias.put("author", author==null ? "" : author );
+        String url;
+        ListIterator<UrlResource> iterator = urlResources.listIterator();
+        if (iterator.hasNext()) {
+            url = iterator.next().getUrl();
+        } else {
+            url = "";
+        }
+        criterias.put("url", StringUtils.defaultIfEmpty(url,""));
         return criterias;
     }
     
